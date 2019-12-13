@@ -2,9 +2,9 @@ var express = require('express');
 const port = 5000;
 const WebDAO = require("./DAO/WebDAO");
 const WebDAOObj = new WebDAO();
-//const cors = require('cors')
+const cors = require('cors')
 var app = express();
-// app.use(cors())
+app.use(cors())
 // app.use(session({
 // 	secret: 'secret',
 // 	resave: true,
