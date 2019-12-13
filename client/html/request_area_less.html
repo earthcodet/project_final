@@ -6,6 +6,7 @@
 <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
 <link rel="stylesheet" href="../css/w.3.css">
 <!-- <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-teal.css"> -->
+<link href="https://fonts.googleapis.com/css?family=Sarabun&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/w3-theme-teal.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -16,6 +17,8 @@
 
 <script src="../js/js-index.js"></script>
 <script src="../js/test.js"></script>
+<script src="../js/jquery.validate.js"></script>
+<script src="../js/custom.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -69,7 +72,7 @@
             <a class="w3-bar-item w3-button" onclick="myAccordion4('demo4')" href="javascript:void(0)">ข้อมูลส่วนกลาง<i
                     class="fa fa-caret-down"></i></a>
             <div id="demo4" class="w3-hide">
-                <a class="w3-button" href="#">- ข้อมูลู้ประกอบการ</a>
+                <a class="w3-button" href="#">- ข้อมูลผู้ประกอบการ</a>
                 <a class="w3-button" href="#">- ข้อมูลการจดใบอนุญาต</a>
                 <a class="w3-button" href="#">- โอนใบอนุญาต</a>
             </div>
@@ -130,7 +133,7 @@
 
         <div class="w3-container" style="padding:32px">
 
-            <div>
+            <form id="signupForm" method="get">
                 <!-- <form action="/action_page.php"> -->
                 <a>เลขที่คำขอ :</a>
                 <input type="text" id="formId" name="" size="15" placeholder="">&nbsp;
@@ -270,7 +273,7 @@
                 <input type="text" id="documentName" />
                 ผู้ขอรับใบอนุญาต
                 <!-- </form> -->
-            </div>
+                </form>
         </div>
     </div>
 
