@@ -21,7 +21,7 @@
 <script src="../js/js-index.js"></script>
 <script src="../js/test.js"></script>
 <script src="../js/jquery.validate.js"></script>
-<script src="../js/custom.js"></script>
+<!-- <script src="../js/custom.js"></script> -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -135,168 +135,165 @@
         </header>
 
         <div class="w3-container" style="padding:32px">
-                <!-- <form action="/action_page.php"> -->
-                <a>เลขที่คำขอ :</a>
-                <input type="text" id="formId" name="" size="15" placeholder="">&nbsp;
-                <a>วันที่ยืนขอ :</a>
-                <input type="date" id="date" name="" size="15" placeholder="">&nbsp;
-                <a>ประเภทคำขอ :</a>
-                <input list="brow" id="" name="" style="width: 19%;">
-                <!-- <select id="" name="" style="width: 19%;"> -->
-                    <datalist id="brow">
-                        <option value="" hidden>เลือก...</option>
-                        <option value="1.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่ไม่เกิน 10 ตรม.">
-                            1.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่ไม่เกิน 10 ตรม.
-                        </option>
-                        <option value="2.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่เกิน 10 ตรม. แต่ไม่เกิน 25 ตรม.">
-                            2.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่เกิน 10 ตรม. แต่ไม่เกิน 25 ตรม.
-                        </option>
-                        <option value="3.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่เกิน 25 ตรม. แต่ไม่เกิน 50 ตรม.">
-                            3.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่เกิน 25 ตรม. แต่ไม่เกิน 50 ตรม.
-                        </option>
-                        <option value="4.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่เกิน 50 ตรม. แต่ไม่เกิน 100ตรม.">
-                            4.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่เกิน 50 ตรม. แต่ไม่เกิน 100ตรม.
-                        </option>
-                        <option value="5.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่เกิน 100 ตรม. แต่ไม่เกิน 200ตรม.">
-                            5.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่เกิน 100 ตรม. แต่ไม่เกิน 200ตรม.
-                        </option>
-                    </datalist>
-                </input>
-                <!-- </select> &nbsp; -->
-                <a>เขียนที่ :</a>
-                <input type="text" id="place" value="เทศบาลเมืองแสนสุข" readonly>&nbsp;
-                <br>
-                <a>ข้าพเจ้า :</a>
-                <input type="radio" name="typee" id="typeUser1" value="บุคคลธรรมดา">
-                <a>บุคคลธรรมดา</a>
-                <input type="radio" name="typee" id="typeUser2" value="นิติบุคคล">
-                <a>นิติบุคคล</a> &nbsp;
-                <input type="text" id="name" size="14">
-                <a>เลขประจำตัว :</a>
-                <input type="int" id="id" size="14"> &nbsp;
-                <a>อายุ :</a>
-                <input type="int" id="age" size="3"> &nbsp;
-                <a>สัญชาติ :</a>
-                <select id="nationality" style="width: 8%;">
-                    <option value="" hidden>เลือก...</option>
-                    <option value="">ไทย</option>
-                    <option value=""></option>
-                </select> &nbsp;
-                <a>เชื้อชาติ :</a>
-                <select id="race" style="width: 8%;">
-                    <option value="" hidden>เลือก...</option>
-                    <option value="">ไทย</option>
-                    <option value=""></option>
-                </select>
-                <br>
-                <a>อยู่บ้านเลขที่ :</a>
-                <input type="text" id="homeId" size="11.5"> &nbsp;
-                <a>หมู่ที่ :</a>
-                <input type="int" id="moo" size="6"> &nbsp;
-                <a>ตรอก:</a>
-                <input type="text" id="trxk" size="11.5"> &nbsp;
-                <a>ซอย :</a>
-                <input type="text" id="sxy" size="11.5"> &nbsp;
-                <a>อาคาร :</a>
-                <input type="text" id="building" size="11.5"> &nbsp;
-                <a>ถนน :</a>
-                <input type="text" id="road" size="11.5">
-                <br>
-                <a>จังหวัด :</a>
-                <select id="province" style="width: 12.5%;">
-                </select> &nbsp;
-                <a>อำเภอ :</a>
-                <select id="district" style="width: 12.5%;">
-                </select>&nbsp;
-                <a>ตำบล :</a>
-                <select id="subdistrict" style="width: 12.5%;">
-                </select>&nbsp;
-                <a>โทรศัพท์ :</a>
-                <input type="text" id="phone" size="16"> &nbsp;
-                <a>โทรสาร :</a>
-                <input type="text" id="fax" size="16">
-                <br>
-                <a>ใช้ชื่ออาคารที่ประกอบการว่า :</a>
-                <input type="text" id="workplaceName" size="35">(ถ้ามี) &nbsp;
-                <a>พื้นที่ :</a>
-                <input type="int" id="area" size="15"> ตารางเมตร &nbsp;
-                <a>จำนวนคนงาน :</a>
-                <input type="int" id="numPeople" size="10"> คน
-                <br>
-                <a>ตั้งอยู่เลขที่ :</a>
-                <input type="text" id="wHomeId" size="11.5"> &nbsp;
-                <a>หมู่ที่ :</a>
-                <input type="int" id="wMoo" size="6"> &nbsp;
-                <a>ตรอก:</a>
-                <input type="text" id="wTrxk" size="11.5"> &nbsp;
-                <a>ซอย :</a>
-                <input type="text" id="wSxy" size="11.5"> &nbsp;
-                <a>อาคาร :</a>
-                <input type="text" id="wBuilding" size="11.5"> &nbsp;
-                <a>ถนน :</a>
-                <input type="text" id="wRoad" size="11.5">
-                <br>
-                <a>จังหวัด :</a>
-                <select id="wProvince" style="width: 12.5%;">
-                </select> &nbsp;
-                <a>อำเภอ :</a>
-                <select id="wDistrict" style="width: 12.5%;">
-                </select>&nbsp;
-                <a>ตำบล :</a>
-                <select id="wSubdistrict" style="width: 12.5%;">
-                </select>&nbsp;
-                <a>โทรศัพท์ :</a>
-                <input type="text" id="wPhone" size="16"> &nbsp;
-                <a>โทรสาร :</a>
-                <input type="text" id="wFax" size="16">
-                <br>
-                <a>คำนำหน้าชื่อ :</a>
-                <select id="" name="" style="width: 10%;">
-                    <option value="" hidden>เลือก...</option>
-                    <option value="">นาย</option>
-                    <option value="">นาง</option>
-                    <option value="">นางสาว</option>
-                </select>
-                <a>ชื่อ :</a>
-                <input type="text" id="" name="" size="15" placeholder="">&nbsp;
-                <a>นามสกุล :</a>
-                <input type="text" id="" name="" size="15" placeholder="">&nbsp;
-                <a>สถานะ :</a>
-                <input type="text" id="" size="16">
-                <a>โทรศัพท์ :</a>
-                <input type="text" id="" size="16">
-                <br>
-                <input type="radio" name="sub" id="purposeType1"> ยืนยันคำขอรับ &nbsp;
-                <input type="radio" name="sub" id="purposeType2"> ยืนยันคำขอต่ออายุ &nbsp;
-                <br><br>
-                <input type="checkbox" id="documentId" value="cb1" />สำเนาบัตรประจำตัว
-                (ประชาชน/ข้าราชการ/พนักงานรัฐวิสาหกิจ)<br>
-                <input type="checkbox" id="documenthHome" value="cb2" />สำเนาทะเบียนบ้านของผู้ขอรับใบอนุญาต<br>
-                <input type="checkbox" id="documentLegalEntity"
-                    value="cb3" />สำเนาหนังสือรับรองการจดทะเบียนเป็นนิติบุคคล<br>
-                <input type="checkbox" id="documentSignature"
-                    value="cb4" />หลักฐานที่แสดงการเป็นผู้มีอำนาจลงนามแทนนิติบุคคลและใบมอบอำนาจ
-                (กรณีที่มีการมอบอำนาจ)<br>
-                <input type="checkbox" id="documentSJ4" value="cb5" />สำเนาใบอนุญาตประกอบกิจการ รง.4
-                หรือใบแทน<br>
-                <input type="checkbox" id="documentOther" value="cb6" />เอกสารอื่นๆที่เกี่ยวข้อง <input type="text"
-                    id="other" /><br>
-                <br><br>
+            <!-- <form action="/action_page.php"> -->
+            <a>เลขที่คำขอ :</a>
+            <input type="text" id="formId" name="" size="15" placeholder="">&nbsp;
+            <a>วันที่ยืนขอ :</a>
+            <input type="date" id="date" name="" size="15" placeholder="">&nbsp;
+            <a>ประเภทคำขอ :</a>
+            <input list="brow" id="" name="" style="width: 19%;">
+            <!-- <select id="" name="" style="width: 19%;"> -->
+            <datalist id="brow">
+                <option value="" hidden>เลือก...</option>
+                <option value="1.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่ไม่เกิน 10 ตรม.">
+                    1.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่ไม่เกิน 10 ตรม.
+                </option>
+                <option value="2.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่เกิน 10 ตรม. แต่ไม่เกิน 25 ตรม.">
+                    2.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่เกิน 10 ตรม. แต่ไม่เกิน 25 ตรม.
+                </option>
+                <option value="3.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่เกิน 25 ตรม. แต่ไม่เกิน 50 ตรม.">
+                    3.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่เกิน 25 ตรม. แต่ไม่เกิน 50 ตรม.
+                </option>
+                <option value="4.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่เกิน 50 ตรม. แต่ไม่เกิน 100ตรม.">
+                    4.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่เกิน 50 ตรม. แต่ไม่เกิน 100ตรม.
+                </option>
+                <option value="5.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่เกิน 100 ตรม. แต่ไม่เกิน 200ตรม.">
+                    5.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่เกิน 100 ตรม. แต่ไม่เกิน 200ตรม.
+                </option>
+            </datalist>
+            </input>
+            <!-- </select> &nbsp; -->
+            <a>เขียนที่ :</a>
+            <input type="text" id="place" value="เทศบาลเมืองแสนสุข" readonly>&nbsp;
+            <br>
+            <a>ข้าพเจ้า :</a>
+            <input type="radio" name="typee" id="typeUser1" value="บุคคลธรรมดา">
+            <a>บุคคลธรรมดา</a>
+            <input type="radio" name="typee" id="typeUser2" value="นิติบุคคล">
+            <a>นิติบุคคล</a> &nbsp;
+            <input type="text" id="name" size="14">
+            <a>เลขประจำตัว :</a>
+            <input type="int" id="id" size="14"> &nbsp;
+            <a>อายุ :</a>
+            <input type="int" id="age" size="3"> &nbsp;
+            <a>สัญชาติ :</a>
+            <select id="nationality" style="width: 8%;">
+                <option value="" hidden>เลือก...</option>
+                <option value="">ไทย</option>
+                <option value=""></option>
+            </select> &nbsp;
+            <a>เชื้อชาติ :</a>
+            <select id="race" style="width: 8%;">
+                <option value="" hidden>เลือก...</option>
+                <option value="">ไทย</option>
+                <option value=""></option>
+            </select>
+            <br>
+            <a>อยู่บ้านเลขที่ :</a>
+            <input type="text" id="homeId" size="11.5"> &nbsp;
+            <a>หมู่ที่ :</a>
+            <input type="int" id="moo" size="6"> &nbsp;
+            <a>ตรอก:</a>
+            <input type="text" id="trxk" size="11.5"> &nbsp;
+            <a>ซอย :</a>
+            <input type="text" id="sxy" size="11.5"> &nbsp;
+            <a>อาคาร :</a>
+            <input type="text" id="building" size="11.5"> &nbsp;
+            <a>ถนน :</a>
+            <input type="text" id="road" size="11.5">
+            <br>
+            <a>จังหวัด :</a>
+            <select id="province" style="width: 12.5%;">
+            </select> &nbsp;
+            <a>อำเภอ :</a>
+            <select id="district" style="width: 12.5%;">
+            </select>&nbsp;
+            <a>ตำบล :</a>
+            <select id="subdistrict" style="width: 12.5%;">
+            </select>&nbsp;
+            <a>โทรศัพท์ :</a>
+            <input type="text" id="phone" size="16"> &nbsp;
+            <a>โทรสาร :</a>
+            <input type="text" id="fax" size="16">
+            <br>
+            <a>ใช้ชื่ออาคารที่ประกอบการว่า :</a>
+            <input type="text" id="workplaceName" size="35">(ถ้ามี) &nbsp;
+            <a>พื้นที่ :</a>
+            <input type="int" id="area" size="15"> ตารางเมตร &nbsp;
+            <a>จำนวนคนงาน :</a>
+            <input type="int" id="numPeople" size="10"> คน
+            <br>
+            <a>ตั้งอยู่เลขที่ :</a>
+            <input type="text" id="wHomeId" size="11.5"> &nbsp;
+            <a>หมู่ที่ :</a>
+            <input type="int" id="wMoo" size="6"> &nbsp;
+            <a>ตรอก:</a>
+            <input type="text" id="wTrxk" size="11.5"> &nbsp;
+            <a>ซอย :</a>
+            <input type="text" id="wSxy" size="11.5"> &nbsp;
+            <a>อาคาร :</a>
+            <input type="text" id="wBuilding" size="11.5"> &nbsp;
+            <a>ถนน :</a>
+            <input type="text" id="wRoad" size="11.5">
+            <br>
+            <a>จังหวัด :</a>
+            <select id="wProvince" style="width: 12.5%;">
+            </select> &nbsp;
+            <a>อำเภอ :</a>
+            <select id="wDistrict" style="width: 12.5%;">
+            </select>&nbsp;
+            <a>ตำบล :</a>
+            <select id="wSubdistrict" style="width: 12.5%;">
+            </select>&nbsp;
+            <a>โทรศัพท์ :</a>
+            <input type="text" id="wPhone" size="16"> &nbsp;
+            <a>โทรสาร :</a>
+            <input type="text" id="wFax" size="16">
+            <br>
+            <a>คำนำหน้าชื่อ :</a>
+            <select id="" name="" style="width: 10%;">
+                <option value="" hidden>เลือก...</option>
+                <option value="">นาย</option>
+                <option value="">นาง</option>
+                <option value="">นางสาว</option>
+            </select>
+            <a>ชื่อ :</a>
+            <input type="text" id="" name="" size="15" placeholder="">&nbsp;
+            <a>นามสกุล :</a>
+            <input type="text" id="" name="" size="15" placeholder="">&nbsp;
+            <a>สถานะ :</a>
+            <input type="text" id="" size="16">
+            <a>โทรศัพท์ :</a>
+            <input type="text" id="" size="16">
+            <br>
+            <input type="radio" name="sub" id="purposeType1"> ยืนยันคำขอรับ &nbsp;
+            <input type="radio" name="sub" id="purposeType2"> ยืนยันคำขอต่ออายุ &nbsp;
+            <br>
+            <br>
 
-                <button class="button" id="">ผลการตรวจ</button>
-                <button class="button" id="">ข้อมูลทั่วไป</button>
-                <button class="button" id="">รูปภาพ</button>
-                <button class="button" id="">การอนุญาต</button>
-                <a class="nav-link" href="view.html">
-                    <button class="button" id="">พิมพ์ใบคำขอ</button></a>
-                <br><br><br>
+            <input type="checkbox" id="documentId" value="cb1" /> หนังสือยินยอมให้ใช้อาคารสถานที่เป็นที่ประกอบการ<br>
+            <input type="checkbox" id="documenthHome" value="cb2" /> สำเนาทะเบียนบ้าน/โฉนดที่ดิน(ที่ให้ใช้เป็นสถานที่ประกอบกิจการ)<br>
+            <input type="checkbox" id="documentLegalEntity"value="cb3" /> ใบรับรองแพทย์ผู้ขอรับใบอนุญาตและผู้ช่วยจำหน่ายสินค้า (ตามแบบ สณ.๑๑)<br>
+            <input type="checkbox" id="documentSignature" value="cb4" /> หนังสือสัญญาเช่า<br>
+            <input type="checkbox" id="documentSJ4" value="cb5" /> หนังสือมอบอำนาจ พร้อมติดอากรแสตมป์<br>
+            <input type="checkbox" id="documentOther" value="cb6" /> เอกสารอื่นๆที่เกี่ยวข้อง
+            <input type="text" id="other" size="40"/><br>
+            <br><br>
 
-                ข้าพเจ้าขอรับรองว่า
-                ข้อความในแบบคำร้องขอต่อใบอนุญาตนี้เป็นจริงทุกประการ<br>
-                (ลงชื่อ)
-                <input type="text" id="documentName" />
-                ผู้ขอรับใบอนุญาต 
-                <!-- </form> -->
+            <button class="button" id="">ผลการตรวจ</button>
+            <button class="button" id="">ข้อมูลทั่วไป</button>
+            <button class="button" id="">รูปภาพ</button>
+            <button class="button" id="">การอนุญาต</button>
+            <a class="nav-link" href="view.html">
+                <button class="button" id="">พิมพ์ใบคำขอ</button></a>
+            <br><br><br>
+
+            ข้าพเจ้าขอรับรองว่า
+            ข้อความในแบบคำร้องขอต่อใบอนุญาตนี้เป็นจริงทุกประการ<br>
+            (ลงชื่อ)
+            <input type="text" id="documentName" />
+            ผู้ขอรับใบอนุญาต
+            <!-- </form> -->
         </div>
     </div>
 
