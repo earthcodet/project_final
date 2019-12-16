@@ -6,7 +6,10 @@ body {
     padding: 16px;
     font-weight: bold;
 }
-
+.w3-bar-item-2 {
+    padding: 16px;
+    font-weight: normal;
+}
 ul {
     list-style-type: none;
     margin: 0;
