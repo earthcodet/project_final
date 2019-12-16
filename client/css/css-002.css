@@ -20,3 +20,12 @@ input, select {
     display: table;
     clear: both;
   }
+
+  div.img {
+    background-color: lightgrey;
+    width: 300px;
+    border: 5px;
+    padding: 110px;
+    margin: 20px;
+    /* margin-left:70px; */
+  }
