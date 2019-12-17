@@ -7,15 +7,21 @@
 <link rel="stylesheet" href="../css/w.3.css">
 <!-- <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-teal.css"> -->
 <link rel="stylesheet" href="../css/w3-theme-teal.css">
-<link href="https://fonts.googleapis.com/css?family=Sarabun&display=swap" rel="stylesheet">
+<!-- <link href="https://fonts.googleapis.com/css?family=Sarabun&display=swap" rel="stylesheet"> -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <link href="../css/css-index.css" rel="stylesheet">
+<link href="../css/fonts.css" rel="stylesheet">
 <link href="../css/css-002.css" rel="stylesheet">
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="../js/js-index.js"></script>
 <script src="../js/test.js"></script>
+
+
+<!-- search -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -132,21 +138,29 @@
             <div>
                 <!-- <form action="/action_page.php"> -->
                 <a>เลขที่คำขอ :</a>
-                <input type="text" id="" name="" size="15" placeholder="">&nbsp;
+                <input type="text" id="" name="" size="12" placeholder="">&nbsp;
                 <a>วันที่ยืนขอ :</a>
                 <input type="date" id="" name="" size="15" placeholder="">&nbsp;
                 <a>ประเภทคำขอ :</a>
-                <select id="" name="" style="width: 19%;">
+                <input list="brow" id="" name="" size="15">
+                <!-- <select id="" name="" style="width: 19%;"> -->
+                <datalist id="brow">
                     <option value="" hidden>เลือก...</option>
-                    <option value="">1 ก.การเลี้ยงม้า โค กระบือ ไม่เกิน 10 ตัว</option>
-                    <option value="">2 ก.การเลี้ยงสุกรเกิน 50 ตัวขึ้นไป
+                    <option value="1 ก.การเลี้ยงม้า โค กระบือ ไม่เกิน 10 ตัว">1 ก.การเลี้ยงม้า โค กระบือ ไม่เกิน 10 ตัว
                     </option>
-                    <option value="">2 ข.การเลี้ยงสุกรเกิน 20 ตัวแต่ไม่เกิน 50 ตัว
+                    <option value="2 ก.การเลี้ยงสุกรเกิน 50 ตัวขึ้นไป">2 ก.การเลี้ยงสุกรเกิน 50 ตัวขึ้นไป
                     </option>
-                    <option value="">2 ค.การเลี้ยงสุกรไม่เกิน 60 ตัว</option>
-                    <option value="">3 ก.การเลี้ยงแพะ แกะ เกิน 50 ตัวขึ้นไป</option>
-                    <option value="">3 ข.การเลี้ยงแพะ แกะ เกิน 20 ตัว แต่ไม่เกิน 50 ตัว</option>
-                </select> &nbsp;
+                    <option value="2 ข.การเลี้ยงสุกรเกิน 20 ตัวแต่ไม่เกิน 50 ตัว">2 ข.การเลี้ยงสุกรเกิน 20 ตัวแต่ไม่เกิน
+                        50 ตัว
+                    </option>
+                    <option value="2 ค.การเลี้ยงสุกรไม่เกิน 60 ตัว">2 ค.การเลี้ยงสุกรไม่เกิน 60 ตัว</option>
+                    <option value="3 ก.การเลี้ยงแพะ แกะ เกิน 50 ตัวขึ้นไป">3 ก.การเลี้ยงแพะ แกะ เกิน 50 ตัวขึ้นไป
+                    </option>
+                    <option value="3 ข.การเลี้ยงแพะ แกะ เกิน 20 ตัว แต่ไม่เกิน 50 ตัว">3 ข.การเลี้ยงแพะ แกะ เกิน 20 ตัว
+                        แต่ไม่เกิน 50 ตัว</option>
+                    </select>
+                </datalist>
+                </input>&nbsp;
                 <a>เขียนที่ :</a>
                 <input type="text" id="place" value="เทศบาลเมืองแสนสุข" readonly>&nbsp;
                 <br>
@@ -240,18 +254,16 @@
 
 
 
-                <input type="checkbox" id="documentId" value="cb1" />สำเนาบัตรประจำตัว
-                (ประชาชน/ข้าราชการ/พนักงานรัฐวิสาหกิจ)<br>
-                <input type="checkbox" id="documenthHome" value="cb2" />สำเนาทะเบียนบ้านของผู้ขอรับใบอนุญาต<br>
-                <input type="checkbox" id="documentLegalEntity"
-                    value="cb3" />สำเนาหนังสือรับรองการจดทะเบียนเป็นนิติบุคคล<br>
-                <input type="checkbox" id="documentSignature"
-                    value="cb4" />หลักฐานที่แสดงการเป็นผู้มีอำนาจลงนามแทนนิติบุคคลและใบมอบอำนาจ
-                (กรณีที่มีการมอบอำนาจ)<br>
-                <input type="checkbox" id="documentSJ4" value="cb5" />สำเนาใบอนุญาตประกอบกิจการ รง.4
-                หรือใบแทน<br>
-                <input type="checkbox" id="documentOther" value="cb6" />เอกสารอื่นๆที่เกี่ยวข้อง <input type="text"
-                    id="other" /><br>
+                <input type="checkbox" id="documentId" value="cb1" />
+                หนังสือยินยอมให้ใช้อาคารสถานที่เป็นที่ประกอบการ<br>
+                <input type="checkbox" id="documenthHome" value="cb2" />
+                สำเนาทะเบียนบ้าน/โฉนดที่ดิน(ที่ให้ใช้เป็นสถานที่ประกอบกิจการ)<br>
+                <input type="checkbox" id="documentLegalEntity" value="cb3" />
+                ใบรับรองแพทย์ผู้ขอรับใบอนุญาตและผู้ช่วยจำหน่ายสินค้า (ตามแบบ สณ.๑๑)<br>
+                <input type="checkbox" id="documentSignature" value="cb4" /> หนังสือสัญญาเช่า<br>
+                <input type="checkbox" id="documentSJ4" value="cb5" /> หนังสือมอบอำนาจ พร้อมติดอากรแสตมป์<br>
+                <input type="checkbox" id="documentOther" value="cb6" /> เอกสารอื่นๆที่เกี่ยวข้อง
+                <input type="text" id="other" size="40" /><br>
                 <br><br>
 
                 <button class="button" id="">ผลการตรวจ</button>
