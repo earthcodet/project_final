@@ -134,7 +134,7 @@
             <div>
                 <!-- <form action="/action_page.php"> -->
 
-                    <a>เลขที่คำโอน :</a>
+                    <a>เลขที่คำขอโอน :</a>
             <input type="text" id="formId" name="" size="15" placeholder="">&nbsp;
             <a>วันที่ยืน :</a>
             <input type="date" id="date" name="" size="15" placeholder="">&nbsp;
@@ -194,7 +194,7 @@
                         </select>
 
                         <br>
-                        <a>ขอยื่นคำร้องต่อนายกเทศมนตรี&nbsp;ดังนี้</a>
+                        <a><b>ขอยื่นคำร้องต่อนายกเทศมนตรี&nbsp;ดังนี้</b></a>
                         
                         <br>
                         <a>ด้วยข้าพเจ้า&nbsp;มีความประสงค์ขอโอน</a>
@@ -235,6 +235,7 @@
                         <input type="text" id="" size="16">
 
                     <br>
+                    <p>
                     <a>โดยข้าพเจ้ายินดีที่จะจ่ายเงินค่าบำรุงให้แก่เทศบาลฯเป็นเงิน</a>
                     <input type="text" name="" id="">บาท
                     <a>ตามใบเสร็จรับเงิน เล่มที่</a>
@@ -245,10 +246,10 @@
             <input type="date" id="date" name="" size="15" placeholder="">
 
             <br>
-            <p>ทั้งนี้ได้แนบเอกสารดังนี้</p>
+            <p><b>ทั้งนี้ได้แนบเอกสารดังนี้</b>
             <div class="row">
                 <div class="col">
-                    <p>1.ผู้โอน</p>
+                    <p><b>1.ผู้โอน</b></p>
                 <input type="radio" name="" id="" value="">
                 <a>สำเนาบัตรประชาชน</a>
                 <input type="radio" name="" id="" value="">
@@ -262,7 +263,7 @@
                 <input type="text" id="">
                 </div>
                 <div class="col">
-                    <p>2.ผู้รับโอน</p>
+                    <p><b>2.ผู้รับโอน</b></p>
                     <input type="radio" name="" id="" value="">
                 <a>สำเนาบัตรประชาชน</a>
                 <input type="radio" name="" id="" value="">
@@ -280,15 +281,75 @@
                     <button class="button" id="">บันทึกรายการ</button>
                 </div>
             </div>
+</p>
 
-            <p>ความเห็นของเจ้าหน้าที่/หัวหน้างานสุขาภิบาล</p>
+            <p>
+            <b>ความเห็นของเจ้าหน้าที่/หัวหน้างานสุขาภิบาล</b>
+            <br>
             <input type="radio" id="" size="14">
-                <a>เห็นความอนุญาต โดยชำระเงินให้แก่เทศบาล</a>
+                <a>เห็นควรอนุญาต โดยชำระเงินให้แก่เทศบาล</a>
             <input type="radio" id="" size="14">
-                <a>ไม่สมควรอนุญาต</a>
+                <a>ไม่สมควรอนุญาต เพราะ</a>
                 <input type="text" id="">
                 <a>โดย</a>
                 <input type="text" id="">
+                <a>วันที่</a>
+            <input type="date" id="date" name="" size="15" placeholder="">
+        </p>
+
+            <p>
+            <b>ความเห็นของหัวหน้าฝ่ายบริหารงานสาธารณสุข</b>
+            <br>
+            <input type="radio" id="" size="14">
+                <a>เห็นควรอนุญาต โดยชำระเงินให้แก่เทศบาล</a>
+            <input type="radio" id="" size="14">
+                <a>ไม่สมควรอนุญาต เพราะ</a>
+                <input type="text" id="">
+                <a>โดย</a>
+                <input type="text" id="">
+                <a>วันที่</a>
+            <input type="date" id="date" name="" size="15" placeholder="">
+        </p>
+
+            <p>
+            <b>ความเห็นของผู้อำนวยการกองสาธารณสุข</b>
+            <br>
+            <input type="radio" id="" size="14">
+                <a>เห็นควรอนุญาต</a>
+            <input type="radio" id="" size="14">
+                <a>ไม่สมควรอนุญาต</a>
+                <a>โดย</a>
+                <input type="text" id="">
+                <a>วันที่</a>
+            <input type="date" id="date" name="" size="15" placeholder="">
+            </p>
+
+            <p>
+            <b>ความเห็นของปลัดเทศบาล</b>
+            <br>
+            <input type="radio" id="" size="14">
+                <a>เห็นควรอนุญาต</a>
+            <input type="radio" id="" size="14">
+                <a>ไม่สมควรอนุญาต</a>
+                <a>โดย</a>
+                <input type="text" id="">
+                <a>วันที่</a>
+            <input type="date" id="date" name="" size="15" placeholder="">
+            </p>
+
+            <p>
+                <b>ความเห็นเจ้าพนักงานท้องถิ่น</b>
+            <br>
+            <input type="radio" id="" size="14">
+                <a>อนุญาต</a>
+            <input type="radio" id="" size="14">
+                <a>ไม่อนุญาต</a>
+                <a>ลงชื่อ</a>
+                <input type="text" id="">
+                <a>ตำแหน่ง</a>
+                <input type="text" id="">
+            </p>
+
                 </div>
                 <!-- </form> -->
             </div>
