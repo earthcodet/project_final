@@ -1,30 +1,32 @@
 <!DOCTYPE html>
 <html>
-<title>กิจการที่เป็นอันตรายต่อสุขภาพ</title>
+<title>กิจการที่จัดตั้งสถานที่จำหน่ายหรือสะสมอาหาร พื้นที่น้อยกว่า
+    200 ตารางเมตร</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="../css/w.3.css">
 <link rel="stylesheet" href="../css/w3-theme-teal.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="../css/w.3.css">
 <link rel="stylesheet" href="../css/w3-theme-teal.css">
-
 <link href="../css/css-index.css" rel="stylesheet">
 <link href="../css/fonts.css" rel="stylesheet">
 <link href="../css/css-002.css" rel="stylesheet">
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="../js/js-index.js"></script>
 <script src="../js/test.js"></script>
-
 <!-- search -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
 <body>
-    <!-- เมนูด้านข้าง -->
+
+
     <nav class="w3-sidebar w3-bar-block w3-collapse w3-animate-left w3-card" style="z-index:3;width:250px;"
         id="mySidebar">
         <a class="w3-bar-item w3-button w3-border-bottom w3-large" href="index.html">
@@ -34,14 +36,15 @@
             <a class="w3-bar-item w3-button" onclick="myAccordion('demo')" href="javascript:void(0)">ระบบงานคำขอ<i
                     class="fa fa-caret-down"></i></a>
             <div id="demo" class="w3-hide">
-                <a class="w3-button" href="request_public_sell.html">- ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
-                <a class="w3-button" href="request_public_hawk.html">- ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
-                <a class="w3-button" href="request_area_more_sell.html">- ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
-                <a class="w3-button" href="request_area_more_correct.html">- ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</a>
-                <a class="w3-button" href="request_area_less_sell.html">- หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
-                <a class="w3-button" href="request_area_less_correct.html">- หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
-                <a class="w3-button" href="request_market.html">- ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
                 <a class="w3-button" href="request_health_danger.html">- กิจการที่เป็นอันตรายต่อสุขภาพ</a>
+                <a class="w3-button" href="request_area_less.html">- กิจการที่จัดตั้งสถานที่จำหน่ายหรือสะสมอาหาร
+                    พื้นที่น้อยกว่า
+                    200 ตารางเมตร</a>
+                <a class="w3-button" href="request_area_more.html">- กิจการที่จัดตั้งสถานที่จำหน่ายหรือสะสมอาหาร
+                    พื้นที่เกินกว่า
+                    200 ตารางเมตร</a>
+                <a class="w3-button" href="request_market.html">- กิจการตลาด</a>
+                <a class="w3-button" href="request_public.html">- กิจการจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
                 <a class="w3-button" href="request_crematory.html">- กิจการฌาปณสถาน</a>
             </div>
         </div>
@@ -99,10 +102,10 @@
 
 
     </nav>
-    <!-- คลิกเมนูย่อได้ -->
-    <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay">
-    </div>
 
+    <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay">
+
+    </div>
     <!-- เมนูด้านบน -->
     <div class="w3-top"style="overflow:auto;">
         <ul>
@@ -114,17 +117,16 @@
             <li><a href="#about">ยกเลิก</a></li>
         </ul> 
     </div>
-    
-    <div class="w3-main" style="margin-left:250px;margin-top: 47px;">
+
+
+    <div class="w3-main" style="margin-left:250px; margin-top: 47px;">
         <header class="w3-container w3-theme">
-            <h1 style="font-size:20px">กิจการที่เป็นอันตรายต่อสุขภาพ</h1>
+            <h1 style="font-size:20px">กิจการที่จัดตั้งสถานที่จำหน่ายหรือสะสมอาหาร พื้นที่น้อยกว่า
+                200 ตารางเมตร</h1>
         </header>
 
         <div class="w3-container" style="padding:32px">
-
-            <div class="box">
-                <h4>ข้อมูลสถานประกอบการ</h4>
-
+            <div>
                 <!-- <form action="/action_page.php"> -->
                 <a>เลขที่คำขอ :</a>
                 <input type="text" id="" name="" size="12" placeholder="">&nbsp;
@@ -135,50 +137,26 @@
                 <!-- <select id="" name="" style="width: 19%;"> -->
                 <datalist id="brow">
                     <option value="" hidden>เลือก...</option>
-                    <option value="1 ก.การเลี้ยงม้า โค กระบือ ไม่เกิน 10 ตัว">1 ก.การเลี้ยงม้า โค กระบือ ไม่เกิน 10 ตัว
+                    <option value="1.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่ไม่เกิน 10 ตรม.">
+                        1.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่ไม่เกิน 10 ตรม.
                     </option>
-                    <option value="2 ก.การเลี้ยงสุกรเกิน 50 ตัวขึ้นไป">2 ก.การเลี้ยงสุกรเกิน 50 ตัวขึ้นไป
+                    <option value="2.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่เกิน 10 ตรม. แต่ไม่เกิน 25 ตรม.">
+                        2.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่เกิน 10 ตรม. แต่ไม่เกิน 25 ตรม.
                     </option>
-                    <option value="2 ข.การเลี้ยงสุกรเกิน 20 ตัวแต่ไม่เกิน 50 ตัว">2 ข.การเลี้ยงสุกรเกิน 20 ตัวแต่ไม่เกิน
-                        50 ตัว
+                    <option value="3.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่เกิน 25 ตรม. แต่ไม่เกิน 50 ตรม.">
+                        3.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่เกิน 25 ตรม. แต่ไม่เกิน 50 ตรม.
                     </option>
-                    <option value="2 ค.การเลี้ยงสุกรไม่เกิน 60 ตัว">2 ค.การเลี้ยงสุกรไม่เกิน 60 ตัว</option>
-                    <option value="3 ก.การเลี้ยงแพะ แกะ เกิน 50 ตัวขึ้นไป">3 ก.การเลี้ยงแพะ แกะ เกิน 50 ตัวขึ้นไป
+                    <option value="4.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่เกิน 50 ตรม. แต่ไม่เกิน 100ตรม.">
+                        4.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่เกิน 50 ตรม. แต่ไม่เกิน 100ตรม.
                     </option>
-                    <option value="3 ข.การเลี้ยงแพะ แกะ เกิน 20 ตัว แต่ไม่เกิน 50 ตัว">3 ข.การเลี้ยงแพะ แกะ เกิน 20 ตัว
-                        แต่ไม่เกิน 50 ตัว</option>
-                    <option value="3. ค. การเลี้ยงแพะ แกะไม่เกิน 20 ตัว"></option>
-                    <option value="4. ก. การเลี้ยงห่าน เป็ด ไก่ เกิน 50 ตัวขึ้นไป"></option>
-                    <option value="4. ข. การเลี้ยงห่าน เป็ด ไก่ เกิน 50 ตัว"></option>
-                    <option value="5. ก.การเลี้ยงสัตว์เพื่อรีดเอานม การรีดน้ำนม"></option>
-                    <option value="6. การทำเนย เนยเทียม"></option>
-                    <option
-                        value="7. การฆ่าห่าน เป็ดไก่ ยกเว้นการฆ่าในภัตตาคาร โรงแรมหรือข้าวแกง เพื่อปรุงอาหารในนั้นหรือการฆ่าเพื่อปรุงอาหารเร่ขายด้วยตนเอง">
+                    <option value="5.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่เกิน 100 ตรม. แต่ไม่เกิน 200ตรม.">
+                        5.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่เกิน 100 ตรม. แต่ไม่เกิน 200ตรม.
                     </option>
-                    <option value="8. การฟอกหนังสัตว์ การสะสมหนังสัตว์"></option>
-                    <option value="9. การสะสมเขาสัตว์ กระดูดสัตว์ ขนสัตว์ หนังสัตว์"></option>
-                    <option value="10. การย้อมทำให้เกิดกลิ่นเหม็น"></option>
-                    <option value="11. ก. การทำกะปิ น้ำปลา น้ำเคย ไตปลา เต้าเจี้ยว ซีอิ้ว หอยดอง โดยใช้เครื่องจักร">
-                    </option>
-                    <option
-                        value="11. ข. การทำกะปิ ไตปลา เต้าเจี้ยว หอยดอง โดยไม่ใช้เครื่องจักรเกินกว่า 60 กิโลกรัมขึ้นไป">
-                    </option>
-                    <option value="11. ค. การทำน้ำปลา น้ำเคย ซีอิ้ว โดยไม่ใช้เครื่องจักรเกินกว่า 200 ลิตร"></option>
-                    <option value="12. การทำ การหมัก การสะสมปลาร้า ปลาเจ่า กุ้งเจ่า ตั้งแต่ 60 กิโลกรัมขึ้นไป"></option>
-                    <option value="13. ก. การทำและตากปลาเค็ม เนื้อเค็ม เป็ดเค็ม หนังหมู กุ้งแห้ง"></option>
-                    <option value="13. ข. การทำและตากปลาเค็ม เนื้อเค็ม เป็ดเค็ม หนังหมู การเคี่ยวมันกุ้ง"></option>
-                    <option
-                        value="14. การนึ่งปลา การตั้มปลาซึ้งใช้แทนการนึ่ง ยกเว้นการนึ่งหรือต้มในภัตตาคาร โรงแรม หรือร้านข้าวแกงปรุงอาหารในนั้น และการนึ่งหรือต้มเพื่อปรุงอาหารเร่ขายด้วยตนเอง">
-                    </option>
-                    <option value="15. ข. การทำสบู่โดยไม่ใช้เครื่องจักร"></option>
-                    <option value="16. การเคี่ยวหนังสัตว์ เอ็นสัตว์ ไขสัตว์"></option>
-                    <option value="17. ก. การอัดเอาน้ำมันใช้เครื่องจักร"></option>
-                    <option value="17. ข. การอัดเอาน้ำมันไม่ใช้เครื่องจักร"></option>
                     </select>
                 </datalist>
                 </input>&nbsp;
                 <a>เขียนที่ :</a>
-                <input type="text" id="place" value="เทศบาลเมืองแสนสุข">&nbsp;
+                <input type="text" id="place" value="เทศบาลเมืองแสนสุข" readonly>&nbsp;
                 <br>
                 <a>ข้าพเจ้า :</a>
                 <input type="radio" name="typee" id="typeUser1" value="บุคคลธรรมดา">
@@ -293,20 +271,11 @@
                 <input type="text" id="" size="16">
                 <br>
                 <br>
-                
-
                 <input type="radio" name="sub" id="purposeType1"> ยืนยันคำขอรับ &nbsp;
                 <input type="radio" name="sub" id="purposeType2"> ยืนยันคำขอต่ออายุ &nbsp;
                 <br>
+                <br>
 
-                <a>ใช้อาคารสถานที่ประกอบการของผู้อื่น</a>
-                <select id="mySelect" name="" style="width: 10%;" onclick=" myFunction()">
-                    <option value="" hidden>เลือก...</option>
-                    <option value="01">ยืนยัน</option>
-                    <option value="02">ไม่ยืนยัน</option>
-                </select>
-
-                <br><br>
                 <input type="checkbox" id="documentId" value="cb1" />
                 หนังสือยินยอมให้ใช้อาคารสถานที่เป็นที่ประกอบการ<br>
                 <input type="checkbox" id="documenthHome" value="cb2" />
@@ -316,75 +285,25 @@
                 <input type="checkbox" id="documentSignature" value="cb4" /> หนังสือสัญญาเช่า<br>
                 <input type="checkbox" id="documentSJ4" value="cb5" /> หนังสือมอบอำนาจ พร้อมติดอากรแสตมป์<br>
                 <input type="checkbox" id="documentOther" value="cb6" /> เอกสารอื่นๆที่เกี่ยวข้อง
-                <input type="text" id="other" size="40" />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" id="other" size="40" /><br>
+                <br><br>
 
+                <button class="button" id="">ผลการตรวจ</button>
+                <button class="button" id="">ข้อมูลทั่วไป</button>
                 <button class="button" id="">รูปภาพ</button>
-                <!-- <a class="nav-link" href="view.html">
-                    <button class="button" id="">พิมพ์ใบคำขอ</button></a> -->
+                <button class="button" id="">การอนุญาต</button>
+                <a class="nav-link" href="view.html">
+                    <button class="button" id="">พิมพ์ใบคำขอ</button></a>
                 <br><br><br>
 
                 ข้าพเจ้าขอรับรองว่า
                 ข้อความในแบบคำร้องขอต่อใบอนุญาตนี้เป็นจริงทุกประการ<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 (ลงชื่อ)
                 <input type="text" id="documentName" />
                 ผู้ขอรับใบอนุญาต
                 <!-- </form> -->
             </div>
-            <br>
-
-            
-            <!-- <input type="radio" name="sub" id="" onclick="w3.show('#Demo')"> ยืนยัน &nbsp; -->
-            <!-- <input type="radio" name="sub" id="" onclick="w3.hide('#Demo')"> ไม่ยืนยัน &nbsp; -->
-            <div id="Demo" style="display:none">
-                <div class="box">
-                    <h4>ข้อมูลเจ้าของสถานที่</h4>
-                    <a>ชื่อ-สกุล :</a>
-                    <input type="text" id="" size="20"> &nbsp;
-                    <a>อยู่บ้านเลขที่ :</a>
-                    <input type="text" id="" size="9"> &nbsp;
-                    <a>หมู่ที่ :</a>
-                    <input type="int" id="" size="6"> &nbsp;
-                    <a>ซอย :</a>
-                    <input type="text" id="" size="13"> &nbsp;
-                    <a>ถนน :</a>
-                    <input type="text" id="" size="13">
-                    <a>จังหวัด :</a>
-                    <select id="" style="width: 13.9%;">
-                    </select> &nbsp;
-                    <a>อำเภอ :</a>
-                    <select id="" style="width: 12.5%;">
-                    </select>&nbsp;
-                    <a>ตำบล :</a>
-                    <select id="" style="width: 12.5%;">
-                    </select>&nbsp;
-                    <a>โทรศัพท์ :</a>
-                    <input type="text" id="" size="16"> &nbsp;
-                    <a>โฉนดที่ดิน :</a>
-                    <input type="text" id="" size="9"> &nbsp;
-                    <a>ตรอก :</a>
-                    <input type="int" id="" size="6"> &nbsp;
-                    <a>ซอย :</a>
-                    <input type="text" id="" size="13"> &nbsp;
-                    <a>ถนน :</a>
-                    <input type="text" id="" size="13">
-                    <a>จังหวัด :</a>
-                    <select id="" style="width: 13.9%;">
-                    </select> &nbsp;
-                    <a>อำเภอ :</a>
-                    <select id="" style="width: 12.5%;">
-                    </select>&nbsp;
-                    <a>ตำบล :</a>
-                    <select id="" style="width: 12.5%;">
-                    </select>&nbsp;
-                    <br>
-                    <input type="file"></input>
-                </div>
-            </div>
         </div>
-       
-    </div>
 
 
     </div>
@@ -398,17 +317,5 @@
 
 
 </body>
-<!-- <script>
-    function myFunction() {
-        var y = document.getElementById("mySelect").value;
-        if (y == '01') {
-            document.getElementById('Demo').style.display = 'block';
-        } else {
-            document.getElementById('Demo').style.display = 'none';
-        }
-
-    }
-</script> -->
-<!-- <script src="https://www.w3schools.com/lib/w3.js"></script> -->
 
 </html>
