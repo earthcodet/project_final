@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<title>ข้อมูลการจดใบอนุญาต</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
+<!-- sarabun -->
+<link href="https://fonts.googleapis.com/css?family=Sarabun&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/w.3.css">
+<!-- <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-teal.css"> -->
+<link rel="stylesheet" href="../../css/w3-theme-teal.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- bootstrap -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<link href="../../css/css-index.css" rel="stylesheet">
+<link href="../../css/css-002.css" rel="stylesheet">
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script src="../../js/js-index.js"></script>
+<script src="../../js/test copy.js"></script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<body>
+    <nav class="w3-sidebar w3-bar-block w3-collapse w3-animate-left w3-card" style="z-index:3;width:250px;"
+        id="mySidebar">
+        <a class="w3-bar-item w3-button w3-border-bottom w3-large" href="../index.html">
+            <img src="../../img/img1.jpg" style="width:100%;">
+        </a>
+        <!-- <a class="w3-bar-item w3-button w3-hide-large w3-large" href="javascript:void(0)" onclick="w3_close()">Close <i
+                class="fa fa-remove"></i></a>
+        <a class="w3-bar-item w3-button w3-teal" href="#">Home</a> -->
+
+        <div>
+            <a class="w3-bar-item w3-button" onclick="myAccordion('demo')" href="javascript:void(0)">ระบบงานคำขอ<i
+                    class="fa fa-caret-down"></i></a>
+            <div id="demo" class="w3-hide">
+                <a class="w3-button" href="../request_health_danger.html">- กิจการที่เป็นอันตรายต่อสุขภาพ</a>
+                <a class="w3-button" href="../request_area_less.html">- กิจการที่จัดตั้งสถานที่จำหน่ายหรือสะสมอาหาร
+                    พื้นที่น้อยกว่า
+                    200 ตารางเมตร</a>
+                <a class="w3-button" href="../request_area_more.html">- กิจการที่จัดตั้งสถานที่จำหน่ายหรือสะสมอาหาร
+                    พื้นที่เกินกว่า
+                    200 ตารางเมตร</a>
+                <a class="w3-button" href="../request_market.html">- กิจการตลาด</a>
+                <a class="w3-button" href="../request_public.html">- กิจการจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
+                <a class="w3-button" href="../request_crematory.html">- กิจการฌาปณสถาน</a>
+            </div>
+        </div>
+
+        <div>
+            <a class="w3-bar-item w3-button" onclick="myAccordion2('demo2')"
+                href="javascript:void(0)">งานตรวจสอบ/อนุมัติ<i class="fa fa-caret-down"></i></a>
+            <div id="demo2" class="w3-hide">
+                <a class="w3-bar-item w3-button" href="#"></a>
+            </div>
+        </div>
+
+        <div>
+            <a class="w3-bar-item w3-button" onclick="myAccordion3('demo3')" href="javascript:void(0)">งานใบอนุญาต<i
+                    class="fa fa-caret-down"></i></a>
+            <div id="demo3" class="w3-hide">
+                <a class="w3-bar-item w3-button" href="#"></a>
+            </div>
+        </div>
+
+        <div>
+            <a class="w3-bar-item w3-button" onclick="myAccordion4('demo4')" href="javascript:void(0)">ข้อมูลส่วนกลาง<i
+                    class="fa fa-caret-down"></i></a>
+            <div id="demo4" class="w3-hide">
+                <a class="w3-button" href="operator.html">- ข้อมูลประกอบการ</a>
+                <a class="w3-button" href="02.html">- ข้อมูลการจดใบอนุญาต</a>
+                <a class="w3-button" href="03.html">- โอนใบอนุญาต</a>
+            </div>
+        </div>
+
+        <div>
+            <a class="w3-bar-item w3-button" onclick="myAccordion5('demo5')" href="javascript:void(0)">งานร้องเรียน<i
+                    class="fa fa-caret-down"></i></a>
+            <div id="demo5" class="w3-hide">
+                <a class="w3-button" href="#">- บันทึกเรื่องร้องเรียน</a>
+                <a class="w3-button" href="#">- บันทึกคำร้อง</a>
+            </div>
+        </div>
+
+        <div>
+            <a class="w3-bar-item w3-button" onclick="myAccordion5('demo6')" href="javascript:void(0)">ข้อมูลระบบ<i
+                    class="fa fa-caret-down"></i></a>
+            <div id="demo6" class="w3-hide">
+                <a class="w3-bar-item w3-button" href="#"></a>
+            </div>
+        </div>
+
+        <div>
+            <a class="w3-bar-item w3-button" onclick="myAccordion5('demo7')" href="javascript:void(0)">รายงาน<i
+                    class="fa fa-caret-down"></i></a>
+            <div id="demo7" class="w3-hide">
+                <a class="w3-bar-item w3-button" href="#"></a>
+            </div>
+        </div>
+
+
+    </nav>
+
+    <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay">
+    </div>
+
+
+
+    <div class="w3-main" style="margin-left:250px;">
+        <ul>
+            <li><a class="active" href="#home">Home</a></li>
+            <li><a href="#news">News</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+
+
+        <div id="myTop" class="">
+            <p><i class="fa fa-bars w3-button w3-teal w3-hide-large w3-xlarge" onclick="w3_open()"></i>
+                <span id="myIntro" class="w3-hide">ระบบงานสิ่งแวดล้อมและสุขภิบาล</span></p>
+        </div>
+
+        <header class="w3-container w3-theme">
+            <h1 style="font-size:20px">ข้อมูลการจดใบอนุญาต</h1>
+        </header>
+
+        <div class="w3-container" style="padding:32px">
+            <!-- START -->
+            <div>
+                <!-- <form action="/action_page.php"> -->
+                <a>คำนำหน้าชื่อ :</a>
+                <select id="" name="" style="width: 10%;">
+                    <option value="" hidden>เลือก...</option>
+                    <option value="">นาย</option>
+                    <option value="">นาง</option>
+                    <option value="">นางสาว</option>
+                </select>
+                <a>ชื่อ :</a>
+                <input type="text" id="" name="" size="17" placeholder="">&nbsp;
+                <a>นามสกุล :</a>
+                <input type="text" id="" name="" size="17" placeholder="">&nbsp;
+                <a >ประเภท :</a>
+                <select id="" name="" style="width: 17%;" class="d-flex justify-content-end">
+                    <option value="" hidden>เลือก...</option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    <option value=""></option>
+                </select>
+                <br>
+                <a>เลขประจำตัว :</a>
+                <input type="text" id="" name="" size="15" placeholder="">&nbsp;&nbsp;
+                <a>บัตรประจำตัว </a>&nbsp;
+                <a>ออกเมื่อ :</a>
+                <input type="date" id="" name="" style="width: 14.7%;" placeholder="">&nbsp;
+                <a>หมดอายุ :</a>
+                <input type="date" id="" name="" style="width: 14.7%;" placeholder="">&nbsp;
+                        <a>สัญชาติ :</a>
+                        <select id="nationality">
+                            <option value="" hidden>เลือก...</option>
+                            <option value="">ไทย</option>
+                            <option value=""></option>
+                        </select> &nbsp;&nbsp;
+                        <a>เชื้อชาติ :</a>
+                        <select id="race">
+                            <option value="" hidden>เลือก...</option>
+                            <option value="">ไทย</option>
+                            <option value=""></option>
+                        </select>
+
+                        <br>
+                        <a>อยู่บ้านเลขที่ :</a>
+                        <input type="text" id="homeId" size="11.5"> &nbsp;
+                        <a>หมู่ที่ :</a>
+                        <input type="int" id="moo" size="6"> &nbsp;
+                        <a>ตรอก:</a>
+                        <input type="text" id="trxk" size="11.5"> &nbsp;
+                        <a>ซอย :</a>
+                        <input type="text" id="sxy" size="11.5"> &nbsp;
+                        <a>อาคาร :</a>
+                        <input type="text" id="building" size="11.5"> &nbsp;
+                        <a>ถนน :</a>
+                        <input type="text" id="road" size="11.5">
+                        
+                        <br>
+                        <a>จังหวัด :</a>
+                        <select id="province">
+                        </select> &nbsp;
+                        <a>อำเภอ :</a>
+                        <select id="district">
+                        </select> &nbsp;
+                        <a>ตำบล :</a>
+                        <select id="subdistrict">
+                        </select> &nbsp;
+                        <a>โทรศัพท์ :</a>
+                        <input type="text" id="phone" size="16"> &nbsp;
+                        <a>โทรสาร :</a>
+                        <input type="text" id="fax" size="16">
+                </div>
+                <!-- </form> -->
+                <br>
+                <div class="row">
+                    <div class="col-8">
+                        <a class="font-weight-bold">ประวัติการออกใบอนุญาต</a class="font-weight-bold"><br>
+                        <a>ปีงบประมาณ</a>
+                        <input type="" id="">
+                        &nbsp;&nbsp;
+                        <a>ประเภทใบอนุญาต</a>
+                        <select id="" style="width: 24%;"></select>
+                        <br><br>
+                        <table class="table table-bordered">
+                            <thead class="thead-light">
+                              <tr>
+                                <th scope="col"></th>
+                                <th scope="col" class="text-center">ปีงบประมาณ</th>
+                                <th scope="col" class="text-center">ประเภทใบอนุญาต</th>
+                                <th scope="col" class="text-center">เล่ม</th>
+                                <th scope="col" class="text-center">เลขที่</th>
+                                <th scope="col" class="text-center">วันหมดอายุ</th>
+                                <th scope="col" class="text-center">สถานะ</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <th scope="row"></th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                    </div>
+                    <div class="col-2">
+                        <button class="button" id="">ค้นหาประวัติ</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8">
+                        <a class="font-weight-bold">ประวัติการร้องเรียน</a class="font-weight-bold">
+                        <table class="table table-bordered">
+                            <thead class="thead-light">
+                              <tr>
+                                <th scope="col"></th>
+                                <th scope="col" class="text-center">ปีงบประมาณ</th>
+                                <th scope="col" class="text-center">ประเภทใบอนุญาต</th>
+                                <th scope="col" class="text-center">เล่ม</th>
+                                <th scope="col" class="text-center">เลขที่</th>
+                                <th scope="col" class="text-center">วันหมดอายุ</th>
+                                <th scope="col" class="text-center">สถานะ</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <th scope="row"></th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                    </div>
+                    <div class="col-2">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    </div>
+
+    <!-- <footer class="w3-container w3-theme" style="padding:32px">
+            <p>Footer information goes here</p>
+        </footer> -->
+
+    </div>
+
+
+
+</body>
+
+</html>

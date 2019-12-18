@@ -1,37 +1,34 @@
 <!DOCTYPE html>
 <html>
-<title>เทศบาลเมืองแสนสุข</title>
+<title>กิจการที่เป็นอันตรายต่อสุขภาพ</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
 <link rel="stylesheet" href="../css/w.3.css">
-<!-- <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-teal.css"> -->
 <link rel="stylesheet" href="../css/w3-theme-teal.css">
-<link href="https://fonts.googleapis.com/css?family=Sarabun&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../css/w.3.css">
+<link rel="stylesheet" href="../css/w3-theme-teal.css">
 <link href="../css/css-index.css" rel="stylesheet">
+<link href="../css/fonts.css" rel="stylesheet">
 <link href="../css/css-002.css" rel="stylesheet">
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="../js/js-index.js"></script>
 <script src="../js/test.js"></script>
+<!-- search -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
 <body>
-
-
     <nav class="w3-sidebar w3-bar-block w3-collapse w3-animate-left w3-card" style="z-index:3;width:250px;"
         id="mySidebar">
         <a class="w3-bar-item w3-button w3-border-bottom w3-large" href="index.html">
             <img src="../img/img1.jpg" style="width:100%;">
         </a>
-        <!-- <a class="w3-bar-item w3-button w3-hide-large w3-large" href="javascript:void(0)" onclick="w3_close()">Close <i
-                class="fa fa-remove"></i></a>
-        <a class="w3-bar-item w3-button w3-teal" href="#">Home</a> -->
-
         <div>
             <a class="w3-bar-item w3-button" onclick="myAccordion('demo')" href="javascript:void(0)">ระบบงานคำขอ<i
                     class="fa fa-caret-down"></i></a>
@@ -69,9 +66,9 @@
             <a class="w3-bar-item w3-button" onclick="myAccordion4('demo4')" href="javascript:void(0)">ข้อมูลส่วนกลาง<i
                     class="fa fa-caret-down"></i></a>
             <div id="demo4" class="w3-hide">
-                <a class="w3-button" href="#">- ข้อมูลผู้ประกอบการ</a>
-                <a class="w3-button" href="#">- ข้อมูลการจดใบอนุญาต</a>
-                <a class="w3-button" href="#">- โอนใบอนุญาต</a>
+                <a class="w3-button" href="./central/operator.html">- ข้อมูลผู้ประกอบการ</a>
+                <a class="w3-button" href="./central/02.html">- ข้อมูลการจดใบอนุญาต</a>
+                <a class="w3-button" href="./central/03.html">- โอนใบอนุญาต</a>
             </div>
         </div>
 
@@ -108,7 +105,7 @@
 
 
 
-    <div class="w3-main" style="margin-left:250px;">
+    <div class="w3-main" style="margin-left:250px;" >
         <ul>
             <li><a class="active" href="#home">Home</a></li>
             <li><a href="#news">News</a></li>
@@ -129,26 +126,54 @@
 
         <div class="w3-container" style="padding:32px">
 
-            <div>
+            <div class="box">
                 <!-- <form action="/action_page.php"> -->
                 <a>เลขที่คำขอ :</a>
-                <input type="text" id="" name="" size="15" placeholder="">&nbsp;
+                <input type="text" id="" name="" size="12" placeholder="">&nbsp;
                 <a>วันที่ยืนขอ :</a>
                 <input type="date" id="" name="" size="15" placeholder="">&nbsp;
                 <a>ประเภทคำขอ :</a>
-                <select id="" name="" style="width: 19%;">
+                <input list="brow" id="" name="" size="31.8">
+                <!-- <select id="" name="" style="width: 19%;"> -->
+                <datalist id="brow">
                     <option value="" hidden>เลือก...</option>
-                    <option value="">1 ก.การเลี้ยงม้า โค กระบือ ไม่เกิน 10 ตัว</option>
-                    <option value="">2 ก.การเลี้ยงสุกรเกิน 50 ตัวขึ้นไป
+                    <option value="1 ก.การเลี้ยงม้า โค กระบือ ไม่เกิน 10 ตัว">1 ก.การเลี้ยงม้า โค กระบือ ไม่เกิน 10 ตัว
                     </option>
-                    <option value="">2 ข.การเลี้ยงสุกรเกิน 20 ตัวแต่ไม่เกิน 50 ตัว
+                    <option value="2 ก.การเลี้ยงสุกรเกิน 50 ตัวขึ้นไป">2 ก.การเลี้ยงสุกรเกิน 50 ตัวขึ้นไป
                     </option>
-                    <option value="">2 ค.การเลี้ยงสุกรไม่เกิน 60 ตัว</option>
-                    <option value="">3 ก.การเลี้ยงแพะ แกะ เกิน 50 ตัวขึ้นไป</option>
-                    <option value="">3 ข.การเลี้ยงแพะ แกะ เกิน 20 ตัว แต่ไม่เกิน 50 ตัว</option>
-                </select> &nbsp;
+                    <option value="2 ข.การเลี้ยงสุกรเกิน 20 ตัวแต่ไม่เกิน 50 ตัว">2 ข.การเลี้ยงสุกรเกิน 20 ตัวแต่ไม่เกิน
+                        50 ตัว
+                    </option>
+                    <option value="2 ค.การเลี้ยงสุกรไม่เกิน 60 ตัว">2 ค.การเลี้ยงสุกรไม่เกิน 60 ตัว</option>
+                    <option value="3 ก.การเลี้ยงแพะ แกะ เกิน 50 ตัวขึ้นไป">3 ก.การเลี้ยงแพะ แกะ เกิน 50 ตัวขึ้นไป
+                    </option>
+                    <option value="3 ข.การเลี้ยงแพะ แกะ เกิน 20 ตัว แต่ไม่เกิน 50 ตัว">3 ข.การเลี้ยงแพะ แกะ เกิน 20 ตัว
+                        แต่ไม่เกิน 50 ตัว</option>
+                    <option value="3. ค. การเลี้ยงแพะ แกะไม่เกิน 20 ตัว"></option>
+                    <option value="4. ก. การเลี้ยงห่าน เป็ด ไก่ เกิน 50 ตัวขึ้นไป"></option>
+                    <option value="4. ข. การเลี้ยงห่าน เป็ด ไก่ เกิน 50 ตัว"></option>
+                    <option value="5. ก.การเลี้ยงสัตว์เพื่อรีดเอานม การรีดน้ำนม"></option>
+                    <option value="6. การทำเนย เนยเทียม"></option>
+                    <option value="7. การฆ่าห่าน เป็ดไก่ ยกเว้นการฆ่าในภัตตาคาร โรงแรมหรือข้าวแกง เพื่อปรุงอาหารในนั้นหรือการฆ่าเพื่อปรุงอาหารเร่ขายด้วยตนเอง"></option>
+                    <option value="8. การฟอกหนังสัตว์ การสะสมหนังสัตว์"></option>
+                    <option value="9. การสะสมเขาสัตว์ กระดูดสัตว์ ขนสัตว์ หนังสัตว์"></option>
+                    <option value="10. การย้อมทำให้เกิดกลิ่นเหม็น"></option>
+                    <option value="11. ก. การทำกะปิ น้ำปลา น้ำเคย ไตปลา เต้าเจี้ยว ซีอิ้ว หอยดอง โดยใช้เครื่องจักร"></option>
+                    <option value="11. ข. การทำกะปิ ไตปลา เต้าเจี้ยว หอยดอง โดยไม่ใช้เครื่องจักรเกินกว่า 60 กิโลกรัมขึ้นไป"></option>
+                    <option value="11. ค. การทำน้ำปลา น้ำเคย ซีอิ้ว โดยไม่ใช้เครื่องจักรเกินกว่า 200 ลิตร"></option>
+                    <option value="12. การทำ การหมัก การสะสมปลาร้า ปลาเจ่า กุ้งเจ่า ตั้งแต่ 60 กิโลกรัมขึ้นไป"></option>
+                    <option value="13. ก. การทำและตากปลาเค็ม เนื้อเค็ม เป็ดเค็ม หนังหมู กุ้งแห้ง"></option>
+                    <option value="13. ข. การทำและตากปลาเค็ม เนื้อเค็ม เป็ดเค็ม หนังหมู การเคี่ยวมันกุ้ง"></option>
+                    <option value="14. การนึ่งปลา การตั้มปลาซึ้งใช้แทนการนึ่ง ยกเว้นการนึ่งหรือต้มในภัตตาคาร โรงแรม หรือร้านข้าวแกงปรุงอาหารในนั้น และการนึ่งหรือต้มเพื่อปรุงอาหารเร่ขายด้วยตนเอง"></option>
+                    <option value="15. ข. การทำสบู่โดยไม่ใช้เครื่องจักร"></option>
+                    <option value="16. การเคี่ยวหนังสัตว์ เอ็นสัตว์ ไขสัตว์"></option>
+                    <option value="17. ก. การอัดเอาน้ำมันใช้เครื่องจักร"></option>
+                    <option value="17. ข. การอัดเอาน้ำมันไม่ใช้เครื่องจักร"></option>
+                    </select>
+                </datalist>
+                </input>&nbsp;
                 <a>เขียนที่ :</a>
-                <input type="text" id="place" value="เทศบาลเมืองแสนสุข" readonly>&nbsp;
+                <input type="text" id="place" value="เทศบาลเมืองแสนสุข" >&nbsp;
                 <br>
                 <a>ข้าพเจ้า :</a>
                 <input type="radio" name="typee" id="typeUser1" value="บุคคลธรรมดา">
@@ -161,33 +186,43 @@
                 <a>อายุ :</a>
                 <input type="int" id="age" size="3"> &nbsp;
                 <a>สัญชาติ :</a>
-                <select id="nationality" style="width: 8%;">
+                <input list="nationality" id="" name="" size="7.5">
+                <datalist id="nationality">
+                    <!-- <select id="nationality" style="width: 8%;"> -->
                     <option value="" hidden>เลือก...</option>
-                    <option value="">ไทย</option>
-                    <option value=""></option>
-                </select> &nbsp;
+                    <option value="ไทย">ไทย</option>
+                    <option value="จีน"></option>
+                    <option value="อเมริกัน"></option>
+                    <!-- </select> -->
+                </datalist>
+                </input> &nbsp;
                 <a>เชื้อชาติ :</a>
-                <select id="race" style="width: 8%;">
+                <input list="nationality" id="" name="" size="7.5">
+                <datalist id="nationality">
+                    <!-- <select id="race" style="width: 8%;"> -->
                     <option value="" hidden>เลือก...</option>
-                    <option value="">ไทย</option>
-                    <option value=""></option>
-                </select>
+                    <option value="ไทย">ไทย</option>
+                    <option value="จีน"></option>
+                    <option value="อเมริกัน"></option>
+                    <!-- </select> -->
+                </datalist>
+                </input>
                 <br>
                 <a>อยู่บ้านเลขที่ :</a>
-                <input type="text" id="homeId" size="11.5"> &nbsp;
+                <input type="text" id="homeId" size="9"> &nbsp;
                 <a>หมู่ที่ :</a>
                 <input type="int" id="moo" size="6"> &nbsp;
                 <a>ตรอก:</a>
-                <input type="text" id="trxk" size="11.5"> &nbsp;
+                <input type="text" id="trxk" size="12"> &nbsp;
                 <a>ซอย :</a>
-                <input type="text" id="sxy" size="11.5"> &nbsp;
+                <input type="text" id="sxy" size="13"> &nbsp;
                 <a>อาคาร :</a>
-                <input type="text" id="building" size="11.5"> &nbsp;
+                <input type="text" id="building" size="13"> &nbsp;
                 <a>ถนน :</a>
-                <input type="text" id="road" size="11.5">
+                <input type="text" id="road" size="13">
                 <br>
                 <a>จังหวัด :</a>
-                <select id="province" style="width: 12.5%;">
+                <select id="province" style="width: 13.9%;">
                 </select> &nbsp;
                 <a>อำเภอ :</a>
                 <select id="district" style="width: 12.5%;">
@@ -201,27 +236,27 @@
                 <input type="text" id="fax" size="16">
                 <br>
                 <a>ใช้ชื่ออาคารที่ประกอบการว่า :</a>
-                <input type="text" id="workplaceName" size="35">(ถ้ามี) &nbsp;
+                <input type="text" id="workplaceName" size="40">&nbsp; (ถ้ามี) &nbsp;
                 <a>พื้นที่ :</a>
                 <input type="int" id="area" size="15"> ตารางเมตร &nbsp;
                 <a>จำนวนคนงาน :</a>
                 <input type="int" id="numPeople" size="10"> คน
                 <br>
                 <a>ตั้งอยู่เลขที่ :</a>
-                <input type="text" id="wHomeId" size="11.5"> &nbsp;
+                <input type="text" id="wHomeId" size="9"> &nbsp;&nbsp;
                 <a>หมู่ที่ :</a>
                 <input type="int" id="wMoo" size="6"> &nbsp;
                 <a>ตรอก:</a>
-                <input type="text" id="wTrxk" size="11.5"> &nbsp;
+                <input type="text" id="wTrxk" size="13"> &nbsp;
                 <a>ซอย :</a>
-                <input type="text" id="wSxy" size="11.5"> &nbsp;
+                <input type="text" id="wSxy" size="13"> &nbsp;
                 <a>อาคาร :</a>
-                <input type="text" id="wBuilding" size="11.5"> &nbsp;
+                <input type="text" id="wBuilding" size="13"> &nbsp;
                 <a>ถนน :</a>
-                <input type="text" id="wRoad" size="11.5">
+                <input type="text" id="wRoad" size="13">
                 <br>
                 <a>จังหวัด :</a>
-                <select id="wProvince" style="width: 12.5%;">
+                <select id="wProvince" style="width: 13.9%;">
                 </select> &nbsp;
                 <a>อำเภอ :</a>
                 <select id="wDistrict" style="width: 12.5%;">
@@ -234,24 +269,41 @@
                 <a>โทรสาร :</a>
                 <input type="text" id="wFax" size="16">
                 <br>
+                บุลคลอ้างอิง
+                <br>
+                <a>คำนำหน้าชื่อ :</a>
+                <select id="" name="" style="width: 10%;">
+                    <option value="" hidden>เลือก...</option>
+                    <option value="">นาย</option>
+                    <option value="">นาง</option>
+                    <option value="">นางสาว</option>
+                </select>
+                <a>ชื่อ :</a>
+                <input type="text" id="" name="" size="17" placeholder="">&nbsp;
+                <a>นามสกุล :</a>
+                <input type="text" id="" name="" size="17" placeholder="">&nbsp;
+                <a>สถานะ :</a>
+                <input type="text" id="" size="16">&nbsp;
+                <a>โทรศัพท์ :</a>
+                <input type="text" id="" size="16">
+                <br>
+                <br>
                 <input type="radio" name="sub" id="purposeType1"> ยืนยันคำขอรับ &nbsp;
                 <input type="radio" name="sub" id="purposeType2"> ยืนยันคำขอต่ออายุ &nbsp;
                 <br><br>
 
 
 
-                <input type="checkbox" id="documentId" value="cb1" />สำเนาบัตรประจำตัว
-                (ประชาชน/ข้าราชการ/พนักงานรัฐวิสาหกิจ)<br>
-                <input type="checkbox" id="documenthHome" value="cb2" />สำเนาทะเบียนบ้านของผู้ขอรับใบอนุญาต<br>
-                <input type="checkbox" id="documentLegalEntity"
-                    value="cb3" />สำเนาหนังสือรับรองการจดทะเบียนเป็นนิติบุคคล<br>
-                <input type="checkbox" id="documentSignature"
-                    value="cb4" />หลักฐานที่แสดงการเป็นผู้มีอำนาจลงนามแทนนิติบุคคลและใบมอบอำนาจ
-                (กรณีที่มีการมอบอำนาจ)<br>
-                <input type="checkbox" id="documentSJ4" value="cb5" />สำเนาใบอนุญาตประกอบกิจการ รง.4
-                หรือใบแทน<br>
-                <input type="checkbox" id="documentOther" value="cb6" />เอกสารอื่นๆที่เกี่ยวข้อง <input type="text"
-                    id="other" /><br>
+                <input type="checkbox" id="documentId" value="cb1" />
+                หนังสือยินยอมให้ใช้อาคารสถานที่เป็นที่ประกอบการ<br>
+                <input type="checkbox" id="documenthHome" value="cb2" />
+                สำเนาทะเบียนบ้าน/โฉนดที่ดิน(ที่ให้ใช้เป็นสถานที่ประกอบกิจการ)<br>
+                <input type="checkbox" id="documentLegalEntity" value="cb3" />
+                ใบรับรองแพทย์ผู้ขอรับใบอนุญาตและผู้ช่วยจำหน่ายสินค้า (ตามแบบ สณ.๑๑)<br>
+                <input type="checkbox" id="documentSignature" value="cb4" /> หนังสือสัญญาเช่า<br>
+                <input type="checkbox" id="documentSJ4" value="cb5" /> หนังสือมอบอำนาจ พร้อมติดอากรแสตมป์<br>
+                <input type="checkbox" id="documentOther" value="cb6" /> เอกสารอื่นๆที่เกี่ยวข้อง
+                <input type="text" id="other" size="40" /><br>
                 <br><br>
 
                 <button class="button" id="">ผลการตรวจ</button>
