@@ -103,27 +103,23 @@
 
 
     </nav>
-
+    <!-- คลิกเมนูย่อได้ -->
     <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay">
     </div>
 
-
-
-    <div class="w3-main" style="margin-left:250px;">
+    <!-- เมนูด้านบน -->
+    <div class="w3-top" style="overflow:auto;">
         <ul>
-            <li><a class="active" href="#home">Home</a></li>
-            <li><a href="#news">News</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="#about">About</a></li>
+            <li class="fa fa-bars w3-button w3-my-color w3-hide-large w3-xxlarge" onclick="w3_open()"></li>
+            <li><a href="#news"><i class="fa fa-plus-square fa-lg w3-margin-right w3-text-theme "></i>เพิ่ม</a></li>
+            <li><a href="#contact"><i class="fa fa-pencil fa-lg w3-margin-right w3-text-theme"></i>แก้ไข</a></li>
+            <li><a href="#contact"><i class="fa fa-floppy-o fa-lg w3-margin-right w3-text-theme"></i>บันทึก</a></li>
+            <li><a href="#contact"><i class="fa fa-reply fa-lg w3-margin-right w3-text-theme"></i>เรียกคืน</a></li>
+            <li><a href="#about"><i class="fa fa-close fa-lg w3-margin-right w3-text-theme"></i>ยกเลิก</a></li>
         </ul>
+    </div>
 
-
-        <div id="myTop" class="">
-
-            <p><i class="fa fa-bars w3-button w3-teal w3-hide-large w3-xlarge" onclick="w3_open()"></i>
-                <span id="myIntro" class="w3-hide">ระบบงานสิ่งแวดล้อมและสุขภิบาล</span></p>
-        </div>
-
+    <div class="w3-main" style="margin-left:250px;margin-top: 47px;">
         <header class="w3-container w3-theme">
             <h1 style="font-size:20px">ข้อมูลผู้ประกอบการ</h1>
         </header>
