@@ -183,72 +183,6 @@ function runForm() {
     })
    
 }
-function printDiv(printDivName) {
-    const currentPage = document.body.innerHTML
-
-    document.body.innerHTML = document.getElementById(printDivName).innerHTML;
-
-    window.print();
-
-    document.body.innerHTML = currentPage;
-}
-
-function ClikeMe(){
-    document.getElementById('aformId').innerHTML = document.getElementById('formId').value
-    document.getElementById('adate').innerHTML = document.getElementById('date').value
-    document.getElementById('aformTyae').innerHTML = document.getElementById('formType').value
-    document.getElementById('atext').innerHTML = document.getElementById('place').value
-
-    var checked1 = document.getElementById('typeUser1').checked
-    var checked2 = document.getElementById('typeUser2').checked
-    console.log(checked1 +"  "+ checked2)
-    var documentFormType = 'ยังไม่ได้เลือก'
-    if(checked1&&checked2==false){
-        var documentFormType = 'บุคคลธรรมดา' 
-    }else if(checked2&&checked1==false){
-        var documentFormType = 'นิติบุคคล' 
-    }else{
-        alert("เลือกๆๆ")
-    }
-    document.getElementById('atypeUser').innerHTML = documentFormType
-
-    document.getElementById('aid').innerHTML = document.getElementById('id').value
-    document.getElementById('aage').innerHTML = document.getElementById('age').value
-    document.getElementById('anationality').innerHTML = document.getElementById('nationality').value
-    document.getElementById('arace').innerHTML = document.getElementById('race').value
-    document.getElementById('ahomeId').innerHTML = document.getElementById('homeId').value
-    
-    document.getElementById('amoo').innerHTML = document.getElementById('moo').value
-    document.getElementById('atrxk').innerHTML = document.getElementById('trxk').value
-    document.getElementById('asxy').innerHTML = document.getElementById('sxy').value
-    document.getElementById('abuilding').innerHTML = document.getElementById('building').value
-    document.getElementById('aroad').innerHTML = document.getElementById('road').value
-
-    document.getElementById('aprovince').innerHTML = getProviceName(document.getElementById('province').value)
-    document.getElementById('adistrict').innerHTML = getAmphurName(document.getElementById('district').value)
-    document.getElementById('asubdistrict').innerHTML = document.getElementById('subdistrict').value
-    document.getElementById('aphone').innerHTML = document.getElementById('phone').value
-    document.getElementById('afax').innerHTML = document.getElementById('fax').value
-
-    document.getElementById('aworkplaceName').innerHTML = document.getElementById('workplaceName').value
-    document.getElementById('aarea').innerHTML = document.getElementById('area').value
-    document.getElementById('anumPeople').innerHTML = document.getElementById('numPeople').value
-    document.getElementById('awHomeId').innerHTML = document.getElementById('wHomeId').value
-    document.getElementById('awMoo').innerHTML = document.getElementById('wMoo').value
-
-    document.getElementById('awTrxk').innerHTML = document.getElementById('wTrxk').value
-    document.getElementById('awSxy').innerHTML = document.getElementById('wSxy').value
-    document.getElementById('awBuilding').innerHTML = document.getElementById('wBuilding').value
-    document.getElementById('awRoad').innerHTML = document.getElementById('wRoad').value
-    document.getElementById('awProvince').innerHTML = getProviceName(document.getElementById('wProvince').value)
-
-    document.getElementById('awDistrict').innerHTML = getAmphurName(document.getElementById('wDistrict').value)
-    document.getElementById('awSubdistrict').innerHTML = document.getElementById('wSubdistrict').value
-    document.getElementById('awPhone').innerHTML = document.getElementById('wPhone').value
-    document.getElementById('awFax').innerHTML = document.getElementById('wFax').value
-   
-    printDiv('classview2')
-}
 function getProviceName(proviceId){
     for(let i = 0 ; i < provice.length ; i++){
         if(provice[i].PROVINCE_ID == proviceId){
@@ -264,4 +198,5 @@ function getAmphurName(amphurId){
         }
     }
 }
+
 runForm()

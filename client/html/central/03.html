@@ -26,10 +26,10 @@
 <script src="../../js/test copy.js"></script>
 
 <!-- date th -->
-<link href="../dist/css/bootstrap-datepicker.css" rel="stylesheet" />
-    <script src="../dist/js/bootstrap-datepicker-custom.js"></script>
-    <script src="../dist/locales/bootstrap-datepicker.th.min.js" charset="UTF-8"></script>
-    <script src="../dist/js/dateth.js"></script>
+<link href="../../css/bootstrap-datepicker.css" rel="stylesheet" />
+    <script src="../../js/date/bootstrap-datepicker-custom.js"></script>
+    <script src="../../js/locales/bootstrap-datepicker.th.min.js" charset="UTF-8"></script>
+    <script src="../../js/date/dateth.js"></script>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -79,11 +79,11 @@
         </div>
 
         <div>
-            <a class="w3-bar-item w3-button" onclick="myAccordion4('demo4')" href="javascript:void(0)">ข้อมูลส่วนกลาง<i
+            <a class="w3-bar-item w3-button w3-theme =" onclick="myAccordion4('demo4')" href="javascript:void(0)">ข้อมูลส่วนกลาง<i
                     class="fa fa-caret-down"></i></a>
-            <div id="demo4" class="w3-hide">
+            <div id="demo4" class="w3-show">
                 <a class="w3-button" href="../central/operator.html">- ข้อมูลประกอบการ</a>
-                <a class="w3-button" href="../central/02.html">- ข้อมูลการจดใบอนุญาต</a>
+                <a class="w3-button w3-my-color" href="../central/02.html">- ข้อมูลการจดใบอนุญาต</a>
                 <a class="w3-button" href="03.html">- โอนใบอนุญาต</a>
             </div>
         </div>
@@ -144,7 +144,7 @@
                     <a>เลขที่คำขอโอน :</a>
             <input type="text" id="formId" name="" size="15" placeholder="">&nbsp;
             <a>วันที่ยืน :</a>
-            <input id="inputdatepicker" class="datepicker" data-date-format="mm/dd/yyyy">&nbsp;
+            <input id="inputdatepicker" class="datepicker" data-date-format="mm/dd/yyyy" >&nbsp ;
             <a>ใบอนุญาตเดิม&nbsp;เล่มที่</a>
             <input type="int" id="">
             <a>เลขที่</a>
