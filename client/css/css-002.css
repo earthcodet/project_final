@@ -21,11 +21,11 @@ input, select {
     clear: both;
   }
 
-  div.img {
-    background-color: lightgrey;
-    width: 300px;
-    border: 5px;
-    padding: 110px;
-    margin: 20px;
+  div.box {
+    /* background-color: lightgrey; */
+    width: 100%;
+    border: 1px solid black;
+    padding: 15px;
+    margin: 0px;
     /* margin-left:70px; */
   }
