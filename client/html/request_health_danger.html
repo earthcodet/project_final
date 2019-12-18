@@ -298,15 +298,19 @@
                 <br>
                 <br>
                 
-                <input type="radio" name="sub" id="purposeType2"> ใช้อาคารสถานที่ประกอบการของตนเอง &nbsp;
-                <input type="radio" name="sub" id="shower"> ใช้อาคารสถานที่ประกอบการของผู้อื่น &nbsp;
 
                 <input type="radio" name="sub" id="purposeType1"> ยืนยันคำขอรับ &nbsp;
                 <input type="radio" name="sub" id="purposeType2"> ยืนยันคำขอต่ออายุ &nbsp;
+                <br>
+
+                <a>ใช้อาคารสถานที่ประกอบการของผู้อื่น</a>
+                <select id="mySelect" name="" style="width: 10%;" onclick=" myFunction()">
+                    <option value="" hidden>เลือก...</option>
+                    <option value="01">ยืนยัน</option>
+                    <option value="02">ไม่ยืนยัน</option>
+                </select>
+
                 <br><br>
-
-
-
                 <input type="checkbox" id="documentId" value="cb1" />
                 หนังสือยินยอมให้ใช้อาคารสถานที่เป็นที่ประกอบการ<br>
                 <input type="checkbox" id="documenthHome" value="cb2" />
@@ -333,48 +337,54 @@
                 <!-- </form> -->
             </div>
             <br>
-            <div class="box2">
-                <h4>ข้อมูลเจ้าของสถานที่</h4>
-                <a>ชื่อ-สกุล :</a>
-                <input type="text" id="" size="20"> &nbsp;
-                <a>อยู่บ้านเลขที่ :</a>
-                <input type="text" id="" size="9"> &nbsp;
-                <a>หมู่ที่ :</a>
-                <input type="int" id="" size="6"> &nbsp;
-                <a>ซอย :</a>
-                <input type="text" id="" size="13"> &nbsp;
-                <a>ถนน :</a>
-                <input type="text" id="" size="13">
-                <a>จังหวัด :</a>
-                <select id="" style="width: 13.9%;">
-                </select> &nbsp;
-                <a>อำเภอ :</a>
-                <select id="" style="width: 12.5%;">
-                </select>&nbsp;
-                <a>ตำบล :</a>
-                <select id="" style="width: 12.5%;">
-                </select>&nbsp;
-                <a>โทรศัพท์ :</a>
-                <input type="text" id="" size="16"> &nbsp;
-                <a>โฉนดที่ดิน :</a>
-                <input type="text" id="" size="9"> &nbsp;
-                <a>ตรอก :</a>
-                <input type="int" id="" size="6"> &nbsp;
-                <a>ซอย :</a>
-                <input type="text" id="" size="13"> &nbsp;
-                <a>ถนน :</a>
-                <input type="text" id="" size="13">
-                <a>จังหวัด :</a>
-                <select id="" style="width: 13.9%;">
-                </select> &nbsp;
-                <a>อำเภอ :</a>
-                <select id="" style="width: 12.5%;">
-                </select>&nbsp;
-                <a>ตำบล :</a>
-                <select id="" style="width: 12.5%;">
-                </select>&nbsp;
-                <br>
-                <input type="file"></input>
+
+            
+            <!-- <input type="radio" name="sub" id="" onclick="w3.show('#Demo')"> ยืนยัน &nbsp; -->
+            <!-- <input type="radio" name="sub" id="" onclick="w3.hide('#Demo')"> ไม่ยืนยัน &nbsp; -->
+            <div id="Demo" style="display:none">
+                <div class="box">
+                    <h4>ข้อมูลเจ้าของสถานที่</h4>
+                    <a>ชื่อ-สกุล :</a>
+                    <input type="text" id="" size="20"> &nbsp;
+                    <a>อยู่บ้านเลขที่ :</a>
+                    <input type="text" id="" size="9"> &nbsp;
+                    <a>หมู่ที่ :</a>
+                    <input type="int" id="" size="6"> &nbsp;
+                    <a>ซอย :</a>
+                    <input type="text" id="" size="13"> &nbsp;
+                    <a>ถนน :</a>
+                    <input type="text" id="" size="13">
+                    <a>จังหวัด :</a>
+                    <select id="" style="width: 13.9%;">
+                    </select> &nbsp;
+                    <a>อำเภอ :</a>
+                    <select id="" style="width: 12.5%;">
+                    </select>&nbsp;
+                    <a>ตำบล :</a>
+                    <select id="" style="width: 12.5%;">
+                    </select>&nbsp;
+                    <a>โทรศัพท์ :</a>
+                    <input type="text" id="" size="16"> &nbsp;
+                    <a>โฉนดที่ดิน :</a>
+                    <input type="text" id="" size="9"> &nbsp;
+                    <a>ตรอก :</a>
+                    <input type="int" id="" size="6"> &nbsp;
+                    <a>ซอย :</a>
+                    <input type="text" id="" size="13"> &nbsp;
+                    <a>ถนน :</a>
+                    <input type="text" id="" size="13">
+                    <a>จังหวัด :</a>
+                    <select id="" style="width: 13.9%;">
+                    </select> &nbsp;
+                    <a>อำเภอ :</a>
+                    <select id="" style="width: 12.5%;">
+                    </select>&nbsp;
+                    <a>ตำบล :</a>
+                    <select id="" style="width: 12.5%;">
+                    </select>&nbsp;
+                    <br>
+                    <input type="file"></input>
+                </div>
             </div>
         </div>
     </div>
@@ -391,5 +401,17 @@
 
 
 </body>
+<!-- <script>
+    function myFunction() {
+        var y = document.getElementById("mySelect").value;
+        if (y == '01') {
+            document.getElementById('Demo').style.display = 'block';
+        } else {
+            document.getElementById('Demo').style.display = 'none';
+        }
+
+    }
+</script> -->
+<!-- <script src="https://www.w3schools.com/lib/w3.js"></script> -->
 
 </html>
