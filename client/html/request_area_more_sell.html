@@ -9,10 +9,17 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <!-- bootstrap -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
 
 <link rel="stylesheet" href="../css/w.3.css">
 <link rel="stylesheet" href="../css/w3-theme-teal.css">
@@ -45,8 +52,10 @@
                 <a class="w3-button" href="request_public_hawk.html">- ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
                 <a class="w3-button" href="request_area_more_sell.html">- ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
                 <a class="w3-button" href="request_area_more_correct.html">- ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</a>
-                <a class="w3-button" href="request_area_less_sell.html">- หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
-                <a class="w3-button" href="request_area_less_correct.html">- หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
+                <a class="w3-button" href="request_area_less_sell.html">-
+                    หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
+                <a class="w3-button" href="request_area_less_correct.html">-
+                    หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
                 <a class="w3-button" href="request_market.html">- ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
                 <a class="w3-button" href="request_health_danger.html">- กิจการที่เป็นอันตรายต่อสุขภาพ</a>
                 <a class="w3-button" href="request_crematory.html">- กิจการฌาปณสถาน</a>
@@ -106,25 +115,23 @@
 
 
     </nav>
-
+    <!-- คลิกเมนูย่อได้ -->
     <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay">
     </div>
 
-    <div class="w3-main" style="margin-left:250px;">
+    <!-- เมนูด้านบน -->
+    <div class="w3-top" style="overflow:auto;">
         <ul>
-            <li><a class="active" href="#home">Home</a></li>
-            <li><a href="#news">News</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="#about">About</a></li>
+            <li class="fa fa-bars w3-button w3-my-color w3-hide-large w3-xxlarge" onclick="w3_open()"></li>
+            <li><a href="#news">เพิ่ม</a></li>
+            <li><a href="#contact">แก้ไข</a></li>
+            <li><a href="#contact">บันทึก</a></li>
+            <li><a href="#contact">เรียกคืน</a></li>
+            <li><a href="#about">ยกเลิก</a></li>
         </ul>
+    </div>
 
-
-        <div id="myTop" class="">
-
-            <p><i class="fa fa-bars w3-button w3-teal w3-hide-large w3-xlarge" onclick="w3_open()"></i>
-                <span id="myIntro" class="w3-hide">ระบบงานสิ่งแวดล้อมและสุขภิบาล</span></p>
-        </div>
-
+    <div class="w3-main" style="margin-left:250px;margin-top: 47px;">
         <header class="w3-container w3-theme">
             <h1 style="font-size:20px">ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</h1>
         </header>
@@ -302,7 +309,7 @@
                 <input type="text" id="" size="16">
                 <br>
                 <br>
-                
+
 
                 <input type="radio" name="sub" id="purposeType1"> ยืนยันคำขอรับ &nbsp;
                 <input type="radio" name="sub" id="purposeType2"> ยืนยันคำขอต่ออายุ &nbsp;
@@ -343,7 +350,7 @@
             </div>
             <br>
 
-            
+
             <!-- <input type="radio" name="sub" id="" onclick="w3.show('#Demo')"> ยืนยัน &nbsp; -->
             <!-- <input type="radio" name="sub" id="" onclick="w3.hide('#Demo')"> ไม่ยืนยัน &nbsp; -->
             <div id="Demo" style="display:none">
@@ -397,23 +404,23 @@
             <div class="box">
                 <div class="row">
                     <div class="col-2">
-                <a><b>ใบอบรมผู้สัมผัสอาหาร</b></a>&nbsp;&nbsp;
+                        <a><b>ใบอบรมผู้สัมผัสอาหาร</b></a>&nbsp;&nbsp;
                     </div>
                     <div class="col">
-                <input type="radio" name="typee" id="typeUser1" value="บุคคลธรรมดา">
-                <a>อบรมแล้ว</a>&nbsp;
-                <input type="radio" name="typee" id="typeUser1" value="บุคคลธรรมดา">
-                <a>ยังไม่ได้อบรมอบรม</a>
-                <br>
-                <a>ออกใบประกาศนียบัตรโดย</a>
-        <input type="text" id="">
-        <br>
-        <a>ให้ไว้ ณ วันที่</a>
-        <input type="date" id="">&nbsp;
-        <a>มีผลถึง ณ วันที่</a>
-        <input type="date" id="">
+                        <input type="radio" name="typee" id="typeUser1" value="บุคคลธรรมดา">
+                        <a>อบรมแล้ว</a>&nbsp;
+                        <input type="radio" name="typee" id="typeUser1" value="บุคคลธรรมดา">
+                        <a>ยังไม่ได้อบรมอบรม</a>
+                        <br>
+                        <a>ออกใบประกาศนียบัตรโดย</a>
+                        <input type="text" id="">
+                        <br>
+                        <a>ให้ไว้ ณ วันที่</a>
+                        <input type="date" id="">&nbsp;
+                        <a>มีผลถึง ณ วันที่</a>
+                        <input type="date" id="">
+                    </div>
                 </div>
-            </div>
             </div>
 
             <br>
