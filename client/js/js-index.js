@@ -106,3 +106,14 @@ function myAccordion7(id) {
             x.previousElementSibling.className.replace(" w3-theme", "");
     }
 }
+
+
+    function myFunction() {
+        var qq = document.getElementById("mySelect").value;
+        if (qq == '01') {
+            document.getElementById('Demo').style.display = 'block';
+        } else {
+            document.getElementById('Demo').style.display = 'none';
+        }
+
+    }
