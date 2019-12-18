@@ -25,9 +25,16 @@
 <script src="../../js/js-index.js"></script>
 <script src="../../js/test copy.js"></script>
 
+<!-- date th -->
+<link href="../dist/css/bootstrap-datepicker.css" rel="stylesheet" />
+    <script src="../dist/js/bootstrap-datepicker-custom.js"></script>
+    <script src="../dist/locales/bootstrap-datepicker.th.min.js" charset="UTF-8"></script>
+    <script src="../dist/js/dateth.js"></script>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
 <body>
     <nav class="w3-sidebar w3-bar-block w3-collapse w3-animate-left w3-card" style="z-index:3;width:250px;"
         id="mySidebar">
@@ -137,7 +144,7 @@
                     <a>เลขที่คำขอโอน :</a>
             <input type="text" id="formId" name="" size="15" placeholder="">&nbsp;
             <a>วันที่ยืน :</a>
-            <input type="date" id="date" name="" size="15" placeholder="">&nbsp;
+            <input id="inputdatepicker" class="datepicker" data-date-format="mm/dd/yyyy">&nbsp;
             <a>ใบอนุญาตเดิม&nbsp;เล่มที่</a>
             <input type="int" id="">
             <a>เลขที่</a>
