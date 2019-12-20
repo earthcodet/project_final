@@ -79,9 +79,9 @@
             <a class="w3-bar-item w3-button" onclick="myAccordion4('demo4')" href="javascript:void(0)">ข้อมูลส่วนกลาง <i
                     class="fa fa-caret-down"></i></a>
             <div id="demo4" class="w3-hide">
-                <a class="w3-button" href="./central/operator.html">- ข้อมูลผู้ประกอบการ</a>
-                <a class="w3-button" href="./central/02.html">- ข้อมูลการจดใบอนุญาต</a>
-                <a class="w3-button" href="./central/03.html">- โอนใบอนุญาต</a>
+                <a class="bar-item w3-button" href="./central/operator.html">- ข้อมูลผู้ประกอบการ</a>
+                <a class="bar-item w3-button" href="./central/02.html">- ข้อมูลการจดใบอนุญาต</a>
+                <a class="bar-item w3-button" href="./central/03.html">- โอนใบอนุญาต</a>
             </div>
         </div>
 
@@ -89,8 +89,8 @@
             <a class="w3-bar-item w3-button" onclick="myAccordion5('demo5')" href="javascript:void(0)">งานร้องเรียน <i
                     class="fa fa-caret-down"></i></a>
             <div id="demo5" class="w3-hide">
-                <a class="w3-button" href="#">- บันทึกเรื่องร้องเรียน</a>
-                <a class="w3-button" href="#">- บันทึกคำร้อง</a>
+                <a class="bar-item w3-button" href="#">- บันทึกเรื่องร้องเรียน</a>
+                <a class="bar-item w3-button" href="#">- บันทึกคำร้อง</a>
             </div>
         </div>
 
@@ -333,10 +333,10 @@
                 <input type="text" id="other" size="40" />
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                <a href="saveImg.html" target="popup"
+                <!-- <a href="saveImg.html" target="popup"
                     onclick="window.open('saveImg.html','popup','width=1100,height=570'); return false;">
                     <button class="button" id="">รูปภาพ</button>
-                </a>
+                </a> -->
                 <!-- <button class="button" id="">รูปภาพ</button> -->
                 <!-- <a class="nav-link" href="view.html">
                     <button class="button" id="">พิมพ์ใบคำขอ</button></a> -->
@@ -415,10 +415,10 @@
                 <input type="text" id="" width="20px"> <a> แรงม้า</a>
                 <br><br>
                     <a>รูปภาพผลการตรวจสอบ</a>
-                    <input type="file" onchange="handleFileSelect(event)" multiple>&nbsp;&nbsp;&nbsp;
-                    <input type="submit">
+                    <input type="file" id="uploadFile" onchange="handleFileSelect(event)" multiple>&nbsp;&nbsp;&nbsp;
+                    
                     <br>
-                    <div id='outputImage' style="height: 320px; overflow-y:auto;">
+                    <div id='outputImage' style="height: 320px; overflow-y:auto; border: 1px solid black;">
                     </div>
             </div>
            
