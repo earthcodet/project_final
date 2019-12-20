@@ -23,6 +23,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+<!-- JS imagePage-->
+<script src="../js/imageUpload.js"></script>
+
+<!-- CSS imagePage -->
+<link href="../css/imageButton.css" rel="stylesheet">
+
 <body>
     <!-- เมนูด้านข้าง -->
     <nav class="w3-sidebar w3-bar-block w3-collapse w3-animate-left w3-card" style="z-index:3;width:250px;"
@@ -408,22 +414,14 @@
                 <a>ใช้เครื่องจักรขนาด :</a>
                 <input type="text" id="" width="20px"> <a> แรงม้า</a>
                 <br><br>
-                <div>
                     <a>รูปภาพผลการตรวจสอบ</a>
-                    <input type="file" id="" name="">&nbsp;&nbsp;&nbsp;
+                    <input type="file" onchange="handleFileSelect(event)" multiple>&nbsp;&nbsp;&nbsp;
                     <input type="submit">
                     <br>
-                    <img src="../img/img1.jpg" style="width:200px;height:170px;">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <img src="../img/img1.jpg" style="width:200px;height:170px;">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <img src="../img/img1.jpg" style="width:200px;height:170px;">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <img src="../img/img1.jpg" style="width:200px;height:170px;">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-                </div>
-
+                    <div id='outputImage' style="height: 320px; overflow-y:auto;">
+                    </div>
+            </div>
+           
             </div>
         </div>
 
