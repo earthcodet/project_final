@@ -37,6 +37,12 @@
 <!-- disable-->
 <script src="../js/disable.js"></script>
 
+<!-- JS imagePage-->
+<script src="../js/imageUpload.js"></script>
+
+<!-- CSS imagePage -->
+<link href="../css/imageButton.css" rel="stylesheet">
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -384,6 +390,27 @@
                             <input type="radio" name="typee" id="typeUser1" value="บุคคลธรรมดา">
                             <a>ไม่ออกใบอนุญาต</a>&nbsp;
                         </div>
+                    </div>
+                </div>
+                <br>
+                <div class="box">
+                    <a>ประเภทกิจการ :</a>
+                    <input type="text" id="" size="120">
+                    <br>
+                    <a>พื้นที่ :</a>
+                    <input type="text" id="" width="20px"> <a> ตารางเมตร</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a>มีคนงาน :</a>
+                    <input type="text" id="" width="20px"> <a> คน</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a>ใช้เครื่องจักรขนาด :</a>
+                    <input type="text" id="" width="20px"> <a> แรงม้า</a>
+                    <br><br>
+                    <a>รูปภาพผลการตรวจสอบ</a>
+                    <input type="file" id="uploadFile" onchange="handleFileSelect(event)" multiple>&nbsp;&nbsp;&nbsp;
+
+                    <br>
+                    <div id='outputImage' style="height: 320px; overflow-y:auto; border: 1px solid black;">
                     </div>
                 </div>
             </fieldset>
