@@ -140,20 +140,19 @@ function myAccordion7(id) {
   }
 }
 function myAccordion77(id) {
-    var x = document.getElementById(id);
-    if (x.className.indexOf("w3-show") == -1) {
-      x.className += " w3-show";
-      x.previousElementSibling.className += " w3-theme";
-    } else {
-      x.className = x.className.replace("w3-show", "");
-      x.previousElementSibling.className = x.previousElementSibling.className.replace(
-        " w3-theme",
-        ""
-      );
-    }
+  var x = document.getElementById(id);
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+    x.previousElementSibling.className += " w3-theme";
+  } else {
+    x.className = x.className.replace("w3-show", "");
+    x.previousElementSibling.className = x.previousElementSibling.className.replace(
+      " w3-theme",
+      ""
+    );
   }
+}
 
-<<<<<<< HEAD
 function myFunction() {
   var qq = document.getElementById("mySelect").value;
   if (qq == "01") {
@@ -162,15 +161,3 @@ function myFunction() {
     document.getElementById("Demo").style.display = "none";
   }
 }
-=======
-    function myFunction() {
-        var qq = document.getElementById("mySelect").value;
-        if (qq == '01') {
-            document.getElementById('Demo').style.display = 'block';
-        } else {
-            document.getElementById('Demo').style.display = 'none';
-        }
-
-    }
-
->>>>>>> 62651cd78ce0604683a51a68b10e80caca4a0f7b
