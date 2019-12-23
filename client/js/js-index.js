@@ -153,6 +153,7 @@ function myAccordion77(id) {
     }
   }
 
+<<<<<<< HEAD
 function myFunction() {
   var qq = document.getElementById("mySelect").value;
   if (qq == "01") {
@@ -161,3 +162,15 @@ function myFunction() {
     document.getElementById("Demo").style.display = "none";
   }
 }
+=======
+    function myFunction() {
+        var qq = document.getElementById("mySelect").value;
+        if (qq == '01') {
+            document.getElementById('Demo').style.display = 'block';
+        } else {
+            document.getElementById('Demo').style.display = 'none';
+        }
+
+    }
+
+>>>>>>> 62651cd78ce0604683a51a68b10e80caca4a0f7b
