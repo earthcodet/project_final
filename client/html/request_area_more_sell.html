@@ -180,7 +180,15 @@
                     <a>บุคคลธรรมดา</a>
                     <input type="radio" name="typee" id="typeUser2" value="นิติบุคคล">
                     <a>นิติบุคคล</a> &nbsp;
-                    <input type="text" id="name" size="14">
+                    <input type="text" id="name" size="14">&nbsp;
+
+                    <!-- <button class="fa fa-search">ds</button> -->
+                    <a href="search.html" target="popup"
+                        onclick="window.open('search.html','popup','width=1100,height=570'); return false;">
+                        <button class="fa fa-search" id=""></button>
+                    </a>
+
+
                     <a>เลขประจำตัว :</a>
                     <input type="int" id="id" size="14"> &nbsp;
                     <a>อายุ :</a>
@@ -430,6 +438,12 @@
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <a>ใช้เครื่องจักรขนาด :</a>
                     <input type="text" id="" width="20px"> <a> แรงม้า</a>
+                    <br>
+                    <a>ใบอนุญาต </a>
+                    <a> เล่มที่ :</a>
+                    <input type="text" id="" width="20px">
+                    <a>เลขที่ :</a>
+                    <input type="text" id="" width="20px">
                     <br><br>
                     <a>รูปภาพผลการตรวจสอบ</a>
                     <input type="file" id="uploadFile" onchange="handleFileSelect(event)" multiple>&nbsp;&nbsp;&nbsp;
