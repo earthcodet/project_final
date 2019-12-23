@@ -14,7 +14,6 @@ input, select {
   height: 300px;
   /* Should be removed. Only for demonstration */
 }
-
 /* Clear floats after the columns */
 
 .row:after {
@@ -22,7 +21,12 @@ input, select {
   display: table;
   clear: both;
 }
-
+.imageupload input[type="file"] {
+  display: none;
+}
+.isColor{
+  background-color: #009688;
+}
 div.box {
   /* background-color: lightgrey; */
   width: 1100px;
