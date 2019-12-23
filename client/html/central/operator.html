@@ -34,6 +34,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+<script src="../../js/imageUpload.js"></script>
+<link href="../../css/imageButton.css" rel="stylesheet">
+
 <body>
 
 
@@ -47,10 +50,14 @@
             <a class="w3-bar-item w3-button" onclick="myAccordion('demo')" href="javascript:void(0)">ระบบงานคำขอ<i
                     class="fa fa-caret-down"></i></a>
             <div id="demo" class="w3-hide">
-                <a class="bar-item w3-button" href="../request_public_sell.html">- ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
-                <a class="bar-item w3-button" href="../request_public_hawk.html">- ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
-                <a class="bar-item w3-button" href="../request_area_more_sell.html">- ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
-                <a class="bar-item w3-button" href="../request_area_more_correct.html">- ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</a>
+                <a class="bar-item w3-button" href="../request_public_sell.html">-
+                    ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
+                <a class="bar-item w3-button" href="../request_public_hawk.html">-
+                    ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
+                <a class="bar-item w3-button" href="../request_area_more_sell.html">-
+                    ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
+                <a class="bar-item w3-button" href="../request_area_more_correct.html">-
+                    ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</a>
                 <a class="bar-item w3-button" href="../request_area_less_sell.html">-
                     หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
                 <a class="bar-item w3-button" href="../request_area_less_correct.html">-
@@ -78,10 +85,10 @@
         </div>
 
         <div>
-            <a class="w3-bar-item w3-button w3-theme" onclick="myAccordion4('demo4')" href="javascript:void(0)">ข้อมูลส่วนกลาง<i
-                    class="fa fa-caret-down"></i></a>
+            <a class="w3-bar-item w3-button w3-theme" onclick="myAccordion4('demo4')"
+                href="javascript:void(0)">ข้อมูลส่วนกลาง<i class="fa fa-caret-down"></i></a>
             <div id="demo4" class="w3-hide w3-show">
-                    <a class="bar-item w3-button w3-my-color" href="operator.html">- ข้อมูลประกอบการ</a> 
+                <a class="bar-item w3-button w3-my-color" href="operator.html">- ข้อมูลประกอบการ</a>
                 <a class="bar-item w3-button" href="02.html">- ข้อมูลการจดใบอนุญาต</a>
                 <a class="bar-item w3-button" href="03.html">- โอนใบอนุญาต</a>
             </div>
@@ -135,95 +142,161 @@
             <h1 style="font-size:20px">ข้อมูลผู้ประกอบการ</h1>
         </header>
 
-        <div class="w3-container" style="padding:32px">
+        <div style="padding-top:32px; width: 80%; margin: 0 auto;">
             <!-- START -->
             <div>
-                <!-- <form action="/action_page.php"> -->
-                <a>คำนำหน้าชื่อ :</a>
-                <select id="" name="" style="width: 10%;">
-                    <option value="" hidden>เลือก...</option>
-                    <option value="">นาย</option>
-                    <option value="">นาง</option>
-                    <option value="">นางสาว</option>
-                </select>
-                <a>ชื่อ :</a>
-                <input type="text" id="" name="" size="17" placeholder="">&nbsp;
-                <a>นามสกุล :</a>
-                <input type="text" id="" name="" size="17" placeholder="">&nbsp;
-                <a>ประเภท :</a>
-                <select id="" name="" style="width: 17%;">
-                    <option value="" hidden>เลือก...</option>
-                    <option value=""></option>
-                    <option value=""></option>
-                    <option value=""></option>
-                </select>
-                <br>
-                <a>เลขประจำตัว :</a>
-                <input type="text" id="" name="" size="15" placeholder="">&nbsp;
-                <a>บัตรประจำตัว </a>&nbsp;&nbsp;
-                <a>ออกเมื่อ :</a>
-                <input type="date" id="" name="" style="width: 13%;" placeholder="">&nbsp;
-                <a>หมดอายุ :</a>
-                <input type="date" id="" name="" style="width: 13%;" placeholder="">&nbsp;
-                <a>เกิดวันที่ :</a>
-                <input type="date" id="" name="" style="width: 13%;" placeholder="">&nbsp;
-
-                <div class="row">
-                    <div class="column">
-                        <a>สัญชาติ :</a>
-                        <select id="nationality" style="width: 22%;">
+                <div class=row>
+                    <div class="col">คำนำหน้าชื่อ :
+                        <select id="" name="" style="width: auto;">
                             <option value="" hidden>เลือก...</option>
-                            <option value="">ไทย</option>
-                            <option value=""></option>
-                        </select> &nbsp;&nbsp;
-                        <a>เชื้อชาติ :</a>
-                        <select id="race" style="width: 22%;">
-                            <option value="" hidden>เลือก...</option>
-                            <option value="">ไทย</option>
-                            <option value=""></option>
+                            <option value="">นาย</option>
+                            <option value="">นาง</option>
+                            <option value="">นางสาว</option>
                         </select>
-                        <br>
-                        <a>อยู่บ้านเลขที่ :</a>
-                        <input type="text" id="homeId" size="11.5"> &nbsp;
-                        <a>หมู่ที่ :</a>
-                        <input type="int" id="moo" size="6"> &nbsp;
-                        <a>ตรอก:</a>
-                        <input type="text" id="trxk" size="11.5"> &nbsp;
-                        <br>
-                        <a>ซอย :</a>
-                        <input type="text" id="sxy" size="11.5"> &nbsp;
-                        <a>อาคาร :</a>
-                        <input type="text" id="building" size="11.5"> &nbsp;
-                        <br>
-                        <a>ถนน :</a>
-                        <input type="text" id="road" size="11.5">
-                        <a>จังหวัด :</a>
-                        <select id="province" style="width: 24%;">
-                        </select> &nbsp;
-                        <br>
-                        <a>อำเภอ :</a>
-                        <select id="district" style="width: 24%;">
-                        </select> &nbsp;
-                        <a>ตำบล :</a>
-                        <select id="subdistrict" style="width: 24%;">
-                        </select> &nbsp;
-                        <br>
-                        <a>โทรศัพท์ :</a>
-                        <input type="text" id="phone" size="16"> &nbsp;
-                        <a>โทรสาร :</a>
-                        <input type="text" id="fax" size="16">
-
-
-
                     </div>
-                    <div class="column">
-                        <h2>Column 2</h2>
-                        <p>Some text..</p>
+                    <div class="col">
+                        ชื่อ&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:
+                        <input type="text" id="" name="" placeholder="">&nbsp;
+                    </div>
+                    <div class="col">
+                        นามสกุล :
+                        <input type="text" id="" name="" placeholder="">&nbsp;
+                    </div>
+                    <div class="col">
+                        ประเภท &nbsp&nbsp&nbsp:
+                        <select id="" name="" style="width: auto;">
+                            <option value="none" hidden>เลือก...</option>
+                            <option value="นิติบุคคล">นิติบุคคล</option>
+                            <option value="บุคคลธรรมดา">บุคคลธรรมดา</option>
+                        </select>
                     </div>
                 </div>
-                <!-- </form> -->
+
+                <div class="row">
+                    <div style="width: 100%; border-color: #808080;">
+                        <div class="row">
+                            <div class="col">
+                                &nbsp&nbsp&nbsp เลขประจำตัว :
+                                <input type="text" id="" name="" size="13px" placeholder="">
+                            </div>
+                            <div class="col">
+                                &nbspออกเมื่อ :
+                                <input type="date" id="" name="" placeholder="">
+                            </div>
+                            <div class="col">
+                                <a>หมดอายุ :</a>
+                                <input type="date" id="" name="" placeholder="">
+                            </div>
+                            <div class="col">
+                                <a>เกิดวันที่ :</a>
+                                <input type="date" id="" name="" placeholder="">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+                    <div class="col-8">
+                        <div class="row">
+                            <div class="col-4">
+                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspสัญชาติ :
+                                <select id="nationality">
+                                    <option value="" hidden>เลือก...</option>
+                                    <option value="">ไทย</option>
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                            <div class="col-4">
+                                เชื้อชาติ :
+                                <select id="race">
+                                    <option value="" hidden>เลือก...</option>
+                                    <option value="">ไทย</option>
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                อยู่บ้านเลขที่ &nbsp:
+                                <input type="text" id="homeId" size="12px">
+                            </div>
+                            <div class="col">
+                                &nbsp&nbsp&nbsp&nbsp หมู่ที่ :
+                                <input type="int" id="moo" size="4px">
+                            </div>
+                            <div class="col">
+                                ตรอก&nbsp:
+                                <input type="text" id="trxk" size="18px"> &nbsp;
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class='col'>
+                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspซอย &nbsp:
+                                <input type="text" id="sxy" size="12px">
+                            </div>
+                            <div class="col">
+                                &nbsp  อาคาร :
+                                <input type="text" id="building" size="16px">
+                            </div>
+                            <div class="col">
+                                ถนน &nbsp&nbsp: 
+                                <input type="text" id="road" size="18px">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspจังหวัด :
+                                <select id="province" style="width: 24%;">
+                                </select>
+                            </div>
+                            <div class="col">
+                                &nbsp  อำเภอ :
+                                <select id="district" style="width: 24%;">
+                                </select>
+                            </div>
+                            <div class="col">
+                                ตำบล :
+                                <select id="subdistrict" style="width: 24%;">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp โทรศัพท์ :
+                                <input type="text" id="phone" size="16"> 
+                            </div>
+                            <div class="col-4">
+                                โทรสาร :
+                                <input type="text" id="fax" size="16">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row" style="  text-align: center; display: block;">
+                            <img id="operatorImage" class="rounded" src="../../img/userProfile.png" width="400px"
+                                height="400px">
+                        </div>
+                        <br>
+                        <div class="row imageupload">
+                            <div class="col" align="right"> <input style='display: none;' type="file" id="uploadFile"
+                                    onchange="uploadImage(event)" accept="image/*">
+                                <button onclick="buttonImage()" class="btn btn-secondary btn-lg isColor">UPLOAD</button>
+                            </div>
+                            <div class="col"> <button id="cancelImage" class="btn btn-secondary btn-lg btn-danger"
+                                    onclick="deleteImageOne()"> DELETE </button></div>
+                            <div class="col"><button id="webcam" class="btn btn-secondary btn-lg" disabled> DELETE
+                                </button></div>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <!-- </form> -->
         </div>
+
+    </div>
     </div>
 
 
