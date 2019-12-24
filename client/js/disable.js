@@ -12,10 +12,10 @@ function disFunction() {
 // function resetFunction() {
 // }
 
-function disFuncRadio1() {
-  document.getElementById("disable2").disabled = false;
+function enFood() {
+  document.getElementById("disableFood").disabled = false;
 }
 
-function disFuncRadio2() {
-  document.getElementById("disable2").disabled = true;
+function disFood() {
+  document.getElementById("disableFood").disabled = true;
 }

@@ -161,3 +161,16 @@ function showtext() {
     document.getElementById("Demo").style.display = "none";
   }
 }
+
+// ผู้สัมผัสอาหาร
+$(document).ready(function(){
+  $(".boxFood").hide();
+});
+
+function showTxtFood(){
+  $(".boxFood").show();
+}
+
+function dontShowTxtFood(){
+  $(".boxFood").hide();
+}
