@@ -24,7 +24,7 @@
 <link href="../css/css-003.css" rel="stylesheet">
 <link href="../css/css-index.css" rel="stylesheet">
 <link href="../css/fonts.css" rel="stylesheet">
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
 <script src="../js/js-index.js"></script>
 <script src="../js/test.js"></script>
 
@@ -40,12 +40,12 @@
 <!-- function ส่วนกลาง -->
 <script src="../js/utilities.js"></script>
 
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
 <body>
+    <!-- เมนูด้านข้าง -->
     <nav class="w3-sidebar w3-bar-block w3-collapse w3-animate-left w3-card" style="z-index:3;width:250px;"
         id="mySidebar">
         <a class="w3-bar-item w3-button w3-border-bottom w3-large" href="index.html">
@@ -154,7 +154,6 @@
     <!-- คลิกเมนูย่อได้ -->
     <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay">
     </div>
-
     <!-- เมนูด้านบน -->
     <div class="w3-top" style="overflow:auto;">
         <ul>
@@ -167,15 +166,15 @@
             <li><a href="#about"><i class="fa fa-close fa-lg w3-margin-right w3-text-theme"></i>ยกเลิก</a></li>
         </ul>
     </div>
-
+    <!-- ข้อมูล -->
     <div class="w3-main" style="margin-left:250px;margin-top: 47px;">
         <header class="w3-container w3-theme">
             <h1 style="font-size:20px">หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</h1>
         </header>
-
         <div class="container-sm" style="padding:32px">
             <form id="form">
                 <fieldset disabled id="disable">
+                    <!--box ข้อมูลสถานประกอบการ -->
                     <div class="box">
                         <h4>ข้อมูลสถานประกอบการ</h4>
                         <table class="table">
@@ -406,12 +405,8 @@
                         </div>
                         <!-- </form> -->
 
-                    </div>
-
-                    <br>
-
-                    <!-- <input type="radio" name="sub" id="" onclick="w3.show('#Demo')"> ยืนยัน &nbsp; -->
-                    <!-- <input type="radio" name="sub" id="" onclick="w3.hide('#Demo')"> ไม่ยืนยัน &nbsp; -->
+                    </div><br>
+                    <!-- box ข้อมูลเจ้าของสถานที่ -->
                     <div id="Demo" style="display:none">
                         <div class="box">
                             <h4>ข้อมูลเจ้าของสถานที่</h4>
@@ -456,10 +451,8 @@
                             <br>
                             <input type="file"></input>
                         </div>
-                    </div>
-
-                    <br>
-
+                    </div><br>
+                    <!-- box จำหน่ายสุรา -->
                     <div class="box">
                         <div class="row">
                             <div class="col-2">
@@ -472,8 +465,8 @@
                                 <a>ไม่ออกใบอนุญาต</a>&nbsp;
                             </div>
                         </div>
-                    </div>
-                    <br>
+                    </div><br>
+                    <!-- box เพิ่มรูปภาพ -->
                     <div class="box">
                         <a>ประเภทกิจการ :</a>
                         <input type="text" id="" size="120">
@@ -503,30 +496,9 @@
             </form>
         </div>
     </div>
-
-
-    </div>
-
-    <!-- <footer class="w3-container w3-theme" style="padding:32px">
-            <p>Footer information goes here</p>
-        </footer> -->
-
-    </div>
-
-
-
 </body>
-<!-- <script>
-    function myFunction() {
-        var y = document.getElementById("mySelect").value;
-        if (y == '01') {
-            document.getElementById('Demo').style.display = 'block';
-        } else {
-            document.getElementById('Demo').style.display = 'none';
-        }
-
-    }
-</script> -->
+<!-- <input type="radio" name="sub" id="" onclick="w3.show('#Demo')"> ยืนยัน &nbsp; -->
+<!-- <input type="radio" name="sub" id="" onclick="w3.hide('#Demo')"> ไม่ยืนยัน &nbsp; -->
 <!-- <script src="https://www.w3schools.com/lib/w3.js"></script> -->
 
 </html>
