@@ -50,3 +50,21 @@ h1{
 /* fieldset input{
   background-color: #F4F6F6;
 } */
+
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collcapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 2px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
