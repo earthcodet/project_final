@@ -3,9 +3,7 @@
 <title>เทศบาลเมืองแสนสุข</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
 <link rel="stylesheet" href="../../css/w.3.css">
-<!-- <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-teal.css"> -->
 <link rel="stylesheet" href="../../css/w3-theme-teal.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -23,10 +21,13 @@
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
 
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+
 <link href="../../css/css-index.css" rel="stylesheet">
 <link href="../../css/css-002.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Sarabun&display=swap" rel="stylesheet">
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
 
 <script src="../../js/js-index.js"></script>
 <script src="../../js/test copy.js"></script>
@@ -46,6 +47,8 @@
 <!-- ทดสอบควบคุมหน้า -->
 <script src="../../js/operator.js"></script>
 
+<!-- address จังหวัด อำเภอ ตำบล -->
+<script src="../../js/address.js"></script>
 
 <body>
 
@@ -140,13 +143,13 @@
         <ul>
             <li class="fa fa-bars w3-button w3-my-color w3-hide-large w3-xxlarge" onclick="w3_open()"></li>
             <li>
-                <a id="addMenu" href="#news" onclick="addNewPage()">
+                <a id="addMenu" href="#news" onclick="addTEST()">
                     <i class="fa fa-plus-square fa-lg w3-margin-right w3-text-theme "> </i>
                     เพิ่ม
                 </a>
             </li>
             <li>
-                <a id="editMenu" href="#contact" class="disableds">
+                <a id="editMenu" href="#contact" onclick="editTEST()" class="disableds">
                     <i class="fa fa-pencil fa-lg w3-margin-right w3-text-theme"></i>
                     แก้ไข
                 </a>
@@ -158,14 +161,14 @@
                 </a>
             </li>
             <li>
-                <a id="restoreMenu" href="#contact" class="disableds">
+                <a id="restoreMenu" onclick="restoreTEST()" href="#contact" class="disableds">
                     <i class="fa fa-reply fa-lg w3-margin-right w3-text-theme"></i>
                     เรียกคืน
                 </a>
             </li>
             <li>
-                <a id="deleteMenu" href="#about" class="disableds">
-                    <i class="fa fa-close fa-lg w3-margin-right w3-text-theme" ></i>
+                <a id="deleteMenu" onclick="deleteTEST()" href="#about" class="disableds">
+                    <i class="fa fa-close fa-lg w3-margin-right w3-text-theme"></i>
                     ยกเลิก
                 </a>
             </li>
@@ -176,14 +179,13 @@
         <header class="w3-container w3-theme">
             <h1 style="font-size:20px">ข้อมูลผู้ประกอบการ</h1>
         </header>
-        <fieldset disabled id="disable">
-            <div style="padding-top:32px; width: 80%; margin: 0 auto;">
-
+        <div style="padding-top:40px; width: 80%; margin: 0 auto;">
+            <fieldset disabled id="disable">
                 <!-- START -->
                 <div>
                     <div class=row>
                         <div class="col">คำนำหน้าชื่อ :
-                            <select id="" name="" class="custom-select" style="width: 120px;">
+                            <select id="" name="" style="width: 120px;">
                                 <option value="" hidden>เลือก...</option>
                                 <option value="">นาย</option>
                                 <option value="">นาง</option>
@@ -191,8 +193,8 @@
                             </select>
                         </div>
                         <div class="col">
-                            ชื่อ&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:
-                            <input type="text" id="" name="" placeholder="">&nbsp;
+                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspชื่อ:
+                            <input type="text" id="" name="" placeholder="" style="width: 165px;">&nbsp;
                         </div>
                         <div class="col">
                             นามสกุล :
@@ -200,7 +202,7 @@
                         </div>
                         <div class="col">
                             ประเภท &nbsp&nbsp&nbsp:
-                            <select id="" name="" class="custom-select" style="width: 160px;">
+                            <select id="" name=""  style="width: 160px;">
                                 <option value="none" hidden>เลือก...</option>
                                 <option value="นิติบุคคล">นิติบุคคล</option>
                                 <option value="บุคคลธรรมดา">บุคคลธรรมดา</option>
@@ -209,43 +211,39 @@
                     </div>
 
                     <div class="row">
-                        <div class="row">
-                            <div class="col">
-                                &nbsp&nbsp&nbsp เลขประจำตัว :
-                                <input type="text" id="" name="" size="13px" placeholder="">
-                            </div>
-                            <div class="col">
-                                &nbspออกเมื่อ :
-                                <input type="date" id="" name="" placeholder="">
-                            </div>
-                            <div class="col">
-                                หมดอายุ :
-                                <input type="date" id="" name="" placeholder="">
-                            </div>
-                            <div class="col">
-                                เกิดวันที่ :
-                                <input type="date" id="" name="" placeholder="">
-                            </div>
+                        <div class="col">
+                            เลขประจำตัว :
+                            <input type="text" id="" name="" size="13px" placeholder="">
                         </div>
-
-
+                        <div class="col">
+                            &nbspออกเมื่อ :
+                            <input type="date" id="" name="" placeholder="">
+                        </div>
+                        <div class="col">
+                            หมดอายุ :
+                            <input type="date" id="" name="" placeholder="">
+                        </div>
+                        <div class="col">
+                            เกิดวันที่ :
+                            <input type="date" id="" name="" placeholder="">
+                        </div>
                     </div>
 
 
                     <div class="row">
-                        <div class="col-8">
+                        <div class="col-9">
                             <div class="row">
                                 <div class="col-4">
                                     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspสัญชาติ :
-                                    <select id="nationality" class="custom-select" style="width: 110px">
+                                    <select id="nationality"  style="width: 110px">
                                         <option value="" hidden>เลือก...</option>
                                         <option value="">ไทย</option>
                                         <option value=""></option>
                                     </select>
                                 </div>
                                 <div class="col-4">
-                                    เชื้อชาติ :
-                                    <select id="race" class="custom-select" style="width: 120px;">
+                                    &nbsp&nbspเชื้อชาติ :
+                                    <select id="race"  style="width: 120px;">
                                         <option value="" hidden>เลือก...</option>
                                         <option value="">ไทย</option>
                                         <option value=""></option>
@@ -258,59 +256,60 @@
                                     <input type="text" id="homeId" size="12px">
                                 </div>
                                 <div class="col">
-                                    &nbsp&nbsp&nbsp&nbsp หมู่ที่ :
+                                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp หมู่ที่ :
                                     <input type="int" id="moo" size="4px">
                                 </div>
                                 <div class="col">
-                                    ตรอก&nbsp:
+                                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbspตรอก:
                                     <input type="text" id="trxk" size="18px"> &nbsp;
                                 </div>
                             </div>
                             <div class="row">
                                 <div class='col'>
-                                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspซอย &nbsp:
+                                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspซอย &nbsp:
                                     <input type="text" id="sxy" size="12px">
                                 </div>
                                 <div class="col">
-                                    &nbsp อาคาร :
+                                    &nbsp&nbsp&nbsp อาคาร :
                                     <input type="text" id="building" size="16px">
                                 </div>
                                 <div class="col">
-                                    ถนน &nbsp&nbsp:
+                                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspถนน :
                                     <input type="text" id="road" size="18px">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspจังหวัด :
-                                    <select id="province" style="width: 24%;">
+                                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspจังหวัด :
+                                    <select id="province"  style="width: 140px">
                                     </select>
                                 </div>
                                 <div class="col">
-                                    &nbsp อำเภอ :
-                                    <select id="district" style="width: 24%;">
+                                    &nbsp&nbsp&nbsp อำเภอ :
+                                    <select id="district" style="width: 160px">
                                     </select>
                                 </div>
                                 <div class="col">
-                                    ตำบล :
-                                    <select id="subdistrict" style="width: 24%;">
+                                    &nbsp&nbsp&nbsp&nbsp&nbspตำบล :
+                                    <select id="subdistrict" style="width: 160px">
                                     </select>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-4">
-                                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp โทรศัพท์ :
-                                    <input type="text" id="phone" onkeyup="checkPhoneInput('phone')"
+                                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp โทรศัพท์ :
+                                    <input type="text"  style="width:50%;"
+                                        id="phone" onkeyup="checkPhoneInput('phone')"
                                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                        style="width: 110px" maxlength="10">
-                                </div>:
+                                        maxlength="10">
+                                </div>
                                 <div class="col-4">
-                                    โทรสาร :
+                                    &nbsp&nbspโทรสาร :
                                     <input type="text" id="fax" size="16">
                                 </div>
                             </div>
                         </div>
-                        <div class="col" style="  text-align: center; display: block;">
+                        <div class="col" style=" padding-top: 30px; text-align: center; display: block;">
                             <div class="row" style="  text-align: center; display: block;">
                                 <img id="operatorImage" class="rounded" src="../../img/userProfile.png" width="200px"
                                     height="200px">
@@ -320,15 +319,15 @@
                                 <div class="col">
                                     <input style='display: none;' type="file" id="uploadFile"
                                         onchange="uploadImage(event)" accept="image/*">
-                                    <button onclick="buttonImage()" class="btn btn-secondary btn-lg isColor"
-                                        style="width:70px">แทน</button>
+                                    <button onclick="buttonImage()" class="btn btn-secondary  isColor"
+                                        style="width:60px">แทน</button>
 
 
-                                    <button id="cancelImage" class="btn btn-secondary btn-lg btn-danger"
-                                        style="width:70px" onclick="deleteImageOne()"> ลบ </button>
+                                    <button id="cancelImage" class="btn btn-secondary  btn-danger"
+                                        style="width:60px" onclick="deleteImageOne()"> ลบ </button>
 
 
-                                    <button id="webcam" class="btn btn-secondary btn-lg " style="width:100px;" disabled>
+                                    <button id="webcam" class="btn btn-secondary  " style="width:80px;" disabled>
                                         ถ่ายภาพ
                                     </button>
                                 </div>
@@ -337,8 +336,8 @@
                     </div>
                 </div>
                 <!-- </form> -->
-        </fieldset>
-    </div>
+            </fieldset>
+        </div>
 
     </div>
     </div>

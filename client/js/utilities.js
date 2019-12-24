@@ -55,13 +55,12 @@ function deleteImage() {
     document.querySelector("#outputImage").removeChild(document.querySelectorAll('#outputImage span')[index]);
     var fileDelete = totalFiles[index]
     totalFiles.splice(index, 1);
-    console.log(document.getElementById("uploadFile").file)
-    for (var i = 0, f; f = files[i]; i++) {
-        if (!f.type.match('image.*')) {
-            continue;
-        }
-    }
-    console.log(totalFiles)
+    document.getElementById('uploadFile').value = ''
+    // for (var i = 0, f; f = files[i]; i++) {
+    //     if (!f.type.match('image.*')) {
+    //         continue;
+    //     }
+    // }
 }
 function uploadImage(event) {
     var cancelButton = document.getElementById('cancelImage')
