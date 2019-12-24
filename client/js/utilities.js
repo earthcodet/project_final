@@ -1,5 +1,34 @@
-var totalFiles = [];
+function checkPhoneInput(tagId) {
+    var text = document.getElementById(tagId).value
+   text = text.replace(/(\d{3})(\d{7})/, "$1-$2");
+   document.getElementById(tagId).value = text
+}
+
+function isNumber(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+}
+function validate(evt) {
+    var theEvent = evt || window.event;
+  
+    // Handle paste
+    if (theEvent.type === 'paste') {
+        key = event.clipboardData.getData('text/plain');
+    } else {
+    // Handle key press
+        var key = theEvent.keyCode || theEvent.which;
+        key = String.fromCharCode(key);
+    }
+    var regex = /[0-9]|\./;
+    if( !regex.test(key) ) {
+      theEvent.returnValue = false;
+      if(theEvent.preventDefault) theEvent.preventDefault();
+    }
+  }
+
+
+  var totalFiles = [];
 function handleFileSelect(evt) {
+    console.log('aaa')
   var files = evt.target.files;
   for (var i = 0, f; f = files[i]; i++) {
     if (!f.type.match('image.*')) {
@@ -46,8 +75,8 @@ function uploadImage(event) {
     reader.onload = function (event) {  
       img.src = event.target.result;
       img.alt = 'operator'
-      img.width = 400
-      img.height = 400
+      img.width = 200
+      img.height = 200
       console.log(img.src)
     };
     reader.readAsDataURL(selectedFile)
@@ -57,8 +86,8 @@ function deleteImageOne(){
   document.getElementById('uploadFile').value = ''
   var img = document.getElementById('operatorImage')
   img.src = '../../img/userProfile.png'
-  img.width = 400
-  img.height = 400
+  img.width = 200
+  img.height = 200
   console.log(img.src)
 }
 
