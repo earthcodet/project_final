@@ -34,8 +34,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-<script src="../../js/imageUpload.js"></script>
-<link href="../../css/imageButton.css" rel="stylesheet">
+<!-- css ส่วนกลาง -->
+<link href="../../css/utilities.css" rel="stylesheet">
+
+<!-- function ส่วนกลาง -->
+<script src="../../js/utilities.js"></script>
+
+<!-- disable-->
+<script src="../../js/disable.js"></script>
+
+<!-- ทดสอบควบคุมหน้า -->
+<script src="../../js/operator.js"></script>
+
 
 <body>
 
@@ -129,11 +139,36 @@
     <div class="w3-top" style="overflow:auto;">
         <ul>
             <li class="fa fa-bars w3-button w3-my-color w3-hide-large w3-xxlarge" onclick="w3_open()"></li>
-            <li><a href="#news"><i class="fa fa-plus-square fa-lg w3-margin-right w3-text-theme "></i>เพิ่ม</a></li>
-            <li><a href="#contact"><i class="fa fa-pencil fa-lg w3-margin-right w3-text-theme"></i>แก้ไข</a></li>
-            <li><a href="#contact"><i class="fa fa-floppy-o fa-lg w3-margin-right w3-text-theme"></i>บันทึก</a></li>
-            <li><a href="#contact"><i class="fa fa-reply fa-lg w3-margin-right w3-text-theme"></i>เรียกคืน</a></li>
-            <li><a href="#about"><i class="fa fa-close fa-lg w3-margin-right w3-text-theme"></i>ยกเลิก</a></li>
+            <li>
+                <a id="addMenu" href="#news" onclick="addNewPage()">
+                    <i class="fa fa-plus-square fa-lg w3-margin-right w3-text-theme "> </i>
+                    เพิ่ม
+                </a>
+            </li>
+            <li>
+                <a id="editMenu" href="#contact" class="disableds">
+                    <i class="fa fa-pencil fa-lg w3-margin-right w3-text-theme"></i>
+                    แก้ไข
+                </a>
+            </li>
+            <li>
+                <a id="saveMenu" onclick="insertTEST()" class="disableds" href="#contact">
+                    <i class="fa fa-floppy-o fa-lg w3-margin-right w3-text-theme"></i>
+                    บันทึก
+                </a>
+            </li>
+            <li>
+                <a id="restoreMenu" href="#contact" class="disableds">
+                    <i class="fa fa-reply fa-lg w3-margin-right w3-text-theme"></i>
+                    เรียกคืน
+                </a>
+            </li>
+            <li>
+                <a id="deleteMenu" href="#about" class="disableds">
+                    <i class="fa fa-close fa-lg w3-margin-right w3-text-theme" ></i>
+                    ยกเลิก
+                </a>
+            </li>
         </ul>
     </div>
 
@@ -141,39 +176,39 @@
         <header class="w3-container w3-theme">
             <h1 style="font-size:20px">ข้อมูลผู้ประกอบการ</h1>
         </header>
+        <fieldset disabled id="disable">
+            <div style="padding-top:32px; width: 80%; margin: 0 auto;">
 
-        <div style="padding-top:32px; width: 80%; margin: 0 auto;">
-            <!-- START -->
-            <div>
-                <div class=row>
-                    <div class="col">คำนำหน้าชื่อ :
-                        <select id="" name="" style="width: auto;">
-                            <option value="" hidden>เลือก...</option>
-                            <option value="">นาย</option>
-                            <option value="">นาง</option>
-                            <option value="">นางสาว</option>
-                        </select>
+                <!-- START -->
+                <div>
+                    <div class=row>
+                        <div class="col">คำนำหน้าชื่อ :
+                            <select id="" name="" class="custom-select" style="width: 120px;">
+                                <option value="" hidden>เลือก...</option>
+                                <option value="">นาย</option>
+                                <option value="">นาง</option>
+                                <option value="">นางสาว</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            ชื่อ&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:
+                            <input type="text" id="" name="" placeholder="">&nbsp;
+                        </div>
+                        <div class="col">
+                            นามสกุล :
+                            <input type="text" id="" name="" placeholder="">&nbsp;
+                        </div>
+                        <div class="col">
+                            ประเภท &nbsp&nbsp&nbsp:
+                            <select id="" name="" class="custom-select" style="width: 160px;">
+                                <option value="none" hidden>เลือก...</option>
+                                <option value="นิติบุคคล">นิติบุคคล</option>
+                                <option value="บุคคลธรรมดา">บุคคลธรรมดา</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="col">
-                        ชื่อ&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:
-                        <input type="text" id="" name="" placeholder="">&nbsp;
-                    </div>
-                    <div class="col">
-                        นามสกุล :
-                        <input type="text" id="" name="" placeholder="">&nbsp;
-                    </div>
-                    <div class="col">
-                        ประเภท &nbsp&nbsp&nbsp:
-                        <select id="" name="" style="width: auto;">
-                            <option value="none" hidden>เลือก...</option>
-                            <option value="นิติบุคคล">นิติบุคคล</option>
-                            <option value="บุคคลธรรมดา">บุคคลธรรมดา</option>
-                        </select>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div style="width: 100%; border-color: #808080;">
+                    <div class="row">
                         <div class="row">
                             <div class="col">
                                 &nbsp&nbsp&nbsp เลขประจำตัว :
@@ -184,127 +219,132 @@
                                 <input type="date" id="" name="" placeholder="">
                             </div>
                             <div class="col">
-                                <a>หมดอายุ :</a>
+                                หมดอายุ :
                                 <input type="date" id="" name="" placeholder="">
                             </div>
                             <div class="col">
-                                <a>เกิดวันที่ :</a>
+                                เกิดวันที่ :
                                 <input type="date" id="" name="" placeholder="">
                             </div>
                         </div>
 
+
                     </div>
 
+
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="row">
+                                <div class="col-4">
+                                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspสัญชาติ :
+                                    <select id="nationality" class="custom-select" style="width: 110px">
+                                        <option value="" hidden>เลือก...</option>
+                                        <option value="">ไทย</option>
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                                <div class="col-4">
+                                    เชื้อชาติ :
+                                    <select id="race" class="custom-select" style="width: 120px;">
+                                        <option value="" hidden>เลือก...</option>
+                                        <option value="">ไทย</option>
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    อยู่บ้านเลขที่ &nbsp:
+                                    <input type="text" id="homeId" size="12px">
+                                </div>
+                                <div class="col">
+                                    &nbsp&nbsp&nbsp&nbsp หมู่ที่ :
+                                    <input type="int" id="moo" size="4px">
+                                </div>
+                                <div class="col">
+                                    ตรอก&nbsp:
+                                    <input type="text" id="trxk" size="18px"> &nbsp;
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class='col'>
+                                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspซอย &nbsp:
+                                    <input type="text" id="sxy" size="12px">
+                                </div>
+                                <div class="col">
+                                    &nbsp อาคาร :
+                                    <input type="text" id="building" size="16px">
+                                </div>
+                                <div class="col">
+                                    ถนน &nbsp&nbsp:
+                                    <input type="text" id="road" size="18px">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspจังหวัด :
+                                    <select id="province" style="width: 24%;">
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    &nbsp อำเภอ :
+                                    <select id="district" style="width: 24%;">
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    ตำบล :
+                                    <select id="subdistrict" style="width: 24%;">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp โทรศัพท์ :
+                                    <input type="text" id="phone" onkeyup="checkPhoneInput('phone')"
+                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                        style="width: 110px" maxlength="10">
+                                </div>:
+                                <div class="col-4">
+                                    โทรสาร :
+                                    <input type="text" id="fax" size="16">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col" style="  text-align: center; display: block;">
+                            <div class="row" style="  text-align: center; display: block;">
+                                <img id="operatorImage" class="rounded" src="../../img/userProfile.png" width="200px"
+                                    height="200px">
+                            </div>
+                            <br>
+                            <div class="row imageupload">
+                                <div class="col">
+                                    <input style='display: none;' type="file" id="uploadFile"
+                                        onchange="uploadImage(event)" accept="image/*">
+                                    <button onclick="buttonImage()" class="btn btn-secondary btn-lg isColor"
+                                        style="width:70px">แทน</button>
+
+
+                                    <button id="cancelImage" class="btn btn-secondary btn-lg btn-danger"
+                                        style="width:70px" onclick="deleteImageOne()"> ลบ </button>
+
+
+                                    <button id="webcam" class="btn btn-secondary btn-lg " style="width:100px;" disabled>
+                                        ถ่ายภาพ
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-
-                <div class="row">
-                    <div class="col-8">
-                        <div class="row">
-                            <div class="col-4">
-                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspสัญชาติ :
-                                <select id="nationality">
-                                    <option value="" hidden>เลือก...</option>
-                                    <option value="">ไทย</option>
-                                    <option value=""></option>
-                                </select>
-                            </div>
-                            <div class="col-4">
-                                เชื้อชาติ :
-                                <select id="race">
-                                    <option value="" hidden>เลือก...</option>
-                                    <option value="">ไทย</option>
-                                    <option value=""></option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                อยู่บ้านเลขที่ &nbsp:
-                                <input type="text" id="homeId" size="12px">
-                            </div>
-                            <div class="col">
-                                &nbsp&nbsp&nbsp&nbsp หมู่ที่ :
-                                <input type="int" id="moo" size="4px">
-                            </div>
-                            <div class="col">
-                                ตรอก&nbsp:
-                                <input type="text" id="trxk" size="18px"> &nbsp;
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class='col'>
-                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspซอย &nbsp:
-                                <input type="text" id="sxy" size="12px">
-                            </div>
-                            <div class="col">
-                                &nbsp  อาคาร :
-                                <input type="text" id="building" size="16px">
-                            </div>
-                            <div class="col">
-                                ถนน &nbsp&nbsp: 
-                                <input type="text" id="road" size="18px">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspจังหวัด :
-                                <select id="province" style="width: 24%;">
-                                </select>
-                            </div>
-                            <div class="col">
-                                &nbsp  อำเภอ :
-                                <select id="district" style="width: 24%;">
-                                </select>
-                            </div>
-                            <div class="col">
-                                ตำบล :
-                                <select id="subdistrict" style="width: 24%;">
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4">
-                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp โทรศัพท์ :
-                                <input type="text" id="phone" size="16"> 
-                            </div>
-                            <div class="col-4">
-                                โทรสาร :
-                                <input type="text" id="fax" size="16">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="row" style="  text-align: center; display: block;">
-                            <img id="operatorImage" class="rounded" src="../../img/userProfile.png" width="400px"
-                                height="400px">
-                        </div>
-                        <br>
-                        <div class="row imageupload">
-                            <div class="col" align="right"> <input style='display: none;' type="file" id="uploadFile"
-                                    onchange="uploadImage(event)" accept="image/*">
-                                <button onclick="buttonImage()" class="btn btn-secondary btn-lg isColor">UPLOAD</button>
-                            </div>
-                            <div class="col"> <button id="cancelImage" class="btn btn-secondary btn-lg btn-danger"
-                                    onclick="deleteImageOne()"> DELETE </button></div>
-                            <div class="col"><button id="webcam" class="btn btn-secondary btn-lg" disabled> DELETE
-                                </button></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- </form> -->
-        </div>
+                <!-- </form> -->
+        </fieldset>
+    </div>
 
     </div>
     </div>
 
 
     </div>
-
-    <!-- <footer class="w3-container w3-theme" style="padding:32px">
-            <p>Footer information goes here</p>
-        </footer> -->
 
     </div>
 
