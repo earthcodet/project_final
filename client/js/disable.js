@@ -3,5 +3,9 @@ function disFunction() {
   document.getElementById("form9").reset();
 }
 
+// function enableFunction() {
+//   document.getElementById("disable").disabled = true;
+// }
+
 // function resetFunction() {
 // }
