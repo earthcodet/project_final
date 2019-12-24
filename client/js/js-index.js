@@ -153,8 +153,8 @@ function myAccordion77(id) {
   }
 }
 
-function myFunction() {
-  var qq = document.getElementById("mySelect").value;
+function showtext() {
+  var qq = document.getElementById("deed").value;
   if (qq == "01") {
     document.getElementById("Demo").style.display = "block";
   } else {
