@@ -24,7 +24,7 @@
 
 <link href="../css/css-index.css" rel="stylesheet">
 <link href="../css/fonts.css" rel="stylesheet">
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
 <script src="../js/js-index.js"></script>
 <script src="../js/test.js"></script>
 
@@ -46,12 +46,12 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
 <body>
+    <!-- เมนูด้านบน -->
     <nav class="w3-sidebar w3-bar-block w3-collapse w3-animate-left w3-card" style="z-index:3;width:250px;"
         id="mySidebar">
         <a class="w3-bar-item w3-button w3-border-bottom w3-large" href="index.html">
             <img src="../img/img1.jpg" style="width:100%;">
         </a>
-
         <div>
             <a class="w3-bar-item w3-button w3-theme" onclick="myAccordion('demo1')"
                 href="javascript:void(0)">ระบบงานคำขอ <i class="fa fa-caret-down"></i></a>
@@ -151,7 +151,7 @@
             </div>
         </div>
     </nav>
-
+    <!-- คลิกเมนูย่อได้ -->
     <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay">
     </div>
     <!-- เมนูด้านบน -->
@@ -166,6 +166,7 @@
             <li><a href="#about"><i class="fa fa-close fa-lg w3-margin-right w3-text-theme"></i>ยกเลิก</a></li>
         </ul>
     </div>
+    <!-- ข้อมูล -->
     <div class="w3-main" style="margin-left:250px;margin-top:47px;">
         <header class="w3-container w3-theme">
             <h1 style="font-size:20px">ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</h1>
@@ -173,6 +174,7 @@
         <div class="w3-container" style="padding:32px">
             <form id="form">
                 <fieldset disabled id="disable">
+                    <!-- box ข้อมูลสถานประกอบการ -->
                     <div class="box">
                         <h4>ข้อมูลสถานประกอบการ</h4>
 
@@ -335,32 +337,34 @@
                         <input type="text" id="documentName" />
                         ผู้ขอรับใบอนุญาต
                         <!-- </form> -->
-                    </div>
-
-                    <br>
-
+                    </div> <br>
+                    <!-- box ผู้สัมผัสอาหาร -->
                     <div class="box">
                         <div class="row">
                             <div class="col-2">
                                 <a><b>ใบอบรมผู้สัมผัสอาหาร</b></a>&nbsp;&nbsp;
                             </div>
                             <div class="col">
-                                <input type="radio" name="typee" id="typeUser1" value="บุคคลธรรมดา">
+                                <input type="radio" name="typee" id="typeUser1" value="บุคคลธรรมดา"
+                                    onclick="w3.show('#ww')">
                                 <a>อบรมแล้ว</a>&nbsp;
-                                <input type="radio" name="typee" id="typeUser1" value="บุคคลธรรมดา">
+                                <input type="radio" name="typee" id="typeUser1" value="บุคคลธรรมดา"
+                                    onclick="w3.hide('#ww')">
                                 <a>ยังไม่ได้อบรมอบรม</a>
                                 <br>
-                                <a>ออกใบประกาศนียบัตรโดย</a>
-                                <input type="text" id="">
-                                <br>
-                                <a>ให้ไว้ ณ วันที่</a>
-                                <input type="date" id="">&nbsp;
-                                <a>มีผลถึง ณ วันที่</a>
-                                <input type="date" id="">
+                                <div id="ww" style="display:none">
+                                    <a>ออกใบประกาศนียบัตรโดย</a>
+                                    <input type="text" id="">
+                                    <br>
+                                    <a>ให้ไว้ ณ วันที่</a>
+                                    <input type="date" id="">&nbsp;
+                                    <a>มีผลถึง ณ วันที่</a>
+                                    <input type="date" id="">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <br>
+                    </div> <br>
+                    <!-- box เพิ่มรูป -->
                     <div class="box">
                         <a>ประเภทกิจการ :</a>
                         <input type="text" id="" size="120">
@@ -392,30 +396,8 @@
             </form>
         </div>
     </div>
-
-
-    </div>
-
-    <!-- <footer class="w3-container w3-theme" style="padding:32px">
-            <p>Footer information goes here</p>
-        </footer> -->
-
-    </div>
-
-
-
 </body>
-<!-- <script>
-    function myFunction() {
-        var y = document.getElementById("mySelect").value;
-        if (y == '01') {
-            document.getElementById('Demo').style.display = 'block';
-        } else {
-            document.getElementById('Demo').style.display = 'none';
-        }
-
-    }
-</script> -->
-<!-- <script src="https://www.w3schools.com/lib/w3.js"></script> -->
+<!-- show hide -->
+<script src="https://www.w3schools.com/lib/w3.js"></script>
 
 </html>

@@ -1,5 +1,7 @@
 function disFunction() {
   document.getElementById("disable").disabled = false;
+  
+  // reset
   document.getElementById("form").reset();
 }
 
@@ -9,3 +11,11 @@ function disFunction() {
 
 // function resetFunction() {
 // }
+
+function enFood() {
+  document.getElementById("disableFood").disabled = false;
+}
+
+function disFood() {
+  document.getElementById("disableFood").disabled = true;
+}
