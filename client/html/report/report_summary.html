@@ -21,27 +21,40 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
 </head>
-<style type="text/css" media="print">
-    @page {
-        size: A4 landscape;
+<style type="text/css">
+    @media print {
+        @page {
+            size: A4 landscape;
+        }
+
+        BODY {
+            font-size: x-small;
+            line-height: 1em;
+        }
+
+        .hideWhenPrint {
+            display: none;
+        }
     }
 
-    /* body {
-        writing-mode: sideways-lr;
-    } */
-    /* body {
-        font-size: 11pt;
-    } */
-    
+    body {
+        padding: 20px;
+    }
 </style>
-
+<script type="text/javascript">
+    function ExportToExcel(table){
+           var htmltable= document.getElementById('table');
+           var html = htmltable.outerHTML;
+           window.open('data:application/vnd.ms-excel,' + encodeURIComponent(html));
+        }
+    </script>
 <body>
-    <div style="font-family: sarabun; padding: 50px;">
-        <table class="table table-bordered table-hover">
+    <div style="font-family: sarabun;">
+        <table id="table" class="table table-bordered table-hover">
             <thead class="text-center">
                 <tr>
                     <th class="align-middle" rowspan="2">ที่</th>
-                    <th class="align-middle" rowspan="2" width="50%">รายการ</th>
+                    <th class="align-middle" rowspan="2" width="29%"> รายการ </th>
                     <th class="align-middle" rowspan="2">ยอดประมาณการ(ราย)</th>
                     <th class="align-middle" rowspan="2">ยอดประมาณการ(บาท)</th>
                     <th class="align-middle" colspan="2">ยอดยกมา</th>
@@ -64,16 +77,16 @@
                 <tr>
                     <td>1</td>
                     <td>ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร&nbsp;(สอ.4)</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>456546456</td>
+                    <td>456456</td>
+                    <td>456456sss</td>
+                    <td>123456</td>
+                    <td>123456</td>
+                    <td>123456</td>
+                    <td>123456</td>
+                    <td>123456</td>
+                    <td>123456</td>
+                    <td>123456</td>
                 </tr>
                 <tr>
                     <td>2</td>
@@ -229,6 +242,10 @@
                 <td class="text-left">บาท</td>
             </tr>
         </table>
+    </div>
+    <div class="hideWhenPrint">
+    <button onclick="window.print()">พิมพ์</button>
+    <button onclick="ExportToExcel(table)">พิมพ์</button>
     </div>
 </body>
 
