@@ -57,7 +57,13 @@ function editTEST() {
         enableMenu('saveMenu')
         disFunction()
     } else {
-        alert('ข้อมูลอยู่ในสถานะลบแล้ว')
+        Swal.fire({
+            title: "สำนักงานเทศบาล",
+            html: "ข้อมูลอยู่ในสถานะลบแล้ว",
+            confirmButtonColor: "#009688",
+            closeOnConfirm: false,
+            icon:'warning'
+        })
     }
 }
 
