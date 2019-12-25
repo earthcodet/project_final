@@ -5,9 +5,9 @@ function disFunction() {
   document.getElementById("form").reset();
 }
 
-// function enableFunction() {
-//   document.getElementById("disable").disabled = true;
-// }
+function enableFunction() {
+  document.getElementById("disable").disabled = true;
+}
 
 // function resetFunction() {
 // }
