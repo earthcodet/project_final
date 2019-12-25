@@ -1,6 +1,4 @@
 function checkLogin(){
-    var x = location.href;
-    console.log(x)
     hideAlert()
     var username = document.getElementById('username').value
     var password = document.getElementById('password').value
