@@ -167,152 +167,165 @@
         </ul>
     </div>
     <!-- ข้อมูล -->
-    <div class="w3-main" style="margin-left:250px;margin-top:47px;">
+    <div class="w3-main" style="margin-left:250px;margin-top:47px; overflow-x: auto;">
         <header class="w3-container w3-theme">
             <h1 style="font-size:20px">Test</h1>
         </header>
-        <div class="w3-container" style="padding:32px">
+        <div class="w3-container" style="padding:32px;" >
             <form id="form">
                 <fieldset disabled id="disable">
                     <!-- box ข้อมูลสถานประกอบการ -->
-                    <div class="box">
-                        <h4>ข้อมูลสถานประกอบการ</h4>
-                        <!-- <form action="/action_page.php"> -->
-                        &nbsp;&nbsp;
-                        <a>เลขที่คำขอ :</a>
-                        <input type="text" id="" name="" size="12px" placeholder="">&nbsp;
-                        <a>วันที่ยืนขอ :</a>
-                        <input type="date" id="" name="" style="width: 155px;" placeholder="">&nbsp;
-                        <a>ประเภทคำขอ :</a>
-                        <input list="brow" id="" name="" size="40px">
-                        <datalist id="brow">
-                            <option value="" hidden>เลือก...</option>
-                            <option
-                                value="1.การจำหน่ายสินค้าในที่ หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น">
-                                1.การจำหน่ายสินค้าในที่ หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
-                            </option>
-                        </datalist>
-                        </input>&nbsp;&nbsp;
-                        <a>เขียนที่ :</a>
-                        <input type="text" id="place" value="เทศบาลเมืองแสนสุข" size="19px">&nbsp;
-                        <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a>ข้าพเจ้า :</a>
-                        <select id="" style="width: 120px;">
-                            <option value="" hidden>เลือก...</option>
-                            <option value="">บุคคลธรรมดา</option>
-                            <option value="">นิติธรรมดา</option>
-                            </option>
-                        </select>
-                        <input type="text" id="name" size="29px">
-                        &nbsp;
-                        <a>เลขประจำตัว :</a>
-                        <input type="int" id="id" size="14px"> &nbsp;
-                       &nbsp &nbspอายุ :
-                        <input type="int" id="age" size="3px">&nbsp;
-                        <a>สัญชาติ :</a>
-                        <input list="nationality" id="" name="" size="7.5px">
-                        <datalist id="nationality">
-                            <option value="" hidden>เลือก...</option>
-                            <option value="ไทย">ไทย</option>
-                            <option value="จีน"></option>
-                            <option value="อเมริกัน"></option>
-                        </datalist>
-                        </input>&nbsp;
-                        <a>เชื้อชาติ :</a>
-                        <input list="race" id="" name="" size="7.5px">
-                        <datalist id="race">
-                            <option value="" hidden>เลือก...</option>
-                            <option value="ไทย">ไทย</option>
-                            <option value="จีน"></option>
-                            <option value="อเมริกัน"></option>
-                        </datalist>
-                        </input>
-                        <br>
-                        <a>อยู่บ้านเลขที่ :</a>
-                        <input type="text" id="homeId" size="9px"> &nbsp;
-                        <a>หมู่ที่ :</a>
-                        <input type="int" id="moo" size="6px"> &nbsp;
-                        <a>ตรอก:</a>
-                        <input type="text" id="trxk" size="12px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    
-                        <a>ซอย :</a>
-                        <input type="text" id="sxy" size="12px"> &nbsp;&nbsp;
-                        &nbsp;&nbsp; <a>อาคาร :</a>
-                        <input type="text" id="building" size="15px"> &nbsp;&nbsp;
-                        <a>ถนน :</a>
-                        <input type="text" id="road" size="19">
-                        <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a>จังหวัด :</a>
-                        <select id="province" style="width: 150px;">
-                        </select> &nbsp;
-                        <a>อำเภอ :</a>
-                        <select id="district" style="width: 150px;">
-                        </select>&nbsp;
-                        <a>ตำบล :</a>
-                        <select id="subdistrict" style="width: 150px;">
-                        </select>&nbsp;
-                        <a>โทรศัพท์ :</a>
-                        <input type="text" id="phone" size="13"> &nbsp;
-                        <a>โทรสาร :</a>
-                        <input type="text" id="fax" size="19">
-                        <br>
-                        <a>สถานที่ประกอบการ :</a>
-                        <input type="text" id="workplaceName" size="40">&nbsp; (ถ้ามี) &nbsp;
-                        <a>พื้นที่ :</a>
-                        <input type="int" id="area" size="15"> ตารางเมตร &nbsp;
-                        <a>จำนวนคนงาน :</a>
-                        <input type="int" id="numPeople" size="10"> คน
-                        <br>
-                        <a>ตั้งอยู่เลขที่ :</a>
-                        <input type="text" id="wHomeId" size="9"> &nbsp;&nbsp;
-                        <a>หมู่ที่ :</a>
-                        <input type="int" id="wMoo" size="6"> &nbsp;
-                        <a>ตรอก:</a>
-                        <input type="text" id="wTrxk" size="13"> &nbsp;
-                        <a>ซอย :</a>
-                        <input type="text" id="wSxy" size="13"> &nbsp;
-                        <a>อาคาร :</a>
-                        <input type="text" id="wBuilding" size="13"> &nbsp;
-                        <a>ถนน :</a>
-                        <input type="text" id="wRoad" size="13">
-                        <br>
-                        <a>จังหวัด :</a>
-                        <select id="wProvince" style="width: 13.9%;">
-                        </select> &nbsp;
-                        <a>อำเภอ :</a>
-                        <select id="wDistrict" style="width: 12.5%;">
-                        </select>&nbsp;
-                        <a>ตำบล :</a>
-                        <select id="wSubdistrict" style="width: 12.5%;">
-                        </select>&nbsp;
-                        <a>โทรศัพท์ :</a>
-                        <input type="text" id="wPhone" size="16"> &nbsp;
-                        <a>โทรสาร :</a>
-                        <input type="text" id="wFax" size="16">
-                        <br>
-                        บุลคลอ้างอิง
-                        <br>
-                        <a>คำนำหน้าชื่อ :</a>
-                        <select id="" name="" style="width: 10%;">
-                            <option value="" hidden>เลือก...</option>
-                            <option value="">นาย</option>
-                            <option value="">นาง</option>
-                            <option value="">นางสาว</option>
-                        </select>
-                        <a>ชื่อ :</a>
-                        <input type="text" id="" name="" size="17" placeholder="">&nbsp;
-                        <a>นามสกุล :</a>
-                        <input type="text" id="" name="" size="17" placeholder="">&nbsp;
-                        <a>สถานะ :</a>
-                        <input type="text" id="" size="16">&nbsp;
-                        <a>โทรศัพท์ :</a>
-                        <input type="text" id="" size="16">
-                        <br>
+                    <div class="box" >
+                        <div>
+                            <h4>ข้อมูลสถานประกอบการ</h4>
+                            <!-- <form action="/action_page.php"> -->
+                            &nbsp;&nbsp;
+                            <a>เลขที่คำขอ :</a>
+                            <input type="text" id="" name="" size="12px" placeholder="">&nbsp;
+                            <a>วันที่ยืนขอ :</a>
+                            <input type="date" id="" name="" style="width: 155px;" placeholder="">&nbsp;
+                            <a>ประเภทคำขอ :</a>
+                            <input list="brow" id="" name="" size="40px">
+                            <datalist id="brow">
+                                <option value="" hidden>เลือก...</option>
+                                <option
+                                    value="1.การจำหน่ายสินค้าในที่ หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น">
+                                    1.การจำหน่ายสินค้าในที่ หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                </option>
+                            </datalist>
+                            </input>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a>เขียนที่ :</a>
+                            <input type="text" id="place" value="เทศบาลเมืองแสนสุข" size="19px" style="float: right;">&nbsp;
+                        </div>
+                        <div>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a>ข้าพเจ้า :</a>
+                            <select id="" style="width: 120px;">
+                                <option value="" hidden>เลือก...</option>
+                                <option value="">บุคคลธรรมดา</option>
+                                <option value="">นิติธรรมดา</option>
+                                </option>
+                            </select>
+                            <input type="text" id="name" size="28px">
+                            &nbsp;
+                            <a>เลขประจำตัว :</a>
+                            <input type="int" id="id" size="14px"> &nbsp;
+                           &nbsp &nbspอายุ :
+                            <input type="int" id="age" size="3px">&nbsp;
+                            <a>สัญชาติ :</a>
+                            <input list="nationality" id="" name="" size="7.5px">
+                            <datalist id="nationality">
+                                <option value="" hidden>เลือก...</option>
+                                <option value="ไทย">ไทย</option>
+                                <option value="จีน"></option>
+                                <option value="อเมริกัน"></option>
+                            </datalist>
+                            </input>&nbsp;
+                            <a>เชื้อชาติ :</a>
+                            <input list="race" id="" name="" size="7.5px" style="float: right;">
+                            <datalist id="race">
+                                <option value="" hidden>เลือก...</option>
+                                <option value="ไทย">ไทย</option>
+                                <option value="จีน"></option>
+                                <option value="อเมริกัน"></option>
+                            </datalist>
+                            </input>
+                        </div>
+                        <div>
+                            <a>อยู่บ้านเลขที่ :</a>
+                            <input type="text" id="homeId" size="9px"> &nbsp;
+                            <a>หมู่ที่ :</a>
+                            <input type="int" id="moo" size="6px"> &nbsp;
+                            <a>ตรอก:</a>
+                            <input type="text" id="trxk" size="12px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    
+                            <a>ซอย :</a>
+                            <input type="text" id="sxy" size="12px"> &nbsp;&nbsp;
+                            <a>อาคาร :</a>
+                            <input type="text" id="building" size="14px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a>ถนน :</a>
+                            <input type="text" id="road" size="19px" style="float: right;">
+                        </div>
+                        <div>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a>จังหวัด :</a>
+                            <select id="province" style="width: 150px;">
+                            </select> &nbsp;
+                            <a>อำเภอ :</a>
+                            <select id="district" style="width: 150px;">
+                            </select>&nbsp;
+                            <a>ตำบล :</a>
+                            <select id="subdistrict" style="width: 150px;">
+                            </select>&nbsp;
+                            <a>โทรศัพท์ :</a>
+                            <input type="text" id="phone" size="14px"> &nbsp;
+                            <a>โทรสาร :</a>
+                            <input type="text" id="fax" size="19px" style="float: right;">
+                        </div>
+                        <div>
+                            <a>สถานที่ประกอบการ :</a>
+                            <input type="text" id="workplaceName" size="55">&nbsp; (ถ้ามี) &nbsp;&nbsp;&nbsp;&nbsp;
+                            <a>พื้นที่ :</a>
+                            <input type="int" id="area" size="15"> ตารางเมตร &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a>จำนวนคนงาน :</a>
+                            <a style="float: right;">
+                                <input type="int" id="numPeople" size="10"> คน</a>
+                        </div>
+                        <div>
+                            &nbsp;&nbsp;
+                            <a>ตั้งอยู่เลขที่ :</a>
+                            <input type="text" id="wHomeId" size="9px"> &nbsp;
+                            <a>หมู่ที่ :</a>
+                            <input type="int" id="wMoo" size="6px"> &nbsp;
+                            <a>ตรอก:</a>
+                            <input type="text" id="wTrxk" size="12px"> &nbsp;&nbsp;&nbsp;
+                            <a>ซอย :</a>
+                            <input type="text" id="wSxy" size="12px"> &nbsp;&nbsp;
+                            <a>อาคาร :</a>
+                            <input type="text" id="wBuilding" size="14px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a>ถนน :</a>
+                            <input type="text" id="wRoad" size="19px" style="float: right;">
+                        </div>
+                        <div>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a>จังหวัด :</a>
+                            <select id="wProvince" style="width: 150px;">
+                            </select> &nbsp;
+                            <a>อำเภอ :</a>
+                            <select id="wDistrict" style="width: 150px;">
+                            </select>&nbsp;
+                            <a>ตำบล :</a>
+                            <select id="wSubdistrict" style="width: 150px;">
+                            </select>&nbsp;
+                            <a>โทรศัพท์ :</a>
+                            <input type="text" id="wPhone" size="14px"> &nbsp;
+                            <a>โทรสาร :</a>
+                            <input type="text" id="wFax" size="19px" style="float: right;">
+                        </div>
+                        <div>
+                            บุลคลอ้างอิง
+                        </div>
+                        <div>
+                            <a>คำนำหน้าชื่อ :</a>
+                            <select id="" name="" style="width: 10%;">
+                                <option value="" hidden>เลือก...</option>
+                                <option value="">นาย</option>
+                                <option value="">นาง</option>
+                                <option value="">นางสาว</option>
+                            </select>&nbsp;
+                            ชื่อ :
+                            <a >ชื่อ :</a>
+                            <input type="text" id="" name="" size="20px" placeholder="">&nbsp;&nbsp;
+                            <a>นามสกุล :</a>
+                            <input type="text" id="" name="" size="20px" placeholder="">&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a>สถานะ :</a>
+                            <input type="text" id="" size="13px">&nbsp;&nbsp;
+                            <a>โทรศัพท์ :</a>
+                            <input type="text" id="" size="19px" style="float: right;">
+                        </div>
                         <br>
 
 
-                        <input type="radio" name="sub" id="purposeType1"> ยืนยันคำขอรับ &nbsp;
+                        <input type="radio" name="sub" id="purposeType1"> <a>ยืนยันคำขอรับ</a>  &nbsp;
                         <input type="radio" name="sub" id="purposeType2"> ยืนยันคำขอต่ออายุ &nbsp;
                         <br>
 
