@@ -167,7 +167,7 @@
         </ul>
     </div>
     <!-- ข้อมูล -->
-    <div class="w3-main" style="margin-left:250px;margin-top:47px;">
+    <div class="w3-main" style="margin-left:250px;margin-top:47px; overflow-x: auto;">
         <header class="w3-container w3-theme">
             <h1 style="font-size:20px">Test</h1>
         </header>
@@ -192,9 +192,9 @@
                                 1.การจำหน่ายสินค้าในที่ หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
                             </option>
                         </datalist>
-                        </input>&nbsp;&nbsp;
+                        </input>&nbsp;&nbsp;&nbsp;&nbsp;
                         <a>เขียนที่ :</a>
-                        <input type="text" id="place" value="เทศบาลเมืองแสนสุข" size="19px">&nbsp;
+                        <input type="text" id="place" value="เทศบาลเมืองแสนสุข" size="19px" style="float: right;">&nbsp;
                         <br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <a>ข้าพเจ้า :</a>
@@ -204,8 +204,8 @@
                             <option value="">นิติธรรมดา</option>
                             </option>
                         </select>
-                        <input type="text" id="name" size="25px">
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" id="name" size="28px">
+                        &nbsp;
                         <a>เลขประจำตัว :</a>
                         <input type="int" id="id" size="14px"> &nbsp;&nbsp;
                         <a>อายุ :</a>
@@ -220,7 +220,7 @@
                         </datalist>
                         </input>&nbsp;
                         <a>เชื้อชาติ :</a>
-                        <input list="race" id="" name="" size="7.5px">
+                        <input list="race" id="" name="" size="7.5px" style="float: right;">
                         <datalist id="race">
                             <option value="" hidden>เลือก...</option>
                             <option value="ไทย">ไทย</option>
@@ -238,9 +238,9 @@
                         <a>ซอย :</a>
                         <input type="text" id="sxy" size="12px"> &nbsp;&nbsp;
                         <a>อาคาร :</a>
-                        <input type="text" id="building" size="15px"> &nbsp;&nbsp;
+                        <input type="text" id="building" size="14px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <a>ถนน :</a>
-                        <input type="text" id="road" size="19">
+                        <input type="text" id="road" size="19px" style="float: right;">
                         <br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <a>จังหวัด :</a>
@@ -253,43 +253,46 @@
                         <select id="subdistrict" style="width: 150px;">
                         </select>&nbsp;
                         <a>โทรศัพท์ :</a>
-                        <input type="text" id="phone" size="13"> &nbsp;
+                        <input type="text" id="phone" size="14px"> &nbsp;
                         <a>โทรสาร :</a>
-                        <input type="text" id="fax" size="19">
+                        <input type="text" id="fax" size="19px" style="float: right;">
                         <br>
                         <a>สถานที่ประกอบการ :</a>
-                        <input type="text" id="workplaceName" size="40">&nbsp; (ถ้ามี) &nbsp;
+                        <input type="text" id="workplaceName" size="55">&nbsp; (ถ้ามี) &nbsp;&nbsp;&nbsp;&nbsp;
                         <a>พื้นที่ :</a>
-                        <input type="int" id="area" size="15"> ตารางเมตร &nbsp;
+                        <input type="int" id="area" size="15"> ตารางเมตร &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <a>จำนวนคนงาน :</a>
-                        <input type="int" id="numPeople" size="10"> คน
+                        <a style="float: right;">
+                            <input type="int" id="numPeople" size="10"> คน</a>
                         <br>
+                        &nbsp;&nbsp;
                         <a>ตั้งอยู่เลขที่ :</a>
-                        <input type="text" id="wHomeId" size="9"> &nbsp;&nbsp;
+                        <input type="text" id="wHomeId" size="9px"> &nbsp;
                         <a>หมู่ที่ :</a>
-                        <input type="int" id="wMoo" size="6"> &nbsp;
+                        <input type="int" id="wMoo" size="6px"> &nbsp;
                         <a>ตรอก:</a>
-                        <input type="text" id="wTrxk" size="13"> &nbsp;
+                        <input type="text" id="wTrxk" size="12px"> &nbsp;&nbsp;&nbsp;
                         <a>ซอย :</a>
-                        <input type="text" id="wSxy" size="13"> &nbsp;
+                        <input type="text" id="wSxy" size="12px"> &nbsp;&nbsp;
                         <a>อาคาร :</a>
-                        <input type="text" id="wBuilding" size="13"> &nbsp;
+                        <input type="text" id="wBuilding" size="14px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <a>ถนน :</a>
-                        <input type="text" id="wRoad" size="13">
+                        <input type="text" id="wRoad" size="19px" style="float: right;">
                         <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <a>จังหวัด :</a>
-                        <select id="wProvince" style="width: 13.9%;">
+                        <select id="wProvince" style="width: 150px;">
                         </select> &nbsp;
                         <a>อำเภอ :</a>
-                        <select id="wDistrict" style="width: 12.5%;">
+                        <select id="wDistrict" style="width: 150px;">
                         </select>&nbsp;
                         <a>ตำบล :</a>
-                        <select id="wSubdistrict" style="width: 12.5%;">
+                        <select id="wSubdistrict" style="width: 150px;">
                         </select>&nbsp;
                         <a>โทรศัพท์ :</a>
-                        <input type="text" id="wPhone" size="16"> &nbsp;
+                        <input type="text" id="wPhone" size="14px"> &nbsp;
                         <a>โทรสาร :</a>
-                        <input type="text" id="wFax" size="16">
+                        <input type="text" id="wFax" size="19px" style="float: right;">
                         <br>
                         บุลคลอ้างอิง
                         <br>
@@ -299,15 +302,15 @@
                             <option value="">นาย</option>
                             <option value="">นาง</option>
                             <option value="">นางสาว</option>
-                        </select>
+                        </select>&nbsp;
                         <a>ชื่อ :</a>
-                        <input type="text" id="" name="" size="17" placeholder="">&nbsp;
+                        <input type="text" id="" name="" size="20px" placeholder="">&nbsp;&nbsp;
                         <a>นามสกุล :</a>
-                        <input type="text" id="" name="" size="17" placeholder="">&nbsp;
+                        <input type="text" id="" name="" size="20px" placeholder="">&nbsp;&nbsp;&nbsp;&nbsp;
                         <a>สถานะ :</a>
-                        <input type="text" id="" size="16">&nbsp;
+                        <input type="text" id="" size="13px">&nbsp;&nbsp;
                         <a>โทรศัพท์ :</a>
-                        <input type="text" id="" size="16">
+                        <input type="text" id="" size="19px" style="float: right;">
                         <br>
                         <br>
 
