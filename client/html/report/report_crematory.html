@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>รายงานกิจการฌาปณสถาน</title>
-    <link rel="stylesheet" href="../../css/w.3.css">
-    <link rel="stylesheet" href="../../css/w3-theme-teal.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -150,30 +148,53 @@
 
     <div class="w3-main" style="margin-left:250px;margin-top: 49px;">
         <header class="w3-container w3-theme">
+<<<<<<< HEAD
             <h1 style="font-size:20px">รายงาน</h1>
+=======
+            <h1 style="font-size:20px">รายงานตามประเภทคำขอ</h1>
+>>>>>>> 740c02af40db5dae2dda911c95af1a667c5fa493
         </header>
 
         <div class="container-sm" style="padding:32px">
             <div class="row">
                 <div class="col">
-                    <h5 class="text-center">
-                        วันที่เริ่ม
-                        <br>
-                        <input type="date" id="" placeholder="">
-                    </h5>
+                    <p>ประเภทคำขอ
+                        <input list="brow" id="" name="" size="40">
+                        <datalist id="brow">
+                            <option value="ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ">
+                                ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ
+                            </option>
+                            <option value="ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ">
+                                ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ
+                            </option>
+                            <option value="ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร">ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร
+                            </option>
+                            <option value="ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร">ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร
+                            </option>
+                            <option value="หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร">
+                                หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</option>
+                            <option value="หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร">
+                                หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</option>
+                            <option value="ใบอนุญาติให้ใช้สถานที่เป็นตลาดเอกชน">ใบอนุญาติให้ใช้สถานที่เป็นตลาดเอกชน
+                            </option>
+                            <option value="กิจการที่เป็นอันตรายต่อสุขภาพ">กิจการที่เป็นอันตรายต่อสุขภาพ</option>
+                            <option value="กิจการฌาปณสถาน">กิจการฌาปณสถาน</option>
+                        </datalist>
+                        </h6>
                 </div>
-                <div class="col">
-                    <h5 class="text-center">
+                <div class="col-7">
+                    <p>
+                        วันที่เริ่ม
+                        <input type="date" id="" placeholder="">
+
                         วันที่สุดท้าย
-                        <br>
-                        <input type="date" placeholder="">
-                    </h5>
+                        <input type="date" id="" placeholder="">
+                        <button type="button" class="btn btn-outline-success btn-lg">ตกลง</button>
+                    </p>
                 </div>
             </div>
-            <br><br><br><br>
-            <p class="text-center">
-                <button type="button" class="btn btn-outline-success btn-lg">ตกลง</button>
-            </p>
+
+            
         </div>
     </div>
 </body>
