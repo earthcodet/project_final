@@ -48,6 +48,10 @@ a.exit:hover{
     margin: 0px;
     /* margin-left:-42px; */
   }
+
+  div.displaynone{
+    display: none;
+  }
   
   /* disable*/
   fieldset {
