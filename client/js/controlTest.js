@@ -15,10 +15,7 @@ function exitTEST(menu){
     })
         .then((result) => {
             if (result.value) {
-              if(menu == 'report' ||menu =='central')
-                window.location.href = "../login.html"
-                else
-                window.location.href = "./login.html"
+                window.location.href = "../utilities/login.html"
             } 
         });
 }

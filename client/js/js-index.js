@@ -139,19 +139,6 @@ function myAccordion7(id) {
     );
   }
 }
-function myAccordion77(id) {
-  var x = document.getElementById(id);
-  if (x.className.indexOf("w3-show") == -1) {
-    x.className += " w3-show";
-    x.previousElementSibling.className += " w3-theme";
-  } else {
-    x.className = x.className.replace("w3-show", "");
-    x.previousElementSibling.className = x.previousElementSibling.className.replace(
-      " w3-theme",
-      ""
-    );
-  }
-}
 
 function showtext() {
   var qq = document.getElementById("deed").value;
