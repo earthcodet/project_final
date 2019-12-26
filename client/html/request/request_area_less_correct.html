@@ -40,10 +40,15 @@
 <!-- function ส่วนกลาง -->
 <script src="../../js/utilities.js"></script>
 
-
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <!-- ทดสอบควบคุมหน้า -->
 <script src="../../js/controlTest.js"></script>
+
+<!-- date th -->
+<link type="text/css" href="../../css/jquery-ui-1.12.1.custom/jquery-ui.css" rel="stylesheet" />
+<script type="text/javascript" src="../../js/date/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="../../js/date/jquery-ui-1.8.10.offset.datepicker.min.js"></script>
+<script type="text/javascript" src="../../js/date/dateth.js"></script>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -202,7 +207,7 @@
                                 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a>เลขที่คำขอ :</a></td>
                                 <td><input type="text" id="" name="" placeholder="" size="11"></td>
                                 <td><a>วันที่ยืนขอ :</a></td>
-                                <td><input type="date" id="" name="" placeholder=""></td>
+                                <td><input type="text" size="10" id="datepicker-th-2" name="date1" /></td>
                                 <td>&nbsp;<a>ประเภทคำขอ :</a></td>
                                 <td><input size="30" list="brow" id="" name="">
                                     <datalist id="brow">
