@@ -51,8 +51,10 @@
 
 <body>
     <div class="hideWhenPrint">
-        <button onclick="window.print()">พิมพ์</button>
-        <button onclick="ExportToExcel(table)">Excel</button>
+        <button type="button" class="btn btn-outline-success btn-lg"
+        style="background-color: #009688;color: white;" onclick="window.print()">พิมพ์</button>
+        <button type="button" class="btn btn-outline-success btn-lg"
+        style="background-color: #009688;color: white;" onclick="ExportToExcel(table)">Excel</button>
         <br><br>
     </div>
     <p style="text-align: center;">รายงานการชำระค่าธรรมเนียมใบอนุญาตประกอบการค้าประเภทต่างๆ</p>
@@ -250,10 +252,6 @@
                 <td class="text-left">บาท</td>
             </tr>
         </table>
-    </div>
-    <div class="hideWhenPrint">
-        <button onclick="window.print()">พิมพ์</button>
-        <button onclick="ExportToExcel(table)">Excel</button>
     </div>
 </body>
 
