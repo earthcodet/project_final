@@ -1,10 +1,10 @@
 var data = false
 var deleteData = false
 
-function exitTEST(){
+function exitTEST(menu){
     Swal.fire({
         title: "สำนักงานเทศบาล",
-        html: "ต้องการออกจากระบบหรือมไ",
+        html: "ต้องการออกจากระบบหรือไม่",
         showCancelButton: true,
         confirmButtonColor: "#009688",
         confirmButtonText: "ใช่",
@@ -15,7 +15,10 @@ function exitTEST(){
     })
         .then((result) => {
             if (result.value) {
+              if(menu == 'report' ||menu =='central')
                 window.location.href = "../login.html"
+                else
+                window.location.href = "./login.html"
             } 
         });
 }

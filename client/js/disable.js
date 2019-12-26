@@ -2,6 +2,7 @@ function disFunction() {
   document.getElementById("disable").disabled = false;
   
   // reset
+  console.log(document.getElementById("form"))
   document.getElementById("form").reset();
 }
 
