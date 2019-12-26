@@ -24,7 +24,7 @@
 <link href="../css/css-003.css" rel="stylesheet">
 <link href="../css/css-index.css" rel="stylesheet">
 <link href="../css/fonts.css" rel="stylesheet">
-<!--  <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="../js/js-index.js"></script>
 <script src="../js/test.js"></script>
 
@@ -196,12 +196,12 @@
                         <h4 style="width: 100%">ข้อมูลสถานประกอบการ</h4>
                         <table class="table">
                             <tr>
-                                <td><a>เลขที่คำขอ :</a></td>
-                                <td><input type="text" id="" name="" placeholder=""></td>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a>เลขที่คำขอ :</a></td>
+                                <td><input type="text" id="" name="" placeholder="" size="11"></td>
                                 <td><a>วันที่ยืนขอ :</a></td>
                                 <td><input type="date" id="" name="" placeholder=""></td>
-                                <td><a>ประเภทคำขอ :</a></td>
-                                <td><input list="brow" id="" name="">
+                                <td>&nbsp;<a>ประเภทคำขอ :</a></td>
+                                <td><input size="30" list="brow" id="" name="">
                                     <datalist id="brow">
                                         <option value="" hidden>เลือก...</option>
                                         <option value="1.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่ไม่เกิน 10 ตรม.">
@@ -229,25 +229,32 @@
                                         </option>
                                     </datalist>
                                     </input></td>
-                                <td><a>เขียนที่ :</a></td>
-                                <td><input type="text" id="place" value="เทศบาลเมืองแสนสุข" readonly></td>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;<a>เขียนที่ :</a></td>
+                                <td><input type="text" id="place" value="เทศบาลเมืองแสนสุข" readonly size="20"></td>
                             </tr>
                         </table>
 
                         <table class="table">
                             <tr>
-                                <td><a>ข้าพเจ้า :</a>
-                                    <input type="radio" name="typee" id="typeUser1" value="บุคคลธรรมดา">
-                                    <a>บุคคลธรรมดา</a>
-                                    <input type="radio" name="typee" id="typeUser2" value="นิติบุคคล">
-                                    <a>นิติบุคคล</a> &nbsp;</td>
-                                <td><input type="text" id="name"></td>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a>ข้าพเจ้า :</a>
+                                    <select id="" style="width: 120px;">
+                                        <option value="" hidden>เลือก...</option>
+                                        <option value="">บุคคลธรรมดา</option>
+                                        <option value="">นิติธรรมดา</option>
+                                        </option>
+                                    </select>
+                                </td>
+                                <td><input type="text" id="name" size="29">
+                                    <a href="search.html" target="popup"
+                                        onclick="window.open('search.html','popup','width=1100,height=570'); return false;">
+                                        <button class="fa fa-search" id=""></button>
+                                    </a></td>
                                 <td><a>เลขประจำตัว :</a></td>
-                                <td><input type="int" id="id"> &nbsp;</td>
-                                <td><a>อายุ :</a></td>
-                                <td><input type="int" id="age" size="3"> &nbsp;</td>
+                                <td><input type="int" id="id" size="15"> &nbsp;</td>
+                                <td>&nbsp;<a>อายุ :</a></td>
+                                <td><input type="int" id="age" size="2.5"> &nbsp;</td>
                                 <td><a>สัญชาติ :</a></td>
-                                <td><input list="nationality" id="" name="" size="7.5">
+                                <td><input list="nationality" id="" name="" size="4.5">
                                     <datalist id="nationality">
                                         <select id="nationality">
                                             <option value="" hidden>เลือก...</option>
@@ -259,7 +266,7 @@
                                     </input> &nbsp;</td>
                                 <td><a>เชื้อชาติ :</a></td>
                                 <td>
-                                    <input list="nationality" id="" name="" size="7.5">
+                                    <input list="nationality" id="" name="" size="4.5">
                                     <datalist id="nationality">
                                         <!-- <select id="race" style="width: 8%;"> -->
                                         <option value="" hidden>เลือก...</option>
@@ -274,36 +281,37 @@
 
                         <table class="table">
                             <tr>
-                                <td><a>ตั้งอยู่เลขที่ :</a></td>
+                                <td>&nbsp;&nbsp;<a>อยู่บ้านเลขที่ :</a></td>
                                 <td><input type="text" id="homeId" size="5"></td>
                                 <td><a>หมู่ที่ :</a></td>
                                 <td><input type="int" id="moo" size="5"></td>
                                 <td><a>ตรอก:</a></td>
-                                <td><input type="text" id="trxk"></td>
-                                <td><a>ซอย :</a></td>
-                                <td><input type="text" id="sxy"></td>
+                                <td><input type="text" id="trxk" size="17"></td>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a>ซอย :</a></td>
+                                <td><input type="text" id="sxy" size="13"></td>
                                 <td><a>อาคาร :</a></td>
-                                <td><input type="text" id="building"></td>
+                                <td><input type="text" id="building" size="13"></td>
                                 <td><a>ถนน :</a></td>
-                                <td><input type="text" id="road" size="15"></td>
+                                <td><input type="text" id="road" size="13"></td>
                             </tr>
                         </table>
 
                         <table class="table">
                             <tr>
-                                <td><a>จังหวัด :</a></td>
-                                <td><select id="province">
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a>จังหวัด :</a></td>
+                                <td><select id="province" style="width: 150px;">
                                     </select></td>
                                 <td><a>อำเภอ :</a></td>
-                                <td> <select id="district">
+                                <td> <select id="district" style="width: 150px;">
                                     </select></td>
                                 <td><a>ตำบล :</a></td>
-                                <td><select id="subdistrict">
+                                <td><select id="subdistrict" style="width: 150px;">
                                     </select></td>
                                 <td><a>โทรศัพท์ :</a></td>
-                                <td><input type="text" id="phone"></td>
+                                <td><input type="text" id="phone" size="12"></td>
                                 <td><a>โทรสาร :</a></td>
-                                <td> <input type="text" id="fax"></td>
+                                <td> <input type="text" id="fax" size="12"></td>
                             </tr>
                         </table>
 
