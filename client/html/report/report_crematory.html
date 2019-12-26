@@ -32,18 +32,18 @@
     <script src="../../js/js-index.js"></script>
     <script src="../../js/test.js"></script>
 
-     <!-- disable-->
-     <script src="../../js/disable.js"></script>
-     <!-- css ส่วนกลาง -->
-     <link href="../../css/utilities.css" rel="stylesheet">
-     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-     <!-- ทดสอบควบคุมหน้า -->
-     <script src="../../js/controlTest.js"></script>
+    <!-- disable-->
+    <script src="../../js/disable.js"></script>
+    <!-- css ส่วนกลาง -->
+    <link href="../../css/utilities.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <!-- ทดสอบควบคุมหน้า -->
+    <script src="../../js/controlTest.js"></script>
 </head>
 
 <body>
-     <!-- เมนูด้านบน -->
-     <div class="w3-top" style="overflow:auto;">
+    <!-- เมนูด้านบน -->
+    <div class="w3-top" style="overflow:auto;">
         <ul>
             <li class="fa fa-bars w3-button w3-my-color w3-hide-large w3-xxlarge" onclick="w3_open()"></li>
             <li>
@@ -77,109 +77,112 @@
                 </a>
             </li>
             <li class="w3-display-topright">
-                <a id="exitMenu" onclick="exitTEST()" class="exit"  >
+                <a id="exitMenu" onclick="exitTEST()" class="exit">
                     <i class="fa fa-sign-out fa-lg w3-margin-right w3-text-theme"></i>
                     ออกจากระบบ
                 </a>
             </li>
         </ul>
         <nav class="w3-sidebar w3-bar-block w3-collapse w3-animate-left w3-card" style="z-index:3;width:250px;"
-        id="mySidebar">
-        <a class="w3-bar-item w3-button w3-border-bottom w3-large" href="../utilities/index.html">
-            <img src="../../img/img1.jpg" style="width:100%;">
-        </a>
+            id="mySidebar">
+            <a class="w3-bar-item w3-button w3-border-bottom w3-large" href="../utilities/index.html">
+                <img src="../../img/img1.jpg" style="width:100%;">
+            </a>
 
-        <div>
-            <a class="w3-bar-item w3-button" onclick="myAccordion('demo1')" href="javascript:void(0)">ระบบงานคำขอ <i
-                    class="fa fa-caret-down"></i></a>
-                    <div>
-                                <div id="demo1" class="w3-hide ">
-                                    <a class="bar-item w3-button w3-theme " onclick="myAccordion('demo11')" href="javascript:void(0)">
-                                        เพิ่ม <i class="fa fa-caret-down"></i></a>
-                                    <div id="demo11" class="w3-hide ">
-                                        <a class="bar-item w3-button" href="../request/request_public_sell.html">-
-                                            ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
-                                        <a class="bar-item w3-button" href="../request/request_public_hawk.html">-
-                                            ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
-                                        <a class="bar-item w3-button" href="../request/request_area_more_sell.html">-
-                                            ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
-                                        <a class="bar-item w3-button" href="../request/request_area_more_correct.html">-
-                                            ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</a>
-                                        <a class="bar-item w3-button" href="../request/request_area_less_sell.html">-
-                                            หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
-                                        <a class="bar-item w3-button " href="../request/request_area_less_correct.html">-
-                                            หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
-                                        <a class="bar-item w3-button" href="../request/request_market.html">-
-                                            ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
-                                        <a class="bar-item w3-button" href="../request/request_health_danger.html">-
-                                            กิจการที่เป็นอันตรายต่อสุขภาพ</a>
-                                        <a class="bar-item w3-button" href="../request/request_crematory.html">- กิจการฌาปณสถาน</a>
-                                    </div>
-                                    <a class="bar-item w3-button" href="../request/searchRequest.html">
-                                        ค้นหา/แก้ไข</a>
-                                </div>
-            
+            <div>
+                <a class="w3-bar-item w3-button" onclick="myAccordion('demo1')" href="javascript:void(0)">ระบบงานคำขอ <i
+                        class="fa fa-caret-down"></i></a>
+                <div>
+                    <div id="demo1" class="w3-hide ">
+                        <a class="bar-item w3-button w3-theme " onclick="myAccordion('demo11')"
+                            href="javascript:void(0)">
+                            เพิ่ม <i class="fa fa-caret-down"></i></a>
+                        <div id="demo11" class="w3-hide ">
+                            <a class="bar-item w3-button" href="../request/request_public_sell.html">-
+                                ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
+                            <a class="bar-item w3-button" href="../request/request_public_hawk.html">-
+                                ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
+                            <a class="bar-item w3-button" href="../request/request_area_more_sell.html">-
+                                ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
+                            <a class="bar-item w3-button" href="../request/request_area_more_correct.html">-
+                                ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</a>
+                            <a class="bar-item w3-button" href="../request/request_area_less_sell.html">-
+                                หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
+                            <a class="bar-item w3-button " href="../request/request_area_less_correct.html">-
+                                หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
+                            <a class="bar-item w3-button" href="../request/request_market.html">-
+                                ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
+                            <a class="bar-item w3-button" href="../request/request_health_danger.html">-
+                                กิจการที่เป็นอันตรายต่อสุขภาพ</a>
+                            <a class="bar-item w3-button" href="../request/request_crematory.html">- กิจการฌาปณสถาน</a>
+                        </div>
+                        <a class="bar-item w3-button" href="../request/searchRequest.html">
+                            ค้นหา/แก้ไข</a>
                     </div>
 
-        </div>
+                </div>
 
-        <div>
-            <a class="w3-bar-item w3-button" onclick="myAccordion2('demo2')"
-                href="javascript:void(0)">งานตรวจสอบ/อนุมัติ <i class="fa fa-caret-down"></i></a>
-            <div id="demo2" class="w3-hide">
-                <a class="w3-bar-item w3-button" href="#"></a>
             </div>
-        </div>
 
-        <div>
-            <a class="w3-bar-item w3-button" onclick="myAccordion3('demo3')" href="javascript:void(0)">งานใบอนุญาต <i
-                    class="fa fa-caret-down"></i></a>
-            <div id="demo3" class="w3-hide">
-                <a class="w3-bar-item w3-button" href="#"></a>
+            <div>
+                <a class="w3-bar-item w3-button" onclick="myAccordion2('demo2')"
+                    href="javascript:void(0)">งานตรวจสอบ/อนุมัติ <i class="fa fa-caret-down"></i></a>
+                <div id="demo2" class="w3-hide">
+                    <a class="w3-bar-item w3-button" href="#"></a>
+                </div>
             </div>
-        </div>
 
-        <div>
-            <a class="w3-bar-item w3-button" onclick="myAccordion4('demo4')" href="javascript:void(0)">ข้อมูลส่วนกลาง <i
-                    class="fa fa-caret-down"></i></a>
-            <div id="demo4" class="w3-hide">
-                <a class="bar-item w3-button" href="../central/operator.html">- ข้อมูลผู้ประกอบการ</a>
-                <a class="bar-item w3-button" href="../central/02.html">- ข้อมูลการจดใบอนุญาต</a>
-                <a class="bar-item w3-button" href="../central/03.html">- โอนใบอนุญาต</a>
+            <div>
+                <a class="w3-bar-item w3-button" onclick="myAccordion3('demo3')" href="javascript:void(0)">งานใบอนุญาต
+                    <i class="fa fa-caret-down"></i></a>
+                <div id="demo3" class="w3-hide">
+                    <a class="w3-bar-item w3-button" href="#"></a>
+                </div>
             </div>
-        </div>
 
-        <div>
-            <a class="w3-bar-item w3-button" onclick="myAccordion5('demo5')" href="javascript:void(0)">งานร้องเรียน <i
-                    class="fa fa-caret-down"></i></a>
-            <div id="demo5" class="w3-hide">
-                <a class="bar-item w3-button" href="#">- บันทึกเรื่องร้องเรียน</a>
-                <a class="bar-item w3-button" href="#">- บันทึกคำร้อง</a>
+            <div>
+                <a class="w3-bar-item w3-button" onclick="myAccordion4('demo4')"
+                    href="javascript:void(0)">ข้อมูลส่วนกลาง <i class="fa fa-caret-down"></i></a>
+                <div id="demo4" class="w3-hide">
+                    <a class="bar-item w3-button" href="../central/operator.html">- ข้อมูลผู้ประกอบการ</a>
+                    <a class="bar-item w3-button" href="../central/02.html">- ข้อมูลการจดใบอนุญาต</a>
+                    <a class="bar-item w3-button" href="../central/03.html">- โอนใบอนุญาต</a>
+                </div>
             </div>
-        </div>
 
-        <div>
-            <a class="w3-bar-item w3-button" onclick="myAccordion6('demo6')" href="javascript:void(0)">ข้อมูลระบบ <i
-                    class="fa fa-caret-down"></i></a>
-            <div id="demo6" class="w3-hide">
-                <a class="w3-bar-item w3-button" href="#"></a>
+            <div>
+                <a class="w3-bar-item w3-button" onclick="myAccordion5('demo5')" href="javascript:void(0)">งานร้องเรียน
+                    <i class="fa fa-caret-down"></i></a>
+                <div id="demo5" class="w3-hide">
+                    <a class="bar-item w3-button" href="#">- บันทึกเรื่องร้องเรียน</a>
+                    <a class="bar-item w3-button" href="#">- บันทึกคำร้อง</a>
+                </div>
             </div>
-        </div>
 
-        <div>
-            <a class="w3-bar-item w3-button w3-theme" onclick="myAccordion7('demo7')" href="javascript:void(0)">รายงาน
-                <i class="fa fa-caret-down"></i></a>
-            <div id="demo7" class="w3-hide w3-show">
-                <a class="bar-item w3-button w3-my-color" href="./report_crematory.html">ตามคำขอ</a>
-                <a class="bar-item w3-button " href="./report_summary.html">สรุป</a>
+            <div>
+                <a class="w3-bar-item w3-button" onclick="myAccordion6('demo6')" href="javascript:void(0)">ข้อมูลระบบ <i
+                        class="fa fa-caret-down"></i></a>
+                <div id="demo6" class="w3-hide">
+                    <a class="w3-bar-item w3-button" href="#"></a>
+                </div>
             </div>
-        </div>
-        <br><br><br><br>
-    </nav>
 
-    <!-- คลิกเมนูย่อได้ -->
-    <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay">
-    </div>
+            <div>
+                <a class="w3-bar-item w3-button w3-theme" onclick="myAccordion7('demo7')"
+                    href="javascript:void(0)">รายงาน
+                    <i class="fa fa-caret-down"></i></a>
+                <div id="demo7" class="w3-hide w3-show">
+                    <a class="bar-item w3-button w3-my-color" href="./report_crematory.html">ตามคำขอ</a>
+                    <a class="bar-item w3-button " href="./report_summary.html">สรุป</a>
+                </div>
+            </div>
+            <br><br><br><br>
+        </nav>
+
+        <!-- คลิกเมนูย่อได้ -->
+        <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer"
+            id="myOverlay">
+        </div>
     </div>
 
     <div class="w3-main" style="margin-left:250px;margin-top: 49px;">
@@ -221,12 +224,15 @@
 
                         วันที่สุดท้าย
                         <input type="date" id="" placeholder="">
-                        <button type="button" class="btn btn-lg " style="background-color: #009688;color: white ;" >ตกลง</button>
+                        <a href="report_crematory_preveiw.html" target="popup"
+                            onclick="window.open('report_crematory_preveiw.html','popup','width=1100,height=570'); return false;">
+                            <button type="button" class="btn btn-lg "
+                                style="background-color: #009688;color: white ;">ตกลง</button></a>
                     </p>
                 </div>
             </div>
 
-            
+
         </div>
     </div>
 </body>
