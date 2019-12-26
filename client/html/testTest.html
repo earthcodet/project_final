@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <title>ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</title>
-
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, user-scalable=no" />
+<!-- <  meta name="viewport" content="width=device-width, initial-scale=1"> -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -171,9 +171,10 @@
         <header class="w3-container w3-theme">
             <h1 style="font-size:20px">Test</h1>
         </header>
-        <div class="w3-container" style="padding:32px">
+        <div class="w3-container" style="padding:32px;" >
             <form id="form">
                 <fieldset disabled id="disable">
+                    
                     <!-- box ข้อมูลสถานประกอบการ -->
                     <div class="box">
                         <h4>ข้อมูลสถานประกอบการ</h4>
@@ -194,7 +195,7 @@
                         </datalist>
                         </input>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <a>เขียนที่ :</a>
-                        <input type="text" id="place" value="เทศบาลเมืองแสนสุข" size="22px" style="float: right;">&nbsp;
+                        <input type="text" id="place" value="เทศบาลเมืองแสนสุข" size="22px" ">&nbsp;
                         <br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <a>ข้าพเจ้า :</a>
@@ -220,7 +221,7 @@
                         </datalist>
                         </input>&nbsp;
                         <a>เชื้อชาติ :</a>
-                        <input list="race" id="" name="" size="10px" style="float: right;">
+                        <input list="race" id="" name="" size="10px" >
                         <datalist id="race">
                             <option value="" hidden>เลือก...</option>
                             <option value="ไทย">ไทย</option>
@@ -240,7 +241,7 @@
                         <a>อาคาร :</a>
                         <input type="text" id="building" size="14px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <a>ถนน :</a>
-                        <input type="text" id="road" size="22px" style="float: right;">
+                        <input type="text" id="road" size="22px" >
                         <br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <a>จังหวัด :</a>
@@ -255,14 +256,14 @@
                         <a>โทรศัพท์ :</a>
                         <input type="text" id="phone" size="14px"> &nbsp;
                         <a>โทรสาร :</a>
-                        <input type="text" id="fax" size="22px" style="float: right;">
+                        <input type="text" id="fax" size="22px" >
                         <br>
                         <a>สถานที่ประกอบการ :</a>
                         <input type="text" id="workplaceName" size="55">&nbsp; (ถ้ามี) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <a>พื้นที่ :</a>
                         <input type="int" id="area" size="15"> ตารางเมตร &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <a>จำนวนคนงาน :</a>
-                        <a style="float: right;">
+                        <a >
                             <input type="int" id="numPeople" size="12"> คน</a>
                         <br>
                         &nbsp;&nbsp;
@@ -277,7 +278,7 @@
                         <a>อาคาร :</a>
                         <input type="text" id="wBuilding" size="14px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <a>ถนน :</a>
-                        <input type="text" id="wRoad" size="22px" style="float: right;">
+                        <input type="text" id="wRoad" size="22px" >
                         <br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <a>จังหวัด :</a>
@@ -292,7 +293,7 @@
                         <a>โทรศัพท์ :</a>
                         <input type="text" id="wPhone" size="14px"> &nbsp;
                         <a>โทรสาร :</a>
-                        <input type="text" id="wFax" size="22px" style="float: right;">
+                        <input type="text" id="wFax" size="22px" >
                         <br>
                         บุลคลอ้างอิง
                         <br>
@@ -310,12 +311,12 @@
                         <a>สถานะ :</a>
                         <input type="text" id="" size="13px">&nbsp;&nbsp;&nbsp;
                         <a>โทรศัพท์ :</a>
-                        <input type="text" id="" size="22px" style="float: right;">
+                        <input type="text" id="" size="22px" >
                         <br>
                         <br>
 
 
-                        <input type="radio" name="sub" id="purposeType1"> ยืนยันคำขอรับ &nbsp;
+                        <input type="radio" name="sub" id="purposeType1"> <a>ยืนยันคำขอรับ</a>  &nbsp;
                         <input type="radio" name="sub" id="purposeType2"> ยืนยันคำขอต่ออายุ &nbsp;
                         <br>
 

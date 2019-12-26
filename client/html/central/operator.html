@@ -22,7 +22,7 @@
     crossorigin="anonymous"></script>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 <link href="../../css/css-index.css" rel="stylesheet">
 <link href="../../css/css-002.css" rel="stylesheet">
@@ -45,7 +45,7 @@
 <script src="../../js/disable.js"></script>
 
 <!-- ทดสอบควบคุมหน้า -->
-<script src="../../js/operator.js"></script>
+<script src="../../js/controlTest.js"></script>
 
 <!-- address จังหวัด อำเภอ ตำบล -->
 <script src="../../js/address.js"></script>
@@ -53,7 +53,51 @@
 <body>
 
 
-    <nav class="w3-sidebar w3-bar-block w3-collapse w3-animate-left w3-card" style="z-index:3;width:250px;"
+   
+
+    <!-- เมนูด้านบน -->
+    <div class="w3-top" style="overflow:auto;">
+        <ul>
+            <li class="fa fa-bars w3-button w3-my-color w3-hide-large w3-xxlarge" onclick="w3_open()"></li>
+            <li>
+                <a id="addMenu" href="#news" onclick="addTEST()">
+                    <i class="fa fa-plus-square fa-lg w3-margin-right w3-text-theme "> </i>
+                    เพิ่ม
+                </a>
+            </li>
+            <li>
+                <a id="editMenu" href="#contact" onclick="editTEST()" class="disableds">
+                    <i class="fa fa-pencil fa-lg w3-margin-right w3-text-theme"></i>
+                    แก้ไข
+                </a>
+            </li>
+            <li>
+                <a id="saveMenu" onclick="insertTEST()" class="disableds" href="#contact">
+                    <i class="fa fa-floppy-o fa-lg w3-margin-right w3-text-theme"></i>
+                    บันทึก
+                </a>
+            </li>
+            <li>
+                <a id="restoreMenu" onclick="restoreTEST()" href="#contact" class="disableds">
+                    <i class="fa fa-reply fa-lg w3-margin-right w3-text-theme"></i>
+                    เรียกคืน
+                </a>
+            </li>
+            <li>
+                <a id="deleteMenu" onclick="deleteTEST()" href="#about" class="disableds">
+                    <i class="fa fa-close fa-lg w3-margin-right w3-text-theme"></i>
+                    ยกเลิก
+                </a>
+            </li>
+            <li class="w3-display-topright">
+                <a id="exitMenu" onclick="exitTEST('central')" class="exit"  >
+                    <i class="fa fa-sign-out fa-lg w3-margin-right w3-text-theme"></i>
+                    ออกจากระบบ
+                </a>
+            </li>
+        </ul>
+        <!-- เมนูด้านข้าง -->
+         <nav class="w3-sidebar w3-bar-block w3-collapse w3-animate-left w3-card" style="z-index:3;width:250px;"
         id="mySidebar">
         <a class="w3-bar-item w3-button w3-border-bottom w3-large" href="../index.html">
             <img src="../../img/img1.jpg" style="width:100%;">
@@ -137,50 +181,15 @@
     <!-- คลิกเมนูย่อได้ -->
     <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay">
     </div>
-
-    <!-- เมนูด้านบน -->
-    <div class="w3-top" style="overflow:auto;">
-        <ul>
-            <li class="fa fa-bars w3-button w3-my-color w3-hide-large w3-xxlarge" onclick="w3_open()"></li>
-            <li>
-                <a id="addMenu" href="#news" onclick="addTEST()">
-                    <i class="fa fa-plus-square fa-lg w3-margin-right w3-text-theme "> </i>
-                    เพิ่ม
-                </a>
-            </li>
-            <li>
-                <a id="editMenu" href="#contact" onclick="editTEST()" class="disableds">
-                    <i class="fa fa-pencil fa-lg w3-margin-right w3-text-theme"></i>
-                    แก้ไข
-                </a>
-            </li>
-            <li>
-                <a id="saveMenu" onclick="insertTEST()" class="disableds" href="#contact">
-                    <i class="fa fa-floppy-o fa-lg w3-margin-right w3-text-theme"></i>
-                    บันทึก
-                </a>
-            </li>
-            <li>
-                <a id="restoreMenu" onclick="restoreTEST()" href="#contact" class="disableds">
-                    <i class="fa fa-reply fa-lg w3-margin-right w3-text-theme"></i>
-                    เรียกคืน
-                </a>
-            </li>
-            <li>
-                <a id="deleteMenu" onclick="deleteTEST()" href="#about" class="disableds">
-                    <i class="fa fa-close fa-lg w3-margin-right w3-text-theme"></i>
-                    ยกเลิก
-                </a>
-            </li>
-        </ul>
     </div>
 
-    <div class="w3-main" style="margin-left:250px;margin-top: 49px;">
+    <div class="w3-main" style="margin-left:250px;margin-top: 47px;">
         <header class="w3-container w3-theme">
             <h1 style="font-size:20px">ข้อมูลผู้ประกอบการ</h1>
         </header>
         <div class= "container-sm"style="padding-top:40px; width: 85%; margin: 0 auto;">
          <div>
+             <form id="form">
             <fieldset disabled id="disable">
                 <!-- START -->
                 <div class="box" >
@@ -338,6 +347,7 @@
                 </div>
                 <!-- </form> -->
             </fieldset>
+        </form>
          </div>
         </div>
 
