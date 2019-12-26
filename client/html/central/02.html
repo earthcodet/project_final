@@ -35,12 +35,61 @@
 <script src="../../js/js-index.js"></script>
 <script src="../../js/test copy.js"></script>
 
+<!-- disable-->
+<script src="../../js/disable.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<!-- ทดสอบควบคุมหน้า -->
+<script src="../../js/controlTest.js"></script>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
 <body>
-    <nav class="w3-sidebar w3-bar-block w3-collapse w3-animate-left w3-card" style="z-index:3;width:250px;"
+    <!-- เมนูด้านบน -->
+    <div class="w3-top" style="overflow:auto;">
+        <ul>
+            <li class="fa fa-bars w3-button w3-my-color w3-hide-large w3-xxlarge" onclick="w3_open()"></li>
+            <li>
+                <a id="addMenu" href="#news" onclick="addTEST()">
+                    <i class="fa fa-plus-square fa-lg w3-margin-right w3-text-theme "> </i>
+                    เพิ่ม
+                </a>
+            </li>
+            <li>
+                <a id="editMenu" href="#contact" onclick="editTEST()" class="disableds">
+                    <i class="fa fa-pencil fa-lg w3-margin-right w3-text-theme"></i>
+                    แก้ไข
+                </a>
+            </li>
+            <li>
+                <a id="saveMenu" onclick="insertTEST()" class="disableds" href="#contact">
+                    <i class="fa fa-floppy-o fa-lg w3-margin-right w3-text-theme"></i>
+                    บันทึก
+                </a>
+            </li>
+            <li>
+                <a id="restoreMenu" onclick="restoreTEST()" href="#contact" class="disableds">
+                    <i class="fa fa-reply fa-lg w3-margin-right w3-text-theme"></i>
+                    เรียกคืน
+                </a>
+            </li>
+            <li>
+                <a id="deleteMenu" onclick="deleteTEST()" href="#about" class="disableds">
+                    <i class="fa fa-close fa-lg w3-margin-right w3-text-theme"></i>
+                    ยกเลิก
+                </a>
+            </li>
+            <li class="w3-display-topright">
+                <a id="exitMenu" onclick="exitTEST('central')" class="exit"  >
+                    <i class="fa fa-sign-out fa-lg w3-margin-right w3-text-theme"></i>
+                    ออกจากระบบ
+                </a>
+            </li>
+        </ul>
+        <!-- เมนูด้านข้าง -->
+         <nav class="w3-sidebar w3-bar-block w3-collapse w3-animate-left w3-card" style="z-index:3;width:250px;"
         id="mySidebar">
         <a class="w3-bar-item w3-button w3-border-bottom w3-large" href="../index.html">
             <img src="../../img/img1.jpg" style="width:100%;">
@@ -112,43 +161,30 @@
         </div>
 
         <div>
-            <a class="w3-bar-item w3-button" onclick="myAccordion5('demo7')" href="javascript:void(0)">รายงาน<i
+            <a class="w3-bar-item w3-button" onclick="myAccordion7('demo7')" href="javascript:void(0)">รายงาน <i
                     class="fa fa-caret-down"></i></a>
             <div id="demo7" class="w3-hide">
-                <a class="w3-bar-item w3-button" href="#"></a>
+                <a class="bar-item w3-button" href="../report/report_crematory.html">ตามคำขอ</a>
+                <a class="bar-item w3-button" href="../report/report_public_sell.html">สรุป</a>
             </div>
         </div>
 
 
     </nav>
-
+    <!-- คลิกเมนูย่อได้ -->
     <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay">
     </div>
-
-
-
-    <div class="w3-main" style="margin-left:250px;">
-        <ul>
-            <li><a class="active" href="#home">Home</a></li>
-            <li><a href="#news">News</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="#about">About</a></li>
-        </ul>
-
-
-        <div id="myTop" class="">
-            <p><i class="fa fa-bars w3-button w3-teal w3-hide-large w3-xlarge" onclick="w3_open()"></i>
-                <span id="myIntro" class="w3-hide">ระบบงานสิ่งแวดล้อมและสุขภิบาล</span></p>
-        </div>
-
+    </div>
+    <div class="w3-main" style="margin-left:250px;margin-top: 47px;">
         <header class="w3-container w3-theme">
             <h1 style="font-size:20px">ข้อมูลการจดใบอนุญาต</h1>
         </header>
 
-        <div class="w3-container" style="padding:32px">
+        <div class="w3-container">
+            <form id="form">
+                <fieldset disabled id="disable">
             <!-- START -->
             <div>
-                <!-- <form action="/action_page.php"> -->
                 <a>คำนำหน้าชื่อ :</a>
                 <select id="" name="" style="width: 10%;">
                     <option value="" hidden>เลือก...</option>
@@ -288,6 +324,8 @@
                 <div class="col-2">
                 </div>
             </div>
+        </fieldset>
+        </form>
         </div>
     </div>
     </div>

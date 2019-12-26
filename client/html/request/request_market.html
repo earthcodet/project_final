@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</title>
+<title>ใบอนุญาติให้ใช้สถานที่เป็นตลาดเอกชน</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
@@ -19,44 +19,91 @@
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="../css/w.3.css">
-<link rel="stylesheet" href="../css/w3-theme-teal.css">
-<link href="../css/css-index.css" rel="stylesheet">
-<link href="../css/fonts.css" rel="stylesheet">
-<!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
-<script src="../js/js-index.js"></script>
-<script src="../js/test.js"></script>
+<link rel="stylesheet" href="../../css/w.3.css">
+<link rel="stylesheet" href="../../css/w3-theme-teal.css">
+<link href="../../css/css-003.css" rel="stylesheet">
+<link href="../../css/css-index.css" rel="stylesheet">
+<link href="../../css/fonts.css" rel="stylesheet">
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="../../js/js-index.js"></script>
+<script src="../../js/test.js"></script>
 
 <!-- search -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <!-- disable-->
-<script src="../js/disable.js"></script>
+<script src="../../js/disable.js"></script>
 
 <!-- css ส่วนกลาง -->
-<link href="../css/utilities.css" rel="stylesheet">
+<link href="../../css/utilities.css" rel="stylesheet">
 
 <!-- function ส่วนกลาง -->
-<script src="../js/utilities.js"></script>
+<script src="../../js/utilities.js"></script>
 
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<!-- ทดสอบควบคุมหน้า -->
+<script src="../../js/controlTest.js"></script>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
 <body>
-    <!-- เมนูด้านข้าง -->
-    <nav class="w3-sidebar w3-bar-block w3-collapse w3-animate-left w3-card" style="z-index:3;width:250px;"
+   
+
+    <!-- เมนูด้านบน -->
+    <div class="w3-top" style="overflow:auto;">
+        <ul>
+            <li class="fa fa-bars w3-button w3-my-color w3-hide-large w3-xxlarge" onclick="w3_open()"></li>
+            <li>
+                <a id="addMenu" href="#news" onclick="addTEST()">
+                    <i class="fa fa-plus-square fa-lg w3-margin-right w3-text-theme "> </i>
+                    เพิ่ม
+                </a>
+            </li>
+            <li>
+                <a id="editMenu" href="#contact" onclick="editTEST()" class="disableds">
+                    <i class="fa fa-pencil fa-lg w3-margin-right w3-text-theme"></i>
+                    แก้ไข
+                </a>
+            </li>
+            <li>
+                <a id="saveMenu" onclick="insertTEST()" class="disableds" href="#contact">
+                    <i class="fa fa-floppy-o fa-lg w3-margin-right w3-text-theme"></i>
+                    บันทึก
+                </a>
+            </li>
+            <li>
+                <a id="restoreMenu" onclick="restoreTEST()" href="#contact" class="disableds">
+                    <i class="fa fa-reply fa-lg w3-margin-right w3-text-theme"></i>
+                    เรียกคืน
+                </a>
+            </li>
+            <li>
+                <a id="deleteMenu" onclick="deleteTEST()" href="#about" class="disableds">
+                    <i class="fa fa-close fa-lg w3-margin-right w3-text-theme"></i>
+                    ยกเลิก
+                </a>
+            </li>
+            <li class="w3-display-topright">
+                <a id="exitMenu" onclick="exitTEST()" class="exit"  >
+                    <i class="fa fa-sign-out fa-lg w3-margin-right w3-text-theme"></i>
+                    ออกจากระบบ
+                </a>
+            </li>
+        </ul>
+        <nav class="w3-sidebar w3-bar-block w3-collapse w3-animate-left w3-card" style="z-index:3;width:250px;"
         id="mySidebar">
-        <a class="w3-bar-item w3-button w3-border-bottom w3-large" href="index.html">
-            <img src="../img/img1.jpg" style="width:100%;">
+        <a class="w3-bar-item w3-button w3-border-bottom w3-large" href="../utilities/index.html">
+            <img src="../../img/img1.jpg" style="width:100%;">
         </a>
 
         <div>
             <a class="w3-bar-item w3-button w3-theme" onclick="myAccordion('demo1')"
                 href="javascript:void(0)">ระบบงานคำขอ <i class="fa fa-caret-down"></i></a>
             <div id="demo1" class="w3-hide w3-show">
-                <a class="bar-item w3-button w3-theme" onclick="myAccordion('demo11')" href="javascript:void(0)">
+                <a class="bar-item w3-button w3-theme" onclick="myAccordion11('demo11')" href="javascript:void(0)">
                     เพิ่ม <i class="fa fa-caret-down"></i></a>
                 <div id="demo11" class="w3-hide w3-show">
                     <a class="bar-item w3-button" href="request_public_sell.html">-
@@ -67,11 +114,12 @@
                         ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
                     <a class="bar-item w3-button" href="request_area_more_correct.html">-
                         ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</a>
-                    <a class="bar-item w3-button w3-my-color" href="request_area_less_sell.html">-
+                    <a class="bar-item w3-button" href="request_area_less_sell.html">-
                         หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
                     <a class="bar-item w3-button" href="request_area_less_correct.html">-
                         หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
-                    <a class="bar-item w3-button" href="request_market.html">- ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
+                    <a class="bar-item w3-button w3-my-color" href="request_market.html">-
+                        ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
                     <a class="bar-item w3-button" href="request_health_danger.html">- กิจการที่เป็นอันตรายต่อสุขภาพ</a>
                     <a class="bar-item w3-button" href="request_crematory.html">- กิจการฌาปณสถาน</a>
                 </div>
@@ -79,6 +127,7 @@
                     ค้นหา/แก้ไข</a>
             </div>
         </div>
+
         <div>
             <a class="w3-bar-item w3-button" onclick="myAccordion2('demo2')"
                 href="javascript:void(0)">งานตรวจสอบ/อนุมัติ <i class="fa fa-caret-down"></i></a>
@@ -99,9 +148,9 @@
             <a class="w3-bar-item w3-button" onclick="myAccordion4('demo4')" href="javascript:void(0)">ข้อมูลส่วนกลาง <i
                     class="fa fa-caret-down"></i></a>
             <div id="demo4" class="w3-hide">
-                <a class="bar-item w3-button" href="./central/operator.html">- ข้อมูลผู้ประกอบการ</a>
-                <a class="bar-item w3-button" href="./central/02.html">- ข้อมูลการจดใบอนุญาต</a>
-                <a class="bar-item w3-button" href="./central/03.html">- โอนใบอนุญาต</a>
+                <a class="bar-item w3-button" href="../central/operator.html">- ข้อมูลผู้ประกอบการ</a>
+                <a class="bar-item w3-button" href="../central/02.html">- ข้อมูลการจดใบอนุญาต</a>
+                <a class="bar-item w3-button" href="../central/03.html">- โอนใบอนุญาต</a>
             </div>
         </div>
 
@@ -126,41 +175,30 @@
             <a class="w3-bar-item w3-button" onclick="myAccordion7('demo7')" href="javascript:void(0)">รายงาน <i
                     class="fa fa-caret-down"></i></a>
             <div id="demo7" class="w3-hide">
-                <a class="bar-item w3-button" href="report/report_crematory.html">ตามคำขอ</a>
-                <a class="bar-item w3-button" href="report/report_public_sell.html">สรุป</a>
+                <a class="bar-item w3-button" href="../report/report_crematory.html">ตามคำขอ</a>
+                <a class="bar-item w3-button" href="../report/report_public_sell.html">สรุป</a>
             </div>
         </div>
         <br><br><br><br>
- 
     </nav>
-    <!-- คลิกเมนูย่อได้ -->
+
     <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay">
     </div>
-    <!-- เมนูด้านบน -->
-    <div class="w3-top" style="overflow:auto;">
-        <ul>
-            <li class="fa fa-bars w3-button w3-my-color w3-hide-large w3-xxlarge" onclick="w3_open()"></li>
-            <li><a href="#add" onclick="disFunction()"><i
-                        class="fa fa-plus-square fa-lg w3-margin-right w3-text-theme "></i>เพิ่ม</a></li>
-            <li><a href="#contact"><i class="fa fa-pencil fa-lg w3-margin-right w3-text-theme"></i>แก้ไข</a></li>
-            <li><a href="#contact"><i class="fa fa-floppy-o fa-lg w3-margin-right w3-text-theme"></i>บันทึก</a></li>
-            <li><a href="#contact"><i class="fa fa-reply fa-lg w3-margin-right w3-text-theme"></i>เรียกคืน</a></li>
-            <li><a href="#about"><i class="fa fa-close fa-lg w3-margin-right w3-text-theme"></i>ยกเลิก</a></li>
-
-            <li class="w3-display-topright"><a href="#signout"><i class="fa fa-sign-out fa-lg w3-margin-right w3-text-theme"></i>ออกจากระบบ</a></li>
-        </ul>
     </div>
-    <!-- ข้อมูล -->
-    <div class="w3-main" style="margin-left:250px;margin-top: 47px;">
+
+    <!-- เนื้อหา  -->
+    <div class="w3-main" style="margin-left:250px;margin-top:47px;">
+
         <header class="w3-container w3-theme">
-            <h1 style="font-size:20px">หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</h1>
+            <h1 style="font-size:20px">ใบอนุญาติให้ใช้สถานที่เป็นตลาดเอกชน</h1>
         </header>
+
         <div class="w3-container" style="padding:32px">
-            <form class="form">
+            <form id="form">
                 <fieldset disabled id="disable">
-                    <!--box ข้อมูลสถานประกอบการ -->
                     <div class="box">
                         <h4>ข้อมูลสถานประกอบการ</h4>
+
                         <!-- <form action="/action_page.php"> -->
                         <a>เลขที่คำขอ :</a>
                         <input type="text" id="" name="" size="12" placeholder="">&nbsp;
@@ -171,25 +209,8 @@
                         <!-- <select id="" name="" style="width: 19%;"> -->
                         <datalist id="brow">
                             <option value="" hidden>เลือก...</option>
-                            <option value="1.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่ไม่เกิน 10 ตรม.">
-                                1.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่ไม่เกิน 10 ตรม.
-                            </option>
-                            <option
-                                value="2.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่เกิน 10 ตรม. แต่ไม่เกิน 25 ตรม.">
-                                2.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่เกิน 10 ตรม. แต่ไม่เกิน 25 ตรม.
-                            </option>
-                            <option
-                                value="3.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่เกิน 25 ตรม. แต่ไม่เกิน 50 ตรม.">
-                                3.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่เกิน 25 ตรม. แต่ไม่เกิน 50 ตรม.
-                            </option>
-                            <option
-                                value="4.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่เกิน 50 ตรม. แต่ไม่เกิน 100ตรม.">
-                                4.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่เกิน 50 ตรม. แต่ไม่เกิน 100ตรม.
-                            </option>
-                            <option
-                                value="5.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่เกิน 100 ตรม. แต่ไม่เกิน 200ตรม.">
-                                5.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่เกิน 100 ตรม. แต่ไม่เกิน 200ตรม.
-                            </option>
+                            <option value="1.ตลาด ประเภทที่ 1">1.ตลาด ประเภทที่ 1</option>
+                            <option value="2.ตลาด ประเภทที่ 2">2.ตลาด ประเภทที่ 2</option>
                         </datalist>
                         </input>&nbsp;
                         <a>เขียนที่ :</a>
@@ -343,8 +364,12 @@
                         <input type="text" id="documentName" />
                         ผู้ขอรับใบอนุญาต
                         <!-- </form> -->
-                    </div> <br>
-                    <!-- box ข้อมูลเจ้าของสถานที่ -->
+                    </div>
+                    <br>
+
+
+                    <!-- <input type="radio" name="sub" id="" onclick="w3.show('#Demo')"> ยืนยัน &nbsp; -->
+                    <!-- <input type="radio" name="sub" id="" onclick="w3.hide('#Demo')"> ไม่ยืนยัน &nbsp; -->
                     <div id="Demo" style="display:none">
                         <div class="box">
                             <h4>ข้อมูลเจ้าของสถานที่</h4>
@@ -389,57 +414,11 @@
                             <br>
                             <input type="file"></input>
                         </div>
-                    </div> <br>
-                    <!-- box ผู้สัมผัสอาหาร -->
-                    <div class="box">
-                        <div class="row">
-                            <div class="col-2">
-                                <a><b>ใบอบรมผู้สัมผัสอาหาร</b></a>&nbsp;&nbsp;
-                            </div>
-                            <div class="col">
-                                <input type="radio" name="food" id="" value="" onclick="enFood()">
-                                <a>อบรมแล้ว</a>&nbsp;
-                                <input type="radio" name="food" id="" value="" onclick="disFood()">
-                                <a>ยังไม่ได้อบรมอบรม</a>
-                                <br>
-
-                                <fieldset disabled id="disableFood">
-                                    <a>ออกใบประกาศนียบัตรโดย</a>
-                                    <input type="text" id="">
-                                    <br>
-                                    <a>ให้ไว้ ณ วันที่</a>
-                                    <input type="date" id="">&nbsp;
-                                    <a>มีผลถึง ณ วันที่</a>
-                                    <input type="date" id="">
-                                </fieldset>
-                            </div>
-                        </div>
-                    </div> <br>
-                    <!-- box จำหน่ายสุรา -->
-                    <div class="box">
-                        <div class="row">
-                            <div class="col-2">
-                                <a><b>ใบอนุญาตจำหน่ายสุรา</b></a>&nbsp;&nbsp;
-                            </div>
-                            <div class="col">
-                                <input type="radio" name="typee" id="typeUser1" value="บุคคลธรรมดา">
-                                <a>ออกใบอนุญาต</a>&nbsp;
-                                <input type="radio" name="typee" id="typeUser1" value="บุคคลธรรมดา">
-                                <a>ไม่ออกใบอนุญาต</a>&nbsp;
-                            </div>
-                        </div>
-                    </div> <br>
-                    <!-- box เพิ่มรูปภาพ -->
+                    </div>
+                    <br>
                     <div class="box">
                         <a>ประเภทกิจการ :</a>
                         <input type="text" id="" size="120">
-                        <br>
-                        <a>พื้นที่ :</a>
-                        <input type="text" id="" width="20px"> <a> ตารางเมตร</a>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a>มีคนงาน :</a>
-                        <input type="text" id="" width="20px"> <a> คน</a>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <br>
                         <a>ใบอนุญาต </a>
                         <a> เล่มที่ :</a>

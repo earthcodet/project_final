@@ -19,134 +19,172 @@
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="../css/w.3.css">
-<link rel="stylesheet" href="../css/w3-theme-teal.css">
-<link href="../css/css-003.css" rel="stylesheet">
-<link href="../css/css-index.css" rel="stylesheet">
-<link href="../css/fonts.css" rel="stylesheet">
-<!--  <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
-<script src="../js/js-index.js"></script>
-<script src="../js/test.js"></script>
+<link rel="stylesheet" href="../../css/w.3.css">
+<link rel="stylesheet" href="../../css/w3-theme-teal.css">
+<link href="../../css/css-003.css" rel="stylesheet">
+<link href="../../css/css-index.css" rel="stylesheet">
+<link href="../../css/fonts.css" rel="stylesheet">
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="../../js/js-index.js"></script>
+<script src="../../js/test.js"></script>
 
 <!-- search -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <!-- disable-->
-<script src="../js/disable.js"></script>
+<script src="../../js/disable.js"></script>
 
 <!-- css ส่วนกลาง -->
-<link href="../css/utilities.css" rel="stylesheet">
+<link href="../../css/utilities.css" rel="stylesheet">
 
 <!-- function ส่วนกลาง -->
-<script src="../js/utilities.js"></script>
+<script src="../../js/utilities.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<!-- ทดสอบควบคุมหน้า -->
+<script src="../../js/controlTest.js"></script>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
 <body>
-    <!-- เมนูด้านข้าง -->
-    <nav class="w3-sidebar w3-bar-block w3-collapse w3-animate-left w3-card" style="z-index:3;width:250px;"
-        id="mySidebar">
-        <a class="w3-bar-item w3-button w3-border-bottom w3-large" href="index.html">
-            <img src="../img/img1.jpg" style="width:100%;">
-        </a>
 
-        <div>
-            <a class="w3-bar-item w3-button w3-theme" onclick="myAccordion('demo1')"
-                href="javascript:void(0)">ระบบงานคำขอ <i class="fa fa-caret-down"></i></a>
-            <div id="demo1" class="w3-hide w3-show">
-                <a class="bar-item w3-button w3-theme" onclick="myAccordion('demo11')" href="javascript:void(0)">
-                    เพิ่ม <i class="fa fa-caret-down"></i></a>
-                <div id="demo11" class="w3-hide w3-show">
-                    <a class="bar-item w3-button" href="request_public_sell.html">-
-                        ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
-                    <a class="bar-item w3-button" href="request_public_hawk.html">-
-                        ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
-                    <a class="bar-item w3-button" href="request_area_more_sell.html">-
-                        ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
-                    <a class="bar-item w3-button" href="request_area_more_correct.html">-
-                        ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</a>
-                    <a class="bar-item w3-button" href="request_area_less_sell.html">-
-                        หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
-                    <a class="bar-item w3-button w3-my-color" href="request_area_less_correct.html">-
-                        หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
-                    <a class="bar-item w3-button" href="request_market.html">- ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
-                    <a class="bar-item w3-button" href="request_health_danger.html">- กิจการที่เป็นอันตรายต่อสุขภาพ</a>
-                    <a class="bar-item w3-button" href="request_crematory.html">- กิจการฌาปณสถาน</a>
-                </div>
-                <a class="bar-item w3-button" href="#">
-                    ค้นหา/แก้ไข</a>
-            </div>
-        </div>
-
-        <div>
-            <a class="w3-bar-item w3-button" onclick="myAccordion2('demo2')"
-                href="javascript:void(0)">งานตรวจสอบ/อนุมัติ <i class="fa fa-caret-down"></i></a>
-            <div id="demo2" class="w3-hide">
-                <a class="w3-bar-item w3-button" href="#"></a>
-            </div>
-        </div>
-
-        <div>
-            <a class="w3-bar-item w3-button" onclick="myAccordion3('demo3')" href="javascript:void(0)">งานใบอนุญาต <i
-                    class="fa fa-caret-down"></i></a>
-            <div id="demo3" class="w3-hide">
-                <a class="w3-bar-item w3-button" href="#"></a>
-            </div>
-        </div>
-
-        <div>
-            <a class="w3-bar-item w3-button" onclick="myAccordion4('demo4')" href="javascript:void(0)">ข้อมูลส่วนกลาง <i
-                    class="fa fa-caret-down"></i></a>
-            <div id="demo4" class="w3-hide">
-                <a class="bar-item w3-button" href="./central/operator.html">- ข้อมูลผู้ประกอบการ</a>
-                <a class="bar-item w3-button" href="./central/02.html">- ข้อมูลการจดใบอนุญาต</a>
-                <a class="bar-item w3-button" href="./central/03.html">- โอนใบอนุญาต</a>
-            </div>
-        </div>
-
-        <div>
-            <a class="w3-bar-item w3-button" onclick="myAccordion5('demo5')" href="javascript:void(0)">งานร้องเรียน <i
-                    class="fa fa-caret-down"></i></a>
-            <div id="demo5" class="w3-hide">
-                <a class="bar-item w3-button" href="#">- บันทึกเรื่องร้องเรียน</a>
-                <a class="bar-item w3-button" href="#">- บันทึกคำร้อง</a>
-            </div>
-        </div>
-
-        <div>
-            <a class="w3-bar-item w3-button" onclick="myAccordion6('demo6')" href="javascript:void(0)">ข้อมูลระบบ <i
-                    class="fa fa-caret-down"></i></a>
-            <div id="demo6" class="w3-hide">
-                <a class="w3-bar-item w3-button" href="#"></a>
-            </div>
-        </div>
-
-        <div>
-            <a class="w3-bar-item w3-button" onclick="myAccordion7('demo7')" href="javascript:void(0)">รายงาน <i
-                    class="fa fa-caret-down"></i></a>
-            <div id="demo7" class="w3-hide">
-                <a class="bar-item w3-button" href="report/report_crematory.html">ตามคำขอ</a>
-                <a class="bar-item w3-button" href="report/report_public_sell.html">สรุป</a>
-            </div>
-        </div>
-        <br><br><br><br>
-    </nav>
-    <!-- คลิกเมนูย่อได้ -->
-    <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay">
-    </div>
     <!-- เมนูด้านบน -->
     <div class="w3-top" style="overflow:auto;">
         <ul>
-            <li class="fa fa-bars w3-button w3-my-color w3-hide-large w3-xxlarge" onclick="w3_open()"></li>
-            <li><a href="#add" onclick="disFunction()"><i
-                        class="fa fa-plus-square fa-lg w3-margin-right w3-text-theme "></i>เพิ่ม</a></li>
-            <li><a href="#contact"><i class="fa fa-pencil fa-lg w3-margin-right w3-text-theme"></i>แก้ไข</a></li>
-            <li><a href="#contact"><i class="fa fa-floppy-o fa-lg w3-margin-right w3-text-theme"></i>บันทึก</a></li>
-            <li><a href="#contact"><i class="fa fa-reply fa-lg w3-margin-right w3-text-theme"></i>เรียกคืน</a></li>
-            <li><a href="#about"><i class="fa fa-close fa-lg w3-margin-right w3-text-theme"></i>ยกเลิก</a></li>
+            <li>
+                <a id="addMenu" href="#news" onclick="addTEST()">
+                    <i class="fa fa-plus-square fa-lg w3-margin-right w3-text-theme "> </i>
+                    เพิ่ม
+                </a>
+            </li>
+            <li>
+                <a id="editMenu" href="#contact" onclick="editTEST()" class="disableds">
+                    <i class="fa fa-pencil fa-lg w3-margin-right w3-text-theme"></i>
+                    แก้ไข
+                </a>
+            </li>
+            <li>
+                <a id="saveMenu" onclick="insertTEST()" class="disableds" href="#contact">
+                    <i class="fa fa-floppy-o fa-lg w3-margin-right w3-text-theme"></i>
+                    บันทึก
+                </a>
+            </li>
+            <li>
+                <a id="restoreMenu" onclick="restoreTEST()" href="#contact" class="disableds">
+                    <i class="fa fa-reply fa-lg w3-margin-right w3-text-theme"></i>
+                    เรียกคืน
+                </a>
+            </li>
+            <li>
+                <a id="deleteMenu" onclick="deleteTEST()" href="#about" class="disableds">
+                    <i class="fa fa-close fa-lg w3-margin-right w3-text-theme"></i>
+                    ยกเลิก
+                </a>
+            </li>
+            <li class="w3-display-topright">
+                <a id="exitMenu" onclick="exitTEST()" class="exit">
+                    <i class="fa fa-sign-out fa-lg w3-margin-right w3-text-theme"></i>
+                    ออกจากระบบ
+                </a>
+            </li>
         </ul>
+        <!-- เมนูด้านข้าง -->
+        <nav class="w3-sidebar w3-bar-block w3-collapse w3-animate-left w3-card" style="z-index:3;width:250px;"
+            id="mySidebar">
+            <a class="w3-bar-item w3-button w3-border-bottom w3-large" href="../utilities/index.html">
+                <img src="../../img/img1.jpg" style="width:100%;">
+            </a>
+
+            <div>
+                <a class="w3-bar-item w3-button w3-theme" onclick="myAccordion('demo1')"
+                    href="javascript:void(0)">ระบบงานคำขอ <i class="fa fa-caret-down"></i></a>
+                <div id="demo1" class="w3-hide w3-show">
+                    <a class="bar-item w3-button w3-theme" onclick="myAccordion('demo11')" href="javascript:void(0)">
+                        เพิ่ม <i class="fa fa-caret-down"></i></a>
+                    <div id="demo11" class="w3-hide w3-show">
+                        <a class="bar-item w3-button" href="request_public_sell.html">-
+                            ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
+                        <a class="bar-item w3-button" href="request_public_hawk.html">-
+                            ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
+                        <a class="bar-item w3-button" href="request_area_more_sell.html">-
+                            ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
+                        <a class="bar-item w3-button" href="request_area_more_correct.html">-
+                            ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</a>
+                        <a class="bar-item w3-button" href="request_area_less_sell.html">-
+                            หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
+                        <a class="bar-item w3-button w3-my-color" href="request_area_less_correct.html">-
+                            หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
+                        <a class="bar-item w3-button" href="request_market.html">-
+                            ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
+                        <a class="bar-item w3-button" href="request_health_danger.html">-
+                            กิจการที่เป็นอันตรายต่อสุขภาพ</a>
+                        <a class="bar-item w3-button" href="request_crematory.html">- กิจการฌาปณสถาน</a>
+                    </div>
+                    <a class="bar-item w3-button" href="#">
+                        ค้นหา/แก้ไข</a>
+                </div>
+            </div>
+
+            <div>
+                <a class="w3-bar-item w3-button" onclick="myAccordion2('demo2')"
+                    href="javascript:void(0)">งานตรวจสอบ/อนุมัติ <i class="fa fa-caret-down"></i></a>
+                <div id="demo2" class="w3-hide">
+                    <a class="w3-bar-item w3-button" href="#"></a>
+                </div>
+            </div>
+
+            <div>
+                <a class="w3-bar-item w3-button" onclick="myAccordion3('demo3')" href="javascript:void(0)">งานใบอนุญาต
+                    <i class="fa fa-caret-down"></i></a>
+                <div id="demo3" class="w3-hide">
+                    <a class="w3-bar-item w3-button" href="#"></a>
+                </div>
+            </div>
+
+            <div>
+                <a class="w3-bar-item w3-button" onclick="myAccordion4('demo4')"
+                    href="javascript:void(0)">ข้อมูลส่วนกลาง <i class="fa fa-caret-down"></i></a>
+                <div id="demo4" class="w3-hide">
+                    <a class="bar-item w3-button" href="../central/operator.html">- ข้อมูลผู้ประกอบการ</a>
+                    <a class="bar-item w3-button" href="../central/02.html">- ข้อมูลการจดใบอนุญาต</a>
+                    <a class="bar-item w3-button" href="../central/03.html">- โอนใบอนุญาต</a>
+                </div>
+            </div>
+
+            <div>
+                <a class="w3-bar-item w3-button" onclick="myAccordion5('demo5')" href="javascript:void(0)">งานร้องเรียน
+                    <i class="fa fa-caret-down"></i></a>
+                <div id="demo5" class="w3-hide">
+                    <a class="bar-item w3-button" href="#">- บันทึกเรื่องร้องเรียน</a>
+                    <a class="bar-item w3-button" href="#">- บันทึกคำร้อง</a>
+                </div>
+            </div>
+
+            <div>
+                <a class="w3-bar-item w3-button" onclick="myAccordion6('demo6')" href="javascript:void(0)">ข้อมูลระบบ <i
+                        class="fa fa-caret-down"></i></a>
+                <div id="demo6" class="w3-hide">
+                    <a class="w3-bar-item w3-button" href="#"></a>
+                </div>
+            </div>
+
+            <div>
+                <a class="w3-bar-item w3-button" onclick="myAccordion7('demo7')" href="javascript:void(0)">รายงาน <i
+                        class="fa fa-caret-down"></i></a>
+                <div id="demo7" class="w3-hide">
+                    <a class="bar-item w3-button" href="../report/report_crematory.html">ตามคำขอ</a>
+                    <a class="bar-item w3-button" href="../report/report_public_sell.html">สรุป</a>
+                </div>
+            </div>
+            <br><br><br><br>
+        </nav>
+        <!-- คลิกเมนูย่อได้ -->
+        <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer"
+            id="myOverlay">
+        </div>
     </div>
     <!-- ข้อมูล -->
     <div class="w3-main" style="margin-left:250px;margin-top: 47px;">
@@ -158,15 +196,15 @@
                 <fieldset disabled id="disable">
                     <!--box ข้อมูลสถานประกอบการ -->
                     <div class="box">
-                        <h4>ข้อมูลสถานประกอบการ</h4>
+                        <h4 style="width: 100%">ข้อมูลสถานประกอบการ</h4>
                         <table class="table">
                             <tr>
-                                <td><a>เลขที่คำขอ :</a></td>
-                                <td><input type="text" id="" name="" placeholder=""></td>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a>เลขที่คำขอ :</a></td>
+                                <td><input type="text" id="" name="" placeholder="" size="11"></td>
                                 <td><a>วันที่ยืนขอ :</a></td>
                                 <td><input type="date" id="" name="" placeholder=""></td>
-                                <td><a>ประเภทคำขอ :</a></td>
-                                <td><input list="brow" id="" name="">
+                                <td>&nbsp;<a>ประเภทคำขอ :</a></td>
+                                <td><input size="30" list="brow" id="" name="">
                                     <datalist id="brow">
                                         <option value="" hidden>เลือก...</option>
                                         <option value="1.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่ไม่เกิน 10 ตรม.">
@@ -194,25 +232,32 @@
                                         </option>
                                     </datalist>
                                     </input></td>
-                                <td><a>เขียนที่ :</a></td>
-                                <td><input type="text" id="place" value="เทศบาลเมืองแสนสุข" readonly></td>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;<a>เขียนที่ :</a></td>
+                                <td><input type="text" id="place" value="เทศบาลเมืองแสนสุข" readonly size="20"></td>
                             </tr>
                         </table>
 
                         <table class="table">
                             <tr>
-                                <td><a>ข้าพเจ้า :</a>
-                                    <input type="radio" name="typee" id="typeUser1" value="บุคคลธรรมดา">
-                                    <a>บุคคลธรรมดา</a>
-                                    <input type="radio" name="typee" id="typeUser2" value="นิติบุคคล">
-                                    <a>นิติบุคคล</a> &nbsp;</td>
-                                <td><input type="text" id="name"></td>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a>ข้าพเจ้า :</a>
+                                    <select id="" style="width: 120px;">
+                                        <option value="" hidden>เลือก...</option>
+                                        <option value="">บุคคลธรรมดา</option>
+                                        <option value="">นิติธรรมดา</option>
+                                        </option>
+                                    </select>
+                                </td>
+                                <td><input type="text" id="name" size="29">
+                                    <a href="search.html" target="popup"
+                                        onclick="window.open('search.html','popup','width=1100,height=570'); return false;">
+                                        <button class="fa fa-search" id=""></button>
+                                    </a></td>
                                 <td><a>เลขประจำตัว :</a></td>
-                                <td><input type="int" id="id"> &nbsp;</td>
-                                <td><a>อายุ :</a></td>
-                                <td><input type="int" id="age" size="3"> &nbsp;</td>
+                                <td><input type="int" id="id" size="15"> &nbsp;</td>
+                                <td>&nbsp;<a>อายุ :</a></td>
+                                <td><input type="int" id="age" size="2.5"> &nbsp;</td>
                                 <td><a>สัญชาติ :</a></td>
-                                <td><input list="nationality" id="" name="" size="7.5">
+                                <td><input list="nationality" id="" name="" size="4.5">
                                     <datalist id="nationality">
                                         <select id="nationality">
                                             <option value="" hidden>เลือก...</option>
@@ -224,7 +269,7 @@
                                     </input> &nbsp;</td>
                                 <td><a>เชื้อชาติ :</a></td>
                                 <td>
-                                    <input list="nationality" id="" name="" size="7.5">
+                                    <input list="nationality" id="" name="" size="4.5">
                                     <datalist id="nationality">
                                         <!-- <select id="race" style="width: 8%;"> -->
                                         <option value="" hidden>เลือก...</option>
@@ -239,36 +284,38 @@
 
                         <table class="table">
                             <tr>
-                                <td><a>ตั้งอยู่เลขที่ :</a></td>
+                                <td>&nbsp;&nbsp;<a>อยู่บ้านเลขที่ :</a></td>
                                 <td><input type="text" id="homeId" size="5"></td>
                                 <td><a>หมู่ที่ :</a></td>
                                 <td><input type="int" id="moo" size="5"></td>
                                 <td><a>ตรอก:</a></td>
-                                <td><input type="text" id="trxk"></td>
-                                <td><a>ซอย :</a></td>
-                                <td><input type="text" id="sxy"></td>
+                                <td><input type="text" id="trxk" size="17"></td>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a>ซอย :</a></td>
+                                <td><input type="text" id="sxy" size="13"></td>
                                 <td><a>อาคาร :</a></td>
-                                <td><input type="text" id="building"></td>
+                                <td><input type="text" id="building" size="13"></td>
                                 <td><a>ถนน :</a></td>
-                                <td><input type="text" id="road" size="15"></td>
+                                <td><input type="text" id="road" size="13"></td>
                             </tr>
                         </table>
 
                         <table class="table">
                             <tr>
-                                <td><a>จังหวัด :</a></td>
-                                <td><select id="province">
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a>จังหวัด :</a>
+                                </td>
+                                <td><select id="province" style="width: 150px;">
                                     </select></td>
                                 <td><a>อำเภอ :</a></td>
-                                <td> <select id="district">
+                                <td> <select id="district" style="width: 150px;">
                                     </select></td>
                                 <td><a>ตำบล :</a></td>
-                                <td><select id="subdistrict">
+                                <td><select id="subdistrict" style="width: 150px;">
                                     </select></td>
                                 <td><a>โทรศัพท์ :</a></td>
-                                <td><input type="text" id="phone"></td>
+                                <td><input type="text" id="phone" size="12"></td>
                                 <td><a>โทรสาร :</a></td>
-                                <td> <input type="text" id="fax"></td>
+                                <td> <input type="text" id="fax" size="12"></td>
                             </tr>
                         </table>
 

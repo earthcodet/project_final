@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>กิจการที่เป็นอันตรายต่อสุขภาพ</title>
+<title>กิจการฌาปณสถาน</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
@@ -19,36 +19,84 @@
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="../css/w.3.css">
-<link rel="stylesheet" href="../css/w3-theme-teal.css">
-
-<link href="../css/css-index.css" rel="stylesheet">
-<link href="../css/fonts.css" rel="stylesheet">
+<link rel="stylesheet" href="../../css/w.3.css">
+<link rel="stylesheet" href="../../css/w3-theme-teal.css">
+<link href="../../css/css-003.css" rel="stylesheet">
+<link href="../../css/css-index.css" rel="stylesheet">
+<link href="../../css/fonts.css" rel="stylesheet">
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="../js/js-index.js"></script>
-<script src="../js/test.js"></script>
+<script src="../../js/js-index.js"></script>
+<script src="../../js/test.js"></script>
 
 <!-- search -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- disable-->
+<script src="../../js/disable.js"></script>
+
+<!-- css ส่วนกลาง -->
+<link href="../../css/utilities.css" rel="stylesheet">
+
+<!-- function ส่วนกลาง -->
+<script src="../../js/utilities.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<!-- ทดสอบควบคุมหน้า -->
+<script src="../../js/controlTest.js"></script>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-
-<!-- css ส่วนกลาง -->
-<link href="../css/utilities.css" rel="stylesheet">
-
-<script src="../js/disable.js"></script>
-<!-- function ส่วนกลาง -->
-<script src="../js/utilities.js"></script>
-
-
 <body>
-    <!-- เมนูด้านข้าง -->
-    <nav class="w3-sidebar w3-bar-block w3-collapse w3-animate-left w3-card" style="z-index:3;width:250px;"
+    
+
+    <!-- เมนูด้านบน -->
+    <div class="w3-top" style="overflow:auto;">
+        <ul>
+            <li class="fa fa-bars w3-button w3-my-color w3-hide-large w3-xxlarge" onclick="w3_open()"></li>
+            <li>
+                <a id="addMenu" href="#news" onclick="addTEST()">
+                    <i class="fa fa-plus-square fa-lg w3-margin-right w3-text-theme "> </i>
+                    เพิ่ม
+                </a>
+            </li>
+            <li>
+                <a id="editMenu" href="#contact" onclick="editTEST()" class="disableds">
+                    <i class="fa fa-pencil fa-lg w3-margin-right w3-text-theme"></i>
+                    แก้ไข
+                </a>
+            </li>
+            <li>
+                <a id="saveMenu" onclick="insertTEST()" class="disableds" href="#contact">
+                    <i class="fa fa-floppy-o fa-lg w3-margin-right w3-text-theme"></i>
+                    บันทึก
+                </a>
+            </li>
+            <li>
+                <a id="restoreMenu" onclick="restoreTEST()" href="#contact" class="disableds">
+                    <i class="fa fa-reply fa-lg w3-margin-right w3-text-theme"></i>
+                    เรียกคืน
+                </a>
+            </li>
+            <li>
+                <a id="deleteMenu" onclick="deleteTEST()" href="#about" class="disableds">
+                    <i class="fa fa-close fa-lg w3-margin-right w3-text-theme"></i>
+                    ยกเลิก
+                </a>
+            </li>
+            <li class="w3-display-topright">
+                <a id="exitMenu" onclick="exitTEST()" class="exit"  >
+                    <i class="fa fa-sign-out fa-lg w3-margin-right w3-text-theme"></i>
+                    ออกจากระบบ
+                </a>
+            </li>
+        </ul>
+        <nav class="w3-sidebar w3-bar-block w3-collapse w3-animate-left w3-card" style="z-index:3;width:250px;"
         id="mySidebar">
-        <a class="w3-bar-item w3-button w3-border-bottom w3-large" href="index.html">
-            <img src="../img/img1.jpg" style="width:100%;">
+        <a class="w3-bar-item w3-button w3-border-bottom w3-large" href="../utilities/index.html">
+            <img src="../../img/img1.jpg" style="width:100%;">
         </a>
 
         <div>
@@ -71,9 +119,8 @@
                     <a class="bar-item w3-button" href="request_area_less_correct.html">-
                         หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
                     <a class="bar-item w3-button" href="request_market.html">- ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
-                    <a class="bar-item w3-button w3-my-color" href="request_health_danger.html">-
-                        กิจการที่เป็นอันตรายต่อสุขภาพ</a>
-                    <a class="bar-item w3-button" href="request_crematory.html">- กิจการฌาปณสถาน</a>
+                    <a class="bar-item w3-button" href="request_health_danger.html">- กิจการที่เป็นอันตรายต่อสุขภาพ</a>
+                    <a class="bar-item w3-button w3-my-color" href="request_crematory.html">- กิจการฌาปณสถาน</a>
                 </div>
                 <a class="bar-item w3-button" href="#">
                     ค้นหา/แก้ไข</a>
@@ -100,9 +147,9 @@
             <a class="w3-bar-item w3-button" onclick="myAccordion4('demo4')" href="javascript:void(0)">ข้อมูลส่วนกลาง <i
                     class="fa fa-caret-down"></i></a>
             <div id="demo4" class="w3-hide">
-                <a class="bar-item w3-button" href="./central/operator.html">- ข้อมูลผู้ประกอบการ</a>
-                <a class="bar-item w3-button" href="./central/02.html">- ข้อมูลการจดใบอนุญาต</a>
-                <a class="bar-item w3-button" href="./central/03.html">- โอนใบอนุญาต</a>
+                <a class="bar-item w3-button" href="../central/operator.html">- ข้อมูลผู้ประกอบการ</a>
+                <a class="bar-item w3-button" href="../central/02.html">- ข้อมูลการจดใบอนุญาต</a>
+                <a class="bar-item w3-button" href="../central/03.html">- โอนใบอนุญาต</a>
             </div>
         </div>
 
@@ -127,8 +174,8 @@
             <a class="w3-bar-item w3-button" onclick="myAccordion7('demo7')" href="javascript:void(0)">รายงาน <i
                     class="fa fa-caret-down"></i></a>
             <div id="demo7" class="w3-hide">
-                <a class="bar-item w3-button" href="report/report_crematory.html">ตามคำขอ</a>
-                <a class="bar-item w3-button" href="report/report_public_sell.html">สรุป</a>
+                <a class="bar-item w3-button" href="../report/report_crematory.html">ตามคำขอ</a>
+                <a class="bar-item w3-button" href="../report/report_public_sell.html">สรุป</a>
             </div>
         </div>
         <br><br><br><br>
@@ -136,26 +183,14 @@
     <!-- คลิกเมนูย่อได้ -->
     <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay">
     </div>
-
-    <!-- เมนูด้านบน -->
-    <div class="w3-top" style="overflow:auto;">
-        <ul>
-            <li class="fa fa-bars w3-button w3-my-color w3-hide-large w3-xxlarge" onclick="w3_open()"></li>
-            <li><a href="#add" onclick="disFunction()"><i
-                        class="fa fa-plus-square fa-lg w3-margin-right w3-text-theme "></i>เพิ่ม</a></li>
-            <li><a href="#contact"><i class="fa fa-pencil fa-lg w3-margin-right w3-text-theme"></i>แก้ไข</a></li>
-            <li><a href="#contact"><i class="fa fa-floppy-o fa-lg w3-margin-right w3-text-theme"></i>บันทึก</a></li>
-            <li><a href="#contact"><i class="fa fa-reply fa-lg w3-margin-right w3-text-theme"></i>เรียกคืน</a></li>
-            <li><a href="#about"><i class="fa fa-close fa-lg w3-margin-right w3-text-theme"></i>ยกเลิก</a></li>
-        </ul>
     </div>
 
     <div class="w3-main" style="margin-left:250px;margin-top: 47px;">
         <header class="w3-container w3-theme">
-            <h1 style="font-size:20px">กิจการที่เป็นอันตรายต่อสุขภาพ</h1>
+            <h1 style="font-size:20px">กิจการฌาปณสถาน</h1>
         </header>
 
-        <div class="w3-container" style="padding:32px">
+        <div class="container-sm" style="padding:32px">
             <form id="form">
                 <fieldset disabled id="disable">
                     <div class="box">
@@ -171,56 +206,11 @@
                         <!-- <select id="" name="" style="width: 19%;"> -->
                         <datalist id="brow">
                             <option value="" hidden>เลือก...</option>
-                            <option value="1 ก.การเลี้ยงม้า โค กระบือ ไม่เกิน 10 ตัว">1 ก.การเลี้ยงม้า โค กระบือ ไม่เกิน
-                                10
-                                ตัว
-                            </option>
-                            <option value="2 ก.การเลี้ยงสุกรเกิน 50 ตัวขึ้นไป">2 ก.การเลี้ยงสุกรเกิน 50 ตัวขึ้นไป
-                            </option>
-                            <option value="2 ข.การเลี้ยงสุกรเกิน 20 ตัวแต่ไม่เกิน 50 ตัว">2 ข.การเลี้ยงสุกรเกิน 20
-                                ตัวแต่ไม่เกิน
-                                50 ตัว
-                            </option>
-                            <option value="2 ค.การเลี้ยงสุกรไม่เกิน 60 ตัว">2 ค.การเลี้ยงสุกรไม่เกิน 60 ตัว</option>
-                            <option value="3 ก.การเลี้ยงแพะ แกะ เกิน 50 ตัวขึ้นไป">3 ก.การเลี้ยงแพะ แกะ เกิน 50
-                                ตัวขึ้นไป
-                            </option>
-                            <option value="3 ข.การเลี้ยงแพะ แกะ เกิน 20 ตัว แต่ไม่เกิน 50 ตัว">3 ข.การเลี้ยงแพะ แกะ เกิน
-                                20
-                                ตัว
-                                แต่ไม่เกิน 50 ตัว</option>
-                            <option value="3. ค. การเลี้ยงแพะ แกะไม่เกิน 20 ตัว"></option>
-                            <option value="4. ก. การเลี้ยงห่าน เป็ด ไก่ เกิน 50 ตัวขึ้นไป"></option>
-                            <option value="4. ข. การเลี้ยงห่าน เป็ด ไก่ เกิน 50 ตัว"></option>
-                            <option value="5. ก.การเลี้ยงสัตว์เพื่อรีดเอานม การรีดน้ำนม"></option>
-                            <option value="6. การทำเนย เนยเทียม"></option>
-                            <option
-                                value="7. การฆ่าห่าน เป็ดไก่ ยกเว้นการฆ่าในภัตตาคาร โรงแรมหรือข้าวแกง เพื่อปรุงอาหารในนั้นหรือการฆ่าเพื่อปรุงอาหารเร่ขายด้วยตนเอง">
-                            </option>
-                            <option value="8. การฟอกหนังสัตว์ การสะสมหนังสัตว์"></option>
-                            <option value="9. การสะสมเขาสัตว์ กระดูดสัตว์ ขนสัตว์ หนังสัตว์"></option>
-                            <option value="10. การย้อมทำให้เกิดกลิ่นเหม็น"></option>
-                            <option
-                                value="11. ก. การทำกะปิ น้ำปลา น้ำเคย ไตปลา เต้าเจี้ยว ซีอิ้ว หอยดอง โดยใช้เครื่องจักร">
-                            </option>
-                            <option
-                                value="11. ข. การทำกะปิ ไตปลา เต้าเจี้ยว หอยดอง โดยไม่ใช้เครื่องจักรเกินกว่า 60 กิโลกรัมขึ้นไป">
-                            </option>
-                            <option value="11. ค. การทำน้ำปลา น้ำเคย ซีอิ้ว โดยไม่ใช้เครื่องจักรเกินกว่า 200 ลิตร">
-                            </option>
-                            <option value="12. การทำ การหมัก การสะสมปลาร้า ปลาเจ่า กุ้งเจ่า ตั้งแต่ 60 กิโลกรัมขึ้นไป">
-                            </option>
-                            <option value="13. ก. การทำและตากปลาเค็ม เนื้อเค็ม เป็ดเค็ม หนังหมู กุ้งแห้ง"></option>
-                            <option value="13. ข. การทำและตากปลาเค็ม เนื้อเค็ม เป็ดเค็ม หนังหมู การเคี่ยวมันกุ้ง">
-                            </option>
-                            <option
-                                value="14. การนึ่งปลา การตั้มปลาซึ้งใช้แทนการนึ่ง ยกเว้นการนึ่งหรือต้มในภัตตาคาร โรงแรม หรือร้านข้าวแกงปรุงอาหารในนั้น และการนึ่งหรือต้มเพื่อปรุงอาหารเร่ขายด้วยตนเอง">
-                            </option>
-                            <option value="15. ข. การทำสบู่โดยไม่ใช้เครื่องจักร"></option>
-                            <option value="16. การเคี่ยวหนังสัตว์ เอ็นสัตว์ ไขสัตว์"></option>
-                            <option value="17. ก. การอัดเอาน้ำมันใช้เครื่องจักร"></option>
-                            <option value="17. ข. การอัดเอาน้ำมันไม่ใช้เครื่องจักร"></option>
-                            </select>
+                            <option value="การฌาปนกิจ อนุญาตให้จัดตั้งสุสาน และฌาปนสถาน">การฌาปนกิจ
+                                อนุญาตให้จัดตั้งสุสาน
+                                และฌาปนสถาน</option>
+                            <option value="การฌาปนกิจ อนุญาตให้เป็นผู้ดำเนินการสุสานและฌาปนสถาน">การฌาปนกิจ
+                                อนุญาตให้เป็นผู้ดำเนินการสุสานและฌาปนสถาน</option>
                         </datalist>
                         </input>&nbsp;
                         <a>เขียนที่ :</a>
@@ -346,12 +336,11 @@
                         <br>
 
                         <a>ใช้อาคารสถานที่ประกอบการของผู้อื่น</a>
-                        <select id="deed" name="" style="width: 10%;" onclick=" showtext()">
+                        <select id="mySelect" name="" style="width: 10%;" onclick=" myFunction()">
                             <option value="" hidden>เลือก...</option>
                             <option value="01">ยืนยัน</option>
                             <option value="02">ไม่ยืนยัน</option>
                         </select>
-
 
                         <br><br>
                         <input type="checkbox" id="documentId" value="cb1" />
@@ -364,9 +353,8 @@
                         <input type="checkbox" id="documentSJ4" value="cb5" /> หนังสือมอบอำนาจ พร้อมติดอากรแสตมป์<br>
                         <input type="checkbox" id="documentOther" value="cb6" /> เอกสารอื่นๆที่เกี่ยวข้อง
                         <input type="text" id="other" size="40" />
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-
+                        <!-- <a class="nav-link" href="view.html">
+                    <button class="button" id="">พิมพ์ใบคำขอ</button></a> -->
                         <br><br><br>
 
                         ข้าพเจ้าขอรับรองว่า
@@ -378,6 +366,8 @@
                         <!-- </form> -->
                     </div>
                     <br>
+
+
                     <!-- <input type="radio" name="sub" id="" onclick="w3.show('#Demo')"> ยืนยัน &nbsp; -->
                     <!-- <input type="radio" name="sub" id="" onclick="w3.hide('#Demo')"> ไม่ยืนยัน &nbsp; -->
                     <div id="Demo" style="display:none">
@@ -390,7 +380,7 @@
                             <a>หมู่ที่ :</a>
                             <input type="int" id="" size="6"> &nbsp;
                             <a>ซอย :</a>
-                            <input type="text" id="" size="13"> &nbsp;zz
+                            <input type="text" id="" size="13"> &nbsp;
                             <a>ถนน :</a>
                             <input type="text" id="" size="13">
                             <a>จังหวัด :</a>
@@ -427,6 +417,9 @@
                     </div>
                     <br>
                     <div class="box">
+                        <a>ประเภทกิจการ :</a>
+                        <input type="text" id="" size="120">
+                        <br>
                         <a>พื้นที่ :</a>
                         <input type="text" id="" width="20px"> <a> ตารางเมตร</a>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -434,16 +427,11 @@
                         <input type="text" id="" width="20px"> <a> คน</a>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <a>ใช้เครื่องจักรขนาด :</a>
-                        <input type="text" id="" width="20px">
-                        <br>
-                        <a>ใบอนุญาต </a>
-                        <a> เล่มที่ :</a>
-                        <input type="text" id="" width="20px">
-                        <a>เลขที่ :</a>
-                        <input type="text" id="" width="20px">
+                        <input type="text" id="" width="20px"> <a> แรงม้า</a>
                         <br><br>
                         <a>รูปภาพผลการตรวจสอบ</a>
-                        <input type="file" id="uploadFile" onchange="handleFileSelect(event)" multiple>
+                        <input type="file" id="uploadFile" onchange="handleFileSelect(event)"
+                            multiple>&nbsp;&nbsp;&nbsp;
 
                         <br>
                         <div id='outputImage' style="height: 320px; overflow-y:auto; border: 1px solid black;">
@@ -453,10 +441,23 @@
             </form>
         </div>
     </div>
-    </div>
+
+    <!-- <footer class="w3-container w3-theme" style="padding:32px">
+            <p>Footer information goes here</p>
+        </footer> -->
 
 </body>
+<!-- <script>
+    function myFunction() {
+        var y = document.getElementById("mySelect").value;
+        if (y == '01') {
+            document.getElementById('Demo').style.display = 'block';
+        } else {
+            document.getElementById('Demo').style.display = 'none';
+        }
 
-<script src="https://www.w3schools.com/lib/w3.js"></script>
+    }
+</script> -->
+<!-- <script src="https://www.w3schools.com/lib/w3.js"></script> -->
 
 </html>
