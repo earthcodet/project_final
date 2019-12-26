@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>รายงานกิจการฌาปณสถาน</title>
-    <link rel="stylesheet" href="../../css/w.3.css">
-    <link rel="stylesheet" href="../../css/w3-theme-teal.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -33,10 +31,26 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="../../js/js-index.js"></script>
     <script src="../../js/test.js"></script>
+
+
+
+    
 </head>
 
-<body>
-    <nav class="w3-sidebar w3-bar-block w3-collapse w3-animate-left w3-card" style="z-index:3;width:250px;"
+<body >
+    เมนูด้านบน
+    <div class="w3-top" style="overflow:auto;">
+        <ul>
+            <li class="fa fa-bars w3-button w3-my-color w3-hide-large w3-xxlarge" onclick="w3_open()"></li>
+            <li><a href="#add" onclick="disFunction()"><i
+                        class="fa fa-plus-square fa-lg w3-margin-right w3-text-theme "></i>เพิ่ม</a></li>
+            <li><a href="#edit"><i class="fa fa-pencil fa-lg w3-margin-right w3-text-theme"></i>แก้ไข</a></li>
+            <li><a href="#save"><i class="fa fa-floppy-o fa-lg w3-margin-right w3-text-theme"></i>บันทึก</a></li>
+            <li><a href="#back"><i class="fa fa-reply fa-lg w3-margin-right w3-text-theme"></i>เรียกคืน</a></li>
+            <li><a href="#cancel" onclick="resetFunction()"><i
+                        class="fa fa-close fa-lg w3-margin-right w3-text-theme"></i>ยกเลิก</a></li>
+        </ul>
+        <nav class="w3-sidebar w3-bar-block w3-collapse w3-animate-left w3-card" style="z-index:3;width:250px;"
         id="mySidebar">
         <a class="w3-bar-item w3-button w3-border-bottom w3-large" href="index.html">
             <img src="../../img/img1.jpg" style="width:100%;">
@@ -96,9 +110,9 @@
             <a class="w3-bar-item w3-button" onclick="myAccordion4('demo4')" href="javascript:void(0)">ข้อมูลส่วนกลาง <i
                     class="fa fa-caret-down"></i></a>
             <div id="demo4" class="w3-hide">
-                <a class="bar-item w3-button" href="./central/operator.html">- ข้อมูลผู้ประกอบการ</a>
-                <a class="bar-item w3-button" href="./central/02.html">- ข้อมูลการจดใบอนุญาต</a>
-                <a class="bar-item w3-button" href="./central/03.html">- โอนใบอนุญาต</a>
+                <a class="bar-item w3-button" href="../central/operator.html">- ข้อมูลผู้ประกอบการ</a>
+                <a class="bar-item w3-button" href="../central/02.html">- ข้อมูลการจดใบอนุญาต</a>
+                <a class="bar-item w3-button" href="../central/03.html">- โอนใบอนุญาต</a>
             </div>
         </div>
 
@@ -123,8 +137,8 @@
             <a class="w3-bar-item w3-button w3-theme" onclick="myAccordion7('demo7')" href="javascript:void(0)">รายงาน
                 <i class="fa fa-caret-down"></i></a>
             <div id="demo7" class="w3-hide w3-show">
-                <a class="bar-item w3-button w3-my-color" href="report/report_crematory.html">ตามคำขอ</a>
-                <a class="bar-item w3-button" href="">สรุป</a>
+                <a class="bar-item w3-button" href="report/report_crematory.html">ตามคำขอ</a>
+                <a class="bar-item w3-button w3-my-color" href="./report_conclude.html">สรุป</a>
             </div>
         </div>
 
@@ -133,49 +147,48 @@
     <!-- คลิกเมนูย่อได้ -->
     <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay">
     </div>
-
-    <!-- เมนูด้านบน -->
-    <div class="w3-top" style="overflow:auto;">
-        <ul>
-            <li class="fa fa-bars w3-button w3-my-color w3-hide-large w3-xxlarge" onclick="w3_open()"></li>
-            <li><a href="#add" onclick="disFunction()"><i
-                        class="fa fa-plus-square fa-lg w3-margin-right w3-text-theme "></i>เพิ่ม</a></li>
-            <li><a href="#edit"><i class="fa fa-pencil fa-lg w3-margin-right w3-text-theme"></i>แก้ไข</a></li>
-            <li><a href="#save"><i class="fa fa-floppy-o fa-lg w3-margin-right w3-text-theme"></i>บันทึก</a></li>
-            <li><a href="#back"><i class="fa fa-reply fa-lg w3-margin-right w3-text-theme"></i>เรียกคืน</a></li>
-            <li><a href="#cancel" onclick="resetFunction()"><i
-                        class="fa fa-close fa-lg w3-margin-right w3-text-theme"></i>ยกเลิก</a></li>
-        </ul>
     </div>
 
-    <div class="w3-main" style="margin-left:250px;margin-top: 49px;">
+    <div class="w3-main " style="margin-left:250px;margin-top: 25px;">
         <header class="w3-container w3-theme">
             <h1 style="font-size:20px">รายงานกิจการฌาปณสถาน</h1>
         </header>
-
-        <div class="container-sm" style="padding:32px">
-            <div class="row">
-                <div class="col">
-                    <h5 class="text-center">
-                        วันที่เริ่ม
-                        <br>
-                        <input type="date" id="" placeholder="">
-                    </h5>
+        <div class="w3-container w3-card w3-indigo" style=" background-color: red;">
+            <div class="row justify-content-center">
+                <div class="col-4" style="text-align: center;display: block;">
+                    <h5>รายเดือน</h5>
+                    <select>
+                        <option value="มกราคม">มกราคม</option>
+                        <option value="กุมภาพันธ์">กุมภาพันธ์</option>
+                        <option value="มีนาคม">มีนาคม</option>
+                        <option value="เมษายน">เมษายน</option>
+                        <option value="พฤษภาคม">พฤษภาคม</option>
+                        <option value="มิถุนายน">มิถุนายน</option>
+                        <option value="กรกฎาคม">กรกฎาคม</option>
+                        <option value="สิงหาคม">สิงหาคม</option>
+                        <option value="กันยายน">กันยายน</option>
+                        <option value="ตุลาคม">ตุลาคม</option>
+                        <option value="พฤศจิกายน">พฤศจิกายน</option>
+                        <option value="ธันวาคม">ธันวาคม</option>
+                    </select>   
                 </div>
-                <div class="col">
-                    <h5 class="text-center">
-                        วันที่สุดท้าย
-                        <br>
-                        <input type="date" placeholder="">
-                    </h5>
+                <div class="col-4" style="text-align: center;display: block;">
+                    <h5>ปี พ.ศ.</h5>
+                    <select id="yearPrint">
+                        <option value="2560">2560</option>
+                        <option value="2561">2561</option>
+                        <option value="2562">2562</option>
+                        <option value="2563">2563</option>
+                        <option value="2564">2564</option>
+                    </select>
                 </div>
-            </div>
-            <br><br><br><br>
+              </div>
             <p class="text-center">
-                <button type="button" class="btn btn-outline-success btn-lg">ตกลง</button>
+                <button type="button" class="btn btn-outline-success btn-lg" style="background-color: #009688;color: white;">ตกลง</button>
             </p>
         </div>
     </div>
-</body>
 
+
+</body>
 </html>

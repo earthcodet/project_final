@@ -1,7 +1,24 @@
 var data = false
 var deleteData = false
-//import swal from '../node_modules/sweetalert';
 
+function exitTEST(){
+    Swal.fire({
+        title: "สำนักงานเทศบาล",
+        html: "ต้องการออกจากระบบหรือมไ",
+        showCancelButton: true,
+        confirmButtonColor: "#009688",
+        confirmButtonText: "ใช่",
+        cancelButtonText: "ไม่ใช่",
+        cancelButtonColor: '#dc3545',
+        closeOnConfirm: false,
+        closeOnCancel: false
+    })
+        .then((result) => {
+            if (result.value) {
+                window.location.href = "../login.html"
+            } 
+        });
+}
 function addTEST() {
     deleteData = false
     data = false
