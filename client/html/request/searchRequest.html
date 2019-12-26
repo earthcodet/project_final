@@ -43,13 +43,14 @@
 <link href="../../css/imageButton.css" rel="stylesheet">
 
 
-  <!-- disable-->
-  <script src="../../js/disable.js"></script>
-  <!-- css ส่วนกลาง -->
-  <link href="../../css/utilities.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-  <!-- ทดสอบควบคุมหน้า -->
-  <script src="../../js/controlTest.js"></script>
+<!-- disable-->
+<script src="../../js/disable.js"></script>
+<!-- css ส่วนกลาง -->
+<link href="../../css/utilities.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<!-- ทดสอบควบคุมหน้า -->
+<script src="../../js/controlTest.js"></script>
+
 <body>
 
 
@@ -58,7 +59,7 @@
     <div class="w3-top" style="overflow:auto;">
         <ul>
             <li>
-                <a id="addMenu" href="#news" onclick="addTEST()">
+                <a id="addMenu" href="#news" onclick="addTEST()" class="disableds">
                     <i class="fa fa-plus-square fa-lg w3-margin-right w3-text-theme "> </i>
                     เพิ่ม
                 </a>
@@ -198,7 +199,7 @@
         <div class="w3-container " style="padding:32px; text-align: center;">
             <!-- <div class="box"> -->
             <div class="row">
-                <div class="col">
+                <div class="col" style="text-align: left ; margin-left:30px ">
                     <h5>ค้นหาตาม</h5>
                     <select size="7" style="width: 90%;">
                         <option value="">ชื่อผู้ขอ</option>
@@ -212,11 +213,14 @@
                 </div>
 
                 <div class="col">
-                    <h5>คำที่ค้นหา</h5>
-                    <br>
-                    <input type="text" style="width: 90%;">
-                    <br><br>
-                    <button class="fa fa-search button "> ค้นหา</button>
+                    <div id="searchUser" class="s">
+                        <h5>คำที่ค้นหา</h5>
+                        <br>
+                        <input type="text" style="width: 90%;">
+                        <br><br>
+                        <button class="fa fa-search button "> ค้นหา</button>
+                    </div>
+                    <div id="searchUser">   </div>
                 </div>
             </div>
             <br>
