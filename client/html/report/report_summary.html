@@ -42,13 +42,21 @@
     }
 </style>
 <script type="text/javascript">
-    function ExportToExcel(table){
-           var htmltable= document.getElementById('table');
-           var html = htmltable.outerHTML;
-           window.open('data:application/vnd.ms-excel,' + encodeURIComponent(html));
-        }
-    </script>
+    function ExportToExcel(table) {
+        var htmltable = document.getElementById('table');
+        var html = htmltable.outerHTML;
+        window.open('data:application/vnd.ms-excel,' + encodeURIComponent(html));
+    }
+</script>
+
 <body>
+    <div class="hideWhenPrint">
+        <button onclick="window.print()">พิมพ์</button>
+        <button onclick="ExportToExcel(table)">Excel</button>
+        <br><br>
+    </div>
+    <p style="text-align: center;">รายงานการชำระค่าธรรมเนียมใบอนุญาตประกอบการค้าประเภทต่างๆ</p>
+    <p style="text-align: center;">ประจำเดือน <z>รอใส่เดือน</z></p>
     <div style="font-family: sarabun;">
         <table id="table" class="table table-bordered table-hover">
             <thead class="text-center">
@@ -244,8 +252,8 @@
         </table>
     </div>
     <div class="hideWhenPrint">
-    <button onclick="window.print()">พิมพ์</button>
-    <button onclick="ExportToExcel(table)">พิมพ์</button>
+        <button onclick="window.print()">พิมพ์</button>
+        <button onclick="ExportToExcel(table)">Excel</button>
     </div>
 </body>
 
