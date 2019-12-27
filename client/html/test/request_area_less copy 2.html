@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<title>กิจการที่จัดตั้งสถานที่จำหน่ายหรือสะสมอาหาร พื้นที่น้อยกว่า
+    200 ตารางเมตร</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- bootstrap -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="../../css/w.3.css">
+<link rel="stylesheet" href="../../css/w3-theme-teal.css">
+<link href="../../css/css-003.css" rel="stylesheet">
+<link href="../../css/css-index.css" rel="stylesheet">
+<link href="../../css/fonts.css" rel="stylesheet">
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="../../js/js-index.js"></script>
+<script src="../../js/test.js"></script>
+
+<!-- search -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- disable-->
+<script src="../../js/disable.js"></script>
+
+<!-- css ส่วนกลาง -->
+<link href="../../css/utilities.css" rel="stylesheet">
+
+<!-- function ส่วนกลาง -->
+<script src="../../js/utilities.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<!-- ทดสอบควบคุมหน้า -->
+<script src="../../js/controlTest.js"></script>
+
+<!-- date th -->
+<link type="text/css" href="../../css/jquery-ui-1.12.1.custom/jquery-ui.css" rel="stylesheet" />
+<script type="text/javascript" src="../../js/date/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="../../js/date/jquery-ui-1.8.10.offset.datepicker.min.js"></script>
+<script type="text/javascript" src="../../js/date/dateth.js"></script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<body>
+
+
+    <!-- เมนูด้านบน -->
+    <div class="w3-top" style="overflow:auto;">
+        <ul>
+            <li class="fa fa-bars w3-button w3-my-color w3-hide-large w3-xxlarge" onclick="w3_open()"></li>
+            <li>
+                <a id="addMenu" href="#news" onclick="addTEST()">
+                    <i class="fa fa-plus-square fa-lg w3-margin-right w3-text-theme "> </i>
+                    เพิ่ม
+                </a>
+            </li>
+            <li>
+                <a id="editMenu" href="#contact" onclick="editTEST()" class="disableds">
+                    <i class="fa fa-pencil fa-lg w3-margin-right w3-text-theme"></i>
+                    แก้ไข
+                </a>
+            </li>
+            <li>
+                <a id="saveMenu" onclick="insertTEST()" class="disableds" href="#contact">
+                    <i class="fa fa-floppy-o fa-lg w3-margin-right w3-text-theme"></i>
+                    บันทึก
+                </a>
+            </li>
+            <li>
+                <a id="restoreMenu" onclick="restoreTEST()" href="#contact" class="disableds">
+                    <i class="fa fa-reply fa-lg w3-margin-right w3-text-theme"></i>
+                    เรียกคืน
+                </a>
+            </li>
+            <li>
+                <a id="deleteMenu" onclick="deleteTEST()" href="#about" class="disableds">
+                    <i class="fa fa-close fa-lg w3-margin-right w3-text-theme"></i>
+                    ยกเลิก
+                </a>
+            </li>
+        </ul>
+        <!-- เมนูด้านข้าง -->
+        <nav class="w3-sidebar w3-bar-block w3-collapse w3-animate-left w3-card" style="z-index:3;width:250px;"
+            id="mySidebar">
+            <a class="w3-bar-item w3-button w3-border-bottom w3-large" href="../utilities/index.html">
+                <img src="../../img/img1.jpg" style="width:100%;">
+            </a>
+            <div>
+                <a class="w3-bar-item w3-button w3-theme" onclick="myAccordion('demo')"
+                    href="javascript:void(0)">ระบบงานคำขอ<i class="fa fa-caret-down"></i></a>
+                <div id="demo" class="w3-show">
+                    <a class="w3-button" href="../request/request_health_danger.html">-
+                        กิจการที่เป็นอันตรายต่อสุขภาพ</a>
+                    <a class="w3-button w3-my-color" href="../request/request_area_less.html">-
+                        กิจการที่จัดตั้งสถานที่จำหน่ายหรือสะสมอาหาร
+                        พื้นที่น้อยกว่า
+                        200 ตารางเมตร</a>
+                    <a class="w3-button" href="../request/request_area_more.html">-
+                        กิจการที่จัดตั้งสถานที่จำหน่ายหรือสะสมอาหาร
+                        พื้นที่เกินกว่า
+                        200 ตารางเมตร</a>
+                    <a class="w3-button" href="../request/request_market.html">- กิจการตลาด</a>
+                    <a class="w3-button" href="../request/request_public.html">-
+                        กิจการจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
+                    <a class="w3-button" href="../request/request_crematory.html">- กิจการฌาปณสถาน</a>
+                </div>
+            </div>
+
+            <div>
+                <a class="w3-bar-item w3-button" onclick="myAccordion2('demo2')"
+                    href="javascript:void(0)">งานตรวจสอบ/อนุมัติ<i class="fa fa-caret-down"></i></a>
+                <div id="demo2" class="w3-hide">
+                    <a class="w3-bar-item w3-button" href="#"></a>
+                </div>
+            </div>
+
+            <div>
+                <a class="w3-bar-item w3-button" onclick="myAccordion3('demo3')" href="javascript:void(0)">งานใบอนุญาต<i
+                        class="fa fa-caret-down"></i></a>
+                <div id="demo3" class="w3-hide">
+                    <a class="w3-bar-item w3-button" href="#"></a>
+                </div>
+            </div>
+
+            <div>
+                <a class="w3-bar-item w3-button" onclick="myAccordion4('demo4')"
+                    href="javascript:void(0)">ข้อมูลส่วนกลาง <i class="fa fa-caret-down"></i></a>
+                <div id="demo4" class="w3-hide">
+                    <a class="bar-item w3-button" href="./central/operator.html">- ข้อมูลผู้ประกอบการ</a>
+                    <a class="bar-item w3-button" href="./central/02.html">- ข้อมูลการจดใบอนุญาต</a>
+                    <a class="bar-item w3-button" href="./central/03.html">- โอนใบอนุญาต</a>
+                </div>
+            </div>
+
+            <div>
+                <a class="w3-bar-item w3-button" onclick="myAccordion5('demo5')" href="javascript:void(0)">งานร้องเรียน
+                    <i class="fa fa-caret-down"></i></a>
+                <div id="demo5" class="w3-hide">
+                    <a class="bar-item w3-button" href="#">- บันทึกเรื่องร้องเรียน</a>
+                    <a class="bar-item w3-button" href="#">- บันทึกคำร้อง</a>
+                </div>
+            </div>
+
+            <div>
+                <a class="w3-bar-item w3-button" onclick="myAccordion5('demo6')" href="javascript:void(0)">ข้อมูลระบบ<i
+                        class="fa fa-caret-down"></i></a>
+                <div id="demo6" class="w3-hide">
+                    <a class="w3-bar-item w3-button" href="#"></a>
+                </div>
+            </div>
+
+            <div>
+                <a class="w3-bar-item w3-button" onclick="myAccordion5('demo7')" href="javascript:void(0)">รายงาน<i
+                        class="fa fa-caret-down"></i></a>
+                <div id="demo7" class="w3-hide">
+                    <a class="w3-bar-item w3-button" href="#"></a>
+                </div>
+            </div>
+
+
+        </nav>
+
+        <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer"
+            id="myOverlay">
+        </div>
+    </div>
+
+    <div class="w3-main" style="margin-left:250px; margin-top: 47px;">
+        <header class="w3-container w3-theme">
+            <h1 style="font-size:20px">กิจการที่จัดตั้งสถานที่จำหน่ายหรือสะสมอาหาร พื้นที่น้อยกว่า
+                200 ตารางเมตร</h1>
+        </header>
+
+        <div class="container-sm" style="padding:32px">
+            <!-- <form>
+                <div class="form-row">
+                    <div class="form-group col-md" style="padding-right: 30px;">
+                        <label for="">เลขที่คำขอ</label>
+                        <input type="text" class="form-control" id="" placeholder="">
+                    </div>
+                    <div class="form-group col-md" style="padding-left: 30px;">
+                        <label for="">วันที่ยื่นขอ</label>
+                        <input type="date" class="form-control" id="" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputAddress">Address</label>
+                    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                </div>
+                <div class="form-group">
+                    <label for="inputAddress2">Address 2</label>
+                    <input type="text" class="form-control" id="inputAddress2"
+                        placeholder="Apartment, studio, or floor">
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputCity">City</label>
+                        <input type="text" class="form-control" id="inputCity">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="inputState">State</label>
+                        <select id="inputState" class="form-control">
+                            <option selected>Choose...</option>
+                            <option>...</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="inputZip">Zip</label>
+                        <input type="text" class="form-control" id="inputZip">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="gridCheck">
+                        <label class="form-check-label" for="gridCheck">
+                            Check me out
+                        </label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Sign in</button>
+            </form> -->
+
+        </div>
+
+
+    </div>
+
+    <!-- <footer class="w3-container w3-theme" style="padding:32px">
+            <p>Footer information goes here</p>
+        </footer> -->
+
+    </div>
+
+
+
+</body>
+
+</html>
