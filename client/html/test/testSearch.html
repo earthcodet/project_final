@@ -55,12 +55,12 @@
         <div class="display-center ">
             <h5>
                 ชื่อ :
-                <input type="text" id="" >
+                <input type="text" id="username" >
                 นามสกุล :
-                <input type="text" id="" >
+                <input type="text" id="userlastname" >
                 เลขบัตรประจำตัว :
-                <input type="text" id="" >
-                <button type="button" class="btn btn-secondary is-color" >
+                <input type="text" id="userid" >
+                <button type="button" class="btn btn-secondary is-color"  onclick="searchItem(document.getElementById('userlastname').value)">
                     <h5> 
                         <i class="fa fa-search"></i> 
                         ค้นหา
@@ -69,7 +69,7 @@
             </h5>
         </div>
         <div>
-            <table id='result' class="table table-hover cursor-pointer border-black">
+            <table id='resultItem' class="table table-hover cursor-pointer border-black">
                 <thead>
                   <tr class="is-color ">
                     <th scope="col">ชื่อ</th>
@@ -79,20 +79,12 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr onclick="alert('row 1 is click')">
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr onclick="alert('row 2 is click')">
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
+            
                 </tbody>
               </table>
+        </div>
+        <div id="resultNotFound" class="display-none display-center">
+            <h1> ค้นหาไม่พบ </h1>
         </div>
     </div>
    

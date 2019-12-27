@@ -103,3 +103,17 @@ a.exit:hover{
   .sarabun-font{
     font-family: sarabun;
   }
+  .display-none{
+    display: none;
+  }
+  .w3-main{ 
+    height: 100%;
+  }
+  html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: auto;
+    }
+  .w3-main,#main{transition:margin-left .4s}  
