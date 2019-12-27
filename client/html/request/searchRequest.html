@@ -15,6 +15,8 @@
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
 
+
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="../../css/w.3.css">
 <link rel="stylesheet" href="../../css/w3-theme-teal.css">
@@ -51,12 +53,7 @@
 <!-- ทดสอบควบคุมหน้า -->
 <script src="../../js/controlTest.js"></script>
 
-<!-- date th -->
-<link type="text/css" href="../../css/jquery-ui-1.12.1.custom/jquery-ui.css" rel="stylesheet" />
-<script type="text/javascript" src="../../js/date/jquery-1.4.4.min.js"></script>
-<script type="text/javascript" src="../../js/date/jquery-ui-1.8.10.offset.datepicker.min.js"></script>
-<script type="text/javascript" src="../../js/date/dateth.js"></script>
-
+<script src="../../js/searchRequest.js"></script>
 <body>
     <!-- เมนูด้านบน -->
     <div class="w3-top" style="overflow:auto;">
@@ -195,65 +192,174 @@
     </div>
 
     <div class="w3-main" style="margin-left:250px;margin-top: 47px;">
-        <header class="w3-container w3-theme">
+        <header class="w3-container  w3-theme">
             <h1 style="font-size:20px">ค้นหา/แก้ไข</h1>
         </header>
 
-        <div class="w3-container " style="padding:32px; text-align: center;">
-            <!-- <div class="box"> -->
-            <div class="row">
-                <div class="col" style="text-align: left ; margin-left:30px ">
-                    <h5>ค้นหาตาม</h5>
-                    <select size="7" style="width: 90%;">
-                        <option value="">ชื่อผู้ขอ</option>
-                        <option value="">วันที่ยื่น</option>
-                        <option value="">เลขที่ใบคำขอ</option>
-                        <option value="">วันที่หมดอายุ (ใบคำขอ)</option>
-                        <option value="">ประเภทใบอนุญาต</option>
-                        <option value="">ประเภทกิจการ</option>
-                        <option value="">ที่อยู่</option>
-                    </select>
-                </div>
-
-                <div class="col">
-                    <div id="searchUser" class="s">
-                        <h5>คำที่ค้นหา</h5>
-                        <br>
-                        <input type="text" style="width: 90%;">
-                        <br><br>
-                        <button class="fa fa-search button "> ค้นหา</button>
+        <div class=" w3-container " style="padding:32px; text-align: center;">
+            <div style="width: 100%;">
+                <div class="row " style="padding: 20px;">
+                    <div class="col" style="text-align: left;">
+                        <h5>ค้นหาตาม</h5>
+                        <select size="7" style="width: 90%;" id="searchItem"onchange="selectItem(this.value)" >
+                            <option selected="selected" value=1>ชื่อผู้ขอ</option>
+                            <option value=2>วันที่ยื่น</option>
+                            <option value=3>เลขที่ใบคำขอ</option>
+                            <option value=4>วันที่หมดอายุ (ใบคำขอ)</option>
+                            <option value=5>ประเภทใบอนุญาต</option>
+                            <option value=6>ประเภทกิจการ</option>
+                            <option value=7>ที่อยู่</option>
+                        </select>
                     </div>
-                    <div id="searchUser"> </div>
+
+                    <div class="col " style="text-align: left ; display: box;margin-left: 50px;">
+                        <div id="searchUser" >
+                            <h5>คำที่ค้นหา</h5>
+                            <br>
+                            <input type="text" style="width: 50%;">
+                        </div>
+                        <div id="searchDate" class="displaynone">
+                            <h5>วันที่ค้นหา</h5>
+                            <br>
+                            <input type="date" style="width: 50%;">
+                        </div>
+                        <div id='searchId' class="displaynone">
+                            <h5>เลขที่ใบคำขอ</h5>
+                            <br>
+                            <input type="text" style="width: 50%;">
+                        </div>
+                        <div id="searchDateEx" class="displaynone">
+                            <h5>วันที่หมดอายุ (ใบคำขอ)</h5>
+                            <br>
+                            <input type="date" style="width: 50%;">
+                        </div>
+                        <div id="searchType" class="displaynone">
+                            <h5>ประเภทใบอนุญาต</h5>
+                            <br>
+                            <input list="brow" id="" name="" style="width: 50%;">
+                            <datalist id="brow">
+                                <option value="ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ">
+                                    ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ
+                                </option>
+                                <option value="ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ">
+                                    ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ
+                                </option>
+                                <option value="ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร">ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร
+                                </option>
+                                <option value="ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร">ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร
+                                </option>
+                                <option value="หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร">
+                                    หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</option>
+                                <option value="หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร">
+                                    หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</option>
+                                <option value="ใบอนุญาติให้ใช้สถานที่เป็นตลาดเอกชน">ใบอนุญาติให้ใช้สถานที่เป็นตลาดเอกชน
+                                </option>
+                                <option value="กิจการที่เป็นอันตรายต่อสุขภาพ">กิจการที่เป็นอันตรายต่อสุขภาพ</option>
+                                <option value="กิจการฌาปณสถาน">กิจการฌาปณสถาน</option>
+                            </datalist>
+                        </div>
+                        <div id='searchTypeBuidding' class="displaynone">
+                            <h5>ประเภทกิจการ</h5>
+                            <br>
+                            <input type="text" style="width: 50%;">
+                        </div>
+                        <div id='searchAddress' class="displaynone" >
+                            <h5>ที่อยู่</h5>
+                            <br>
+                            <div>
+                                <div class="row">
+                                    <div class="col">
+                                        ตั้งอยู่เลขที่ :
+                                        <input type="int">
+                                    </div>
+                                    <div class="col">
+                                        &nbsp;
+                                        หมู่ที่ :
+                                        <input type="int">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        ตรอก :
+                                        <input type="text">
+                                    </div>
+                                    <div class="col">
+                                        &nbsp;&nbsp;
+                                        ซอย :
+                                        <input type="text">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        อาคาร :
+                                        <input type="text">
+                                    </div>
+                                    <div class="col">
+                                        &nbsp;&nbsp;
+                                        ถนน :
+                                        <input type="text">
+                                    </div>
+                                   
+                                </div>
+                            <div class="row">
+                                <div class="col">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    จังหวัด :
+                                    <input type="text">
+                                </div>
+                                <div class="col">
+                                    อำเภอ :
+                                    <input type="text">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    ตำบล :
+                                    <input type="text">
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row" style="text-align: right ; display:block;margin-right:30px">
+                            <button class="fa fa-search button" style="background-color: #009688; " > ค้นหา</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <br>
-            <table>
-                <tr>
-                    <th>ชื่อผู้ขอ</th>
-                    <th>วันที่ยื่น</th>
-                    <th>เลขที่ใบคำขอ</th>
-                    <th>วันที่หมดอายุ</th>
-                    <th>ประเภทใบอนุญาต</th>
-                    <th>ประเภทกิจการ</th>
-                </tr>
-                <tr>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                </tr>
-                <tr>
-                    <td>test2</td>
-                    <td>test2</td>
-                    <td>test2</td>
-                    <td>test2</td>
-                    <td>test2</td>
-                    <td>test2</td>
-                </tr>
-            </table>
-            <!-- </div> -->
+            <br><br>
+            <h5 style="text-align: left;"> ผลลัทพ์การค้นหา </h5>
+            <div class="" style="width: 100%;">
+                <table>
+                    <tr>
+                        <th style=" background-color: #009688; color: white;">ชื่อผู้ขอ</th>
+                        <th style=" background-color: #009688; color: white;">วันที่ยื่น</th>
+                        <th style=" background-color: #009688; color: white;">เลขที่ใบคำขอ</th>
+                        <th style=" background-color: #009688; color: white;">วันที่หมดอายุ</th>
+                        <th style=" background-color: #009688; color: white;">ประเภทใบอนุญาต</th>
+                        <th style=" background-color: #009688; color: white;">ประเภทกิจการ</th>
+                    </tr>
+                    <tr>
+                        <td>test</td>
+                        <td>test</td>
+                        <td>test</td>
+                        <td>test</td>
+                        <td>test</td>
+                        <td>test</td>
+                    </tr>
+                    <tr>
+                        <td>test2</td>
+                        <td>test2</td>
+                        <td>test2</td>
+                        <td>test2</td>
+                        <td>test2</td>
+                        <td>test2</td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 
