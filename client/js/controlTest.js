@@ -39,34 +39,38 @@ function enableMenu(id) {
 }
 
 function insertTEST() {
-    Swal.fire({
-        title: "สำนักงานเทศบาล",
-        html: "ต้องการบันทึกหรือไม่",
-        showCancelButton: true,
-        confirmButtonColor: "#009688",
-        confirmButtonText: "ใช่",
-        cancelButtonText: "ไม่ใช่",
-        cancelButtonColor: '#dc3545',
-        closeOnConfirm: false,
-        closeOnCancel: false
-    })
-        .then((result) => {
-            if (result.value) {
-                Swal.fire({
-                    html: "บันทึกสำเร็จ",
-                    icon: "success",
-                    confirmButtonColor: "#009688"
-                });
-                data = true
-                disableMenuAll()
-                enableMenu('addMenu')
-                enableMenu('editMenu')
-                enableMenu('deleteMenu')
-                enableFunction()
-            } else if (result.dismiss === Swal.DismissReason.cancel) {
-                // Swal.fire("บันทึกล้มเหลว");
-            }
-        });
+    // Swal.fire({
+    //     title: "สำนักงานเทศบาล",
+    //     html: "ต้องการบันทึกหรือไม่",
+    //     showCancelButton: true,
+    //     confirmButtonColor: "#009688",
+    //     confirmButtonText: "ใช่",
+    //     cancelButtonText: "ไม่ใช่",
+    //     cancelButtonColor: '#dc3545',
+    //     closeOnConfirm: false,
+    //     closeOnCancel: false
+    // })
+    //     .then((result) => {
+    //         if (result.value) {
+    //             Swal.fire({
+    //                 html: "บันทึกสำเร็จ",
+    //                 icon: "success",
+    //                 confirmButtonColor: "#009688"
+    //             });
+    //             data = true
+    //             disableMenuAll()
+    //             enableMenu('addMenu')
+    //             enableMenu('editMenu')
+    //             enableMenu('deleteMenu')
+    //             enableFunction()
+    //         } else if (result.dismiss === Swal.DismissReason.cancel) {
+    //             // Swal.fire("บันทึกล้มเหลว");
+    //         }
+    //     });
+
+    var swal_html = '<div></div>'
+    
+    Swal.fire({title:"Good Job!", html: swal_html});
 }
 function editTEST() {
     if (!deleteData) {

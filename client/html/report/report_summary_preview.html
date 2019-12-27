@@ -20,6 +20,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
+
+            <!-- css ส่วนกลาง -->
+    <link href="../../css/utilities.css" rel="stylesheet">
 </head>
 <style type="text/css">
     @media print {
@@ -51,15 +54,13 @@
 
 <body>
     <div class="hideWhenPrint">
-        <button type="button" class="btn btn-outline-success btn-lg"
-        style="background-color: #009688;color: white;" onclick="window.print()">พิมพ์</button>
-        <button type="button" class="btn btn-outline-success btn-lg"
-        style="background-color: #009688;color: white;" onclick="ExportToExcel(table)">Excel</button>
+        <button type="button" class="btn btn-outline-success btn-lg is-color" onclick="window.print()">พิมพ์</button>
+        <button type="button" class="btn btn-outline-success btn-lg is-color" onclick="ExportToExcel(table)">Excel</button>
         <br><br>
     </div>
-    <p style="text-align: center;">รายงานการชำระค่าธรรมเนียมใบอนุญาตประกอบการค้าประเภทต่างๆ</p>
-    <p style="text-align: center;">ประจำเดือน <z>รอใส่เดือน</z></p>
-    <div style="font-family: sarabun;">
+    <p class="text-center">รายงานการชำระค่าธรรมเนียมใบอนุญาตประกอบการค้าประเภทต่างๆ</p>
+    <p class="text-center">ประจำเดือน <z>รอใส่เดือน</z></p>
+    <div class="sarabun-font">
         <table id="table" class="table table-bordered table-hover">
             <thead class="text-center">
                 <tr>
