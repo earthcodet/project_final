@@ -1,15 +1,19 @@
+//list จังหวัดทั้งหมด
 let provice = [];
 let amphur = [];
 let district = [];
 
+// สำหรับ จ/อ/ต ช่องที่หนึ่ง
 let addressProvice = [];
 let addressAmphur = [];
 let addressDistrict = [];
 
+//สำหรับเก็บจังหวัดที่เลือกไว้
 let buiddingProvice = [];
 let buiddingAmphur   =[];
 let buiddingDistrict =[];
 
+//ตัวแปรเอาไว้ชี้ว่าเลือกจังหวัดอะไรไว้
 var aProviceId = 1;
 var wProviceId = 1;
 
@@ -57,6 +61,7 @@ function removeAlloption(id) {
         select.options[c] = null;
     }
 }
+
 //Address Buidding 
 
 function wdistrictSelect(amphurId) {
@@ -91,7 +96,7 @@ function wamphurSelect(proviceId) {
         var option = document.createElement("option");
         option.text = buiddingAmphur[i].AMPHUR_NAME;
         option.value = buiddingAmphur[i].AMPHUR_ID;
-        select.onchange = function () { wdistrictSelect(document.getElementById('wDistrict').value) };
+        select.onchange = function () { wdistrictSelect(select.value) };
         select.add(option);
     }
    
@@ -107,7 +112,7 @@ function wcreateSelectProvice(data) {
         option.text = data[i].PROVINCE_NAME;
         option.value = data[i].PROVINCE_ID;
 
-        select.onchange = function () { wchageProvice(document.getElementById('wProvince').value) };
+        select.onchange = function () { wchageProvice(select.value) };
         select.add(option);
     }
 }
@@ -146,7 +151,7 @@ function amphurSelect(proviceId) {
         var option = document.createElement("option");
         option.text = addressAmphur[i].AMPHUR_NAME;
         option.value = addressAmphur[i].AMPHUR_ID;
-        select.onchange = function () { districtSelect(document.getElementById('district').value) };
+        select.onchange = function () { districtSelect(select.value) };
         select.add(option);
     }
    
@@ -162,10 +167,13 @@ function createSelectProvice(data) {
         option.text = data[i].PROVINCE_NAME;
         option.value = data[i].PROVINCE_ID;
 
-        select.onchange = function () { chageProvice(document.getElementById('province').value) };
+        select.onchange = function () { chageProvice(select.value) };
         select.add(option);
     }
 }
+
+
+//ฟังชันเริ่มต้น
 function runForm() {
     getProvice().then((data) => {
         createSelectProvice(data)

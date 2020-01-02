@@ -86,6 +86,7 @@ a.exit:hover{
  .cursor-pointer{
     cursor: pointer;
   }
+  
   .table-hover tbody tr:hover{
     color:#FFFF;
     background-color:#95a09f
@@ -124,7 +125,6 @@ a.exit:hover{
   }
 
   .search-popup-height {
-    /* overflow:auto; */
     height:300px;
     border-style: solid;
     border-color: #d8d7d7;
@@ -151,4 +151,28 @@ table-layout:fixed;
 }
 .tablesearch thead {
 width: calc( 100% - 1em )
+}
+
+/* table result */
+.setheight400px{
+  height: 400px;
+}
+.tableresult tbody {
+  display:block;
+  height:370px;
+  overflow:auto;
+}
+.tableresult th{
+  font-size: 16px;
+  padding: 0.5rem;
+  margin-bottom: 0rem;
+  text-align: center;
+}
+.tableresult thead,.tableresult tr {
+display:table;
+width:100%;
+table-layout:fixed;
+}
+.tableresult thead {
+width: calc( 100% - 1.1em )
 }

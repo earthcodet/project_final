@@ -7,11 +7,6 @@ let addressProvice = [];
 let addressAmphur = [];
 let addressDistrict = [];
 
-// สำหรับ จ/อ/ต ช่องที่สอง
-let buiddingProvice = [];
-let buiddingAmphur   =[];
-let buiddingDistrict =[];
-
 //สำหรับเก็บจังหวัดที่เลือกไว้
 var aProviceId = 1;
 var wProviceId = 1;
@@ -105,12 +100,12 @@ function chageProvice(proviceId){
     districtSelect(addressAmphur[0].AMPHUR_ID)
 }
 function createSelectProvice(data) {
+    console.log(data)
     for (let i = 0; i < data.length; i++) {
         var select = document.getElementById("province");
         var option = document.createElement("option");
         option.text = data[i].PROVINCE_NAME;
         option.value = data[i].PROVINCE_ID;
-
         select.onchange = function () { chageProvice(document.getElementById('province').value) };
         select.add(option);
     }
@@ -118,8 +113,8 @@ function createSelectProvice(data) {
 function runForm() {
     getProvice().then((data) => {
         createSelectProvice(data)
-        getAmphur().then((data) =>{
-            amphurSelect(1)
+         getAmphur().then((data) =>{
+           amphurSelect(1)
             getDistrict().then((districtTemp) =>{
                 districtSelect(addressAmphur[0].AMPHUR_ID)
             })

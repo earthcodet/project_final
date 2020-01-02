@@ -53,6 +53,10 @@ function addTEST() {
     disFunction()
     disableMenuAll()
     enableMenu('saveMenu')
+    var id = document.getElementById('id')
+    if(id != null){
+            id.style.textDecoration = ''
+    }
 }
 function disableMenuAll() {
     document.getElementById('addMenu').classList.add('disableds')
@@ -97,8 +101,6 @@ function insertTEST() {
         });
 }
 
-
-
 function testSearchOparator(){
     var swal_html = `  <div >
     <div class="display-center">
@@ -110,7 +112,7 @@ function testSearchOparator(){
             เลขบัตรประจำตัว :
             <input type="text" id="userid" >
             <button type="button" 
-            class="btn btn-secondary is-color>
+            class="btn btn-secondary is-color">
                 <h5> 
                     <i class="fa fa-search"></i> 
                     ค้นหา
@@ -211,7 +213,7 @@ function editTEST() {
     if (!deleteData) {
         disableMenuAll()
         enableMenu('saveMenu')
-        disFunction()
+        disableFunction()
     } else {
         Swal.fire({
             title: "สำนักงานเทศบาล",
@@ -222,9 +224,19 @@ function editTEST() {
         })
     }
 }
-
+ function setIdDelete(){
+    var id = document.getElementById('id')
+    if(id != null){
+        if(id.style.textDecoration == ''){
+            id.style.textDecoration = 'line-through'
+        }else{
+            id.style.textDecoration = ''
+        }
+    }
+ }
 function deleteTEST() {
     deleteData = true
+    setIdDelete()
     disableMenuAll()
     enableMenu('addMenu')
     enableMenu('editMenu')
@@ -233,6 +245,7 @@ function deleteTEST() {
 
 function restoreTEST() {
     deleteData = false
+    setIdDelete()
     disableMenuAll()
     enableMenu('addMenu')
     enableMenu('editMenu')
