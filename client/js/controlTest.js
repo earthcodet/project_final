@@ -1,63 +1,35 @@
 var data = false
 var deleteData = false
-let listUsername =[
-    {   
-        username:'สมพงค์',
-        lastname:'ท้องป่อง',
-        address:'169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131',
-        id:'1234567891233' 
-    },
-    {   
-        username:'สมัคร',
-        lastname:'ปกป้องแดนไกล',
-        address:'169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131',
-        id:'1234567895123' 
-    }
-]
-function searchItem(lastname){
-    
-    var resultName = []
-    for(let i =0; i<listUsername.length; i++){
-        if(listUsername[i].lastname.indexOf(lastname)){
-            resultName.push(listUsername[i])
-        }
-    }
-    return resultName
-}
-
-function createItem(lastname){
-    console.log('passs')
-    document.getElementById('resultNotFound').classList.add('display-none')
-
-    let arrayResult = searchItem(lastname)
-    if(arrayResult.length != 0){
-        console.log(arrayResult)
-            var tbl = document.getElementById('resultItem')
-            var tbdy = document.createElement('tbody');
-            for (var i = 0; i < 3; i++) {
-              var tr = document.createElement('tr');
-              for (var j = 0; j < 2; j++) {
-                if (i == 2 && j == 1) {
-                  break
-                } else {
-                  var td = document.createElement('td');
-                  td.appendChild(document.createTextNode('\u0020'))
-                  i == 1 && j == 1 ? td.setAttribute('rowSpan', '2') : null;
-                  tr.appendChild(td)
-                }
-              }
-              tbdy.appendChild(tr);
-            }
-            tbl.appendChild(tbdy);
-    }else{
-        document.getElementById('resultItem').classList.add('display-none')
-        document.getElementById('resultNotFound').classList.remove('display-none')
-    }
-}
+// function createItem(lastname){
+//     document.getElementById('resultNotFound').classList.add('display-none')
+//     let arrayResult = searchItem(lastname)
+//     if(arrayResult.length != 0){
+//             var tbl = document.getElementById('resultItem')
+//             var tbdy = document.createElement('tbody');
+//             for (var i = 0; i < 3; i++) {
+//               var tr = document.createElement('tr');
+//               for (var j = 0; j < 2; j++) {
+//                 if (i == 2 && j == 1) {
+//                   break
+//                 } else {
+//                   var td = document.createElement('td');
+//                   td.appendChild(document.createTextNode('\u0020'))
+//                   i == 1 && j == 1 ? td.setAttribute('rowSpan', '2') : null;
+//                   tr.appendChild(td)
+//                 }
+//               }
+//               tbdy.appendChild(tr);
+//             }
+//             tbl.appendChild(tbdy);
+//     }else{
+//         document.getElementById('resultItem').classList.add('display-none')
+//         document.getElementById('resultNotFound').classList.remove('display-none')
+//     }
+// }
 
 
 
-function exitTEST(menu){
+function exitTEST() {
     Swal.fire({
         title: "สำนักงานเทศบาล",
         html: "ต้องการออกจากระบบหรือไม่",
@@ -72,7 +44,7 @@ function exitTEST(menu){
         .then((result) => {
             if (result.value) {
                 window.location.href = "../utilities/login.html"
-            } 
+            }
         });
 }
 function addTEST() {
@@ -95,37 +67,41 @@ function enableMenu(id) {
 }
 
 function insertTEST() {
-    // Swal.fire({
-    //     title: "สำนักงานเทศบาล",
-    //     html: "ต้องการบันทึกหรือไม่",
-    //     showCancelButton: true,
-    //     confirmButtonColor: "#009688",
-    //     confirmButtonText: "ใช่",
-    //     cancelButtonText: "ไม่ใช่",
-    //     cancelButtonColor: '#dc3545',
-    //     closeOnConfirm: false,
-    //     closeOnCancel: false
-    // })
-    //     .then((result) => {
-    //         if (result.value) {
-    //             Swal.fire({
-    //                 html: "บันทึกสำเร็จ",
-    //                 icon: "success",
-    //                 confirmButtonColor: "#009688"
-    //             });
-    //             data = true
-    //             disableMenuAll()
-    //             enableMenu('addMenu')
-    //             enableMenu('editMenu')
-    //             enableMenu('deleteMenu')
-    //             enableFunction()
-    //         } else if (result.dismiss === Swal.DismissReason.cancel) {
-    //             // Swal.fire("บันทึกล้มเหลว");
-    //         }
-    //     });
+    Swal.fire({
+        title: "สำนักงานเทศบาล",
+        html: "ต้องการบันทึกหรือไม่",
+        showCancelButton: true,
+        confirmButtonColor: "#009688",
+        confirmButtonText: "ใช่",
+        cancelButtonText: "ไม่ใช่",
+        cancelButtonColor: '#dc3545',
+        closeOnConfirm: false,
+        closeOnCancel: false
+    })
+        .then((result) => {
+            if (result.value) {
+                Swal.fire({
+                    html: "บันทึกสำเร็จ",
+                    icon: "success",
+                    confirmButtonColor: "#009688"
+                });
+                data = true
+                disableMenuAll()
+                enableMenu('addMenu')
+                enableMenu('editMenu')
+                enableMenu('deleteMenu')
+                enableFunction()
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                // Swal.fire("บันทึกล้มเหลว");
+            }
+        });
+}
 
+
+
+function testSearchOparator(){
     var swal_html = `  <div >
-    <div class="display-center ">
+    <div class="display-center">
         <h5>
             ชื่อ :
             <input type="text" id="username" >
@@ -133,7 +109,8 @@ function insertTEST() {
             <input type="text" id="userlastname" >
             เลขบัตรประจำตัว :
             <input type="text" id="userid" >
-            <button type="button" class="btn btn-secondary is-color"  onclick="searchItem(document.getElementById('userlastname').value)">
+            <button type="button" 
+            class="btn btn-secondary is-color>
                 <h5> 
                     <i class="fa fa-search"></i> 
                     ค้นหา
@@ -141,36 +118,93 @@ function insertTEST() {
             </button>
         </h5>
     </div>
-    <div>
-        <table id='resultItem' class="table table-hover cursor-pointer border-black">
+    <div class="search-popup-height">
+        <table id='resultItem' class="table tablesearch table-hover cursor-pointer">
             <thead>
               <tr class="is-color ">
-                <th scope="col">ชื่อ</th>
-                <th scope="col">นามสกุล</th>
-                <th scope="col">ที่อยู่</th>
-                <th scope="col">เลขบัตรประจำตัว</th>
+                <th>ชื่อ</th>
+                <th>นามสกุล</th>
+                <th>ที่อยู่</th>
+                <th>เลขบัตรประจำตัว</th>
               </tr>
             </thead>
             <tbody>
-        
+            <tr>
+                <td>นายสมหมาย</td>
+                <td>จงรัก</td>
+                <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
+                <td>1011122111111</td>
+            </tr>
+            <tr>
+                <td>นายสมหมาย</td>
+                <td>จงรัก</td>
+                <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
+                <td>1011122111111</td>
+            </tr>
+            <tr>
+                <td>นายสมหมาย</td>
+                <td>จงรัก</td>
+                <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
+                <td>1011122111111</td>
+            </tr>
+            <tr>
+                <td>นายสมหมาย</td>
+                <td>จงรัก</td>
+                <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
+                <td>1011122111111</td>
+            </tr>
+            <tr>
+                <td>นายสมหมาย</td>
+                <td>จงรัก</td>
+                <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
+                <td>1011122111111</td>
+            </tr>
+            <tr>
+                <td>นายสมหมาย</td>
+                <td>จงรัก</td>
+                <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
+                <td>1011122111111</td>
+            </tr>
+            <tr>
+                <td>นายสมหมาย</td>
+                <td>จงรัก</td>
+                <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
+                <td>1011122111111</td>
+            </tr>
+            <tr>
+                <td>นายสมหมาย</td>
+                <td>จงรัก</td>
+                <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
+                <td>1011122111111</td>
+            </tr>
+            <tr>
+                <td>นายสมหมาย</td>
+                <td>จงรัก</td>
+                <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
+                <td>1011122111111</td>
+            </tr>
+            
+            <tr>
+                <td>นายสมหมาย</td>
+                <td>จงรัก</td>
+                <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
+                <td>1011122111111</td>
+            </tr>
             </tbody>
           </table>
     </div>
-    <div id="resultNotFound" class="display-none display-center">
-        <h1> ค้นหาไม่พบ </h1>
-    </div>
 </div>`
-    
+
     Swal.fire({
-        title:"Good Job!", 
+        title: "ค้นหารายชื่อผู้ประกอบการ",
         html: swal_html,
         width: '80%',
-        showCancelButton: false, 
+        customClass: 'swal-height',
+        showCancelButton: false,
         showConfirmButton: false
     });
 }
-
-function searchUsername(){
+function searchUsername() {
     document.getElementById('')
 }
 function editTEST() {
@@ -184,7 +218,7 @@ function editTEST() {
             html: "ข้อมูลอยู่ในสถานะลบแล้ว",
             confirmButtonColor: "#009688",
             closeOnConfirm: false,
-            icon:'warning'
+            icon: 'warning'
         })
     }
 }
