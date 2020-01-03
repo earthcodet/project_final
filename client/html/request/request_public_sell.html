@@ -465,27 +465,30 @@
                     <!-- box เพิ่มรูป -->
                     <div class="w3-container box" style="margin:auto;">
                         <a>ประเภทกิจการ :</a>
-                        <input type="text" id="" size="120">
+                        <input type="text" id="" style="width: 91.05%;">
                         <br>
-                        <a>พื้นที่ :</a>
-                        <input type="text" id="" width="20px"> <a> ตารางเมตร</a>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a>มีคนงาน :</a>
-                        <input type="text" id="" width="20px"> <a> คน</a>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a>ใช้เครื่องจักรขนาด :</a>
-                        <input type="text" id="" width="20px"> <a> แรงม้า</a>
+
+                        <div class="row">
+                            <div class="col"><a>พื้นที่ :</a>
+                        <input type="text" id="" style="width: 50%;"> <a> ตารางเมตร</a></div>
+                            <div class="col"><a>มีคนงาน :</a>
+                        <input type="text" id="" style="width: 60%;"> <a> คน</a></div>
+                            <div class="col-6 text-right"><a>ใช้เครื่องจักรขนาด :</a>
+                        <input type="text" id="" style="width: 70%;">&nbsp;<a>แรงม้า</a></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col"> <a>ใบอนุญาต </a>
+                                <a> เล่มที่ :</a>
+                                <input type="text" id="" style="width: 50%;"></div>
+                            <div class="col"><a>เลขที่ :</a>
+                                <input type="text" id=""></div>
+                            <div class="col"><a>ค่าธรรมเนียม:</a>
+                                <input type="number" id="" style="width: 53%;">&nbsp;<a>บาท</a></div>
+                            <div class="col text-right"><a>ค่าปรับ:</a>
+                                <input type="number" id="" style="width: 65%;">&nbsp;<a>บาท</a></div>
+                        </div>
                         <br>
-                        <a>ใบอนุญาต </a>
-                        <a> เล่มที่ :</a>
-                        <input type="text" id="" width="20px">
-                        <a>เลขที่ :</a>
-                        <input type="text" id="" width="20px">
-                        <a>ค่าธรรมเนียม</a>
-                        <input type="number" id="">
-                        <a>ค่าปรับ</a>
-                        <input type="number" id="">
-                        <br><br>
                         <a>รูปภาพผลการตรวจสอบ</a>
                         <input type="file" id="uploadFile" onchange="handleFileSelect(event)"
                             multiple>&nbsp;&nbsp;&nbsp;
