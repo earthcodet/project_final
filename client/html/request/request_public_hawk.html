@@ -202,139 +202,7 @@
                 <fieldset disabled id="disable">
                     <!-- ข้อมูล -->
                     <div class="w3-container box" style="margin:auto;">
-                        <h4>ข้อมูลสถานประกอบการ</h4>
-
-                        <!-- <form action="/action_page.php"> -->
-                        <a>เลขที่คำขอ :</a>
-                        <input type="text" id="" name="" size="12" placeholder="">&nbsp;
-                        <a>วันที่ยื่นขอ :</a>
-                        <input type="text" id="datepicker-th-2" name="date1" />&nbsp;
-                        <a>ประเภทคำขอ :</a>
-                        <input list="brow" id="" name="" size="31.8">
-                        <!-- <select id="" name="" style="width: 19%;"> -->
-                        <datalist id="brow">
-                            <option value="" hidden>เลือก...</option>
-                            <option value="1.การจำหน่ายสินค้าในที่ หรือทางสาธารณะ โดยลักษณะการเร่ขาย">
-                                1.การจำหน่ายสินค้าในที่ หรือทางสาธารณะ โดยลักษณะการเร่ขาย</option>
-                        </datalist>
-                        </input>&nbsp;
-                        <a>เขียนที่ :</a>
-                        <input type="text" id="place" value="เทศบาลเมืองแสนสุข">&nbsp;
-                        <br>
-                        <a>ข้าพเจ้า :</a>
-                        <input type="radio" name="typee" id="typeUser1" value="บุคคลธรรมดา">
-                        <a>บุคคลธรรมดา</a>
-                        <input type="radio" name="typee" id="typeUser2" value="นิติบุคคล">
-                        <a>นิติบุคคล</a> &nbsp;
-                        <input type="text" id="name" size="14">
-                        <a>เลขประจำตัว :</a>
-                        <input type="int" id="id" size="14"> &nbsp;
-                        <a>อายุ :</a>
-                        <input type="int" id="age" size="3"> &nbsp;
-                        <a>สัญชาติ :</a>
-                        <input list="nationality" id="" name="" size="7.5">
-                        <datalist id="nationality">
-                            <!-- <select id="nationality" style="width: 8%;"> -->
-                            <option value="" hidden>เลือก...</option>
-                            <option value="ไทย">ไทย</option>
-                            <option value="จีน"></option>
-                            <option value="อเมริกัน"></option>
-                            <!-- </select> -->
-                        </datalist>
-                        </input> &nbsp;
-                        <a>เชื้อชาติ :</a>
-                        <input list="nationality" id="" name="" size="7.5">
-                        <datalist id="nationality">
-                            <!-- <select id="race" style="width: 8%;"> -->
-                            <option value="" hidden>เลือก...</option>
-                            <option value="ไทย">ไทย</option>
-                            <option value="จีน"></option>
-                            <option value="อเมริกัน"></option>
-                            <!-- </select> -->
-                        </datalist>
-                        </input>
-                        <br>
-                        <a>อยู่บ้านเลขที่ :</a>
-                        <input type="text" id="homeId" size="9"> &nbsp;
-                        <a>หมู่ที่ :</a>
-                        <input type="int" id="moo" size="6"> &nbsp;
-                        <a>ตรอก:</a>
-                        <input type="text" id="trxk" size="12"> &nbsp;
-                        <a>ซอย :</a>
-                        <input type="text" id="sxy" size="13"> &nbsp;
-                        <a>อาคาร :</a>
-                        <input type="text" id="building" size="13"> &nbsp;
-                        <a>ถนน :</a>
-                        <input type="text" id="road" size="13">
-                        <br>
-                        <a>จังหวัด :</a>
-                        <select id="province" style="width: 13.9%;">
-                        </select> &nbsp;
-                        <a>อำเภอ :</a>
-                        <select id="district" style="width: 12.5%;">
-                        </select>&nbsp;
-                        <a>ตำบล :</a>
-                        <select id="subdistrict" style="width: 12.5%;">
-                        </select>&nbsp;
-                        <a>โทรศัพท์ :</a>
-                        <input type="text" id="phone" size="16"> &nbsp;
-                        <a>โทรสาร :</a>
-                        <input type="text" id="fax" size="16">
-                        <br>
-                        <a>สถานที่ประกอบการ :</a>
-                        <input type="text" id="workplaceName" size="40">&nbsp; (ถ้ามี) &nbsp;
-                        <a>พื้นที่ :</a>
-                        <input type="int" id="area" size="15"> ตารางเมตร &nbsp;
-                        <a>จำนวนคนงาน :</a>
-                        <input type="int" id="numPeople" size="10"> คน
-                        <br>
-                        <a>ตั้งอยู่เลขที่ :</a>
-                        <input type="text" id="wHomeId" size="9"> &nbsp;&nbsp;
-                        <a>หมู่ที่ :</a>
-                        <input type="int" id="wMoo" size="6"> &nbsp;
-                        <a>ตรอก:</a>
-                        <input type="text" id="wTrxk" size="13"> &nbsp;
-                        <a>ซอย :</a>
-                        <input type="text" id="wSxy" size="13"> &nbsp;
-                        <a>อาคาร :</a>
-                        <input type="text" id="wBuilding" size="13"> &nbsp;
-                        <a>ถนน :</a>
-                        <input type="text" id="wRoad" size="13">
-                        <br>
-                        <a>จังหวัด :</a>
-                        <select id="wProvince" style="width: 13.9%;">
-                        </select> &nbsp;
-                        <a>อำเภอ :</a>
-                        <select id="wDistrict" style="width: 12.5%;">
-                        </select>&nbsp;
-                        <a>ตำบล :</a>
-                        <select id="wSubdistrict" style="width: 12.5%;">
-                        </select>&nbsp;
-                        <a>โทรศัพท์ :</a>
-                        <input type="text" id="wPhone" size="16"> &nbsp;
-                        <a>โทรสาร :</a>
-                        <input type="text" id="wFax" size="16">
-                        <br>
-                        บุลคลอ้างอิง
-                        <br>
-                        <a>คำนำหน้าชื่อ :</a>
-                        <select id="" name="" style="width: 10%;">
-                            <option value="" hidden>เลือก...</option>
-                            <option value="">นาย</option>
-                            <option value="">นาง</option>
-                            <option value="">นางสาว</option>
-                        </select>
-                        <a>ชื่อ :</a>
-                        <input type="text" id="" name="" size="17" placeholder="">&nbsp;
-                        <a>นามสกุล :</a>
-                        <input type="text" id="" name="" size="17" placeholder="">&nbsp;
-                        <a>สถานะ :</a>
-                        <input type="text" id="" size="16">&nbsp;
-                        <a>โทรศัพท์ :</a>
-                        <input type="text" id="" size="16">
-                        <br>
-                        <br>
-
+                        
                         <div style="width: 42%;height: 100%;float: left;">
                             <a>เลขที่คำขอ :</a>
                             <input type="text" id="" name="" style="width:20% " placeholder="">
@@ -575,20 +443,20 @@
                                 <a><b>ใบอบรมผู้สัมผัสอาหาร</b></a>&nbsp;&nbsp;
                             </div>
                             <div class="col">
-                                <input type="radio" name="typee" id="typeUser1" value="บุคคลธรรมดา"
-                                    onclick="w3.show('#ww')">
+                                <input type="radio" name="food" id="" value="" onclick="showTxtFood()">
                                 <a>อบรมแล้ว</a>&nbsp;
-                                <input type="radio" name="typee" id="typeUser1" value="บุคคลธรรมดา"
-                                    onclick="w3.hide('#ww')">
+                                <input type="radio" name="food" id="" value="" onclick="dontShowTxtFood()">
                                 <a>ยังไม่ได้อบรมอบรม</a>
                                 <br>
-                                <a>ออกใบประกาศนียบัตรโดย</a>
-                                <input type="text" id="">
-                                <br>
-                                <a>ให้ไว้ ณ วันที่</a>
-                                <input type="text" id="datepicker-th-3" name="date3" />&nbsp;
-                                <a>มีผลถึง ณ วันที่</a>
-                                <input type="text" id="datepicker-th-4" name="date4" />
+                                <div class="boxFood">
+                                    <a>ออกใบประกาศนียบัตรโดย</a>
+                                    <input type="text" id="">
+                                    <br>
+                                    <a>ให้ไว้ ณ วันที่</a>
+                                    <input type="text" id="datepicker-th-3" name="date1" />&nbsp;
+                                    <a>มีผลถึง ณ วันที่</a>
+                                    <input type="text" id="datepicker-th-4" name="date1" />
+                                </div>
                             </div>
                         </div>
                     </div> <br>
@@ -617,9 +485,12 @@
                         <input type="number" id="">
                         <br><br>
                         <a>รูปภาพผลการตรวจสอบ</a>
-                        <input type="file" id="uploadFile" onchange="handleFileSelect(event)"
-                            multiple>&nbsp;&nbsp;&nbsp;
-
+                        <input type="file" id="uploadFile" style="display: none;" onchange="handleFileSelect(event)" accept="image/*" multiple>
+                        <button type="button" class="btn is-color "style="" onclick="document.getElementById('uploadFile').click()"> 
+                            <h5><i class="fa fa-upload"></i>
+                            อัพโหลดภาพ</h5> 
+                        </button>
+                        <br>
                         <br>
                         <div id='outputImage' style="height: 320px; overflow-y:auto; border: 1px solid black;">
                         </div>
