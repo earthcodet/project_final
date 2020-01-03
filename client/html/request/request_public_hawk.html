@@ -56,7 +56,7 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
 <body>
-   
+
     <!-- เมนูด้านบน -->
     <div class="w3-top" style="overflow:auto;">
         <ul>
@@ -92,102 +92,105 @@
                 </a>
             </li>
             <li class="w3-display-topright">
-                <a id="exitMenu" onclick="exitTEST()" class="exit"  >
+                <a id="exitMenu" onclick="exitTEST()" class="exit">
                     <i class="fa fa-sign-out fa-lg w3-margin-right w3-text-theme"></i>
                     ออกจากระบบ
                 </a>
             </li>
         </ul>
         <nav class="w3-sidebar w3-bar-block w3-collapse w3-animate-left w3-card" style="z-index:3;width:250px;"
-        id="mySidebar">
-        <a class="w3-bar-item w3-button w3-border-bottom w3-large" href="../utilities/index.html">
-            <img src="../../img/img1.jpg" style="width:100%;">
-        </a>
+            id="mySidebar">
+            <a class="w3-bar-item w3-button w3-border-bottom w3-large" href="../utilities/index.html">
+                <img src="../../img/img1.jpg" style="width:100%;">
+            </a>
 
-        <div>
-            <a class="w3-bar-item w3-button w3-theme" onclick="myAccordion('demo1')"
-                href="javascript:void(0)">ระบบงานคำขอ <i class="fa fa-caret-down"></i></a>
-            <div id="demo1" class="w3-hide w3-show">
-                <a class="bar-item w3-button w3-theme" onclick="myAccordion11('demo11')" href="javascript:void(0)">
-                    เพิ่ม <i class="fa fa-caret-down"></i></a>
-                <div id="demo11" class="w3-hide w3-show">
-                    <a class="bar-item w3-button" href="request_public_sell.html">-
-                        ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
-                    <a class="bar-item w3-button w3-my-color" href="request_public_hawk.html">-
-                        ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
-                    <a class="bar-item w3-button" href="request_area_more_sell.html">-
-                        ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
-                    <a class="bar-item w3-button" href="request_area_more_correct.html">-
-                        ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</a>
-                    <a class="bar-item w3-button" href="request_area_less_sell.html">-
-                        หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
-                    <a class="bar-item w3-button" href="request_area_less_correct.html">-
-                        หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
-                    <a class="bar-item w3-button" href="request_market.html">- ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
-                    <a class="bar-item w3-button" href="request_health_danger.html">- กิจการที่เป็นอันตรายต่อสุขภาพ</a>
-                    <a class="bar-item w3-button" href="request_crematory.html">- กิจการฌาปณสถาน</a>
+            <div>
+                <a class="w3-bar-item w3-button w3-theme" onclick="myAccordion('demo1')"
+                    href="javascript:void(0)">ระบบงานคำขอ <i class="fa fa-caret-down"></i></a>
+                <div id="demo1" class="w3-hide w3-show">
+                    <a class="bar-item w3-button w3-theme" onclick="myAccordion11('demo11')" href="javascript:void(0)">
+                        เพิ่ม <i class="fa fa-caret-down"></i></a>
+                    <div id="demo11" class="w3-hide w3-show">
+                        <a class="bar-item w3-button" href="request_public_sell.html">-
+                            ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
+                        <a class="bar-item w3-button w3-my-color" href="request_public_hawk.html">-
+                            ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
+                        <a class="bar-item w3-button" href="request_area_more_sell.html">-
+                            ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
+                        <a class="bar-item w3-button" href="request_area_more_correct.html">-
+                            ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</a>
+                        <a class="bar-item w3-button" href="request_area_less_sell.html">-
+                            หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
+                        <a class="bar-item w3-button" href="request_area_less_correct.html">-
+                            หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
+                        <a class="bar-item w3-button" href="request_market.html">-
+                            ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
+                        <a class="bar-item w3-button" href="request_health_danger.html">-
+                            กิจการที่เป็นอันตรายต่อสุขภาพ</a>
+                        <a class="bar-item w3-button" href="request_crematory.html">- กิจการฌาปณสถาน</a>
+                    </div>
+                    <a class="bar-item w3-button" href="searchRequest.html">
+                        ค้นหา/แก้ไข</a>
                 </div>
-                <a class="bar-item w3-button" href="searchRequest.html">
-                    ค้นหา/แก้ไข</a>
             </div>
-        </div>
 
-        <div>
-            <a class="w3-bar-item w3-button" onclick="myAccordion2('demo2')"
-                href="javascript:void(0)">งานตรวจสอบ/อนุมัติ <i class="fa fa-caret-down"></i></a>
-            <div id="demo2" class="w3-hide">
-                <a class="w3-bar-item w3-button" href="#"></a>
+            <div>
+                <a class="w3-bar-item w3-button" onclick="myAccordion2('demo2')"
+                    href="javascript:void(0)">งานตรวจสอบ/อนุมัติ <i class="fa fa-caret-down"></i></a>
+                <div id="demo2" class="w3-hide">
+                    <a class="w3-bar-item w3-button" href="#"></a>
+                </div>
             </div>
-        </div>
 
-        <div>
-            <a class="w3-bar-item w3-button" onclick="myAccordion3('demo3')" href="javascript:void(0)">งานใบอนุญาต <i
-                    class="fa fa-caret-down"></i></a>
-            <div id="demo3" class="w3-hide">
-                <a class="w3-bar-item w3-button" href="#"></a>
+            <div>
+                <a class="w3-bar-item w3-button" onclick="myAccordion3('demo3')" href="javascript:void(0)">งานใบอนุญาต
+                    <i class="fa fa-caret-down"></i></a>
+                <div id="demo3" class="w3-hide">
+                    <a class="w3-bar-item w3-button" href="#"></a>
+                </div>
             </div>
-        </div>
 
-        <div>
-            <a class="w3-bar-item w3-button" onclick="myAccordion4('demo4')" href="javascript:void(0)">ข้อมูลส่วนกลาง <i
-                    class="fa fa-caret-down"></i></a>
-            <div id="demo4" class="w3-hide">
-                <a class="bar-item w3-button" href="../central/operator.html">- ข้อมูลผู้ประกอบการ</a>
-                <a class="bar-item w3-button" href="../central/02.html">- ข้อมูลการจดใบอนุญาต</a>
-                <a class="bar-item w3-button" href="../central/03.html">- โอนใบอนุญาต</a>
+            <div>
+                <a class="w3-bar-item w3-button" onclick="myAccordion4('demo4')"
+                    href="javascript:void(0)">ข้อมูลส่วนกลาง <i class="fa fa-caret-down"></i></a>
+                <div id="demo4" class="w3-hide">
+                    <a class="bar-item w3-button" href="../central/operator.html">- ข้อมูลผู้ประกอบการ</a>
+                    <a class="bar-item w3-button" href="../central/02.html">- ข้อมูลการจดใบอนุญาต</a>
+                    <a class="bar-item w3-button" href="../central/03.html">- โอนใบอนุญาต</a>
+                </div>
             </div>
-        </div>
 
-        <div>
-            <a class="w3-bar-item w3-button" onclick="myAccordion5('demo5')" href="javascript:void(0)">งานร้องเรียน <i
-                    class="fa fa-caret-down"></i></a>
-            <div id="demo5" class="w3-hide">
-                <a class="bar-item w3-button" href="#">- บันทึกเรื่องร้องเรียน</a>
-                <a class="bar-item w3-button" href="#">- บันทึกคำร้อง</a>
+            <div>
+                <a class="w3-bar-item w3-button" onclick="myAccordion5('demo5')" href="javascript:void(0)">งานร้องเรียน
+                    <i class="fa fa-caret-down"></i></a>
+                <div id="demo5" class="w3-hide">
+                    <a class="bar-item w3-button" href="#">- บันทึกเรื่องร้องเรียน</a>
+                    <a class="bar-item w3-button" href="#">- บันทึกคำร้อง</a>
+                </div>
             </div>
-        </div>
 
-        <div>
-            <a class="w3-bar-item w3-button" onclick="myAccordion6('demo6')" href="javascript:void(0)">ข้อมูลระบบ <i
-                    class="fa fa-caret-down"></i></a>
-            <div id="demo6" class="w3-hide">
-                <a class="w3-bar-item w3-button" href="#"></a>
+            <div>
+                <a class="w3-bar-item w3-button" onclick="myAccordion6('demo6')" href="javascript:void(0)">ข้อมูลระบบ <i
+                        class="fa fa-caret-down"></i></a>
+                <div id="demo6" class="w3-hide">
+                    <a class="w3-bar-item w3-button" href="#"></a>
+                </div>
             </div>
-        </div>
 
-        <div>
-            <a class="w3-bar-item w3-button" onclick="myAccordion7('demo7')" href="javascript:void(0)">รายงาน <i
-                    class="fa fa-caret-down"></i></a>
-            <div id="demo7" class="w3-hide">
-                <a class="bar-item w3-button" href="../report/report_crematory.html">ตามคำขอ</a>
-                <a class="bar-item w3-button" href="../report/report_summary.html">สรุป</a>
+            <div>
+                <a class="w3-bar-item w3-button" onclick="myAccordion7('demo7')" href="javascript:void(0)">รายงาน <i
+                        class="fa fa-caret-down"></i></a>
+                <div id="demo7" class="w3-hide">
+                    <a class="bar-item w3-button" href="../report/report_crematory.html">ตามคำขอ</a>
+                    <a class="bar-item w3-button" href="../report/report_summary.html">สรุป</a>
+                </div>
             </div>
-        </div>
-        <br><br><br><br>
-    </nav>
+            <br><br><br><br>
+        </nav>
 
-    <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay">
-    </div>
+        <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer"
+            id="myOverlay">
+        </div>
     </div>
     <div class="w3-main" style="margin-left:250px;padding-top:47px;">
         <header class="w3-container w3-theme">
@@ -197,7 +200,8 @@
         <div class="w3-container" style="padding:32px">
             <form id="form">
                 <fieldset disabled id="disable">
-                    <div class="box">
+                    <!-- ข้อมูล -->
+                    <div class="w3-container box" style="margin:auto;">
                         <h4>ข้อมูลสถานประกอบการ</h4>
 
                         <!-- <form action="/action_page.php"> -->
@@ -331,44 +335,251 @@
                         <br>
                         <br>
 
-                        <input type="radio" name="sub" id="purposeType1"> ยืนยันคำขอรับ &nbsp;
-                        <input type="radio" name="sub" id="purposeType2"> ยืนยันคำขอต่ออายุ &nbsp;
-                        <br>
+                        <div style="width: 42%;height: 100%;float: left;">
+                            <a>เลขที่คำขอ :</a>
+                            <input type="text" id="" name="" style="width:20% " placeholder="">
+                            &nbsp;
+                            <a>วันที่ยืนขอ :</a>
+                            <input type="text" id="datepicker-th-2" name="date1" style="width: 43%;" />
+                            &nbsp;
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <a>ข้าพเจ้า :</a>
+                            <select>
+                                <option value="บุคคลธรรมดา">บุคคลธรรมดา</option>
+                                <option value="นิติบุคคล">นิติบุคคล</option>
+                            </select>
+                            &nbsp;
+                            <input type="text" id="name" style="width: 45%;">
+                            <button class="fa fa-search is-color " style="height: 32px;border-radius: 8px;"
+                                onclick="testSearchOparator()"></button>
 
-                        <br><br>
-                        <input type="checkbox" id="documentId" value="cb1" />
-                        หนังสือยินยอมให้ใช้อาคารสถานที่เป็นที่ประกอบการ<br>
-                        <input type="checkbox" id="documenthHome" value="cb2" />
-                        สำเนาทะเบียนบ้าน/โฉนดที่ดิน(ที่ให้ใช้เป็นสถานที่ประกอบกิจการ)<br>
-                        <input type="checkbox" id="documentLegalEntity" value="cb3" />
-                        ใบรับรองแพทย์ผู้ขอรับใบอนุญาตและผู้ช่วยจำหน่ายสินค้า (ตามแบบ สณ.๑๑)<br>
-                        <input type="checkbox" id="documentSignature" value="cb4" /> หนังสือสัญญาเช่า<br>
-                        <input type="checkbox" id="documentSJ4" value="cb5" /> หนังสือมอบอำนาจ พร้อมติดอากรแสตมป์<br>
-                        <input type="checkbox" id="documentOther" value="cb6" /> เอกสารอื่นๆที่เกี่ยวข้อง
-                        <input type="text" id="other" size="40" />
-            
-                        <br><br><br>
+                            <br>
+                            &nbsp;
+                            <a>เลขที่บ้าน :</a>
+                            <input type="text" id="homeId" style="width: 20%;">
+                            &nbsp;&nbsp;
+                            <a>หมู่ที่ :</a>
+                            <input type="int" id="moo" style="width: 10%;">
+                            &nbsp;&nbsp;
+                            <a>ตรอก:</a>
+                            <input type="text" id="trxk" style="width: 28%;">
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            จังหวัด :
+                            <select id="province" style="width: 40%;">
+                            </select>
+                            &nbsp;
+                            <a>อำเภอ :</a>
+                            <select id="district" style="width: 28%;"></select>
+                            <br>
+                            <a>สถานที่ประกอบการ :</a>
+                            <input type="text" id="workplaceName" style="width: 60%;">&nbsp; (ถ้ามี)
+                            &nbsp;&nbsp;
+                            <br>
+                            &nbsp;
+                            <a>ตั้งอยู่เลขที่ :</a>
+                            <input type="text" id="wHomeId" style="width: 20%;">
+                            &nbsp;
+                            <a>หมู่ที่ :</a>
+                            <input type="int" id="wMoo" style="width: 10%;">
+                            &nbsp;&nbsp;
+                            <a>ตรอก:</a>
+                            <input type="text" id="wTrxk" style="width: 27%;">
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            จังหวัด :
+                            <select id="wProvince" style="width: 41%;">
+                            </select>
+                            &nbsp;
+                            <a>อำเภอ :</a>
+                            <select id="wDistrict" style="width: 27%;"></select>
+                            <br>
+                            บุคคลอ้างอิง
+                            <br>
+                            <a>คำนำหน้าชื่อ :</a>
+                            <select id="" name="">
+                                <option value="" hidden>เลือก...</option>
+                                <option value="">นาย</option>
+                                <option value="">นาง</option>
+                                <option value="">นางสาว</option>
+                            </select>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <a>ชื่อ :</a>
+                            <input type="text" id="" name="" style="width: 49%;" placeholder="">
+                        </div>
 
-                        ข้าพเจ้าขอรับรองว่า
-                        ข้อความในแบบคำร้องขอต่อใบอนุญาตนี้เป็นจริงทุกประการ<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        (ลงชื่อ)
-                        <input type="text" id="documentName" />
-                        ผู้ขอรับใบอนุญาต
-                        <!-- </form> -->
-                    </div>
+                        <div style="width: 58%;height: 100%;float: right;">
+                            <a>ประเภทคำขอ :</a>
+                            <input list="brow" id="" name="" style="width: 40%;">
 
-                    <br>
+                            <datalist id="brow">
+                                <option value="" hidden>เลือก...</option>
+                                <option
+                                    value="1.การจำหน่ายสินค้าในที่ หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น">
+                                    1.การจำหน่ายสินค้าในที่
+                                    หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                </option>
+                            </datalist>
+                            </input>
+                            &nbsp;
+                            <a>เขียนที่ &nbsp;:</a>
+                            <input type="text" id="place" value="เทศบาลเมืองแสนสุข" style="width: 35%;">
+                            <br>
+                            <a>เลขประจำตัว &nbsp;:</a>
+                            <input type="int" id="id" style="width: 25%;">
+                            &nbsp;
+                            <a>อายุ :</a>
+                            <input type="int" id="age" style="width: 8%;">
+                            <a>สัญชาติ &nbsp;:</a>
+                            <input list="nationality" id="" name="" style="width: 13%;">
+                            <datalist id="nationality">
+                                <!-- <select id="nationality" style="width: 8%;"> -->
+                                <option value="" hidden>เลือก...</option>
+                                <option value="ไทย">ไทย</option>
+                                <option value="จีน"></option>
+                                <option value="อเมริกัน"></option>
+                                <!-- </select> -->
+                            </datalist>
+                            </input>
 
-                    <div class="box">
+                            <a>เชื้อชาติ :</a>
+                            <input list="nationality" id="" name="" style="width: 13%;">
+                            <datalist id="nationality">
+                                <option value="" hidden>เลือก...</option>
+                                <option value="ไทย">ไทย</option>
+                                <option value="จีน"></option>
+                                <option value="อเมริกัน"></option>
+                                <!-- </select> -->
+                            </datalist>
+                            </input>
+                            <br>
+                            &nbsp;
+                            <a>ซอย :</a>
+                            <input type="text" id="sxy" style="width: 20%;">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a>อาคาร &nbsp;:</a>
+                            <input type="text" id="building" style="width: 25%;">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a>ถนน &nbsp;:</a>
+                            <input type="text" id="road" style="width: 25%;">
+                            <br>
+                            <a>ตำบล :</a>
+                            <select id="subdistrict" style="width: 20%;">
+                            </select>
+                            &nbsp;&nbsp;
+                            โทรศัพท์ :
+                            <input type="text" style="width: 25%" id="phone" onkeyup="checkPhoneInput('phone')"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                maxlength="10">
+                            &nbsp;
+                            <a>โทรสาร :</a>
+                            <input type="text" style="width: 25%" id="fax" onkeyup="checkPhoneInput('phone')"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                maxlength="9">
+                            <br>
+
+                            <a style="margin-left: 5px;">พื้นที่ :</a>
+                            <input type="int" id="area" style="width: 30%;">
+                            &nbsp;
+                            ตารางเมตร
+                            &nbsp;
+                            <a>จำนวนคนงาน :</a>
+                            <input type="int" id="numPeople" style="width: 15%;">
+                            &nbsp;
+                            คน
+                            <br>
+                            &nbsp;
+                            <a>ซอย :</a>
+                            <input type="text" id="wSxy" style="width: 20%;">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a>อาคาร &nbsp;:</a>
+                            <input type="text" id="wBuilding" style="width: 25%;margin-left: 2px;">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a>ถนน &nbsp;:</a>
+                            <input type="text" id="wRoad" style="width: 25.5%;">
+                            <br>
+                            <a>ตำบล :</a>
+                            <select id="wSubdistrict" style="width: 20%;">
+                            </select>
+                            &nbsp;&nbsp;
+                            <a>โทรศัพท์ :</a>
+                            <input type="text" style="width: 25%" id="wPhone" onkeyup="checkPhoneInput('phone')"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                maxlength="10">
+                            &nbsp;&nbsp;
+                            <a>โทรสาร :</a>
+                            <input type="text" style="width: 25%" id="wFax" onkeyup="checkPhoneInput('phone')"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                maxlength="9">
+                            <br>
+                            <br>
+                            <a>นามสกุล :</a>
+                            <input type="text" id="" name="" style="width: 20%;" placeholder="">
+                            &nbsp;
+                            <a>สถานะ :</a>
+                            <input type="text" id="" style="width: 25%;">
+
+                            <a style="margin-left: 3px;">โทรศัพท์ :</a>
+                            <input type="text" style="width: 25%" id="" onkeyup="checkPhoneInput('phone')"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            maxlength="10">
+                            <br>
+                        </div>
+
+
+
+
+                        <div>
+                            <input type="radio" name="sub" id="purposeType1" style="margin-top: 30px;"> ยืนยันคำขอรับ
+                            &nbsp;
+                            <input type="radio" name="sub" id="purposeType2"> ยืนยันคำขอต่ออายุ &nbsp;
+                            <br>
+
+                            <!-- <a>ใช้อาคารสถานที่ประกอบการของผู้อื่น</a>
+                            <select id="deed" name="" style="width: 10%;" onclick=" showtext()">
+                                <option value="" hidden>เลือก...</option>
+                                <option value="01">ยืนยัน</option>
+                                <option value="02">ไม่ยืนยัน</option>
+                            </select>
+                            <br> -->
+                            <br>
+                            <input type="checkbox" id="documentId" value="cb1" />
+                            หนังสือยินยอมให้ใช้อาคารสถานที่เป็นที่ประกอบการ<br>
+                            <input type="checkbox" id="documenthHome" value="cb2" />
+                            สำเนาทะเบียนบ้าน/โฉนดที่ดิน(ที่ให้ใช้เป็นสถานที่ประกอบกิจการ)<br>
+                            <input type="checkbox" id="documentLegalEntity" value="cb3" />
+                            ใบรับรองแพทย์ผู้ขอรับใบอนุญาตและผู้ช่วยจำหน่ายสินค้า (ตามแบบ สณ.๑๑)<br>
+                            <input type="checkbox" id="documentSignature" value="cb4" /> หนังสือสัญญาเช่า<br>
+                            <input type="checkbox" id="documentSJ4" value="cb5" /> หนังสือมอบอำนาจ
+                            พร้อมติดอากรแสตมป์<br>
+                            <input type="checkbox" id="documentOther" value="cb6" /> เอกสารอื่นๆที่เกี่ยวข้อง
+                            <input type="text" id="other" size="40" />
+                        </div>
+                        <div style="width: 45%;float: right;text-align: center;display: block;">
+                            ข้าพเจ้าขอรับรองว่า
+                            ข้อความในแบบคำร้องขอต่อใบอนุญาตนี้เป็นจริงทุกประการ
+                            <br>
+                            (ลงชื่อ)
+                            <input type="text" id="documentName" />
+                            ผู้ขอรับใบอนุญาต
+                        </div>
+
+
+
+                    </div><br>
+                    <!-- box ผู้สัมผัสอาหาร -->
+                    <div class="w3-container box" style="margin:auto;">
                         <div class="row">
                             <div class="col-2">
                                 <a><b>ใบอบรมผู้สัมผัสอาหาร</b></a>&nbsp;&nbsp;
                             </div>
                             <div class="col">
-                                <input type="radio" name="typee" id="typeUser1" value="บุคคลธรรมดา">
+                                <input type="radio" name="typee" id="typeUser1" value="บุคคลธรรมดา"
+                                    onclick="w3.show('#ww')">
                                 <a>อบรมแล้ว</a>&nbsp;
-                                <input type="radio" name="typee" id="typeUser1" value="บุคคลธรรมดา">
+                                <input type="radio" name="typee" id="typeUser1" value="บุคคลธรรมดา"
+                                    onclick="w3.hide('#ww')">
                                 <a>ยังไม่ได้อบรมอบรม</a>
                                 <br>
                                 <a>ออกใบประกาศนียบัตรโดย</a>
@@ -380,9 +591,9 @@
                                 <input type="text" id="datepicker-th-4" name="date4" />
                             </div>
                         </div>
-                    </div>
-                    <br>
-                    <div class="box">
+                    </div> <br>
+                    <!-- box เพิ่มรูป -->
+                    <div class="w3-container box" style="margin:auto;">
                         <a>ประเภทกิจการ :</a>
                         <input type="text" id="" size="120">
                         <br>
@@ -401,9 +612,9 @@
                         <a>เลขที่ :</a>
                         <input type="text" id="" width="20px">
                         <a>ค่าธรรมเนียม</a>
-                        <input type="number" id="" >
+                        <input type="number" id="">
                         <a>ค่าปรับ</a>
-                        <input type="number" id="" >
+                        <input type="number" id="">
                         <br><br>
                         <a>รูปภาพผลการตรวจสอบ</a>
                         <input type="file" id="uploadFile" onchange="handleFileSelect(event)"
@@ -419,28 +630,7 @@
     </div>
 
 
-    </div>
-
-    <!-- <footer class="w3-container w3-theme" style="padding:32px">
-            <p>Footer information goes here</p>
-        </footer> -->
-
-    </div>
-
-
 
 </body>
-<!-- <script>
-    function myFunction() {
-        var y = document.getElementById("mySelect").value;
-        if (y == '01') {
-            document.getElementById('Demo').style.display = 'block';
-        } else {
-            document.getElementById('Demo').style.display = 'none';
-        }
-
-    }
-</script> -->
-<!-- <script src="https://www.w3schools.com/lib/w3.js"></script> -->
 
 </html>
