@@ -1,7 +1,7 @@
 a.disableds {
     pointer-events: none;
     cursor: default;
-    color:gray
+    color:gray!important
   }
 a.exit {
   color: white;
@@ -177,4 +177,10 @@ table-layout:fixed;
 }
 .tableresult thead {
 width: calc( 100% - 1.1em )
+}
+
+.menu-click { 
+  color:white;
+  text-decoration: underline;
+  cursor: auto;
 }
