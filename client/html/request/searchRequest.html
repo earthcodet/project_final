@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>กิจการที่เป็นอันตรายต่อสุขภาพ</title>
+<title>ค้นหา/แก้ไข</title>
 
 <!-- bootstrap -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -14,8 +14,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
-
-
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="../../css/w.3.css">
@@ -37,8 +35,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-
-
 <!-- disable-->
 <script src="../../js/disable.js"></script>
 <!-- css ส่วนกลาง -->
@@ -49,6 +45,13 @@
 
 <script src="../../js/searchRequest.js"></script>
 <script src="../../js/address.js"></script>
+
+<!-- date th -->
+<link type="text/css" href="../../css/jquery-ui-1.12.1.custom/jquery-ui.css" rel="stylesheet" />
+<script type="text/javascript" src="../../js/date/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="../../js/date/jquery-ui-1.8.10.offset.datepicker.min.js"></script>
+<script type="text/javascript" src="../../js/date/dateth.js"></script>
+
 <body>
     <!-- เมนูด้านบน -->
     <div class="w3-top" style="overflow:auto;">
@@ -192,7 +195,7 @@
         </header>
 
         <div class=" w3-container " style="padding:32px; text-align: center;">
-            <div style="width: 100%;height: 230px;" >
+            <div style="width: 100%;height: 230px;">
                 <div class="row " style="padding: 20px;">
                     <div class="col-3" style="text-align: left;">
                         <h5>ค้นหาตาม</h5>
@@ -209,15 +212,15 @@
                     </div>
 
                     <div class="col " style="text-align: left ; display: box;margin-left: 50px;">
-                        <div id="searchUser" >
+                        <div id="searchUser">
                             <h5>คำที่ค้นหา</h5>
                             <br>
                             <input type="text" style="width: 50%;">
                         </div>
-                        <div id="searchDate" class="displaynone">
+                        <div id="searchDate" class="displaynone" >
                             <h5>วันที่ค้นหา</h5>
                             <br>
-                            <input type="date" style="width: 50%;">
+                            <input id="datepicker-th-2" name="date1" type="text" style="width: 50%;">
                         </div>
                         <div id='searchId' class="displaynone">
                             <h5>เลขที่ใบคำขอ</h5>
@@ -227,7 +230,7 @@
                         <div id="searchDateEx" class="displaynone">
                             <h5>วันที่หมดอายุ (ใบคำขอ)</h5>
                             <br>
-                            <input type="date" style="width: 50%;">
+                            <input id="datepicker-th-3" name="date1" type="text"  type="date" style="width: 50%;">
                         </div>
                         <div id="searchType" class="displaynone">
                             <h5>ประเภทใบอนุญาต</h5>
@@ -259,7 +262,7 @@
                             <br>
                             <input type="text" style="width: 50%;">
                         </div>
-                        <div id='searchAddress' class="displaynone" >
+                        <div id='searchAddress' class="displaynone">
                             <h5>ที่อยู่</h5>
                             <br>
                             <div>
@@ -315,19 +318,19 @@
                             </div>
                         </div>
                         <br>
-                        
+
                     </div>
-                   
+
                 </div>
             </div>
-            <div >
+            <div>
                 <div style="text-align: right ; display:block; margin-right:30px;float: right;">
                     <button class="fa fa-search button" style="background-color: #009688; "> ค้นหา</button>
                 </div>
             </div>
             <br><br>
             <h5 style="text-align: left;"> ผลลัทพ์การค้นหา </h5>
-            <div class="setheight400px" >
+            <div class="setheight400px">
                 <table class="table cursor-pointer table-hover tableresult">
                     <thead>
                         <tr class="is-color ">
@@ -428,6 +431,7 @@
 
 </body>
 <script>
-console.log(document.getElementById('province'))
+    console.log(document.getElementById('province'))
 </script>
+
 </html>
