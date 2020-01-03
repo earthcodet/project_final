@@ -121,7 +121,7 @@ a.exit:hover{
     transition:margin-left .4s
   }  
   .swal-height {
-    height: 50vh;
+    height: auto;
   }
 
   .search-popup-height {
@@ -133,10 +133,12 @@ a.exit:hover{
   }
 
  /* table ค้นหาผู้ประกอบการ */
-
+ .tablesearch{
+   height: 100%;
+ }
  .tablesearch tbody {
   display:block;
-  height:250px;
+  height:100%;
   overflow:auto;
 }
 .tablesearch th{
