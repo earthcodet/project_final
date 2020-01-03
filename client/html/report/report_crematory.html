@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>รายงานกิจการฌาปณสถาน</title>
+    <title>รายงานตามประเภทคำขอ</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -39,6 +39,12 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <!-- ทดสอบควบคุมหน้า -->
     <script src="../../js/controlTest.js"></script>
+    
+    <!-- date th -->
+    <link type="text/css" href="../../css/jquery-ui-1.12.1.custom/jquery-ui.css" rel="stylesheet" />
+    <script type="text/javascript" src="../../js/date/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="../../js/date/jquery-ui-1.8.10.offset.datepicker.min.js"></script>
+    <script type="text/javascript" src="../../js/date/dateth.js"></script>
 </head>
 
 <body>
@@ -224,10 +230,10 @@
                 <div class="col-7">
                     <p>
                         วันที่เริ่ม
-                        <input type="date" id="" placeholder="">
+                        <input id="datepicker-th-2" name="date1" type="text" placeholder="">
 
                         วันที่สุดท้าย
-                        <input type="date" id="" placeholder="">
+                        <input id="datepicker-th-3" name="date1" type="text" placeholder="">
                         <a href="report_crematory_preveiw.html" target="popup"
                             onclick="window.open('report_crematory_preveiw.html','popup','width=1100,height=570'); return false;">
                             <button type="button" class="btn btn-lg "
