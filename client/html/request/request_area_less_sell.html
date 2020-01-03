@@ -60,33 +60,32 @@
     <!-- เมนูด้านบน -->
     <div class="w3-top" style="overflow:auto;">
         <ul>
-            <li class="fa fa-bars w3-button w3-my-color w3-hide-large w3-xxlarge" onclick="w3_open()"></li>
             <li>
-                <a id="addMenu" href="#news" onclick="addTEST()">
+                <a id="addMenu" class="exit " onclick="addTEST()">
                     <i class="fa fa-plus-square fa-lg w3-margin-right w3-text-theme "> </i>
                     เพิ่ม
                 </a>
             </li>
             <li>
-                <a id="editMenu" href="#contact" onclick="editTEST()" class="disableds">
+                <a id="editMenu" onclick="editTEST()" class="exit disableds">
                     <i class="fa fa-pencil fa-lg w3-margin-right w3-text-theme"></i>
                     แก้ไข
                 </a>
             </li>
             <li>
-                <a id="saveMenu" onclick="insertTEST()" class="disableds" href="#contact">
+                <a id="saveMenu" onclick="insertTEST()" class="exit disableds">
                     <i class="fa fa-floppy-o fa-lg w3-margin-right w3-text-theme"></i>
                     บันทึก
                 </a>
             </li>
             <li>
-                <a id="restoreMenu" onclick="restoreTEST()" href="#contact" class="disableds">
+                <a id="restoreMenu" onclick="restoreTEST()"  class="exit disableds">
                     <i class="fa fa-reply fa-lg w3-margin-right w3-text-theme"></i>
                     เรียกคืน
                 </a>
             </li>
             <li>
-                <a id="deleteMenu" onclick="deleteTEST()" href="#about" class="disableds">
+                <a id="deleteMenu" onclick="deleteTEST()" class="exit disableds">
                     <i class="fa fa-close fa-lg w3-margin-right w3-text-theme"></i>
                     ยกเลิก
                 </a>
@@ -222,7 +221,7 @@
                             </select>
                             &nbsp;
                             <input type="text" id="name" style="width: 45%;">
-                            <button class="fa fa-search is-color " style="height: 32px;border-radius: 8px;"
+                            <button type="button" class="fa fa-search is-color " style="height: 32px;border-radius: 8px;"
                                 onclick="testSearchOparator()"></button>
 
                             <br>

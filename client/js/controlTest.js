@@ -30,6 +30,7 @@ function addTEST() {
     if(id != null){
             id.style.textDecoration = ''
     }
+    resetFunction() 
 }
 
 function disableMenuAll() {
@@ -176,10 +177,10 @@ function testSearchOparator(){
         html: swal_html,
         width: '80%',
         customClass: 'swal-height',
-        showConfirmButton: false
-        
-        
-    });
+        showConfirmButton: false,
+        closeOnConfirm: false,
+        closeOnCancel: false
+    });  
 }
 function searchUsername() {
     document.getElementById('')
