@@ -79,7 +79,7 @@
                 </a>
             </li>
             <li>
-                <a id="restoreMenu" onclick="restoreTEST()"  class="exit disableds">
+                <a id="restoreMenu" onclick="restoreTEST()" class="exit disableds">
                     <i class="fa fa-reply fa-lg w3-margin-right w3-text-theme"></i>
                     เรียกคืน
                 </a>
@@ -221,8 +221,8 @@
                             </select>
                             &nbsp;
                             <input type="text" id="name" style="width: 45%;">
-                            <button type="button" class="fa fa-search is-color " style="height: 32px;border-radius: 8px;"
-                                onclick="testSearchOparator()"></button>
+                            <button type="button" class="fa fa-search is-color "
+                                style="height: 32px;border-radius: 8px;" onclick="testSearchOparator()"></button>
 
                             <br>
                             &nbsp;
@@ -427,8 +427,8 @@
 
 
                     </div>
-                     <!-- ข้อมูลเจ้าของ -->
-                     <div id="Demo" style="width: 1100px;height: 300px;display: none">
+                    <!-- ข้อมูลเจ้าของ -->
+                    <div id="Demo" style="width: 1100px;height: 300px;display: none">
                         <br>
                         <div class="box" style="height:100%">
                             <h4>ข้อมูลเจ้าของสถานที่</h4>
@@ -471,7 +471,7 @@
                                 <a style="margin-left: 5px;">ถนน :</a>
                                 <input type="text" id="" style="width: 22%;"> &nbsp;
                                 <a>โทรศัพท์ :</a>
-                                <input type="text" id="" style="width: 20%;" 
+                                <input type="text" id="" style="width: 20%;"
                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                     maxlength="10">
                                 <br>
@@ -535,25 +535,22 @@
                     <br>
                     <!-- box เพิ่มรูปภาพ -->
                     <div class="w3-container box" style="margin:auto;">
-                        <a>ประเภทกิจการ :</a>
-                        <input type="text" id="" style="width: 91.05%;">
-                        <br>
 
                         <div class="row">
-                            <div class="col"><a>พื้นที่ :</a>
-                        <input type="text" id="" style="width: 50%;"> <a> ตารางเมตร</a></div>
-                            <div class="col"><a>มีคนงาน :</a>
-                        <input type="text" id="" style="width: 60%;"> <a> คน</a></div>
-                            <div class="col-6 text-right"><a>ใช้เครื่องจักรขนาด :</a>
-                        <input type="text" id="" style="width: 70%;">&nbsp;<a>แรงม้า</a></div>
+                            <div class="col">
+                                <a>ประเภทกิจการ :</a>
+                                <input type="text" id="" style="width: 80%;">
+                            </div>
+                            <div class="col"><a>โดยมีพื้นที่ประกอบการ :</a>
+                                <input type="text" id="" style="width: 60%;"> <a> ตารางเมตร</a></div>
                         </div>
 
                         <div class="row">
                             <div class="col"> <a>ใบอนุญาต </a>
                                 <a> เล่มที่ :</a>
-                                <input type="text" id="" style="width: 50%;"></div>
+                                <input type="text" id="" style="width: 55%;"></div>
                             <div class="col"><a>เลขที่ :</a>
-                                <input type="text" id=""></div>
+                                <input type="text" id="" style="width: 80%;"></div>
                             <div class="col"><a>ค่าธรรมเนียม:</a>
                                 <input type="number" id="" style="width: 53%;">&nbsp;<a>บาท</a></div>
                             <div class="col text-right"><a>ค่าปรับ:</a>
@@ -561,10 +558,12 @@
                         </div>
                         <br>
                         <a>รูปภาพผลการตรวจสอบ</a>
-                        <input type="file" id="uploadFile" style="display: none;" onchange="handleFileSelect(event)" accept="image/*" multiple>
-                        <button type="button" class="btn is-color "style="" onclick="document.getElementById('uploadFile').click()"> 
+                        <input type="file" id="uploadFile" style="display: none;" onchange="handleFileSelect(event)"
+                            accept="image/*" multiple>
+                        <button type="button" class="btn is-color " style=""
+                            onclick="document.getElementById('uploadFile').click()">
                             <h5><i class="fa fa-upload"></i>
-                            อัพโหลดภาพ</h5> 
+                                อัพโหลดภาพ</h5>
                         </button>
                         <br>
                         <br>
