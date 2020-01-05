@@ -86,10 +86,8 @@ a.exit:hover{
  .cursor-pointer{
     cursor: pointer;
   }
-  
-  .table-hover tbody tr:hover{
-    color:#FFFF;
-    background-color:#95a09f
+  .table-request th:hover{
+    background-color: gray;
   }
   .border-black{
     border-color: black;
@@ -190,12 +188,28 @@ width: calc( 100% - 1.1em )
   position: relative;
 }
 
+.notification .badgeTopic {
+  position: absolute;
+  top: 16px;
+  right: 19px;
+  color: white;
+  background-color: red;
+  padding: 2px 8px;
+  border-radius: 3px;
+}
+
 .notification .badge {
   position: absolute;
-  top: -10px;
-  right: -10px;
-  padding: 5px 10px;
-  border-radius: 50%;
-  background-color: red;
+  top: 8px;
+  right: 11px;
   color: white;
+  background-color: red;
+  padding: 6px 8px;
+  border-radius: 3px;
+}
+
+
+
+is-color-red{
+  color: red;
 }
