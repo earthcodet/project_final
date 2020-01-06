@@ -75,7 +75,40 @@ function insertTEST() {
             }
         });
 }
-
+function printImg(){
+    Swal.fire({
+        title: "สำนักงานเทศบาล",
+        html: "ต้องการบันทึกหรือไม่",
+        showCancelButton: true,
+        confirmButtonColor: "#009688",
+        confirmButtonText: "ใช่",
+        cancelButtonText: "ไม่ใช่",
+        cancelButtonColor: '#dc3545',
+        closeOnConfirm: false,
+        closeOnCancel: false
+    })
+        .then((result) => {
+            if (result.value) {
+                Swal.fire({
+                    html: "บันทึกสำเร็จ",
+                    icon: "success",
+                    confirmButtonColor: "#009688"
+                }) .then((result1)=>{
+                    data = true
+                    disableMenuAll()
+                    enableMenu('addMenu')
+                    enableMenu('editMenu')
+                    enableMenu('deleteMenu')
+                    enableFunction()
+                    window.open('../utilities/viewImg.html','popup','width=1100,height=570');
+                })
+                
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                // Swal.fire("บันทึกล้มเหลว");
+            }
+        });
+   
+}
 function testSearchOparator(){
     var swal_html = `<div >
     <div class="display-center">
