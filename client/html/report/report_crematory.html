@@ -39,12 +39,13 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <!-- ทดสอบควบคุมหน้า -->
     <script src="../../js/controlTest.js"></script>
-    
-    <!-- date th -->
+
+    <!-- เรียกไลบารี่สร้างปฎิทิน  -->
     <link type="text/css" href="../../css/jquery-ui-1.12.1.custom/jquery-ui.css" rel="stylesheet" />
-    <script type="text/javascript" src="../../js/date/jquery-1.4.4.min.js"></script>
-    <script type="text/javascript" src="../../js/date/jquery-ui-1.8.10.offset.datepicker.min.js"></script>
-    <script type="text/javascript" src="../../js/date/dateth.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://รับเขียนโปรแกรม.net/jquery_datepicker_thai/jquery-ui.js"></script>
+    <!-- เรียกไลบารี่สร้างปฎิทิน  -->
+    <script src="../../js/dateth.js"></script>
 </head>
 
 <body>
@@ -102,9 +103,8 @@
                 </a>
                 <div>
                     <div id="demo1" class="w3-hide ">
-                        <a class="bar-item w3-button" onclick="myAccordion('demo11')"
-                            href="javascript:void(0)">
-                            เพิ่ม 
+                        <a class="bar-item w3-button" onclick="myAccordion('demo11')" href="javascript:void(0)">
+                            เพิ่ม
                             <i class="fa fa-caret-down"></i>
                         </a>
                         <div id="demo11" class="w3-hide ">
@@ -187,8 +187,7 @@
                 </div>
             </div>
             <div>
-                <a class="w3-bar-item w3-button notification" onclick="myAccordion7('demo8')"
-                    href="javascript:void(0)">
+                <a class="w3-bar-item w3-button notification" onclick="myAccordion7('demo8')" href="javascript:void(0)">
                     <span>แจ้งเตือน</span>
                     <i class="fa fa-caret-down"></i>
                     <span id="notficationRequestTopic" class="badgeTopic">7</span>
@@ -244,10 +243,10 @@
                 <div class="col-7">
                     <p>
                         วันที่เริ่ม
-                        <input id="datepicker-th-2" name="date1" type="text" placeholder="">
+                        <input type="text" id="datepicker1" placeholder="">
 
                         วันที่สุดท้าย
-                        <input id="datepicker-th-3" name="date1" type="text" placeholder="">
+                        <input type="text" id="datepicker2" placeholder="">
                         <a href="report_crematory_preveiw.html" target="popup"
                             onclick="window.open('report_crematory_preveiw.html','popup','width=1100,height=570'); return false;">
                             <button type="button" class="btn btn-lg "
