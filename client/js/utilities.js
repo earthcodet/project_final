@@ -1,3 +1,17 @@
+let month = {
+    'มกราคม':1,
+    'กุมภาพันธ์':2,
+    'เดือนมีนาคม':3,
+    'เมษายน':4,
+    'พฤษภาคม':5,
+    'มิถุนายน':6,
+    'กรกฎาคม':7,
+    'สิงหาคม':8,
+    'กันยายน':9,
+    'ตุลาคม':10,
+    'พฤศจิกายน':11,
+    'ธันวาคม':12
+}
 function checkPhoneInput(tagId) {
     var text = document.getElementById(tagId).value
     text = text.replace(/(\d{3})(\d{7})/, "$1-$2");
@@ -81,7 +95,6 @@ function isNumber(n) {
 }
 // sortTable //
 function sortTable(n, id) {
-    console.log(`run function sorttable`)
     var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
     table = document.getElementById(id);
     switching = true;
@@ -93,15 +106,77 @@ function sortTable(n, id) {
             shouldSwitch = false;
             x = rows[i].getElementsByTagName("TD")[n];
             y = rows[i + 1].getElementsByTagName("TD")[n];
-            if (dir == "asc") {
-                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                    shouldSwitch = true;
-                    break;
+            if (n ==3 || n== 4) {
+                var tempdateX = x.innerHTML.split(' ')
+                var tempdateY = y.innerHTML.split(' ')
+                var dayX ,dayY ,monthX ,monthY ,yearX , yearY
+                dayX = tempdateX[0]
+                dayY = tempdateY[0]
+                monthX = tempdateX[1]
+                monthY = tempdateY[1]
+                yearX = tempdateX[2]
+                yearY = tempdateY[2]
+                if (dir == "asc") {
+                    if(yearX > yearY){
+                        shouldSwitch = true;
+                        break;  
+                    }else if(yearX == yearY && month[monthX] > month[monthY]){
+                        shouldSwitch = true;
+                        break;
+                    }else if(yearX == yearY && month[monthX] == month[monthY] && dayX > dayY){
+                        shouldSwitch = true;
+                        break;
+                    }
+                }else if (dir == "desc"){
+                    if(yearX < yearY){
+                        shouldSwitch = true;
+                        break;  
+                    }else if(yearX == yearY && month[monthX] < month[monthY]){
+                        shouldSwitch = true;
+                        break;
+                    }else if(yearX == yearY && month[monthX] == month[monthY] && dayX < dayY){
+                        shouldSwitch = true;
+                        break;
+                    }
                 }
-            } else if (dir == "desc") {
-                if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-                    shouldSwitch = true;
-                    break;
+            }else if(n == 5){
+                var tempX = x.innerHTML.split(' ')
+                var tempY = y.innerHTML.split(' ')
+                var dateX, dateY
+                dateX = tempX[0]
+                dateY = tempY[0]
+                if (dir == "asc") {
+                    if(dateX != 'หมดอายุ' && dateY != 'หมดอายุ'){
+                       if(parseInt(dateX) > parseInt(dateY)){
+                        shouldSwitch = true;
+                        break;
+                       }
+                    }else if(dateX > dateY){
+                        shouldSwitch = true;
+                        break;
+                    }
+                }else if (dir == "desc"){
+                    if(dateX != 'หมดอายุ' && dateY != 'หมดอายุ'){
+                        if(parseInt(dateX) < parseInt(dateY)){
+                         shouldSwitch = true;
+                         break;
+                        }
+                     }else if(dateX < dateY){
+                         shouldSwitch = true;
+                         break;
+                     }
+                }
+            }else {
+                if (dir == "asc") {
+                    if (x.innerHTML > y.innerHTML) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (dir == "desc") {
+                    if (x.innerHTML < y.innerHTML) {
+                        shouldSwitch = true;
+                        break;
+                    }
                 }
             }
         }
