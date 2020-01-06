@@ -476,40 +476,71 @@
                     </div> <br>
                     <!-- box เพิ่มรูป -->
                     <div class="w3-container box" style="margin:auto;">
-                        <a>ประเภทกิจการ :</a>
-                        <input type="text" id="" style="width: 91.05%;">
-                        <br>
+                        <div>
+                            <div style="width: 100%;height: auto; ">
+                                <a>ประเภทกิจการ : </a>
+                                &nbsp;
+                                <input type="text" id="" style="width: 35%;">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a>โดยมีพื้นที่ประกอบการ :</a>
+                                &nbsp;&nbsp;
+                                <input type="text" id="" style="width: 10%;">
+                                &nbsp;&nbsp;
+                                <a> ตารางเมตร</a>
+                                <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a>มีคนงาน :</a>
+                                &nbsp;
+                                <input type="text" id="" style="width: 10%;">
+                                &nbsp;
+                                <a> คน</a>&nbsp;&nbsp;
+                                <a>ใช้เครื่องจักรขนาด :</a>
+                                &nbsp;&nbsp;
+                                <input type="text" id="" style="width: 10%;">
+                                &nbsp;&nbsp;
+                                <a> แรงม้า</a>
+                                <br>
+                                <a>ใบอนุญาตฉบับจริงที่หมดอายุ เล่มที่ : </a>
+                                &nbsp;
+                                <input type="text" id="" style="width: 5%;">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a>เลขที่ :</a>
+                                <input type="number" id="" style="width: 13%;">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a>ออกให้เมือวันที่ :</a>
+                                &nbsp;
+                                <input type="text" id="datepicker2" id="" style="width: 15%;">
+                                <br>
 
-                        <div class="row">
-                            <div class="col"><a>พื้นที่ :</a>
-                        <input type="text" id="" style="width: 50%;"> <a> ตารางเมตร</a></div>
-                            <div class="col"><a>มีคนงาน :</a>
-                        <input type="text" id="" style="width: 60%;"> <a> คน</a></div>
-                            <div class="col-6 text-right"><a>ใช้เครื่องจักรขนาด :</a>
-                        <input type="text" id="" style="width: 70%;">&nbsp;<a>แรงม้า</a></div>
+                                &nbsp;&nbsp;
+                                <a>ค่าธรรมเนียม :</a>
+                                &nbsp;
+                                <input type="number" id="" style="width: 15.5%;">
+                                &nbsp;&nbsp;&nbsp;
+                                <a>ค่าปรับ :</a>
+                                <input type="number" id="" style="width: 13%;">
+
+                            </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col"> <a>ใบอนุญาต </a>
-                                <a> เล่มที่ :</a>
-                                <input type="text" id="" style="width: 50%;"></div>
-                            <div class="col"><a>เลขที่ :</a>
-                                <input type="text" id=""></div>
-                            <div class="col"><a>ค่าธรรมเนียม:</a>
-                                <input type="number" id="" style="width: 53%;">&nbsp;<a>บาท</a></div>
-                            <div class="col text-right"><a>ค่าปรับ:</a>
-                                <input type="number" id="" style="width: 65%;">&nbsp;<a>บาท</a></div>
-                        </div>
                         <br>
-                        <a>รูปภาพผลการตรวจสอบ</a>
-                        <input type="file" id="uploadFile" style="display: none;" onchange="handleFileSelect(event)" accept="image/*" multiple>
-                        <button type="button" class="btn is-color "style="" onclick="document.getElementById('uploadFile').click()"> 
-                            <h5><i class="fa fa-upload"></i>
-                            อัพโหลดภาพ</h5> 
-                        </button>
-                        <br>
-                        <br>
-                        <div id='outputImage' style="height: 320px; overflow-y:auto; border: 1px solid black;">
+                        <div>
+                            <a>รูปภาพผลการตรวจสอบ</a>
+                            <input type="file" id="uploadFile" style="display: none;" onchange="handleFileSelect(event)"
+                                accept="image/*" multiple>
+                            <button type="button" class="btn is-color "
+                                onclick="document.getElementById('uploadFile').click()">
+                                <h5><i class="fa fa-upload"></i>
+                                    อัพโหลดภาพ</h5>
+                            </button>
+                            <button type="button" class="btn is-color" style="float: right;" onclick="printImg()">
+                                <h5><i class="fa fa-print"></i>
+                                    พิมพ์รูปภาพ</h5>
+                            </button>
+                            <br>
+                            <br>
+                            <div id='outputImage' style="height: 320px; overflow-y:auto; border: 1px solid black;">
+                            </div>
                         </div>
                     </div>
                 </fieldset>
