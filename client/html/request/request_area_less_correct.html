@@ -44,11 +44,12 @@
 <!-- ทดสอบควบคุมหน้า -->
 <script src="../../js/controlTest.js"></script>
 
-date th
+<!-- เรียกไลบารี่สร้างปฎิทิน  -->
 <link type="text/css" href="../../css/jquery-ui-1.12.1.custom/jquery-ui.css" rel="stylesheet" />
-<script type="text/javascript" src="../../js/date/jquery-1.4.4.min.js"></script>
-<script type="text/javascript" src="../../js/date/jquery-ui-1.8.10.offset.datepicker.min.js"></script>
-<script type="text/javascript" src="../../js/date/dateth.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://รับเขียนโปรแกรม.net/jquery_datepicker_thai/jquery-ui.js"></script>
+<!-- เรียกไลบารี่สร้างปฎิทิน  -->
+<script src="../../js/dateth.js"></script>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -78,7 +79,7 @@ date th
                 </a>
             </li>
             <li>
-                <a id="restoreMenu" onclick="restoreTEST()"  class="exit disableds">
+                <a id="restoreMenu" onclick="restoreTEST()" class="exit disableds">
                     <i class="fa fa-reply fa-lg w3-margin-right w3-text-theme"></i>
                     เรียกคืน
                 </a>
@@ -185,8 +186,7 @@ date th
                 </div>
             </div>
             <div>
-                <a class="w3-bar-item w3-button notification" onclick="myAccordion7('demo8')"
-                    href="javascript:void(0)">
+                <a class="w3-bar-item w3-button notification" onclick="myAccordion7('demo8')" href="javascript:void(0)">
                     <span>แจ้งเตือน</span>
                     <i class="fa fa-caret-down"></i>
                     <span id="notficationRequestTopic" class="badgeTopic">7</span>
@@ -206,12 +206,12 @@ date th
         </div>
     </div>
     <!-- ข้อมูล -->
-    <div class="w3-main" style="margin-left:250px;padding-top: 27px;">
+    <div class="w3-main" style="margin-left:250px;padding-top: 48px;">
         <header class="w3-container w3-theme">
             <h1 style="font-size:20px">หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</h1>
         </header>
         <div class="container-sm" style="padding:32px">
-            <form id="form" name="form" >
+            <form id="form" name="form">
                 <fieldset disabled id="disable">
                     <!-- ข้อมูล -->
                     <div class="w3-container box" style="margin:auto;">
@@ -223,7 +223,7 @@ date th
                             <input type="text" id="" name="" style="width:20% " placeholder="">
                             &nbsp;
                             <a>วันที่ยื่นขอ :</a>
-                            <input type="text" id="datepicker-th-2" name="date1" style="width: 43%;" />
+                            <input type="text" id="datepicker1" style="width: 43%;" />
                             &nbsp;
                             <br>
                             &nbsp;&nbsp;&nbsp;&nbsp;
@@ -234,8 +234,8 @@ date th
                             </select>
                             &nbsp;
                             <input type="text" id="name" style="width: 45%;">
-                            <button type="button" class="fa fa-search is-color cursor-pointer " style="height: 32px;border-radius: 8px;"
-                                onclick="testSearchOparator()"></button>
+                            <button type="button" class="fa fa-search is-color cursor-pointer "
+                                style="height: 32px;border-radius: 8px;" onclick="testSearchOparator()"></button>
 
                             <br>
                             &nbsp;
@@ -405,8 +405,8 @@ date th
 
                             <a style="margin-left: 3px;">โทรศัพท์ :</a>
                             <input type="text" style="width: 25%" id="" onkeyup="checkPhoneInput('phone')"
-                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                            maxlength="10">
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                maxlength="10">
                             <br>
                         </div>
 
@@ -490,7 +490,7 @@ date th
                                 <a style="margin-left: 5px;">ถนน :</a>
                                 <input type="text" id="" style="width: 22%;"> &nbsp;
                                 <a>โทรศัพท์ :</a>
-                                <input type="text" id="" style="width: 20%;" 
+                                <input type="text" id="" style="width: 20%;"
                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                     maxlength="10">
                                 <br>
@@ -529,32 +529,39 @@ date th
                     <br>
                     <!-- box เพิ่มรูปภาพ -->
                     <div class="w3-container box" style="margin:auto;">
-                        <div class="row">
-                            <div class="col">
-                                <a>ประเภทกิจการ :</a>
-                                <input type="text" id="" style="width: 80%;">
-                            </div>
-                            <div class="col"><a>โดยมีพื้นที่ประกอบการ :</a>
-                                <input type="text" id="" style="width: 60%;"> <a> ตารางเมตร</a></div>
+                        <div >
+                            
+                            <a>ประเภทกิจการ : </a>
+                            <input type="text" id="" style="width: 20%;">
+
+                            <a>โดยมีพื้นที่ประกอบการ :</a>
+                            <input type="text" id="" style="width: 20%;"> <a> ตารางเมตร</a>
+
+                            <a>ใบอนุญาตฉบับจริงที่หมดอายุ เล่มที่  </a>
+                            <input type="text" id="" style="width: 20%;">
+
+                            <a>เลขที่ :</a>
+                            <input type="text" id="" style="width: 20%;">
+
+                            <a>ออกให้เมือวันที่</a>
+                            <input type="text" id="" style="width: 20%;">
+
+                            <a>ค่าธรรมเนียม</a>
+                            <input type="number" id="" style="width: 20%;">
+
+                            <a>ค่าปรับ</a>
+                            <input type="number" id="" style="width: 80%;">
                         </div>
 
-                        <div class="row">
-                            <div class="col"> <a>ใบอนุญาต </a>
-                                <a> เล่มที่ :</a>
-                                <input type="text" id="" style="width: 55%;"></div>
-                            <div class="col"><a>เลขที่ :</a>
-                                <input type="text" id="" style="width: 80%;"></div>
-                            <div class="col"><a>ค่าธรรมเนียม:</a>
-                                <input type="number" id="" style="width: 53%;">&nbsp;<a>บาท</a></div>
-                            <div class="col text-right"><a>ค่าปรับ:</a>
-                                <input type="number" id="" style="width: 65%;">&nbsp;<a>บาท</a></div>
-                        </div>
+
                         <br>
                         <a>รูปภาพผลการตรวจสอบ</a>
-                        <input type="file" id="uploadFile" style="display: none;" onchange="handleFileSelect(event)" accept="image/*" multiple>
-                        <button type="button" class="btn is-color "style="" onclick="document.getElementById('uploadFile').click()"> 
+                        <input type="file" id="uploadFile" style="display: none;" onchange="handleFileSelect(event)"
+                            accept="image/*" multiple>
+                        <button type="button" class="btn is-color " style=""
+                            onclick="document.getElementById('uploadFile').click()">
                             <h5><i class="fa fa-upload"></i>
-                            อัพโหลดภาพ</h5> 
+                                อัพโหลดภาพ</h5>
                         </button>
                         <br>
                         <br>
