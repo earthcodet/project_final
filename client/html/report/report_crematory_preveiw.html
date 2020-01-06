@@ -21,6 +21,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
+
+    <!-- css ส่วนกลาง -->
+    <link href="../../css/utilities.css" rel="stylesheet">
 </head>
 
 <style type="text/css">
@@ -44,13 +47,20 @@
     }
 </style>
 <script type="text/javascript">
-    function ExportToExcel(table){
-           var htmltable= document.getElementById('table');
-           var html = htmltable.outerHTML;
-           window.open('data:application/vnd.ms-excel,' + encodeURIComponent(html));
-        }
-    </script>
+    function ExportToExcel(table) {
+        var htmltable = document.getElementById('table');
+        var html = htmltable.outerHTML;
+        window.open('data:application/vnd.ms-excel,' + encodeURIComponent(html));
+    }
+</script>
+
 <body>
+    <div class="hideWhenPrint">
+        <button type="button" class="btn btn-outline-success btn-lg is-color" onclick="window.print()">พิมพ์</button>
+        <button type="button" class="btn btn-outline-success btn-lg is-color"
+            onclick="ExportToExcel(table)">Excel</button>
+        <br><br>
+    </div>
     <div style="font-family: sarabun;">
         <p class="text-center"><b>สำนักงานเทศบาลเมืองแสนสุข</b></p>
         <p class="text-center">รายงานประจำวัน/เดือน/ปี
@@ -66,7 +76,7 @@
                     <th class="align-middle" colspan="2">ใบอนุญาต</th>
                     <th class="align-middle" rowspan="2">วันออกใบอนุญาต</th>
                     <th class="align-middle" rowspan="2">วันหมดอายุ</th>
-                    <th class="align-middle" rowspan="2"width="20%">ประเภทกิจการ</th>
+                    <th class="align-middle" rowspan="2" width="20%">ประเภทกิจการ</th>
                     <th class="align-middle" rowspan="2">ค่าธรรมเนียม</th>
                     <th class="align-middle" rowspan="2">ชื่อสถานประกอบการ</th>
                     <th class="align-middle" rowspan="2" width="20%">ที่อยู่</th>
@@ -149,7 +159,7 @@
     <div class="hideWhenPrint">
         <button onclick="window.print()">พิมพ์</button>
         <button onclick="ExportToExcel(table)">พิมพ์</button>
-        </div>
+    </div>
 </body>
 
 </html>
