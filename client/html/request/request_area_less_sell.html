@@ -539,6 +539,10 @@
                         <div class="row">
                             <div class="col-2">
                                 <a><b>ใบอนุญาตจำหน่ายสุรา</b></a>&nbsp;&nbsp;
+                                <br>
+                                <br>
+                                <input style="margin-left:10px;" type="file" id="uploadFilePdf"
+                                    onchange="uploadImage(event)" accept="application/pdf" multiple disabled>
                             </div>
                             <div class="col">
                                 <input type="radio" name="typee" id="typeUser1" value="บุคคลธรรมดา">
@@ -555,27 +559,27 @@
                             <div style="width: 100%;height: 140px; ">
                                 <a>ประเภทกิจการ : </a>
                                 &nbsp;
-                                <input type="text" id="" style="width: 30%;">
+                                <input type="text" id="" style="width: 35%;">
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <a>โดยมีพื้นที่ประกอบการ :</a>
                                 &nbsp;&nbsp;
-                                <input type="text" id="" style="width: 10%;"> 
+                                <input type="text" id="" style="width: 10%;">
                                 &nbsp;&nbsp;
                                 <a> ตารางเมตร</a>
                                 <br>
-    
+
                                 <a>ใบอนุญาตฉบับจริงที่หมดอายุ เล่มที่ : </a>
                                 &nbsp;
                                 <input type="text" id="" style="width: 5%;">
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <a>เลขที่ :</a>
                                 <input type="number" id="" style="width: 13%;">
-                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <a>ออกให้เมือวันที่ :</a>
                                 &nbsp;
-                                <input type="text" id="datepicker4" name="date1" style="width: 15%;">
+                                <input type="text" id="datepicker2" id="" style="width: 15%;">
                                 <br>
-                               
+
                                 &nbsp;&nbsp;
                                 <a>ค่าธรรมเนียม :</a>
                                 &nbsp;
@@ -583,26 +587,32 @@
                                 &nbsp;&nbsp;&nbsp;
                                 <a>ค่าปรับ :</a>
                                 <input type="number" id="" style="width: 13%;">
-                                
+
                             </div>
                         </div>
 
+
+
                         <br>
-                        <a>รูปภาพผลการตรวจสอบ</a>
-                        <input type="file" id="uploadFile" style="display: none;" onchange="handleFileSelect(event)"
-                            accept="image/*" multiple>
-                            <button type="button" class="btn is-color "style="" onclick="document.getElementById('uploadFile').click()"> 
+                        <div>
+                            <a>รูปภาพผลการตรวจสอบ</a>
+                            <input type="file" id="uploadFile" style="display: none;" onchange="handleFileSelect(event)"
+                                accept="image/*" multiple>
+                            <button type="button" class="btn is-color " 
+                                onclick="document.getElementById('uploadFile').click()">
                                 <h5><i class="fa fa-upload"></i>
-                                อัพโหลดภาพ</h5> 
+                                    อัพโหลดภาพ</h5>
                             </button>
                             <button type="button" class="btn is-color" style="float: right;" onclick="printImg()"> 
                                 <h5><i class="fa fa-print"></i>
                                 พิมพ์รูปภาพ</h5> 
                             </button>
-                        <br>
-                        <br>
-                        <div id='outputImage' style="height: 320px; overflow-y:auto; border: 1px solid black;">
+                            <br>
+                            <br>
+                            <div id='outputImage' style="height: 320px; overflow-y:auto; border: 1px solid black;">
+                            </div>
                         </div>
+
                     </div>
                 </fieldset>
             </form>
