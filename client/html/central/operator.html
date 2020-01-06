@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>เทศบาลเมืองแสนสุข</title>
+<title>ข้อมูลผู้ประกอบการ</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="../../css/w.3.css">
@@ -22,7 +22,7 @@
     crossorigin="anonymous"></script>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 <link href="../../css/css-index.css" rel="stylesheet">
 <link href="../../css/css-002.css" rel="stylesheet">
@@ -50,10 +50,17 @@
 <!-- address จังหวัด อำเภอ ตำบล -->
 <script src="../../js/address.js"></script>
 
+<!-- เรียกไลบารี่สร้างปฎิทิน  -->
+<link type="text/css" href="../../css/jquery-ui-1.12.1.custom/jquery-ui.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://รับเขียนโปรแกรม.net/jquery_datepicker_thai/jquery-ui.js"></script>
+<!-- เรียกไลบารี่สร้างปฎิทิน  -->
+<script src="../../js/dateth.js"></script>
+
 <body style="overflow-x:auto;">
 
 
-   
+
 
     <!-- เมนูด้านบน -->
     <div class="w3-top" style="overflow:auto;">
@@ -90,305 +97,302 @@
                 </a>
             </li>
             <li class="w3-display-topright">
-                <a id="exitMenu" onclick="exitTEST()" class="exit"  >
+                <a id="exitMenu" onclick="exitTEST()" class="exit">
                     <i class="fa fa-sign-out fa-lg w3-margin-right w3-text-theme"></i>
                     ออกจากระบบ
                 </a>
             </li>
         </ul>
         <!-- เมนูด้านข้าง -->
-         <nav class="w3-sidebar w3-bar-block w3-collapse w3-animate-left w3-card" style="z-index:3;width:250px;"
-        id="mySidebar">
-        <a class="w3-bar-item w3-button w3-border-bottom w3-large" href="../utilities/index.html">
-            <img src="../../img/img1.jpg" style="width:100%;">
-        </a>
-
-        <div>
-            <a class="w3-bar-item w3-button" onclick="myAccordion('demo1')" href="javascript:void(0)">ระบบงานคำขอ <i
-                    class="fa fa-caret-down"></i></a>
-                    <div>
-                                <div id="demo1" class="w3-hide ">
-                                    <a class="bar-item w3-button " onclick="myAccordion('demo11')" href="javascript:void(0)">
-                                        เพิ่ม <i class="fa fa-caret-down"></i></a>
-                                    <div id="demo11" class="w3-hide ">
-                                        <a class="bar-item w3-button" href="../request/request_public_sell.html">-
-                                            ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
-                                        <a class="bar-item w3-button" href="../request/request_public_hawk.html">-
-                                            ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
-                                        <a class="bar-item w3-button" href="../request/request_area_more_sell.html">-
-                                            ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
-                                        <a class="bar-item w3-button" href="../request/request_area_more_correct.html">-
-                                            ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</a>
-                                        <a class="bar-item w3-button" href="../request/request_area_less_sell.html">-
-                                            หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
-                                        <a class="bar-item w3-button " href="../request/request_area_less_correct.html">-
-                                            หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
-                                        <a class="bar-item w3-button" href="../request/request_market.html">-
-                                            ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
-                                        <a class="bar-item w3-button" href="../request/request_health_danger.html">-
-                                            กิจการที่เป็นอันตรายต่อสุขภาพ</a>
-                                        <a class="bar-item w3-button" href="../request/request_crematory.html">- กิจการฌาปณสถาน</a>
-                                    </div>
-                                    <a class="bar-item w3-button" href="../request/searchRequest.html">
-                                        ค้นหา/แก้ไข</a>
-                                </div>
-            
-                    </div>
-
-        </div>
-
-        <div>
-            <a class="w3-bar-item w3-button" onclick="myAccordion2('demo2')"
-                href="javascript:void(0)">งานตรวจสอบ/อนุมัติ<i class="fa fa-caret-down"></i></a>
-            <div id="demo2" class="w3-hide">
-                <a class="w3-bar-item w3-button" href="#"></a>
-            </div>
-        </div>
-
-        <div>
-            <a class="w3-bar-item w3-button" onclick="myAccordion3('demo3')" href="javascript:void(0)">งานใบอนุญาต<i
-                    class="fa fa-caret-down"></i></a>
-            <div id="demo3" class="w3-hide">
-                <a class="w3-bar-item w3-button" href="#"></a>
-            </div>
-        </div>
-
-        <div>
-            <a class="w3-bar-item w3-button w3-theme" onclick="myAccordion4('demo4')"
-                href="javascript:void(0)">ข้อมูลส่วนกลาง<i class="fa fa-caret-down"></i></a>
-            <div id="demo4" class="w3-hide w3-show">
-                <a class="bar-item w3-button w3-my-color" href="operator.html">- ข้อมูลประกอบการ</a>
-                <a class="bar-item w3-button" href="02.html">- ข้อมูลการจดใบอนุญาต</a>
-                <a class="bar-item w3-button" href="03.html">- โอนใบอนุญาต</a>
-            </div>
-        </div>
-
-        <div>
-            <a class="w3-bar-item w3-button" onclick="myAccordion5('demo5')" href="javascript:void(0)">งานร้องเรียน<i
-                    class="fa fa-caret-down"></i></a>
-            <div id="demo5" class="w3-hide">
-                <a class="bar-item w3-button" href="#">- บันทึกเรื่องร้องเรียน</a>
-                <a class="bar-item w3-button" href="#">- บันทึกคำร้อง</a>
-            </div>
-        </div>
-
-        <div>
-            <a class="w3-bar-item w3-button" onclick="myAccordion5('demo6')" href="javascript:void(0)">ข้อมูลระบบ<i
-                    class="fa fa-caret-down"></i></a>
-            <div id="demo6" class="w3-hide">
-                <a class="w3-bar-item w3-button" href="#"></a>
-            </div>
-        </div>
-
-        <div>
-            <a class="w3-bar-item w3-button" onclick="myAccordion7('demo7')" href="javascript:void(0)">รายงาน <i
-                    class="fa fa-caret-down"></i></a>
-            <div id="demo7" class="w3-hide">
-                <a class="bar-item w3-button" href="../report/report_crematory.html">ตามคำขอ</a>
-                <a class="bar-item w3-button" href="../report/report_summary.html">สรุป</a>
-            </div>
-        </div>
-        <div>
-            <a class="w3-bar-item w3-button notification" onclick="myAccordion7('demo8')"
-                href="javascript:void(0)">
-                <span>แจ้งเตือน</span>
-                <i class="fa fa-caret-down"></i>
-                <span id="notficationRequestTopic" class="badgeTopic">7</span>
+        <nav class="w3-sidebar w3-bar-block w3-collapse w3-animate-left w3-card" style="z-index:3;width:250px;"
+            id="mySidebar">
+            <a class="w3-bar-item w3-button w3-border-bottom w3-large" href="../utilities/index.html">
+                <img src="../../img/img1.jpg" style="width:100%;">
             </a>
-            <div id="demo8" class="w3-hide">
-                <a class="bar-item w3-button notification" href="../notfication/request.html">
-                    <span>งานคำขอ</span>
-                    <span id="notficationRequest" class="badge">7</span>
-                </a>
-            </div>
-        </div>
-        <br><br><br><br>
 
-    </nav>
-    <!-- คลิกเมนูย่อได้ -->
-    <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay">
+            <div>
+                <a class="w3-bar-item w3-button" onclick="myAccordion('demo1')" href="javascript:void(0)">ระบบงานคำขอ <i
+                        class="fa fa-caret-down"></i></a>
+                <div id="demo1" class="w3-hide ">
+                    <a class="bar-item w3-button " onclick="myAccordion('demo11')" href="javascript:void(0)">
+                        เพิ่ม <i class="fa fa-caret-down"></i></a>
+                    <div id="demo11" class="w3-hide ">
+                        <a class="bar-item w3-button" href="../request/request_public_sell.html">-
+                            ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
+                        <a class="bar-item w3-button" href="../request/request_public_hawk.html">-
+                            ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
+                        <a class="bar-item w3-button" href="../request/request_area_more_sell.html">-
+                            ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
+                        <a class="bar-item w3-button" href="../request/request_area_more_correct.html">-
+                            ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</a>
+                        <a class="bar-item w3-button" href="../request/request_area_less_sell.html">-
+                            หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
+                        <a class="bar-item w3-button " href="../request/request_area_less_correct.html">-
+                            หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
+                        <a class="bar-item w3-button" href="../request/request_market.html">-
+                            ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
+                        <a class="bar-item w3-button" href="../request/request_health_danger.html">-
+                            กิจการที่เป็นอันตรายต่อสุขภาพ</a>
+                        <a class="bar-item w3-button" href="../request/request_crematory.html">- กิจการฌาปณสถาน</a>
+                    </div>
+                    <a class="bar-item w3-button" href="../request/searchRequest.html">
+                        ค้นหา/แก้ไข</a>
+                </div>
+            </div>
+
+            <div>
+                <a class="w3-bar-item w3-button" onclick="myAccordion('demo2')"
+                    href="javascript:void(0)">งานตรวจสอบ/อนุมัติ<i class="fa fa-caret-down"></i></a>
+                <div id="demo2" class="w3-hide">
+                    <a class="w3-bar-item w3-button" href="#"></a>
+                </div>
+            </div>
+
+            <div>
+                <a class="w3-bar-item w3-button" onclick="myAccordion('demo3')" href="javascript:void(0)">งานใบอนุญาต<i
+                        class="fa fa-caret-down"></i></a>
+                <div id="demo3" class="w3-hide">
+                    <a class="w3-bar-item w3-button" href="#"></a>
+                </div>
+            </div>
+
+            <div>
+                <a class="w3-bar-item w3-button w3-theme" onclick="myAccordion('demo4')"
+                    href="javascript:void(0)">ข้อมูลส่วนกลาง<i class="fa fa-caret-down"></i></a>
+                <div id="demo4" class="w3-hide w3-show">
+                    <a class="bar-item w3-button w3-my-color" href="operator.html">- ข้อมูลประกอบการ</a>
+                    <a class="bar-item w3-button" href="02.html">- ข้อมูลการจดใบอนุญาต</a>
+                    <a class="bar-item w3-button" href="03.html">- โอนใบอนุญาต</a>
+                </div>
+            </div>
+
+            <div>
+                <a class="w3-bar-item w3-button" onclick="myAccordion('demo5')"
+                    href="javascript:void(0)">งานร้องเรียน<i class="fa fa-caret-down"></i></a>
+                <div id="demo5" class="w3-hide">
+                    <a class="bar-item w3-button" href="#">- บันทึกเรื่องร้องเรียน</a>
+                    <a class="bar-item w3-button" href="#">- บันทึกคำร้อง</a>
+                </div>
+            </div>
+
+            <div>
+                <a class="w3-bar-item w3-button" onclick="myAccordion('demo6')" href="javascript:void(0)">ข้อมูลระบบ<i
+                        class="fa fa-caret-down"></i></a>
+                <div id="demo6" class="w3-hide">
+                    <a class="w3-bar-item w3-button" href="#"></a>
+                </div>
+            </div>
+
+            <div>
+                <a class="w3-bar-item w3-button" onclick="myAccordion('demo7')" href="javascript:void(0)">รายงาน <i
+                        class="fa fa-caret-down"></i></a>
+                <div id="demo7" class="w3-hide">
+                    <a class="bar-item w3-button" href="../report/report_crematory.html">ตามคำขอ</a>
+                    <a class="bar-item w3-button" href="../report/report_summary.html">สรุป</a>
+                </div>
+            </div>
+            <div>
+                <a class="w3-bar-item w3-button notification" onclick="myAccordion('demo8')" href="javascript:void(0)">
+                    <span>แจ้งเตือน</span>
+                    <i class="fa fa-caret-down"></i>
+                    <span id="notficationRequestTopic" class="badgeTopic">7</span>
+                </a>
+                <div id="demo8" class="w3-hide">
+                    <a class="bar-item w3-button notification" href="../notfication/request.html">
+                        <span>งานคำขอ</span>
+                        <span id="notficationRequest" class="badge">7</span>
+                    </a>
+                </div>
+            </div>
+            <br><br><br><br>
+
+        </nav>
+        <!-- คลิกเมนูย่อได้ -->
+        <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer"
+            id="myOverlay">
+        </div>
     </div>
-    </div>
-   
+
     <div class="w3-main" style="margin-left:250px;padding-top: 48px;">
-        <header class="w3-container w3-theme" >
+        <header class="w3-container w3-theme">
             <h1 style="font-size:20px">ข้อมูลผู้ประกอบการ</h1>
         </header>
-        <div class= "w3-container"style="padding-top:40px; max-width:100% ">
-         <div>
-             <form id="form">
-            <fieldset disabled id="disable">
-                <!-- START -->
-                <div class="w3-container box w3-center" style="width: 100%; margin:auto;" >
-                    <div class='row'>
-                        <div class="col">
-                            คำนำหน้าชื่อ :
-                            <select id="" name="" style="width: 140px;">
-                                <option value="" hidden>เลือก...</option>
-                                <option value="">นาย</option>
-                                <option value="">นาง</option>
-                                <option value="">นางสาว</option>
-                            </select>
-                        </div>
-                        <div class="col">
-                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                            ชื่อ:
-                            <input type="text" id="" name="" placeholder="" style="width: 160px;">
-                        </div>
-                        <div class="col">
-                            นามสกุล :
-                            <input type="text" id="" name="" placeholder="">&nbsp;
-                        </div>
-                        <div class="col">
-                            &nbsp
-                            ประเภท :
-                            <select id="" name=""  style="width: 160px;">
-                                <option value="none" hidden>เลือก...</option>
-                                <option value="นิติบุคคล">นิติบุคคล</option>
-                                <option value="บุคคลธรรมดา">บุคคลธรรมดา</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col">
-                            เลขประจำตัว :
-                            <input type="text" id="" name="" size="13px" placeholder="" style="width: 140px;">
-                        </div>
-                        <div class="col">
-                            &nbsp
-                            ออกเมื่อ :
-                            <input type="date" id="" name="" placeholder="" style="width: 160px;">
-                        </div>
-                        <div class="col">
-                            หมดอายุ :
-                            <input type="date" id="" name="" placeholder="" style="width: 160px;">
-                        </div>
-                        <div class="col">
-                            &nbsp
-                            เกิดวันที่ :
-                            <input type="date" id="" name="" placeholder="" style="width: 160px;">
-                        </div>
-                    </div>
-
-
-                    <div class="row">
-                        <div class="col-9">
-                            <div class="row">
-                                <div class="col-4">
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    สัญชาติ :
-                                    <select id="nationality"  style="width: 140px; margin: left;">
+        <div class="w3-container" style="padding-top:40px; max-width:100% ">
+            <div>
+                <form id="form">
+                    <fieldset disabled id="disable">
+                        <!-- START -->
+                        <div class="w3-container box w3-center" style="width: 100%; margin:auto;">
+                            <div class='row'>
+                                <div class="col">
+                                    คำนำหน้าชื่อ :
+                                    <select id="" name="" style="width: 140px;">
                                         <option value="" hidden>เลือก...</option>
-                                        <option value="">ไทย</option>
-                                        <option value=""></option>
+                                        <option value="">นาย</option>
+                                        <option value="">นาง</option>
+                                        <option value="">นางสาว</option>
                                     </select>
                                 </div>
-                                <div class="col-4">
+                                <div class="col">
+                                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                    ชื่อ:
+                                    <input type="text" id="" name="" placeholder="" style="width: 160px;">
+                                </div>
+                                <div class="col">
+                                    นามสกุล :
+                                    <input type="text" id="" name="" placeholder="">&nbsp;
+                                </div>
+                                <div class="col">
                                     &nbsp
-                                    เชื้อชาติ :
-                                    <select id="race"  style="width: 160px;">
-                                        <option value="" hidden>เลือก...</option>
-                                        <option value="">ไทย</option>
-                                        <option value=""></option>
+                                    ประเภท :
+                                    <select id="" name="" style="width: 160px;">
+                                        <option value="none" hidden>เลือก...</option>
+                                        <option value="นิติบุคคล">นิติบุคคล</option>
+                                        <option value="บุคคลธรรมดา">บุคคลธรรมดา</option>
                                     </select>
                                 </div>
                             </div>
+
                             <div class="row">
                                 <div class="col">
-                                    &nbsp;
-                                    อยู่บ้านเลขที่ :
-                                    <input type="text" id="homeId" style="width: 140px">
+                                    เลขประจำตัว :
+                                    <input type="text" id="" name="" size="13px" placeholder="" style="width: 140px;">
                                 </div>
                                 <div class="col">
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    หมู่ที่ :
-                                    <input type="int" id="moo" style="width: 160px">
+                                    &nbsp
+                                    ออกเมื่อ :
+                                    <input type="text" id="datepicker1" placeholder="" style="width: 160px;">
                                 </div>
                                 <div class="col">
-                                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbspตรอก:
-                                    <input type="text" id="trxk" style="width: 160px"> &nbsp;
+                                    หมดอายุ :
+                                    <input type="text" id="datepicker2" placeholder="" style="width: 160px;">
+                                </div>
+                                <div class="col">
+                                    &nbsp
+                                    เกิดวันที่ :
+                                    <input type="text" id="datepicker3" placeholder="" style="width: 160px;">
                                 </div>
                             </div>
+
+
                             <div class="row">
-                                <div class='col'>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    ซอย :
-                                    <input type="text" id="sxy" style="width: 140px;" >
+                                <div class="col-9">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            สัญชาติ :
+                                            <select id="nationality" style="width: 140px; margin: left;">
+                                                <option value="" hidden>เลือก...</option>
+                                                <option value="">ไทย</option>
+                                                <option value=""></option>
+                                            </select>
+                                        </div>
+                                        <div class="col-4">
+                                            &nbsp
+                                            เชื้อชาติ :
+                                            <select id="race" style="width: 160px;">
+                                                <option value="" hidden>เลือก...</option>
+                                                <option value="">ไทย</option>
+                                                <option value=""></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            &nbsp;
+                                            อยู่บ้านเลขที่ :
+                                            <input type="text" id="homeId" style="width: 140px">
+                                        </div>
+                                        <div class="col">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            หมู่ที่ :
+                                            <input type="int" id="moo" style="width: 160px">
+                                        </div>
+                                        <div class="col">
+                                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbspตรอก:
+                                            <input type="text" id="trxk" style="width: 160px"> &nbsp;
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class='col'>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            ซอย :
+                                            <input type="text" id="sxy" style="width: 140px;">
+                                        </div>
+                                        <div class="col">
+                                            &nbsp&nbsp&nbsp อาคาร :
+                                            <input type="text" id="building" style="width: 160px">
+                                        </div>
+                                        <div class="col">
+                                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspถนน :
+                                            <input type="text" id="road" style="width: 160px">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            จังหวัด :
+                                            <select id="province" style="width: 140px">
+                                            </select>
+                                        </div>
+                                        <div class="col">
+                                            &nbsp&nbsp&nbsp อำเภอ :
+                                            <select id="district" style="width: 160px">
+                                            </select>
+                                        </div>
+                                        <div class="col">
+                                            &nbsp&nbsp&nbsp&nbsp&nbspตำบล :
+                                            <select id="subdistrict" style="width: 160px">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            โทรศัพท์ :
+                                            <input type="text" style="width: 140px" id="phone"
+                                                onkeyup="checkPhoneInput('phone')"
+                                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                                maxlength="10">
+                                        </div>
+                                        <div class="col-4">
+                                            &nbsp&nbsp
+                                            โทรสาร :
+                                            <input type="text" id="fax" style="width: 160px">
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col">
-                                    &nbsp&nbsp&nbsp อาคาร :
-                                    <input type="text" id="building" style="width: 160px">
-                                </div>
-                                <div class="col">
-                                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspถนน :
-                                    <input type="text" id="road" style="width: 160px">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    จังหวัด :
-                                    <select id="province"  style="width: 140px">
-                                    </select>
-                                </div>
-                                <div class="col">
-                                    &nbsp&nbsp&nbsp อำเภอ :
-                                    <select id="district" style="width: 160px">
-                                    </select>
-                                </div>
-                                <div class="col">
-                                    &nbsp&nbsp&nbsp&nbsp&nbspตำบล :
-                                    <select id="subdistrict" style="width: 160px">
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-4">
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    โทรศัพท์ :
-                                    <input type="text"  style="width: 140px"
-                                        id="phone" onkeyup="checkPhoneInput('phone')"
-                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                        maxlength="10">
-                                </div>
-                                <div class="col-4">
-                                    &nbsp&nbsp
-                                    โทรสาร :
-                                    <input type="text" id="fax" style="width: 160px">
+                                <div class="col" style=" padding-top: 30px; text-align: center; display: block;">
+                                    <div class="row" style="  text-align: center; display: block;">
+                                        <img id="operatorImage" class="rounded" src="../../img/userProfile.png"
+                                            width="200px" height="200px">
+                                    </div>
+                                    <br>
+                                    <div class="row imageupload">
+                                        <div class="col">
+                                            <input style='display: none;' type="file" id="uploadFile"
+                                                onchange="uploadImage(event)" accept="image/*">
+                                            <button onclick="buttonImage()" class="btn btn-secondary  is-color"
+                                                style="width:60px">แทน</button>
+
+
+                                            <button id="cancelImage" class="btn btn-secondary  btn-danger"
+                                                style="width:60px" onclick="deleteImageOne()"> ลบ </button>
+
+
+                                            <button id="webcam" class="btn btn-secondary  " style="width:80px;"
+                                                disabled>
+                                                ถ่ายภาพ
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col" style=" padding-top: 30px; text-align: center; display: block;">
-                            <div class="row" style="  text-align: center; display: block;">
-                                <img id="operatorImage" class="rounded" src="../../img/userProfile.png" width="200px"
-                                    height="200px">
-                            </div>
-                            <br>
-                            <div class="row imageupload">
-                                <div class="col">
-                                    <input style='display: none;' type="file" id="uploadFile"
-                                        onchange="uploadImage(event)" accept="image/*">
-                                    <button onclick="buttonImage()" class="btn btn-secondary  is-color"
-                                        style="width:60px">แทน</button>
-
-
-                                    <button id="cancelImage" class="btn btn-secondary  btn-danger"
-                                        style="width:60px" onclick="deleteImageOne()"> ลบ </button>
-
-
-                                    <button id="webcam" class="btn btn-secondary  " style="width:80px;" disabled>
-                                        ถ่ายภาพ
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- </form> -->
-            </fieldset>
-        </form>
-         </div>
+                        <!-- </form> -->
+                    </fieldset>
+                </form>
+            </div>
         </div>
 
     </div>

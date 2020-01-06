@@ -464,6 +464,7 @@ button.ui-button::-moz-focus-inner {
 	text-align: center;
 	font-weight: bold;
 	border: 0;
+	font-family: 'Sarabun', sans-serif;
 }
 .ui-datepicker td {
 	border: 0;

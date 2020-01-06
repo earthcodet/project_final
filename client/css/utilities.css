@@ -1,187 +1,219 @@
 a.disableds {
-    pointer-events: none;
-    cursor: default;
-    color:gray!important
-  }
+  pointer-events: none;
+  cursor: default;
+  color: gray!important
+}
+
 a.exit {
   color: white;
   cursor: pointer;
 }
-a.exit:hover{
- color: #034b9a;
- text-decoration: underline;
-}
-  input, select {
-    padding: 5px 8px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-sizing: border-box;
-  }
-  
-  .column {
-    float: left;
-    width: 50%;
-    padding: 1px;
-    height: 300px;
-    /* Should be removed. Only for demonstration */
-  }
-  /* Clear floats after the columns */
-  
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-  .imageupload input[type="file"] {
-    display: none;
-  }
-  .is-color{
-    background-color: #009688;
-    color: #FFFF;
-  }
-  div.box {
-    /* background-color: lightgrey; */
-    width: 1100px;
-    border: 1px solid black;
-    padding: 15px;
-    margin: 0px;
-    /* margin-left:-42px; */
-  }
 
-  div.displaynone{
-    display: none;
-  }
-  
-  /* disable*/
-  fieldset {
-    border: 0px solid #c0c0c0;
-    margin: 0 2px;
-    padding: .35em .625em .75em;
-  }
-  
-  h1{
-    padding: 5px;
-  }
-  
-  /* fieldset input{
+a.exit:hover {
+  color: #034b9a;
+  text-decoration: underline;
+}
+
+input, select {
+  padding: 5px 8px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.column {
+  float: left;
+  width: 50%;
+  padding: 1px;
+  height: 300px;
+  /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.imageupload input[type="file"] {
+  display: none;
+}
+
+.is-color {
+  background-color: #009688;
+  color: #FFFF;
+  font-family: 'Sarabun', sans-serif;
+}
+
+div.box {
+  /* background-color: lightgrey; */
+  width: 1100px;
+  border: 1px solid black;
+  padding: 15px;
+  margin: 0px;
+  /* margin-left:-42px; */
+}
+
+div.displaynone {
+  display: none;
+}
+
+/* disable*/
+
+fieldset {
+  border: 0px solid #c0c0c0;
+  margin: 0 2px;
+  padding: .35em .625em .75em;
+}
+
+h1 {
+  padding: 5px;
+}
+
+/* fieldset input{
     background-color: #F4F6F6;
   } */
-  
-  .deletebutton {
-    background-color: #cc0000; /* Green */
-    border: none;
-    color: white;
-    /* padding: 15px 32px; */
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    cursor: pointer;
-    font-weight: bold;
-    width: 100%;
-    height: 32px;
-  }
- .cursor-pointer{
-    cursor: pointer;
-  }
-  .table-request th:hover{
-    background-color: gray;
-  }
-  .border-black{
-    border-color: black;
-  }
-  .display-center{
-    text-align: center; 
-    display: block;
-  }
-  .text-center{
-    text-align: center;
-  }
-  .sarabun-font{
-    font-family: sarabun;
-  }
-  .display-none{
-    display: none;
-  }
-  .w3-main{ 
-    height: 100%;
-  }
-  html, body {
-    width: 100%;
-    height: 100%;
-    margin: 0px;
-    padding: 0px;
-    overflow-x: auto;
-    }
-  .w3-main,#main{
-    transition:margin-left .4s
-  }  
-  .swal-height {
-    height: auto;
-  }
 
-  .search-popup-height {
-    height:300px;
-    border-style: solid;
-    border-color: #d8d7d7;
-    border-width: 0px 1px 1px 1px
-
-  }
-
- /* table ค้นหาผู้ประกอบการ */
- .tablesearch{
-   height: 100%;
- }
- .tablesearch tbody {
-  display:block;
-  height:100%;
-  overflow:auto;
+.deletebutton {
+  background-color: #cc0000;
+  /* Green */
+  border: none;
+  color: white;
+  /* padding: 15px 32px; */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  width: 100%;
+  height: 32px;
 }
-.tablesearch th{
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.table-request th:hover {
+  background-color: gray;
+}
+
+.border-black {
+  border-color: black;
+}
+
+.display-center {
+  text-align: center;
+  display: block;
+}
+
+.text-center {
+  text-align: center;
+  font-family: 'Sarabun', sans-serif;
+}
+
+.sarabun-font {
+  font-family: 'Sarabun', sans-serif;
+}
+
+.display-none {
+  display: none;
+}
+
+.w3-main {
+  height: 100%;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  overflow-x: auto;
+}
+
+.w3-main, #main {
+  transition: margin-left .4s
+}
+
+.swal-height {
+  height: auto;
+}
+
+.search-popup-height {
+  height: 300px;
+  border-style: solid;
+  border-color: #d8d7d7;
+  border-width: 0px 1px 1px 1px
+}
+
+/* table ค้นหาผู้ประกอบการ */
+
+.tablesearch {
+  height: 100%;
+}
+
+.tablesearch tbody {
+  display: block;
+  height: 100%;
+  overflow: auto;
+}
+
+.tablesearch th {
   padding: 0.5rem;
   margin-bottom: 0rem;
   text-align: center;
 }
+
 .tablesearch tr {
-display:table;
-width:100%;
-table-layout:fixed;
+  display: table;
+  width: 100%;
+  table-layout: fixed;
 }
+
 .tablesearch thead {
-width: calc( 100% - 1em )
+  width: calc( 100% - 1em)
 }
 
 /* table result */
-.setheight400px{
+
+.setheight400px {
   height: 400px;
 }
+
 .tableresult tbody {
-  display:block;
-  height:370px;
-  overflow:auto;
+  display: block;
+  height: 370px;
+  overflow: auto;
 }
-.tableresult th{
+
+.tableresult th {
   font-size: 16px;
   padding: 0.5rem;
   margin-bottom: 0rem;
   text-align: center;
 }
-.tableresult thead,.tableresult tr {
-display:table;
-width:100%;
-table-layout:fixed;
-}
-.tableresult thead {
-width: calc( 100% - 1.1em )
+
+.tableresult thead, .tableresult tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
 }
 
-.menu-click { 
-  color:white;
+.tableresult thead {
+  width: calc( 100% - 1.1em)
+}
+
+.menu-click {
+  color: white;
   text-decoration: underline;
   cursor: auto;
 }
+
 /* notification */
 
 .notification {
@@ -208,8 +240,6 @@ width: calc( 100% - 1.1em )
   border-radius: 3px;
 }
 
-
-
-is-color-red{
+is-color-red {
   color: red;
 }
