@@ -19,7 +19,6 @@ function checkPhoneInput(tagId) {
 }
 var totalFiles = [];
 function handleFileSelect(evt) {
-    console.log('aaa')
     var files = evt.target.files;
     for (var i = 0, f; f = files[i]; i++) {
         if (!f.type.match('image.*')) {
@@ -94,7 +93,7 @@ function isNumber(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 }
 // sortTable //
-function sortTable(n, id) {
+function sortTable(n, id , event) {
     var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
     table = document.getElementById(id);
     switching = true;
