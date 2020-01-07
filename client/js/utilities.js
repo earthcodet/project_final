@@ -93,7 +93,7 @@ function isNumber(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 }
 // sortTable //
-function sortTable(n, id , event) {
+function sortTable(n, id ,type) {
     var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
     table = document.getElementById(id);
     switching = true;
@@ -105,7 +105,7 @@ function sortTable(n, id , event) {
             shouldSwitch = false;
             x = rows[i].getElementsByTagName("TD")[n];
             y = rows[i + 1].getElementsByTagName("TD")[n];
-            if (n ==3 || n== 4) {
+            if (type = "date") {
                 var tempdateX = x.innerHTML.split(' ')
                 var tempdateY = y.innerHTML.split(' ')
                 var dayX ,dayY ,monthX ,monthY ,yearX , yearY
@@ -138,7 +138,7 @@ function sortTable(n, id , event) {
                         break;
                     }
                 }
-            }else if(n == 5){
+            }else if(type = "dateExp"){
                 var tempX = x.innerHTML.split(' ')
                 var tempY = y.innerHTML.split(' ')
                 var dateX, dateY

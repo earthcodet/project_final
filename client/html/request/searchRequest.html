@@ -183,8 +183,7 @@
                 </div>
             </div>
             <div>
-                <a class="w3-bar-item w3-button notification" onclick="myAccordion7('demo8')"
-                    href="javascript:void(0)">
+                <a class="w3-bar-item w3-button notification" onclick="myAccordion7('demo8')" href="javascript:void(0)">
                     <span>แจ้งเตือน</span>
                     <i class="fa fa-caret-down"></i>
                     <span id="notficationRequestTopic" class="badgeTopic">7</span>
@@ -210,7 +209,7 @@
         </header>
 
         <div class=" w3-container " style="padding:32px; text-align: center;">
-            <div style="width: 100%;height: 230px;">
+            <div style="width: 100%;height: 280px;">
                 <div class="row " style="padding: 20px;">
                     <div class="col-3" style="text-align: left;">
                         <h5>ค้นหาตาม</h5>
@@ -232,7 +231,7 @@
                             <br>
                             <input type="text" style="width: 50%;">
                         </div>
-                        <div id="searchDate" class="displaynone" >
+                        <div id="searchDate" class="displaynone">
                             <h5>วันที่ค้นหา</h5>
                             <br>
                             <input type="text" id="datepicker1" style="width: 50%;">
@@ -339,105 +338,110 @@
                 </div>
             </div>
             <div>
-                <div style="text-align: right ; display:block; margin-right:30px;float: right;">
+                <div style="text-align: right ; display:block; margin-right:30px;float: right;position: relative;bottom: 0px;">
                     <button class="fa fa-search button" style="background-color: #009688; "> ค้นหา</button>
                 </div>
             </div>
             <br><br>
             <h5 style="text-align: left;"> ผลลัทพ์การค้นหา </h5>
             <div class="setheight400px">
-                <table class="table cursor-pointer table-hover tableresult">
+                <table id="requestTable"  class="table cursor-pointer table-hover tableresult">
                     <thead>
                         <tr class="is-color ">
-                            <th>ชื่อผู้ขอ</th>
-                            <th>วันที่ยื่น</th>
-                            <th>เลขที่ใบคำขอ</th>
-                            <th>วันที่หมดอายุ</th>
-                            <th>ประเภทใบอนุญาต</th>
-                            <th>ประเภทกิจการ</th>
+                            <th onclick="sortTable(0,'requestTable','')">
+                                <h6>
+                                    ประเภทใบอนุญาต
+                                    <i class="fa fa-sort "></i>
+                                </h6>
+                            </th>
+                            <th onclick="sortTable(1,'requestTable'),''">
+                                <h6>
+                                    ประเภทกิจการ
+                                    <i class="fa fa-sort "></i>
+                                </h6>
+                            </th>
+                            <th onclick="sortTable(2,'requestTable'),''">
+                                <h6>
+                                    เลขที่ใบคำขอ
+                                    <i class="fa fa-sort "></i>
+                                </h6>
+                            </th>
+                            <th onclick="sortTable(3,'requestTable'),''">
+                                <h6>
+                                    ชื่อผู้ขอ
+                                    <i class="fa fa-sort "></i>
+                                </h6>
+                            </th>
+                            <th onclick="sortTable(4,'requestTable'),'date'">
+                                <h6>
+                                    วันที่ยื่น
+                                    <i class="fa fa-sort "></i>
+                                </h6>
+                            </th>
+                            <th onclick="sortTable(4,'requestTable'),'date'">
+                                <h6 >
+                                    วันที่หมดอายุ
+                                    <i class="fa fa-sort " ></i>
+                                </h6>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>test</td>
-                            <td>test</td>
-                            <td>test</td>
-                            <td>test</td>
-                            <td>test</td>
-                            <td>test</td>
+                            <td>หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่าย</td>
+                            <td>1.การจำหน่ายสินค้าในที่ หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                            </td>
+                            <td>N 0001/2562</td>
+                            <td>นาย สมควร</td>
+                            <td>1 กันยายน 2562</td>
+                            <td>1 กันยายน 2568</td>
                         </tr>
                         <tr>
-                            <td>test2</td>
-                            <td>test2</td>
-                            <td>test2</td>
-                            <td>test2</td>
-                            <td>test2</td>
-                            <td>test2</td>
+                            <td>หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่าย</td>
+                            <td>1.การจำหน่ายสินค้าในที่ หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                            </td>
+                            <td>N 0001/2562</td>
+                            <td>นาย สมควร</td>
+                            <td>1 พฤศจิกายน 2562</td>
+                            <td>1 พฤศจิกายน 2568</td>
                         </tr>
                         <tr>
-                            <td>test2</td>
-                            <td>test2</td>
-                            <td>test2</td>
-                            <td>test2</td>
-                            <td>test2</td>
-                            <td>test2</td>
+                            <td>หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่าย</td>
+                            <td>1.การจำหน่ายสินค้าในที่ หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                            </td>
+                            <td>N 0001/2562</td>
+                            <td>นาย สมควร</td>
+                            <td>1 ธันวาคม 2562</td>
+                            <td>1 ธันวาคม 2568</td>
                         </tr>
                         <tr>
-                            <td>test2</td>
-                            <td>test2</td>
-                            <td>test2</td>
-                            <td>test2</td>
-                            <td>test2</td>
-                            <td>test2</td>
+                            <td>หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่าย</td>
+                            <td>1.การจำหน่ายสินค้าในที่ หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                            </td>
+                            <td>N 0001/2562</td>
+                            <td>นาย สมควร</td>
+                            <td>1 มิถุนายน 2562</td>
+                            <td>1 มิถุนายน 2568</td>
                         </tr>
                         <tr>
-                            <td>test2</td>
-                            <td>test2</td>
-                            <td>test2</td>
-                            <td>test2</td>
-                            <td>test2</td>
-                            <td>test2</td>
+                            <td>หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่าย</td>
+                            <td>1.การจำหน่ายสินค้าในที่ หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                            </td>
+                            <td>N 0001/2562</td>
+                            <td>นาย สมควร</td>
+                            <td>1 มิถุนายน 2562</td>
+                            <td>1 มิถุนายน 2568</td>
                         </tr>
                         <tr>
-                            <td>test2</td>
-                            <td>test2</td>
-                            <td>test2</td>
-                            <td>test2</td>
-                            <td>test2</td>
-                            <td>test2</td>
+                            <td>หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่าย</td>
+                            <td>1.การจำหน่ายสินค้าในที่ หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                            </td>
+                            <td>N 0001/2562</td>
+                            <td>นาย สมควร</td>
+                            <td>1 กันยายน 2562</td>
+                            <td>1 กันยายน 2568</td>
                         </tr>
-                        <tr>
-                            <td>test2</td>
-                            <td>test2</td>
-                            <td>test2</td>
-                            <td>test2</td>
-                            <td>test2</td>
-                            <td>test2</td>
-                        </tr>
-                        <tr>
-                            <td>test2</td>
-                            <td>test2</td>
-                            <td>test2</td>
-                            <td>test2</td>
-                            <td>test2</td>
-                            <td>test2</td>
-                        </tr>
-                        <tr>
-                            <td>test2</td>
-                            <td>test2</td>
-                            <td>test2</td>
-                            <td>test2</td>
-                            <td>test2</td>
-                            <td>test2</td>
-                        </tr>
-                        <tr>
-                            <td>test2</td>
-                            <td>test2</td>
-                            <td>test2</td>
-                            <td>test2</td>
-                            <td>test2</td>
-                            <td>test2</td>
-                        </tr>
+
                     </tbody>
                 </table>
             </div>
@@ -445,8 +449,5 @@
     </div>
 
 </body>
-<script>
-    console.log(document.getElementById('province'))
-</script>
-
+<script src="../../js/utilities.js"></script>
 </html>

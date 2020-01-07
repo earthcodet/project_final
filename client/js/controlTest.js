@@ -234,7 +234,6 @@ function onSelectUser(){
     document.getElementById('road').value =listDataTest.userRoad
     document.getElementById('phone').value =listDataTest.userPhone
     document.getElementById('fax').value =listDataTest.userFax
-    console.log('zzzz')
 }
 function searchUsername() {
     document.getElementById('')
