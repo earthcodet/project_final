@@ -76,7 +76,7 @@
                 </a>
             </li>
             <li>
-                <a id="restoreMenu" onclick="restoreTEST()"  class="exit disableds">
+                <a id="restoreMenu" onclick="restoreTEST()" class="exit disableds">
                     <i class="fa fa-reply fa-lg w3-margin-right w3-text-theme"></i>
                     เรียกคืน
                 </a>
@@ -182,8 +182,7 @@
                 </div>
             </div>
             <div>
-                <a class="w3-bar-item w3-button notification" onclick="myAccordion7('demo8')"
-                    href="javascript:void(0)">
+                <a class="w3-bar-item w3-button notification" onclick="myAccordion7('demo8')" href="javascript:void(0)">
                     <span>แจ้งเตือน</span>
                     <i class="fa fa-caret-down"></i>
                     <span id="notficationRequestTopic" class="badgeTopic">7</span>
@@ -396,7 +395,9 @@
                             <input type="text" id="" style="width: 25%;">
 
                             <a style="margin-left: 3px;">โทรศัพท์ :</a>
-                            <input type="text" id="" style="width: 24.5%;">
+                            <input type="text" style="width: 25%" id="" onkeyup="checkPhoneInput('phone')"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                maxlength="10">
                             <br>
                         </div>
 
@@ -439,7 +440,7 @@
 
 
 
-                    </div> 
+                    </div>
                     <!-- ข้อมูลเจ้าของ -->
                     <br>
                     <div id="Demo" style="width: 1100px;height: 300px;display: none;margin: auto;">
@@ -506,8 +507,7 @@
 
                         </div>
                     </div>
-                    <br>
-                    <br>
+                    <br><br>
                     <!-- เพิ่มรูป -->
                     <div class="w3-container box" style="margin:auto;">
                         <a>ประเภทกิจการ :</a>&nbsp;&nbsp;&nbsp;
@@ -527,16 +527,50 @@
                         </div>
                         <br>
                         <a>รูปภาพผลการตรวจสอบ</a>
-                        <input type="file" id="uploadFile" style="display: none;" onchange="handleFileSelect(event)" accept="image/*" multiple>
-                        <button type="button" class="btn is-color "style="" onclick="document.getElementById('uploadFile').click()"> 
+                        <input type="file" id="uploadFile" style="display: none;" onchange="handleFileSelect(event)"
+                            accept="image/*" multiple>
+                        <button type="button" class="btn is-color "
+                            onclick="document.getElementById('uploadFile').click()">
                             <h5><i class="fa fa-upload"></i>
-                            อัพโหลดภาพ</h5> 
+                                อัพโหลดภาพ</h5>
                         </button>
                         <br>
                         <br>
                         <div id='outputImage' style="height: 320px; overflow-y:auto; border: 1px solid black;">
                         </div>
                     </div>
+                    <br>
+                    <!-- อนุมัติ -->
+                    <div class="box" style="margin: auto;">
+                        <div class="row">
+                            <div class="col" style="text-align: left;">
+                                <p style="margin-top: 14px;"><b>ความถูกต้องของเอกสารคำร้อง</b></p>
+                                <div class="box" style="width: 100%;margin-top: 26px;">
+                                    <input type="radio" name="" id="" value="">
+                                    &nbsp;เห็นสมควรอนุญาต
+                                    <br>
+                                    <input type="radio" name="" id="" value="">
+                                    &nbsp;เห็นสมควรไม่อนุญาต เพราะ <textarea rows="4" cols="50"> </textarea>
+                                    <br><br>
+                                    <p style="margin-left: 25px;">ลงชื่อ <input type="text"> ผู้ตรวจสอบ </p>
+                                </div>
+                            </div>
+
+                            <div class="col" style="text-align: left;">
+                                <b>บันทึกอนุมัติคำขอ</b> <input type="text" id="datepicker2">
+                                <div class="box" style="width: 100%;margin-top: 12px;">
+                                    <input type="radio" name="" id="" value="">
+                                    &nbsp;เห็นสมควรอนุญาต
+                                    <br>
+                                    <input type="radio" name="" id="" value="">
+                                    &nbsp;เห็นสมควรไม่อนุญาต เพราะ <textarea rows="4" cols="50"> </textarea>
+                                    <br><br>
+                                    <p>ลงชื่อ <input type="text"> ผู้ตรวจสอบ </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </fieldset>
             </form>
         </div>
