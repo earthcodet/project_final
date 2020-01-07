@@ -81,6 +81,12 @@
                     ยกเลิก
                 </a>
             </li>
+            <li >
+                <a id="searchMenu" onclick="searchOparator()" class="exit">
+                    <i class="fa fa-search fa-lg w3-margin-right  w3-text-theme"></i>
+                    ค้นหา
+                </a>
+            </li>
             <li class="w3-display-topright">
                 <a id="exitMenu" onclick="exitTEST()" class="exit">
                     <i class="fa fa-sign-out fa-lg w3-margin-right w3-text-theme"></i>
@@ -241,7 +247,9 @@
                             <div class="row">
                                 <div class="col">
                                     เลขประจำตัว :
-                                    <input type="text" id="id" name="" size="13px" placeholder="" style="width: 140px;">
+                                    <input type="text" id="id" name=""  placeholder="" style="width: 140px;"
+                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                    maxlength="13">
                                 </div>
                                 <div class="col">
                                     &nbsp
@@ -406,5 +414,4 @@
 
 
 <script src="../../js/js-index.js"></script>
-<script src="../../js/test copy.js"></script
 </html>
