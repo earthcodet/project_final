@@ -23,9 +23,8 @@
 <link rel="stylesheet" href="../../css/w3-theme-teal.css">
 <link href="../../css/css-index.css" rel="stylesheet">
 <link href="../../css/fonts.css" rel="stylesheet">
-<!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="../../js/js-index.js"></script>
-<script src="../../js/test.js"></script>
 
 <!-- search -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -42,8 +41,7 @@
 <!-- disable-->
 <script src="../../js/disable.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-<!-- ทดสอบควบคุมหน้า -->
-<script src="../../js/controlTest.js"></script>
+
 
 <!-- เรียกไลบารี่สร้างปฎิทิน  -->
 <link type="text/css" href="../../css/jquery-ui-1.12.1.custom/jquery-ui.css" rel="stylesheet" />
@@ -230,7 +228,7 @@
                             <br>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <a>ข้าพเจ้า :</a>
-                            <select>
+                            <select id="typeUser">
                                 <option value="บุคคลธรรมดา">บุคคลธรรมดา</option>
                                 <option value="นิติบุคคล">นิติบุคคล</option>
                             </select>
@@ -317,8 +315,8 @@
                             <a>อายุ :</a>
                             <input type="int" id="age" style="width: 8%;">
                             <a>สัญชาติ &nbsp;:</a>
-                            <input list="nationality" id="" name="" style="width: 13%;">
-                            <datalist id="nationality">
+                            <input list="nationality1" id="nationalityList1" name="" style="width: 13%;">
+                            <datalist id="nationality1">
                                 <!-- <select id="nationality" style="width: 8%;"> -->
                                 <option value="" hidden>เลือก...</option>
                                 <option value="ไทย">ไทย</option>
@@ -329,8 +327,8 @@
                             </input>
 
                             <a>เชื้อชาติ :</a>
-                            <input list="nationality" id="" name="" style="width: 13%;">
-                            <datalist id="nationality">
+                            <input list="nationality2" id="nationalityList2" name="" style="width: 13%;">
+                            <datalist id="nationality2">
                                 <option value="" hidden>เลือก...</option>
                                 <option value="ไทย">ไทย</option>
                                 <option value="จีน"></option>
@@ -619,5 +617,8 @@
         </div>
     </div>
 </body>
-
+<!-- ทดสอบควบคุมหน้า -->
+<script src="../../js/twoAddress.js"></script>
+<script src="../../js/dataTEST.js"></script>
+<script src="../../js/controlTest.js"></script>
 </html>

@@ -120,7 +120,7 @@ function testSearchOparator(){
                     เลขบัตรประจำตัว :
                     <input type="text" id="userid" style="width: 18%;" >
                     <button type="button" style="width: auto;height: auto;"
-                    class="btn btn-secondary is-color">
+                    class="btn btn-secondary is-color" >
                        
                             <i class="fa fa-search"></i> 
                             ค้นหา
@@ -139,62 +139,62 @@ function testSearchOparator(){
               </tr>
             </thead>
             <tbody>
-            <tr>
+            <tr onclick="onSelectUser()">
                 <td>นายสมหมาย</td>
                 <td>จงรัก</td>
                 <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
                 <td>1011122111111</td>
             </tr>
-            <tr>
+            <tr onclick="onSelectUser()">
                 <td>นายสมหมาย</td>
                 <td>จงรัก</td>
                 <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
                 <td>1011122111111</td>
             </tr>
-            <tr>
+            <tr onclick="onSelectUser()">
                 <td>นายสมหมาย</td>
                 <td>จงรัก</td>
                 <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
                 <td>1011122111111</td>
             </tr>
-            <tr>
+            <tr onclick="onSelectUser()">
                 <td>นายสมหมาย</td>
                 <td>จงรัก</td>
                 <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
                 <td>1011122111111</td>
             </tr>
-            <tr>
+            <tr onclick="onSelectUser()">
                 <td>นายสมหมาย</td>
                 <td>จงรัก</td>
                 <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
                 <td>1011122111111</td>
             </tr>
-            <tr>
+            <tr onclick="onSelectUser()">
                 <td>นายสมหมาย</td>
                 <td>จงรัก</td>
                 <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
                 <td>1011122111111</td>
             </tr>
-            <tr>
+            <tr onclick="onSelectUser()">
                 <td>นายสมหมาย</td>
                 <td>จงรัก</td>
                 <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
                 <td>1011122111111</td>
             </tr>
-            <tr>
+            <tr onclick="onSelectUser()">
                 <td>นายสมหมาย</td>
                 <td>จงรัก</td>
                 <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
                 <td>1011122111111</td>
             </tr>
-            <tr>
+            <tr onclick="onSelectUser()">
                 <td>นายสมหมาย</td>
                 <td>จงรัก</td>
                 <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
                 <td>1011122111111</td>
             </tr>
             
-            <tr>
+            <tr onclick="onSelectUser()">
                 <td>นายสมหมาย</td>
                 <td>จงรัก</td>
                 <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
@@ -214,6 +214,27 @@ function testSearchOparator(){
         closeOnConfirm: false,
         closeOnCancel: false
     });  
+}
+function onSelectUser(){
+    Swal.close()
+    document.getElementById('typeUser').value = listDataTest.userType
+    document.getElementById('province').value = listDataTest.userProvince
+    document.getElementById('district').value = listDataTest.userSA
+    document.getElementById('subdistrict').value = listDataTest.userA
+    document.getElementById('name').value = listDataTest.userName
+    document.getElementById('id').value =listDataTest.userId
+    document.getElementById('age').value =listDataTest.userAge
+    document.getElementById('nationalityList1').value =listDataTest.userN1
+    document.getElementById('nationalityList2').value =listDataTest.userN2
+    document.getElementById('homeId').value =listDataTest.userHomeId
+    document.getElementById('moo').value =listDataTest.userMoo
+    document.getElementById('trxk').value =listDataTest.userTrxk
+    document.getElementById('sxy').value ='sss'
+    document.getElementById('building').value =listDataTest.userBuilding
+    document.getElementById('road').value =listDataTest.userRoad
+    document.getElementById('phone').value =listDataTest.userPhone
+    document.getElementById('fax').value =listDataTest.userFax
+    console.log('zzzz')
 }
 function searchUsername() {
     document.getElementById('')

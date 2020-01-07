@@ -25,7 +25,6 @@
 <link href="../../css/fonts.css" rel="stylesheet">
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="../../js/js-index.js"></script>
-<script src="../../js/test.js"></script>
 
 <!-- search -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -40,8 +39,6 @@
 <script src="../../js/utilities.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-<!-- ทดสอบควบคุมหน้า -->
-<script src="../../js/controlTest.js"></script>
 
 <!-- เรียกไลบารี่สร้างปฎิทิน  -->
 <link type="text/css" href="../../css/jquery-ui-1.12.1.custom/jquery-ui.css" rel="stylesheet" />
@@ -228,14 +225,14 @@
                             <br>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <a>ข้าพเจ้า :</a>
-                            <select>
+                            <select id="typeUser">
                                 <option value="บุคคลธรรมดา">บุคคลธรรมดา</option>
                                 <option value="นิติบุคคล">นิติบุคคล</option>
                             </select>
                             &nbsp;
                             <input type="text" id="name" style="width: 45%;">
-                            <button type="button" class="fa fa-search is-color " style="height: 32px;border-radius: 8px;"
-                                onclick="testSearchOparator()"></button>
+                            <button type="button" class="fa fa-search is-color "
+                                style="height: 32px;border-radius: 8px;" onclick="testSearchOparator()"></button>
 
                             <br>
                             &nbsp;
@@ -315,8 +312,8 @@
                             <a>อายุ :</a>
                             <input type="int" id="age" style="width: 8%;">
                             <a>สัญชาติ &nbsp;:</a>
-                            <input list="nationality" id="" name="" style="width: 13%;">
-                            <datalist id="nationality">
+                            <input list="nationality1" id="nationalityList1" name="" style="width: 13%;">
+                            <datalist id="nationality1">
                                 <!-- <select id="nationality" style="width: 8%;"> -->
                                 <option value="" hidden>เลือก...</option>
                                 <option value="ไทย">ไทย</option>
@@ -327,8 +324,8 @@
                             </input>
 
                             <a>เชื้อชาติ :</a>
-                            <input list="nationality" id="" name="" style="width: 13%;">
-                            <datalist id="nationality">
+                            <input list="nationality2" id="nationalityList2" name="" style="width: 13%;">
+                            <datalist id="nationality2">
                                 <option value="" hidden>เลือก...</option>
                                 <option value="ไทย">ไทย</option>
                                 <option value="จีน"></option>
@@ -351,15 +348,11 @@
                             <select id="subdistrict" style="width: 20%;">
                             </select>
                             &nbsp;&nbsp;
-                            โทรศัพท์ :
-                            <input type="text" style="width: 25%" id="phone" onkeyup="checkPhoneInput('phone')"
-                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                maxlength="10">
+                            <a>โทรศัพท์ :</a>
+                            <input type="text" id="phone" style="width: 25%;">
                             &nbsp;
                             <a>โทรสาร :</a>
-                            <input type="text" style="width: 25%" id="fax" onkeyup="checkPhoneInput('phone')"
-                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                maxlength="9">
+                            <input type="text" id="fax" style="width: 25%;">
                             <br>
 
                             <a style="margin-left: 5px;">พื้นที่ :</a>
@@ -386,15 +379,11 @@
                             <select id="wSubdistrict" style="width: 20%;">
                             </select>
                             &nbsp;&nbsp;
-                            <a>โทรศัพท์ :</a>
-                            <input type="text" style="width: 25%" id="wPhone" onkeyup="checkPhoneInput('phone')"
-                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                maxlength="10">
-                            &nbsp;&nbsp;
+                            <a>โทรศัพท์ &nbsp;:</a>
+                            <input type="text" id="wPhone" style="width: 25%;">
+                            &nbsp;
                             <a>โทรสาร :</a>
-                            <input type="text" style="width: 25%" id="wFax" onkeyup="checkPhoneInput('phone')"
-                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                maxlength="9">
+                            <input type="text" id="wFax" style="width: 25%;margin-left: 1px;">
                             <br>
                             <br>
                             <a>นามสกุล :</a>
@@ -404,11 +393,12 @@
                             <input type="text" id="" style="width: 25%;">
 
                             <a style="margin-left: 3px;">โทรศัพท์ :</a>
-                            <input type="text" style="width: 25%" id="" onkeyup="checkPhoneInput('phone')"
-                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                maxlength="10">
+                            <input type="text" id="" style="width: 24.5%;">
                             <br>
                         </div>
+
+
+
 
                         <div>
                             <input type="radio" name="sub" id="purposeType1" style="margin-top: 30px;"> ยืนยันคำขอรับ
@@ -416,12 +406,12 @@
                             <input type="radio" name="sub" id="purposeType2"> ยืนยันคำขอต่ออายุ &nbsp;
                             <br>
 
-                            <!-- <a>ใช้อาคารสถานที่ประกอบการของผู้อื่น</a>
+                            <a>ใช้อาคารสถานที่ประกอบการของผู้อื่น</a>
                             <select id="deed" name="" style="width: 10%;" onclick=" showtext()">
                                 <option value="" hidden>เลือก...</option>
                                 <option value="01">ยืนยัน</option>
                                 <option value="02">ไม่ยืนยัน</option>
-                            </select> -->
+                            </select>
                             <br><br>
                             <input type="checkbox" id="documentId" value="cb1" />
                             หนังสือยินยอมให้ใช้อาคารสถานที่เป็นที่ประกอบการ<br>
@@ -443,6 +433,9 @@
                             <input type="text" id="documentName" />
                             ผู้ขอรับใบอนุญาต
                         </div>
+
+
+
                     </div>
                     <br>
                     
@@ -456,17 +449,7 @@
         </footer> -->
 
 </body>
-<!-- <script>
-    function myFunction() {
-        var y = document.getElementById("mySelect").value;
-        if (y == '01') {
-            document.getElementById('Demo').style.display = 'block';
-        } else {
-            document.getElementById('Demo').style.display = 'none';
-        }
-
-    }
-</script> -->
-<!-- <script src="https://www.w3schools.com/lib/w3.js"></script> -->
-
+<script src="../../js/twoAddress.js"></script>
+<script src="../../js/dataTEST.js"></script>
+<script src="../../js/controlTest.js"></script>
 </html>
