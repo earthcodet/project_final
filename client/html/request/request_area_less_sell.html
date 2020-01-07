@@ -55,7 +55,6 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
 <body>
-
     <!-- เมนูด้านบน -->
     <div class="w3-top" style="overflow:auto;">
         <ul>
@@ -184,8 +183,7 @@
                 </div>
             </div>
             <div>
-                <a class="w3-bar-item w3-button notification" onclick="myAccordion7('demo8')"
-                    href="javascript:void(0)">
+                <a class="w3-bar-item w3-button notification" onclick="myAccordion7('demo8')" href="javascript:void(0)">
                     <span>แจ้งเตือน</span>
                     <i class="fa fa-caret-down"></i>
                     <span id="notficationRequestTopic" class="badgeTopic">7</span>
@@ -216,7 +214,6 @@
                     <!-- ข้อมูล -->
                     <div class="w3-container box" style="margin:auto;">
                         <h4>ข้อมูลสถานประกอบการ</h4>
-
 
                         <div style="width: 42%;height: 100%;float: left;">
                             <a>เลขที่คำขอ :</a>
@@ -417,8 +414,6 @@
                         </div>
 
 
-
-
                         <div>
                             <input type="radio" name="sub" id="purposeType1" style="margin-top: 30px;"> ยืนยันคำขอรับ
                             &nbsp;
@@ -452,9 +447,6 @@
                             <input type="text" id="documentName" />
                             ผู้ขอรับใบอนุญาต
                         </div>
-
-
-
                     </div>
                     <!-- ข้อมูลเจ้าของ -->
                     <div id="Demo" style="width: 1100px;height: 300px;display: none;margin:auto">
@@ -515,14 +507,8 @@
                                 <select id="" style="width: 22%;">
                                 </select>
                             </div>
-
-
-
-
                         </div>
-                    </div>
-                    <br>
-                    <br>
+                    </div><br>
                     <!-- ผู้สัมผัสอาหาร -->
                     <div class="w3-container box" style="margin:auto;">
                         <div class="row">
@@ -546,8 +532,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <br>
+                    </div><br>
                     <!-- สุรา -->
                     <div class="w3-container box" style="margin:auto;">
                         <div class="row">
@@ -565,8 +550,7 @@
                                 <a>ไม่ออกใบอนุญาต</a>&nbsp;
                             </div>
                         </div>
-                    </div>
-                    <br>
+                    </div><br>
                     <!-- box เพิ่มรูปภาพ -->
                     <div class="w3-container box" style="margin:auto;">
                         <div>
@@ -605,21 +589,19 @@
                             </div>
                         </div>
 
-
-
                         <br>
                         <div>
                             <a>รูปภาพผลการตรวจสอบ</a>
                             <input type="file" id="uploadFile" style="display: none;" onchange="handleFileSelect(event)"
                                 accept="image/*" multiple>
-                            <button type="button" class="btn is-color " 
+                            <button type="button" class="btn is-color "
                                 onclick="document.getElementById('uploadFile').click()">
                                 <h5><i class="fa fa-upload"></i>
                                     อัพโหลดภาพ</h5>
                             </button>
-                            <button type="button" class="btn is-color" style="float: right;" onclick="printImg()"> 
+                            <button type="button" class="btn is-color" style="float: right;" onclick="printImg()">
                                 <h5><i class="fa fa-print"></i>
-                                พิมพ์รูปภาพ</h5> 
+                                    พิมพ์รูปภาพ</h5>
                             </button>
                             <br>
                             <br>
@@ -627,17 +609,17 @@
                             </div>
                         </div>
 
-                    </div>
-                     <!-- อนุมัติ -->
-                     <div class="box">
+                    </div><br>
+                    <!-- อนุมัติ -->
+                    <div class="w3-container box">
                         <div class="row">
                             <div class="col" style="text-align: left;">
                                 <p style="margin-top: 14px;"><b>ความถูกต้องของเอกสารคำร้อง</b></p>
                                 <div class="box" style="width: 100%;margin-top: 26px;">
-                                    <input type="radio" name="" id="" value="">
+                                    <input type="radio" name="correct1" id="" value="">
                                     &nbsp;เห็นสมควรอนุญาต
                                     <br>
-                                    <input type="radio" name="" id="" value="">
+                                    <input type="radio" name="correct1" id="" value="">
                                     &nbsp;เห็นสมควรไม่อนุญาต เพราะ <textarea rows="4" cols="50"> </textarea>
                                     <br><br>
                                     <p style="margin-left: 25px;">ลงชื่อ <input type="text"> ผู้ตรวจสอบ </p>
@@ -647,10 +629,10 @@
                             <div class="col" style="text-align: left;">
                                 <b>บันทึกอนุมัติคำขอ</b> <input type="text">
                                 <div class="box" style="width: 100%;margin-top: 12px;">
-                                    <input type="radio" name="" id="" value="">
+                                    <input type="radio" name="correct2" id="" value="">
                                     &nbsp;เห็นสมควรอนุญาต
                                     <br>
-                                    <input type="radio" name="" id="" value="">
+                                    <input type="radio" name="correct2" id="" value="">
                                     &nbsp;เห็นสมควรไม่อนุญาต เพราะ <textarea rows="4" cols="50"> </textarea>
                                     <br><br>
                                     <p>ลงชื่อ <input type="text"> ผู้ตรวจสอบ </p>
