@@ -147,8 +147,8 @@
             </div>
 
             <div>
-                <a class="w3-bar-item w3-button" onclick="myAccordion('demo4')"
-                    href="javascript:void(0)">ข้อมูลส่วนกลาง <i class="fa fa-caret-down"></i></a>
+                <a class="w3-bar-item w3-button" onclick="myAccordion('demo4')" href="javascript:void(0)">ข้อมูลส่วนกลาง
+                    <i class="fa fa-caret-down"></i></a>
                 <div id="demo4" class="w3-hide">
                     <a class="bar-item w3-button" href="../central/operator.html">- ข้อมูลผู้ประกอบการ</a>
                     <a class="bar-item w3-button" href="../central/02.html">- ข้อมูลการจดใบอนุญาต</a>
@@ -209,11 +209,11 @@
             <h1 style="font-size:20px">รายงานตามประเภทคำขอ</h1>
         </header>
 
-        <div class="container-sm" style="padding:32px">
+        <div class="container-sm" style="padding-top: 5rem;">
             <div class="row">
-                <div class="col">
+                <div class="col-5">
                     <p>ประเภทคำขอ
-                        <input list="brow" id="" name="" size="40">
+                        <input list="brow" id="" name="" style="width: 80%;">
                         <datalist id="brow">
                             <option value="ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ">
                                 ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ
@@ -236,18 +236,18 @@
                         </datalist>
                         </h6>
                 </div>
-                <div class="col-7">
-                    <p>
-                        วันที่เริ่ม
-                        <input type="text" id="datepicker1" placeholder="">
-
-                        วันที่สุดท้าย
-                        <input type="text" id="datepicker2" placeholder="">
-                        <a href="report_crematory_preveiw.html" target="popup"
-                            onclick="window.open('report_crematory_preveiw.html','popup','width=1100,height=570'); return false;">
-                            <button type="button" class="btn btn-lg "
-                                style="background-color: #009688;color: white ;">ตกลง</button></a>
-                    </p>
+                <div class="col-3">
+                    วันที่เริ่ม
+                    <input type="text" id="datepicker1" placeholder="">
+                </div>
+                <div class="col">
+                    วันที่สุดท้าย
+                    <input type="text" id="datepicker2" placeholder="">
+                    &nbsp;&nbsp;
+                    <a href="report_crematory_preveiw.html" target="popup"
+                        onclick="window.open('report_crematory_preveiw.html','popup','width=1100,height=570'); return false;">
+                        <button type="button" class="btn btn-lg "
+                            style="background-color: #009688;color: white ;">ตกลง</button></a>
                 </div>
             </div>
 

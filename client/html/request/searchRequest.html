@@ -87,14 +87,14 @@
                     ยกเลิก
                 </a>
             </li>
-            
+
             <li class="w3-display-topright">
                 <a id="exitMenu" onclick="exitTEST()" class="exit">
                     <i class="fa fa-sign-out fa-lg w3-margin-right w3-text-theme"></i>
                     ออกจากระบบ
                 </a>
             </li>
-           
+
         </ul>
         <!-- เมนูด้านข้าง -->
         <nav class="w3-sidebar w3-bar-block w3-collapse w3-animate-left w3-card" style="z-index:3;width:250px;"
@@ -216,14 +216,17 @@
                     <div class="col-3" style="text-align: left;">
                         <h5>ค้นหาตาม</h5>
                         <br>
-                        <select size="7" style="width: 90%;" id="searchItem" onchange="selectItem(this.value)">
+                        <select size="9" style="width: 90%;" id="searchItem" onchange="selectItem(this.value)">
                             <option selected="selected" value=1>ชื่อผู้ขอ</option>
                             <option value=2>วันที่ยื่น</option>
                             <option value=3>เลขที่ใบคำขอ</option>
-                            <option value=4>วันที่หมดอายุ (ใบคำขอ)</option>
-                            <option value=5>ประเภทใบอนุญาต</option>
-                            <option value=6>ประเภทกิจการ</option>
-                            <option value=7>ที่อยู่</option>
+                            <option value=4>เลขประจำตัว</option>
+                            <option value=5>วันที่หมดอายุ (ใบคำขอ)</option>
+                            <option value=6>ประเภทใบอนุญาต</option>
+                            <option value=7>ประเภทกิจการ</option>
+                            <option value=8>ที่อยู่</option>
+                            <option value=9>สถานประกอบการ</option>
+
                         </select>
                     </div>
 
@@ -231,7 +234,21 @@
                         <div id="searchUser">
                             <h5>คำที่ค้นหา</h5>
                             <br>
-                            <input type="text" style="width: 50%;">
+
+
+                            <div>
+                                <div class="row">
+                                    <div class="col">
+                                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ชื่อ:
+                                        <input type="text" style="width: 50%;">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">นามสกุล:
+                                        <input type="text" style="width: 50%;">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div id="searchDate" class="displaynone">
                             <h5>วันที่ค้นหา</h5>
@@ -240,6 +257,11 @@
                         </div>
                         <div id='searchId' class="displaynone">
                             <h5>เลขที่ใบคำขอ</h5>
+                            <br>
+                            <input type="text" style="width: 50%;">
+                        </div>
+                        <div id='searchPerID' class="displaynone">
+                            <h5>เลขประจำตัว</h5>
                             <br>
                             <input type="text" style="width: 50%;">
                         </div>
@@ -333,6 +355,12 @@
                                 </div>
                             </div>
                         </div>
+                        <div id='searchPlace' class="displaynone">
+                            <h5>ชื่อสถานประกอบการ</h5>
+                            <br>
+                            <input type="text" style="width: 50%;">
+                        </div>
+
                         <br>
 
                     </div>
@@ -340,14 +368,15 @@
                 </div>
             </div>
             <div>
-                <div style="text-align: right ; display:block; margin-right:30px;float: right;position: relative;bottom: 0px;">
+                <div
+                    style="text-align: right ; display:block; margin-right:30px;float: right;position: relative;bottom: 0px;">
                     <button class="fa fa-search button" style="background-color: #009688; "> ค้นหา</button>
                 </div>
             </div>
             <br><br>
             <h5 style="text-align: left;"> ผลลัพธ์การค้นหา </h5>
             <div class="setheight400px">
-                <table id="requestTable"  class="table cursor-pointer table-hover tableresult">
+                <table id="requestTable" class="table cursor-pointer table-hover tableresult">
                     <thead>
                         <tr class="is-color ">
                             <th onclick="sortTable(0,'requestTable','')">
@@ -381,9 +410,9 @@
                                 </h6>
                             </th>
                             <th onclick="sortTable(4,'requestTable'),'date'">
-                                <h6 >
+                                <h6>
                                     วันที่หมดอายุ
-                                    <i class="fa fa-sort " ></i>
+                                    <i class="fa fa-sort "></i>
                                 </h6>
                             </th>
                         </tr>
@@ -452,4 +481,5 @@
 
 </body>
 <script src="../../js/utilities.js"></script>
+
 </html>
