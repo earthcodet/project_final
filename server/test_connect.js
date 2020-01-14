@@ -23,6 +23,7 @@ app.use(cors())
 //       }
 //     });
 //   });
+
   app.get("/get/provice", (req, res) => {
     WebDAOObj.getProvince().then(data => {
       if (data != null) {
