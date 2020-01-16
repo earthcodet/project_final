@@ -12,6 +12,7 @@ let month = {
     'พฤศจิกายน':11,
     'ธันวาคม':12
 }
+
 function checkPhoneInput(tagId) {
     var text = document.getElementById(tagId).value
     text = text.replace(/(\d{3})(\d{7})/, "$1-$2");
