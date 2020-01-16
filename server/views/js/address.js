@@ -38,7 +38,6 @@ function getAmphur() {
 function getDistrict() {
     return new Promise((resolve, reject) => {
         axios.get('http://localhost:5000/get/district/').then((result) => {
-            resolve(result.data);
             for (let i = 0; i < result.data.length; i++) {
                 district.push(result.data[i])
             }

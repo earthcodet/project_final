@@ -5,50 +5,6 @@ var con = mysql.createConnection({
     password: '',
     database: 'database'
 });
-// var arrObj = []
-// arrObj.formId = '1705'
-// arrObj.date = '24/17/2019'
-// arrObj.formType = 'a'
-// arrObj.place = 'a'
-// arrObj.typeUser = 'a'
-// arrObj.name = 'a'
-// arrObj.age = 10
-// arrObj.nationality = 'a'
-// arrObj.race = 'a'
-// arrObj.homeId = 'a'
-// arrObj.moo = 10
-// arrObj.trxk = 'a'
-// arrObj.sxy = 'a'
-// arrObj.building = 'a'
-// arrObj.road = 'a'
-// arrObj.province = 'a'
-// arrObj.district = 'a'
-// arrObj.subdistrict = 'a'
-// arrObj.phone = 'a'
-// arrObj.fax = 'a'
-// arrObj.workplaceName = 'a'
-// arrObj.area = 10
-// arrObj.numPeople = 10
-// arrObj.wHomeId = 'a'
-// arrObj.wMoo = 10
-// arrObj.wTrxk = 'a'
-// arrObj.wSxy = 'a'
-// arrObj.wBuilding = 'a'
-// arrObj.wRoad = 'a'
-// arrObj.wProvince = 'b'
-// arrObj.wDistrict = 'b'
-// arrObj.wSubdistrict = 'b'
-// arrObj.wPhone = 'b'
-// arrObj.wFax = 'b'
-// arrObj.purposeType = 'b'
-// arrObj.documentId = 1
-// arrObj.documenthHome = 1
-// arrObj.documentLegalEntity = 1
-// arrObj.documentSignature = 1
-// arrObj.documentSJ4 = 1
-// arrObj.documentOther = 1
-// arrObj.documentName = 'a'
-// var test = []
 class WebDAO {
     // insert() {
     //     return new Promise((resolve, reject) => {
