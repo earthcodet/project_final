@@ -1,7 +1,9 @@
 let loading = false
 
 function checkLogin(){
+    
     if(!loading){
+        console.log(`loading`)
         hideAlert()
         var username = document.getElementById('username').value.trim()
         var password = document.getElementById('password').value.trim()
@@ -19,12 +21,17 @@ function checkLogin(){
                     }, 500);
                 }
                 else{
+                    console.log(data)
+                    // ทำ address เป็น static
+
                     setSession(data[0].user_id).then((data) => {
                         window.location.href ='/'
                     })
                 }
             })
         }
+    }else{
+        console.log(`wait`)
     }
     
 }

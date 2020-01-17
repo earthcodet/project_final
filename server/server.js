@@ -45,39 +45,6 @@ app.get("/get/district", (req, res) => {
     }
   });
 });
-// app.get("/get/amphur/:proviceId", (req, res) => {
-//   WebDAOObj.getAmphur(req.params.proviceId).then(data => {
-//     if (data != null) {
-//       res.json(data);
-//     } else {
-//       res.sendStatus(404);
-//     }
-//   });
-// });
-// app.get("/get/district/:proviceId/:amphurId", (req, res) => {
-//   WebDAOObj.getDistrict(req.params.proviceId,req.params.amphurId).then(data => {
-//     if (data != null) {
-//       res.json(data);
-//     } else {
-//       res.sendStatus(404);
-//     }
-//   });
-// });
-
-// app.post("/insert", (req, res) => {
-//     WebDAOObj.getAmphur(req.body.formData).then(data => {
-//       console.log(req.body.formData)
-//       res.json(data);
-
-//     });
-//   });
-//   console.log("pass")
-//   app.post("/update", (req, res) => {
-//     WebDAOObj.update(req.body.formDatas).then(data => {
-//       res.json(data);
-
-//     });
-//   });
 
 app.listen(port, () => {
   console.log(`App listening on ${port}`);
