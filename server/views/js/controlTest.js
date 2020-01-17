@@ -15,9 +15,13 @@ function exitTEST() {
     })
         .then((result) => {
             if (result.value) {
-                window.location.href = "../utilities/login.html"
+            document.getElementById('exitMenu').classList.add('disableds')
+                logout()
             }
         });
+}
+function logout(){
+    location.replace("/logout")
 }
 
 function addTEST() {

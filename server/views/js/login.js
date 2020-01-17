@@ -1,35 +1,60 @@
-
+let loading = false
 
 function checkLogin(){
-    hideAlert()
-    var username = document.getElementById('username').value
-    var password = document.getElementById('password').value
-
-    getUser(username, password).then((data) =>{
-        console.log(data)
-        if(data.length == 0){
-            showAlert()
-        }
-        else{
-
-            setSession(data[0].user_id)
-        }
-
-
-
-    })
-
     
-    // if(username == '' && password == ''){
-    //     window.location.href = "./index.html";
-    // }else{
-    //     showAlert()
-    // }
+    if(!loading){
+        console.log(`loading`)
+        hideAlert()
+        var username = document.getElementById('username').value.trim()
+        var password = document.getElementById('password').value.trim()
+        if(username.length === 0 || password.length === 0){
+            showAlert()
+        }else{
+            loading = !loading
+            buttonLoading()
+            getUser(username, password).then((data) =>{
+                if(data.length == 0){
+                    showAlert()
+                    setTimeout(function(){
+                        buttonLoading()
+                        loading = !loading
+                    }, 500);
+                }
+                else{
+                    console.log(data)
+                    // ทำ address เป็น static
+
+                    setSession(data[0].user_id).then((data) => {
+                        window.location.href ='/'
+                    })
+                }
+            })
+        }
+    }else{
+        console.log(`wait`)
+    }
+    
 }
-
-
-
-
+function buttonLoading(){
+    var load = document.getElementById('loadBtn')
+    var text = document.getElementById('textBtn')
+    var button = document.getElementById('loginBtn')
+    if(text.innerHTML === 'เข้าสู่ระบบ'){
+        load.style.display = ''
+        button.classList.add("disableds")
+        text.innerHTML = 'กำลังโหลด'
+    }else{
+        button.classList.remove("disableds")
+        load.style.display = 'none'
+        text.innerHTML = 'เข้าสู่ระบบ'
+    }
+}
+function runScript(e) {
+    if (e.keyCode == 13) {
+        checkLogin()
+        return false;
+    }
+}
 function showAlert(){
     document.getElementById('alertLogin').classList.remove('hide')
 }
@@ -48,8 +73,8 @@ function getUser(username, password) {
 
 function setSession(userId){
     return new Promise((resolve, reject) => {
-        axios.post(`http://localhost:3000/session/${userId}`).then((result) => {
-            resolve(result.data);
+        axios.get(`http://localhost:3000/session/${userId}`).then((data) =>{
+            resolve(data)
         })
     })
 }

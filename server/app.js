@@ -5,14 +5,25 @@ const router = express.Router();
 const session = require('express-session')
 
 const {
-    PORT = 3000
+    PORT = 3000,
+    NODE_ENV = 'development'
 } = process.env
+const IN_PROD = NODE_ENV === 'production'
 app.use(session({
     name:'sid',
     secret: 'keyboard cat',
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: false,
+    cookie: {
+        secure : IN_PROD,
+        sameSite:true
+    }
   }))
+
+//   if (app.get('env') === 'production') {
+//     app.set('trust proxy', 1) // trust first proxy
+//     sess.cookie.secure = true // serve secure cookies
+//   } 
 
 const redirectLogin = (req, res, next) => {
     if(!req.session.userId){
@@ -29,19 +40,31 @@ const redirectHome = (req, res, next) => {
         next()
     }
 }
-app.post("/session/:userId", (req, res) => {
-    console.log(`run`)
-    
+app.get("/session/:userId", (req, res) => {
+    console.log(`TOT`)
+    console.log(req.session.userId)
     req.session.userId = req.params.userId
     console.log(req.session.userId)
-    return res.redirect('/home')
+    console.log(req.params.userId)
+    res.redirect('/')
+    return true
+});
+
+router.get('/logout', redirectLogin, function (req, res) {
+    req.session.destroy(function(err){
+        if (err){
+            res.negotiate(err)
+        }
+        res.redirect('./')
+    })
 });
 
 router.get('/login', redirectHome, function (req, res) {
     res.sendFile(path.join(__dirname + '/views/html/utilities/login.html'));
 });
 
-router.get('/home', redirectLogin, function (req, res) {
+router.get('/',redirectLogin, function (req, res) {
+    console.log(req.session.userId)
     res.sendFile(path.join(__dirname + '/views/html/utilities/index.html'));
 });
 
