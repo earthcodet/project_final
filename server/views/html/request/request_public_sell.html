@@ -1,590 +1,685 @@
 <!DOCTYPE html>
-<html>
-<title>ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</title>
+<html lang="en">
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../js/js22.js"></script>
 
-<!-- bootstrap -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-    crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-    crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-    crossorigin="anonymous"></script>
-
-<link rel="stylesheet" href="../../css/w.3.css">
-<link rel="stylesheet" href="../../css/w3-theme-teal.css">
-
-<link href="../../css/css-index.css" rel="stylesheet">
-<link href="../../css/fonts.css" rel="stylesheet">
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="../../js/js-index.js"></script>
-
-<!-- search -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<!-- disable-->
-<script src="../../js/disable.js"></script>
-
-<!-- css ส่วนกลาง -->
-<link href="../../css/utilities.css" rel="stylesheet">
-
-<!-- function ส่วนกลาง -->
-<script src="../../js/utilities.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-
-<!-- เรียกไลบารี่สร้างปฎิทิน  -->
-<link type="text/css" href="../../css/jquery-ui-1.12.1.custom/jquery-ui.css" rel="stylesheet" />
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://รับเขียนโปรแกรม.net/jquery_datepicker_thai/jquery-ui.js"></script>
-<!-- เรียกไลบารี่สร้างปฎิทิน  -->
-<script src="../../js/dateth.js"></script>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../css/css2.css">
+    <link href="../../css/fonts.css" rel="stylesheet">
+</head>
 
 <body>
-
     <!-- เมนูด้านบน -->
-    <div class="w3-top" style="overflow:auto;">
-        <ul>
-            <li>
-                <a id="addMenu" class="exit " onclick="addTEST()">
-                    <i class="fa fa-plus-square fa-lg w3-margin-right w3-text-theme "> </i>
-                    เพิ่ม
-                </a>
-            </li>
-            <li>
-                <a id="editMenu" onclick="editTEST()" class="exit disableds">
-                    <i class="fa fa-pencil fa-lg w3-margin-right w3-text-theme"></i>
-                    แก้ไข
-                </a>
-            </li>
-            <li>
-                <a id="saveMenu" onclick="insertTEST()" class="exit disableds">
-                    <i class="fa fa-floppy-o fa-lg w3-margin-right w3-text-theme"></i>
-                    บันทึก
-                </a>
-            </li>
-            <li>
-                <a id="restoreMenu" onclick="restoreTEST()" class="exit disableds">
-                    <i class="fa fa-reply fa-lg w3-margin-right w3-text-theme"></i>
-                    เรียกคืน
-                </a>
-            </li>
-            <li>
-                <a id="deleteMenu" onclick="deleteTEST()" class="exit disableds">
-                    <i class="fa fa-close fa-lg w3-margin-right w3-text-theme"></i>
-                    ยกเลิก
-                </a>
-            </li>
-            <li class="w3-display-topright">
-                <a id="exitMenu" onclick="exitTEST()" class="exit">
-                    <i class="fa fa-sign-out fa-lg w3-margin-right w3-text-theme"></i>
-                    ออกจากระบบ
-                </a>
-            </li>
-        </ul>
-        <!-- เมนูด้านบน -->
-        <nav class="w3-sidebar w3-bar-block w3-collapse w3-animate-left w3-card" style="z-index:3;width:250px;"
-            id="mySidebar">
-            <a class="w3-bar-item w3-button w3-border-bottom w3-large" href="../utilities/index.html">
-                <img src="../../img/img1.jpg" style="width:100%;">
-            </a>
-            <div>
-                <a class="w3-bar-item w3-button w3-theme" onclick="myAccordion('demo1')"
-                    href="javascript:void(0)">ระบบงานคำขอ <i class="fa fa-caret-down"></i></a>
-                <div id="demo1" class="w3-hide w3-show">
-                    <a class="bar-item w3-button w3-theme" onclick="myAccordion11('demo11')" href="javascript:void(0)">
-                        เพิ่ม <i class="fa fa-caret-down"></i></a>
-                    <div id="demo11" class="w3-hide w3-show">
-                        <a class="bar-item w3-button w3-my-color" href="request_public_sell.html">-
-                            ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
-                        <a class="bar-item w3-button" href="request_public_hawk.html">-
-                            ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
-                        <a class="bar-item w3-button" href="request_area_more_sell.html">-
-                            ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
-                        <a class="bar-item w3-button" href="request_area_more_correct.html">-
-                            ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</a>
-                        <a class="bar-item w3-button" href="request_area_less_sell.html">-
-                            หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
-                        <a class="bar-item w3-button" href="request_area_less_correct.html">-
-                            หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
-                        <a class="bar-item w3-button" href="request_market.html">-
-                            ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
-                        <a class="bar-item w3-button" href="request_health_danger.html">-
-                            กิจการที่เป็นอันตรายต่อสุขภาพ</a>
-                        <a class="bar-item w3-button" href="request_crematory.html">- กิจการฌาปณสถาน</a>
-                    </div>
-                    <a class="bar-item w3-button" href="searchRequest.html">
-                        ค้นหา/แก้ไข</a>
-                </div>
-            </div>
+    <div class="w3-top icon-bar">
+        <a id="addMenu" class="exit " onclick="addTEST()"><i class="fa fa-plus-square"> เพิ่ม</i></a>
+        <a id="editMenu" onclick="editTEST()" class="exit disableds"><i class="fa fa-pencil"> แก้ไข</i></a>
+        <a id="saveMenu" onclick="insertTEST()" class="exit disableds"><i class="fa fa-floppy-o"> บันทึก</i></a>
+        <a id="restoreMenu" onclick="restoreTEST()" class="exit disableds"><i class="fa fa-reply"> เรียกคืน</i></a>
+        <a id="deleteMenu" onclick="deleteTEST()" class="exit disableds"><i class="fa fa-close"> ยกเลิก</i></a>
+        <!-- <a><i class="fa fa-search"> ค้นหา</i></a> -->
+        <a id="exitMenu" onclick="exitTEST()" class="exit" style="float: right;width: 17%;"><i class="fa fa-sign-out">
+                ออกจากระบบ</i></a>
+    </div>
+    <!-- เมนูด้านข้าง -->
+    <div class="sidenav">
+        <a href="../utilities/index.html" style="margin-top: 15%;">
+            <img src="../../img/img1.jpg" style="width:92%;">
+        </a>
+        <br>
+        <button class="dropdown-btn"><b>ระบบงานคำขอ </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="">- ค้นหา/แก้ไข</a>
+            <a href="request_public_sell.html" style="background-color: rgb(143, 141, 141);">- ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
+            <a href="request_public_hawk.html">- ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
+            <a href="request_area_more_sell.html">- ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
+            <a href="request_area_more_correct.html">- ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</a>
+            <a href="request_area_less_sell.html">- หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
+            <a href="request_area_less_correct.html">- หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
+            <a href="request_market.html">- ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
+            <a href="request_health_danger.html">-
+                กิจการที่เป็นอันตรายต่อสุขภาพ</a>
+            <a href="request_crematory.html">- กิจการฌาปณสถาน</a>
 
-            <div>
-                <a class="w3-bar-item w3-button" onclick="myAccordion2('demo2')"
-                    href="javascript:void(0)">งานตรวจสอบ/อนุมัติ <i class="fa fa-caret-down"></i></a>
-                <div id="demo2" class="w3-hide">
-                    <a class="w3-bar-item w3-button" href="#"></a>
-                </div>
-            </div>
-
-            <div>
-                <a class="w3-bar-item w3-button" onclick="myAccordion3('demo3')" href="javascript:void(0)">งานใบอนุญาต
-                    <i class="fa fa-caret-down"></i></a>
-                <div id="demo3" class="w3-hide">
-                    <a class="w3-bar-item w3-button" href="#"></a>
-                </div>
-            </div>
-
-            <div>
-                <a class="w3-bar-item w3-button" onclick="myAccordion4('demo4')"
-                    href="javascript:void(0)">ข้อมูลส่วนกลาง <i class="fa fa-caret-down"></i></a>
-                <div id="demo4" class="w3-hide">
-                    <a class="bar-item w3-button" href="../central/operator.html">- ข้อมูลผู้ประกอบการ</a>
-                    <a class="bar-item w3-button" href="../central/02.html">- ข้อมูลการจดใบอนุญาต</a>
-                    <a class="bar-item w3-button" href="../central/03.html">- โอนใบอนุญาต</a>
-                </div>
-            </div>
-
-            <div>
-                <a class="w3-bar-item w3-button" onclick="myAccordion5('demo5')" href="javascript:void(0)">งานร้องเรียน
-                    <i class="fa fa-caret-down"></i></a>
-                <div id="demo5" class="w3-hide">
-                    <a class="bar-item w3-button" href="#">- บันทึกเรื่องร้องเรียน</a>
-                    <a class="bar-item w3-button" href="#">- บันทึกคำร้อง</a>
-                </div>
-            </div>
-
-            <div>
-                <a class="w3-bar-item w3-button" onclick="myAccordion6('demo6')" href="javascript:void(0)">ข้อมูลระบบ <i
-                        class="fa fa-caret-down"></i></a>
-                <div id="demo6" class="w3-hide">
-                    <a class="w3-bar-item w3-button" href="#"></a>
-                </div>
-            </div>
-
-            <div>
-                <a class="w3-bar-item w3-button" onclick="myAccordion7('demo7')" href="javascript:void(0)">รายงาน <i
-                        class="fa fa-caret-down"></i></a>
-                <div id="demo7" class="w3-hide">
-                    <a class="bar-item w3-button" href="../report/report_crematory.html">ตามคำขอ</a>
-                    <a class="bar-item w3-button" href="../report/report_summary.html">สรุป</a>
-                </div>
-            </div>
-            <div>
-                <a class="w3-bar-item w3-button notification" onclick="myAccordion7('demo8')" href="javascript:void(0)">
-                    <span>แจ้งเตือน</span>
-                    <i class="fa fa-caret-down"></i>
-                    <span id="notficationRequestTopic" class="badgeTopic">7</span>
-                </a>
-                <div id="demo8" class="w3-hide">
-                    <a class="bar-item w3-button notification" href="../notfication/request.html">
-                        <span>งานคำขอ</span>
-                        <span id="notficationRequest" class="badge">7</span>
-                    </a>
-                </div>
-            </div>
-            <br><br><br><br>
-        </nav>
-        <!-- คลิกเมนูย่อได้ -->
-        <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer"
-            id="myOverlay">
+        </div>
+        <button class="dropdown-btn"><b>งานตรวจสอบ/อนุมัติ </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="#"></a>
+            <a href="#"></a>
+            <a href="#"></a>
+        </div>
+        <button class="dropdown-btn"><b>งานใบอนุญาต </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="#"></a>
+            <a href="#"></a>
+            <a href="#"></a>
+        </div>
+        <button class="dropdown-btn"><b>ข้อมูลส่วนกลาง </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="../central/operator.html">- ข้อมูลผู้ประกอบการ</a>
+            <a href="../central/02.html">- ข้อมูลการจดใบอนุญาต</a>
+            <a href="../central/03.html">- โอนใบอนุญาต</a>
+        </div>
+        <button class="dropdown-btn"><b>งานร้องเรียน </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="#">- บันทึกเรื่องร้องเรียน</a>
+            <a href="#">- บันทึกคำร้อง</a>
+        </div>
+        <button class="dropdown-btn"><b>ข้อมูลระบบ </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="#"></a>
+        </div>
+        <button class="dropdown-btn"><b>รายงาน </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="../report/report_crematory.html">- ตามคำขอ</a>
+            <a href="../report/report_summary.html">- สรุป</a>
+        </div>
+        <button class="dropdown-btn notification"><b>แจ้งเตือน </b><span id="notficationRequest" class="badge" style="margin-left:0.5vw;">100000</span><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a class="notification" href="../report/report_crematory.html">- งานคำขอ<span id="notficationRequest" class="badge" style="margin-left:0.5vw;">100000</span></a>
         </div>
     </div>
-    <!-- ข้อมูล -->
-    <div class="w3-main" style="margin-left:250px;padding-top:47px;height: auto; ">
-        <header class="w3-container w3-theme">
-            <h1 style="font-size:20px">ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</h1>
-        </header>
-        <div class="w3-container" style="padding:32px">
-            <form id="form">
-                <fieldset disabled id="disable">
-                    <!-- ข้อมูล -->
-                    <div class="w3-container box" style="margin:auto;">
-                        <h4>ข้อมูลสถานประกอบการ</h4>
+    <!-- เนื้อหา -->
+    <form id="form">
+        <fieldset disabled id="disable" style="border: 0;padding: 0;margin: 0;">
+            <div class="main">
+                <header class="w3-top2">
+                    <h1 style="font-size:2.8vh;margin-left: 25px;padding: 2px;"> ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</h1>
+                </header>
+                 <!-- ข้อมูลใบ -->
+                 <div class="box">
+                    <h3 style="font-size: 3vh;">ข้อมูลสถานประกอบการ</h3>
+                    <a style="margin-left: 0vw;">เลขที่คำขอ :
+                        <input type="text" style="width: 16%;" readonly></a>
+                    <a>วันที่ยื่นขอ :
+                        <input type="text" style="width: 16%;"></a>
+                    <a>ประเภทคำขอ :
+                        <input list="brow" id="" name="" style="width: 19%;" class="drop">
+                        <datalist id="brow">
+                            <option value="" hidden>เลือก...</option>
+                            <option
+                                value="1.การจำหน่ายสินค้าในที่ หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น">
+                                1.การจำหน่ายสินค้าในที่
+                                หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                            </option>
+                        </datalist>
+                        </input></a>
+                    <a>เขียนที่ :
+                        <input type="text" id="place" value="เทศบาลเมืองแสนสุข" style="width:16%;"></a>
+                    <br>
 
-
-                        <div style="width: 42%;height: 100%;float: left;">
-                            <a>เลขที่คำขอ :</a>
-                            <input type="text" id="" name="" style="width:20% " placeholder="" readonly>
-                            &nbsp;
-                            <a>วันที่ยื่นขอ :</a>
-                            <input type="text" id="datepicker1" style="width: 43%;" />
-                            &nbsp;
-                            <br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;
-                            <a>ข้าพเจ้า :</a>
-                            <select id="typeUser">
-                                <option value="บุคคลธรรมดา">บุคคลธรรมดา</option>
-                                <option value="นิติบุคคล">นิติบุคคล</option>
-                            </select>
-                            &nbsp;
-                            <input type="text" id="name" style="width: 45%;">
-                            <button type="button" class="fa fa-search is-color "
-                                style="height: 32px;border-radius: 8px;" onclick="testSearchOparator()"></button>
-
-                            <br>
-                            &nbsp;
-                            <a>เลขที่บ้าน :</a>
-                            <input type="text" id="homeId" style="width: 20%;">
-                            &nbsp;&nbsp;
-                            <a>หมู่ที่ :</a>
-                            <input type="int" id="moo" style="width: 10%;">
-                            &nbsp;&nbsp;
-                            <a>ตรอก:</a>
-                            <input type="text" id="trxk" style="width: 28%;">
-                            <br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            จังหวัด :
-                            <select id="province" style="width: 40%;">
-                            </select>
-                            &nbsp;
-                            <a>อำเภอ :</a>
-                            <select id="district" style="width: 28%;"></select>
-                            <br>
-                            <a>สถานที่ประกอบการ :</a>
-                            <input type="text" id="workplaceName" style="width: 60%;">&nbsp; (ถ้ามี)
-                            &nbsp;&nbsp;
-                            <br>
-                            &nbsp;
-                            <a>ตั้งอยู่เลขที่ :</a>
-                            <input type="text" id="wHomeId" style="width: 20%;">
-                            &nbsp;
-                            <a>หมู่ที่ :</a>
-                            <input type="int" id="wMoo" style="width: 10%;">
-                            &nbsp;&nbsp;
-                            <a>ตรอก:</a>
-                            <input type="text" id="wTrxk" style="width: 27%;">
-                            <br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            จังหวัด :
-                            <select id="wProvince" style="width: 41%;">
-                            </select>
-                            &nbsp;
-                            <a>อำเภอ :</a>
-                            <select id="wDistrict" style="width: 27%;"></select>
-                            <br>
-                            บุคคลอ้างอิง
-                            <br>
-                            <a>คำนำหน้าชื่อ :</a>
-                            <select id="" name="">
-                                <option value="" hidden>เลือก...</option>
-                                <option value="">นาย</option>
-                                <option value="">นาง</option>
-                                <option value="">นางสาว</option>
-                            </select>
-                            &nbsp;&nbsp;&nbsp;&nbsp;
-                            <a>ชื่อ :</a>
-                            <input type="text" id="" name="" style="width: 49%;" placeholder="">
-                        </div>
-
-                        <div style="width: 58%;height: 100%;float: right;">
-                            <a>ประเภทคำขอ :</a>
-                            <input list="brow" id="" name="" style="width: 40%;">
-
-                            <datalist id="brow">
-                                <option value="" hidden>เลือก...</option>
-                                <option
-                                    value="1.การจำหน่ายสินค้าในที่ หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น">
-                                    1.การจำหน่ายสินค้าในที่
-                                    หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
-                                </option>
-                            </datalist>
-                            </input>
-                            &nbsp;
-                            <a>เขียนที่ &nbsp;:</a>
-                            <input type="text" id="place" value="เทศบาลเมืองแสนสุข" style="width: 35%;">
-                            <br>
-                            <a>เลขประจำตัว &nbsp;:</a>
-                            <input type="text" id="id" style="width: 25%;"
+                    <a style="margin-left: 1.4vw;">ข้าพเจ้า :
+                        <select id="typeUser" style="width: 11%;">
+                            <option value="บุคคลธรรมดา">บุคคลธรรมดา</option>
+                            <option value="นิติบุคคล">นิติบุคคล</option>
+                        </select>
+                        <input type="text" id="name" style="width: 16.5%;">
+                        <button type="button" class="fa fa-search" style="border-radius: 5px;"
+                            onclick="testSearchOparator()"></button></a>
+                    <a>เลขประจำตัว :
+                        <input type="text" id="id"
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                    maxlength="13"
-                            >
-                            &nbsp;
-                            <a>อายุ :</a>
-                            <input type="text" id="age" style="width: 8%;"
+                            maxlength="13" style="width: 13%;"></a>
+                    <a>อายุ :
+                        <input type="text" id="age"
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                    maxlength="3"
-                                    >
-                            <a>สัญชาติ &nbsp;:</a>
-                            <input list="nationality1" id="nationalityList1" name="" style="width: 13%;">
-                            <datalist id="nationality1">
-                                <!-- <select id="nationality" style="width: 8%;"> -->
-                                <option value="" hidden>เลือก...</option>
-                                <option value="ไทย">ไทย</option>
-                                <option value="จีน"></option>
-                                <option value="อเมริกัน"></option>
-                                <!-- </select> -->
-                            </datalist>
-                            </input>
-
-                            <a>เชื้อชาติ :</a>
-                            <input list="nationality2" id="nationalityList2" name="" style="width: 13%;">
-                            <datalist id="nationality2">
-                                <option value="" hidden>เลือก...</option>
-                                <option value="ไทย">ไทย</option>
-                                <option value="จีน"></option>
-                                <option value="อเมริกัน"></option>
-                                <!-- </select> -->
-                            </datalist>
-                            </input>
-                            <br>
-                            &nbsp;
-                            <a>ซอย :</a>
-                            <input type="text" id="sxy" style="width: 20%;">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <a>อาคาร &nbsp;:</a>
-                            <input type="text" id="building" style="width: 25%;">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <a>ถนน &nbsp;:</a>
-                            <input type="text" id="road" style="width: 25%;">
-                            <br>
-                            <a>ตำบล :</a>
-                            <select id="subdistrict" style="width: 20%;">
-                            </select>
-                            &nbsp;&nbsp;
-                            <a>โทรศัพท์ :</a>
-                            <input type="text" id="phone" style="width: 25%;"
+                            maxlength="3" style="width: 7%;"></a>
+                    <a>สัญชาติ :
+                        <input class="drop" list="nationality1" id="nationalityList1" name="" style="width: 7%;">
+                        <datalist id="nationality1">
+                            <option value="" hidden>เลือก...</option>
+                            <option value="ไทย">ไทย</option>
+                            <option value="จีน"></option>
+                            <option value="อเมริกัน"></option>
+                        </datalist>
+                        </input></a>
+                    <a>เชื้อชาติ :
+                        <input list="nationality2" id="nationalityList2" name="" style="width: 7%;">
+                        <datalist id="nationality2">
+                            <option value="" hidden>เลือก...</option>
+                            <option value="ไทย">ไทย</option>
+                            <option value="จีน"></option>
+                            <option value="อเมริกัน"></option>
+                            <option value="เขตปลอดร่มเตียงที่ 1">เขตปลอดร่มเตียงที่ 1</option>
+                            <option value="เขตปลอดร่มเตียงที่ 2">เขตปลอดร่มเตียงที่ 2</option>
+                            <option value="เขตปลอดร่มเตียงที่ 3">เขตปลอดร่มเตียงที่ 3</option>
+                            <option value="เขตปลอดร่มเตียงที่ 4">เขตปลอดร่มเตียงที่ 4</option>
+                            <option value="เขตปลอดร่มเตียงที่ 5">เขตปลอดร่มเตียงที่ 5</option>
+                            <option value="เขตปลอดร่มเตียงที่ 6">เขตปลอดร่มเตียงที่ 6</option>
+                            <option value="เขตปลอดร่มเตียงที่ 7">เขตปลอดร่มเตียงที่ 7</option>
+                            <option value="เขตปลอดร่มเตียงที่ 8">เขตปลอดร่มเตียงที่ 8</option>
+                            <option value="เขตปลอดร่มเตียงที่ 9">เขตปลอดร่มเตียงที่ 9</option>
+                            <option value="เขตปลอดร่มเตียงที่ 10">เขตปลอดร่มเตียงที่ 10</option>
+                            <option value="เขตปลอดร่มเตียงที่ 11">เขตปลอดร่มเตียงที่ 11</option>
+                        </datalist>
+                        </input></a>
+                    <br>
+                    <a style="margin-left: 0.58vw;">เลขที่บ้าน :
+                        <input type="text" style="width: 7%;"></a>
+                    <a>หมู่ที่ :
+                        <input type="text" style="width: 7%;"></a>
+                    <a>ตรอก :
+                        <input type="text" style="width: 13%;"></a>
+                    <a>ซอย :
+                        <input type="text" id="sxy" style="width: 13%;"></a>
+                    <a>อาคาร :
+                        <input type="text" id="building" style="width: 13.5%;"></a>
+                    <a>ถนน :
+                        <input type="text" id="road" style="width: 13.5%;"></a>
+                    <br>
+                    <a style="margin-left: 1.8vw;">จังหวัด :
+                        <select id="province" style="width: 14%;"></select></a>
+                    <a>อำเภอ :
+                        <select id="district" style="width: 14%;"></select></a>
+                    <a>ตำบล :
+                        <select id="subdistrict" style="width: 13.5%;"></select></a>
+                    <a>โทรศัพท์ :
+                        <input type="text" id="phone"
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                    maxlength="10">
-                            &nbsp;
-                            <a>โทรสาร :</a>
-                            <input type="text" id="fax" style="width: 25%;"
+                            maxlength="10" style="width: 12%;"></a>
+                    <a>โทรสาร :
+                        <input type="text" id="fax"
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                    maxlength="9">
-                            <br>
+                            maxlength="9" style="width: 13.2%;"></a>
+                    <br>
+                    <a style="margin-left: 2.2vw;">ผู้ช่วย :
+                        <input type="text" id="" style="width: 28%;">
+                        <button type="button" class="fa fa-search" style="border-radius: 5px;"
+                            onclick="testSearchOparator()"></button></a>
+                    <a>เลขประจำตัว :
+                        <input type="text" style="width: 13%;"></a>
+                    <br>
+                    <br>
+                    <a>สถานที่จำหน่ายสินค้า : </a>
+                    <input list="location" id="location1" name="" style="width: 29%;">
+                    <datalist id="location">
+                        <option value="" hidden>เลือก...</option>
+                        <option value="เขตปลอดร่มเตียงที่ 1">เขตปลอดร่มเตียงที่ 1</option>
+                        <option value="เขตปลอดร่มเตียงที่ 2">เขตปลอดร่มเตียงที่ 2</option>
+                        <option value="เขตปลอดร่มเตียงที่ 3">เขตปลอดร่มเตียงที่ 3</option>
+                        <option value="เขตปลอดร่มเตียงที่ 4">เขตปลอดร่มเตียงที่ 4</option>
+                        <option value="เขตปลอดร่มเตียงที่ 5">เขตปลอดร่มเตียงที่ 5</option>
+                        <option value="เขตปลอดร่มเตียงที่ 6">เขตปลอดร่มเตียงที่ 6</option>
+                        <option value="เขตปลอดร่มเตียงที่ 7">เขตปลอดร่มเตียงที่ 7</option>
+                        <option value="เขตปลอดร่มเตียงที่ 8">เขตปลอดร่มเตียงที่ 8</option>
+                        <option value="เขตปลอดร่มเตียงที่ 9">เขตปลอดร่มเตียงที่ 9</option>
+                        <option value="เขตปลอดร่มเตียงที่ 10">เขตปลอดร่มเตียงที่ 10</option>
+                        <option value="เขตปลอดร่มเตียงที่ 11">เขตปลอดร่มเตียงที่ 11</option>
+                        <option value="หาดบางแสน 1"></option>
+                        <option value="หาดบางแสน 2">หาดบางแสน 2</option>
+                        <option value="หาดบางแสน 3">หาดบางแสน 3</option>
+                        <option value="หาดบางแสน 4">หาดบางแสน 4</option>
+                        <option value="">หาดบางแสน 5</option>
+                        <option value="">หาดบางแสน 6</option>
+                        <option value="">หาดบางแสน 7</option>
+                        <option value="">หาดบางแสน 8</option>
+                        <option value="">หาดบางแสน 9</option>
+                        <option value="">หาดบางแสน 10</option>
+                        <option value="">หาดบางแสน 11</option>
+                        <option value="">หาดบางแสน 12</option>
+                        <option value="">หาดบางแสน 13</option>
+                        <option value="">หาดบางแสน 14</option>
+                        <option value="">หาดบางแสน 15</option>
+                        <option value="">หาดบางแสน 16</option>
+                        <option value="">หาดบางแสน 17</option>
+                        <option value="">หาดบางแสน 18</option>
+                        <option value="">หาดบางแสน 19</option>
+                        <option value="">หาดบางแสน 20</option>
+                        <option value="">หาดบางแสน 21</option>
+                        <option value="">หาดบางแสน 22</option>
+                        <option value="">หาดบางแสน 23</option>
+                        <option value="">หาดบางแสน 24</option>
+                        <option value="">หาดบางแสน 25</option>
+                        <option value="">หาดบางแสน 26</option>
+                        <option value="">หาดบางแสน 27</option>
+                        <option value="">หาดบางแสน 28</option>
+                        <option value="">หาดบางแสน 29</option>
+                        <option value="">หาดบางแสน 30</option>
+                        <option value="">หาดบางแสน 31</option>
+                        <option value="">หาดบางแสน 32</option>
+                        <option value="">หาดบางแสน 33</option>
+                        <option value="">หาดบางแสน 34</option>
+                        <option value="">หาดบางแสน 35</option>
+                        <option value="">หาดบางแสน 36</option>
+                        <option value="">หาดบางแสน 37</option>
+                        <option value="">หาดบางแสน 38</option>
+                        <option value="">หาดบางแสน 39</option>
+                        <option value="">หาดบางแสน 40</option>
+                        <option value="">หาดบางแสน 41</option>
+                        <option value="">หาดบางแสน 42</option>
+                        <option value="">หาดบางแสน 43</option>
+                        <option value="">หาดบางแสน 44</option>
+                        <option value="">หาดบางแสน 45</option>
+                        <option value="">หาดบางแสน 46</option>
+                        <option value="">หาดบางแสน 47</option>
+                        <option value="">หาดบางแสน 48</option>
+                        <option value="">หาดบางแสน 49</option>
+                        <option value="">หาดบางแสน 50</option>
+                        <option value="">หาดบางแสน 51</option>
+                        <option value="">หาดบางแสน 52</option>
+                        <option value="">หาดบางแสน 53</option>
+                        <option value="">หาดบางแสน 54</option>
+                        <option value="">หาดบางแสน 55</option>
+                        <option value="">หาดบางแสน 56</option>
+                        <option value="">หาดบางแสน 57</option>
+                        <option value="">หาดบางแสน 58</option>
+                        <option value="">หาดบางแสน 59</option>
+                        <option value="">หาดบางแสน 60</option>
+                        <option value="">หาดบางแสน 61</option>
+                        <option value="">หาดบางแสน 62</option>
+                        <option value="">หาดบางแสน 63</option>
+                        <option value="">หาดบางแสน 64</option>
+                        <option value="">หาดบางแสน 65</option>
+                        <option value="">หาดบางแสน 66</option>
+                        <option value="">หาดบางแสน 67</option>
+                        <option value="">หาดบางแสน 68</option>
+                        <option value="">หาดบางแสน 69</option>
+                        <option value="">หาดบางแสน 70</option>
+                        <option value="">หาดบางแสน 71</option>
+                        <option value="">หาดบางแสน 72</option>
+                        <option value="">หาดบางแสน 73</option>
+                        <option value="">หาดบางแสน 74</option>
+                        <option value="">หาดบางแสน 75</option>
+                        <option value="">หาดบางแสน 76</option>
+                        <option value="">หาดบางแสน 77</option>
+                        <option value="">หาดบางแสน 78</option>
+                        <option value="">หาดบางแสน 79</option>
+                        <option value="">หาดบางแสน 80</option>
+                        <option value="">หาดบางแสน 81</option>
+                        <option value="">หาดบางแสน 82</option>
+                        <option value="">หาดบางแสน 83</option>
+                        <option value="">หาดบางแสน 84</option>
+                        <option value="">หาดบางแสน 85</option>
+                        <option value="">หาดบางแสน 86</option>
+                        <option value="">บางแสนล่าง 1</option>
+                        <option value="">บางแสนล่าง 2</option>
+                        <option value="">บางแสนล่าง 3</option>
+                        <option value="">บางแสนล่าง 4</option>
+                        <option value="">บางแสนล่าง 5</option>
+                        <option value="">บางแสนล่าง 6</option>
+                        <option value="">บางแสนล่าง 7</option>
+                        <option value="">บางแสนล่าง 8</option>
+                        <option value="">บางแสนล่าง 9</option>
+                        <option value="">บางแสนล่าง 10</option>
+                        <option value="">บางแสนล่าง 11</option>
+                        <option value="">บางแสนล่าง 12</option>
+                        <option value="">บางแสนล่าง 13</option>
+                        <option value="">บางแสนล่าง 14</option>
+                        <option value="">บางแสนล่าง 15</option>
+                        <option value="">บางแสนล่าง 16</option>
+                        <option value="">บางแสนล่าง 17</option>
+                        <option value="">บางแสนล่าง 18</option>
+                        <option value="">บางแสนล่าง 19</option>
+                        <option value="">บางแสนล่าง 20</option>
+                        <option value="">บางแสนล่าง 21</option>
+                        <option value="">บางแสนล่าง 22</option>
+                        <option value="">บางแสนล่าง 23</option>
+                        <option value="">บางแสนล่าง 24</option>
+                        <option value="">บางแสนล่าง 25</option>
+                        <option value="">บางแสนล่าง 26</option>
+                        <option value="">บางแสนล่าง 27</option>
+                        <option value="">บางแสนล่าง 28</option>
+                        <option value="">บางแสนล่าง 29</option>
+                        <option value="">บางแสนล่าง 30</option>
+                        <option value="">บางแสนล่าง 31</option>
+                        <option value="">บางแสนล่าง 32</option>
+                        <option value="">บางแสนล่าง 33</option>
+                        <option value="">บางแสนล่าง 34</option>
+                        <option value="">บางแสนล่าง 35</option>
+                        <option value="">บางแสนล่าง 36</option>
+                        <option value="">บางแสนล่าง 37</option>
+                        <option value="">บางแสนล่าง 38</option>
+                        <option value="">บางแสนล่าง 39</option>
+                        <option value="">บางแสนล่าง 40</option>
+                        <option value="">บางแสนล่าง 41</option>
+                        <option value="">บางแสนล่าง 42</option>
+                        <option value="">บางแสนล่าง 43</option>
+                        <option value="">บางแสนล่าง 44</option>
+                        <option value="">บางแสนล่าง 45</option>
+                        <option value="">บางแสนล่าง 46</option>
+                        <option value="">บางแสนล่าง 47</option>
+                        <option value="">บางแสนล่าง 48</option>
+                        <option value="">บางแสนล่าง 49</option>
+                        <option value="">บางแสนล่าง 50</option>
+                        <option value="">บางแสนล่าง 51</option>
+                        <option value="">บางแสนล่าง 52</option>
+                        <option value="">บางแสนล่าง 53</option>
+                        <option value="">บางแสนล่าง 54</option>
+                        <option value="">บางแสนล่าง 55</option>
+                        <option value="">บางแสนล่าง 56</option>
+                        <option value="">บางแสนล่าง 57</option>
+                        <option value="">บางแสนล่าง 58</option>
+                        <option value="">บางแสนล่าง 59</option>
+                        <option value="">บางแสนล่าง 60</option>
+                        <option value="">บางแสนล่าง 61</option>
+                        <option value="">บางแสนล่าง 62</option>
+                        <option value="">บางแสนล่าง 63</option>
+                        <option value="">บางแสนล่าง 64</option>
+                        <option value="">บางแสนล่าง 65</option>
+                        <option value="">บางแสนล่าง 66</option>
+                        <option value="">บางแสนล่าง 67</option>
+                        <option value="">บางแสนล่าง 68</option>
+                        <option value="">บางแสนล่าง 69</option>
+                        <option value="">บางแสนล่าง 70</option>
+                        <option value="">บางแสนล่าง 71</option>
+                        <option value="">บางแสนล่าง 72</option>
+                        <option value="">บางแสนล่าง 73</option>
+                        <option value="">บางแสนล่าง 74</option>
+                        <option value="">บางแสนล่าง 75</option>
+                        <option value="">บางแสนล่าง 76</option>
+                        <option value="">บางแสนล่าง 77</option>
+                        <option value="">บางแสนล่าง 78</option>
+                        <option value="">บางแสนล่าง 79</option>
+                        <option value="">บางแสนล่าง 80</option>
+                        <option value="">แหลมแท่น 1</option>
+                        <option value="">แหลมแท่น 2</option>
+                        <option value="">แหลมแท่น 3</option>
+                        <option value="">แหลมแท่น 4</option>
+                        <option value="">แหลมแท่น 5</option>
+                        <option value="">แหลมแท่น 6</option>
+                        <option value="">แหลมแท่น 7</option>
+                        <option value="">แหลมแท่น 8</option>
+                        <option value="">แหลมแท่น 9</option>
+                        <option value="">แหลมแท่น 10</option>
+                        <option value="">แหลมแท่น 11</option>
+                        <option value="">แหลมแท่น 12</option>
+                        <option value="">แหลมแท่น 13</option>
+                        <option value="">แหลมแท่น 14</option>
+                        <option value="">แหลมแท่น 15</option>
+                        <option value="">แหลมแท่น 16</option>
+                        <option value="">แหลมแท่น 17</option>
+                        <option value="">แหลมแท่น 18</option>
+                        <option value="">แหลมแท่น 19</option>
+                        <option value="">แหลมแท่น 20</option>
+                        <option value="">แหลมแท่น 21</option>
+                        <option value="">แหลมแท่น 22</option>
+                        <option value="">แหลมแท่น 23</option>
+                        <option value="">แหลมแท่น 24</option>
+                        <option value="">แพงลอยสุขุมวิท</option>
+                        <option value="">ตลาดหนองมน</option>
+                        <option value="">ลานหลังเทศบาล</option>
+                        <option value="">ศาลเจ้าแม่เขาสามมุข</option>
+                        <option value="">ปากซอย 1</option>
+                        <option value="">หน้าโรงแรมเฮอริเทจ</option>
 
-                            <a style="margin-left: 5px;">พื้นที่ :</a>
-                            <input type="int" id="area" style="width: 30%;">
-                            &nbsp;
-                            ตารางเมตร
-                            &nbsp;
-                            <a>จำนวนคนงาน :</a>
-                            <input type="int" id="numPeople" style="width: 15%;">
-                            &nbsp;
-                            คน
-                            <br>
-                            &nbsp;
-                            <a>ซอย :</a>
-                            <input type="text" id="wSxy" style="width: 20%;">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <a>อาคาร &nbsp;:</a>
-                            <input type="text" id="wBuilding" style="width: 25%;margin-left: 2px;">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <a>ถนน &nbsp;:</a>
-                            <input type="text" id="wRoad" style="width: 25.5%;">
-                            <br>
-                            <a>ตำบล :</a>
-                            <select id="wSubdistrict" style="width: 20%;">
-                            </select>
-                            &nbsp;&nbsp;
-                            <a>โทรศัพท์ &nbsp;:</a>
-                            <input type="text" id="wPhone" style="width: 25%;"
+                    </datalist>
+                    </input></a>
+                    <br>
+                    <a>ตั้งอยู่เลขที่ :
+                        <input type="text" id="wHomeId" style="width: 7%;"></a>
+                    <a>หมู่ที่ :
+                        <input type="int" id="wMoo" style="width: 7%;"></a>
+                    <a>ตรอก:
+                        <input type="text" id="wTrxk" style="width: 13%;"></a>
+                    <a>ซอย :
+                        <input type="text" id="wSxy" style="width: 13%;"></a>
+                    <a>อาคาร :
+                        <input type="text" id="wBuilding" style="width: 13.5%;"></a>
+                    <a>ถนน :
+                        <input type="text" id="wRoad" style="width: 13.5%;"></a>
+                    <br>
+
+                    <a style="margin-left: 1.75vw;">จังหวัด :
+                        <select id="wProvince" style="width: 14%;"></a>
+                    </select>
+                    <a>อำเภอ :
+                        <select id="wDistrict" style="width: 14%;"></a>
+                    </select>
+                    <a>ตำบล :
+                        <select id="wSubdistrict" style="width: 13.5%;"></a>
+                    </select>
+                    <a>โทรศัพท์ :
+                        <input type="text" id="wPhone"
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                    maxlength="10">
-                            &nbsp;
-                            <a>โทรสาร :</a>
-                            <input type="text" id="wFax" style="width: 25%;margin-left: 1px;"
+                            maxlength="10" style="width: 12%;"></a>
+                    <a>โทรสาร :
+                        <input type="text" id="wFax"
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                    maxlength="9">
-                            <br>
-                            <br>
-                            <a>นามสกุล :</a>
-                            <input type="text" id="" name="" style="width: 20%;" placeholder="">
-                            &nbsp;
-                            <a>สถานะ :</a>
-                            <input type="text" id="" style="width: 25%;">
+                            maxlength="9" style="width: 13.2%;"></a>
+                    <br>
+                    <br>
+                    <a>ใบอนุญาตฉบับจริง
+                        เล่มที่ :
+                        <input type="text" id="" style="width: 5%;"></a>&ensp;
+                    <a>เลขที่ :
+                        <input type="text" id="" style="width: 10%;"></a>&ensp;
+                    <a>ออกให้เมื่อวันที่ :
+                        <input type="text" id="datepicker2" id="" style="width: 12%;"></a>
+                    <a>ค่าธรรมเนียม :
+                        <input type="number" id="" style="width: 12%;"></a>
+                    <a>ค่าปรับ :
+                        <input type="number" id="" style="width: 12%;"></a>
 
-                            <a style="margin-left: 3px;">โทรศัพท์ :</a>
-                            <input type="text" id="" style="width: 24.5%;"
-                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                    maxlength="10">
-                            <br>
-                        </div>
+                    <br>
+                    <br>
+                    <a>
+                        <p>ประกอบกิจการจำหน่ายสินค้าในที่หรือทางสาธารณะ ประเภท</p>
+                        <a>1) &nbsp;<input style="width: 40%;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            ประเภทย่อย : <select style="width: 30%;">
+                                <option value="1">ล้อเลื่อน (ทั่วไป)</option>
+                                <option value="2">ไก่ย่าง</option>
+                                <option value="3">หาบเร่</option>
+                                <option value="4">แผงลอยอาหารชายหาด</option>
+                                <option value="5">ห่วงยาง</option>
+                                <option value="6">นวดแผนไทยชายหาด</option>
+                                <option value="7">เก้าอี้ผ้าใบ</option>
+                                <option value="8">เรือ</option>
+                                <option value="9">แผงลอยอาหารสวนหย่อมแหลมแท่น</option>
+                                <option value="10">ริมทางแนวหินแกรนิต</option>
+                                <option value="11">จักรยานเช่า</option>
+                                <option value="12">เสื้อผ้า</option>
+                                <option value="13">ล้อเลื่อน (ของที่ระลึก)</option>
+                                <option value="14">แผงลอยถนนสุขุมวิท</option>
+                                <option value="15">ตลาดเช้า</option>
+                                <option value="16">ตลาดเย็น</option>
+                                <option value="17">ตลาดเช้า-เย็น</option>
+                                <option value="18">เขาสามมุข</option>
+                                <option value="19">จักรยานน้ำ</option>
+                                <option value="20">ล้อเลื่อน (ฝั่งบน)</option>
+                                <option value="21">แผงลอย</option>
+                                <option value="22">ล้อเลื่อน</option>
+                                <option value="23">ริมทางสาธารณะ (ชั่วคราว)</option>
+                            </select></a>
+                            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            สินค้าประเภท : <input style="width: 32%;">&emsp;&emsp;&emsp;&emsp;
+                            เวลาเริ่ม : <input type="time" style="width: 11.6%;">  เวลาสิ้นสุด : <input type="time" style="width: 11.7%;">
+                        <p>2) &nbsp;ผู้ได้รับอนุญาตต้องปฏิบัติตามหลักเกณฑ์ วิธีการ
+                            และเงื่อนไขที่กำหนดในข้อกำหนดของท้องถิ่น</p>
+                        <p>3)
+                            &nbsp;หากปรากฎในภายหลังว่าการประกอบกิจการที่ได้รับอนุญาตนี้เป็นการขัดต่อกฎหมายอื่นที่เกี่ยวข้องโดยมิอาจแก้ไขได้
+                            เจ้าหน้าที่ท้องถิ่นอื่นอาจพิจารณาให้เพิกถอนการอนุญาตนี้ได้</p>
+                        <p>
+                            <p>4) &nbsp;ผู้รับใบอนุญาตต้องปฏิบัติตามเงื่อนไขดังต่อไปนี้อีกด้วย คือ</p>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input style="width: 30%;" type="text" name="mytext[]">
+                            <button type="button" class="add_form_field">
+                                เพิ่ม</button>
+                            <a class="container1"></a>
+                        </p>
+                        <p>5) &nbsp;ใบอนญาตฉบับนี้ออกให้เมื่อวันที่ <input type="text" id="datepicker6"></p>
+                        <p>6) &nbsp;ใบอนญาตฉบับนี้สิ้นอายุวันที่ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text"
+                                id="datepicker7"></p>
+                    </a>
+                    <br>
+                </div>
+                <br>
 
-
-
-
-                        <div>
-                            <input type="radio" name="sub" id="purposeType1" style="margin-top: 30px;"> ยืนยันคำขอรับ
-                            &nbsp;
-                            <input type="radio" name="sub" id="purposeType2"> ยืนยันคำขอต่ออายุ &nbsp;
-                            <br>
-
-                            <a>ใช้อาคารสถานที่ประกอบการของผู้อื่น</a>
-                            <select id="deed" name="" style="width: 10%;" onclick=" showtext()">
-                                <option value="" hidden>เลือก...</option>
-                                <option value="01">ยืนยัน</option>
-                                <option value="02">ไม่ยืนยัน</option>
-                            </select>
-                            <br><br>
-                            <input type="checkbox" id="documentId" value="cb1" />
-                            หนังสือยินยอมให้ใช้อาคารสถานที่เป็นที่ประกอบการ<br>
-                            <input type="checkbox" id="documenthHome" value="cb2" />
-                            สำเนาทะเบียนบ้าน/โฉนดที่ดิน(ที่ให้ใช้เป็นสถานที่ประกอบกิจการ)<br>
-                            <input type="checkbox" id="documentLegalEntity" value="cb3" />
-                            ใบรับรองแพทย์ผู้ขอรับใบอนุญาตและผู้ช่วยจำหน่ายสินค้า (ตามแบบ สณ.๑๑)<br>
-                            <input type="checkbox" id="documentSignature" value="cb4" /> หนังสือสัญญาเช่า<br>
-                            <input type="checkbox" id="documentSJ4" value="cb5" /> หนังสือมอบอำนาจ
-                            พร้อมติดอากรแสตมป์<br>
-                            <input type="checkbox" id="documentOther" value="cb6" /> เอกสารอื่นๆที่เกี่ยวข้อง
-                            <input type="text" id="other" size="40" />
-                        </div>
-                        <div style="width: 45%;float: right;text-align: center;display: block;">
-                            ข้าพเจ้าขอรับรองว่า
-                            ข้อความในแบบคำร้องขอต่อใบอนุญาตนี้เป็นจริงทุกประการ
-                            <br>
-                            (ลงชื่อ)
-                            <input type="text" id="documentName" />
-                            ผู้ขอรับใบอนุญาต
-                        </div>
-
-
-
+                <!-- สัมผัสอาหาร -->
+                <div class="box">
+                    <h3 style="font-size: 2.8vh;">ใบอบรมผู้สัมผัสอาหาร</h3>
+                    <input type="radio" name="food" id="food" onClick="show_food(this.value);" value="1"
+                        style="margin-left: 5vw;">
+                    <a>อบรมแล้ว</a>
+                    <input type="radio" name="food" id="food" onClick="show_food(this.value);" value="2" />
+                    <a>ยังไม่ได้อบรม</a>
+                    <br>
+                    <div id="boxFood" class="boxFood" style="display: none;margin-left: 5vw;">
+                        <a>ออกใบประกาศนียบัตรโดย</a>
+                        <input type="text" id="">
+                        <br>
+                        <a>ให้ไว้ ณ วันที่</a>
+                        <input type="text" id="datepicker2" />&nbsp;
+                        <a>มีผลถึง ณ วันที่</a>
+                        <input type="text" id="datepicker3" />
                     </div>
                     <br>
-                    <!-- box ผู้สัมผัสอาหาร -->
-                    <div class="w3-container box" style="margin:auto;">
+                </div><br>
+                
+                <!-- เพิ่มรูป -->
+                <div class="box">
+                    <br>
+                    <div>
+                        <a>รูปภาพผลการตรวจสอบ</a>
+                        <input type="file" id="uploadFile" style="display: none;" onchange="handleFileSelect(event)"
+                            accept="image/*" multiple>
+                        <button type="button" class="button" onclick="document.getElementById('uploadFile').click()">
+                            <h5><i class="fa fa-upload"></i>
+                                อัพโหลดภาพ</h5>
+                        </button>
+                        <button type="button" class="button" style="float: right;" onclick="printImg()">
+                            <h5><i class="fa fa-print"></i>
+                                พิมพ์รูปภาพ</h5>
+                        </button>
+                        <br>
+                        <br>
+                        <div id='outputImage' style="height: 40vh; overflow-y:auto; border: 0.3vh solid black;">
+                        </div>
+                    </div>
+                </div><br>
+                <!-- อนุญาต -->
+                <div class="box">
+                    <br>
+                    <input type="radio" name="confirm" id="confirm" onClick="show_confirm(this.value);" value="1">
+                    <a> ยืนยันคำขอรับ </a>
+                    &nbsp;
+                    <input type="radio" name="confirm" id="confirm" onClick="show_confirm(this.value);" value="2">
+                    <a> ยืนยันคำขอต่ออายุ </a>
+                    <br>
+                    <div class="row" id="boxConfirm" style="width: 80%;margin-left: 5vw;display: none;">
+                        <div class="col" style="width: 33.33%;">
+                            เลขที่คำขอ : <input readonly>
+                            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            วันที่ยื่น : <input type="text" id="datepicker5">
+                        </div>
+                        <div class="col" style="width: 33.33%;">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            เล่มที่ : <input style="width: 65%;">
+                            <br>
+                            ค่าธรรมเนียม :&nbsp;<input style="width: 65%;">
+                        </div>
+                        <div class="col" style="width: 33.33%;">
+                            &nbsp;&nbsp;
+                            เลขที่ : <input>
+                            <br>
+                            ค่าปรับ : <input>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div style="margin-left: 8vw;">
+                        <input type="checkbox" id="documentId" value="cb1"><a>
+                            หนังสือยินยอมให้ใช้อาคารสถานที่เป็นที่ประกอบการ</a>
+                        <br>
+                        <input type="checkbox" id="documenthHome" value="cb2"><a>
+                            สำเนาทะเบียนบ้าน/โฉนดที่ดิน(ที่ให้ใช้เป็นสถานที่ประกอบกิจการ)</a>
+                        <br>
+                        <input type="checkbox" id="documentLegalEntity" value="cb3"><a>
+                            ใบรับรองแพทย์ผู้ขอรับใบอนุญาตและผู้ช่วยจำหน่ายสินค้า (ตามแบบ สณ.๑๑)</a>
+                        <br>
+                        <input type="checkbox" id="documentSignature" value="cb4"><a> หนังสือสัญญาเช่า</a>
+                        <br>
+                        <input type="checkbox" id="documentSJ4" value="cb5"><a> หนังสือมอบอำนาจพร้อมติดอากรแสตมป์</a>
+                        <br>
+                        <input type="checkbox" id="documentOther" value="cb6"><a> เอกสารอื่นๆที่เกี่ยวข้อง</a>
+                        <input type="text" id="other" size="40" />
+                    </div>
+                    <br>
+                    <br>
+                    <div class="row" style="text-align: center;">
+                        <div class="col" style="width: 33.33%;">
+                            <a>
+                                ข้าพเจ้าขอรับรองว่า
+                                ข้อความในแบบคำร้องขอต่อใบอนุญาตนี้เป็นจริงทุกประการ
+                                <br>
+                                (ลงชื่อ)
+                                <input type="text" id="documentName" />
+                                ผู้ขอรับใบอนุญาต
+                            </a>
+                        </div>
+                        <div class="col" style="width: 33.33%;">
+                            <a>
+                                ลงชื่อ <input type="text" id="" />
+                                <br>
+                                <p class="text-center">ผู้รับเงิน</p>
+                            </a>
+                        </div>
+                        <div class="col" style="width: 33.33%;">
+                            <a>
+                                &emsp;ลงชื่อ
+                                <input type="text" id="" readonly disabled>
+                                <br>
+                                ตำแหน่ง
+                                <input type="text" id="" readonly disabled>
+                                <br>
+                                เจ้าพนักงานท้องถิ่น
+                            </a>
+                        </div>
+                    </div>
+
+                </div><br>
+                <!-- ตรวจสอบ -->
+                <div class="box">
+                    <a>
                         <div class="row">
-                            <div class="col-2">
-                                <a><b>ใบอบรมผู้สัมผัสอาหาร</b></a>&nbsp;&nbsp;
+                            <div class="col">
+                                <p style="margin-top: 2.8%;"><b>ความถูกต้องของเอกสารคำร้อง</b></p>
                             </div>
                             <div class="col">
-                                <input type="radio" name="typee" id="typeUser1" value="" onclick="w3.show('#ww')">
-                                <a>อบรมแล้ว</a>&nbsp;
-                                <input type="radio" name="typee" id="typeUser1" value="" onclick="w3.hide('#ww')">
-                                <a>ยังไม่ได้อบรม</a>
-                                <br>
-                                <div id="ww" style="display:none">
-                                    <a>ออกใบประกาศนียบัตรโดย</a>
-                                    <input type="text" id="">
-                                    <br>
-                                    <a>ให้ไว้ ณ วันที่</a>
-                                    <input type="text" id="datepicker2" />&nbsp;
-                                    <a>มีผลถึง ณ วันที่</a>
-                                    <input type="text" id="datepicker3" />
-                                </div>
+                                <p style="margin-top: 1%;"><b>บันทึกอนุมัติคำขอ</b> <input type="text" id="datepicker5">
+                                </p>
                             </div>
                         </div>
-                    </div> <br>
-                    <!-- box เพิ่มรูป -->
-                    <div class="w3-container box" style="margin:auto;">
-                        <div>
-                            <div style="width: 100%;height: auto; ">
-                                <a>ประเภทกิจการ : </a>
-                                &nbsp;
-                                <input type="text" id="" style="width: 35%;">
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <a>โดยมีพื้นที่ประกอบการ :</a>
-                                &nbsp;&nbsp;
-                                <input type="text" id="" style="width: 10%;">
-                                &nbsp;&nbsp;
-                                <a> ตารางเมตร</a>
-                                <br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <a>มีคนงาน :</a>
-                                &nbsp;
-                                <input type="text" id="" style="width: 10%;">
-                                &nbsp;
-                                <a> คน</a>&nbsp;&nbsp;
-                                <a>ใช้เครื่องจักรขนาด :</a>
-                                &nbsp;&nbsp;
-                                <input type="text" id="" style="width: 10%;">
-                                &nbsp;&nbsp;
-                                <a> แรงม้า</a>
-                                <br>
-                                <a>ใบอนุญาตฉบับจริงที่หมดอายุ เล่มที่ : </a>
-                                &nbsp;
-                                <input type="text" id="" style="width: 5%;">
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <a>เลขที่ :</a>
-                                <input type="number" id="" style="width: 13%;">
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <a>ออกให้เมื่อวันที่ :</a>
-                                &nbsp;
-                                <input type="text" id="datepicker2" id="" style="width: 15%;">
-                                <br>
-
-                                &nbsp;&nbsp;
-                                <a>ค่าธรรมเนียม :</a>
-                                &nbsp;
-                                <input type="number" id="" style="width: 15.5%;">
-                                &nbsp;&nbsp;&nbsp;
-                                <a>ค่าปรับ :</a>
-                                <input type="number" id="" style="width: 13%;">
-
-                            </div>
-                        </div>
-
-                        <br>
-                        <div>
-                            <a>รูปภาพผลการตรวจสอบ</a>
-                            <input type="file" id="uploadFile" style="display: none;" onchange="handleFileSelect(event)"
-                                accept="image/*" multiple>
-                            <button type="button" class="btn is-color "
-                                onclick="document.getElementById('uploadFile').click()">
-                                <h5><i class="fa fa-upload"></i>
-                                    อัพโหลดภาพ</h5>
-                            </button>
-                            <button type="button" class="btn is-color" style="float: right;" onclick="printImg()">
-                                <h5><i class="fa fa-print"></i>
-                                    พิมพ์รูปภาพ</h5>
-                            </button>
-                            <br>
-                            <br>
-                            <div id='outputImage' style="height: 320px; overflow-y:auto; border: 1px solid black;">
-                            </div>
-                        </div>
-                        <br><br>
-                    </div><br>
-                    <!-- อนุมัติ -->
-                    <div class="w3-container box">
                         <div class="row">
                             <div class="col" style="text-align: left;">
-                                <p style="margin-top: 14px;"><b>ความถูกต้องของเอกสารคำร้อง</b></p>
-                                <div class="box" style="width: 100%;margin-top: 26px;">
-                                    <input type="radio" name="correct1" id="" value="">
-                                    &nbsp;เห็นสมควรอนุญาต
+                                <div class="box">
+                                    <input type="radio" name="correct1" id="" value=""> &nbsp;เห็นสมควรอนุญาต
                                     <br>
-                                    <input type="radio" name="correct1" id="" value="">
-                                    &nbsp;เห็นสมควรไม่อนุญาต เพราะ <textarea rows="4" cols="50"> </textarea>
-                                    <br><br>
-                                    <p style="margin-left: 25px;">ลงชื่อ <input type="text"> ผู้ตรวจสอบ </p>
-                                </div>
-                            </div>
-
-                            <div class="col" style="text-align: left;">
-                                <b>บันทึกอนุมัติคำขอ</b> <input type="text" id="datepicker5">
-                                <div class="box" style="width: 100%;margin-top: 12px;">
-                                    <input type="radio" name="correct2" id="" value="">
-                                    &nbsp;เห็นสมควรอนุญาต
-                                    <br>
-                                    <input type="radio" name="correct2" id="" value="">
-                                    &nbsp;เห็นสมควรไม่อนุญาต เพราะ <textarea rows="4" cols="50"> </textarea>
+                                    <input type="radio" name="correct1" id="" value=""> &nbsp;เห็นสมควรไม่อนุญาต เพราะ
+                                    <textarea rows="4" cols="50"> </textarea>
                                     <br><br>
                                     <p>ลงชื่อ <input type="text"> ผู้ตรวจสอบ </p>
                                 </div>
                             </div>
+
+                            <div class="col" style="text-align: left;">
+                                <div class="box">
+                                    <input type="radio" name="correct2" id="" value=""> &nbsp;เห็นสมควรอนุญาต
+                                    <br>
+                                    <input type="radio" name="correct2" id="" value=""> &nbsp;เห็นสมควรไม่อนุญาต เพราะ
+                                    <textarea rows="4" cols="50"> </textarea>
+                                    <br><br>
+                                    <p>ลงชื่อ <input type="text"> ผู้อนุมัติ </p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </fieldset>
-            </form>
-        </div>
-    </div>
+                    </a>
+                </div><br>
+
+
+            </div>
+
+        </fieldset>
+    </form>
+
+
 </body>
-<!-- show hide -->
-<script src="https://www.w3schools.com/lib/w3.js"></script>
-<script src="../../js/twoAddress.js"></script>
-<script src="../../js/dataTEST.js"></script>
+<script src="../../js/jquery.js"></script>
+<script src="../../js/js22.js"></script>
 <script src="../../js/controlTest.js"></script>
+<script src="../../js/disable.js"></script>
+<script src="../../js/sweet2.js"></script>
+
 </html>
