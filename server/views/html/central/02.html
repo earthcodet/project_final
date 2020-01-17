@@ -2,7 +2,9 @@
 <html>
 <title>ข้อมูลการจดใบอนุญาต</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
 <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
 <!-- sarabun -->
 <link href="https://fonts.googleapis.com/css?family=Sarabun&display=swap" rel="stylesheet">
@@ -13,17 +15,12 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <!-- bootstrap -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-    crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-    crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-    crossorigin="anonymous"></script>
+<link rel="stylesheet" href="../../css/bootstrap-4.4.1/bootstrap.min.css">
+<link rel="stylesheet" href="../../css/bootstrap-4.4.1/bootstrap-grid.min.css">
+<link rel="stylesheet" href="../../css/bootstrap-4.4.1/bootstrap-reboot.min.css">
+<script src="../../js/jquery-3.4.1.min.js"></script>
+<script src="../../js/bootstrap-4.4.1/bootstrap.min.js"></script>
+<script src="../../js/bootstrap-4.4.1/bootstrap.bundle.min.js"></script>
 
 <link href="../../css/css-index.css" rel="stylesheet">
 
@@ -39,12 +36,16 @@
 <script src="../../js/disable.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
 <!-- ทดสอบควบคุมหน้า -->
 <script src="../../js/controlTest.js"></script>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<!-- เรียกไลบารี่สร้างปฎิทิน  -->
+<link type="text/css" href="../../css/jquery-ui-1.12.1.custom/jquery-ui.css" rel="stylesheet" />
+<!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+<script src="https://รับเขียนโปรแกรม.net/jquery_datepicker_thai/jquery-ui.js"></script>
+<!-- เรียกไลบารี่สร้างปฎิทิน  -->
+<script src="../../js/dateth.js"></script>
 
 <body>
     <!-- เมนูด้านบน -->
@@ -392,63 +393,224 @@
                                     <option value="กิจการที่เป็นอันตรายต่อสุขภาพ">กิจการที่เป็นอันตรายต่อสุขภาพ</option>
                                     <option value="กิจการฌาปณสถาน">กิจการฌาปณสถาน</option>
                                 </datalist>
-                                <button class="button" href="#">ปกติ</button>
-                                <button class="button" href="#">โอน</button>
-                                <button class="button" href="#">หมดอายุ</button>
                                 <br><br>
-                                <table class="table table-bordered">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th scope="col"></th>
-                                            <th scope="col" class="text-center">ปีงบประมาณ</th>
-                                            <th scope="col" class="text-center">ประเภทใบอนุญาต</th>
-                                            <th scope="col" class="text-center">เล่ม</th>
-                                            <th scope="col" class="text-center">เลขที่</th>
-                                            <th scope="col" class="text-center">วันหมดอายุ</th>
-                                            <th scope="col" class="text-center">สถานะ</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row"></th>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <a class="font-weight-bold">ประวัติการร้องเรียน</a class="font-weight-bold">
-                                <table class="table table-bordered">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th scope="col"></th>
-                                            <th scope="col" class="text-center">ปีงบประมาณ</th>
-                                            <th scope="col" class="text-center">ประเภทใบอนุญาต</th>
-                                            <th scope="col" class="text-center">เล่ม</th>
-                                            <th scope="col" class="text-center">เลขที่</th>
-                                            <th scope="col" class="text-center">วันหมดอายุ</th>
-                                            <th scope="col" class="text-center">สถานะ</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row"></th>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <nav>
+                                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                        <a class="nav-item nav-link active text-success" id="nav-home-tab"
+                                            data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home"
+                                            aria-selected="true">ปกติ</a>
+                                        <a class="nav-item nav-link text-warning" id="nav-profile-tab" data-toggle="tab"
+                                            href="#nav-profile" role="tab" aria-controls="nav-profile"
+                                            aria-selected="false">โอน</a>
+                                        <a class="nav-item nav-link text-danger" id="nav-contact-tab" data-toggle="tab"
+                                            href="#nav-contact" role="tab" aria-controls="nav-contact"
+                                            aria-selected="false">หมดอายุ</a>
+                                    </div>
+                                </nav>
+                                <div class="tab-content" id="nav-tabContent">
+                                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
+                                        aria-labelledby="nav-home-tab">
+                                        <br>
+                                        <table class="table table-bordered">
+                                            <thead class="thead-light">
+                                                <tr>
+                                                    <th scope="col"></th>
+                                                    <th scope="col" class="text-center">ปีงบประมาณ</th>
+                                                    <th scope="col" class="text-center">ประเภทใบอนุญาต</th>
+                                                    <th scope="col" class="text-center">เล่ม</th>
+                                                    <th scope="col" class="text-center">เลขที่</th>
+                                                    <th scope="col" class="text-center">วันหมดอายุ</th>
+                                                    <th scope="col" class="text-center">สถานะ</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row"></th>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="row">
+                                            <div class="col">
+                                                <a class="font-weight-bold">ประวัติการร้องเรียน</a
+                                                    class="font-weight-bold">
+                                                <table class="table table-bordered">
+                                                    <thead class="thead-light">
+                                                        <tr>
+                                                            <th scope="col"></th>
+                                                            <th scope="col" class="text-center">ปีงบประมาณ</th>
+                                                            <th scope="col" class="text-center">ประเภทใบอนุญาต</th>
+                                                            <th scope="col" class="text-center">เล่ม</th>
+                                                            <th scope="col" class="text-center">เลขที่</th>
+                                                            <th scope="col" class="text-center">วันหมดอายุ</th>
+                                                            <th scope="col" class="text-center">สถานะ</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <th scope="row"></th>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                        <a class="font-weight-bold">ผู้ช่วย</a>
+                                        <br>
+                                        <table class="table table-bordered">
+                                            <thead class="thead-light">
+                                                <tr>
+                                                    <th scope="col"></th>
+                                                    <th scope="col" class="text-center">ปีงบประมาณ</th>
+                                                    <th scope="col" class="text-center">ประเภทใบอนุญาต</th>
+                                                    <th scope="col" class="text-center">เล่ม</th>
+                                                    <th scope="col" class="text-center">เลขที่</th>
+                                                    <th scope="col" class="text-center">วันหมดอายุ</th>
+                                                    <th scope="col" class="text-center">สถานะ</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row"></th>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="tab-pane fade" id="nav-profile" role="tabpanel"
+                                        aria-labelledby="nav-profile-tab">
+                                        <br>
+                                        <table class="table table-bordered">
+                                            <thead class="thead-light">
+                                                <tr>
+                                                    <th scope="col"></th>
+                                                    <th scope="col" class="text-center">ปีงบประมาณ</th>
+                                                    <th scope="col" class="text-center">ประเภทใบอนุญาต</th>
+                                                    <th scope="col" class="text-center">เล่ม</th>
+                                                    <th scope="col" class="text-center">เลขที่</th>
+                                                    <th scope="col" class="text-center">วันหมดอายุ</th>
+                                                    <th scope="col" class="text-center">สถานะ</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row"></th>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="row">
+                                            <div class="col">
+                                                <a class="font-weight-bold">ประวัติการร้องเรียน</a
+                                                    class="font-weight-bold">
+                                                <table class="table table-bordered">
+                                                    <thead class="thead-light">
+                                                        <tr>
+                                                            <th scope="col"></th>
+                                                            <th scope="col" class="text-center">ปีงบประมาณ</th>
+                                                            <th scope="col" class="text-center">ประเภทใบอนุญาต</th>
+                                                            <th scope="col" class="text-center">เล่ม</th>
+                                                            <th scope="col" class="text-center">เลขที่</th>
+                                                            <th scope="col" class="text-center">วันหมดอายุ</th>
+                                                            <th scope="col" class="text-center">สถานะ</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <th scope="row"></th>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="nav-contact" role="tabpanel"
+                                        aria-labelledby="nav-contact-tab">
+                                        <br>
+                                        <table class="table table-bordered">
+                                            <thead class="thead-light">
+                                                <tr>
+                                                    <th scope="col"></th>
+                                                    <th scope="col" class="text-center">ปีงบประมาณ</th>
+                                                    <th scope="col" class="text-center">ประเภทใบอนุญาต</th>
+                                                    <th scope="col" class="text-center">เล่ม</th>
+                                                    <th scope="col" class="text-center">เลขที่</th>
+                                                    <th scope="col" class="text-center">วันหมดอายุ</th>
+                                                    <th scope="col" class="text-center">สถานะ</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row"></th>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="row">
+                                            <div class="col">
+                                                <a class="font-weight-bold">ประวัติการร้องเรียน</a
+                                                    class="font-weight-bold">
+                                                <table class="table table-bordered">
+                                                    <thead class="thead-light">
+                                                        <tr>
+                                                            <th scope="col"></th>
+                                                            <th scope="col" class="text-center">ปีงบประมาณ</th>
+                                                            <th scope="col" class="text-center">ประเภทใบอนุญาต</th>
+                                                            <th scope="col" class="text-center">เล่ม</th>
+                                                            <th scope="col" class="text-center">เลขที่</th>
+                                                            <th scope="col" class="text-center">วันหมดอายุ</th>
+                                                            <th scope="col" class="text-center">สถานะ</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <th scope="row"></th>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br><br>
                             </div>
                         </div>
                     </div>
