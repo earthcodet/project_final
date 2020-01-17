@@ -15,6 +15,7 @@ function exitTEST() {
     })
         .then((result) => {
             if (result.value) {
+            document.getElementById('exitMenu').classList.add('disableds')
                 logout()
             }
         });

@@ -5,209 +5,93 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>สรุปรายงานประจำเดือน/ปี</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <script src="../js/js22.js"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <!-- bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
-
-    <link rel="stylesheet" href="../../css/w.3.css">
-    <link rel="stylesheet" href="../../css/w3-theme-teal.css">
-
-    <link href="../../css/css-index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/css2.css">
     <link href="../../css/fonts.css" rel="stylesheet">
-    <link href="../../css/css-002.css" rel="stylesheet">
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="../../js/js-index.js"></script>
-    <script src="../../js/test.js"></script>
-
-
-    <!-- disable-->
-    <script src="../../js/disable.js"></script>
-    <!-- css ส่วนกลาง -->
-    <link href="../../css/utilities.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-    <!-- ทดสอบควบคุมหน้า -->
-    <script src="../../js/controlTest.js"></script>
-
 </head>
 
 <body>
     <!-- เมนูด้านบน -->
-    <div class="w3-top" style="overflow:auto;">
-        <ul>
-            <li class="fa fa-bars w3-button w3-my-color w3-hide-large w3-xxlarge" onclick="w3_open()"></li>
-            <li>
-                <a id="addMenu" href="#news" onclick="addTEST()" class="disableds">
-                    <i class="fa fa-plus-square fa-lg w3-margin-right w3-text-theme "> </i>
-                    เพิ่ม
-                </a>
-            </li>
-            <li>
-                <a id="editMenu" href="#contact" onclick="editTEST()" class="disableds">
-                    <i class="fa fa-pencil fa-lg w3-margin-right w3-text-theme"></i>
-                    แก้ไข
-                </a>
-            </li>
-            <li>
-                <a id="saveMenu" onclick="insertTEST()" class="disableds" href="#contact">
-                    <i class="fa fa-floppy-o fa-lg w3-margin-right w3-text-theme"></i>
-                    บันทึก
-                </a>
-            </li>
-            <li>
-                <a id="restoreMenu" onclick="restoreTEST()" href="#contact" class="disableds">
-                    <i class="fa fa-reply fa-lg w3-margin-right w3-text-theme"></i>
-                    เรียกคืน
-                </a>
-            </li>
-            <li>
-                <a id="deleteMenu" onclick="deleteTEST()" href="#about" class="disableds">
-                    <i class="fa fa-close fa-lg w3-margin-right w3-text-theme"></i>
-                    ยกเลิก
-                </a>
-            </li>
-            <li class="w3-display-topright">
-                <a id="exitMenu" onclick="exitTEST()" class="exit">
-                    <i class="fa fa-sign-out fa-lg w3-margin-right w3-text-theme"></i>
-                    ออกจากระบบ
-                </a>
-            </li>
-        </ul>
-        <nav class="w3-sidebar w3-bar-block w3-collapse w3-animate-left w3-card" style="z-index:3;width:250px;"
-            id="mySidebar">
-            <a class="w3-bar-item w3-button w3-border-bottom w3-large" href="../utilities/index.html">
-                <img src="../../img/img1.jpg" style="width:100%;">
-            </a>
-
-            <div>
-                <a class="w3-bar-item w3-button" onclick="myAccordion('demo1')" href="javascript:void(0)">
-                    ระบบงานคำขอ
-                    <i class="fa fa-caret-down"></i>
-                </a>
-                <div id="demo1" class="w3-hide ">
-                    <a class="bar-item w3-button" onclick="myAccordion('demo11')" href="javascript:void(0)">
-                        เพิ่ม
-                        <i class="fa fa-caret-down"></i>
-                    </a>
-                    <div id="demo11" class="w3-hide ">
-                        <a class="bar-item w3-button" href="../request/request_public_sell.html">-
-                            ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
-                        <a class="bar-item w3-button" href="../request/request_public_hawk.html">-
-                            ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
-                        <a class="bar-item w3-button" href="../request/request_area_more_sell.html">-
-                            ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
-                        <a class="bar-item w3-button" href="../request/request_area_more_correct.html">-
-                            ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</a>
-                        <a class="bar-item w3-button" href="../request/request_area_less_sell.html">-
-                            หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
-                        <a class="bar-item w3-button " href="../request/request_area_less_correct.html">-
-                            หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
-                        <a class="bar-item w3-button" href="../request/request_market.html">-
-                            ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
-                        <a class="bar-item w3-button" href="../request/request_health_danger.html">-
-                            กิจการที่เป็นอันตรายต่อสุขภาพ</a>
-                        <a class="bar-item w3-button" href="../request/request_crematory.html">- กิจการฌาปณสถาน</a>
-                    </div>
-                    <a class="bar-item w3-button" href="../request/searchRequest.html">
-                        ค้นหา/แก้ไข</a>
-                </div>
-            </div>
-
-            <div>
-                <a class="w3-bar-item w3-button" onclick="myAccordion('demo2')"
-                    href="javascript:void(0)">งานตรวจสอบ/อนุมัติ <i class="fa fa-caret-down"></i></a>
-                <div id="demo2" class="w3-hide">
-                    <a class="w3-bar-item w3-button" href="#"></a>
-                </div>
-            </div>
-
-            <div>
-                <a class="w3-bar-item w3-button" onclick="myAccordion('demo3')" href="javascript:void(0)">งานใบอนุญาต
-                    <i class="fa fa-caret-down"></i></a>
-                <div id="demo3" class="w3-hide">
-                    <a class="w3-bar-item w3-button" href="#"></a>
-                </div>
-            </div>
-
-            <div>
-                <a class="w3-bar-item w3-button" onclick="myAccordion('demo4')" href="javascript:void(0)">ข้อมูลส่วนกลาง
-                    <i class="fa fa-caret-down"></i></a>
-                <div id="demo4" class="w3-hide">
-                    <a class="bar-item w3-button" href="../central/operator.html">- ข้อมูลผู้ประกอบการ</a>
-                    <a class="bar-item w3-button" href="../central/02.html">- ข้อมูลการจดใบอนุญาต</a>
-                    <a class="bar-item w3-button" href="../central/03.html">- โอนใบอนุญาต</a>
-                </div>
-            </div>
-
-            <div>
-                <a class="w3-bar-item w3-button" onclick="myAccordion('demo5')" href="javascript:void(0)">งานร้องเรียน
-                    <i class="fa fa-caret-down"></i></a>
-                <div id="demo5" class="w3-hide">
-                    <a class="bar-item w3-button" href="#">- บันทึกเรื่องร้องเรียน</a>
-                    <a class="bar-item w3-button" href="#">- บันทึกคำร้อง</a>
-                </div>
-            </div>
-
-            <div>
-                <a class="w3-bar-item w3-button" onclick="myAccordion('demo6')" href="javascript:void(0)">ข้อมูลระบบ <i
-                        class="fa fa-caret-down"></i></a>
-                <div id="demo6" class="w3-hide">
-                    <a class="w3-bar-item w3-button" href="#"></a>
-                </div>
-            </div>
-
-            <div>
-                <a class="w3-bar-item w3-button w3-theme" onclick="myAccordion('demo7')"
-                    href="javascript:void(0)">รายงาน
-                    <i class="fa fa-caret-down"></i></a>
-                <div id="demo7" class="w3-hide w3-show">
-                    <a class="bar-item w3-button" href="./report_crematory.html">ตามคำขอ</a>
-                    <a class="bar-item w3-button w3-my-color" href="./report_summary.html">สรุป</a>
-                </div>
-            </div>
-            <div>
-                <a class="w3-bar-item w3-button notification" onclick="myAccordion('demo8')" href="javascript:void(0)">
-                    <span>แจ้งเตือน</span>
-                    <i class="fa fa-caret-down"></i>
-                    <span id="notficationRequestTopic" class="badgeTopic">7</span>
-                </a>
-                <div id="demo8" class="w3-hide">
-                    <a class="bar-item w3-button notification" href="../notfication/request.html">
-                        <span>งานคำขอ</span>
-                        <span id="notficationRequest" class="badge">7</span>
-                    </a>
-                </div>
-            </div>
-            <br><br><br><br>
-        </nav>
-
-        <!-- คลิกเมนูย่อได้ -->
-        <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer"
-            id="myOverlay">
+    <div class="w3-top icon-bar">
+        <a id="addMenu" class="exit disableds" onclick="addTEST()"><i class="fa fa-plus-square"> เพิ่ม</i></a>
+        <a id="editMenu" onclick="editTEST()" class="exit disableds"><i class="fa fa-pencil"> แก้ไข</i></a>
+        <a id="saveMenu" onclick="insertTEST()" class="exit disableds"><i class="fa fa-floppy-o"> บันทึก</i></a>
+        <a id="restoreMenu" onclick="restoreTEST()" class="exit disableds"><i class="fa fa-reply"> เรียกคืน</i></a>
+        <a id="deleteMenu" onclick="deleteTEST()" class="exit disableds"><i class="fa fa-close"> ยกเลิก</i></a>
+        <!-- <a><i class="fa fa-search"> ค้นหา</i></a> -->
+        <a id="exitMenu" onclick="exitTEST()" class="exit" style="float: right;width: 17%;"><i class="fa fa-sign-out">
+                ออกจากระบบ</i></a>
+    </div>
+    <!-- เมนูด้านข้าง -->
+    <div class="sidenav">
+        <a href="index.html" style="margin-top: 15%;">
+            <img src="../../img/img1.jpg" style="width:92%;">
+        </a>
+        <br>
+        <button class="dropdown-btn"><b>ระบบงานคำขอ </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="../request/request_public_sell.html">- ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
+            <a href="../request/request_public_hawk.html">- ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
+            <a href="../request/request_area_more_sell.html">- ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
+            <a href="../request/request_area_more_correct.html">- ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</a>
+            <a href="../request/request_area_less_sell.html">- หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
+            <a href="../request/request_area_less_correct.html">- หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
+            <a href="../request/request_market.html">- ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
+            <a href="../request/request_health_danger.html">- กิจการที่เป็นอันตรายต่อสุขภาพ</a>
+            <a href="../request/request_crematory.html">- กิจการฌาปณสถาน</a>
+            <a href="">- ค้นหา/แก้ไข</a>
+        </div>
+        <button class="dropdown-btn"><b>งานตรวจสอบ/อนุมัติ </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="#"></a>
+            <a href="#"></a>
+            <a href="#"></a>
+        </div>
+        <button class="dropdown-btn"><b>งานใบอนุญาต </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="#"></a>
+            <a href="#"></a>
+            <a href="#"></a>
+        </div>
+        <button class="dropdown-btn"><b>ข้อมูลส่วนกลาง </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="../central/operator.html">- ข้อมูลผู้ประกอบการ</a>
+            <a href="../central/02.html">- ข้อมูลการจดใบอนุญาต</a>
+            <a href="../central/03.html">- โอนใบอนุญาต</a>
+        </div>
+        <button class="dropdown-btn"><b>งานร้องเรียน </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="#">- บันทึกเรื่องร้องเรียน</a>
+            <a href="#">- บันทึกคำร้อง</a>
+        </div>
+        <button class="dropdown-btn"><b>ข้อมูลระบบ </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="#"></a>
+        </div>
+        <button class="dropdown-btn"><b>รายงาน </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="../report/report_crematory.html">- ตามคำขอ</a>
+            <a href="../report/report_summary.html">- สรุป</a>
+        </div>
+        <button class="dropdown-btn notification"><b>แจ้งเตือน </b><span id="notficationRequest" class="badge"
+                style="margin-left:0.5vw;">100000</span><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a class="notification" href="../report/report_crematory.html">- งานคำขอ<span id="notficationRequest"
+                    class="badge" style="margin-left:0.5vw;">100000</span></a>
         </div>
     </div>
-
-    <div class="w3-main w3-card " style="padding-top: 47px;margin-left: 250px; ">
-        <header class="w3-container w3-theme">
-            <h1 style="font-size:20px">สรุปรายงานประจำเดือน/ปี</h1>
-        </header>
-        <div class="w3-container w3-center" style="padding-top: 5rem;">
-            <div class="row">
-                <div class="col-4" style="text-align: right;display: block;">
-                    รายเดือน
-                    <select>
+    <!-- เนื้อหา -->
+    <form id="form">
+        <fieldset id="disable" style="border: 0;padding: 0;margin: 0;">
+            <div class="main">
+                <header class="w3-top2">
+                    <h1 style="font-size:2.8vh;margin-left: 25px;padding: 2px;"> สรุปรายงานประจำเดือน / ปี</h1>
+                </header>
+                <div style="text-align: center; ">
+                    <a>รายเดือน : </a>
+                    <select style="width: 17%;">
                         <option value="มกราคม">มกราคม</option>
                         <option value="กุมภาพันธ์">กุมภาพันธ์</option>
                         <option value="มีนาคม">มีนาคม</option>
@@ -221,33 +105,29 @@
                         <option value="พฤศจิกายน">พฤศจิกายน</option>
                         <option value="ธันวาคม">ธันวาคม</option>
                     </select>
-                </div>
-                <div class="col-4" style="text-align: center;display: block;">
-                    ปี พ.ศ.
-                    <select id="yearPrint">
+                    <a>ปี พ.ศ. : </a>
+                    <select id="yearPrint" style="width: 10%;">
                         <option value="2560">2560</option>
                         <option value="2561">2561</option>
                         <option value="2562">2562</option>
                         <option value="2563">2563</option>
                         <option value="2564">2564</option>
                     </select>
-                </div>
-                <div class="col" style="text-align: left;display: block;">
+                        <br>
                     <a href="report_summary_preview.html" target="popup"
                         onclick="window.open('report_summary_preview.html','popup','width=1100,height=570'); return false;">
-                        <button type="button" class="btn btn-outline-success btn-lg"
-                            style="background-color: #009688;color: white;">ตกลง</button>
-                    </a>
+                        <button type="button" class=""
+                            style="background-color: #009688;color: white ;width: 10%;">ตกลง</button></a>
                 </div>
             </div>
-
-
-        </div>
-
-    </div>
-    </div>
+        </fieldset>
+    </form>
 
 
 </body>
+<script src="../../js/js22.js"></script>
+<script src="../../js/controlTest.js"></script>
+<script src="../../js/disable.js"></script>
+<script src="../../js/sweet2.js"></script>
 
 </html>
