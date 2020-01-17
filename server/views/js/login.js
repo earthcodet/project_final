@@ -32,7 +32,6 @@ function buttonLoading(){
     var load = document.getElementById('loadBtn')
     var text = document.getElementById('textBtn')
     var button = document.getElementById('loginBtn')
-    console.log(text.innerHTML)
     if(text.innerHTML === 'เข้าสู่ระบบ'){
         load.style.display = ''
         button.classList.add("disableds")
@@ -44,7 +43,6 @@ function buttonLoading(){
     }
 }
 function runScript(e) {
-    //See notes about 'which' and 'key'
     if (e.keyCode == 13) {
         checkLogin()
         return false;
