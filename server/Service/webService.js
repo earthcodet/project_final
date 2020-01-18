@@ -73,29 +73,39 @@ class service {
         if (type === 'PERSONAL') {
             return new Promise((resolve, reject) => {
                 PersonalDAOObj.getMaxIdProsonal().then((data) => {
-                    let maxId = data[0].maxId
-                    let peronalId = this.newId(maxId, 'PERSONAL')
-                    // console.log(peronalId)
-                    return resolve(peronalId)
+                    if(data[0].maxId  === null){
+                        let peronalId = "P000001"
+                        console.log(peronalId)
+                        return resolve(peronalId)
+                    }else{
+                        let maxId = data[0].maxId
+                        let peronalId = this.newId(maxId, 'PERSONAL')
+                        console.log(peronalId)
+                        return resolve(peronalId)
+                    }
                 })
             })
         } else {
             return new Promise((resolve, reject) => {
                 PersonalDAOObj.getMaxIdAddress().then((data) => {
-                    let maxId = data[0].maxId
-                    let addressId = this.newId(maxId, 'ADDRESS')
-                    return resolve(addressId)
+                    if(data[0].maxId === null){
+                        let addressId = 'ADD0000001'
+                        console.log(addressId)
+                        return resolve(addressId)
+                    }else{
+                        let maxId = data[0].maxId
+                        let addressId = this.newId(maxId, 'ADDRESS')
+                        console.log(addressId)
+                        return resolve(addressId)
+                    }
                 })
             })
         }
     }
-    insertAddress(personal, address) {
+    insertAddress(address) {
         return new Promise((resolve, reject) => {
             PersonalDAOObj.insertAddress(address).then((data) => {
                 if (data == 'true') {
-                    console.log(`ID new is use => ${address.id}`)
-                    personal.address_id = address.id
-                    loopInsertPersonal(personal)
                     return resolve(true)
                 } else {
                     /* Duplicate Key : ER_DUP_ENTRY */
@@ -128,24 +138,53 @@ class service {
             })
         })
     }
-    loopInsertAddress(address, stop) {
+    loopInsertAddress(personal, address) {
         this.getNewId('ADDRESS').then((id) => {
-            if (stop === 5) {
                 address.id = id
-            }
             this.insertAddress(address).then((data) => {
                 if (data) {
+                    personal.address_id = address.id  
+                    this.loopInsertPersonal(personal)
                     console.log('address insert !!')
                 } else {
-                    console.log(`stop => ${stop}`)
-                    this.loopInsertAddress(address,stop+1)
+                    this.loopInsertAddress(address)
                 }
             })
         })
     }
-    insertStep(address) {
-        address.id = 'ADD0000002'
-        let id = this.loopInsertAddress(address,0)
+    insertStep(personal,address) {
+        var datetime = new Date();
+        console.log(datetime.toISOString().slice(0,10));
+        let dateForUpdate = datetime.toISOString().slice(0,10)
+        personal.birthday = this.formatData('TO-INSERT',personal.birthday)
+        personal.card_issued = this.formatData('TO-INSERT',personal.card_issued)
+        personal.card_expipe = this.formatData('TO-INSERT',personal.card_expipe)
+        personal.update =  dateForUpdate
+
+
+        let id = this.loopInsertAddress(personal,address)
+    }
+
+
+    formatData(type,date){
+        if(type === 'TO-INSERT'){
+            //16/01/2020
+            let temp = date.split('/')
+            let day = temp[0]
+            let month = temp[1]
+            let year = temp[2]
+            let format = `${year}-${month}-${day}` //2020-01-16
+            return format
+        }
+        if(type === 'TO-DISPLAY'){
+            //2563-01-16
+            let temp = date.split('-')
+            let day = temp[0]
+            let month = temp[1]
+            let year = temp[2]
+            let format = `${day}-${month}-${year}` //16/01/2563
+            return format
+        }
     }
 }
 

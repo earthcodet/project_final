@@ -73,25 +73,23 @@ let dataTest = {
   'amphur_name': 'test',
   'province_name': 'test'
 }
-//format yyyy-mm-dd
-let personalTest = {}
-personalTest.id = ''
-personalTest.address_id = ''
-personalTest.title = ''
-personalTest.type = ''
-personalTest.name = ''
-personalTest.surname = ''
-personalTest.nationality = ''
-personalTest.race = ''
-personalTest.birthday = ''
-personalTest.personal_id = ''
-personalTest.card_issued = ''
-personalTest.card_expipe = ''
-personalTest.phone = ''
-personalTest.fax = ''
-personalTest.update = ''
-
-// webService.insertStep(dataTest)
+let personalTest = {
+  'id':'',
+  'address_id':'test',
+  'title':'นาย',
+  'type':'บุคคลธรรมดา',
+  'name':'ทดสอบ',
+  'surname':'หาบัค',
+  'nationality':'ไทย',
+  'race':'ไทย',
+  'birthday':'24/04/2541',
+  'personal_id':'0124455781255',
+  'card_issued':'10/01/2545',
+  'card_expipe':'10/01/2563',
+  'phone':'0625478965',
+  'fax':'213546987'
+}
+// webService.insertStep(personalTest, dataTest)
 app.listen(port, () => {
   console.log(`App listening on ${port}`);
 });
