@@ -20,11 +20,6 @@ app.use(session({
     }
   }))
 
-//   if (app.get('env') === 'production') {
-//     app.set('trust proxy', 1) // trust first proxy
-//     sess.cookie.secure = true // serve secure cookies
-//   } 
-
 const redirectLogin = (req, res, next) => {
     if(!req.session.userId){
         res.redirect('/login')
@@ -116,7 +111,7 @@ router.get('/report/01', redirectLogin, function (req, res) {
     res.sendFile(path.join(__dirname + '/views/html/report/report_crematory.html'));
 });
 router.get('/report/02', redirectLogin, function (req, res) {
-    res.sendFile(path.join(__dirname + '/views/html/report/report_crematory.html'));
+    res.sendFile(path.join(__dirname + '/views/html/report/report_summary.html'));
 });
 
 //เมนูแจ้งเตือน
@@ -124,9 +119,6 @@ router.get('/notfication', redirectLogin, function (req, res) {
     res.sendFile(path.join(__dirname + '/views/html/notfication/request.html'));
 });
 
-router.get('/logout', redirectLogin, function (req, res) {
-    res.sendFile(path.join(__dirname + '/views/html/notfication/request.html'));
-});
 //ทำให้ css กับ js ใช้ได้
 app.use(express.static(__dirname + '/views'));
 
