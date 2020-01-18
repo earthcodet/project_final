@@ -34,7 +34,7 @@ function set_cal(ele) {
         }
       }
     },
-    dateFormat: "yy/mm/dd", //กำหนดรูปแบบวันที่เป็น วัน/เดือน/ปี
+    dateFormat: "dd/mm/yy", //กำหนดรูปแบบวันที่เป็น วัน/เดือน/ปี
     changeMonth: true, //กำหนดให้เลือกเดือนได้
     changeYear: true, //กำหนดให้เลือกปีได้
     showOtherMonths: true //กำหนดให้แสดงวันของเดือนก่อนหน้าได้
