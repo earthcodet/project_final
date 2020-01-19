@@ -31,7 +31,7 @@ class PersonalDAO {
     }
     insertAddress(address){
         return new Promise((resolve, reject) => {
-            let value  = `'${address.id}', '${address.home_number}', '${address.moo}', '${address.trxk}', '${address.sxy}', '${address.buildind}', '${address.road}', '${address.district_name}', '${address.amphur_name}', '${address.province_name}'`
+            let value  = `'${address.id}', '${address.home_number}', '${address.moo}', '${address.trxk}', '${address.sxy}', '${address.building}', '${address.road}', '${address.district_name}', '${address.amphur_name}', '${address.province_name}'`
             let column = 'ADDRESS_ID, ADDRESS_HOME_NUMBER, ADDRESS_MOO, ADDRESS_TRXK, ADDRESS_SXY, ADDRESS_BUILDING, ADDRESS_ROAD, DISTRICT_NAME, AMPHUR_NAME, PROVINCE_NAME'
             let query = `INSERT INTO address(${column}) VALUES (${value})`
             con.query(query, function (err, result) {

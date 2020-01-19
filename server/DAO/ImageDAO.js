@@ -8,12 +8,18 @@ var con = mysql.createConnection({
 
 class ImageDAO {
     insertImage(image) {
+        console.log(image)
         return new Promise((resolve, reject) => {
-            let clounm = `IMAGE_NAME, IMAGE_TYPE, IMAGE_DATA`
-            let value  = `'${image.name}', '${image.type}', '${image.data}'`
-            let query = `INSERT INTO image(${clounm}) VALUES (${value})`
-            con.query(query, function (err, result) {
+            var query = "INSERT INTO `image` SET ?"
+                ,
+                values = {
+                    IMAGE_NAME: image.name,
+                    IMAGE_TYPE:image.type,
+                    IMAGE_DATA:image.data
+                };
+            con.query(query, values, function (err, result) {
                 if (err) {
+                    console.log('image เอง')
                     console.log(err.code) 
                 }
                 return resolve(result)

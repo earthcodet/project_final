@@ -75,12 +75,12 @@ class service {
                 PersonalDAOObj.getMaxIdProsonal().then((data) => {
                     if (data[0].maxId === null) {
                         let peronalId = "P000001"
-                        console.log(peronalId)
+                        console.log('getNewId >'+peronalId)
                         return resolve(peronalId)
                     } else {
                         let maxId = data[0].maxId
                         let peronalId = this.newId(maxId, 'PERSONAL')
-                        console.log(peronalId)
+                        console.log('getNewId >' + peronalId)
                         return resolve(peronalId)
                     }
                 })
@@ -90,12 +90,12 @@ class service {
                 PersonalDAOObj.getMaxIdAddress().then((data) => {
                     if (data[0].maxId === null) {
                         let addressId = 'ADD0000001'
-                        console.log(addressId)
+                        console.log('getNewId >'+addressId)
                         return resolve(addressId)
                     } else {
                         let maxId = data[0].maxId
                         let addressId = this.newId(maxId, 'ADDRESS')
-                        console.log(addressId)
+                        console.log('getNewId >'+addressId)
                         return resolve(addressId)
                     }
                 })
@@ -127,13 +127,15 @@ class service {
         })
     }
     loopInsertPersonal(personal, imageFile) {
+        return new Promise((resolve, reject) => {
         this.getNewId('PERSONAL').then((id) => {
             personal.id = id
             this.insertPersonal(personal).then((data) => {
                 if (data) {
-                    console.log('personal insert !!')
+                    console.log(`loopInsertPersonal > personal insert !! ${data}`)
+                    imageFile.name  = personal.id
                     this.insertImage(imageFile).then((data) => {
-                        console.log(`image insert !!`)
+                        console.log(`loopInsertPersonal >image insert !! ${data}`)
                         if (data) {
                             return resolve(true)
                         } else {
@@ -145,8 +147,10 @@ class service {
                 }
             })
         })
+        })
     }
     loopInsertAddress(personal, address, imageFile) {
+        return new Promise((resolve, reject) => {
         this.getNewId('ADDRESS').then((id) => {
             address.id = id
             this.insertAddress(address).then((data) => {
@@ -159,12 +163,13 @@ class service {
                             return resolve(false)
                         }
                     })
-                    console.log('address insert !!')
+                    console.log(`loopInsertAddress => address insert !! ${data}`)
                 } else {
                     this.loopInsertAddress(address)
                 }
             })
         })
+    })
     }
 
     formatData(type, date) {
@@ -201,18 +206,18 @@ class service {
             })
         })
     }
-    insertStep(personal, address) {
-        var datetime = new Date();
+    insertStep(personal, address, image) {
+            var datetime = new Date();
         console.log(datetime.toISOString().slice(0, 10));
         let dateForUpdate = datetime.toISOString().slice(0, 10)
         personal.birthday = this.formatData('TO-INSERT', personal.birthday)
         personal.card_issued = this.formatData('TO-INSERT', personal.card_issued)
         personal.card_expipe = this.formatData('TO-INSERT', personal.card_expipe)
         personal.update = dateForUpdate
-
         return new Promise((resolve, reject) => {
-            this.loopInsertAddress(personal, address).then((data) => {
+            this.loopInsertAddress(personal, address,image).then((data) => {
                 if (data) {
+                    console.log(`main > ${data}`)
                     return resolve(true)
                 } else {
                     return resolve(false)

@@ -1,19 +1,22 @@
-var express = require('express')
+const express = require('express')
+const bodyParser = require("body-parser")
+const cors = require('cors')
+const fileUpload = require('express-fileupload')
 const port = 5000
+//DAO
 const WebDAO = require("./DAO/WebDAO")
 const LoginDAO = require('./DAO/UserDAO')
-const PersonalDAO = require('./DAO/PersonalDAO')
-const PersonalDAOObj = new PersonalDAO()
 const LoginDAOObj = new LoginDAO()
 const WebDAOObj = new WebDAO();
-
-
-//Service
 const service = require('./Service/webService')
 const webService = new service()
-const cors = require('cors')
+
 var app = express();
 app.use(cors())
+app.use(bodyParser.json({ limit: '50mb' }))
+app.use(fileUpload())
+
+
 app.get('/user/:username/:password', (req, res) => {
   console.log(req.params.username)
   console.log(req.params.password)
@@ -70,8 +73,14 @@ app.get('/get/image/:prsonalId', (req, res) =>{
     }
   })
 })
-app.get('/insert/personal', (req, res) =>{
-  // webService.insertStep(req.body.insert[0], req.body.insert[1], req.body)
+app.post('/insert/personal', (req, res) =>{
+  var obj = JSON.parse(req.body.personal); 
+  var datafile = req.files.image.data
+  obj[2].data = datafile
+  webService.insertStep(obj[0],obj[1], obj[2]).then((data) =>{
+    console.log(data)
+    res.json(data)
+  })
 })
 let dataTest = {
   'id': '',
@@ -79,7 +88,7 @@ let dataTest = {
   'moo': 'test',
   'trxk': 'test',
   'sxy': 'test',
-  'buildind': 'test',
+  'building': 'test',
   'road': 'test',
   'district_name': 'test',
   'amphur_name': 'test',
