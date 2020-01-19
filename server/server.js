@@ -75,8 +75,10 @@ app.get('/get/image/:prsonalId', (req, res) =>{
 })
 app.post('/insert/personal', (req, res) =>{
   var obj = JSON.parse(req.body.personal); 
-  var datafile = req.files.image.data
-  obj[2].data = datafile
+  if(req.files != null){
+    var datafile = req.files.image.data
+    obj[2].data = datafile
+  }
   webService.insertStep(obj[0],obj[1], obj[2]).then((data) =>{
     console.log(data)
     res.json(data)
