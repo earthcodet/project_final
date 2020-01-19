@@ -1,5 +1,7 @@
 const PersonalDAO = require('../DAO/PersonalDAO')
 const PersonalDAOObj = new PersonalDAO()
+const ImageDAO = require('../DAO/ImageDAO')
+const ImageDAOObj = new ImageDAO()
 class service {
     digit(v) {
         return Math.pow(10, Math.ceil(Math.log10(v)));
@@ -36,8 +38,6 @@ class service {
         } else {
             //ADDRESS
             //format ADD0000001
-            //100 000 0
-            //0 000 001
             let sight = 'ADD'
             let num = parseInt(oldId.slice(3))
             num += 1
@@ -73,11 +73,11 @@ class service {
         if (type === 'PERSONAL') {
             return new Promise((resolve, reject) => {
                 PersonalDAOObj.getMaxIdProsonal().then((data) => {
-                    if(data[0].maxId  === null){
+                    if (data[0].maxId === null) {
                         let peronalId = "P000001"
                         console.log(peronalId)
                         return resolve(peronalId)
-                    }else{
+                    } else {
                         let maxId = data[0].maxId
                         let peronalId = this.newId(maxId, 'PERSONAL')
                         console.log(peronalId)
@@ -88,11 +88,11 @@ class service {
         } else {
             return new Promise((resolve, reject) => {
                 PersonalDAOObj.getMaxIdAddress().then((data) => {
-                    if(data[0].maxId === null){
+                    if (data[0].maxId === null) {
                         let addressId = 'ADD0000001'
                         console.log(addressId)
                         return resolve(addressId)
-                    }else{
+                    } else {
                         let maxId = data[0].maxId
                         let addressId = this.newId(maxId, 'ADDRESS')
                         console.log(addressId)
@@ -126,25 +126,39 @@ class service {
             })
         })
     }
-    loopInsertPersonal(personal) {
+    loopInsertPersonal(personal, imageFile) {
         this.getNewId('PERSONAL').then((id) => {
             personal.id = id
             this.insertPersonal(personal).then((data) => {
                 if (data) {
                     console.log('personal insert !!')
+                    this.insertImage(imageFile).then((data) => {
+                        console.log(`image insert !!`)
+                        if (data) {
+                            return resolve(true)
+                        } else {
+                            return resolve(false)
+                        }
+                    })
                 } else {
                     this.loopInsertPersonal(personal)
                 }
             })
         })
     }
-    loopInsertAddress(personal, address) {
+    loopInsertAddress(personal, address, imageFile) {
         this.getNewId('ADDRESS').then((id) => {
-                address.id = id
+            address.id = id
             this.insertAddress(address).then((data) => {
                 if (data) {
-                    personal.address_id = address.id  
-                    this.loopInsertPersonal(personal)
+                    personal.address_id = address.id
+                    this.loopInsertPersonal(personal, imageFile).then((data) => {
+                        if (data) {
+                            return resolve(true)
+                        } else {
+                            return resolve(false)
+                        }
+                    })
                     console.log('address insert !!')
                 } else {
                     this.loopInsertAddress(address)
@@ -152,22 +166,9 @@ class service {
             })
         })
     }
-    insertStep(personal,address) {
-        var datetime = new Date();
-        console.log(datetime.toISOString().slice(0,10));
-        let dateForUpdate = datetime.toISOString().slice(0,10)
-        personal.birthday = this.formatData('TO-INSERT',personal.birthday)
-        personal.card_issued = this.formatData('TO-INSERT',personal.card_issued)
-        personal.card_expipe = this.formatData('TO-INSERT',personal.card_expipe)
-        personal.update =  dateForUpdate
 
-
-        let id = this.loopInsertAddress(personal,address)
-    }
-
-
-    formatData(type,date){
-        if(type === 'TO-INSERT'){
+    formatData(type, date) {
+        if (type === 'TO-INSERT') {
             //16/01/2020
             let temp = date.split('/')
             let day = temp[0]
@@ -176,7 +177,7 @@ class service {
             let format = `${year}-${month}-${day}` //2020-01-16
             return format
         }
-        if(type === 'TO-DISPLAY'){
+        if (type === 'TO-DISPLAY') {
             //2563-01-16
             let temp = date.split('-')
             let day = temp[0]
@@ -185,6 +186,39 @@ class service {
             let format = `${day}-${month}-${year}` //16/01/2563
             return format
         }
+    }
+    getImageByPersonalId(name) {
+        return new Promise((resolve, reject) => {
+            ImageDAOObj.getImageByImage(name).then((data) => {
+                return resolve(data)
+            })
+        })
+    }
+    insertImage(image) {
+        return new Promise((resolve, reject) => {
+            ImageDAOObj.insertImage(image).then((data) => {
+                return resolve(true)
+            })
+        })
+    }
+    insertStep(personal, address) {
+        var datetime = new Date();
+        console.log(datetime.toISOString().slice(0, 10));
+        let dateForUpdate = datetime.toISOString().slice(0, 10)
+        personal.birthday = this.formatData('TO-INSERT', personal.birthday)
+        personal.card_issued = this.formatData('TO-INSERT', personal.card_issued)
+        personal.card_expipe = this.formatData('TO-INSERT', personal.card_expipe)
+        personal.update = dateForUpdate
+
+        return new Promise((resolve, reject) => {
+            this.loopInsertAddress(personal, address).then((data) => {
+                if (data) {
+                    return resolve(true)
+                } else {
+                    return resolve(false)
+                }
+            })
+        })
     }
 }
 

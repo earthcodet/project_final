@@ -61,6 +61,18 @@ app.get('/mytest/v1', (req, res) => {
     }
   })
 })
+app.get('/get/image/:prsonalId', (req, res) =>{
+  webService.getImageByPersonalId(req.params.personalId).then((data) =>{
+    if(data != null){
+      res.json(data)
+    }else {
+      res.sendStatus(404)
+    }
+  })
+})
+app.get('/insert/personal', (req, res) =>{
+  // webService.insertStep(req.body.insert[0], req.body.insert[1], req.body)
+})
 let dataTest = {
   'id': '',
   'home_number': 'test',

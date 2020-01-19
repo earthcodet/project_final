@@ -12,7 +12,7 @@ class PersonalDAO {
             let query = `SELECT MAX(PERSONAL_ID) As 'maxId' FROM personal`
             con.query(query, function (err, result) {
                 if (err) {
-                    throw err   
+                    console.log(err.code) 
                 }
                 return resolve(result)
             })
@@ -23,7 +23,7 @@ class PersonalDAO {
             let query = `SELECT MAX(ADDRESS_ID) As 'maxId' FROM address`
             con.query(query, function (err, result) {
                 if (err) {
-                    throw err
+                    console.log(err.code)
                 }
                 return resolve(result)
             })
