@@ -31,14 +31,16 @@ class PersonalDAO {
     }
     getPersonalId(personalId){
         return new Promise((resolve, reject) => {
-            let query = `SELECT PERSONAL_PERSONAL_ID FROM personal WHERE PERSONAL_PERSONAL_ID='${personalId}'`
+            let query = `SELECT PERSONAL_PERSONAL_ID As pId FROM personal WHERE PERSONAL_PERSONAL_ID='${personalId}'`
             con.query(query, function (err, result) {
                 if (err) {
                     console.log(err.code)
                 }
-                if(result == null){
+                if(result.length === 0){
+                    console.log(`DAO status => ${false}`)
                     return resolve(false)
                 }else{
+                    console.log(`DAO status => ${true}`)
                     return resolve(true)
                 }
             })

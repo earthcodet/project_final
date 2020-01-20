@@ -74,9 +74,8 @@ app.get('/get/image/:prsonalId', (req, res) =>{
   })
 })
 app.get('/get/personalId/:personalId', (req, res) =>{
-  console.log(req.params.personalId)
   webService.getPersonalId(req.params.personalId).then((data) =>{
-    console.log(data)
+    console.log(`servar status => ${data}`)
     if(data != null){
       res.json(data)
     }else {
