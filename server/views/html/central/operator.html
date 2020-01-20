@@ -114,17 +114,21 @@
                                     <option value="นิติบุคคล">นิติบุคคล</option>
                                 </select>
                                 <a style="margin-left:1vw;">สัญชาติ :</a>
-                                <select id="nationality" style="width: 11vw">
-                                    <option value="" hidden>เลือก...</option>
-                                    <option value="ไทย">ไทย</option>
-                                    <option value="อเมริกา">อเมริกา</option>
-                                </select>
+                                <input list='list-nationality' id="nationality" style="width: 11vw">
+                                    <datalist id="list-nationality">
+                                        <option value="" hidden>เลือก...</option>
+                                        <option value="ไทย">ไทย</option>
+                                        <option value="อเมริกา">อเมริกา</option>
+                                    </datalist>
+                                </input>
                                 <a style="margin-left: 1vw;">เชื้อชาติ :</a>
-                                <select id="race" style="width: 11vw;">
-                                    <option value="" hidden>เลือก...</option>
-                                    <option value="ไทย">ไทย</option>
-                                    <option value="อเมริกา">อเมริกา</option>
-                                </select>
+                                <input list='list-race' id="race" style="width: 11vw;">
+                                    <datalist id="list-race">
+                                        <option value="" hidden>เลือก...</option>
+                                        <option value="ไทย">ไทย</option>
+                                        <option value="อเมริกา">อเมริกา</option>
+                                    </datalist>
+                                </input>
                                 <br>
                                 <!-- row 2 -->
                                 <a id='titleNameTopic' style="margin-left: 2vw;">คำนำหน้าชื่อ :</a>
