@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="../js/js22.js"></script>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.css">
     <link rel="stylesheet" href="../../css/css2.css">
     <link href="../../css/fonts.css" rel="stylesheet">
 </head>
@@ -16,12 +16,12 @@
     <!-- เมนูด้านบน -->
     <div class="w3-top icon-bar">
         <a id="addMenu" class="exit " onclick="addTEST()"><i class="fa fa-plus-square"> เพิ่ม</i></a>
-        <a id="editMenu" onclick="editTEST()" class="exit disableds"><i class="fa fa-pencil"> แก้ไข</i></a>
-        <a id="saveMenu" onclick="insertTEST()" class="exit disableds"><i class="fa fa-floppy-o"> บันทึก</i></a>
+        <a id="editMenu" onclick="editTEST()" class="exit disableds"><i class="fa fa-pencil-alt"> แก้ไข</i></a>
+        <a id="saveMenu" onclick="insertTEST()" class="exit disableds"><i class="fa fa-save"> บันทึก</i></a>
         <a id="restoreMenu" onclick="restoreTEST()" class="exit disableds"><i class="fa fa-reply"> เรียกคืน</i></a>
-        <a id="deleteMenu" onclick="deleteTEST()" class="exit disableds"><i class="fa fa-close"> ยกเลิก</i></a>
+        <a id="deleteMenu" onclick="deleteTEST()" class="exit disableds"><i class="fa fa-times"> ยกเลิก</i></a>
         <!-- <a><i class="fa fa-search"> ค้นหา</i></a> -->
-        <a id="exitMenu" onclick="exitTEST()" class="exit" style="float: right;width: 17%;"><i class="fa fa-sign-out">
+        <a id="exitMenu" onclick="exitTEST()" class="exit" style="float: right;width: 17%;"><i class="fa fa-sign-out-alt">
                 ออกจากระบบ</i></a>
     </div>
     <!-- เมนูด้านข้าง -->
@@ -30,9 +30,9 @@
             <img src="../../img/img1.jpg" style="width:92%;">
         </a>
         <br>
-        <button class="dropdown-btn"><b>ระบบงานคำขอ </b><i class="fa fa-caret-down"></i></button>
+        <button class="dropdown-btn select-active"><b>ระบบงานคำขอ </b><i class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
-            <a href="">- ค้นหา/แก้ไข</a>
+           <a href="searchRequest.html">- ค้นหา/แก้ไข</a>
             <a href="request_public_sell.html">- ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
             <a href="request_public_hawk.html">- ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
             <a href="request_area_more_sell.html">- ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
@@ -40,7 +40,7 @@
             <a href="request_area_less_sell.html">- หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
             <a href="request_area_less_correct.html">- หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
             <a href="request_market.html">- ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
-            <a href="request_health_danger.html" style="background-color: rgb(143, 141, 141);">-
+            <a href="request_health_danger.html" class ="dropdown-active">-
                 กิจการที่เป็นอันตรายต่อสุขภาพ</a>
             <a href="request_crematory.html">- กิจการฌาปณสถาน</a>
 
@@ -457,5 +457,5 @@
 <script src="../../js/controlTest.js"></script>
 <script src="../../js/disable.js"></script>
 <script src="../../js/sweet2.js"></script>
-
+<script src="../../js/utilities.js"></script>
 </html>

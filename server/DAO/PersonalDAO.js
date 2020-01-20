@@ -29,6 +29,23 @@ class PersonalDAO {
             })
         })
     }
+    getPersonalId(personalId){
+        return new Promise((resolve, reject) => {
+            let query = `SELECT PERSONAL_PERSONAL_ID As pId FROM personal WHERE PERSONAL_PERSONAL_ID='${personalId}'`
+            con.query(query, function (err, result) {
+                if (err) {
+                    console.log(err.code)
+                }
+                if(result.length === 0){
+                    console.log(`DAO status => ${false}`)
+                    return resolve(false)
+                }else{
+                    console.log(`DAO status => ${true}`)
+                    return resolve(true)
+                }
+            })
+        })
+    }
     insertAddress(address){
         return new Promise((resolve, reject) => {
             let value  = `'${address.id}', '${address.home_number}', '${address.moo}', '${address.trxk}', '${address.sxy}', '${address.building}', '${address.road}', '${address.district_name}', '${address.amphur_name}', '${address.province_name}'`

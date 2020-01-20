@@ -52,7 +52,7 @@ function preInsert() {
     inPeronal.nationality = document.getElementById('nationality').value
     inPeronal.race = document.getElementById('race').value
     inPeronal.birthday = document.getElementById('datepicker3').value
-    inPeronal.birthday = document.getElementById('id').value
+    inPeronal.personal_id = document.getElementById('id').value
     inPeronal.card_issued = document.getElementById('datepicker1').value
     inPeronal.card_expipe = document.getElementById('datepicker2').value
     inPeronal.phone = document.getElementById('phone').value
@@ -64,7 +64,18 @@ function preInsert() {
     console.log(arrInsert)
     console.log(fileImage)
 }
-
+function duplicateId(){
+    return new Promise((resolve, reject) => {
+        axios.get('http://localhost:5000/get/personalId/'+personal).then((data) =>{
+            return resolve(data.data)
+        })
+    })
+}    
+function checkId(value){
+    if(value.length === 13) {
+        duplicateIdId(value)
+    }
+}
 function uploadImage(event) {
     var cancelButton = document.getElementById('cancelImage')
     var target = event.target || event.srcElement;

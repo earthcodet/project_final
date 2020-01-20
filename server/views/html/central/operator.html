@@ -7,12 +7,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- <!-- <script src="../js/js22.js"></script> --> -->
 
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
     <link rel="stylesheet" href="../../css/css2.css">
     <link href="../../css/fonts.css" rel="stylesheet">
+s
     <link rel="stylesheet" href="../../css/jquery-ui-1.12.1.custom/jquery-ui.css">
-    <!-- <link rel="stylesheet" href="../../css/utilities.css"> -->
+
+    <!-- topmenu สำหรับหน้านี้เท่านั้น -->
     <link rel="stylesheet" href="../../css/topmenu.css">
+
+    <!-- icon -->
     <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.css">
 </head>
 
@@ -62,9 +65,9 @@
             <a href="#"></a>
             <a href="#"></a>
         </div>
-        <button class="dropdown-btn"><b>ข้อมูลส่วนกลาง </b><i class="fa fa-caret-down"></i></button>
-        <div class="dropdown-container">
-            <a href="operator.html" style="background-color: rgb(143, 141, 141);">- ข้อมูลผู้ประกอบการ</a>
+        <button class="dropdown-btn select-active "><b>ข้อมูลส่วนกลาง </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container " >
+            <a href="operator.html" class='dropdown-active '>- ข้อมูลผู้ประกอบการ</a>
             <a href="02.html">- ข้อมูลการจดใบอนุญาต</a>
             <a href="03.html">- โอนใบอนุญาต</a>
         </div>
@@ -94,7 +97,7 @@
         <fieldset disabled id="disable" style="border: 0;padding: 0;margin: 0;">
             <div class="main">
                 <header class="w3-top2">
-                    <h1 style="font-size:2.8vh;margin-left: 25px;padding: 2px;"> กิจการที่เป็นอันตรายต่อสุขภาพ</h1>
+                    <h1 style="font-size:2.8vh;margin-left: 25px;padding: 2px;"> ผู้ประกอบการ</h1>
                 </header>
                 <a>
                     <div class="box">
@@ -137,7 +140,8 @@
                                 <a style="margin-left: 1.8vw;">เลขประจำตัว :</a>
                                 <input type="text" id="id" name="" placeholder="" style="width: 11vw"
                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                    maxlength="13">
+                                    maxlength="13"
+                                    onkeyup="console.log(this.value)">
                                 <a style="margin-left:0.9vw;">ออกเมื่อ :</a>
                                 <input type="text" id="datepicker1" placeholder="" style="width: 11vw">
                                 <a style="margin-left: 0.8vw;">หมดอายุ :</a>
@@ -205,9 +209,9 @@
                                         style="width:5vw ">แทน</button>
 
                                     <button type="button" class="delete" id="cancelImage"
-                                        style="width:5vw;margin-left: 1vw;" onclick="deleteImageOne()"> ลบ </button>
+                                        style="width:5vw;margin-left: 0.5vw;" onclick="deleteImageOne()"> ลบ </button>
 
-                                    <button type="button" id="webcam" style="width:5vw;margin-left: 1vw;"
+                                    <button type="button" id="webcam" style="width:5.5vw;margin-left: 0.5vw;"
                                         disabled>ถ่ายภาพ
                                     </button>
                                 </div>
@@ -223,13 +227,14 @@
 
 
 </body>
-<script src="../../js/js22.js"></script>
+
 <script src="../../js/operator.js/operator.js"></script>
 <script src="../../js/operator.js/menuOperator.js"></script>
 <script src="../../js/disable.js"></script>
 <script src="../../js/sweet2.js"></script>
 <script src="../../js/jquery.js"></script>
 <script src="../../js/jquery-ui.js"></script>
+<script src="../../js/js22.js"></script>
 <script src="../../js/dateth.js"></script>
 <script src="../../node_modules/axios/dist/axios.min.js"></script>
 </html>
