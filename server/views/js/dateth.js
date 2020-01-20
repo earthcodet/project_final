@@ -12,7 +12,7 @@ $(function() {
   // กรณีใช้แบบ input
   $("#datepicker1").datetimepicker({
     timepicker: false,
-    format: "d-m-Y", // กำหนดรูปแบบวันที่ ที่ใช้ เป็น 00-00-0000
+    format: "d/m/Y", // กำหนดรูปแบบวันที่ ที่ใช้ เป็น 00-00-0000
     lang: "th", // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
     onSelectDate: function(dp, $input) {
       var yearT = new Date(dp).getFullYear();
@@ -26,7 +26,7 @@ $(function() {
   $("#datepicker1").on("mouseenter mouseleave", function(e) {
     var dateValue = $(this).val();
     if (dateValue != "") {
-      var arr_date = dateValue.split("-"); // ถ้าใช้ตัวแบ่งรูปแบบอื่น ให้เปลี่ยนเป็นตามรูปแบบนั้น
+      var arr_date = dateValue.split("/"); // ถ้าใช้ตัวแบ่งรูปแบบอื่น ให้เปลี่ยนเป็นตามรูปแบบนั้น
       // ในที่นี้อยู่ในรูปแบบ 00-00-0000 เป็น d-m-Y  แบ่งด่วย - ดังนั้น ตัวแปรที่เป็นปี จะอยู่ใน array
       //  ตัวที่สอง arr_date[2] โดยเริ่มนับจาก 0
       if (e.type == "mouseenter") {
