@@ -75,7 +75,7 @@ class service {
                 PersonalDAOObj.getMaxIdProsonal().then((data) => {
                     if (data[0].maxId === null) {
                         let peronalId = "P000001"
-                        console.log('getNewId >'+peronalId)
+                        console.log('getNewId >' + peronalId)
                         return resolve(peronalId)
                     } else {
                         let maxId = data[0].maxId
@@ -90,28 +90,28 @@ class service {
                 PersonalDAOObj.getMaxIdAddress().then((data) => {
                     if (data[0].maxId === null) {
                         let addressId = 'ADD0000001'
-                        console.log('getNewId >'+addressId)
+                        console.log('getNewId >' + addressId)
                         return resolve(addressId)
                     } else {
                         let maxId = data[0].maxId
                         let addressId = this.newId(maxId, 'ADDRESS')
-                        console.log('getNewId >'+addressId)
+                        console.log('getNewId >' + addressId)
                         return resolve(addressId)
                     }
                 })
             })
         }
     }
-    getPersonalId(id){
+    getPersonalId(id) {
         return new Promise((resolve, reject) => {
-            PersonalDAOObj.getPersonalId(id).then((data) =>{
-                console.log(`data`)
-                // if(data[0].PERSONAL_PERSONAL_ID == null){
-                //     return resolve(false)
-                // }else{
-                //     return resolve(true)
-                // }
-                return resolve(true)
+            PersonalDAOObj.getPersonalId(id).then((data) => {
+                console.log(`service status => ${data}`)
+                if (data) {
+                    return resolve(true)
+                } else {
+                    return resolve(false)
+                }
+
             })
         })
     }
@@ -141,48 +141,48 @@ class service {
     }
     loopInsertPersonal(personal, imageFile) {
         return new Promise((resolve, reject) => {
-        this.getNewId('PERSONAL').then((id) => {
-            personal.id = id
-            this.insertPersonal(personal).then((data) => {
-                if (data) {
-                    console.log(`loopInsertPersonal > personal insert !! ${data}`)
-                    imageFile.name  = personal.id
-                    this.insertImage(imageFile).then((data) => {
-                        console.log(`loopInsertPersonal >image insert !! ${data}`)
-                        if (data) {
-                            return resolve(true)
-                        } else {
-                            return resolve(false)
-                        }
-                    })
-                } else {
-                    this.loopInsertPersonal(personal)
-                }
+            this.getNewId('PERSONAL').then((id) => {
+                personal.id = id
+                this.insertPersonal(personal).then((data) => {
+                    if (data) {
+                        console.log(`loopInsertPersonal > personal insert !! ${data}`)
+                        imageFile.name = personal.id
+                        this.insertImage(imageFile).then((data) => {
+                            console.log(`loopInsertPersonal >image insert !! ${data}`)
+                            if (data) {
+                                return resolve(true)
+                            } else {
+                                return resolve(false)
+                            }
+                        })
+                    } else {
+                        this.loopInsertPersonal(personal)
+                    }
+                })
             })
-        })
         })
     }
     loopInsertAddress(personal, address, imageFile) {
         return new Promise((resolve, reject) => {
-        this.getNewId('ADDRESS').then((id) => {
-            address.id = id
-            this.insertAddress(address).then((data) => {
-                if (data) {
-                    personal.address_id = address.id
-                    this.loopInsertPersonal(personal, imageFile).then((data) => {
-                        if (data) {
-                            return resolve(true)
-                        } else {
-                            return resolve(false)
-                        }
-                    })
-                    console.log(`loopInsertAddress => address insert !! ${data}`)
-                } else {
-                    this.loopInsertAddress(address)
-                }
+            this.getNewId('ADDRESS').then((id) => {
+                address.id = id
+                this.insertAddress(address).then((data) => {
+                    if (data) {
+                        personal.address_id = address.id
+                        this.loopInsertPersonal(personal, imageFile).then((data) => {
+                            if (data) {
+                                return resolve(true)
+                            } else {
+                                return resolve(false)
+                            }
+                        })
+                        console.log(`loopInsertAddress => address insert !! ${data}`)
+                    } else {
+                        this.loopInsertAddress(address)
+                    }
+                })
             })
         })
-    })
     }
 
     formatData(type, date) {
@@ -220,7 +220,7 @@ class service {
         })
     }
     insertStep(personal, address, image) {
-            var datetime = new Date();
+        var datetime = new Date();
         console.log(datetime.toISOString().slice(0, 10));
         let dateForUpdate = datetime.toISOString().slice(0, 10)
         personal.birthday = this.formatData('TO-INSERT', personal.birthday)
@@ -228,7 +228,7 @@ class service {
         personal.card_expipe = this.formatData('TO-INSERT', personal.card_expipe)
         personal.update = dateForUpdate
         return new Promise((resolve, reject) => {
-            this.loopInsertAddress(personal, address,image).then((data) => {
+            this.loopInsertAddress(personal, address, image).then((data) => {
                 if (data) {
                     console.log(`main > ${data}`)
                     return resolve(true)
