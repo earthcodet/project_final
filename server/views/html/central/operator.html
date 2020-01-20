@@ -140,7 +140,8 @@ s
                                 <a style="margin-left: 1.8vw;">เลขประจำตัว :</a>
                                 <input type="text" id="id" name="" placeholder="" style="width: 11vw"
                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                    maxlength="13">
+                                    maxlength="13"
+                                    onkeyup="console.log(this.value)">
                                 <a style="margin-left:0.9vw;">ออกเมื่อ :</a>
                                 <input type="text" id="datepicker1" placeholder="" style="width: 11vw">
                                 <a style="margin-left: 0.8vw;">หมดอายุ :</a>

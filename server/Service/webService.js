@@ -102,6 +102,19 @@ class service {
             })
         }
     }
+    getPersonalId(id){
+        return new Promise((resolve, reject) => {
+            PersonalDAOObj.getPersonalId(id).then((data) =>{
+                console.log(`data`)
+                // if(data[0].PERSONAL_PERSONAL_ID == null){
+                //     return resolve(false)
+                // }else{
+                //     return resolve(true)
+                // }
+                return resolve(true)
+            })
+        })
+    }
     insertAddress(address) {
         return new Promise((resolve, reject) => {
             PersonalDAOObj.insertAddress(address).then((data) => {

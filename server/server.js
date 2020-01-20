@@ -73,6 +73,17 @@ app.get('/get/image/:prsonalId', (req, res) =>{
     }
   })
 })
+app.get('/get/personalId/:personalId', (req, res) =>{
+  console.log(req.params.personalId)
+  webService.getPersonalId(req.params.personalId).then((data) =>{
+    console.log(data)
+    if(data != null){
+      res.json(data)
+    }else {
+      res.sendStatus(404)
+    }
+  })
+})
 app.post('/insert/personal', (req, res) =>{
   var obj = JSON.parse(req.body.personal); 
   if(req.files != null){
