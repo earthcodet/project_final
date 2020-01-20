@@ -210,6 +210,11 @@ button.delete{
     background-color: red;
     color: #FFFF;
 }
+button.image{
+    width: 100%;
+    border-radius: .5vw;
+    height: auto;
+}
 button:disabled{
     background-color: gray;
     pointer-events: none;

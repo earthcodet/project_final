@@ -337,8 +337,9 @@
                         </button>
                         <br>
                         <br>
-                        <div id='outputImage' style="height: 40vh; overflow-y:auto; border: 0.3vh solid black;">
+                        <div id='outputImage' style="height: 40vh ;overflow-y:auto; border: 0.3vh solid black;">
                         </div>
+                        <!-- <div id='outputImage' style="height: 40vh;overflow-y:auto ; border: 0.3vh solid black;"> -->
                     </div>
                 </div><br>
                 <!-- อนุญาต -->
@@ -350,6 +351,7 @@
                     <input type="radio" name="confirm" id="confirm" onClick="show_confirm(this.value);" value="2">
                     <a> ยืนยันคำขอต่ออายุ </a>
                     <br>
+                    <a>
                     <div class="row" id="boxConfirm" style="width: 80%;margin-left: 5vw;display: none;">
                         <div class="col" style="width: 33.33%;">
                             เลขที่คำขอ : <input readonly>
@@ -369,6 +371,7 @@
                             ค่าปรับ : <input>
                         </div>
                     </div>
+                </a>
                     <br>
                     <br>
                     <div style="margin-left: 8vw;">
@@ -472,5 +475,5 @@
 <script src="../../js/controlTest.js"></script>
 <script src="../../js/disable.js"></script>
 <script src="../../js/sweet2.js"></script>
-
+<script src="../../js/utilities.js"></script>
 </html>
