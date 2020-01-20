@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <!-- <script src="../js/js22.js"></script> --> -->
+
+    <link rel="stylesheet" href="../../css/css2.css">
+    <link href="../../css/fonts.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../css/jquery-ui-1.12.1.custom/jquery-ui.css">
+
+    <!-- topmenu สำหรับหน้านี้เท่านั้น -->
+    <!-- <link rel="stylesheet" href="../../css/topmenu.css"> -->
+
+    <!-- icon -->
+    <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.css">
+</head>
+
+<body>
+    <!-- เมนูด้านบน -->
+    <div class="w3-top icon-bar">
+        <a id="addMenu" class="exit " onclick="addTEST()"><i class="fa fa-plus-square"> เพิ่ม</i></a>
+        <a id="editMenu" onclick="editTEST()" class="exit disableds"><i class="fa fa-pencil-alt"> แก้ไข</i></a>
+        <a id="saveMenu" onclick="insertTEST()" class="exit disableds"><i class="fa fa-save"> บันทึก</i></a>
+        <a id="restoreMenu" onclick="restoreTEST()" class="exit disableds"><i class="fa fa-reply"> เรียกคืน</i></a>
+        <a id="deleteMenu" onclick="deleteTEST()" class="exit disableds"><i class="fa fa-times"> ยกเลิก</i></a>
+        <!-- <a><i class="fa fa-search"> ค้นหา</i></a> -->
+        <a id="exitMenu" onclick="exitTEST()" class="exit" style="float: right;width: 17%;"><i
+                class="fa fa-sign-out-alt">
+                ออกจากระบบ</i></a>
+    </div>
+    <!-- เมนูด้านข้าง -->
+    <div class="sidenav">
+        <a href="/" style="margin-top: 15%;">
+            <img src="../../img/img1.jpg" style="width:92%;">
+        </a>
+        <br>
+        <button class="dropdown-btn"><b>ระบบงานคำขอ </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="../request/searchRequest.html">- ค้นหา/แก้ไข</a>
+            <a href="../request/request_public_sell.html">- ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
+            <a href="../request/request_public_hawk.html">- ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
+            <a href="../request/request_area_more_sell.html">- ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
+            <a href="../request/request_area_more_correct.html">- ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</a>
+            <a href="../request/request_area_less_sell.html">- หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
+            <a href="../request/request_area_less_correct.html">- หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
+            <a href="../request/request_market.html">- ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
+            <a href="../request/request_health_danger.html">-
+                กิจการที่เป็นอันตรายต่อสุขภาพ</a>
+            <a href="../request/request_crematory.html">- กิจการฌาปณสถาน</a>
+
+        </div>
+        <button class="dropdown-btn"><b>งานตรวจสอบ/อนุมัติ </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="#"></a>
+            <a href="#"></a>
+            <a href="#"></a>
+        </div>
+        <button class="dropdown-btn"><b>งานใบอนุญาต </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="#"></a>
+            <a href="#"></a>
+            <a href="#"></a>
+        </div>
+        <button class="dropdown-btn select-active "><b>ข้อมูลส่วนกลาง </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container ">
+            <a href="operator.html">- ข้อมูลผู้ประกอบการ</a>
+            <a href="02.html" class='dropdown-active '>- ข้อมูลการจดใบอนุญาต</a>
+            <a href="03.html">- โอนใบอนุญาต</a>
+        </div>
+        <button class="dropdown-btn"><b>งานร้องเรียน </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="#">- บันทึกเรื่องร้องเรียน</a>
+            <a href="#">- บันทึกคำร้อง</a>
+        </div>
+        <button class="dropdown-btn"><b>ข้อมูลระบบ </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="#"></a>
+        </div>
+        <button class="dropdown-btn"><b>รายงาน </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="../report/report_crematory.html">- ตามคำขอ</a>
+            <a href="../report/report_summary.html">- สรุป</a>
+        </div>
+        <button class="dropdown-btn notification"><b>แจ้งเตือน </b><span id="notficationRequest" class="badge"
+                style="margin-left:0.5vw;">100000</span><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a class="notification" href="../notfication/request.html">- งานคำขอ<span id="notficationRequest"
+                    class="badge" style="margin-left:0.5vw;">100000</span></a>
+        </div>
+    </div>
+    <!-- เนื้อหา -->
+    <form id="form">
+        <fieldset style="border: 0;padding: 0;margin: 0;">
+            <div class="main">
+                <header class="w3-top2">
+                    <h1 style="font-size:2.8vh;margin-left: 25px;padding: 2px;"> โอนใบอนุญาต</h1>
+                </header>
+                <div class="box">
+                    <a>เลขที่คำขอโอน :</a>
+                    <input type="text" id="formId" name="" style="width: 12%;" placeholder="">&nbsp;
+                    <a>วันที่ยืน :</a>
+                    <input type="text" id="datepicker-th-2" name="date1" style="width: 12%;">&nbsp;
+                    <a>ใบอนุญาตเดิม&nbsp;เล่มที่</a>
+                    <input  type="int" id="" style="width: 12%;">
+                    <a>เลขที่</a>
+                    <input type="int" id="" style="width: 12%;">
+                    <a>ใบอนุญาตใหม่&nbsp;เล่มที่</a>
+                    <input type="int" id="" style="width: 12%;">
+                    <a>เลขที่</a>
+                    <input type="int" id="" style="width: 12%;">
+
+                    <br>
+                    <a>ข้าพเจ้า</a>
+                    <input type="text" id="" style="width: 12%;">
+                    <a>สัญชาติ :</a>
+                    <select id="nationality" style="width: 12%;">
+                        <option value="" hidden>เลือก...</option>
+                        <option value="">ไทย</option>
+                        <option value=""></option>
+                    </select> &nbsp;&nbsp;
+                    <a>อายุ</a><input type="int" id="" style="width: 12%;">
+                    <a>อยู่บ้านเลขที่ :</a>
+                    <input type="text" id="homeId" style="width: 12%;"> &nbsp;
+                    <a>หมู่ที่ :</a>
+                    <input type="int" id="moo" style="width: 12%;"> &nbsp;
+                    <a>ตรอก:</a>
+                    <input type="text" id="trxk" style="width: 12%;"> &nbsp;
+                    <a>ซอย :</a>
+                    <input type="text" id="sxy" style="width: 12%;"> &nbsp;
+                    <a>อาคาร :</a>
+                    <input type="text" id="building" style="width: 12%;"> &nbsp;
+                    <a>ถนน :</a>
+                    <input type="text" id="road" style="width: 12%;">
+
+                    <br>
+                    <a>จังหวัด :</a>
+                    <select id="province" style="width: 12%;">
+                    </select> &nbsp;
+                    <a>อำเภอ :</a>
+                    <select id="district" style="width: 12%;">
+                    </select> &nbsp;
+                    <a>ตำบล :</a>
+                    <select id="subdistrict" style="width: 12%;">
+                    </select> &nbsp;
+                    <a>โทรศัพท์ :</a>
+                    <input type="text" id="phone" style="width: 12%;"> &nbsp;
+
+                    <br>
+                    <a>เป็นผู้ประกอบการในที่หรือทางสาธารณะชายหาดเทศบาลบางแสน&nbsp;ประเภท</a>
+                    <input type="text" id="">
+                    <a>บริเวณที่ได้รับอนุญาต</a>
+                    <select id="" style="width: 12%;">
+                        <option value="" hidden>เลือก...</option>
+                        <option value=""></option>
+                        <option value=""></option>
+                    </select>
+
+                    <br>
+                    <a><b>ขอยื่นคำร้องต่อนายกเทศมนตรี&nbsp;ดังนี้</b></a>
+
+                    <br>
+                    <a>ด้วยข้าพเจ้า&nbsp;มีความประสงค์ขอโอน</a>
+                    <select id="" style="width: 12%;">
+                        <option value="" hidden>เลือก...</option>
+                        <option value=""></option>
+                        <option value=""></option>
+                    </select>
+                    <a>ให้แก่&nbsp;(ผู้รับโอน)</a>
+                    <input type="text" id="" style="width: 12%;">
+
+                    <br>
+                    <a>อายุ</a><input type="int" id="" style="width: 12%;">
+                    <a>อยู่บ้านเลขที่ :</a>
+                    <input type="text" id="homeId" style="width: 12%;"> &nbsp;
+                    <a>หมู่ที่ :</a>
+                    <input type="int" id="moo" style="width: 12%;"> &nbsp;
+                    <a>ตรอก:</a>
+                    <input type="text" id="trxk" style="width: 12%;"> &nbsp;
+                    <a>ซอย :</a>
+                    <input type="text" id="sxy" style="width: 12%;"> &nbsp;
+                    <a>อาคาร :</a>
+                    <input type="text" id="building" style="width: 12%;"> &nbsp;
+                    <a>ถนน :</a>
+                    <input type="text" id="road" style="width: 12%;">
+                    <a>หมู่ที่</a>
+                    <input type="int" id="" style="width: 12%;">
+                    <a>จังหวัด :</a>
+                    <select id="province" style="width: 12%;">
+                    </select> &nbsp;
+                    <a>อำเภอ :</a>
+                    <select id="district" style="width: 12%;">
+                    </select>&nbsp;
+                    <a>ตำบล :</a>
+                    <select id="subdistrict" style="width: 12%;">
+                    </select>&nbsp;
+                    <a>โทรศัพท์</a>
+                    <input type="text" id="" style="width: 12%;">
+
+                    <br>
+                    <p>
+                        <a>โดยข้าพเจ้ายินดีที่จะจ่ายเงินค่าบำรุงให้แก่เทศบาลฯเป็นเงิน</a>
+                        <input type="text" name="" id="" style="width: 12%;">บาท
+                        <a>ตามใบเสร็จรับเงิน เล่มที่</a>
+                        <input type="text" name="" id="" style="width: 12%;">
+                        <a>เลขที่</a>
+                        <input type="int" name="" id="" style="width: 12%;">
+                        <a>ลงวันที่</a>
+                        <input type="date" id="date" name="" style="width: 12%;" placeholder="">
+
+                        <br>
+                        <p><b>ทั้งนี้ได้แนบเอกสารดังนี้</b>
+                            <div class="row">
+                                <div class="col" style="width: 33%;">
+                                    <p><b>1.ผู้โอน</b></p>
+                                    <input type="radio" name="" id="" value="">
+                                    <a>สำเนาบัตรประชาชน</a>
+                                    <input type="radio" name="" id="" value="">
+                                    <a>สำเนาทะเบียนบ้าน</a> &nbsp;
+                                    <input type="radio" id="" size="14">
+                                    <a>สำเนาใบอนุญาต</a>
+
+                                    <br>
+                                    <input type="radio" id="" size="14">
+                                    <a>อื่นๆ</a>
+                                    <input type="text" id="">
+                                </div>
+                                <div class="col" style="width: 33%;">
+                                    <p><b>2.ผู้รับโอน</b></p>
+                                    <input type="radio" name="" id="" value="">
+                                    <a>สำเนาบัตรประชาชน</a>
+                                    <input type="radio" name="" id="" value="">
+                                    <a>สำเนาทะเบียนบ้าน</a>
+
+                                    <br>
+                                    <input type="radio" id="" size="14">
+                                    <a>อื่นๆ</a>
+                                    <input type="text" id="">
+                                </div>
+
+                                <div class="col" style="width: 33%;">
+                                    <button type="button" class="button" id="" style="width: 50%;height: 3vw;">พิมพ์ใบขอโอน</button>
+                                    <br><br>
+                                    <button type="button" class="button" id="" style="width: 50%;height: 3vw;">บันทึกรายการ</button>
+                                </div>
+                            </div>
+                        </p>
+
+                        <p>
+                            <b>ความเห็นของเจ้าหน้าที่/หัวหน้างานสุขาภิบาล</b>
+                            <br>
+                            <input type="radio" id="" size="14">
+                            <a>เห็นควรอนุญาต โดยชำระเงินให้แก่เทศบาล</a>
+                            <input type="radio" id="" size="14">
+                            <a>ไม่สมควรอนุญาต เพราะ</a>
+                            <input type="text" id="">
+                            <a>โดย</a>
+                            <input type="text" id="">
+                            <a>วันที่</a>
+                            <input type="date" id="date" name="" size="15" placeholder="">
+                        </p>
+
+                        <p>
+                            <b>ความเห็นของหัวหน้าฝ่ายบริหารงานสาธารณสุข</b>
+                            <br>
+                            <input type="radio" id="" size="14">
+                            <a>เห็นควรอนุญาต โดยชำระเงินให้แก่เทศบาล</a>
+                            <input type="radio" id="" size="14">
+                            <a>ไม่สมควรอนุญาต เพราะ</a>
+                            <input type="text" id="">
+                            <a>โดย</a>
+                            <input type="text" id="">
+                            <a>วันที่</a>
+                            <input type="date" id="date" name="" size="15" placeholder="">
+                        </p>
+
+                        <p>
+                            <b>ความเห็นของผู้อำนวยการกองสาธารณสุข</b>
+                            <br>
+                            <input type="radio" id="" size="14">
+                            <a>เห็นควรอนุญาต</a>
+                            <input type="radio" id="" size="14">
+                            <a>ไม่สมควรอนุญาต</a>
+                            <a>โดย</a>
+                            <input type="text" id="">
+                            <a>วันที่</a>
+                            <input type="date" id="date" name="" size="15" placeholder="">
+                        </p>
+
+                        <p>
+                            <b>ความเห็นของปลัดเทศบาล</b>
+                            <br>
+                            <input type="radio" id="" size="14">
+                            <a>เห็นควรอนุญาต</a>
+                            <input type="radio" id="" size="14">
+                            <a>ไม่สมควรอนุญาต</a>
+                            <a>โดย</a>
+                            <input type="text" id="">
+                            <a>วันที่</a>
+                            <input type="date" id="date" name="" size="15" placeholder="">
+                        </p>
+
+                        <p>
+                            <b>ความเห็นเจ้าพนักงานท้องถิ่น</b>
+                            <br>
+                            <input type="radio" id="" size="14">
+                            <a>อนุญาต</a>
+                            <input type="radio" id="" size="14">
+                            <a>ไม่อนุญาต</a>
+                            <a>ลงชื่อ</a>
+                            <input type="text" id="">
+                            <a>ตำแหน่ง</a>
+                            <input type="text" id="">
+                        </p>
+
+                </div>
+            </div>
+        </fieldset>
+    </form>
+
+
+</body>
+
+<script src="../../js/operator.js/operator.js"></script>
+<script src="../../js/operator.js/menuOperator.js"></script>
+<script src="../../js/disable.js"></script>
+<script src="../../js/sweet2.js"></script>
+<script src="../../js/jquery.js"></script>
+<script src="../../js/jquery-ui.js"></script>
+<script src="../../js/js22.js"></script>
+<script src="../../js/dateth.js"></script>
+<script src="../../node_modules/axios/dist/axios.min.js"></script>
+
+</html>

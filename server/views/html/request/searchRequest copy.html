@@ -98,7 +98,8 @@
                     <a>ค้นหาตาม</a>
                     <div class="row">
                         <div class="col" style="width: 25%;">
-                            <select size="9" style="width: 90%; background-size: 0%;" id="searchItem" onchange="selectItem(this.value)" >
+                            <select size="9" style="width: 90%; background-size: 0%;" id="searchItem"
+                                onchange="selectItem(this.value)">
                                 <option selected="selected" value=1>ชื่อผู้ขอ</option>
                                 <option value=2>วันที่ยื่น</option>
                                 <option value=3>เลขที่ใบคำขอ</option>
@@ -208,7 +209,113 @@
                         <button class="fa fa-search" style="background-color: #009688; width: 25%;"> ค้นหา</button>
                     </div>
                     <a style="text-align: left;"><b> ผลลัพธ์การค้นหา </b></a>
-                    
+                    <div style="font-size: 1.7vh; text-align: center;" >
+                        <table id="requestTable" class="table cursor-pointer table-hover tableresult">
+                            <thead >
+                                <tr class="is-color">
+                                    <th onclick="sortTable(0,'requestTable','')">
+                                        <p>ประเภทใบอนุญาต <i class="fa fa-sort "></i></p>
+                                    </th>
+                                    <th onclick="sortTable(1,'requestTable'),''">
+                                        <p>ประเภทกิจการ <i class="fa fa-sort "></i></p>
+                                    </th>
+                                    <th onclick="sortTable(2,'requestTable'),''">
+                                        <p>เลขที่ใบคำขอ <i class="fa fa-sort "></i>
+                                        </p>
+                                    </th>
+                                    <th onclick="sortTable(4,'requestTable'),'date'">
+                                        <p>ชื่อสถานประกอบการ <i class="fa fa-sort "></i></p>
+                                    </th>
+                                    <th onclick="sortTable(3,'requestTable'),''">
+                                        <p>ชื่อผู้ขอ <i class="fa fa-sort "></i></p>
+                                    </th>
+                                    <th onclick="sortTable(4,'requestTable'),'date'">
+                                        <p>ที่อยู่ <i class="fa fa-sort "></i></p>
+                                    </th>
+                                    <th onclick="sortTable(4,'requestTable'),'date'">
+                                        <p>วันที่ยื่น <i class="fa fa-sort "></i></p>
+                                    </th>
+                                    <th onclick="sortTable(4,'requestTable'),'date'">
+                                        <p>วันที่หมดอายุ <i class="fa fa-sort "></i></p>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr onclick="toRequest(event)">
+                                    <td>หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่าย</td>
+                                    <td>1.การจำหน่ายสินค้าในที่
+                                        หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                    </td>
+                                    <td>0001/2562</td>
+                                    <td>ร้านข้าวมันไก่อร่อยที่สุดที่โลก</td>
+                                    <td>สมควร ฟ้า</td>
+                                    <td>9/145 ต.แสนสุข อ.เมือง จ.ชลบุรี 20130</td>
+                                    <td>1 กันยายน 2562</td>
+                                    <td>1 กันยายน 2568</td>
+                                </tr>
+                                <tr onclick="toRequest(event)">
+                                    <td>ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</td>
+                                    <td>1.การจำหน่ายสินค้าในที่
+                                        หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                    </td>
+                                    <td>0002/2562</td>
+                                    <td>สมควร น้ำเงิน</td>
+                                    <td>สมควร น้ำเงิน</td>
+                                    <td>สมควร น้ำเงิน</td>
+                                    <td>1 พฤศจิกายน 2562</td>
+                                    <td>1 พฤศจิกายน 2568</td>
+                                </tr>
+                                <tr onclick="toRequest(event)">
+                                    <td>หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่าย</td>
+                                    <td>1.การจำหน่ายสินค้าในที่
+                                        หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                    </td>
+                                    <td>0003/2562</td>
+                                    <td>สมควร ชมพู</td>
+                                    <td>สมควร ชมพู</td>
+                                    <td>สมควร ชมพู</td>
+                                    <td>1 ธันวาคม 2562</td>
+                                    <td>1 ธันวาคม 2568</td>
+                                </tr>
+                                <tr onclick="toRequest(event)">
+                                    <td>ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</td>
+                                    <td>test
+                                    </td>
+                                    <td>0001/2562</td>
+                                    <td>สมควร ทันสมัย</td>
+                                    <td>สมควร ชมพู</td>
+                                    <td>สมควร ชมพู</td>
+                                    <td>1 มิถุนายน 2562</td>
+                                    <td>1 มิถุนายน 2568</td>
+                                </tr>
+                                <tr onclick="toRequest(event)">
+                                    <td>หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่าย</td>
+                                    <td>1.การจำหน่ายสินค้าในที่
+                                        หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                    </td>
+                                    <td>0005/2562</td>
+                                    <td>สมควร เขียว</td>
+                                    <td>สมควร ชมพู</td>
+                                    <td>สมควร ชมพู</td>
+                                    <td>1 มิถุนายน 2562</td>
+                                    <td>1 มิถุนายน 2568</td>
+                                </tr>
+                                <tr onclick="toRequest(event)">
+                                    <td>หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่าย</td>
+                                    <td>1.การจำหน่ายสินค้าในที่
+                                        หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                    </td>
+                                    <td>0006/2562</td>
+                                    <td>สมควร แดง</td>
+                                    <td>สมควร ชมพู</td>
+                                    <td>สมควร ชมพู</td>
+                                    <td>1 กันยายน 2562</td>
+                                    <td>1 กันยายน 2568</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
