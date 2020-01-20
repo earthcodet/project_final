@@ -29,7 +29,7 @@ app.get('/user/:username/:password', (req, res) => {
   })
 })
 app.get("/get/provice", (req, res) => {
-  WebDAOObj.getProvince().then(data => {
+  webService.getProvince().then(data => {
     if (data != null) {
       res.json(data);
     } else {
@@ -38,7 +38,7 @@ app.get("/get/provice", (req, res) => {
   });
 });
 app.get("/get/amphur", (req, res) => {
-  WebDAOObj.getAmphur().then(data => {
+  webService.getAmphur().then(data => {
     if (data != null) {
       res.json(data);
     } else {
@@ -47,7 +47,7 @@ app.get("/get/amphur", (req, res) => {
   });
 });
 app.get("/get/district", (req, res) => {
-  WebDAOObj.getDistrict().then(data => {
+  webService.getDistrict().then(data => {
     if (data != null) {
       res.json(data);
     } else {
@@ -55,15 +55,6 @@ app.get("/get/district", (req, res) => {
     }
   });
 });
-app.get('/mytest/v1', (req, res) => {
-  webService.getNewId('ADDRESS').then((data) => {
-    if (data != null) {
-      res.json(data);
-    } else {
-      res.sendStatus(404)
-    }
-  })
-})
 app.get('/get/image/:prsonalId', (req, res) =>{
   webService.getImageByPersonalId(req.params.personalId).then((data) =>{
     if(data != null){

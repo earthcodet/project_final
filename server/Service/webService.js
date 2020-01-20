@@ -2,7 +2,32 @@ const PersonalDAO = require('../DAO/PersonalDAO')
 const PersonalDAOObj = new PersonalDAO()
 const ImageDAO = require('../DAO/ImageDAO')
 const ImageDAOObj = new ImageDAO()
+const AddressDAO = require('../DAO/AddressDAO')
+const AddressDAOObj = new AddressDAO
+
 class service {
+    getProvince(){
+        return new Promise((resolve, reject) => {
+            AddressDAOObj.getProvince().then((data) => {
+                return resolve(data)
+            })
+        })
+    }
+    getAmphur(){
+        return new Promise((resolve, reject) => {
+            AddressDAOObj.getAmphur().then((data) => {
+                return resolve(data)
+            })
+        })
+    }
+    getDistrict(){
+        return new Promise((resolve, reject) => {
+            AddressDAOObj.getDistrict().then((data) => {
+                return resolve(data)
+            })
+        })
+    }
+
     digit(v) {
         return Math.pow(10, Math.ceil(Math.log10(v)));
     }
