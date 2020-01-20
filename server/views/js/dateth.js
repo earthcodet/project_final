@@ -50,4 +50,5 @@ $(document).ready(function() {
   set_cal($("#datepicker5"));
   set_cal($("#datepicker6"));
   set_cal($("#datepicker7"));
+  set_cal($("#datepicker8"));
 });
