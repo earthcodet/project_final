@@ -194,19 +194,23 @@ button {
     font-size: 2.45vh;
     border-radius: 10%;
 }
-button.addimage{
+
+button.addimage {
     background-color: #009688;
     color: #FFFF;
 }
-button.delete{
+
+button.delete {
     background-color: red;
     color: #FFFF;
 }
-button:disabled{
+
+button:disabled {
     background-color: gray;
     pointer-events: none;
     cursor: default;
 }
+
 button.button {
     background-color: #555555;
     border: none;
@@ -306,14 +310,20 @@ header {
     padding: 0.3vw 0.3vw;
     border-radius: 0.5vw;
 }
-is-color{
+
+is-color {
     background-color: #009688;
     color: #FFFF;
 }
+
 html, body {
     width: 100%;
     height: 100%;
     margin: 0px;
     padding: 0px;
     overflow-x: auto;
-  }
+}
+
+div.displaynone {
+    display: none;
+}
