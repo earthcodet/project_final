@@ -187,8 +187,8 @@ class service {
 
     formatData(type, date) {
         if (type === 'TO-INSERT') {
-            //16/01/2020
-            let temp = date.split('/')
+            //16-01-2563
+            let temp = date.split('-')
             let day = temp[0]
             let month = temp[1]
             let year = temp[2]

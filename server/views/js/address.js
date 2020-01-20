@@ -8,7 +8,7 @@ let addressAmphur = [];
 let addressDistrict = [];
 
 //สำหรับเก็บจังหวัดที่เลือกไว้
-var aProviceId = 1;
+var aProviceId = 1
 var wProviceId = 1;
 
 function getProvice() {
@@ -16,6 +16,7 @@ function getProvice() {
         axios.get('http://localhost:5000/get/provice/').then((result) => {
             resolve(result.data);
             for (let i = 0; i < result.data.length; i++) {
+                result.data[i].PROVINCE_NAME = result.data[i].PROVINCE_NAME.trim()
                 provice.push(result.data[i])
             }
             console.log(result.data)
@@ -28,6 +29,7 @@ function getAmphur() {
         axios.get('http://localhost:5000/get/amphur/').then((result) => {
             resolve(result.data);
             for (let i = 0; i < result.data.length; i++) {
+                result.data[i].AMPHUR_NAME = result.data[i].AMPHUR_NAME.trim()
                 amphur.push(result.data[i])
             }
             console.log(result.data)
@@ -39,6 +41,7 @@ function getDistrict() {
     return new Promise((resolve, reject) => {
         axios.get('http://localhost:5000/get/district/').then((result) => {
             for (let i = 0; i < result.data.length; i++) {
+                result.data[i].DISTRICT_NAME = result.data[i].DISTRICT_NAME.trim()
                 district.push(result.data[i])
             }
             console.log(result.data)
@@ -69,8 +72,8 @@ function districtSelect(amphurId) {
     for (let i = 0; i < addressDistrict.length; i++) {
         var select = document.getElementById("subdistrict");
         var option = document.createElement("option");
-        option.text = addressDistrict[i].DISTRICT_NAME;
-        option.value = addressDistrict[i].DISTRICT_NAME;
+        option.text = addressDistrict[i].DISTRICT_NAME.trim();
+        option.value = addressDistrict[i].DISTRICT_ID;
         select.add(option);
     }
    
@@ -87,7 +90,7 @@ function amphurSelect(proviceId) {
     for (let i = 0; i < addressAmphur.length; i++) {
         var select = document.getElementById("district");
         var option = document.createElement("option");
-        option.text = addressAmphur[i].AMPHUR_NAME;
+        option.text = addressAmphur[i].AMPHUR_NAME.trim();
         option.value = addressAmphur[i].AMPHUR_ID;
         select.onchange = function () { districtSelect(document.getElementById('district').value) };
         select.add(option);
@@ -103,7 +106,7 @@ function createSelectProvice(data) {
     for (let i = 0; i < data.length; i++) {
         var select = document.getElementById("province");
         var option = document.createElement("option");
-        option.text = data[i].PROVINCE_NAME;
+        option.text = data[i].PROVINCE_NAME.trim();
         option.value = data[i].PROVINCE_ID;
         select.onchange = function () { chageProvice(document.getElementById('province').value) };
         select.add(option);

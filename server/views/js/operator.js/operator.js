@@ -35,6 +35,12 @@ let inImage = {
     'type': '',
     'data': ''
 }
+
+let SEprovince = []
+let SEamphur = []
+let SEdistrict = []
+
+
 function preInsert() {
     if (document.getElementById('id').value.trim() != '' && document.getElementById('id').value.trim().length === 13) {
         console.log(_isUsed)
@@ -46,9 +52,13 @@ function preInsert() {
             inAddress.sxy = document.getElementById('sxy').value
             inAddress.building = document.getElementById('building').value
             inAddress.road = document.getElementById('road').value
-            inAddress.district_name = document.getElementById('subdistrict').value
-            inAddress.amphur_name = document.getElementById('district').value
-            inAddress.province_name = document.getElementById('province').value
+
+            let provinceValue = parseInt(document.getElementById(`province`).value)
+            let amphurValue = parseInt(document.getElementById(`district`).value)
+            let districtValue = parseInt(document.getElementById(`subdistrict`).value)
+            inAddress.district_name = district[districtValue - 1].DISTRICT_NAME
+            inAddress.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME
+            inAddress.province_name = provice[provinceValue - 1].PROVINCE_NAME
             //prsonal
             inPeronal.title = document.getElementById('title').value
             inPeronal.type = document.getElementById('typeUser').value
@@ -69,7 +79,7 @@ function preInsert() {
             console.log(arrInsert)
             console.log(fileImage)
             return true
-        }else{
+        } else {
             Swal.fire({
                 title: "เลขประจำตัวผู้ประกอบการนี้มีในระบบแล้ว",
                 width: '30%',
@@ -80,7 +90,7 @@ function preInsert() {
                 icon: 'error'
             });
         }
-    }else{
+    } else {
         Swal.fire({
             title: "กรุณาใส่เลขประจำตัวให้ครบ 13 หลัก",
             width: '30%',
@@ -103,11 +113,11 @@ function duplicateId(personalId) {
     })
 }
 function checkId(value) {
-    if(value.length != 13){
+    if (value.length != 13) {
         _isCheckPersonalId = false
     }
     if (value.length === 13) {
-        if(_isIdCheckPersonal != value){
+        if (_isIdCheckPersonal != value) {
             duplicateId(value).then((data) => {
                 console.log(data)
                 if (!data) {
@@ -135,7 +145,7 @@ function checkId(value) {
                 }
             })
         }
-       
+
     } else {
         return false
     }
@@ -194,8 +204,6 @@ function deleteImageOne() {
 function buttonImage() {
     document.getElementById('uploadFile').click()
 }
-
-
 function insertToDatabase() {
     return new Promise((resolve, reject) => {
         console.log('insertToDatabase')
@@ -211,3 +219,11 @@ function insertToDatabase() {
         })
     })
 }
+// value  ของที่อยู่มันจะเท่ากับ value - 1 index ของ array address
+/*
+let provinceValue = parseInt(document.getElementById(`province`).value)
+    let amphurValue = parseInt(document.getElementById(`district`).value)
+    let districtValue = parseInt(document.getElementById(`subdistrict`).value)
+*/
+
+

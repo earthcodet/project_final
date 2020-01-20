@@ -77,7 +77,7 @@ function wdistrictSelect(amphurId) {
         var select = document.getElementById("wSubdistrict");
         var option = document.createElement("option");
         option.text = buiddingDistrict[i].DISTRICT_NAME;
-        option.value = buiddingDistrict[i].DISTRICT_NAME;
+        option.value = buiddingDistrict[i].DISTRICT_ID;
         select.add(option);
     }
    
@@ -132,7 +132,7 @@ function districtSelect(amphurId) {
         var select = document.getElementById("subdistrict");
         var option = document.createElement("option");
         option.text = addressDistrict[i].DISTRICT_NAME;
-        option.value = addressDistrict[i].DISTRICT_NAME;
+        option.value = addressDistrict[i].DISTRICT_ID;
         select.add(option);
     }
    
