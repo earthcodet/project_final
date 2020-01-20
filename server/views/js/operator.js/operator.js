@@ -147,7 +147,7 @@ function changeInputBytype(value) {
         console.log(document.getElementById('titleNameTopic'))
         document.getElementById('surnameUser').style.display = 'none'
         document.getElementById('surTopic').style.display = 'none'
-        document.getElementById('nameUserTopic').style.marginLeft = '6.2vw'
+        document.getElementById('nameUserTopic').style.marginLeft = '5.8vw'
         document.getElementById('nameUser').style.width = '27.5vw'
         document.getElementById('titleNameTopic').style.display = 'none'
     } else {
