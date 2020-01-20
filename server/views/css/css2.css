@@ -29,6 +29,14 @@
     color: white;
 }
 
+.select-active {
+    background-color: green!important;
+    color: white!important;
+}
+.dropdown-active {
+    background-color: rgb(143, 141, 141)!important;
+}
+
 .w3-top {
     width: 100%;
     position: fixed;
@@ -194,7 +202,24 @@ button {
     font-size: 2.45vh;
     border-radius: 10%;
 }
-
+button.addimage{
+    background-color: #009688;
+    color: #FFFF;
+}
+button.delete{
+    background-color: red;
+    color: #FFFF;
+}
+button.image{
+    width: 100%;
+    border-radius: .5vw;
+    height: auto;
+}
+button:disabled{
+    background-color: gray;
+    pointer-events: none;
+    cursor: default;
+}
 button.button {
     background-color: #555555;
     border: none;
@@ -208,6 +233,7 @@ button.button {
 }
 
 button:hover {
+    cursor: pointer;
     background-color: #3e8e41;
 }
 
@@ -293,3 +319,14 @@ header {
     padding: 0.3vw 0.3vw;
     border-radius: 0.5vw;
 }
+is-color{
+    background-color: #009688;
+    color: #FFFF;
+}
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: auto;
+  }

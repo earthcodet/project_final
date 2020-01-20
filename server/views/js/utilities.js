@@ -1,18 +1,20 @@
 let month = {
-    'มกราคม':1,
-    'กุมภาพันธ์':2,
-    'เดือนมีนาคม':3,
-    'เมษายน':4,
-    'พฤษภาคม':5,
-    'มิถุนายน':6,
-    'กรกฎาคม':7,
-    'สิงหาคม':8,
-    'กันยายน':9,
-    'ตุลาคม':10,
-    'พฤศจิกายน':11,
-    'ธันวาคม':12
+    'มกราคม': 1,
+    'กุมภาพันธ์': 2,
+    'เดือนมีนาคม': 3,
+    'เมษายน': 4,
+    'พฤษภาคม': 5,
+    'มิถุนายน': 6,
+    'กรกฎาคม': 7,
+    'สิงหาคม': 8,
+    'กันยายน': 9,
+    'ตุลาคม': 10,
+    'พฤศจิกายน': 11,
+    'ธันวาคม': 12
 }
-
+let selectImageFile = 0
+let maxImageFile = 4
+let imageDisplay = 0
 function checkPhoneInput(tagId) {
     var text = document.getElementById(tagId).value
     text = text.replace(/(\d{3})(\d{7})/, "$1-$2");
@@ -21,32 +23,35 @@ function checkPhoneInput(tagId) {
 var totalFiles = [];
 function handleFileSelect(evt) {
     var files = evt.target.files;
-    for (var i = 0, f; f = files[i]; i++) {
+    for (var i = 0, f; f = files[i] ; i++) {
         if (!f.type.match('image.*')) {
             continue;
         }
-        totalFiles.push(f)
-        var reader = new FileReader();
-        reader.onload = (function (theFile) {
-            return function (e) {
-                var span = document.createElement('span');
-                span.innerHTML =
-                    [
-                        `<div class="column" style="width: 25%; height: 310px; ">
+        if (selectImageFile < maxImageFile) {
+            totalFiles.push(f)
+            var reader = new FileReader();
+            reader.onload = (function (theFile) {
+                return function (e) {
+                    var span = document.createElement('span');
+                    span.innerHTML =
+                        [
+                            `<div class="col" style="width: 25%; height: 100%; ">
                 <img 
                 width=100% 
-                height=270px 
+                height=85% 
                 src="`
-                        , e.target.result,
-                        '" title="', escape(theFile.name), '"/>'
-                        , "<button class='deletebutton'" +
-                        "onclick='deleteImage()' >ลบรูปภาพนี้</button>", "</div>"
-                    ].join('');
+                            , e.target.result,
+                            '" title="', escape(theFile.name), '"/>'
+                            , "<br><button type='button' class='delete image'" +
+                            "onclick='deleteImage()' >ลบรูปภาพนี้</button>", "</div>"
+                        ].join('');
 
-                document.getElementById('outputImage').insertBefore(span, null);
-            };
-        })(f);
-        reader.readAsDataURL(f);
+                    document.getElementById('outputImage').insertBefore(span, null);
+                };
+            })(f);
+            reader.readAsDataURL(f);
+            selectImageFile = selectImageFile + 1
+        }
     }
 }
 function deleteImage() {
@@ -54,47 +59,14 @@ function deleteImage() {
     document.querySelector("#outputImage").removeChild(document.querySelectorAll('#outputImage span')[index]);
     totalFiles.splice(index, 1);
     document.getElementById('uploadFile').value = ''
+    selectImageFile = selectImageFile - 1
 }
-function uploadImage(event) {
-    var cancelButton = document.getElementById('cancelImage')
-    var target = event.target || event.srcElement;
-    console.log(target, "changed.");
-    console.log(event);
-    if (target.value.length == 0) {
-        console.log("Suspect Cancel was hit, no files selected.");
-        if (0 == target.files.length) {
-            console.log('im delete image')
-            cancelButton.onclick();
-        }
-    } else {
-        var selectedFile = event.target.files[0];
-        var reader = new FileReader();
-        var img = document.getElementById('operatorImage')
-        console.log(selectedFile)
-        reader.onload = function (event) {
-            img.src = event.target.result;
-            img.alt = 'operator'
-            img.width = 200
-            img.height = 200
-        };
-        reader.readAsDataURL(selectedFile)
-    }
-}
-function deleteImageOne() {
-    document.getElementById('uploadFile').value = ''
-    var img = document.getElementById('operatorImage')
-    img.src = '../../img/userProfile.png'
-    img.width = 200
-    img.height = 200
-}
-function buttonImage() {
-    document.getElementById('uploadFile').click()
-}
+
 function isNumber(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 }
 // sortTable //
-function sortTable(n, id ,type) {
+function sortTable(n, id, type) {
     var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
     table = document.getElementById(id);
     switching = true;
@@ -109,7 +81,7 @@ function sortTable(n, id ,type) {
             if (type = "date") {
                 var tempdateX = x.innerHTML.split(' ')
                 var tempdateY = y.innerHTML.split(' ')
-                var dayX ,dayY ,monthX ,monthY ,yearX , yearY
+                var dayX, dayY, monthX, monthY, yearX, yearY
                 dayX = tempdateX[0]
                 dayY = tempdateY[0]
                 monthX = tempdateX[1]
@@ -117,56 +89,56 @@ function sortTable(n, id ,type) {
                 yearX = tempdateX[2]
                 yearY = tempdateY[2]
                 if (dir == "asc") {
-                    if(yearX > yearY){
-                        shouldSwitch = true;
-                        break;  
-                    }else if(yearX == yearY && month[monthX] > month[monthY]){
+                    if (yearX > yearY) {
                         shouldSwitch = true;
                         break;
-                    }else if(yearX == yearY && month[monthX] == month[monthY] && dayX > dayY){
+                    } else if (yearX == yearY && month[monthX] > month[monthY]) {
+                        shouldSwitch = true;
+                        break;
+                    } else if (yearX == yearY && month[monthX] == month[monthY] && dayX > dayY) {
                         shouldSwitch = true;
                         break;
                     }
-                }else if (dir == "desc"){
-                    if(yearX < yearY){
-                        shouldSwitch = true;
-                        break;  
-                    }else if(yearX == yearY && month[monthX] < month[monthY]){
+                } else if (dir == "desc") {
+                    if (yearX < yearY) {
                         shouldSwitch = true;
                         break;
-                    }else if(yearX == yearY && month[monthX] == month[monthY] && dayX < dayY){
+                    } else if (yearX == yearY && month[monthX] < month[monthY]) {
+                        shouldSwitch = true;
+                        break;
+                    } else if (yearX == yearY && month[monthX] == month[monthY] && dayX < dayY) {
                         shouldSwitch = true;
                         break;
                     }
                 }
-            }else if(type = "dateExp"){
+            } else if (type = "dateExp") {
                 var tempX = x.innerHTML.split(' ')
                 var tempY = y.innerHTML.split(' ')
                 var dateX, dateY
                 dateX = tempX[0]
                 dateY = tempY[0]
                 if (dir == "asc") {
-                    if(dateX != 'หมดอายุ' && dateY != 'หมดอายุ'){
-                       if(parseInt(dateX) > parseInt(dateY)){
-                        shouldSwitch = true;
-                        break;
-                       }
-                    }else if(dateX > dateY){
+                    if (dateX != 'หมดอายุ' && dateY != 'หมดอายุ') {
+                        if (parseInt(dateX) > parseInt(dateY)) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    } else if (dateX > dateY) {
                         shouldSwitch = true;
                         break;
                     }
-                }else if (dir == "desc"){
-                    if(dateX != 'หมดอายุ' && dateY != 'หมดอายุ'){
-                        if(parseInt(dateX) < parseInt(dateY)){
-                         shouldSwitch = true;
-                         break;
+                } else if (dir == "desc") {
+                    if (dateX != 'หมดอายุ' && dateY != 'หมดอายุ') {
+                        if (parseInt(dateX) < parseInt(dateY)) {
+                            shouldSwitch = true;
+                            break;
                         }
-                     }else if(dateX < dateY){
-                         shouldSwitch = true;
-                         break;
-                     }
+                    } else if (dateX < dateY) {
+                        shouldSwitch = true;
+                        break;
+                    }
                 }
-            }else {
+            } else {
                 if (dir == "asc") {
                     if (x.innerHTML > y.innerHTML) {
                         shouldSwitch = true;
