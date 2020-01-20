@@ -64,16 +64,40 @@ function preInsert() {
     console.log(arrInsert)
     console.log(fileImage)
 }
-function duplicateId(){
+function duplicateId(personalId) {
     return new Promise((resolve, reject) => {
-        axios.get('http://localhost:5000/get/personalId/'+personal).then((data) =>{
+        axios.get('http://localhost:5000/get/personalId/' + personalId).then((data) => {
             return resolve(data.data)
         })
     })
-}    
-function checkId(value){
-    if(value.length === 13) {
-        duplicateIdId(value)
+}
+function checkId(value) {
+    console.log(value)
+    if (value.length === 13) {
+            duplicateId(value).then((data) => {
+                console.log(data)
+                if(!data){
+                    Swal.fire({
+                        title: "เลขประจำตัวผู้ประกอบการนี้ใช้ได้",
+                        width: '30%',
+                        showConfirmButton: true,
+                        closeOnConfirm: false,
+                        closeOnCancel: false,
+                        icon:'success'
+                    });
+                }else{
+                    Swal.fire({
+                        title: "มีเลขประจำตัวผู้ประกอบการ",
+                        width: '30%',
+                        showConfirmButton: true,
+                        closeOnConfirm: false,
+                        closeOnCancel: false,
+                        icon:'error'
+                    });
+                }
+            })
+    }else{
+        return false
     }
 }
 function uploadImage(event) {
@@ -123,7 +147,7 @@ function insertToDatabase() {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
-        }).then((data) =>{
+        }).then((data) => {
             return resolve(data.data)
         })
     })
