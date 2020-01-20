@@ -9,11 +9,11 @@
 
     <link rel="stylesheet" href="../../css/css2.css">
     <link href="../../css/fonts.css" rel="stylesheet">
-    s
+
     <link rel="stylesheet" href="../../css/jquery-ui-1.12.1.custom/jquery-ui.css">
 
     <!-- topmenu สำหรับหน้านี้เท่านั้น -->
-    <link rel="stylesheet" href="../../css/topmenu.css">
+    <!-- <link rel="stylesheet" href="../../css/topmenu.css"> -->
 
     <!-- icon -->
     <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.css">
@@ -67,7 +67,7 @@
         </div>
         <button class="dropdown-btn select-active "><b>ข้อมูลส่วนกลาง </b><i class="fa fa-caret-down"></i></button>
         <div class="dropdown-container ">
-            <a href="operator.html" >- ข้อมูลผู้ประกอบการ</a>
+            <a href="operator.html">- ข้อมูลผู้ประกอบการ</a>
             <a href="02.html" class='dropdown-active '>- ข้อมูลการจดใบอนุญาต</a>
             <a href="03.html">- โอนใบอนุญาต</a>
         </div>
@@ -94,7 +94,7 @@
     </div>
     <!-- เนื้อหา -->
     <form id="form">
-        <fieldset disabled id="disable" style="border: 0;padding: 0;margin: 0;">
+        <fieldset style="border: 0;padding: 0;margin: 0;">
             <div class="main">
                 <header class="w3-top2">
                     <h1 style="font-size:2.8vh;margin-left: 25px;padding: 2px;"> ข้อมูลการจดใบอนุญาต</h1>
@@ -218,10 +218,741 @@
                     </div><br>
 
                     <div class="box">
+                        <p class="font">ประวัติการออกใบอนุญาต</p>
+                        <a>ปีงบประมาณ : <input type="text"></a>
+                        <a>ประเภทใบอนุญาต :
+                            <input list="brow" id="" name="" style="width: 30%;">
+                            <datalist id="brow">
+                                <option value="ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ">
+                                    ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ
+                                </option>
+                                <option value="ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ">
+                                    ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ
+                                </option>
+                                <option value="ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร">ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร
+                                </option>
+                                <option value="ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร">ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร
+                                </option>
+                                <option value="หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร">
+                                    หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</option>
+                                <option value="หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร">
+                                    หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</option>
+                                <option value="ใบอนุญาติให้ใช้สถานที่เป็นตลาดเอกชน">ใบอนุญาติให้ใช้สถานที่เป็นตลาดเอกชน
+                                </option>
+                                <option value="กิจการที่เป็นอันตรายต่อสุขภาพ">กิจการที่เป็นอันตรายต่อสุขภาพ</option>
+                                <option value="กิจการฌาปณสถาน">กิจการฌาปณสถาน</option>
+                            </datalist></a>
+                        <div class="tab">
+                            <button type="button" class="tablinks" onclick="openCity(event, 'London')">ปกติ</button>
+                            <button type="button" class="tablinks" onclick="openCity(event, 'Paris')">โอน</button>
+                            <button type="button" class="tablinks" onclick="openCity(event, 'Tokyo')">หมดอายุ</button>
+                        </div>
+
+                        <div id="London" class="tabcontent">
+                            <div style="font-size: 1.7vh;">
+                                <br>
+                                <a>ประวัติใบอนุญาต</a>
+                                <br><br>
+                                <table id="requestTable" class="table cursor-pointer table-hover tableresult">
+                                    <thead>
+                                        <tr class="is-color" style="height: 5.2vw;" >
+                                            <th onclick="sortTable(0,'requestTable','')">
+                                                <p>ปีงบประมาณ <i class="fa fa-sort "></i></p>
+                                            </th>
+                                            <th onclick="sortTable(1,'requestTable'),''">
+                                                <p>ประเภทใบอนุญาต <i class="fa fa-sort "></i></p>
+                                            </th>
+                                            <th onclick="sortTable(2,'requestTable'),''">
+                                                <p>เล่ม <i class="fa fa-sort "></i>
+                                                </p>
+                                            </th>
+                                            <th onclick="sortTable(4,'requestTable'),'date'">
+                                                <p>เลขที่ <i class="fa fa-sort "></i></p>
+                                            </th>
+                                            <th onclick="sortTable(3,'requestTable'),''">
+                                                <p>วันที่หมดอายุ <i class="fa fa-sort "></i></p>
+                                            </th>
+                                            <th onclick="sortTable(4,'requestTable'),'date'">
+                                                <p>สถานะ <i class="fa fa-sort "></i></p>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody style="height: 17vw;  text-align: center;" >
+                                        <tr onclick="toRequest(event)">
+                                            <td>2563</td>
+                                            <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                            </td>
+                                            <td>0001/2562</td>
+                                            <td>9999</td>
+                                            <td>20 มกราคม 2563</td>
+                                            <td>365 วัน</td>
+                                        </tr>
+                                        <tr onclick="toRequest(event)">
+                                            <td>2563</td>
+                                            <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                            </td>
+                                            <td>0001/2562</td>
+                                            <td>9999</td>
+                                            <td>20 มกราคม 2563</td>
+                                            <td>365 วัน</td>
+                                        </tr>
+                                        <tr onclick="toRequest(event)">
+                                            <td>2563</td>
+                                            <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                            </td>
+                                            <td>0001/2562</td>
+                                            <td>9999</td>
+                                            <td>20 มกราคม 2563</td>
+                                            <td>365 วัน</td>
+                                        </tr>
+                                        <tr onclick="toRequest(event)">
+                                            <td>2563</td>
+                                            <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                            </td>
+                                            <td>0001/2562</td>
+                                            <td>9999</td>
+                                            <td>20 มกราคม 2563</td>
+                                            <td>365 วัน</td>
+                                        </tr>
+                                        <tr onclick="toRequest(event)">
+                                            <td>2563</td>
+                                            <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                            </td>
+                                            <td>0001/2562</td>
+                                            <td>9999</td>
+                                            <td>20 มกราคม 2563</td>
+                                            <td>365 วัน</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <br>
+                                <a>ประวัติการร้องเรียน</a>
+                                <br><br>
+                                <div style="font-size: 1.7vh;">
+                                    <table id="requestTable" class="table cursor-pointer table-hover tableresult">
+                                        <thead >
+                                            <tr class="" style="height: 5.2vw; background-color: rgba(212, 65, 65, 0.863); color: rgb(255, 255, 255);">
+                                                <th onclick="sortTable(0,'requestTable','')">
+                                                    <p>ปีงบประมาณ <i class="fa fa-sort "></i></p>
+                                                </th>
+                                                <th onclick="sortTable(1,'requestTable'),''">
+                                                    <p>ประเภทใบอนุญาต <i class="fa fa-sort "></i></p>
+                                                </th>
+                                                <th onclick="sortTable(2,'requestTable'),''">
+                                                    <p>เล่ม <i class="fa fa-sort "></i>
+                                                    </p>
+                                                </th>
+                                                <th onclick="sortTable(4,'requestTable'),'date'">
+                                                    <p>เลขที่ <i class="fa fa-sort "></i></p>
+                                                </th>
+                                                <th onclick="sortTable(3,'requestTable'),''">
+                                                    <p>วันที่หมดอายุ <i class="fa fa-sort "></i></p>
+                                                </th>
+                                                <th onclick="sortTable(4,'requestTable'),'date'">
+                                                    <p>สถานะ <i class="fa fa-sort "></i></p>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody style="height: 17vw; text-align: center;">
+                                            <tr onclick="toRequest(event)">
+                                                <td>2563</td>
+                                                <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                                </td>
+                                                <td>0001/2562</td>
+                                                <td>9999</td>
+                                                <td>20 มกราคม 2563</td>
+                                                <td>365 วัน</td>
+                                            </tr>
+                                            <tr onclick="toRequest(event)">
+                                                <td>2563</td>
+                                                <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                                </td>
+                                                <td>0001/2562</td>
+                                                <td>9999</td>
+                                                <td>20 มกราคม 2563</td>
+                                                <td>365 วัน</td>
+                                            </tr>
+                                            <tr onclick="toRequest(event)">
+                                                <td>2563</td>
+                                                <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                                </td>
+                                                <td>0001/2562</td>
+                                                <td>9999</td>
+                                                <td>20 มกราคม 2563</td>
+                                                <td>365 วัน</td>
+                                            </tr>
+                                            <tr onclick="toRequest(event)">
+                                                <td>2563</td>
+                                                <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                                </td>
+                                                <td>0001/2562</td>
+                                                <td>9999</td>
+                                                <td>20 มกราคม 2563</td>
+                                                <td>365 วัน</td>
+                                            </tr>
+                                            <tr onclick="toRequest(event)">
+                                                <td>2563</td>
+                                                <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                                </td>
+                                                <td>0001/2562</td>
+                                                <td>9999</td>
+                                                <td>20 มกราคม 2563</td>
+                                                <td>365 วัน</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <br>
+                                <a>ประวัติผู้ช่วย</a>
+                                <br><br>
+                                <div style="font-size: 1.7vh;">
+                                    <table id="requestTable" class="table cursor-pointer table-hover tableresult">
+                                        <thead >
+                                            <tr class="" style="height:auto; background-color: rgba(40, 131, 250, 0.876); color: rgb(255, 255, 255);">
+                                                <th onclick="sortTable(0,'requestTable','')">
+                                                    <p>ปีงบประมาณ <i class="fa fa-sort "></i></p>
+                                                </th>
+                                                <th onclick="sortTable(1,'requestTable'),''">
+                                                    <p>ประเภทใบอนุญาต <i class="fa fa-sort "></i></p>
+                                                </th>
+                                                <th onclick="sortTable(2,'requestTable'),''">
+                                                    <p>เล่ม <i class="fa fa-sort "></i>
+                                                    </p>
+                                                </th>
+                                                <th onclick="sortTable(4,'requestTable'),'date'">
+                                                    <p>เลขที่ <i class="fa fa-sort "></i></p>
+                                                </th>
+                                                <th onclick="sortTable(3,'requestTable'),''">
+                                                    <p>วันที่หมดอายุ <i class="fa fa-sort "></i></p>
+                                                </th>
+                                                <th onclick="sortTable(4,'requestTable'),'date'">
+                                                    <p>สถานะ <i class="fa fa-sort "></i></p>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody style="height: 17vw; text-align: center;">
+                                            <tr onclick="toRequest(event)">
+                                                <td>2563</td>
+                                                <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                                </td>
+                                                <td>0001/2562</td>
+                                                <td>9999</td>
+                                                <td>20 มกราคม 2563</td>
+                                                <td>365 วัน</td>
+                                            </tr>
+                                            <tr onclick="toRequest(event)">
+                                                <td>2563</td>
+                                                <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                                </td>
+                                                <td>0001/2562</td>
+                                                <td>9999</td>
+                                                <td>20 มกราคม 2563</td>
+                                                <td>365 วัน</td>
+                                            </tr>
+                                            <tr onclick="toRequest(event)">
+                                                <td>2563</td>
+                                                <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                                </td>
+                                                <td>0001/2562</td>
+                                                <td>9999</td>
+                                                <td>20 มกราคม 2563</td>
+                                                <td>365 วัน</td>
+                                            </tr>
+                                            <tr onclick="toRequest(event)">
+                                                <td>2563</td>
+                                                <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                                </td>
+                                                <td>0001/2562</td>
+                                                <td>9999</td>
+                                                <td>20 มกราคม 2563</td>
+                                                <td>365 วัน</td>
+                                            </tr>
+                                            <tr onclick="toRequest(event)">
+                                                <td>2563</td>
+                                                <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                                </td>
+                                                <td>0001/2562</td>
+                                                <td>9999</td>
+                                                <td>20 มกราคม 2563</td>
+                                                <td>365 วัน</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="Paris" class="tabcontent">
+                            <div style="font-size: 1.7vh;">
+                                <br>
+                                <a>ประวัติใบอนุญาต</a>
+                                <br><br>
+                                <table id="requestTable" class="table cursor-pointer table-hover tableresult">
+                                    <thead>
+                                        <tr class="is-color" style="height: 5.2vw;" >
+                                            <th onclick="sortTable(0,'requestTable','')">
+                                                <p>ปีงบประมาณ <i class="fa fa-sort "></i></p>
+                                            </th>
+                                            <th onclick="sortTable(1,'requestTable'),''">
+                                                <p>ประเภทใบอนุญาต <i class="fa fa-sort "></i></p>
+                                            </th>
+                                            <th onclick="sortTable(2,'requestTable'),''">
+                                                <p>เล่ม <i class="fa fa-sort "></i>
+                                                </p>
+                                            </th>
+                                            <th onclick="sortTable(4,'requestTable'),'date'">
+                                                <p>เลขที่ <i class="fa fa-sort "></i></p>
+                                            </th>
+                                            <th onclick="sortTable(3,'requestTable'),''">
+                                                <p>วันที่หมดอายุ <i class="fa fa-sort "></i></p>
+                                            </th>
+                                            <th onclick="sortTable(4,'requestTable'),'date'">
+                                                <p>สถานะ <i class="fa fa-sort "></i></p>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody style="height: 17vw;  text-align: center;" >
+                                        <tr onclick="toRequest(event)">
+                                            <td>2563</td>
+                                            <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                            </td>
+                                            <td>0001/2562</td>
+                                            <td>9999</td>
+                                            <td>20 มกราคม 2563</td>
+                                            <td>365 วัน</td>
+                                        </tr>
+                                        <tr onclick="toRequest(event)">
+                                            <td>2563</td>
+                                            <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                            </td>
+                                            <td>0001/2562</td>
+                                            <td>9999</td>
+                                            <td>20 มกราคม 2563</td>
+                                            <td>365 วัน</td>
+                                        </tr>
+                                        <tr onclick="toRequest(event)">
+                                            <td>2563</td>
+                                            <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                            </td>
+                                            <td>0001/2562</td>
+                                            <td>9999</td>
+                                            <td>20 มกราคม 2563</td>
+                                            <td>365 วัน</td>
+                                        </tr>
+                                        <tr onclick="toRequest(event)">
+                                            <td>2563</td>
+                                            <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                            </td>
+                                            <td>0001/2562</td>
+                                            <td>9999</td>
+                                            <td>20 มกราคม 2563</td>
+                                            <td>365 วัน</td>
+                                        </tr>
+                                        <tr onclick="toRequest(event)">
+                                            <td>2563</td>
+                                            <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                            </td>
+                                            <td>0001/2562</td>
+                                            <td>9999</td>
+                                            <td>20 มกราคม 2563</td>
+                                            <td>365 วัน</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <br>
+                                <a>ประวัติการร้องเรียน</a>
+                                <br><br>
+                                <div style="font-size: 1.7vh;">
+                                    <table id="requestTable" class="table cursor-pointer table-hover tableresult">
+                                        <thead >
+                                            <tr class="" style="height: 5.2vw; background-color: rgba(212, 65, 65, 0.863); color: rgb(255, 255, 255);">
+                                                <th onclick="sortTable(0,'requestTable','')">
+                                                    <p>ปีงบประมาณ <i class="fa fa-sort "></i></p>
+                                                </th>
+                                                <th onclick="sortTable(1,'requestTable'),''">
+                                                    <p>ประเภทใบอนุญาต <i class="fa fa-sort "></i></p>
+                                                </th>
+                                                <th onclick="sortTable(2,'requestTable'),''">
+                                                    <p>เล่ม <i class="fa fa-sort "></i>
+                                                    </p>
+                                                </th>
+                                                <th onclick="sortTable(4,'requestTable'),'date'">
+                                                    <p>เลขที่ <i class="fa fa-sort "></i></p>
+                                                </th>
+                                                <th onclick="sortTable(3,'requestTable'),''">
+                                                    <p>วันที่หมดอายุ <i class="fa fa-sort "></i></p>
+                                                </th>
+                                                <th onclick="sortTable(4,'requestTable'),'date'">
+                                                    <p>สถานะ <i class="fa fa-sort "></i></p>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody style="height: 17vw; text-align: center;">
+                                            <tr onclick="toRequest(event)">
+                                                <td>2563</td>
+                                                <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                                </td>
+                                                <td>0001/2562</td>
+                                                <td>9999</td>
+                                                <td>20 มกราคม 2563</td>
+                                                <td>365 วัน</td>
+                                            </tr>
+                                            <tr onclick="toRequest(event)">
+                                                <td>2563</td>
+                                                <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                                </td>
+                                                <td>0001/2562</td>
+                                                <td>9999</td>
+                                                <td>20 มกราคม 2563</td>
+                                                <td>365 วัน</td>
+                                            </tr>
+                                            <tr onclick="toRequest(event)">
+                                                <td>2563</td>
+                                                <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                                </td>
+                                                <td>0001/2562</td>
+                                                <td>9999</td>
+                                                <td>20 มกราคม 2563</td>
+                                                <td>365 วัน</td>
+                                            </tr>
+                                            <tr onclick="toRequest(event)">
+                                                <td>2563</td>
+                                                <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                                </td>
+                                                <td>0001/2562</td>
+                                                <td>9999</td>
+                                                <td>20 มกราคม 2563</td>
+                                                <td>365 วัน</td>
+                                            </tr>
+                                            <tr onclick="toRequest(event)">
+                                                <td>2563</td>
+                                                <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                                </td>
+                                                <td>0001/2562</td>
+                                                <td>9999</td>
+                                                <td>20 มกราคม 2563</td>
+                                                <td>365 วัน</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <br>
+                                <a>ประวัติผู้ช่วย</a>
+                                <br><br>
+                                <div style="font-size: 1.7vh;">
+                                    <table id="requestTable" class="table cursor-pointer table-hover tableresult">
+                                        <thead >
+                                            <tr class="" style="height:auto; background-color: rgba(40, 131, 250, 0.876); color: rgb(255, 255, 255);">
+                                                <th onclick="sortTable(0,'requestTable','')">
+                                                    <p>ปีงบประมาณ <i class="fa fa-sort "></i></p>
+                                                </th>
+                                                <th onclick="sortTable(1,'requestTable'),''">
+                                                    <p>ประเภทใบอนุญาต <i class="fa fa-sort "></i></p>
+                                                </th>
+                                                <th onclick="sortTable(2,'requestTable'),''">
+                                                    <p>เล่ม <i class="fa fa-sort "></i>
+                                                    </p>
+                                                </th>
+                                                <th onclick="sortTable(4,'requestTable'),'date'">
+                                                    <p>เลขที่ <i class="fa fa-sort "></i></p>
+                                                </th>
+                                                <th onclick="sortTable(3,'requestTable'),''">
+                                                    <p>วันที่หมดอายุ <i class="fa fa-sort "></i></p>
+                                                </th>
+                                                <th onclick="sortTable(4,'requestTable'),'date'">
+                                                    <p>สถานะ <i class="fa fa-sort "></i></p>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody style="height: 17vw; text-align: center;">
+                                            <tr onclick="toRequest(event)">
+                                                <td>2563</td>
+                                                <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                                </td>
+                                                <td>0001/2562</td>
+                                                <td>9999</td>
+                                                <td>20 มกราคม 2563</td>
+                                                <td>365 วัน</td>
+                                            </tr>
+                                            <tr onclick="toRequest(event)">
+                                                <td>2563</td>
+                                                <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                                </td>
+                                                <td>0001/2562</td>
+                                                <td>9999</td>
+                                                <td>20 มกราคม 2563</td>
+                                                <td>365 วัน</td>
+                                            </tr>
+                                            <tr onclick="toRequest(event)">
+                                                <td>2563</td>
+                                                <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                                </td>
+                                                <td>0001/2562</td>
+                                                <td>9999</td>
+                                                <td>20 มกราคม 2563</td>
+                                                <td>365 วัน</td>
+                                            </tr>
+                                            <tr onclick="toRequest(event)">
+                                                <td>2563</td>
+                                                <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                                </td>
+                                                <td>0001/2562</td>
+                                                <td>9999</td>
+                                                <td>20 มกราคม 2563</td>
+                                                <td>365 วัน</td>
+                                            </tr>
+                                            <tr onclick="toRequest(event)">
+                                                <td>2563</td>
+                                                <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                                </td>
+                                                <td>0001/2562</td>
+                                                <td>9999</td>
+                                                <td>20 มกราคม 2563</td>
+                                                <td>365 วัน</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="Tokyo" class="tabcontent">
+                            <div style="font-size: 1.7vh;">
+                                <br>
+                                <a>ประวัติใบอนุญาต</a>
+                                <br><br>
+                                <table id="requestTable" class="table cursor-pointer table-hover tableresult">
+                                    <thead>
+                                        <tr class="is-color" style="height: 5.2vw;" >
+                                            <th onclick="sortTable(0,'requestTable','')">
+                                                <p>ปีงบประมาณ <i class="fa fa-sort "></i></p>
+                                            </th>
+                                            <th onclick="sortTable(1,'requestTable'),''">
+                                                <p>ประเภทใบอนุญาต <i class="fa fa-sort "></i></p>
+                                            </th>
+                                            <th onclick="sortTable(2,'requestTable'),''">
+                                                <p>เล่ม <i class="fa fa-sort "></i>
+                                                </p>
+                                            </th>
+                                            <th onclick="sortTable(4,'requestTable'),'date'">
+                                                <p>เลขที่ <i class="fa fa-sort "></i></p>
+                                            </th>
+                                            <th onclick="sortTable(3,'requestTable'),''">
+                                                <p>วันที่หมดอายุ <i class="fa fa-sort "></i></p>
+                                            </th>
+                                            <th onclick="sortTable(4,'requestTable'),'date'">
+                                                <p>สถานะ <i class="fa fa-sort "></i></p>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody style="height: 17vw;  text-align: center;" >
+                                        <tr onclick="toRequest(event)">
+                                            <td>2563</td>
+                                            <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                            </td>
+                                            <td>0001/2562</td>
+                                            <td>9999</td>
+                                            <td>20 มกราคม 2563</td>
+                                            <td>365 วัน</td>
+                                        </tr>
+                                        <tr onclick="toRequest(event)">
+                                            <td>2563</td>
+                                            <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                            </td>
+                                            <td>0001/2562</td>
+                                            <td>9999</td>
+                                            <td>20 มกราคม 2563</td>
+                                            <td>365 วัน</td>
+                                        </tr>
+                                        <tr onclick="toRequest(event)">
+                                            <td>2563</td>
+                                            <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                            </td>
+                                            <td>0001/2562</td>
+                                            <td>9999</td>
+                                            <td>20 มกราคม 2563</td>
+                                            <td>365 วัน</td>
+                                        </tr>
+                                        <tr onclick="toRequest(event)">
+                                            <td>2563</td>
+                                            <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                            </td>
+                                            <td>0001/2562</td>
+                                            <td>9999</td>
+                                            <td>20 มกราคม 2563</td>
+                                            <td>365 วัน</td>
+                                        </tr>
+                                        <tr onclick="toRequest(event)">
+                                            <td>2563</td>
+                                            <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                            </td>
+                                            <td>0001/2562</td>
+                                            <td>9999</td>
+                                            <td>20 มกราคม 2563</td>
+                                            <td>365 วัน</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <br>
+                                <a>ประวัติการร้องเรียน</a>
+                                <br><br>
+                                <div style="font-size: 1.7vh;">
+                                    <table id="requestTable" class="table cursor-pointer table-hover tableresult">
+                                        <thead >
+                                            <tr class="" style="height: 5.2vw; background-color: rgba(212, 65, 65, 0.863); color: rgb(255, 255, 255);">
+                                                <th onclick="sortTable(0,'requestTable','')">
+                                                    <p>ปีงบประมาณ <i class="fa fa-sort "></i></p>
+                                                </th>
+                                                <th onclick="sortTable(1,'requestTable'),''">
+                                                    <p>ประเภทใบอนุญาต <i class="fa fa-sort "></i></p>
+                                                </th>
+                                                <th onclick="sortTable(2,'requestTable'),''">
+                                                    <p>เล่ม <i class="fa fa-sort "></i>
+                                                    </p>
+                                                </th>
+                                                <th onclick="sortTable(4,'requestTable'),'date'">
+                                                    <p>เลขที่ <i class="fa fa-sort "></i></p>
+                                                </th>
+                                                <th onclick="sortTable(3,'requestTable'),''">
+                                                    <p>วันที่หมดอายุ <i class="fa fa-sort "></i></p>
+                                                </th>
+                                                <th onclick="sortTable(4,'requestTable'),'date'">
+                                                    <p>สถานะ <i class="fa fa-sort "></i></p>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody style="height: 17vw; text-align: center;">
+                                            <tr onclick="toRequest(event)">
+                                                <td>2563</td>
+                                                <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                                </td>
+                                                <td>0001/2562</td>
+                                                <td>9999</td>
+                                                <td>20 มกราคม 2563</td>
+                                                <td>365 วัน</td>
+                                            </tr>
+                                            <tr onclick="toRequest(event)">
+                                                <td>2563</td>
+                                                <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                                </td>
+                                                <td>0001/2562</td>
+                                                <td>9999</td>
+                                                <td>20 มกราคม 2563</td>
+                                                <td>365 วัน</td>
+                                            </tr>
+                                            <tr onclick="toRequest(event)">
+                                                <td>2563</td>
+                                                <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                                </td>
+                                                <td>0001/2562</td>
+                                                <td>9999</td>
+                                                <td>20 มกราคม 2563</td>
+                                                <td>365 วัน</td>
+                                            </tr>
+                                            <tr onclick="toRequest(event)">
+                                                <td>2563</td>
+                                                <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                                </td>
+                                                <td>0001/2562</td>
+                                                <td>9999</td>
+                                                <td>20 มกราคม 2563</td>
+                                                <td>365 วัน</td>
+                                            </tr>
+                                            <tr onclick="toRequest(event)">
+                                                <td>2563</td>
+                                                <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                                </td>
+                                                <td>0001/2562</td>
+                                                <td>9999</td>
+                                                <td>20 มกราคม 2563</td>
+                                                <td>365 วัน</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <br>
+                                <a>ประวัติผู้ช่วย</a>
+                                <br><br>
+                                <div style="font-size: 1.7vh;">
+                                    <table id="requestTable" class="table cursor-pointer table-hover tableresult">
+                                        <thead >
+                                            <tr class="" style="height:auto; background-color: rgba(40, 131, 250, 0.876); color: rgb(255, 255, 255);">
+                                                <th onclick="sortTable(0,'requestTable','')">
+                                                    <p>ปีงบประมาณ <i class="fa fa-sort "></i></p>
+                                                </th>
+                                                <th onclick="sortTable(1,'requestTable'),''">
+                                                    <p>ประเภทใบอนุญาต <i class="fa fa-sort "></i></p>
+                                                </th>
+                                                <th onclick="sortTable(2,'requestTable'),''">
+                                                    <p>เล่ม <i class="fa fa-sort "></i>
+                                                    </p>
+                                                </th>
+                                                <th onclick="sortTable(4,'requestTable'),'date'">
+                                                    <p>เลขที่ <i class="fa fa-sort "></i></p>
+                                                </th>
+                                                <th onclick="sortTable(3,'requestTable'),''">
+                                                    <p>วันที่หมดอายุ <i class="fa fa-sort "></i></p>
+                                                </th>
+                                                <th onclick="sortTable(4,'requestTable'),'date'">
+                                                    <p>สถานะ <i class="fa fa-sort "></i></p>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody style="height: 17vw; text-align: center;">
+                                            <tr onclick="toRequest(event)">
+                                                <td>2563</td>
+                                                <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                                </td>
+                                                <td>0001/2562</td>
+                                                <td>9999</td>
+                                                <td>20 มกราคม 2563</td>
+                                                <td>365 วัน</td>
+                                            </tr>
+                                            <tr onclick="toRequest(event)">
+                                                <td>2563</td>
+                                                <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                                </td>
+                                                <td>0001/2562</td>
+                                                <td>9999</td>
+                                                <td>20 มกราคม 2563</td>
+                                                <td>365 วัน</td>
+                                            </tr>
+                                            <tr onclick="toRequest(event)">
+                                                <td>2563</td>
+                                                <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                                </td>
+                                                <td>0001/2562</td>
+                                                <td>9999</td>
+                                                <td>20 มกราคม 2563</td>
+                                                <td>365 วัน</td>
+                                            </tr>
+                                            <tr onclick="toRequest(event)">
+                                                <td>2563</td>
+                                                <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                                </td>
+                                                <td>0001/2562</td>
+                                                <td>9999</td>
+                                                <td>20 มกราคม 2563</td>
+                                                <td>365 วัน</td>
+                                            </tr>
+                                            <tr onclick="toRequest(event)">
+                                                <td>2563</td>
+                                                <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                                                </td>
+                                                <td>0001/2562</td>
+                                                <td>9999</td>
+                                                <td>20 มกราคม 2563</td>
+                                                <td>365 วัน</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
                 </a>
             </div>
+
         </fieldset>
     </form>
 

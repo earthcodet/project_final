@@ -192,7 +192,7 @@ select::-ms-expand {
 }
 
 a {
-    font-size: 2.2vh;
+    font-size: 2.0vh;
 }
 
 button {
@@ -430,12 +430,12 @@ html, body {
 
 .tableresult tbody {
     display: block;
-    height: 370px;
+    height: 25vw;
     overflow: auto;
 }
 
 .tableresult th {
-    font-size: 16px;
+    /* font-size: 2vh; */
     padding: 0.5rem;
     margin-bottom: 0rem;
     text-align: center;
@@ -474,9 +474,55 @@ html, body {
     color: #212529;
     background-color: rgba(0, 0, 0, .075)
 }
+
 .cursor-pointer {
     cursor: pointer;
-  }
+}
+
 div.displaynone {
     display: none;
+}
+
+p.font {
+    font-size: 1.1vw;
+}
+
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #414642;
+}
+
+/* Style the buttons inside the tab */
+
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+
+.tab button:hover {
+    background-color: rgb(80, 80, 80);
+}
+
+/* Create an active/current tablink class */
+
+.tab button.active {
+    background-color: rgb(0, 0, 0);
+}
+
+/* Style the tab content */
+
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
 }
