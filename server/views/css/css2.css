@@ -29,6 +29,14 @@
     color: white;
 }
 
+.select-active {
+    background-color: green!important;
+    color: white!important;
+}
+.dropdown-active {
+    background-color: rgb(143, 141, 141)!important;
+}
+
 .w3-top {
     width: 100%;
     position: fixed;
