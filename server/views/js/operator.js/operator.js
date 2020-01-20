@@ -1,3 +1,5 @@
+let _isUsed = false
+let _isIdCheckPersonal = ''
 let arrInsert = []
 let fileImage
 let inAddress = {
@@ -34,37 +36,66 @@ let inImage = {
     'data': ''
 }
 function preInsert() {
-    //address
-    inAddress.home_number = document.getElementById('homeId').value
-    inAddress.moo = document.getElementById('moo').value
-    inAddress.trxk = document.getElementById('trxk').value
-    inAddress.sxy = document.getElementById('sxy').value
-    inAddress.building = document.getElementById('building').value
-    inAddress.road = document.getElementById('road').value
-    inAddress.district_name = document.getElementById('subdistrict').value
-    inAddress.amphur_name = document.getElementById('district').value
-    inAddress.province_name = document.getElementById('province').value
-    //prsonal
-    inPeronal.title = document.getElementById('title').value
-    inPeronal.type = document.getElementById('typeUser').value
-    inPeronal.name = document.getElementById('nameUser').value
-    inPeronal.surname = document.getElementById('surnameUser').value
-    inPeronal.nationality = document.getElementById('nationality').value
-    inPeronal.race = document.getElementById('race').value
-    inPeronal.birthday = document.getElementById('datepicker3').value
-    inPeronal.personal_id = document.getElementById('id').value
-    inPeronal.card_issued = document.getElementById('datepicker1').value
-    inPeronal.card_expipe = document.getElementById('datepicker2').value
-    inPeronal.phone = document.getElementById('phone').value
-    inPeronal.fax = document.getElementById('fax').value
-    arrInsert.push(inPeronal)
-    arrInsert.push(inAddress)
-    arrInsert.push(inImage)
+    if (document.getElementById('id').value.trim() != '' && document.getElementById('id').value.trim().length === 13) {
+        console.log(_isUsed)
+        if (_isUsed === false) {
+            //address
+            inAddress.home_number = document.getElementById('homeId').value
+            inAddress.moo = document.getElementById('moo').value
+            inAddress.trxk = document.getElementById('trxk').value
+            inAddress.sxy = document.getElementById('sxy').value
+            inAddress.building = document.getElementById('building').value
+            inAddress.road = document.getElementById('road').value
+            inAddress.district_name = document.getElementById('subdistrict').value
+            inAddress.amphur_name = document.getElementById('district').value
+            inAddress.province_name = document.getElementById('province').value
+            //prsonal
+            inPeronal.title = document.getElementById('title').value
+            inPeronal.type = document.getElementById('typeUser').value
+            inPeronal.name = document.getElementById('nameUser').value
+            inPeronal.surname = document.getElementById('surnameUser').value
+            inPeronal.nationality = document.getElementById('nationality').value
+            inPeronal.race = document.getElementById('race').value
+            inPeronal.birthday = document.getElementById('datepicker3').value
+            inPeronal.personal_id = document.getElementById('id').value
+            inPeronal.card_issued = document.getElementById('datepicker1').value
+            inPeronal.card_expipe = document.getElementById('datepicker2').value
+            inPeronal.phone = document.getElementById('phone').value
+            inPeronal.fax = document.getElementById('fax').value
+            arrInsert.push(inPeronal)
+            arrInsert.push(inAddress)
+            arrInsert.push(inImage)
 
-    console.log(arrInsert)
-    console.log(fileImage)
+            console.log(arrInsert)
+            console.log(fileImage)
+            return true
+        }else{
+            Swal.fire({
+                title: "เลขประจำตัวผู้ประกอบการนี้มีในระบบแล้ว",
+                width: '30%',
+                showConfirmButton: true,
+                closeOnConfirm: false,
+                closeOnCancel: false,
+                confirmButtonColor: "#009688",
+                icon: 'error'
+            });
+        }
+    }else{
+        Swal.fire({
+            title: "กรุณาใส่เลขประจำตัวให้ครบ 13 หลัก",
+            width: '30%',
+            showConfirmButton: true,
+            closeOnConfirm: false,
+            closeOnCancel: false,
+            confirmButtonColor: "#009688",
+            icon: 'error'
+        });
+        return false
+    }
+
 }
 function duplicateId(personalId) {
+    _isIdCheckPersonal = personalId
     return new Promise((resolve, reject) => {
         axios.get('http://localhost:5000/get/personalId/' + personalId).then((data) => {
             return resolve(data.data)
@@ -72,32 +103,60 @@ function duplicateId(personalId) {
     })
 }
 function checkId(value) {
-    console.log(value)
+    if(value.length != 13){
+        _isCheckPersonalId = false
+    }
     if (value.length === 13) {
+        if(_isIdCheckPersonal != value){
             duplicateId(value).then((data) => {
                 console.log(data)
-                if(!data){
+                if (!data) {
                     Swal.fire({
-                        title: "เลขประจำตัวผู้ประกอบการนี้ใช้ได้",
+                        title: "เลขประจำตัวผู้ประกอบการนี้สามารถใช้ได้",
                         width: '30%',
                         showConfirmButton: true,
                         closeOnConfirm: false,
                         closeOnCancel: false,
-                        icon:'success'
+                        confirmButtonColor: "#009688",
+                        icon: 'success'
                     });
-                }else{
+                    _isUsed = false
+                } else {
                     Swal.fire({
-                        title: "มีเลขประจำตัวผู้ประกอบการ",
+                        title: "เลขประจำตัวผู้ประกอบการนี้มีในระบบแล้ว",
                         width: '30%',
                         showConfirmButton: true,
                         closeOnConfirm: false,
                         closeOnCancel: false,
-                        icon:'error'
+                        confirmButtonColor: "#009688",
+                        icon: 'error'
                     });
+                    _isUsed = true
                 }
             })
-    }else{
+        }
+       
+    } else {
         return false
+    }
+}
+function changeInputBytype(value) {
+    console.log(value === 'นิติบุคคล')
+    if (value === 'นิติบุคคล') {
+        document.getElementById('title').style.display = 'none'
+        console.log(document.getElementById('titleNameTopic'))
+        document.getElementById('surnameUser').style.display = 'none'
+        document.getElementById('surTopic').style.display = 'none'
+        document.getElementById('nameUserTopic').style.marginLeft = '6.2vw'
+        document.getElementById('nameUser').style.width = '27.5vw'
+        document.getElementById('titleNameTopic').style.display = 'none'
+    } else {
+        document.getElementById('title').style.display = ''
+        document.getElementById('surnameUser').style.display = ''
+        document.getElementById('surTopic').style.display = ''
+        document.getElementById('nameUserTopic').style.marginLeft = '3vw'
+        document.getElementById('nameUser').style.width = '11vw'
+        document.getElementById('titleNameTopic').style.display = ''
     }
 }
 function uploadImage(event) {

@@ -52,52 +52,53 @@ function enableMenu(id) {
 }
 
 function insertTEST() {
-
-    Swal.fire({
-        title: "สำนักงานเทศบาล",
-        html: "ต้องการบันทึกหรือไม่",
-        showCancelButton: true,
-        customClass: 'swal-height',
-        confirmButtonColor: "#009688",
-        confirmButtonText: "ใช่",
-        cancelButtonText: "ไม่ใช่",
-        cancelButtonColor: '#dc3545',
-        closeOnConfirm: false,
-        closeOnCancel: false,
-        showLoaderOnConfirm: true,
-        imageUrl: '../../img/img1.jpg',
-        imageWidth: 'auto',
-        imageHeight: '100%',
-        imageAlt: 'Custom image',
-        preConfirm: function() {
-            return new Promise(function(resolve, reject) {
-              setTimeout(function() {
-                preInsert()
-                insertToDatabase().then((data) => {
-                    if (data) {
-                        resolve();
-                    }
-                })
-              }, 1000);
-            });
-          }
-    }).then((result) => {
-        if (result.value) {
-            Swal.fire({
-                html: "บันทึกสำเร็จ",
-                icon: "success",
-                confirmButtonColor: "#009688"
-            });
-            data = true
-            addNew = false
-            disableMenuAll()
-            enableMenu('addMenu')
-            enableMenu('editMenu')
-            enableMenu('deleteMenu')
-            enableFunction()
-        } else if (result.dismiss === Swal.DismissReason.cancel) {
-            // Swal.fire("บันทึกล้มเหลว");
-        }});
+    var a = preInsert()
+    console.log(`a => ${a}`)
+    // Swal.fire({
+    //     title: "สำนักงานเทศบาล",
+    //     html: "ต้องการบันทึกหรือไม่",
+    //     showCancelButton: true,
+    //     customClass: 'swal-height',
+    //     confirmButtonColor: "#009688",
+    //     confirmButtonText: "ใช่",
+    //     cancelButtonText: "ไม่ใช่",
+    //     cancelButtonColor: '#dc3545',
+    //     closeOnConfirm: false,
+    //     closeOnCancel: false,
+    //     showLoaderOnConfirm: true,
+    //     imageUrl: '../../img/img1.jpg',
+    //     imageWidth: 'auto',
+    //     imageHeight: '100%',
+    //     imageAlt: 'Custom image',
+    //     preConfirm: function() {
+    //         return new Promise(function(resolve, reject) {
+    //           setTimeout(function() {
+    //             preInsert()
+    //             insertToDatabase().then((data) => {
+    //                 if (data) {
+    //                     resolve();
+    //                 }
+    //             })
+    //           }, 1000);
+    //         });
+    //       }
+    // }).then((result) => {
+    //     if (result.value) {
+    //         Swal.fire({
+    //             html: "บันทึกสำเร็จ",
+    //             icon: "success",
+    //             confirmButtonColor: "#009688"
+    //         });
+    //         data = true
+    //         addNew = false
+    //         disableMenuAll()
+    //         enableMenu('addMenu')
+    //         enableMenu('editMenu')
+    //         enableMenu('deleteMenu')
+    //         enableFunction()
+    //     } else if (result.dismiss === Swal.DismissReason.cancel) {
+    //         // Swal.fire("บันทึกล้มเหลว");
+    //     }});
 }
 
 function editTEST() {
