@@ -10,6 +10,12 @@
     <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.css">
     <link rel="stylesheet" href="../../css/css2.css">
     <link href="../../css/fonts.css" rel="stylesheet">
+
+    <!-- เรียกไลบารี่สร้างปฎิทิน  -->
+    <script src="../../js/jquery-3.4.1.min.js"></script>
+    <script src="../../js/datetimepicker.full.js"></script>
+    <script src="../../js/dateth.js"></script>
+    <link rel="stylesheet" href="../../css/date.css">
 </head>
 
 <body>
@@ -21,7 +27,8 @@
         <a id="restoreMenu" onclick="restoreTEST()" class="exit disableds"><i class="fa fa-reply"> เรียกคืน</i></a>
         <a id="deleteMenu" onclick="deleteTEST()" class="exit disableds"><i class="fa fa-times"> ยกเลิก</i></a>
         <!-- <a><i class="fa fa-search"> ค้นหา</i></a> -->
-        <a id="exitMenu" onclick="exitTEST()" class="exit" style="float: right;width: 17%;"><i class="fa fa-sign-out-alt">
+        <a id="exitMenu" onclick="exitTEST()" class="exit" style="float: right;width: 17%;"><i
+                class="fa fa-sign-out-alt">
                 ออกจากระบบ</i></a>
     </div>
     <!-- เมนูด้านข้าง -->
@@ -32,9 +39,9 @@
         <br>
         <button class="dropdown-btn select-active"><b>ระบบงานคำขอ </b><i class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
-           <a href="searchRequest.html">- ค้นหา/แก้ไข</a>
+            <a href="searchRequest.html">- ค้นหา/แก้ไข</a>
             <a href="request_public_sell.html">- ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
-            <a href="request_public_hawk.html" class ="dropdown-active">-
+            <a href="request_public_hawk.html" class="dropdown-active">-
                 ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
             <a href="request_area_more_sell.html">- ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
             <a href="request_area_more_correct.html">- ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</a>
@@ -78,9 +85,11 @@
             <a href="../report/report_crematory.html">- ตามคำขอ</a>
             <a href="../report/report_summary.html">- สรุป</a>
         </div>
-        <button class="dropdown-btn notification"><b>แจ้งเตือน </b><span id="notficationRequest" class="badge" style="margin-left:0.5vw;">100000</span><i class="fa fa-caret-down"></i></button>
+        <button class="dropdown-btn notification"><b>แจ้งเตือน </b><span id="notficationRequest" class="badge"
+                style="margin-left:0.5vw;">100000</span><i class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
-            <a class="notification" href="../notfication/request.html">- งานคำขอ<span id="notficationRequest" class="badge" style="margin-left:0.5vw;">100000</span></a>
+            <a class="notification" href="../notfication/request.html">- งานคำขอ<span id="notficationRequest"
+                    class="badge" style="margin-left:0.5vw;">100000</span></a>
         </div>
     </div>
     <!-- เนื้อหา -->
@@ -97,7 +106,7 @@
                     <a style="margin-left: 0vw;">เลขที่คำขอ :
                         <input type="text" style="width: 16%;" readonly></a>
                     <a>วันที่ยื่นขอ :
-                        <input type="text" style="width: 16%;"></a>
+                        <input type="text" id="datepicker1" style="width: 16%;"></a>
                     <a>ประเภทคำขอ :
                         <input list="brow" id="" name="" style="width: 19%;" class="drop">
                         <datalist id="brow">
@@ -449,7 +458,7 @@
                     <a>เลขที่ :
                         <input type="text" id="" style="width: 10%;"></a>&ensp;
                     <a>ออกให้เมื่อวันที่ :
-                        <input type="text" id="datepicker2" id="" style="width: 12%;"></a>
+                        <input type="text" id="datepicker2" style="width: 12%;"></a>
                     <a>ค่าธรรมเนียม :
                         <input type="number" id="" style="width: 12%;"></a>
                     <a>ค่าปรับ :
@@ -485,9 +494,10 @@
                                 <option value="22">ล้อเลื่อน</option>
                                 <option value="23">ริมทางสาธารณะ (ชั่วคราว)</option>
                             </select></a>
-                            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            สินค้าประเภท : <input style="width: 32%;">&emsp;&emsp;&emsp;&emsp;
-                            เวลาเริ่ม : <input type="time" style="width: 11.6%;">  เวลาสิ้นสุด : <input type="time" style="width: 11.7%;">
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        สินค้าประเภท : <input style="width: 32%;">&emsp;&emsp;&emsp;&emsp;
+                        เวลาเริ่ม : <input type="time" style="width: 11.6%;"> เวลาสิ้นสุด : <input type="time"
+                            style="width: 11.7%;">
                         <p>2) &nbsp;ผู้ได้รับอนุญาตต้องปฏิบัติตามหลักเกณฑ์ วิธีการ
                             และเงื่อนไขที่กำหนดในข้อกำหนดของท้องถิ่น</p>
                         <p>3)
@@ -501,14 +511,14 @@
                                 เพิ่ม</button>
                             <a class="container1"></a>
                         </p>
-                        <p>5) &nbsp;ใบอนญาตฉบับนี้ออกให้เมื่อวันที่ <input type="text" id="datepicker6"></p>
+                        <p>5) &nbsp;ใบอนญาตฉบับนี้ออกให้เมื่อวันที่ <input type="text" id="datepicker3"></p>
                         <p>6) &nbsp;ใบอนญาตฉบับนี้สิ้นอายุวันที่ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text"
-                                id="datepicker7"></p>
+                                id="datepicker4"></p>
                     </a>
                     <br>
                 </div>
                 <br>
-                
+
                 <!-- สัมผัสอาหาร -->
                 <div class="box">
                     <h3 style="font-size: 2.8vh;">ใบอบรมผู้สัมผัสอาหาร</h3>
@@ -523,9 +533,9 @@
                         <input type="text" id="">
                         <br>
                         <a>ให้ไว้ ณ วันที่</a>
-                        <input type="text" id="datepicker2" />&nbsp;
+                        <input type="text" id="datepicker5" />&nbsp;
                         <a>มีผลถึง ณ วันที่</a>
-                        <input type="text" id="datepicker3" />
+                        <input type="text" id="datepicker6" />
                     </div>
                     <br>
                 </div><br>
@@ -565,7 +575,7 @@
                         <div class="col" style="width: 33.33%;">
                             เลขที่คำขอ : <input readonly>
                             <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            วันที่ยื่น : <input type="text" id="datepicker5">
+                            วันที่ยื่น : <input type="text" id="datepicker7">
                         </div>
                         <div class="col" style="width: 33.33%;">
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -633,7 +643,7 @@
                     </div>
 
                 </div><br>
-                
+
                 <!-- ตรวจสอบ -->
                 <div class="box">
                     <a>
@@ -642,7 +652,7 @@
                                 <p style="margin-top: 2.8%;"><b>ความถูกต้องของเอกสารคำร้อง</b></p>
                             </div>
                             <div class="col">
-                                <p style="margin-top: 1%;"><b>บันทึกอนุมัติคำขอ</b> <input type="text" id="datepicker5">
+                                <p style="margin-top: 1%;"><b>บันทึกอนุมัติคำขอ</b> <input type="text" id="datepicker8">
                                 </p>
                             </div>
                         </div>
@@ -681,10 +691,11 @@
 
 </body>
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
-<script src="../../js/jquery.js"></script>
+<!-- <script src="../../js/jquery.js"></script> -->
 <script src="../../js/js22.js"></script>
 <script src="../../js/controlTest.js"></script>
 <script src="../../js/disable.js"></script>
 <script src="../../js/sweet2.js"></script>
 <script src="../../js/utilities.js"></script>
+
 </html>

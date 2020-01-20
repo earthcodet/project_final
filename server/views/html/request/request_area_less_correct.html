@@ -9,6 +9,12 @@
     <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.css">
     <link rel="stylesheet" href="../../css/css2.css">
     <link href="../../css/fonts.css" rel="stylesheet">
+
+    <!-- เรียกไลบารี่สร้างปฎิทิน  -->
+    <script src="../../js/jquery-3.4.1.min.js"></script>
+    <script src="../../js/datetimepicker.full.js"></script>
+    <script src="../../js/dateth.js"></script>
+    <link rel="stylesheet" href="../../css/date.css">
 </head>
 
 <body>
@@ -20,7 +26,8 @@
         <a id="restoreMenu" onclick="restoreTEST()" class="exit disableds"><i class="fa fa-reply"> เรียกคืน</i></a>
         <a id="deleteMenu" onclick="deleteTEST()" class="exit disableds"><i class="fa fa-times"> ยกเลิก</i></a>
         <!-- <a><i class="fa fa-search"> ค้นหา</i></a> -->
-        <a id="exitMenu" onclick="exitTEST()" class="exit" style="float: right;width: 17%;"><i class="fa fa-sign-out-alt">
+        <a id="exitMenu" onclick="exitTEST()" class="exit" style="float: right;width: 17%;"><i
+                class="fa fa-sign-out-alt">
                 ออกจากระบบ</i></a>
     </div>
     <!-- เมนูด้านข้าง -->
@@ -29,7 +36,7 @@
             <img src="../../img/img1.jpg" style="width:92%;">
         </a>
         <br>
-        <button class="dropdown-btn select-active" ><b>ระบบงานคำขอ </b><i class="fa fa-caret-down"></i></button>
+        <button class="dropdown-btn select-active"><b>ระบบงานคำขอ </b><i class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
             <a href="searchRequest.html">- ค้นหา/แก้ไข</a>
             <a href="request_public_sell.html">- ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
@@ -37,7 +44,8 @@
             <a href="request_area_more_sell.html">- ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
             <a href="request_area_more_correct.html">- ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</a>
             <a href="request_area_less_sell.html">- หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
-            <a class ="dropdown-active" href="request_area_less_correct.html" >- หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
+            <a class="dropdown-active" href="request_area_less_correct.html">-
+                หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
             <a href="request_market.html">- ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
             <a href="request_health_danger.html">-
                 กิจการที่เป็นอันตรายต่อสุขภาพ</a>
@@ -76,9 +84,11 @@
             <a href="../report/report_crematory.html">- ตามคำขอ</a>
             <a href="../report/report_summary.html">- สรุป</a>
         </div>
-        <button class="dropdown-btn notification"><b>แจ้งเตือน </b><span id="notficationRequest" class="badge" style="margin-left:0.5vw;">100000</span><i class="fa fa-caret-down"></i></button>
+        <button class="dropdown-btn notification"><b>แจ้งเตือน </b><span id="notficationRequest" class="badge"
+                style="margin-left:0.5vw;">100000</span><i class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
-            <a class="notification" href="../notfication/request.html">- งานคำขอ<span id="notficationRequest" class="badge" style="margin-left:0.5vw;">100000</span></a>
+            <a class="notification" href="../notfication/request.html">- งานคำขอ<span id="notficationRequest"
+                    class="badge" style="margin-left:0.5vw;">100000</span></a>
         </div>
     </div>
     <!-- เนื้อหา -->
@@ -86,7 +96,8 @@
         <fieldset disabled id="disable" style="border: 0;padding: 0;margin: 0;">
             <div class="main">
                 <header class="w3-top2">
-                    <h1 style="font-size:2.8vh;margin-left: 25px;padding: 2px;"> หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</h1>
+                    <h1 style="font-size:2.8vh;margin-left: 25px;padding: 2px;">
+                        หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</h1>
                 </header>
                 <!-- ข้อมูลใบ -->
                 <div class="box">
@@ -94,7 +105,7 @@
                     <a style="margin-left: 0vw;">เลขที่คำขอ :
                         <input type="text" style="width: 16%;" readonly></a>
                     <a>วันที่ยื่นขอ :
-                        <input type="text" style="width: 16%;"></a>
+                        <input type="text" id="datepicker1" style="width: 16%;"></a>
                     <a>ประเภทคำขอ :
                         <input list="brow" id="" name="" style="width: 19%;" class="drop">
                         <datalist id="brow">
@@ -225,7 +236,7 @@
                     <a>เลขที่ :
                         <input type="text" id="" style="width: 10%;"></a>&ensp;
                     <a>ออกให้เมื่อวันที่ :
-                        <input type="text" id="datepicker2" id="" style="width: 12%;"></a>
+                        <input type="text" id="datepicker2" style="width: 12%;"></a>
                     <a>ค่าธรรมเนียม :
                         <input type="number" id="" style="width: 12%;"></a>
                     <a>ค่าปรับ :
@@ -240,9 +251,10 @@
                 <div class="box" id="Demo">
                     <h3 style="font-size: 2.8vh;">ใช้อาคารสถานที่ประกอบการของผู้อื่น</h3>
                     <input type="radio" name="spirits" id="spirits" onClick="show_spirits(this.value);" value="1"
-                        style="margin-left: 5vw;" >
+                        style="margin-left: 5vw;">
                     <a>ใช้สถานที่ประกอบการของผู้อื่น</a>&ensp;
-                    <input type="radio" name="spirits" id="spirits" onClick="show_spirits(this.value);" value="2" checked/>
+                    <input type="radio" name="spirits" id="spirits" onClick="show_spirits(this.value);" value="2"
+                        checked />
                     <a>ไม่ใช้สถานที่ประกอบการของผู้อื่น</a>
                     <div id="boxSpirits" style="display: none;">
                         <h3 style="font-size: 2.8vh;">ข้อมูลเจ้าของสถานที่</h3>
@@ -351,26 +363,26 @@
                     <a> ยืนยันคำขอต่ออายุ </a>
                     <br>
                     <a>
-                    <div class="row" id="boxConfirm" style="width: 80%;margin-left: 5vw;display: none;">
-                        <div class="col" style="width: 33.33%;">
-                            เลขที่คำขอ : <input readonly>
-                            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            วันที่ยื่น : <input type="text" id="datepicker5">
+                        <div class="row" id="boxConfirm" style="width: 80%;margin-left: 5vw;display: none;">
+                            <div class="col" style="width: 33.33%;">
+                                เลขที่คำขอ : <input readonly>
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                วันที่ยื่น : <input type="text" id="datepicker5">
+                            </div>
+                            <div class="col" style="width: 33.33%;">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                เล่มที่ : <input style="width: 65%;">
+                                <br>
+                                ค่าธรรมเนียม :&nbsp;<input style="width: 65%;">
+                            </div>
+                            <div class="col" style="width: 33.33%;">
+                                &nbsp;&nbsp;
+                                เลขที่ : <input>
+                                <br>
+                                ค่าปรับ : <input>
+                            </div>
                         </div>
-                        <div class="col" style="width: 33.33%;">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            เล่มที่ : <input style="width: 65%;">
-                            <br>
-                            ค่าธรรมเนียม :&nbsp;<input style="width: 65%;">
-                        </div>
-                        <div class="col" style="width: 33.33%;">
-                            &nbsp;&nbsp;
-                            เลขที่ : <input>
-                            <br>
-                            ค่าปรับ : <input>
-                        </div>
-                    </div>
-                </a>
+                    </a>
                     <br>
                     <br>
                     <div style="margin-left: 8vw;">
@@ -475,4 +487,5 @@
 <script src="../../js/disable.js"></script>
 <script src="../../js/sweet2.js"></script>
 <script src="../../js/utilities.js"></script>
+
 </html>

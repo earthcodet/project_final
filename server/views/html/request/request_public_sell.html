@@ -10,6 +10,12 @@
     <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.css">
     <link rel="stylesheet" href="../../css/css2.css">
     <link href="../../css/fonts.css" rel="stylesheet">
+
+    <!-- เรียกไลบารี่สร้างปฎิทิน  -->
+    <script src="../../js/jquery-3.4.1.min.js"></script>
+    <script src="../../js/datetimepicker.full.js"></script>
+    <script src="../../js/dateth.js"></script>
+    <link rel="stylesheet" href="../../css/date.css">
 </head>
 
 <body>
@@ -95,7 +101,7 @@
                     <a style="margin-left: 0vw;">เลขที่คำขอ :
                         <input type="text" style="width: 16%;" readonly></a>
                     <a>วันที่ยื่นขอ :
-                        <input type="text" style="width: 16%;"></a>
+                        <input type="text" id="datepicker1" style="width: 16%;"></a>
                     <a>ประเภทคำขอ :
                         <input list="brow" id="" name="" style="width: 19%;" class="drop">
                         <datalist id="brow">
@@ -447,7 +453,7 @@
                     <a>เลขที่ :
                         <input type="text" id="" style="width: 10%;"></a>&ensp;
                     <a>ออกให้เมื่อวันที่ :
-                        <input type="text" id="datepicker2" id="" style="width: 12%;"></a>
+                        <input type="text" id="datepicker2" style="width: 12%;"></a>
                     <a>ค่าธรรมเนียม :
                         <input type="number" id="" style="width: 12%;"></a>
                     <a>ค่าปรับ :
@@ -499,9 +505,9 @@
                                 เพิ่ม</button>
                             <a class="container1"></a>
                         </p>
-                        <p  class="font">5) &nbsp;ใบอนญาตฉบับนี้ออกให้เมื่อวันที่ <input type="text" id="datepicker6"></p>
-                        <p  class="font">6) &nbsp;ใบอนญาตฉบับนี้สิ้นอายุวันที่ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text"
-                                id="datepicker7"></p>
+                        <p class="font">5) &nbsp;ใบอนญาตฉบับนี้ออกให้เมื่อวันที่ <input type="text" id="datepicker3"></p>
+                        <p class="font">6) &nbsp;ใบอนญาตฉบับนี้สิ้นอายุวันที่ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text"
+                                id="datepicker4"></p>
                     </a>
                     <br>
                 </div>
@@ -521,9 +527,9 @@
                         <input type="text" id="">
                         <br>
                         <a>ให้ไว้ ณ วันที่</a>
-                        <input type="text" id="datepicker2" />&nbsp;
+                        <input type="text" id="datepicker5" />&nbsp;
                         <a>มีผลถึง ณ วันที่</a>
-                        <input type="text" id="datepicker3" />
+                        <input type="text" id="datepicker6" />
                     </div>
                     <br>
                 </div><br>
@@ -562,7 +568,7 @@
                         <div class="col" style="width: 33.33%;">
                             เลขที่คำขอ : <input readonly>
                             <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            วันที่ยื่น : <input type="text" id="datepicker5">
+                            วันที่ยื่น : <input type="text" id="datepicker7">
                         </div>
                         <div class="col" style="width: 33.33%;">
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -638,7 +644,7 @@
                                 <p style="margin-top: 2.8%;"><b>ความถูกต้องของเอกสารคำร้อง</b></p>
                             </div>
                             <div class="col">
-                                <p style="margin-top: 1%;"><b>บันทึกอนุมัติคำขอ</b> <input type="text" id="datepicker5">
+                                <p style="margin-top: 1%;"><b>บันทึกอนุมัติคำขอ</b> <input type="text" id="datepicker8">
                                 </p>
                             </div>
                         </div>
@@ -676,7 +682,7 @@
 
 
 </body>
-<script src="../../js/jquery.js"></script>
+<!-- <script src="../../js/jquery.js"></script> -->
 <script src="../../js/js22.js"></script>
 <script src="../../js/controlTest.js"></script>
 <script src="../../js/disable.js"></script>
