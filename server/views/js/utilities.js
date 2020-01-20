@@ -14,7 +14,6 @@ let month = {
 }
 let selectImageFile = 0
 let maxImageFile = 4
-let imageDisplay = 0
 function checkPhoneInput(tagId) {
     var text = document.getElementById(tagId).value
     text = text.replace(/(\d{3})(\d{7})/, "$1-$2");
