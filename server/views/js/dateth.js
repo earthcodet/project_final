@@ -1,54 +1,259 @@
-function set_cal(ele) {
-  //function สร้างตัวเลือกปฎิทิน
-  $(ele).datepicker({
-    onSelect: date_text => {
-      let arr = date_text.split("/");
-      let new_date =
-        arr[0] + "/" + arr[1] + "/" + (parseInt(arr[2]) + 543).toString();
-      $(ele).val(new_date);
-      $(ele).css("color", "");
-    },
-    beforeShow: () => {
-      if ($(ele).val() != "") {
-        let arr = $(ele)
-          .val()
-          .split("/");
-        let new_date =
-          arr[0] + "/" + arr[1] + "/" + (parseInt(arr[2]) - 543).toString();
-        $(ele).val(new_date);
-      }
+$(function() {
+  $.datetimepicker.setLocale("th"); // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
 
-      $(ele).css("color", "white");
-    },
-    onClose: () => {
-      $(ele).css("color", "");
+  // กรณีใช้แบบ inline
+  /*  $("#datepicker4").datetimepicker({
+      timepicker:false,
+      format:'d-m-Y',  // กำหนดรูปแบบวันที่ ที่ใช้ เป็น 00-00-0000            
+      lang:'th',  // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
+      inline:true  
+  });    */
 
-      if ($(ele).val() != "") {
-        let arr = $(ele)
-          .val()
-          .split("/");
-        if (parseInt(arr[2]) < 2500) {
-          let new_date =
-            arr[0] + "/" + arr[1] + "/" + (parseInt(arr[2]) + 543).toString();
-          $(ele).val(new_date);
-        }
-      }
-    },
-    dateFormat: "dd/mm/yy", //กำหนดรูปแบบวันที่เป็น วัน/เดือน/ปี
-    changeMonth: true, //กำหนดให้เลือกเดือนได้
-    changeYear: true, //กำหนดให้เลือกปีได้
-    showOtherMonths: true //กำหนดให้แสดงวันของเดือนก่อนหน้าได้
+  // กรณีใช้แบบ input
+  $("#datepicker1").datetimepicker({
+    timepicker: false,
+    format: "d-m-Y", // กำหนดรูปแบบวันที่ ที่ใช้ เป็น 00-00-0000
+    lang: "th", // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
+    onSelectDate: function(dp, $input) {
+      var yearT = new Date(dp).getFullYear();
+      var yearTH = yearT + 543;
+      var fulldate = $input.val();
+      var fulldateTH = fulldate.replace(yearT, yearTH);
+      $input.val(fulldateTH);
+    }
   });
-}
+  // กรณีใช้กับ input ต้องกำหนดส่วนนี้ด้วยเสมอ เพื่อปรับปีให้เป็น ค.ศ. ก่อนแสดงปฏิทิน
+  $("#datepicker1").on("mouseenter mouseleave", function(e) {
+    var dateValue = $(this).val();
+    if (dateValue != "") {
+      var arr_date = dateValue.split("-"); // ถ้าใช้ตัวแบ่งรูปแบบอื่น ให้เปลี่ยนเป็นตามรูปแบบนั้น
+      // ในที่นี้อยู่ในรูปแบบ 00-00-0000 เป็น d-m-Y  แบ่งด่วย - ดังนั้น ตัวแปรที่เป็นปี จะอยู่ใน array
+      //  ตัวที่สอง arr_date[2] โดยเริ่มนับจาก 0
+      if (e.type == "mouseenter") {
+        var yearT = arr_date[2] - 543;
+      }
+      if (e.type == "mouseleave") {
+        var yearT = parseInt(arr_date[2]) + 543;
+      }
+      dateValue = dateValue.replace(arr_date[2], yearT);
+      $(this).val(dateValue);
+    }
+  });
 
-$(document).ready(function() {
-  //เรียก function set_cal เมื่อเปิดหน้าเว็บ โดยส่ง object element ที่มี id เป็น datepicker เป็นพารามิเตอร์
-  set_cal($("#datepicker1"));
-  set_cal($("#datepicker2"));
-  set_cal($("#datepicker3"));
-  set_cal($("#datepicker4"));
-  set_cal($("#datepicker5"));
-  set_cal($("#datepicker6"));
-  set_cal($("#datepicker7"));
-  set_cal($("#datepicker8"));
+  // กรณีใช้แบบ input
+  $("#datepicker2").datetimepicker({
+    timepicker: false,
+    format: "d-m-Y", // กำหนดรูปแบบวันที่ ที่ใช้ เป็น 00-00-0000
+    lang: "th", // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
+    onSelectDate: function(dp, $input) {
+      var yearT = new Date(dp).getFullYear();
+      var yearTH = yearT + 543;
+      var fulldate = $input.val();
+      var fulldateTH = fulldate.replace(yearT, yearTH);
+      $input.val(fulldateTH);
+    }
+  });
+  // กรณีใช้กับ input ต้องกำหนดส่วนนี้ด้วยเสมอ เพื่อปรับปีให้เป็น ค.ศ. ก่อนแสดงปฏิทิน
+  $("#datepicker2").on("mouseenter mouseleave", function(e) {
+    var dateValue = $(this).val();
+    if (dateValue != "") {
+      var arr_date = dateValue.split("-"); // ถ้าใช้ตัวแบ่งรูปแบบอื่น ให้เปลี่ยนเป็นตามรูปแบบนั้น
+      // ในที่นี้อยู่ในรูปแบบ 00-00-0000 เป็น d-m-Y  แบ่งด่วย - ดังนั้น ตัวแปรที่เป็นปี จะอยู่ใน array
+      //  ตัวที่สอง arr_date[2] โดยเริ่มนับจาก 0
+      if (e.type == "mouseenter") {
+        var yearT = arr_date[2] - 543;
+      }
+      if (e.type == "mouseleave") {
+        var yearT = parseInt(arr_date[2]) + 543;
+      }
+      dateValue = dateValue.replace(arr_date[2], yearT);
+      $(this).val(dateValue);
+    }
+  });
+
+  // กรณีใช้แบบ input
+  $("#datepicker3").datetimepicker({
+    timepicker: false,
+    format: "d-m-Y", // กำหนดรูปแบบวันที่ ที่ใช้ เป็น 00-00-0000
+    lang: "th", // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
+    onSelectDate: function(dp, $input) {
+      var yearT = new Date(dp).getFullYear();
+      var yearTH = yearT + 543;
+      var fulldate = $input.val();
+      var fulldateTH = fulldate.replace(yearT, yearTH);
+      $input.val(fulldateTH);
+    }
+  });
+  // กรณีใช้กับ input ต้องกำหนดส่วนนี้ด้วยเสมอ เพื่อปรับปีให้เป็น ค.ศ. ก่อนแสดงปฏิทิน
+  $("#datepicker3").on("mouseenter mouseleave", function(e) {
+    var dateValue = $(this).val();
+    if (dateValue != "") {
+      var arr_date = dateValue.split("-"); // ถ้าใช้ตัวแบ่งรูปแบบอื่น ให้เปลี่ยนเป็นตามรูปแบบนั้น
+      // ในที่นี้อยู่ในรูปแบบ 00-00-0000 เป็น d-m-Y  แบ่งด่วย - ดังนั้น ตัวแปรที่เป็นปี จะอยู่ใน array
+      //  ตัวที่สอง arr_date[2] โดยเริ่มนับจาก 0
+      if (e.type == "mouseenter") {
+        var yearT = arr_date[2] - 543;
+      }
+      if (e.type == "mouseleave") {
+        var yearT = parseInt(arr_date[2]) + 543;
+      }
+      dateValue = dateValue.replace(arr_date[2], yearT);
+      $(this).val(dateValue);
+    }
+  });
+
+  // กรณีใช้แบบ input
+  $("#datepicker4").datetimepicker({
+    timepicker: false,
+    format: "d-m-Y", // กำหนดรูปแบบวันที่ ที่ใช้ เป็น 00-00-0000
+    lang: "th", // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
+    onSelectDate: function(dp, $input) {
+      var yearT = new Date(dp).getFullYear();
+      var yearTH = yearT + 543;
+      var fulldate = $input.val();
+      var fulldateTH = fulldate.replace(yearT, yearTH);
+      $input.val(fulldateTH);
+    }
+  });
+  // กรณีใช้กับ input ต้องกำหนดส่วนนี้ด้วยเสมอ เพื่อปรับปีให้เป็น ค.ศ. ก่อนแสดงปฏิทิน
+  $("#datepicker4").on("mouseenter mouseleave", function(e) {
+    var dateValue = $(this).val();
+    if (dateValue != "") {
+      var arr_date = dateValue.split("-"); // ถ้าใช้ตัวแบ่งรูปแบบอื่น ให้เปลี่ยนเป็นตามรูปแบบนั้น
+      // ในที่นี้อยู่ในรูปแบบ 00-00-0000 เป็น d-m-Y  แบ่งด่วย - ดังนั้น ตัวแปรที่เป็นปี จะอยู่ใน array
+      //  ตัวที่สอง arr_date[2] โดยเริ่มนับจาก 0
+      if (e.type == "mouseenter") {
+        var yearT = arr_date[2] - 543;
+      }
+      if (e.type == "mouseleave") {
+        var yearT = parseInt(arr_date[2]) + 543;
+      }
+      dateValue = dateValue.replace(arr_date[2], yearT);
+      $(this).val(dateValue);
+    }
+  });
+
+  // กรณีใช้แบบ input
+  $("#datepicker5").datetimepicker({
+    timepicker: false,
+    format: "d-m-Y", // กำหนดรูปแบบวันที่ ที่ใช้ เป็น 00-00-0000
+    lang: "th", // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
+    onSelectDate: function(dp, $input) {
+      var yearT = new Date(dp).getFullYear();
+      var yearTH = yearT + 543;
+      var fulldate = $input.val();
+      var fulldateTH = fulldate.replace(yearT, yearTH);
+      $input.val(fulldateTH);
+    }
+  });
+  // กรณีใช้กับ input ต้องกำหนดส่วนนี้ด้วยเสมอ เพื่อปรับปีให้เป็น ค.ศ. ก่อนแสดงปฏิทิน
+  $("#datepicker5").on("mouseenter mouseleave", function(e) {
+    var dateValue = $(this).val();
+    if (dateValue != "") {
+      var arr_date = dateValue.split("-"); // ถ้าใช้ตัวแบ่งรูปแบบอื่น ให้เปลี่ยนเป็นตามรูปแบบนั้น
+      // ในที่นี้อยู่ในรูปแบบ 00-00-0000 เป็น d-m-Y  แบ่งด่วย - ดังนั้น ตัวแปรที่เป็นปี จะอยู่ใน array
+      //  ตัวที่สอง arr_date[2] โดยเริ่มนับจาก 0
+      if (e.type == "mouseenter") {
+        var yearT = arr_date[2] - 543;
+      }
+      if (e.type == "mouseleave") {
+        var yearT = parseInt(arr_date[2]) + 543;
+      }
+      dateValue = dateValue.replace(arr_date[2], yearT);
+      $(this).val(dateValue);
+    }
+  });
+
+  // กรณีใช้แบบ input
+  $("#datepicker6").datetimepicker({
+    timepicker: false,
+    format: "d-m-Y", // กำหนดรูปแบบวันที่ ที่ใช้ เป็น 00-00-0000
+    lang: "th", // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
+    onSelectDate: function(dp, $input) {
+      var yearT = new Date(dp).getFullYear();
+      var yearTH = yearT + 543;
+      var fulldate = $input.val();
+      var fulldateTH = fulldate.replace(yearT, yearTH);
+      $input.val(fulldateTH);
+    }
+  });
+  // กรณีใช้กับ input ต้องกำหนดส่วนนี้ด้วยเสมอ เพื่อปรับปีให้เป็น ค.ศ. ก่อนแสดงปฏิทิน
+  $("#datepicker6").on("mouseenter mouseleave", function(e) {
+    var dateValue = $(this).val();
+    if (dateValue != "") {
+      var arr_date = dateValue.split("-"); // ถ้าใช้ตัวแบ่งรูปแบบอื่น ให้เปลี่ยนเป็นตามรูปแบบนั้น
+      // ในที่นี้อยู่ในรูปแบบ 00-00-0000 เป็น d-m-Y  แบ่งด่วย - ดังนั้น ตัวแปรที่เป็นปี จะอยู่ใน array
+      //  ตัวที่สอง arr_date[2] โดยเริ่มนับจาก 0
+      if (e.type == "mouseenter") {
+        var yearT = arr_date[2] - 543;
+      }
+      if (e.type == "mouseleave") {
+        var yearT = parseInt(arr_date[2]) + 543;
+      }
+      dateValue = dateValue.replace(arr_date[2], yearT);
+      $(this).val(dateValue);
+    }
+  });
+
+  // กรณีใช้แบบ input
+  $("#datepicker7").datetimepicker({
+    timepicker: false,
+    format: "d-m-Y", // กำหนดรูปแบบวันที่ ที่ใช้ เป็น 00-00-0000
+    lang: "th", // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
+    onSelectDate: function(dp, $input) {
+      var yearT = new Date(dp).getFullYear();
+      var yearTH = yearT + 543;
+      var fulldate = $input.val();
+      var fulldateTH = fulldate.replace(yearT, yearTH);
+      $input.val(fulldateTH);
+    }
+  });
+  // กรณีใช้กับ input ต้องกำหนดส่วนนี้ด้วยเสมอ เพื่อปรับปีให้เป็น ค.ศ. ก่อนแสดงปฏิทิน
+  $("#datepicker7").on("mouseenter mouseleave", function(e) {
+    var dateValue = $(this).val();
+    if (dateValue != "") {
+      var arr_date = dateValue.split("-"); // ถ้าใช้ตัวแบ่งรูปแบบอื่น ให้เปลี่ยนเป็นตามรูปแบบนั้น
+      // ในที่นี้อยู่ในรูปแบบ 00-00-0000 เป็น d-m-Y  แบ่งด่วย - ดังนั้น ตัวแปรที่เป็นปี จะอยู่ใน array
+      //  ตัวที่สอง arr_date[2] โดยเริ่มนับจาก 0
+      if (e.type == "mouseenter") {
+        var yearT = arr_date[2] - 543;
+      }
+      if (e.type == "mouseleave") {
+        var yearT = parseInt(arr_date[2]) + 543;
+      }
+      dateValue = dateValue.replace(arr_date[2], yearT);
+      $(this).val(dateValue);
+    }
+  });
+
+  // กรณีใช้แบบ input
+  $("#datepicker8").datetimepicker({
+    timepicker: false,
+    format: "d-m-Y", // กำหนดรูปแบบวันที่ ที่ใช้ เป็น 00-00-0000
+    lang: "th", // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
+    onSelectDate: function(dp, $input) {
+      var yearT = new Date(dp).getFullYear();
+      var yearTH = yearT + 543;
+      var fulldate = $input.val();
+      var fulldateTH = fulldate.replace(yearT, yearTH);
+      $input.val(fulldateTH);
+    }
+  });
+  // กรณีใช้กับ input ต้องกำหนดส่วนนี้ด้วยเสมอ เพื่อปรับปีให้เป็น ค.ศ. ก่อนแสดงปฏิทิน
+  $("#datepicker8").on("mouseenter mouseleave", function(e) {
+    var dateValue = $(this).val();
+    if (dateValue != "") {
+      var arr_date = dateValue.split("-"); // ถ้าใช้ตัวแบ่งรูปแบบอื่น ให้เปลี่ยนเป็นตามรูปแบบนั้น
+      // ในที่นี้อยู่ในรูปแบบ 00-00-0000 เป็น d-m-Y  แบ่งด่วย - ดังนั้น ตัวแปรที่เป็นปี จะอยู่ใน array
+      //  ตัวที่สอง arr_date[2] โดยเริ่มนับจาก 0
+      if (e.type == "mouseenter") {
+        var yearT = arr_date[2] - 543;
+      }
+      if (e.type == "mouseleave") {
+        var yearT = parseInt(arr_date[2]) + 543;
+      }
+      dateValue = dateValue.replace(arr_date[2], yearT);
+      $(this).val(dateValue);
+    }
+  });
 });
