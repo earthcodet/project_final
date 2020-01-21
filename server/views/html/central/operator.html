@@ -70,7 +70,7 @@
             <a href="#"></a>
         </div>
         <button class="dropdown-btn select-active "><b>ข้อมูลส่วนกลาง </b><i class="fa fa-caret-down"></i></button>
-        <div class="dropdown-container " >
+        <div class="dropdown-container ">
             <a href="operator.html" class='dropdown-active '>- ข้อมูลผู้ประกอบการ</a>
             <a href="02.html">- ข้อมูลการจดใบอนุญาต</a>
             <a href="03.html">- โอนใบอนุญาต</a>
@@ -109,36 +109,38 @@
                         <div style="display: flex;padding: 0.5vw;">
                             <div style="width: 59vw;margin-top: 0.5vw;">
                                 <a style="margin-left: 4vw;">ประเภท :</a>
-                                <select id="typeUser" name="" style="width: 11vw;" onchange="changeInputBytype(this.value)">
+                                <select id="typeUser" name="" style="width: 11vw;"
+                                    onchange="changeInputBytype(this.value)">
                                     <option value="บุคคลธรรมดา" selected="selected">บุคคลธรรมดา</option>
                                     <option value="นิติบุคคล">นิติบุคคล</option>
                                 </select>
                                 <a style="margin-left:1vw;">สัญชาติ :</a>
                                 <input list='list-nationality' id="nationality" style="width: 11vw">
-                                    <datalist id="list-nationality">
-                                        <option value="" hidden>เลือก...</option>
-                                        <option value="ไทย">ไทย</option>
-                                        <option value="อเมริกา">อเมริกา</option>
-                                    </datalist>
+                                <datalist id="list-nationality">
+                                    <option value="" hidden>เลือก...</option>
+                                    <option value="ไทย">ไทย</option>
+                                    <option value="อเมริกา">อเมริกา</option>
+                                </datalist>
                                 </input>
                                 <a style="margin-left: 1vw;">เชื้อชาติ :</a>
                                 <input list='list-race' id="race" style="width: 11vw;">
-                                    <datalist id="list-race">
-                                        <option value="" hidden>เลือก...</option>
-                                        <option value="ไทย">ไทย</option>
-                                        <option value="อเมริกา">อเมริกา</option>
-                                    </datalist>
+                                <datalist id="list-race">
+                                    <option value="" hidden>เลือก...</option>
+                                    <option value="ไทย">ไทย</option>
+                                    <option value="อเมริกา">อเมริกา</option>
+                                </datalist>
                                 </input>
                                 <br>
                                 <!-- row 2 -->
                                 <a id='titleNameTopic' style="margin-left: 2vw;">คำนำหน้าชื่อ :</a>
-
-                                <select id="title" name="" style="width: 11vw">
+                                <input list='list-titles' id="title" style="width: 11vw;">
+                                <datalist id="list-titles">
                                     <option value="" hidden>เลือก...</option>
-                                    <option value="">นาย</option>
-                                    <option value="">นาง</option>
-                                    <option value="">นางสาว</option>
-                                </select>
+                                    <option value="นาย">นาย</option>
+                                    <option value="นาง">นาง</option>
+                                    <option value="นางสาว">นางสาว</option>
+                                </datalist>
+                                </input>
                                 <a id='nameUserTopic' style="margin-left: 3vw;">ชื่อ :</a>
                                 <input type="text" id="nameUser" name="" placeholder="" style="width: 11vw">
                                 <a id="surTopic" style="margin-left: 0.8vw;">นามสกุล :</a>
@@ -149,27 +151,26 @@
                                 <a style="margin-left: 1.8vw;">เลขประจำตัว :</a>
                                 <input type="text" id="id" name="" placeholder="" style="width: 11vw"
                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                    maxlength="13"
-                                    onkeyup="checkId(this.value)">
+                                    maxlength="13" onkeyup="checkId(this.value)">
                                 <a style="margin-left:0.9vw;">ออกเมื่อ :</a>
                                 <input type="text" id="datepicker1" placeholder="" style="width: 11vw">
                                 <a style="margin-left: 0.8vw;">หมดอายุ :</a>
                                 <input type="text" id="datepicker2" placeholder="" style="width: 11vw">
                                 <br>
-                                
+
                                 <br>
                                 <!-- row4 -->
                                 <a style="margin-left: 3.7vw;">เกิดวันที่ :</a>
                                 <input type="text" id="datepicker3" placeholder="" style="width: 11vw;">
 
                                 <a style="margin-left: 0.7vw;">โทรศัพท์ :</a>
-                                <input type="text" style="width: 11vw" id="phone" 
+                                <input type="text" style="width: 11vw" id="phone"
                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                     maxlength="10">
                                 <a style="margin-left: 1.4vw;">โทรสาร :</a>
                                 <input type="text" id="fax" style="width: 11vw"
-                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                maxlength="9">
+                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                    maxlength="9">
                                 <br>
                                 <!-- row5 -->
 
@@ -203,8 +204,7 @@
                                 <a style="margin-left: 2.1vw;">อัพเดทล่าสุด :</a>
                                 <input type="text" style="width: 11vw;" readonly disabled>
                             </div>
-                            <div
-                                style="width: 20vw; ;text-align: center; display: block; padding: 1vw;">
+                            <div style="width: 20vw; ;text-align: center; display: block; padding: 1vw;">
                                 <a style="font-size: 1.5vw;"> รูปภาพภาพผู้ประกอบการ</a>
                                 <div>
                                     <img id="operatorImage" class="rounded" src="../../img/userProfile.png"
@@ -225,13 +225,13 @@
                                     </button>
                                     <br>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
                 </a>
             </div>
-           
+
         </fieldset>
     </form>
 
