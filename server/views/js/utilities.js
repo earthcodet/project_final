@@ -70,6 +70,7 @@ function sortTable(n, id, type) {
     table = document.getElementById(id);
     switching = true;
     dir = "asc";
+    console.log(type)
     while (switching) {
         switching = false;
         rows = table.rows;
@@ -77,7 +78,7 @@ function sortTable(n, id, type) {
             shouldSwitch = false;
             x = rows[i].getElementsByTagName("TD")[n];
             y = rows[i + 1].getElementsByTagName("TD")[n];
-            if (type = "date") {
+            if (type === "date") {
                 var tempdateX = x.innerHTML.split(' ')
                 var tempdateY = y.innerHTML.split(' ')
                 var dayX, dayY, monthX, monthY, yearX, yearY
@@ -87,7 +88,7 @@ function sortTable(n, id, type) {
                 monthY = tempdateY[1]
                 yearX = tempdateX[2]
                 yearY = tempdateY[2]
-                if (dir == "asc") {
+                if (dir === "asc") {
                     if (yearX > yearY) {
                         shouldSwitch = true;
                         break;
@@ -110,19 +111,21 @@ function sortTable(n, id, type) {
                         break;
                     }
                 }
-            } else if (type = "dateExp") {
+            } else if (type === "dateExp") {
                 var tempX = x.innerHTML.split(' ')
                 var tempY = y.innerHTML.split(' ')
                 var dateX, dateY
                 dateX = tempX[0]
                 dateY = tempY[0]
+                console.log(tempX[1] )
+                console.log(dateX ==='หมดอายุ' )
                 if (dir == "asc") {
                     if (dateX != 'หมดอายุ' && dateY != 'หมดอายุ') {
                         if (parseInt(dateX) > parseInt(dateY)) {
                             shouldSwitch = true;
                             break;
                         }
-                    } else if (dateX > dateY) {
+                    } else if (parseInt(tempX[1]) > parseInt(tempY[1])) {
                         shouldSwitch = true;
                         break;
                     }
@@ -132,7 +135,7 @@ function sortTable(n, id, type) {
                             shouldSwitch = true;
                             break;
                         }
-                    } else if (dateX < dateY) {
+                    } else if (parseInt(tempX[1]) < parseInt(tempY[1])) {
                         shouldSwitch = true;
                         break;
                     }

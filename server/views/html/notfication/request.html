@@ -1,312 +1,371 @@
 <!DOCTYPE html>
-<html>
-<title>งานคำขอที่ใกล้หมดอายุ</title>
+<html lang="en">
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <!-- <script src="../js/js22.js"></script> --> -->
 
-<!-- bootstrap -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-    crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-    crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-    crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../css/css2.css">
+    <link href="../../css/fonts.css" rel="stylesheet">
 
-<link rel="stylesheet" href="../../css/w.3.css">
-<link rel="stylesheet" href="../../css/w3-theme-teal.css">
-<link href="../../css/css-index.css" rel="stylesheet">
-<link href="../../css/fonts.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="../../css/jquery-ui-1.12.1.custom/jquery-ui.css"> -->
 
-<!-- css ส่วนกลาง -->
-<link href="../../css/utilities.css" rel="stylesheet">
+    <!-- topmenu สำหรับหน้านี้เท่านั้น -->
+    <!-- <link rel="stylesheet" href="../../css/topmenu.css"> -->
 
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- icon -->
+    <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.css">
+</head>
 
 <body>
-
     <!-- เมนูด้านบน -->
-    <div class="w3-top" style="overflow:auto;">
-        <ul>
-            <li>
-                <a id="addMenu" class="exit disableds" onclick="addTEST()">
-                    <i class="fa fa-plus-square fa-lg w3-margin-right w3-text-theme "> </i>
-                    เพิ่ม
-                </a>
-            </li>
-            <li>
-                <a id="editMenu" onclick="editTEST()" class="exit disableds">
-                    <i class="fa fa-pencil fa-lg w3-margin-right w3-text-theme"></i>
-                    แก้ไข
-                </a>
-            </li>
-            <li>
-                <a id="saveMenu" onclick="insertTEST()" class="exit disableds">
-                    <i class="fa fa-floppy-o fa-lg w3-margin-right w3-text-theme"></i>
-                    บันทึก
-                </a>
-            </li>
-            <li>
-                <a id="restoreMenu" onclick="restoreTEST()" class="exit disableds">
-                    <i class="fa fa-reply fa-lg w3-margin-right w3-text-theme"></i>
-                    เรียกคืน
-                </a>
-            </li>
-            <li>
-                <a id="deleteMenu" onclick="deleteTEST()" class="exit disableds">
-                    <i class="fa fa-close fa-lg w3-margin-right w3-text-theme"></i>
-                    ยกเลิก
-                </a>
-            </li>
-            <li class="w3-display-topright">
-                <a id="exitMenu" onclick="exitTEST()" class="exit">
-                    <i class="fa fa-sign-out fa-lg w3-margin-right w3-text-theme"></i>
-                    ออกจากระบบ
-                </a>
-            </li>
-        </ul>
-        <!-- เมนูด้านข้าง -->
-        <nav class="w3-sidebar w3-bar-block w3-collapse w3-animate-left w3-card" style="z-index:3;width:250px;"
-            id="mySidebar">
-            <a class="w3-bar-item w3-button w3-border-bottom w3-large" href="/">
-                <img src="../../img/img1.jpg" style="width:100%;">
-            </a>
+    <div class="w3-top icon-bar">
+        <a id="addMenu" class="exit disableds" onclick="addTEST()"><i class="fa fa-plus-square"> เพิ่ม</i></a>
+        <a id="editMenu" onclick="editTEST()" class="exit disableds"><i class="fa fa-pencil-alt"> แก้ไข</i></a>
+        <a id="saveMenu" onclick="insertTEST()" class="exit disableds"><i class="fa fa-save"> บันทึก</i></a>
+        <a id="restoreMenu" onclick="restoreTEST()" class="exit disableds"><i class="fa fa-reply"> เรียกคืน</i></a>
+        <a id="deleteMenu" onclick="deleteTEST()" class="exit disableds"><i class="fa fa-times"> ยกเลิก</i></a>
+        <!-- <a><i class="fa fa-search"> ค้นหา</i></a> -->
+        <a id="exitMenu" onclick="exitTEST()" class="exit" style="float: right;width: 17%;"><i
+                class="fa fa-sign-out-alt">
+                ออกจากระบบ</i></a>
+    </div>
+    <!-- เมนูด้านข้าง -->
+    <div class="sidenav">
+        <a href="/" style="margin-top: 15%;">
+            <img src="../../img/img1.jpg" style="width:92%;">
+        </a>
+        <br>
+        <button class="dropdown-btn"><b>ระบบงานคำขอ </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="../request/searchRequest.html">- ค้นหา/แก้ไข</a>
+            <a href="../request/request_public_sell.html">- ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
+            <a href="../request/request_public_hawk.html">- ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
+            <a href="../request/request_area_more_sell.html">- ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
+            <a href="../request/request_area_more_correct.html">- ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</a>
+            <a href="../request/request_area_less_sell.html">- หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
+            <a href="../request/request_area_less_correct.html">- หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
+            <a href="../request/request_market.html">- ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
+            <a href="../request/request_health_danger.html">-
+                กิจการที่เป็นอันตรายต่อสุขภาพ</a>
+            <a href="../request/request_crematory.html">- กิจการฌาปณสถาน</a>
 
-            <div>
-                <a class="w3-bar-item w3-button " onclick="myAccordion('demo1')" href="javascript:void(0)">ระบบงานคำขอ
-                    <i class="fa fa-caret-down"></i></a>
-                <div id="demo1" class="w3-hide">
-                    <a class="bar-item w3-button " onclick="myAccordion('demo11')" href="javascript:void(0)">
-                        เพิ่ม <i class="fa fa-caret-down"></i></a>
-                    <div id="demo11" class="w3-hide">
-                        <a class="bar-item w3-button" href="../request/request_public_sell.html">-
-                            ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
-                        <a class="bar-item w3-button" href="../request/request_public_hawk.html">-
-                            ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
-                        <a class="bar-item w3-button" href="../request/request_area_more_sell.html">-
-                            ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
-                        <a class="bar-item w3-button" href="../request/request_area_more_correct.html">-
-                            ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</a>
-                        <a class="bar-item w3-button" href="../request/request_area_less_sell.html">-
-                            หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
-                        <a class="bar-item w3-button " href="../request/request_area_less_correct.html">-
-                            หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
-                        <a class="bar-item w3-button" href="../request/request_market.html">-
-                            ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
-                        <a class="bar-item w3-button" href="../request/request_health_danger.html">-
-                            กิจการที่เป็นอันตรายต่อสุขภาพ</a>
-                        <a class="bar-item w3-button" href="../request/request_crematory.html">- กิจการฌาปณสถาน</a>
-                    </div>
-                    <a class="bar-item w3-button" href="../request/searchRequest.html">
-                        ค้นหา/แก้ไข</a>
-                </div>
-            </div>
-
-            <div>
-                <a class="w3-bar-item w3-button" onclick="myAccordion2('demo2')"
-                    href="javascript:void(0)">งานตรวจสอบ/อนุมัติ <i class="fa fa-caret-down"></i></a>
-                <div id="demo2" class="w3-hide">
-                    <a class="w3-bar-item w3-button" href="#"></a>
-                </div>
-            </div>
-
-            <div>
-                <a class="w3-bar-item w3-button" onclick="myAccordion3('demo3')" href="javascript:void(0)">งานใบอนุญาต
-                    <i class="fa fa-caret-down"></i></a>
-                <div id="demo3" class="w3-hide">
-                    <a class="w3-bar-item w3-button" href="#"></a>
-                </div>
-            </div>
-
-            <div>
-                <a class="w3-bar-item w3-button" onclick="myAccordion4('demo4')"
-                    href="javascript:void(0)">ข้อมูลส่วนกลาง <i class="fa fa-caret-down"></i></a>
-                <div id="demo4" class="w3-hide">
-                    <a class="bar-item w3-button" href="../central/operator.html">- ข้อมูลผู้ประกอบการ</a>
-                    <a class="bar-item w3-button" href="../central/02.html">- ข้อมูลการจดใบอนุญาต</a>
-                    <a class="bar-item w3-button" href="../central/03.html">- โอนใบอนุญาต</a>
-                </div>
-            </div>
-
-            <div>
-                <a class="w3-bar-item w3-button" onclick="myAccordion5('demo5')" href="javascript:void(0)">งานร้องเรียน
-                    <i class="fa fa-caret-down"></i></a>
-                <div id="demo5" class="w3-hide">
-                    <a class="bar-item w3-button" href="#">- บันทึกเรื่องร้องเรียน</a>
-                    <a class="bar-item w3-button" href="#">- บันทึกคำร้อง</a>
-                </div>
-            </div>
-
-            <div>
-                <a class="w3-bar-item w3-button" onclick="myAccordion6('demo6')" href="javascript:void(0)">ข้อมูลระบบ <i
-                        class="fa fa-caret-down"></i></a>
-                <div id="demo6" class="w3-hide">
-                    <a class="w3-bar-item w3-button" href="#"></a>
-                </div>
-            </div>
-
-            <div>
-                <a class="w3-bar-item w3-button" onclick="myAccordion7('demo7')" href="javascript:void(0)">รายงาน <i
-                        class="fa fa-caret-down"></i></a>
-                <div id="demo7" class="w3-hide">
-                    <a class="bar-item w3-button" href="../report/report_crematory.html">ตามคำขอ</a>
-                    <a class="bar-item w3-button" href="../report/report_summary.html">สรุป</a>
-                </div>
-            </div>
-
-            <div>
-                <a class="w3-bar-item w3-button w3-theme notification" onclick="myAccordion7('demo8')"
-                    href="javascript:void(0)">
-                    <span>แจ้งเตือน</span>
-                    <i class="fa fa-caret-down"></i>
-                    <span id="notficationRequestTopic" class="badgeTopic">7</span>
-                </a>
-                <div id="demo8" class="w3-hide w3-show">
-                    <a class="bar-item w3-button w3-my-color notification" href="../notfication/request.html">
-                        <span>งานคำขอ</span>
-                        <span id="notficationRequest" class="badge">7</span>
-                    </a>
-                </div>
-            </div>
-            <br><br><br><br>
-        </nav>
-        <!-- คลิกเมนูย่อได้ -->
-        <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer"
-            id="myOverlay">
+        </div>
+        <button class="dropdown-btn"><b>งานตรวจสอบ/อนุมัติ </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="#"></a>
+            <a href="#"></a>
+            <a href="#"></a>
+        </div>
+        <button class="dropdown-btn"><b>งานใบอนุญาต </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="#"></a>
+            <a href="#"></a>
+            <a href="#"></a>
+        </div>
+        <button class="dropdown-btn"><b>ข้อมูลส่วนกลาง </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container ">
+            <a href="operator.html">- ข้อมูลผู้ประกอบการ</a>
+            <a href="02.html">- ข้อมูลการจดใบอนุญาต</a>
+            <a href="03.html">- โอนใบอนุญาต</a>
+        </div>
+        <button class="dropdown-btn"><b>งานร้องเรียน </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="#">- บันทึกเรื่องร้องเรียน</a>
+            <a href="#">- บันทึกคำร้อง</a>
+        </div>
+        <button class="dropdown-btn"><b>ข้อมูลระบบ </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="#"></a>
+        </div>
+        <button class="dropdown-btn"><b>รายงาน </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="../report/report_crematory.html">- ตามคำขอ</a>
+            <a href="../report/report_summary.html">- สรุป</a>
+        </div>
+        <button class="dropdown-btn notification select-active"><b>แจ้งเตือน </b><span id="notficationRequest" class="badge"
+                style="margin-left:0.5vw;">100000</span><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a class="notification dropdown-active" href="../notfication/request.html">- งานคำขอ<span id="notficationRequest"
+                    class="badge" style="margin-left:0.5vw;" >100000</span></a>
         </div>
     </div>
-    <!-- ข้อมูล -->
-    <div class="w3-main" style="margin-left:250px;padding-top: 47px;">
-        <header class="w3-container w3-theme">
-            <h1 style="font-size:20px">งานคำขอ</h1>
-        </header>
-        <div class="container-sm" style="padding:32px">
-            <!-- ข้อมูล -->
-            <div class="w3-container box" style="margin:auto;">
-                <h4>งานคำขอที่ใกล้หมดอายุ</h4>
-                <table id="requestTable" class="table table-hover cursor-pointer table-request tableresult" >
-                    <thead class="is-color">
-                        <tr>  
-                            <th  onclick="sortTable(0,'requestTable','')">
-                                <h6 >
-                                    ประเภทคำขอ
-                                    <i class="fa fa-sort " ></i>
-                                </h6>
-                            </th>
-                            <th onclick="sortTable(1,'requestTable'),''">
-                                <h6>
-                                    ชื่อ-นามสกุล
-                                    <i class="fa fa-sort" ></i>
-                                </h6>
-                            </th>
-                            <th onclick="sortTable(2,'requestTable'),''">
-                                <h6>
-                                    ที่อยู่
-                                    <i class="fa fa-sort" ></i>
-                                </h6>
-                            </th>
-                            <th onclick="sortTable(3,'requestTable'),'date'">
-                                <h6>
-                                    วันที่เริ่มคำขอ
-                                    <i class="fa fa-sort" ></i>
-                                </h6>
-                            </th>
-                            <th onclick="sortTable(4,'requestTable'),'date'">
-                                <h6>
-                                    วันที่สิ้นสุดคำขอ
-                                    <i class="fa fa-sort" ></i>
-                                </h6>
-                            </th>
-                            <th onclick="sortTable(5,'requestTable'),'dateExp'">
-                                <h6>
-                                    วันที่คงเหลือ (วัน)
-                                    <i class="fa fa-sort" ></i>
-                                </h6>
-                            </th>
-                          </tr>
-                    </thead>
-                    <tbody style="height: 500px;text-align: center;">
-                        <tr onclick="toRequest(event)">
-                            <td>ใบอนุญาตจำหน่ายสินค้าในที่หรือทาง</td>
-                            <td>นาย ใคร่ครวญ สำนึก</td>
-                            <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
-                            <td>1 พฤษภาคม 2561</td>
-                            <td>1 พฤษภาคม 2562</td>
-                            <td>หมดอายุ</td>
-                          </tr>
-                          <tr onclick="toRequest(event)">
-                            <td>กิจการที่เป็นอันตรายต่อสุขภาพ</td>
-                            <td>นาย ใคร่ครวญ สำนึก</td>
-                            <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
-                            <td>1 ธันวาคม 2561</td>
-                            <td>1 ธันวาคม 2562</td>
-                            <td>หมดอายุ</td>
-                          </tr >
-                          <tr onclick="toRequest(event)">
-                            <td>ใบอนุญาตจำหน่ายสินค้าในที่หรือทาง</td>
-                            <td>นาย ใคร่ครวญ สำนึก</td>
-                            <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
-                            <td>1 กุมภาพันธ์ 2561</td>
-                            <td>1 กุมภาพันธ์ 2562</td>
-                            <td>หมดอายุ</td>
-                          </tr>
-                          <tr onclick="toRequest(event)">
-                              <td>ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</td>
-                              <td>นาย สมบัติ มากมี</td>
-                              <td>14/15 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
-                              <td>10 มกราคม 2561</td>
-                              <td>10 มกราคม 2562</td>
-                              <td>11 วัน</td>
-                          </tr>
-                          <tr onclick="toRequest(event)">
-                              <td>หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่าย</td>
-                              <td>นาง ทัน สมัย</td>
-                              <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
-                              <td>15 สิงหาคม 2561</td>
-                              <td>15 สิงหาคม 2562</td>
-                              <td>16 วัน</td>
-                          </tr>
-                          <tr onclick="toRequest(event)">
-                              <td>ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</td>
-                              <td>นาย ก่อหญ้า สีเขียว</td>
-                              <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
-                              <td>20 มิถุนายน 2561</td>
-                              <td>20 มิถุนายน 2562</td>
-                              <td>14 วัน</td>
-                          </tr>
-                          <tr onclick="toRequest(event)">
-                              <td>หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</td>
-                              <td>นาย ก่อหญ้า สีน้ำตาล</td>
-                              <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
-                              <td>11 กรกฎาคม 2561</td>
-                              <td>11 กรกฎาคม 2562</td>
-                              <td>8 วัน</td>
-                          </tr>
-                    </tbody>
-                  </table>
-                  
+    <!-- เนื้อหา -->
+    <form id="form">
+        <fieldset style="border: 0;padding: 0;margin: 0;">
+            <div class="main">
+                <header class="w3-top2">
+                    <h1 style="font-size:2.8vh;margin-left: 25px;padding: 2px;"> งานคำขอ</h1>
+                </header>
+                <a>
+                    <div class="box">
+                        <p class="font"></p>
+                        <div class="tab">
+                            <button type="button" class="tablinks" onclick="openCity(event, 'London')"><a>เหลือน้อยกว่า 30 วัน</a></button>
+                            <button type="button" class="tablinks" onclick="openCity(event, 'Paris')"><a>หมดอายุไปแล้วน้อยกว่า 90 วัน</a></button>
+                            <button type="button" class="tablinks" onclick="openCity(event, 'Tokyo')"><a>หมดอายุไปแล้วมากกว่า 90 วัน</a></button>
+                        </div>
 
+                        <div id="London" class="tabcontent" style="display: block;">
+                            <div style="font-size: 1.7vh;">
+                                <br>       
+                                <table id="requestTable30day" class="table cursor-pointer table-hover tableresult">
+                                    <thead>
+                                        <tr class="is-color">
+                                            <th onclick="sortTable(0,'requestTable30day','')">
+                                                <p>ประเภทคำขอ <i class="fa fa-sort "></i></p>
+                                            </th>
+                                            <th onclick="sortTable(1,'requestTable30day','')">
+                                                <p>ชื่อ-นามสกุล <i class="fa fa-sort "></i></p>
+                                            </th>
+                                            <th onclick="sortTable(2,'requestTable30day','')">
+                                                <p>ที่อยู่ <i class="fa fa-sort "></i>
+                                                </p>
+                                            </th>
+                                            <th onclick="sortTable(3,'requestTable30day','date')">
+                                                <p>วันที่เริ่มคำขอ <i class="fa fa-sort "></i></p>
+                                            </th>
+                                            <th onclick="sortTable(4,'requestTable30day','')">
+                                                <p>วันที่สิ้นสุดคำขอ <i class="fa fa-sort "></i></p>
+                                            </th>
+                                            <th onclick="sortTable(5,'requestTable30day','dateExp')">
+                                                <p>สถานะ <i class="fa fa-sort "></i></p>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody style="height: 23vw;  text-align: center;" >
+                                        <tr onclick="toRequest(event)">
+                                            <td>ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</td>
+                                            <td>นาย สมชาย น้ำเงิน
+                                            </td>
+                                            <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
+                                            <td>20 ธันวาคม 2562</td>
+                                            <td>20 ธันวาคม 2563</td>
+                                            <td >2 วัน</td>
+                                        </tr>
+                                        <tr onclick="toRequest(event)">
+                                            <td>กิจการที่เป็นอันตรายต่อสุขภาพ</td>
+                                            <td>นาย สมชาย ชมพู
+                                            </td>
+                                            <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
+                                            <td>20 มกราคม 2562</td>
+                                            <td>20 มกราคม 2563</td>
+                                            <td>20 วัน</td>
+                                        </tr>
+                                        <tr onclick="toRequest(event)">
+                                            <td>กิจการที่เป็นอันตรายต่อสุขภาพ</td>
+                                            <td>นาย สมชาย แดง
+                                            </td>
+                                            <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
+                                            <td>20 สิงหาคม 2562</td>
+                                            <td>20 สิงหาคม 2563</td>
+                                            <td>24 วัน</td>
+                                        </tr>
+                                        <tr onclick="toRequest(event)">
+                                            <td>ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</td>
+                                            <td>นาย สมชาย เขียว
+                                            </td>
+                                            <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
+                                            <td>20 กันยายน 2562</td>
+                                            <td>20 กันยายน 2563</td>
+                                            <td>23 วัน</td>
+                                        </tr>
+                                        <tr onclick="toRequest(event)">
+                                            <td>กิจการที่เป็นอันตรายต่อสุขภาพ</td>
+                                            <td>นาย สมชาย ใจดี
+                                            </td>
+                                            <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
+                                            <td>20 สิงหาคม 2562</td>
+                                            <td>20 สิงหาคม 2563</td>
+                                            <td>15 วัน</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <br>
+                                
+                            </div>
+                        </div>
+                        <div id="Paris" class="tabcontent">
+                            <div style="font-size: 1.7vh;">
+                                <br>       
+                                <table id="requestTable90day" class="table cursor-pointer table-hover tableresult">
+                                    <thead>
+                                        <tr class="" style="background-color: rgba(212, 65, 65, 0.863); color: rgb(255, 255, 255);">
+                                            <th onclick="sortTable(0,'requestTable90day','')">
+                                                <p>ประเภทคำขอ <i class="fa fa-sort "></i></p>
+                                            </th>
+                                            <th onclick="sortTable(1,'requestTable90day','')">
+                                                <p>ชื่อ-นามสกุล <i class="fa fa-sort "></i></p>
+                                            </th>
+                                            <th onclick="sortTable(2,'requestTable90day','')">
+                                                <p>ที่อยู่ <i class="fa fa-sort "></i>
+                                                </p>
+                                            </th>
+                                            <th onclick="sortTable(3,'requestTable90day','date')">
+                                                <p>วันที่เริ่มคำขอ <i class="fa fa-sort "></i></p>
+                                            </th>
+                                            <th onclick="sortTable(4,'requestTable90day','')">
+                                                <p>วันที่สิ้นสุดคำขอ <i class="fa fa-sort "></i></p>
+                                            </th>
+                                            <th onclick="sortTable(5,'requestTable90day','dateExp')">
+                                                <p>สถานะ <i class="fa fa-sort "></i></p>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody style="height: 23vw;  text-align: center;" >
+                                        <tr onclick="toRequest(event)">
+                                            <td>กิจการที่เป็นอันตรายต่อสุขภาพ</td>
+                                            <td>นาย สมชาย ใจดี
+                                            </td>
+                                            <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
+                                            <td>20 มกราคม 2562</td>
+                                            <td>20 มกราคม 2563</td>
+                                            <td >หมดอายุ 50 วัน</td>
+                                        </tr>
+                                        <tr onclick="toRequest(event)">
+                                            <td>กิจการที่เป็นอันตรายต่อสุขภาพ</td>
+                                            <td>นาย สมชาย ใจดี
+                                            </td>
+                                            <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
+                                            <td>20 ตุลาคม 2562</td>
+                                            <td>20 ตุลาคม 2563</td>
+                                            <td>หมดอายุ 60 วัน</td>
+                                        </tr>
+                                        <tr onclick="toRequest(event)">
+                                            <td>กิจการที่เป็นอันตรายต่อสุขภาพ</td>
+                                            <td>นาย สมชาย ใจดี
+                                            </td>
+                                            <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
+                                            <td>20 สิงหาคม 2562</td>
+                                            <td>20 สิงหาคม 2563</td>
+                                            <td>หมดอายุ 41 วัน</td>
+                                        </tr>
+                                        <tr onclick="toRequest(event)">
+                                            <td>กิจการที่เป็นอันตรายต่อสุขภาพ</td>
+                                            <td>นาย สมชาย ใจดี
+                                            </td>
+                                            <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
+                                            <td>20 ตุลาคม 2562</td>
+                                            <td>20 ตุลาคม 2563</td>
+                                            <td>หมดอายุ 75 วัน</td>
+                                        </tr>
+                                        <tr onclick="toRequest(event)">
+                                            <td>กิจการที่เป็นอันตรายต่อสุขภาพ</td>
+                                            <td>นาย สมชาย ใจดี
+                                            </td>
+                                            <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
+                                            <td>20 สิงหาคม 2562</td>
+                                            <td>20 สิงหาคม 2563</td>
+                                            <td>หมดอายุ 85 วัน</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <br>
+                                
+                            </div>
+                        </div>
+
+                        <div id="Tokyo" class="tabcontent">
+                            <div style="font-size: 1.7vh;">
+                                <br>       
+                                <table id="requestTableM90dy" class="table cursor-pointer table-hover tableresult">
+                                    <thead>
+                                        <tr class="" style="background-color: rgba(212, 65, 65, 0.863); color: rgb(255, 255, 255);">
+                                            <th onclick="sortTable(0,'requestTableM90dy','')">
+                                                <p>ประเภทคำขอ <i class="fa fa-sort "></i></p>
+                                            </th>
+                                            <th onclick="sortTable(1,'requestTableM90dy','')">
+                                                <p>ชื่อ-นามสกุล <i class="fa fa-sort "></i></p>
+                                            </th>
+                                            <th onclick="sortTable(2,'requestTableM90dy','')">
+                                                <p>ที่อยู่ <i class="fa fa-sort "></i>
+                                                </p>
+                                            </th>
+                                            <th onclick="sortTable(3,'requestTableM90dy','date')">
+                                                <p>วันที่เริ่มคำขอ <i class="fa fa-sort "></i></p>
+                                            </th>
+                                            <th onclick="sortTable(4,'requestTableM90dy','')">
+                                                <p>วันที่สิ้นสุดคำขอ <i class="fa fa-sort "></i></p>
+                                            </th>
+                                            <th onclick="sortTable(5,'requestTableM90dy','dateExp')">
+                                                <p>สถานะ <i class="fa fa-sort "></i></p>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody style="height: 23vw;  text-align: center;" >
+                                        <tr onclick="toRequest(event)">
+                                            <td>ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</td>
+                                            <td>นาย สมชาย ใจดี
+                                            </td>
+                                            <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
+                                            <td>20 มิถุนายน 2562</td>
+                                            <td>20 มิถุนายน 2563</td>
+                                            <td >หมดอายุ 100 วัน</td>
+                                        </tr>
+                                        <tr onclick="toRequest(event)">
+                                            <td>กิจการที่เป็นอันตรายต่อสุขภาพ</td>
+                                            <td>นาย สมชาย ใจดี
+                                            </td>
+                                            <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
+                                            <td>20 พฤษภาคม 2562</td>
+                                            <td>20 พฤษภาคม 2563</td>
+                                            <td>หมดอายุ 10000 วัน</td>
+                                        </tr>
+                                        <tr onclick="toRequest(event)">
+                                            <td>กิจการที่เป็นอันตรายต่อสุขภาพ</td>
+                                            <td>นาย สมชาย ใจดี
+                                            </td>
+                                            <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
+                                            <td>20 มกราคม 2562</td>
+                                            <td>20 มกราคม 2563</td>
+                                            <td>หมดอายุ 105 วัน</td>
+                                        </tr>
+                                        <tr onclick="toRequest(event)">
+                                            <td>ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</td>
+                                            <td>นาย สมชาย ใจดี
+                                            </td>
+                                            <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
+                                            <td>20 กรกฎาคม 2562</td>
+                                            <td>20 กรกฎาคม 2563</td>
+                                            <td>หมดอายุ 365 วัน</td>
+                                        </tr>
+                                        <tr onclick="toRequest(event)">
+                                            <td>ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</td>
+                                            <td>นาย สมชาย ใจดี
+                                            </td>
+                                            <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
+                                            <td>20 กันยายน 2562</td>
+                                            <td>20 กันยายน 2563</td>
+                                            <td>หมดอายุ 9000 วัน</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <br>
+                                
+                            </div>
+                        </div>
+
+                    </div>
+                </a>
             </div>
-        </div>
+
+        </fieldset>
+    </form>
+
+
 </body>
 
-<!-- axios -->
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<!-- js-index -->
-<script src="../../js/js-index.js"></script>
-<!-- swal2 alert -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-<!-- utilities -->
+<script src="../../js/operator.js/operator.js"></script>
+<script src="../../js/operator.js/menuOperator.js"></script>
+<script src="../../js/disable.js"></script>
+<script src="../../js/sweet2.js"></script>
+<script src="../../js/jquery.js"></script>
+<!-- <!-- <script src="../../js/jquery-ui.js"></script> --> -->
+<script src="../../js/js22.js"></script>
+<!-- <script src="../../js/dateth.js"></script> -->
+<script src="../../node_modules/axios/dist/axios.min.js"></script>
 <script src="../../js/utilities.js"></script>
-<!-- control page test-->
-<script src="../../js/controlTest.js"></script>
+
 </html>
