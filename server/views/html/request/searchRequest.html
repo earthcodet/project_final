@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <title>ค้นหา/แก้ไข</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -11,7 +12,11 @@
     <link rel="stylesheet" href="../../css/css2.css">
     <link href="../../css/fonts.css" rel="stylesheet">
 
-
+    <!-- เรียกไลบารี่สร้างปฎิทิน  -->
+    <script src="../../js/jquery-3.4.1.min.js"></script>
+    <script src="../../js/datetimepicker.full.js"></script>
+    <script src="../../js/dateth.js"></script>
+    <link rel="stylesheet" href="../../css/date.css">
 </head>
 
 <body>
@@ -106,7 +111,7 @@
                     </div>
                     <div class="row">
                         <div class="col" style="width: 25%;">
-                            <select size="9" style="width: 90%; background-size: 0%;" id="searchItem"
+                            <select size="9" style="width: 90%; background-size: 0%; font-family: 'Sarabun';" id="searchItem"
                                 onchange="selectItem(this.value)">
                                 <option selected="selected" value=1>ชื่อผู้ขอ</option>
                                 <option value=2>วันที่ยื่น</option>
@@ -333,7 +338,7 @@
 
 </body>
 <script src="../../js/searchRequest.js"></script>
-<script src="../../js/jquery.js"></script>
+<!-- <script src="../../js/jquery.js"></script> -->
 <script src="../../js/js22.js"></script>
 <script src="../../js/controlTest.js"></script>
 <script src="../../js/disable.js"></script>
