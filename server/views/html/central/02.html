@@ -351,7 +351,7 @@
                                                     <p>เลขที่ <i class="fa fa-sort "></i></p>
                                                 </th>
                                                 <th onclick="sortTable(3,'requestTable'),''">
-                                                    <p>วันที่หมดอายุ <i class="fa fa-sort "></i></p>
+                                                    <p>วันที่ <i class="fa fa-sort "></i></p>
                                                 </th>
                                                 <th onclick="sortTable(4,'requestTable'),'date'">
                                                     <p>สถานะ <i class="fa fa-sort "></i></p>
@@ -431,6 +431,9 @@
                                                     <p>วันที่หมดอายุ <i class="fa fa-sort "></i></p>
                                                 </th>
                                                 <th onclick="sortTable(4,'requestTable'),'date'">
+                                                    <p>เจ้าของสถานประกอบการ <i class="fa fa-sort "></i></p>
+                                                </th>
+                                                <th onclick="sortTable(4,'requestTable'),'date'">
                                                     <p>สถานะ <i class="fa fa-sort "></i></p>
                                                 </th>
                                             </tr>
@@ -443,6 +446,7 @@
                                                 <td>0001/2562</td>
                                                 <td>9999</td>
                                                 <td>20 มกราคม 2563</td>
+                                                <td>นาย A</td>
                                                 <td>365 วัน</td>
                                             </tr>
                                             <tr onclick="toRequest(event)">
@@ -452,6 +456,7 @@
                                                 <td>0001/2562</td>
                                                 <td>9999</td>
                                                 <td>20 มกราคม 2563</td>
+                                                <td>นาย A</td>
                                                 <td>365 วัน</td>
                                             </tr>
                                             <tr onclick="toRequest(event)">
@@ -461,6 +466,7 @@
                                                 <td>0001/2562</td>
                                                 <td>9999</td>
                                                 <td>20 มกราคม 2563</td>
+                                                <td>นาย A</td>
                                                 <td>365 วัน</td>
                                             </tr>
                                             <tr onclick="toRequest(event)">
@@ -470,6 +476,7 @@
                                                 <td>0001/2562</td>
                                                 <td>9999</td>
                                                 <td>20 มกราคม 2563</td>
+                                                <td>นาย A</td>
                                                 <td>365 วัน</td>
                                             </tr>
                                             <tr onclick="toRequest(event)">
@@ -479,6 +486,7 @@
                                                 <td>0001/2562</td>
                                                 <td>9999</td>
                                                 <td>20 มกราคม 2563</td>
+                                                <td>นาย A</td>
                                                 <td>365 วัน</td>
                                             </tr>
                                         </tbody>
@@ -497,21 +505,18 @@
                                             <th onclick="sortTable(0,'requestTable','')">
                                                 <p>ปีงบประมาณ <i class="fa fa-sort "></i></p>
                                             </th>
-                                            <th onclick="sortTable(1,'requestTable'),''">
+                                            <th onclick="sortTable(1,'requestTable','')">
                                                 <p>ประเภทใบอนุญาต <i class="fa fa-sort "></i></p>
                                             </th>
-                                            <th onclick="sortTable(2,'requestTable'),''">
+                                            <th onclick="sortTable(2,'requestTable','')">
                                                 <p>เล่ม <i class="fa fa-sort "></i>
                                                 </p>
                                             </th>
-                                            <th onclick="sortTable(4,'requestTable'),'date'">
+                                            <th onclick="sortTable(4,'requestTable','date')">
                                                 <p>เลขที่ <i class="fa fa-sort "></i></p>
                                             </th>
-                                            <th onclick="sortTable(3,'requestTable'),''">
-                                                <p>วันที่หมดอายุ <i class="fa fa-sort "></i></p>
-                                            </th>
-                                            <th onclick="sortTable(4,'requestTable'),'date'">
-                                                <p>สถานะ <i class="fa fa-sort "></i></p>
+                                            <th onclick="sortTable(3,'requestTable','')">
+                                                <p>วันที่ <i class="fa fa-sort "></i></p>
                                             </th>
                                         </tr>
                                     </thead>
@@ -523,7 +528,6 @@
                                             <td>0001/2562</td>
                                             <td>9999</td>
                                             <td>20 มกราคม 2563</td>
-                                            <td>365 วัน</td>
                                         </tr>
                                         <tr onclick="toRequest(event)">
                                             <td>2563</td>
@@ -532,7 +536,6 @@
                                             <td>0001/2562</td>
                                             <td>9999</td>
                                             <td>20 มกราคม 2563</td>
-                                            <td>365 วัน</td>
                                         </tr>
                                         <tr onclick="toRequest(event)">
                                             <td>2563</td>
@@ -541,7 +544,6 @@
                                             <td>0001/2562</td>
                                             <td>9999</td>
                                             <td>20 มกราคม 2563</td>
-                                            <td>365 วัน</td>
                                         </tr>
                                         <tr onclick="toRequest(event)">
                                             <td>2563</td>
@@ -550,7 +552,6 @@
                                             <td>0001/2562</td>
                                             <td>9999</td>
                                             <td>20 มกราคม 2563</td>
-                                            <td>365 วัน</td>
                                         </tr>
                                         <tr onclick="toRequest(event)">
                                             <td>2563</td>
@@ -559,7 +560,6 @@
                                             <td>0001/2562</td>
                                             <td>9999</td>
                                             <td>20 มกราคม 2563</td>
-                                            <td>365 วัน</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -586,9 +586,6 @@
                                                 <th onclick="sortTable(3,'requestTable'),''">
                                                     <p>วันที่หมดอายุ <i class="fa fa-sort "></i></p>
                                                 </th>
-                                                <th onclick="sortTable(4,'requestTable'),'date'">
-                                                    <p>สถานะ <i class="fa fa-sort "></i></p>
-                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody style="height: 17vw; text-align: center;">
@@ -599,7 +596,6 @@
                                                 <td>0001/2562</td>
                                                 <td>9999</td>
                                                 <td>20 มกราคม 2563</td>
-                                                <td>365 วัน</td>
                                             </tr>
                                             <tr onclick="toRequest(event)">
                                                 <td>2563</td>
@@ -608,7 +604,6 @@
                                                 <td>0001/2562</td>
                                                 <td>9999</td>
                                                 <td>20 มกราคม 2563</td>
-                                                <td>365 วัน</td>
                                             </tr>
                                             <tr onclick="toRequest(event)">
                                                 <td>2563</td>
@@ -617,7 +612,6 @@
                                                 <td>0001/2562</td>
                                                 <td>9999</td>
                                                 <td>20 มกราคม 2563</td>
-                                                <td>365 วัน</td>
                                             </tr>
                                             <tr onclick="toRequest(event)">
                                                 <td>2563</td>
@@ -626,7 +620,6 @@
                                                 <td>0001/2562</td>
                                                 <td>9999</td>
                                                 <td>20 มกราคม 2563</td>
-                                                <td>365 วัน</td>
                                             </tr>
                                             <tr onclick="toRequest(event)">
                                                 <td>2563</td>
@@ -635,7 +628,6 @@
                                                 <td>0001/2562</td>
                                                 <td>9999</td>
                                                 <td>20 มกราคม 2563</td>
-                                                <td>365 วัน</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -663,8 +655,8 @@
                                                 <th onclick="sortTable(3,'requestTable'),''">
                                                     <p>วันที่หมดอายุ <i class="fa fa-sort "></i></p>
                                                 </th>
-                                                <th onclick="sortTable(4,'requestTable'),'date'">
-                                                    <p>สถานะ <i class="fa fa-sort "></i></p>
+                                                <th onclick="sortTable(3,'requestTable'),''">
+                                                    <p>เจ้าของสถานประกอบการ <i class="fa fa-sort "></i></p>
                                                 </th>
                                             </tr>
                                         </thead>
@@ -676,7 +668,7 @@
                                                 <td>0001/2562</td>
                                                 <td>9999</td>
                                                 <td>20 มกราคม 2563</td>
-                                                <td>365 วัน</td>
+                                                <td>นาย A</td>
                                             </tr>
                                             <tr onclick="toRequest(event)">
                                                 <td>2563</td>
@@ -685,7 +677,7 @@
                                                 <td>0001/2562</td>
                                                 <td>9999</td>
                                                 <td>20 มกราคม 2563</td>
-                                                <td>365 วัน</td>
+                                                <td>นาย A</td>
                                             </tr>
                                             <tr onclick="toRequest(event)">
                                                 <td>2563</td>
@@ -694,7 +686,7 @@
                                                 <td>0001/2562</td>
                                                 <td>9999</td>
                                                 <td>20 มกราคม 2563</td>
-                                                <td>365 วัน</td>
+                                                <td>นาย A</td>
                                             </tr>
                                             <tr onclick="toRequest(event)">
                                                 <td>2563</td>
@@ -703,7 +695,7 @@
                                                 <td>0001/2562</td>
                                                 <td>9999</td>
                                                 <td>20 มกราคม 2563</td>
-                                                <td>365 วัน</td>
+                                                <td>นาย A</td>
                                             </tr>
                                             <tr onclick="toRequest(event)">
                                                 <td>2563</td>
@@ -712,7 +704,7 @@
                                                 <td>0001/2562</td>
                                                 <td>9999</td>
                                                 <td>20 มกราคม 2563</td>
-                                                <td>365 วัน</td>
+                                                <td>นาย A</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -897,6 +889,9 @@
                                                 <th onclick="sortTable(3,'requestTable'),''">
                                                     <p>วันที่หมดอายุ <i class="fa fa-sort "></i></p>
                                                 </th>
+                                                <th onclick="sortTable(3,'requestTable'),''">
+                                                    <p>เจ้าของสถานประกอบการ <i class="fa fa-sort "></i></p>
+                                                </th>
                                                 <th onclick="sortTable(4,'requestTable'),'date'">
                                                     <p>สถานะ <i class="fa fa-sort "></i></p>
                                                 </th>
@@ -910,6 +905,7 @@
                                                 <td>0001/2562</td>
                                                 <td>9999</td>
                                                 <td>20 มกราคม 2563</td>
+                                                <td>นาย A</td>
                                                 <td>365 วัน</td>
                                             </tr>
                                             <tr onclick="toRequest(event)">
@@ -919,6 +915,7 @@
                                                 <td>0001/2562</td>
                                                 <td>9999</td>
                                                 <td>20 มกราคม 2563</td>
+                                                <td>นาย A</td>
                                                 <td>365 วัน</td>
                                             </tr>
                                             <tr onclick="toRequest(event)">
@@ -928,6 +925,7 @@
                                                 <td>0001/2562</td>
                                                 <td>9999</td>
                                                 <td>20 มกราคม 2563</td>
+                                                <td>นาย A</td>
                                                 <td>365 วัน</td>
                                             </tr>
                                             <tr onclick="toRequest(event)">
@@ -937,6 +935,7 @@
                                                 <td>0001/2562</td>
                                                 <td>9999</td>
                                                 <td>20 มกราคม 2563</td>
+                                                <td>นาย A</td>
                                                 <td>365 วัน</td>
                                             </tr>
                                             <tr onclick="toRequest(event)">
@@ -946,6 +945,7 @@
                                                 <td>0001/2562</td>
                                                 <td>9999</td>
                                                 <td>20 มกราคม 2563</td>
+                                                <td>นาย A</td>
                                                 <td>365 วัน</td>
                                             </tr>
                                         </tbody>
@@ -974,4 +974,5 @@
 <script src="../../js/dateth.js"></script>
 <script src="../../node_modules/axios/dist/axios.min.js"></script>
 <script src="../../js/address.js"></script>
+<script src="../../js/utilities.js"></script>
 </html>
