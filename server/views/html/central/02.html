@@ -104,127 +104,130 @@
                     <div class="box">
                         <!-- row 1 -->
                         <fieldset disabled id="disable" style="border: 0;padding: 0;margin: 0;">
-                        <div style="display: flex;padding: 0.5vw;">
-                            <div style="width: 59vw;margin-top: 0.5vw;">
-                                <a style="margin-left: 4vw;">ประเภท :</a>
-                                <select id="typeUser" name="" style="width: 11vw;">
-                                    <option value="none" hidden>เลือก...</option>
-                                    <option value="นิติบุคคล">นิติบุคคล</option>
-                                    <option value="บุคคลธรรมดา">บุคคลธรรมดา</option>
-                                </select>
-                                <a style="margin-left:1vw;">สัญชาติ :</a>
-                                <select id="nationality" style="width: 11vw">
-                                    <option value="" hidden>เลือก...</option>
-                                    <option value="ไทย">ไทย</option>
-                                    <option value="อเมริกา">อเมริกา</option>
-                                </select>
-                                <a style="margin-left: 1vw;">เชื้อชาติ :</a>
-                                <select id="race" style="width: 11vw;">
-                                    <option value="" hidden>เลือก...</option>
-                                    <option value="ไทย">ไทย</option>
-                                    <option value="อเมริกา">อเมริกา</option>
-                                </select>
-                                <br>
-                                <!-- row 2 -->
-                                <a style="margin-left: 2vw;">คำนำหน้าชื่อ :</a>
-                                <select id="title" name="" style="width: 11vw">
-                                    <option value="" hidden>เลือก...</option>
-                                    <option value="">นาย</option>
-                                    <option value="">นาง</option>
-                                    <option value="">นางสาว</option>
-                                </select>
-                                <a style="margin-left: 3vw;">ชื่อ :</a>
-                                <input type="text" id="nameUser" name="" placeholder="" style="width: 11vw">
-                                <a style="margin-left: 0.8vw;">นามสกุล :</a>
-                                <input type="text" id="surnameUser" name="" placeholder="" style="width: 11vw">
-                                <br>
-                                <!-- row 3 -->
-                                <a style="margin-left: 1.8vw;">เลขประจำตัว :</a>
-                                <input type="text" id="id" name="" placeholder="" style="width: 11vw"
-                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                    maxlength="13" onkeyup="console.log(this.value)">
-                                <a style="margin-left:0.9vw;">ออกเมื่อ :</a>
-                                <input type="text" id="datepicker1" placeholder="" style="width: 11vw">
-                                <a style="margin-left: 0.8vw;">หมดอายุ :</a>
-                                <input type="text" id="datepicker2" placeholder="" style="width: 11vw">
-                                <br>
+                            <div style="display: flex;padding: 0.5vw;">
+                                <div style="width: 59vw;margin-top: 0.5vw;">
+                                    <a style="margin-left: 4vw;">ประเภท :</a>
+                                    <select id="typeUser" name="" style="width: 11vw;">
+                                        <option value="none" hidden>เลือก...</option>
+                                        <option value="นิติบุคคล">นิติบุคคล</option>
+                                        <option value="บุคคลธรรมดา">บุคคลธรรมดา</option>
+                                    </select>
+                                    <a style="margin-left:1vw;">สัญชาติ :</a>
+                                    <select id="nationality" style="width: 11vw">
+                                        <option value="" hidden>เลือก...</option>
+                                        <option value="ไทย">ไทย</option>
+                                        <option value="อเมริกา">อเมริกา</option>
+                                    </select>
+                                    <a style="margin-left: 1vw;">เชื้อชาติ :</a>
+                                    <select id="race" style="width: 11vw;">
+                                        <option value="" hidden>เลือก...</option>
+                                        <option value="ไทย">ไทย</option>
+                                        <option value="อเมริกา">อเมริกา</option>
+                                    </select>
+                                    <br>
+                                    <!-- row 2 -->
+                                    <a style="margin-left: 2vw;">คำนำหน้าชื่อ :</a>
+                                    <select id="title" name="" style="width: 11vw">
+                                        <option value="" hidden>เลือก...</option>
+                                        <option value="">นาย</option>
+                                        <option value="">นาง</option>
+                                        <option value="">นางสาว</option>
+                                    </select>
+                                    <a style="margin-left: 3vw;">ชื่อ :</a>
+                                    <input type="text" id="nameUser" name="" placeholder="" style="width: 11vw">
+                                    <a style="margin-left: 0.8vw;">นามสกุล :</a>
+                                    <input type="text" id="surnameUser" name="" placeholder="" style="width: 11vw">
+                                    <br>
+                                    <!-- row 3 -->
+                                    <a style="margin-left: 1.8vw;">เลขประจำตัว :</a>
+                                    <input type="text" id="id" name="" placeholder="" style="width: 11vw"
+                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                        maxlength="13" onkeyup="console.log(this.value)">
+                                    <a style="margin-left:0.9vw;">ออกเมื่อ :</a>
+                                    <input type="text" id="datepicker1" placeholder="" style="width: 11vw">
+                                    <a style="margin-left: 0.8vw;">หมดอายุ :</a>
+                                    <input type="text" id="datepicker2" placeholder="" style="width: 11vw">
+                                    <br>
 
-                                <br>
-                                <!-- row4 -->
-                                <a style="margin-left: 3.9vw;">เกิดวันที่ :</a>
-                                <input type="text" id="datepicker3" placeholder="" style="width: 11vw;">
+                                    <br>
+                                    <!-- row4 -->
+                                    <a style="margin-left: 3.9vw;">เกิดวันที่ :</a>
+                                    <input type="text" id="datepicker3" placeholder="" style="width: 11vw;">
 
-                                <a style="margin-left: 0.7vw;">โทรศัพท์ :</a>
-                                <input type="text" style="width: 11vw" id="phone"
-                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                    maxlength="10">
-                                <a style="margin-left: 1.1vw;">โทรสาร :</a>
-                                <input type="text" id="fax" style="width: 11vw"
-                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                    maxlength="9">
-                                <br>
-                                <!-- row5 -->
+                                    <a style="margin-left: 0.7vw;">โทรศัพท์ :</a>
+                                    <input type="text" style="width: 11vw" id="phone"
+                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                        maxlength="10">
+                                    <a style="margin-left: 1.1vw;">โทรสาร :</a>
+                                    <input type="text" id="fax" style="width: 11vw"
+                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                        maxlength="9">
+                                    <br>
+                                    <!-- row5 -->
 
 
-                                <a style="margin-left: 2vw;">อยู่บ้านเลขที่ :</a>
-                                <input type="text" id="homeId" style="width: 11vw">
-                                <a style="margin-left: 2.3vw;">หมู่ที่ :</a>
-                                <input type="int" id="moo" style="width: 11vw">
-                                <a style="margin-left: 2.05vw;">ตรอก :</a>
-                                <input type="text" id="trxk" style="width: 11vw">
-                                <!-- row 6 -->
-                                <br>
-                                <a style="margin-left: 5.4vw;">ซอย :</a>
-                                <input type="text" id="sxy" style="width: 11vw;">
-                                <a style="margin-left: 1.6vw;">อาคาร :</a>
-                                <input type="text" id="building" style="width: 11vw">
-                                <a style="margin-left: 2.45vw;">ถนน :</a>
-                                <input type="text" id="road" style="width: 11vw">
-                                <!-- row 7 -->
-                                <br>
-                                <a style="margin-left: 4.3vw;">จังหวัด :</a>
-                                <select id="province" style="width: 11vw">
-                                </select>
-                                <a style="margin-left: 1.8vw;">อำเภอ :</a>
-                                <select id="district" style="width: 11vw">
-                                </select>
-                                <a style="margin-left: 1.9vw;">ตำบล :</a>
-                                <select id="subdistrict" style="width: 11vw">
-                                </select>
-                                <br>
-                                <a style="margin-left: 1.8vw;">อัพเดทล่าสุด :</a>
-                                <input type="text" style="width: 11vw;" readonly disabled>
-                            </div>
-                            <div style="width: 20vw; ;text-align: center; display: block; padding: 1vw;">
-                                <a style="font-size: 1.5vw;"> รูปภาพภาพผู้ประกอบการ</a>
-                                <div>
-                                    <img id="operatorImage" class="rounded" src="../../img/userProfile.png"
-                                        style="width: 18vw;height: 18vw;">
+                                    <a style="margin-left: 2vw;">อยู่บ้านเลขที่ :</a>
+                                    <input type="text" id="homeId" style="width: 11vw">
+                                    <a style="margin-left: 2.3vw;">หมู่ที่ :</a>
+                                    <input type="int" id="moo" style="width: 11vw">
+                                    <a style="margin-left: 2.05vw;">ตรอก :</a>
+                                    <input type="text" id="trxk" style="width: 11vw">
+                                    <!-- row 6 -->
+                                    <br>
+                                    <a style="margin-left: 5.4vw;">ซอย :</a>
+                                    <input type="text" id="sxy" style="width: 11vw;">
+                                    <a style="margin-left: 1.6vw;">อาคาร :</a>
+                                    <input type="text" id="building" style="width: 11vw">
+                                    <a style="margin-left: 2.45vw;">ถนน :</a>
+                                    <input type="text" id="road" style="width: 11vw">
+                                    <!-- row 7 -->
+                                    <br>
+                                    <a style="margin-left: 4.3vw;">จังหวัด :</a>
+                                    <select id="province" style="width: 11vw">
+                                    </select>
+                                    <a style="margin-left: 1.8vw;">อำเภอ :</a>
+                                    <select id="district" style="width: 11vw">
+                                    </select>
+                                    <a style="margin-left: 1.9vw;">ตำบล :</a>
+                                    <select id="subdistrict" style="width: 11vw">
+                                    </select>
+                                    <br>
+                                    <a style="margin-left: 1.8vw;">อัพเดทล่าสุด :</a>
+                                    <input type="text" style="width: 11vw;" readonly disabled>
                                 </div>
-                                <div>
-                                    <input style='display: none;' type="file" id="uploadFile"
-                                        onchange="uploadImage(event)" accept="image/*">
+                                <div style="width: 20vw; ;text-align: center; display: block; padding: 1vw;">
+                                    <a style="font-size: 1.5vw;"> รูปภาพภาพผู้ประกอบการ</a>
+                                    <div>
+                                        <img id="operatorImage" class="rounded" src="../../img/userProfile.png"
+                                            style="width: 18vw;height: 18vw;">
+                                    </div>
+                                    <div>
+                                        <input style='display: none;' type="file" id="uploadFile"
+                                            onchange="uploadImage(event)" accept="image/*">
 
-                                    <button type="button" class="addimage" onclick="buttonImage()"
-                                        style="width:5vw ">แทน</button>
+                                        <button type="button" class="addimage" onclick="buttonImage()"
+                                            style="width:5vw ">แทน</button>
 
-                                    <button type="button" class="delete" id="cancelImage"
-                                        style="width:5vw;margin-left: 0.5vw;" onclick="deleteImageOne()"> ลบ </button>
+                                        <button type="button" class="delete" id="cancelImage"
+                                            style="width:5vw;margin-left: 0.5vw;" onclick="deleteImageOne()"> ลบ
+                                        </button>
 
-                                    <button type="button" id="webcam" style="width:5.5vw; margin-left: 0.5vw;"
-                                        disabled>ถ่ายภาพ
-                                    </button>
+                                        <button type="button" id="webcam" style="width:5.5vw; margin-left: 0.5vw;"
+                                            disabled>ถ่ายภาพ
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </fieldset>
+                        </fieldset>
                     </div>
-                
+
                     <br>
 
                     <div class="box">
                         <p class="font">ประวัติการออกใบอนุญาต</p>
-                        <a>ปีงบประมาณ : <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="4"></a>
+                        <a>ปีงบประมาณ : <input type="text"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                maxlength="4"></a>
                         <a>ประเภทใบอนุญาต :
                             <input list="brow" id="" name="" style="width: 30%;">
                             <datalist id="brow">
@@ -260,7 +263,7 @@
                                 <br><br>
                                 <table id="requestTable" class="table cursor-pointer table-hover tableresult">
                                     <thead>
-                                        <tr class="is-color" style="height: 5.2vw;" >
+                                        <tr class="is-color">
                                             <th onclick="sortTable(0,'requestTable','')">
                                                 <p>ปีงบประมาณ <i class="fa fa-sort "></i></p>
                                             </th>
@@ -282,51 +285,46 @@
                                             </th>
                                         </tr>
                                     </thead>
-                                    <tbody style="height: 17vw;  text-align: center;" >
+                                    <tbody style="height: 17vw;  text-align: center;">
                                         <tr onclick="toRequest(event)">
                                             <td>2563</td>
-                                            <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
-                                            </td>
+                                            <td>ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</td>
                                             <td>0001/2562</td>
                                             <td>9999</td>
                                             <td>20 มกราคม 2563</td>
-                                            <td>365 วัน</td>
+                                            <td>300 วัน</td>
+                                        </tr>
+                                        <tr onclick="toRequest(event)">
+                                            <td>2562</td>
+                                            <td>ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</td>
+                                            <td>0002/2562</td>
+                                            <td>9991</td>
+                                            <td>25 มกราคม 2563</td>
+                                            <td>345 วัน</td>
+                                        </tr>
+                                        <tr onclick="toRequest(event)">
+                                            <td>2561</td>
+                                            <td>ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</td>
+                                            <td>0003/2562</td>
+                                            <td>9992</td>
+                                            <td>27 มกราคม 2563</td>
+                                            <td>65 วัน</td>
                                         </tr>
                                         <tr onclick="toRequest(event)">
                                             <td>2563</td>
-                                            <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
-                                            </td>
-                                            <td>0001/2562</td>
-                                            <td>9999</td>
-                                            <td>20 มกราคม 2563</td>
-                                            <td>365 วัน</td>
+                                            <td>ใบอนุญาตจัดตั้งสถานที่สะสมอาหาร</td>
+                                            <td>0004/2562</td>
+                                            <td>9993</td>
+                                            <td>29 มกราคม 2563</td>
+                                            <td>36 วัน</td>
                                         </tr>
                                         <tr onclick="toRequest(event)">
                                             <td>2563</td>
-                                            <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
-                                            </td>
-                                            <td>0001/2562</td>
-                                            <td>9999</td>
-                                            <td>20 มกราคม 2563</td>
-                                            <td>365 วัน</td>
-                                        </tr>
-                                        <tr onclick="toRequest(event)">
-                                            <td>2563</td>
-                                            <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
-                                            </td>
-                                            <td>0001/2562</td>
-                                            <td>9999</td>
-                                            <td>20 มกราคม 2563</td>
-                                            <td>365 วัน</td>
-                                        </tr>
-                                        <tr onclick="toRequest(event)">
-                                            <td>2563</td>
-                                            <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
-                                            </td>
-                                            <td>0001/2562</td>
-                                            <td>9999</td>
-                                            <td>20 มกราคม 2563</td>
-                                            <td>365 วัน</td>
+                                            <td>ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</td>
+                                            <td>0005/2562</td>
+                                            <td>9994</td>
+                                            <td>31 มกราคม 2563</td>
+                                            <td>205 วัน</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -335,8 +333,8 @@
                                 <br><br>
                                 <div style="font-size: 1.7vh;">
                                     <table id="requestTable" class="table cursor-pointer table-hover tableresult">
-                                        <thead >
-                                            <tr class="" style="height: 5.2vw; background-color: rgba(212, 65, 65, 0.863); color: rgb(255, 255, 255);">
+                                        <thead>
+                                            <tr class="" style="background-color: rgba(212, 65, 65, 0.863); color: rgb(255, 255, 255);">
                                                 <th onclick="sortTable(0,'requestTable','')">
                                                     <p>ปีงบประมาณ <i class="fa fa-sort "></i></p>
                                                 </th>
@@ -361,48 +359,43 @@
                                         <tbody style="height: 17vw; text-align: center;">
                                             <tr onclick="toRequest(event)">
                                                 <td>2563</td>
-                                                <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
-                                                </td>
+                                                <td>ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</td>
                                                 <td>0001/2562</td>
                                                 <td>9999</td>
                                                 <td>20 มกราคม 2563</td>
-                                                <td>365 วัน</td>
+                                                <td>300 วัน</td>
+                                            </tr>
+                                            <tr onclick="toRequest(event)">
+                                                <td>2562</td>
+                                                <td>ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</td>
+                                                <td>0002/2562</td>
+                                                <td>9991</td>
+                                                <td>25 มกราคม 2563</td>
+                                                <td>345 วัน</td>
+                                            </tr>
+                                            <tr onclick="toRequest(event)">
+                                                <td>2561</td>
+                                                <td>ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</td>
+                                                <td>0003/2562</td>
+                                                <td>9992</td>
+                                                <td>27 มกราคม 2563</td>
+                                                <td>65 วัน</td>
                                             </tr>
                                             <tr onclick="toRequest(event)">
                                                 <td>2563</td>
-                                                <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
-                                                </td>
-                                                <td>0001/2562</td>
-                                                <td>9999</td>
-                                                <td>20 มกราคม 2563</td>
-                                                <td>365 วัน</td>
+                                                <td>ใบอนุญาตจัดตั้งสถานที่สะสมอาหาร</td>
+                                                <td>0004/2562</td>
+                                                <td>9993</td>
+                                                <td>29 มกราคม 2563</td>
+                                                <td>36 วัน</td>
                                             </tr>
                                             <tr onclick="toRequest(event)">
                                                 <td>2563</td>
-                                                <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
-                                                </td>
-                                                <td>0001/2562</td>
-                                                <td>9999</td>
-                                                <td>20 มกราคม 2563</td>
-                                                <td>365 วัน</td>
-                                            </tr>
-                                            <tr onclick="toRequest(event)">
-                                                <td>2563</td>
-                                                <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
-                                                </td>
-                                                <td>0001/2562</td>
-                                                <td>9999</td>
-                                                <td>20 มกราคม 2563</td>
-                                                <td>365 วัน</td>
-                                            </tr>
-                                            <tr onclick="toRequest(event)">
-                                                <td>2563</td>
-                                                <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
-                                                </td>
-                                                <td>0001/2562</td>
-                                                <td>9999</td>
-                                                <td>20 มกราคม 2563</td>
-                                                <td>365 วัน</td>
+                                                <td>ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</td>
+                                                <td>0005/2562</td>
+                                                <td>9994</td>
+                                                <td>31 มกราคม 2563</td>
+                                                <td>205 วัน</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -412,8 +405,9 @@
                                 <br><br>
                                 <div style="font-size: 1.7vh;">
                                     <table id="requestTable" class="table cursor-pointer table-hover tableresult">
-                                        <thead >
-                                            <tr class="" style="height:auto; background-color: rgba(40, 131, 250, 0.876); color: rgb(255, 255, 255);">
+                                        <thead>
+                                            <tr class=""
+                                                style="height:auto; background-color: rgba(40, 131, 250, 0.876); color: rgb(255, 255, 255);">
                                                 <th onclick="sortTable(0,'requestTable','')">
                                                     <p>ปีงบประมาณ <i class="fa fa-sort "></i></p>
                                                 </th>
@@ -441,53 +435,48 @@
                                         <tbody style="height: 17vw; text-align: center;">
                                             <tr onclick="toRequest(event)">
                                                 <td>2563</td>
-                                                <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
-                                                </td>
+                                                <td>ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</td>
                                                 <td>0001/2562</td>
                                                 <td>9999</td>
                                                 <td>20 มกราคม 2563</td>
                                                 <td>นาย A</td>
-                                                <td>365 วัน</td>
+                                                <td>300 วัน</td>
+                                            </tr>
+                                            <tr onclick="toRequest(event)">
+                                                <td>2562</td>
+                                                <td>ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</td>
+                                                <td>0002/2562</td>
+                                                <td>9991</td>
+                                                <td>25 มกราคม 2563</td>
+                                                <td>นาย BB</td>
+                                                <td>345 วัน</td>
+                                            </tr>
+                                            <tr onclick="toRequest(event)">
+                                                <td>2561</td>
+                                                <td>ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</td>
+                                                <td>0003/2562</td>
+                                                <td>9992</td>
+                                                <td>27 มกราคม 2563</td>
+                                                <td>นาย CCC</td>
+                                                <td>65 วัน</td>
                                             </tr>
                                             <tr onclick="toRequest(event)">
                                                 <td>2563</td>
-                                                <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
-                                                </td>
-                                                <td>0001/2562</td>
-                                                <td>9999</td>
-                                                <td>20 มกราคม 2563</td>
-                                                <td>นาย A</td>
-                                                <td>365 วัน</td>
+                                                <td>ใบอนุญาตจัดตั้งสถานที่สะสมอาหาร</td>
+                                                <td>0004/2562</td>
+                                                <td>9993</td>
+                                                <td>29 มกราคม 2563</td>
+                                                <td>นาย DDDD</td>
+                                                <td>36 วัน</td>
                                             </tr>
                                             <tr onclick="toRequest(event)">
                                                 <td>2563</td>
-                                                <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
-                                                </td>
-                                                <td>0001/2562</td>
-                                                <td>9999</td>
-                                                <td>20 มกราคม 2563</td>
-                                                <td>นาย A</td>
-                                                <td>365 วัน</td>
-                                            </tr>
-                                            <tr onclick="toRequest(event)">
-                                                <td>2563</td>
-                                                <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
-                                                </td>
-                                                <td>0001/2562</td>
-                                                <td>9999</td>
-                                                <td>20 มกราคม 2563</td>
-                                                <td>นาย A</td>
-                                                <td>365 วัน</td>
-                                            </tr>
-                                            <tr onclick="toRequest(event)">
-                                                <td>2563</td>
-                                                <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
-                                                </td>
-                                                <td>0001/2562</td>
-                                                <td>9999</td>
-                                                <td>20 มกราคม 2563</td>
-                                                <td>นาย A</td>
-                                                <td>365 วัน</td>
+                                                <td>ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</td>
+                                                <td>0005/2562</td>
+                                                <td>9994</td>
+                                                <td>31 มกราคม 2563</td>
+                                                <td>นาย EEEEE</td>
+                                                <td>205 วัน</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -501,7 +490,7 @@
                                 <br><br>
                                 <table id="requestTable" class="table cursor-pointer table-hover tableresult">
                                     <thead>
-                                        <tr class="is-color" style="height: 5.2vw;" >
+                                        <tr class="is-color">
                                             <th onclick="sortTable(0,'requestTable','')">
                                                 <p>ปีงบประมาณ <i class="fa fa-sort "></i></p>
                                             </th>
@@ -520,7 +509,7 @@
                                             </th>
                                         </tr>
                                     </thead>
-                                    <tbody style="height: 17vw;  text-align: center;" >
+                                    <tbody style="height: 17vw;  text-align: center;">
                                         <tr onclick="toRequest(event)">
                                             <td>2563</td>
                                             <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
@@ -568,8 +557,8 @@
                                 <br><br>
                                 <div style="font-size: 1.7vh;">
                                     <table id="requestTable" class="table cursor-pointer table-hover tableresult">
-                                        <thead >
-                                            <tr class="" style="height: 5.2vw; background-color: rgba(212, 65, 65, 0.863); color: rgb(255, 255, 255);">
+                                        <thead>
+                                            <tr class="" style="background-color: rgba(212, 65, 65, 0.863); color: rgb(255, 255, 255);">
                                                 <th onclick="sortTable(0,'requestTable','')">
                                                     <p>ปีงบประมาณ <i class="fa fa-sort "></i></p>
                                                 </th>
@@ -637,8 +626,9 @@
                                 <br><br>
                                 <div style="font-size: 1.7vh;">
                                     <table id="requestTable" class="table cursor-pointer table-hover tableresult">
-                                        <thead >
-                                            <tr class="" style="height:auto; background-color: rgba(40, 131, 250, 0.876); color: rgb(255, 255, 255);">
+                                        <thead>
+                                            <tr class=""
+                                                style="height:auto; background-color: rgba(40, 131, 250, 0.876); color: rgb(255, 255, 255);">
                                                 <th onclick="sortTable(0,'requestTable','')">
                                                     <p>ปีงบประมาณ <i class="fa fa-sort "></i></p>
                                                 </th>
@@ -719,7 +709,7 @@
                                 <br><br>
                                 <table id="requestTable" class="table cursor-pointer table-hover tableresult">
                                     <thead>
-                                        <tr class="is-color" style="height: 5.2vw;" >
+                                        <tr class="is-color">
                                             <th onclick="sortTable(0,'requestTable','')">
                                                 <p>ปีงบประมาณ <i class="fa fa-sort "></i></p>
                                             </th>
@@ -741,7 +731,7 @@
                                             </th>
                                         </tr>
                                     </thead>
-                                    <tbody style="height: 17vw;  text-align: center;" >
+                                    <tbody style="height: 17vw;  text-align: center;">
                                         <tr onclick="toRequest(event)">
                                             <td>2563</td>
                                             <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
@@ -794,8 +784,8 @@
                                 <br><br>
                                 <div style="font-size: 1.7vh;">
                                     <table id="requestTable" class="table cursor-pointer table-hover tableresult">
-                                        <thead >
-                                            <tr class="" style="height: 5.2vw; background-color: rgba(212, 65, 65, 0.863); color: rgb(255, 255, 255);">
+                                        <thead>
+                                            <tr class="" style="background-color: rgba(212, 65, 65, 0.863); color: rgb(255, 255, 255);">
                                                 <th onclick="sortTable(0,'requestTable','')">
                                                     <p>ปีงบประมาณ <i class="fa fa-sort "></i></p>
                                                 </th>
@@ -871,8 +861,9 @@
                                 <br><br>
                                 <div style="font-size: 1.7vh;">
                                     <table id="requestTable" class="table cursor-pointer table-hover tableresult">
-                                        <thead >
-                                            <tr class="" style="height:auto; background-color: rgba(40, 131, 250, 0.876); color: rgb(255, 255, 255);">
+                                        <thead>
+                                            <tr class=""
+                                                style="height:auto; background-color: rgba(40, 131, 250, 0.876); color: rgb(255, 255, 255);">
                                                 <th onclick="sortTable(0,'requestTable','')">
                                                     <p>ปีงบประมาณ <i class="fa fa-sort "></i></p>
                                                 </th>
@@ -975,4 +966,5 @@
 <script src="../../node_modules/axios/dist/axios.min.js"></script>
 <script src="../../js/address.js"></script>
 <script src="../../js/utilities.js"></script>
+
 </html>
