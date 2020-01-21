@@ -166,6 +166,7 @@ function deleteTEST() {
         });
 
 }
+
 function searchPersonal() {
     console.log('run')
     let id = document.getElementById('popSearchId').value.trim()
@@ -215,7 +216,12 @@ function getAddressByAddressId(aid){
 }
 function createResultSearch(data) {
     var tbl = document.getElementById("resultItems");
-    var tblBody = document.createElement('tbodyResult')
+    // tbl.removeChild(tbl.getElementsByTagName("tbody")[0])
+    if(tbl.getElementsByTagName("tbody")[0] != null || tbl.getElementsByTagName("tbody")[0] != undefined){
+        tbl.removeChild(tbl.getElementsByTagName("tbody")[0])
+    }
+    // document.getElementsByTagName('tbody')[0].parentNode.removeChild( document.getElementsByTagName('tbody')[0]);
+    var tblBody = document.createElement('tbody')
     // creating all cells
     for (var i = 0; i < data.length; i++) {
       // creates a table row
