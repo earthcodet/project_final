@@ -526,3 +526,4 @@ p.font {
     border: 1px solid #ccc;
     border-top: none;
 }
+html.swal2-shown,body.swal2-shown { overflow-y: hidden !important; }
