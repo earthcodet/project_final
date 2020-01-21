@@ -73,18 +73,16 @@ class PersonalDAO {
             })
         })
     }
-    getPersonal(){
+    getPersonal(id,name,surname){
         return new Promise((resolve, reject) => {
-            let query = `SELECT * FROM personal`
+            let value = 'PERSONAL_TITLE,PERSONAL_NAME,PERSONAL_SURNAME,PERSONAL_PERSONAL_ID,ADDRESS_ID'
+            let condition = `PERSONAL_PERSONAL_ID LIKE '%${id}%' AND PERSONAL_NAME LIKE '%${name}%' AND PERSONAL_SURNAME LIKE '%${surname}%'`
+            let query = `SELECT ${value} FROM personal WHERE ${condition}`
             con.query(query, function (err, result) {
+                console.log(result)
                 if (err) {
                     console.log(err.code)
-                }
-                if(result.length === 0){
-                    console.log(`DAO status => ${false}`)
-                    return resolve(result)
                 }else{
-                    console.log(`DAO status => ${true}`)
                     return resolve(result)
                 }
             })

@@ -127,9 +127,9 @@ class service {
             })
         }
     }
-    getPersonal() {
+    getPersonal(id,name,surname) {
         return new Promise((resolve, reject) => {
-            PersonalDAOObj.getPersonal().then((data) => {
+            PersonalDAOObj.getPersonal(id,name,surname).then((data) => {
                 console.log(`service status => ${data}`)
                     return resolve(data)
 
@@ -146,6 +146,13 @@ class service {
                     return resolve(false)
                 }
 
+            })
+        })
+    }
+    getAddressByAddressId(id) {
+        return new Promise((resolve, reject) => {
+            AddressDAOObj.getAddressByAddressId(id).then((data) => {
+                    return resolve(data)
             })
         })
     }

@@ -83,8 +83,28 @@ app.post('/insert/personal', (req, res) =>{
     res.json(data)
   })
 })
-app.get('/get/axax', (req, res) =>{
-  webService.getPersonal().then((data) =>{
+app.get('/search/personal/:id/:name/:surname', (req, res) =>{
+  //id/name/surname
+  if(req.params.id === 'none'){
+    req.params.id = ''
+  }
+  if(req.params.name === 'none'){
+    req.params.name = ''
+  }
+  if(req.params.surname === 'none'){
+    req.params.surname = ''
+  }
+  webService.getPersonal(req.params.id  , req.params.name, req.params.surname).then((data) =>{
+    console.log(`servar status => ${data}`)
+    if(data != null){
+      res.json(data)
+    }else {
+      res.sendStatus(404)
+    }
+  })
+})
+app.get('/search/address/:addressId', (req, res) =>{
+  webService.getAddressByAddressId(req.params.addressId).then((data) =>{
     console.log(`servar status => ${data}`)
     if(data != null){
       res.json(data)

@@ -39,5 +39,16 @@ class AddressDAO {
             });
         });
     }
+    getAddressByAddressId(aid){
+        return new Promise((resolve, reject) => {
+            con.query(`SELECT * FROM address WHERE ADDRESS_ID='${aid}'`, function (err, rows) {
+                if (err) {
+                    throw err;
+                }
+
+                return resolve(rows);
+            });
+        });
+    }
 }
 module.exports = AddressDAO;
