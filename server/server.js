@@ -18,8 +18,6 @@ app.use(fileUpload())
 
 
 app.get('/user/:username/:password', (req, res) => {
-  console.log(req.params.username)
-  console.log(req.params.password)
   LoginDAOObj.getUser(req.params.username, req.params.password).then((data) => {
     if (data != null) {
       res.json(data)
@@ -83,6 +81,16 @@ app.post('/insert/personal', (req, res) =>{
   webService.insertStep(obj[0],obj[1], obj[2]).then((data) =>{
     console.log(data)
     res.json(data)
+  })
+})
+app.get('/get/axax', (req, res) =>{
+  webService.getPersonal().then((data) =>{
+    console.log(`servar status => ${data}`)
+    if(data != null){
+      res.json(data)
+    }else {
+      res.sendStatus(404)
+    }
   })
 })
 let dataTest = {

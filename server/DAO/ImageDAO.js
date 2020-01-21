@@ -19,7 +19,6 @@ class ImageDAO {
                 };
             con.query(query, values, function (err, result) {
                 if (err) {
-                    console.log('image เอง')
                     console.log(err.code) 
                 }
                 return resolve(result)

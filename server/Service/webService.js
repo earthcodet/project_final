@@ -127,6 +127,15 @@ class service {
             })
         }
     }
+    getPersonal() {
+        return new Promise((resolve, reject) => {
+            PersonalDAOObj.getPersonal().then((data) => {
+                console.log(`service status => ${data}`)
+                    return resolve(data)
+
+            })
+        })
+    }
     getPersonalId(id) {
         return new Promise((resolve, reject) => {
             PersonalDAOObj.getPersonalId(id).then((data) => {
@@ -221,12 +230,13 @@ class service {
             return format
         }
         if (type === 'TO-DISPLAY') {
-            //2563-01-16
-            let temp = date.split('-')
-            let day = temp[0]
+            //2563-01-04T17:00:00.000Z
+            let realdate = date.substring(0, 10);
+            let temp = realdate.split('-')
+            let day = temp[2]
             let month = temp[1]
-            let year = temp[2]
-            let format = `${day}-${month}-${year}` //16/01/2563
+            let year = temp[0]
+            let format = `${day}-${month}-${year}` //16-01-2563
             return format
         }
     }
@@ -246,7 +256,6 @@ class service {
     }
     insertStep(personal, address, image) {
         var datetime = new Date();
-        console.log(datetime.toISOString().slice(0, 10));
         let dateForUpdate = datetime.toISOString().slice(0, 10)
         personal.birthday = this.formatData('TO-INSERT', personal.birthday)
         personal.card_issued = this.formatData('TO-INSERT', personal.card_issued)
