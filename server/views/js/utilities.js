@@ -70,7 +70,6 @@ function sortTable(n, id, type) {
     table = document.getElementById(id);
     switching = true;
     dir = "asc";
-    console.log(type)
     while (switching) {
         switching = false;
         rows = table.rows;
@@ -117,8 +116,6 @@ function sortTable(n, id, type) {
                 var dateX, dateY
                 dateX = tempX[0]
                 dateY = tempY[0]
-                console.log(tempX[1] )
-                console.log(dateX ==='หมดอายุ' )
                 if (dir == "asc") {
                     if (dateX != 'หมดอายุ' && dateY != 'หมดอายุ') {
                         if (parseInt(dateX) > parseInt(dateY)) {
