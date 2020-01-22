@@ -22,6 +22,7 @@
     <script src="../../js/datetimepicker.full.js"></script>
     <script src="../../js/dateth.js"></script>
     <link rel="stylesheet" href="../../css/date.css">
+   
 </head>
 
 <body>
@@ -203,7 +204,7 @@
                                 </select>
                                 <br>
                                 <a style="margin-left: 2.1vw;">อัพเดทล่าสุด :</a>
-                                <input type="text" style="width: 11vw;" readonly disabled>
+                                <input type="text" id='last-update' style="width: 11vw;" readonly disabled>
                             </div>
                             <div style="width: 20vw; ;text-align: center; display: block; padding: 1vw;">
                                 <a style="font-size: 1.5vw;"> รูปภาพภาพผู้ประกอบการ</a>
@@ -238,13 +239,14 @@
 
 
 </body>
-
+<script src="../../node_modules/axios/dist/axios.min.js"></script>
+<script src="../../js/operator.js/operator.js"></script>
 <script src="../../js/operator.js/menuOperator.js"></script>
 <script src="../../js/disable.js"></script>
 <script src="../../js/sweet2.js"></script>
 <script src="../../js/js22.js"></script>
-<script src="../../node_modules/axios/dist/axios.min.js"></script>
 <script src="../../js/address.js"></script>
-<script src="../../js/operator.js/operator.js"></script>
+
+<!-- <!-- <script src="../../js/checkUserLogin.js"></script> --> -->
 
 </html>

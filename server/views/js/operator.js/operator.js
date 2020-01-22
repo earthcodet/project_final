@@ -5,35 +5,35 @@ let fileImage
 let inAddress = {
     'id': 'test',
     'home_number': '',
-    'moo': '',
-    'trxk': '',
-    'sxy': '',
-    'building': '',
-    'road': '',
+    'moo': null,
+    'trxk': null,
+    'sxy': null,
+    'building': null,
+    'road': null,
     'district_name': '',
     'amphur_name': '',
     'province_name': ''
 }
 let inPeronal = {
     'id': '',
-    'address_id': 'test',
+    'address_id': '',
     'title': '',
     'type': '',
     'name': '',
     'surname': '',
-    'nationality': '',
-    'race': '',
-    'birthday': '',
+    'nationality': null,
+    'race': null,
+    'birthday': null,
     'personal_id': '',
     'card_issued': '',
-    'card_expipe': '',
+    'card_expipe': null,
     'phone': '',
-    'fax': ''
+    'fax': null
 }
 let inImage = {
     'id': '',
-    'type': '',
-    'data': ''
+    'type': null,
+    'data': null
 }
 
 let SEprovince = []

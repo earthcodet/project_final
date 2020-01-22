@@ -45,7 +45,6 @@ class AddressDAO {
                 if (err) {
                     throw err;
                 }
-
                 return resolve(rows);
             });
         });

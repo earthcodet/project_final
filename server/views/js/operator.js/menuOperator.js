@@ -1,7 +1,9 @@
 var data = false
 var deleteData = false
 var addNew = false
-let tempdata = []
+let tSearchName = ''
+let tSearchSurname = ''
+let tSearchId = ''
 function exitTEST() {
     Swal.fire({
         title: "สำนักงานเทศบาล",
@@ -97,6 +99,14 @@ function insertTEST() {
                 enableMenu('editMenu')
                 enableMenu('deleteMenu')
                 enableFunction()
+                var datetime = new Date();
+                let dateForUpdate = datetime.toISOString().slice(0, 10)
+                let temp = dateForUpdate.split('-')
+                let day = temp[2]
+                let month = temp[1]
+                let year = temp[0]
+                let format = `${day}-${month}-${year}`
+                document.getElementById('last-update').value = format
             } else if (result.dismiss === Swal.DismissReason.cancel) {
                 // Swal.fire("บันทึกล้มเหลว");
             }
@@ -166,98 +176,109 @@ function deleteTEST() {
         });
 
 }
-
+function checkDuplicateSearch(id, name, surname) {
+    if (tSearchId != id) {
+        return true
+    } else if (tSearchName != name) {
+        return true
+    } else if (tSearchSurname != surname) {
+        return true
+    }
+    else {
+        return false
+    }
+}
 function searchPersonal() {
     console.log('run')
     let id = document.getElementById('popSearchId').value.trim()
     let name = document.getElementById('popSearchName').value.trim()
     let surname = document.getElementById('popSearchSurname').value.trim()
-    console.log(`id = ${id} , name = ${name} , surname = ${surname}`)
-    let arrResult = []
-    arrResult.push(id)
-    arrResult.push(name)
-    arrResult.push(surname)
+    console.log(`X id = ${id} , name = ${name} , surname = ${surname}`)
     if (id.length === 0) {
         id = 'none'
     }
     if (name.length === 0) {
         name = 'none'
-    } 
+    }
     if (surname.length === 0) {
         surname = 'none'
     }
-    return new Promise((resolve, reject) => {
-        axios.get(`http://localhost:5000/search/personal/${id}/${name}/${surname}`).then((result) => {
-            for (let i = 0; i < result.data.length; i++) {
-                getAddressByAddressId(result.data[i].ADDRESS_ID).then((data) =>{
-                    result.data[i].AID = data
-                    if(i == result.data.length - 1){
-                        createResultSearch(result.data)
-                    }
-                })
-            }
-            console.log(result.data[0])
-            resolve(result.data);
+    if (checkDuplicateSearch(id, name, surname)) {
+        return new Promise((resolve, reject) => {
+            tSearchName = name
+            tSearchId = id
+            tSearchSurname = surname
+
+
+            console.log('Searching')
+            axios.get(`http://localhost:5000/search/personal/${id}/${name}/${surname}`).then((result) => {
+                for (let i = 0; i < result.data.length; i++) {
+                    getAddressByAddressId(result.data[i].ADDRESS_ID).then((data) => {
+                        result.data[i].AID = data
+                        if (i == result.data.length - 1) {
+                            createResultSearch(result.data)
+                        }
+                    })
+                }
+                resolve(result.data);
+            })
         })
-    })
+    } else {
+        console.log(`list search item not change`)
+    }
+
 }
-function getAddressByAddressId(aid){
-    console.log(aid)
-    // /search/address/
+function getAddressByAddressId(aid) {
     return new Promise((resolve, reject) => {
         axios.get(`http://localhost:5000/search/address/${aid}`).then((result) => {
-            console.log(result.data[0].ADDRESS_HOME_NUMBER)
-            let searchData = result.data
-            let address = `บ้านเลขที่ ${searchData[0].ADDRESS_HOME_NUMBER.trim()} หมู่ ${searchData[0].ADDRESS_MOO.trim()} ตรอก ${searchData[0].ADDRESS_TRXK.trim()} ซอย ${searchData[0].ADDRESS_SXY.trim()} อาคาร ${searchData[0].ADDRESS_BUILDING.trim()} ถนน ${searchData[0].ADDRESS_ROAD.trim()} ตำบล ${searchData[0].DISTRICT_NAME.trim()} อำเภอ ${searchData[0].AMPHUR_NAME.trim()} จังหวัด ${searchData[0].PROVINCE_NAME.trim()}`
-            console.log(address)
-            resolve(address);
+            return resolve(`บ้านเลขที่ ${result.data[0].ADDRESS_HOME_NUMBER.trim()} หมู่ ${result.data[0].ADDRESS_MOO.trim()} ตรอก ${result.data[0].ADDRESS_TRXK.trim()} ซอย ${result.data[0].ADDRESS_SXY.trim()} อาคาร ${result.data[0].ADDRESS_BUILDING.trim()} ถนน ${result.data[0].ADDRESS_ROAD.trim()} ตำบล ${result.data[0].DISTRICT_NAME.trim()} อำเภอ ${result.data[0].AMPHUR_NAME.trim()} จังหวัด ${result.data[0].PROVINCE_NAME.trim()}`);
         })
     })
 }
 function createResultSearch(data) {
     var tbl = document.getElementById("resultItems");
     // tbl.removeChild(tbl.getElementsByTagName("tbody")[0])
-    if(tbl.getElementsByTagName("tbody")[0] != null || tbl.getElementsByTagName("tbody")[0] != undefined){
+    if (tbl.getElementsByTagName("tbody")[0] != null || tbl.getElementsByTagName("tbody")[0] != undefined) {
         tbl.removeChild(tbl.getElementsByTagName("tbody")[0])
     }
     // document.getElementsByTagName('tbody')[0].parentNode.removeChild( document.getElementsByTagName('tbody')[0]);
     var tblBody = document.createElement('tbody')
     // creating all cells
     for (var i = 0; i < data.length; i++) {
-      // creates a table row
-      var row = document.createElement("tr");
-        
-      for (var j = 0; j < 4; j++) {
-   
-        var cell = document.createElement("td");
-        if(j === 0){
-            var cellText = document.createTextNode(data[i].PERSONAL_NAME);
-        }else if(j === 1){
-            var cellText = document.createTextNode(data[i].PERSONAL_SURNAME);
-        }else if(j === 2){
-            var cellText = document.createTextNode(data[i].AID);
-        }else{
-            var cellText = document.createTextNode(data[i].PERSONAL_PERSONAL_ID);
+        // creates a table row
+        var row = document.createElement("tr");
+
+        for (var j = 0; j < 4; j++) {
+
+            var cell = document.createElement("td");
+            if (j === 0) {
+                var cellText = document.createTextNode(data[i].PERSONAL_NAME);
+            } else if (j === 1) {
+                var cellText = document.createTextNode(data[i].PERSONAL_SURNAME);
+            } else if (j === 2) {
+                var cellText = document.createTextNode(data[i].AID);
+            } else {
+                var cellText = document.createTextNode(data[i].PERSONAL_PERSONAL_ID);
+            }
+            cell.appendChild(cellText);
+            row.appendChild(cell);
         }
-        cell.appendChild(cellText);
-        row.appendChild(cell);
-      }
-  
-      // add the row to the end of the table body
-      tblBody.appendChild(row);
+
+        // add the row to the end of the table body
+        tblBody.appendChild(row);
     }
-  
+
     // put the <tbody> in the <table>
     tbl.appendChild(tblBody);
-/*
-<tr ">
-                    <td>นายสมหมาย</td>
-                    <td>จงรัก</td>
-                    <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
-                    <td>1011122111111</td>
-                </tr>
-*/
-}   
+    /*
+    <tr ">
+                        <td>นายสมหมาย</td>
+                        <td>จงรัก</td>
+                        <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
+                        <td>1011122111111</td>
+                    </tr>
+    */
+}
 
 function searchOparator() {
     console.log(addNew)

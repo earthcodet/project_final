@@ -4,23 +4,25 @@ const ImageDAO = require('../DAO/ImageDAO')
 const ImageDAOObj = new ImageDAO()
 const AddressDAO = require('../DAO/AddressDAO')
 const AddressDAOObj = new AddressDAO
+const LoginDAO = require('../DAO/UserDAO')
+const LoginDAOObj = new LoginDAO()
 
 class service {
-    getProvince(){
+    getProvince() {
         return new Promise((resolve, reject) => {
             AddressDAOObj.getProvince().then((data) => {
                 return resolve(data)
             })
         })
     }
-    getAmphur(){
+    getAmphur() {
         return new Promise((resolve, reject) => {
             AddressDAOObj.getAmphur().then((data) => {
                 return resolve(data)
             })
         })
     }
-    getDistrict(){
+    getDistrict() {
         return new Promise((resolve, reject) => {
             AddressDAOObj.getDistrict().then((data) => {
                 return resolve(data)
@@ -127,11 +129,11 @@ class service {
             })
         }
     }
-    getPersonal(id,name,surname) {
+    getPersonal(id, name, surname) {
         return new Promise((resolve, reject) => {
-            PersonalDAOObj.getPersonal(id,name,surname).then((data) => {
+            PersonalDAOObj.getPersonal(id, name, surname).then((data) => {
                 console.log(`service status => ${data}`)
-                    return resolve(data)
+                return resolve(data)
 
             })
         })
@@ -152,7 +154,23 @@ class service {
     getAddressByAddressId(id) {
         return new Promise((resolve, reject) => {
             AddressDAOObj.getAddressByAddressId(id).then((data) => {
-                    return resolve(data)
+                console.log(data)
+                if (data[0].ADDRESS_MOO === null) {
+                    data[0].ADDRESS_MOO = '-'
+                }
+                if (data[0].ADDRESS_TRXK === null) {
+                    data[0].ADDRESS_MOO = '-'
+                }
+                if (data[0].ADDRESS_SXY === null) {
+                    data[0].ADDRESS_MOO = '-'
+                }
+                if (data[0].ADDRESS_BUILDING === null) {
+                    data[0].ADDRESS_MOO = '-'
+                }
+                if (data[0].ADDRESS_ROAD === null) {
+                    data[0].ADDRESS_MOO = '-'
+                }
+                return resolve(data)
             })
         })
     }
@@ -229,22 +247,28 @@ class service {
     formatData(type, date) {
         if (type === 'TO-INSERT') {
             //16-01-2563
-            let temp = date.split('-')
-            let day = temp[0]
-            let month = temp[1]
-            let year = temp[2]
-            let format = `${year}-${month}-${day}` //2020-01-16
-            return format
+            if(date != null){
+                let temp = date.split('-')
+                let day = temp[0]
+                let month = temp[1]
+                let year = temp[2]
+                let format = `${year}-${month}-${day}` //2020-01-16
+                return format
+            }
+            return date
         }
         if (type === 'TO-DISPLAY') {
             //2563-01-04T17:00:00.000Z
-            let realdate = date.substring(0, 10);
-            let temp = realdate.split('-')
-            let day = temp[2]
-            let month = temp[1]
-            let year = temp[0]
-            let format = `${day}-${month}-${year}` //16-01-2563
-            return format
+            if(date != null){
+                let realdate = date.substring(0, 10);
+                let temp = realdate.split('-')
+                let day = temp[2]
+                let month = temp[1]
+                let year = temp[0]
+                let format = `${day}-${month}-${year}` //16-01-2563
+                return format
+            }
+            return date
         }
     }
     getImageByPersonalId(name) {
@@ -261,13 +285,105 @@ class service {
             })
         })
     }
-    insertStep(personal, address, image) {
+    formatInsert(type, data) {
+        if (type === 'PERSONAL') {
+            if (data.nationality === ''){
+                data.nationality = null
+            }else{
+                data.nationality = `'${data.nationality}'`
+            }
+               
+            if (data.race === ''){
+                data.race = null
+            }else{
+                data.race = `'${data.race}'`
+            }
+
+            if (data.birthday === ''){
+                data.birthday = null
+            }else{
+                data.birthday = `'${data.birthday}'`
+            }
+
+            if (data.card_expipe === ''){
+                data.card_expipe = null
+            }else{
+                data.card_expipe = `'${data.card_expipe}'`
+            }
+
+            if (data.fax === ''){
+                data.fax = null
+            }else{
+                data.fax = `'${data.fax}'`
+            }
+
+            return data
+        } else if (type === 'ADDRESS') {
+            
+            if (data.moo === ''){
+                data.moo = null
+            }else{
+                data.moo = `'${data.moo}'`
+            }
+
+            if (data.trxk === ''){
+                data.trxk = null
+            }else{
+                data.trxk = `'${data.trxk}'`
+            }
+
+            if (data.sxy === ''){
+                data.sxy = null
+            }else{
+                data.sxy = `'${data.sxy}'`
+            }
+
+            if (data.building === ''){
+                data.building = null
+            }else{
+                data.building = `'${data.building}'`
+            }
+
+            if (data.road === ''){
+                data.road = null
+            }else{
+                data.road = `'${data.road}'`
+            }
+
+            return data
+        } else {
+            //IMAGE
+            if (data.type === ''){
+                data.type = null
+            }else{
+                data.type = `'${data.type}'`
+            }
+
+            if (data.data === ''){
+                data.data = null
+            }else{
+                data.data = `'${data.data}'`
+            }
+
+            return data
+        }
+    }
+    insertStep(personal, address, image, username) {
+        console.log(personal)
+        console.log(address)
+
+        //checknull
+        personal = this.formatInsert('PERSONAL',personal)
+        address = this.formatInsert('ADDRESS',address)
+        image = this.formatInsert('IMAGE',image)
+        console.log(personal)
         var datetime = new Date();
         let dateForUpdate = datetime.toISOString().slice(0, 10)
         personal.birthday = this.formatData('TO-INSERT', personal.birthday)
         personal.card_issued = this.formatData('TO-INSERT', personal.card_issued)
         personal.card_expipe = this.formatData('TO-INSERT', personal.card_expipe)
         personal.update = dateForUpdate
+        personal.username = username
         return new Promise((resolve, reject) => {
             this.loopInsertAddress(personal, address, image).then((data) => {
                 if (data) {
@@ -276,6 +392,13 @@ class service {
                 } else {
                     return resolve(false)
                 }
+            })
+        })
+    }
+    getUser(username, password) {
+        return new Promise((resolve, reject) => {
+            LoginDAOObj.getUser(username, password).then((data) => {
+                return resolve(data)
             })
         })
     }
