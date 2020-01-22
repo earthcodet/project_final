@@ -176,18 +176,6 @@ function deleteTEST() {
         });
 
 }
-function checkDuplicateSearch(id, name, surname) {
-    if (tSearchId != id) {
-        return true
-    } else if (tSearchName != name) {
-        return true
-    } else if (tSearchSurname != surname) {
-        return true
-    }
-    else {
-        return false
-    }
-}
 function searchPersonal() {
     console.log('run')
     let id = document.getElementById('popSearchId').value.trim()
@@ -203,7 +191,8 @@ function searchPersonal() {
     if (surname.length === 0) {
         surname = 'none'
     }
-    if (checkDuplicateSearch(id, name, surname)) {
+    //ไม่ให้ค้นหา คำค้นหาเดิม
+    if (tSearchId != id || tSearchName != name || tSearchSurname != surname) {
         return new Promise((resolve, reject) => {
             tSearchName = name
             tSearchId = id

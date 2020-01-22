@@ -114,7 +114,7 @@ class service {
             })
         } else {
             return new Promise((resolve, reject) => {
-                PersonalDAOObj.getMaxIdAddress().then((data) => {
+                AddressDAOObj.getMaxIdAddress().then((data) => {
                     if (data[0].maxId === null) {
                         let addressId = 'ADD0000001'
                         console.log('getNewId >' + addressId)
@@ -176,7 +176,7 @@ class service {
     }
     insertAddress(address) {
         return new Promise((resolve, reject) => {
-            PersonalDAOObj.insertAddress(address).then((data) => {
+            AddressDAOObj.insertAddress(address).then((data) => {
                 if (data == 'true') {
                     return resolve(true)
                 } else {
@@ -247,7 +247,7 @@ class service {
     formatData(type, date) {
         if (type === 'TO-INSERT') {
             //16-01-2563
-            if(date != null){
+            if (date != null) {
                 let temp = date.split('-')
                 let day = temp[0]
                 let month = temp[1]
@@ -259,7 +259,7 @@ class service {
         }
         if (type === 'TO-DISPLAY') {
             //2563-01-04T17:00:00.000Z
-            if(date != null){
+            if (date != null) {
                 let realdate = date.substring(0, 10);
                 let temp = realdate.split('-')
                 let day = temp[2]
@@ -287,82 +287,63 @@ class service {
     }
     formatInsert(type, data) {
         if (type === 'PERSONAL') {
-            if (data.nationality === ''){
-                data.nationality = null
-            }else{
+            if (data.nationality === '') {
+                data.nationality = 'NULL'
+            } else {
                 data.nationality = `'${data.nationality}'`
             }
-               
-            if (data.race === ''){
+
+            if (data.race === '') {
                 data.race = null
-            }else{
+            } else {
                 data.race = `'${data.race}'`
             }
 
-            if (data.birthday === ''){
-                data.birthday = null
-            }else{
-                data.birthday = `'${data.birthday}'`
-            }
+            if (data.birthday.length === 0) {
+                data.birthday = `NULL`
+            } 
 
-            if (data.card_expipe === ''){
-                data.card_expipe = null
-            }else{
-                data.card_expipe = `'${data.card_expipe}'`
-            }
+            if (data.card_expipe.length === 0) {
+                data.card_expipe = `NULL`
+            } 
 
-            if (data.fax === ''){
-                data.fax = null
-            }else{
+            if (data.fax === '') {
+                data.fax = 'NULL'
+            } else {
                 data.fax = `'${data.fax}'`
             }
 
             return data
-        } else if (type === 'ADDRESS') {
-            
-            if (data.moo === ''){
-                data.moo = null
-            }else{
+        } else {
+
+            if (data.moo === '') {
+                data.moo = 'NULL'
+            } else {
                 data.moo = `'${data.moo}'`
             }
 
-            if (data.trxk === ''){
-                data.trxk = null
-            }else{
+            if (data.trxk === '') {
+                data.trxk = 'NULL'
+            } else {
                 data.trxk = `'${data.trxk}'`
             }
 
-            if (data.sxy === ''){
-                data.sxy = null
-            }else{
+            if (data.sxy === '') {
+                data.sxy = 'NULL'
+            } else {
                 data.sxy = `'${data.sxy}'`
             }
 
-            if (data.building === ''){
-                data.building = null
-            }else{
+            if (data.building === '') {
+                data.building = 'NULL'
+            } else {
                 data.building = `'${data.building}'`
             }
 
-            if (data.road === ''){
-                data.road = null
-            }else{
+            if (data.road === '') {
+                data.road = 'NULL'
+            } else {
                 data.road = `'${data.road}'`
-            }
-
-            return data
-        } else {
-            //IMAGE
-            if (data.type === ''){
-                data.type = null
-            }else{
-                data.type = `'${data.type}'`
-            }
-
-            if (data.data === ''){
-                data.data = null
-            }else{
-                data.data = `'${data.data}'`
             }
 
             return data
@@ -373,19 +354,23 @@ class service {
         console.log(address)
 
         //checknull
-        personal = this.formatInsert('PERSONAL',personal)
-        address = this.formatInsert('ADDRESS',address)
-        image = this.formatInsert('IMAGE',image)
-        console.log(personal)
+
         var datetime = new Date();
         let dateForUpdate = datetime.toISOString().slice(0, 10)
-        personal.birthday = this.formatData('TO-INSERT', personal.birthday)
+        if (personal.birthday.length != 0)
+            personal.birthday = this.formatData('TO-INSERT', personal.birthday)
+        if (personal.card_expipe.length != 0)
+            personal.card_expipe = this.formatData('TO-INSERT', personal.card_expipe)
         personal.card_issued = this.formatData('TO-INSERT', personal.card_issued)
-        personal.card_expipe = this.formatData('TO-INSERT', personal.card_expipe)
+
         personal.update = dateForUpdate
         personal.username = username
+        let newpersonal = this.formatInsert('PERSONAL', personal)
+        let newaddress = this.formatInsert('ADDRESS', address)
+        console.log(newaddress)
+        console.log(newpersonal)
         return new Promise((resolve, reject) => {
-            this.loopInsertAddress(personal, address, image).then((data) => {
+            this.loopInsertAddress(newpersonal, newaddress, image).then((data) => {
                 if (data) {
                     console.log(`main > ${data}`)
                     return resolve(true)
@@ -393,6 +378,7 @@ class service {
                     return resolve(false)
                 }
             })
+            // return resolve(true)
         })
     }
     getUser(username, password) {

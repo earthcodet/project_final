@@ -197,6 +197,8 @@ function uploadImage(event) {
     }
 }
 function deleteImageOne() {
+    fileImage = null
+    inImage.type = null
     document.getElementById('uploadFile').value = ''
     var img = document.getElementById('operatorImage')
     img.src = '../../img/userProfile.png'
