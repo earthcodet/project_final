@@ -195,13 +195,10 @@ function searchPersonal() {
     if (tSearchId != id || tSearchName != name || tSearchSurname != surname) {
         return new Promise((resolve, reject) => {
             tSearchName = name
-            tSearchId = id  
+            tSearchId = id
             tSearchSurname = surname
-
-
             console.log('Searching')
             axios.get(`http://localhost:5000/search/personal/${id}/${name}/${surname}`).then((result) => {
-                console.log(result.data)
                 createResultSearch(result.data)
                 return resolve(result.data);
             })
@@ -209,29 +206,36 @@ function searchPersonal() {
     } else {
         console.log(`list search item not change`)
     }
+
 }
 function createResultSearch(data) {
     var tbl = document.getElementById("resultItems");
-    // tbl.removeChild(tbl.getElementsByTagName("tbody")[0])
     if (tbl.getElementsByTagName("tbody")[0] != null || tbl.getElementsByTagName("tbody")[0] != undefined) {
         tbl.removeChild(tbl.getElementsByTagName("tbody")[0])
     }
-    // document.getElementsByTagName('tbody')[0].parentNode.removeChild( document.getElementsByTagName('tbody')[0]);
     var tblBody = document.createElement('tbody')
-    // creating all cells
     for (var i = 0; i < data.length; i++) {
         // creates a table row
         var row = document.createElement("tr");
 
         for (var j = 0; j < 4; j++) {
-
             var cell = document.createElement("td");
             if (j === 0) {
                 var cellText = document.createTextNode(data[i].PERSONAL_NAME);
             } else if (j === 1) {
                 var cellText = document.createTextNode(data[i].PERSONAL_SURNAME);
             } else if (j === 2) {
-                var cellText = document.createTextNode(data[i].AID);
+                let AddressText = ''
+                AddressText = AddressText + `บ้านเลขที่ ${data[i].AID.ADDRESS_HOME_NUMBER.trim()} `
+                AddressText = AddressText + `หมู่ ${data[i].AID.ADDRESS_MOO.trim()} `
+                AddressText = AddressText + `ตรอก ${data[i].AID.ADDRESS_TRXK.trim()} `
+                AddressText = AddressText + `ซอย ${data[i].AID.ADDRESS_SXY.trim()} `
+                AddressText = AddressText + `อาคาร ${data[i].AID.ADDRESS_BUILDING.trim()} `
+                AddressText = AddressText + `ถนน ${data[i].AID.ADDRESS_ROAD.trim()} `
+                AddressText = AddressText + `ตำบล ${data[i].AID.DISTRICT_NAME.trim()} `
+                AddressText = AddressText + `อำเภอ ${data[i].AID.AMPHUR_NAME.trim()}`
+                AddressText = AddressText + `จังหวัด ${data[i].AID.PROVINCE_NAME.trim()}`
+                var cellText = document.createTextNode(AddressText);
             } else {
                 var cellText = document.createTextNode(data[i].PERSONAL_PERSONAL_ID);
             }
@@ -260,6 +264,10 @@ function searchOparator() {
     if (addNew) {
         insertTEST()
     } else {
+        // new list ค่าใหม่ 
+        tSearchName = ''
+        tSearchSurname = ''
+        tSearchId = ''
         var swal_html = `<div >
         <div class="display-center">
                     <h5 style="font-size: 100%;">

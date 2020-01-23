@@ -167,22 +167,24 @@ class service {
     getAddressByAddressId(id) {
         return new Promise((resolve, reject) => {
             AddressDAOObj.getAddressByAddressId(id).then((data) => {
+                console.log(`address === null ${data[0].ADDRESS_TRXK === null}`)
+                console.log(data[0].ADDRESS_TRXK)
                 if (data[0].ADDRESS_MOO === null) {
                     data[0].ADDRESS_MOO = '-'
                 }
                 if (data[0].ADDRESS_TRXK === null) {
-                    data[0].ADDRESS_MOO = '-'
+                    data[0].ADDRESS_TRXK = '-'
                 }
                 if (data[0].ADDRESS_SXY === null) {
-                    data[0].ADDRESS_MOO = '-'
+                    data[0].ADDRESS_SXY = '-'
                 }
                 if (data[0].ADDRESS_BUILDING === null) {
-                    data[0].ADDRESS_MOO = '-'
+                    data[0].ADDRESS_BUILDING = '-'
                 }
                 if (data[0].ADDRESS_ROAD === null) {
-                    data[0].ADDRESS_MOO = '-'
+                    data[0].ADDRESS_ROAD = '-'
                 }
-
+                console.log(data[0].ADDRESS_TRXK)
                 return resolve(data)
             })
         })
