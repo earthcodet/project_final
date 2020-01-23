@@ -40,6 +40,7 @@ function addTEST() {
         id.style.textDecoration = ''
     }
     resetFunction()
+
 }
 
 function disableMenuAll() {
@@ -88,7 +89,7 @@ function insertTEST() {
         }).then((result) => {
             if (result.value) {
                 Swal.fire({
-                    html: "บันทึกสำเร็จ",
+                    html: "<h2>บันทึกสำเร็จ</h2>",
                     icon: "success",
                     confirmButtonColor: "#009688"
                 });
@@ -108,7 +109,31 @@ function insertTEST() {
                 let format = `${day}-${month}-${year}`
                 document.getElementById('last-update').value = format
             } else if (result.dismiss === Swal.DismissReason.cancel) {
-                // Swal.fire("บันทึกล้มเหลว");
+                Swal.fire({
+                    icon: 'success',
+                    html: "<h2>ยกเลิกสำเร็จ</h2>",
+                    confirmButtonColor: "#009688"
+                });
+                addNew = false
+                disableMenuAll()
+                enableMenu('addMenu')
+                enableMenu('saveMenu')
+                resetFunction()
+                enableFunction()
+                //deleteImage
+                fileImage = null
+                inImage.type = null
+                document.getElementById('uploadFile').value = ''
+                var img = document.getElementById('operatorImage')
+                img.src = '../../img/userProfile.png'
+
+
+
+                var id = document.getElementById('id')
+                if (id != null) {
+                    id.style.textDecoration = ''
+                }
+
             }
         });
     }
@@ -208,9 +233,20 @@ function searchPersonal() {
     }
 
 }
-function showItem(data){
+function showItem(data) {
     console.log(data)
     setDataUI(data)
+    Swal.close()
+    data = true
+    addNew = false
+    disableMenuAll()
+    enableMenu('addMenu')
+    enableMenu('editMenu')
+    enableMenu('deleteMenu')
+    enableFunction()
+    if (id != null) {
+        id.style.textDecoration = ''
+    }
 }
 function createResultSearch(data) {
     var tbl = document.getElementById("resultItems");
@@ -222,7 +258,7 @@ function createResultSearch(data) {
         // creates a table row
         var row = document.createElement("tr");
         //row index = this.rowIndex
-        row.onclick = function() { showItem(data[this.rowIndex-1])}
+        row.onclick = function () { showItem(data[this.rowIndex - 1]) }
 
         for (var j = 0; j < 4; j++) {
             var cell = document.createElement("td");
@@ -245,7 +281,7 @@ function createResultSearch(data) {
             } else {
                 var cellText = document.createTextNode(data[i].PERSONAL_PERSONAL_ID);
             }
-            
+
             cell.appendChild(cellText);
             row.appendChild(cell);
         }

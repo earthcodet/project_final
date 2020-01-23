@@ -39,7 +39,7 @@ class PersonalDAO {
     insertPersonal(personal){
         personal.is_deleted = 'NO'
         return new Promise((resolve, reject) => {
-            let value  = `'${personal.id}', '${personal.address_id}', '${personal.title}', '${personal.type}', '${personal.name}', '${personal.surname}', ${personal.nationality}, ${personal.race}, ${personal.birthday}, '${personal.personal_id}', '${personal.card_issued}', ${personal.card_expipe}, '${personal.phone}',${personal.fax},'${personal.update}','${personal.is_deleted}','${personal.username}'`
+            let value  = `'${personal.id}', '${personal.address_id}', ${personal.title}, '${personal.type}', '${personal.name}', ${personal.surname}, ${personal.nationality}, ${personal.race}, ${personal.birthday}, '${personal.personal_id}', '${personal.card_issued}', ${personal.card_expipe}, '${personal.phone}',${personal.fax},'${personal.update}','${personal.is_deleted}','${personal.username}'`
             let column = 'PERSONAL_ID, ADDRESS_ID, PERSONAL_TITLE, PERSONAL_TYPE, PERSONAL_NAME, PERSONAL_SURNAME, PERSONAL_NATIONALITY, PERSONAL_RACE, PERSONAL_BIRTHDAY, PERSONAL_PERSONAL_ID, PERSONAL_CARD_ISSUED, PERSONAL_CARD_EXPIRE, PERSONAL_PHONE, PERSONAL_FAX, PERSONAL_UPDATE, PERSONAL_IS_DELETED, USER_UPDATE'
             let query = `INSERT INTO personal(${column}) VALUES (${value})`
             con.query(query, function (err, result) {

@@ -42,29 +42,30 @@ let SEdistrict = []
 
 function setDataUI(data) {
     //address
-    document.getElementById('homeId').value = data.AID.HOME_NUMBER 
-    document.getElementById('moo').value = data.AID.MOO === null ? '-' : data.AID.road
-    document.getElementById('trxk').value = data.AID.TRXK === null ? '-' : data.AID.road
-    document.getElementById('sxy').value = data.AID.SXY === null ? '-' : data.AID.road
-    document.getElementById('building').value = data.AID.BUILDING === null ? '-' : data.AID.road
-    document.getElementById('road').value = data.AID.ROAD === null ? '-' : data.AID.road
+    document.getElementById('homeId').value = data.AID.ADDRESS_HOME_NUMBER === '' ? '-' : data.AID.ADDRESS_HOME_NUMBER 
+    document.getElementById('moo').value = data.AID.ADDRESS_MOO === undefined ? '-' : data.AID.ADDRESS_MOO
+    document.getElementById('trxk').value = data.AID.ADDRESS_TRXK === undefined ? '-' : data.AID.ADDRESS_TRXK
+    document.getElementById('sxy').value = data.AID.ADDRESS_SXY === undefined ? '-' : data.AID.ADDRESS_SXY
+    document.getElementById('building').value = data.AID.ADDRESS_BUILDING === undefined ? '-' : data.AID.ADDRESS_BUILDING
+    document.getElementById('road').value = data.AID.ADDRESS_ROAD === undefined ? '-' : data.AID.ADDRESS_ROAD
     //ค่าที่ส่งกลับมาอาจเป็น text ต้องการที่เป็น int
     document.getElementById(`province`).value = parseInt(getProviceIdByName(data.AID.PROVINCE_NAME))
     document.getElementById(`district`).value = parseInt(getAmphureIdByName(data.AID.AMPHUR_NAME))
     document.getElementById(`subdistrict`).value = parseInt(getDistrictIdByName(data.AID.DISTRICT_NAME))
     //prsonal
-    inPeronal.title = document.getElementById('title').value = data.PERSONAL_TITLE
-    inPeronal.type = document.getElementById('typeUser').value = data.PERSONAL_TYPE
-    inPeronal.name = document.getElementById('nameUser').value = data.PERSONAL_NAME
-    inPeronal.surname = document.getElementById('surnameUser').value = data.PERSONAL_SURNAME
-    inPeronal.nationality = document.getElementById('nationality').value = data.PERSONAL_NATIONALITY === null ? '' : data.PERSONAL_NATIONALITY
-    inPeronal.race = document.getElementById('race').value = data.PERSONAL_RACE === null ? '' : data.PERSONAL_RACE
-    inPeronal.birthday = document.getElementById('datepicker3').value = data.PERSONAL_BIRTHDAY === null ? '00-00-0000' : data.PERSONAL_BIRTHDAY
-    inPeronal.personal_id = document.getElementById('id').value = data.PERSONAL_ID 
-    inPeronal.card_issued = document.getElementById('datepicker1').value = data.PERSONAL_CARD_ISSUED
-    inPeronal.card_expipe = document.getElementById('datepicker2').value = data.PERSONAL_CARD_EXPIRE === null ? '00-00-0000' : data.PERSONAL_CARD_EXPIRE
-    inPeronal.phone = document.getElementById('phone').value = data.PERSONAL_PHONE
-    inPeronal.fax = document.getElementById('fax').value = data.FAX
+    document.getElementById('title').value = data.PERSONAL_TITLE === undefined ? '' : data.PERSONAL_TITLE
+    document.getElementById('typeUser').value = data.PERSONAL_TYPE
+    document.getElementById('nameUser').value = data.PERSONAL_NAME
+    document.getElementById('surnameUser').value = data.PERSONAL_SURNAME === undefined ? '' : data.PERSONAL_SURNAME
+    document.getElementById('nationality').value = data.PERSONAL_NATIONALITY === undefined ? '' : data.PERSONAL_NATIONALITY
+    document.getElementById('race').value = data.PERSONAL_RACE === undefined ? '' : data.PERSONAL_RACE
+    document.getElementById('datepicker3').value = data.PERSONAL_BIRTHDAY === undefined ? '00-00-0000' : data.PERSONAL_BIRTHDAY
+    document.getElementById('id').value = data.PERSONAL_PERSONAL_ID 
+    document.getElementById('datepicker1').value = data.PERSONAL_CARD_ISSUED
+    document.getElementById('datepicker2').value = data.PERSONAL_CARD_EXPIRE === undefined ? '00-00-0000' : data.PERSONAL_CARD_EXPIRE
+    document.getElementById('phone').value = data.PERSONAL_PHONE
+    document.getElementById('fax').value = data.PERSONAL_FAX === undefined ? '-' : data.FAX
+    document.getElementById('last-update').value = data.PERSONAL_UPDATE
     
 }
 function preInsert() {

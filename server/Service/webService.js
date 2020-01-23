@@ -132,8 +132,35 @@ class service {
     getPersonal(id, name, surname) {
         return new Promise((resolve, reject) => {
             PersonalDAOObj.getPersonal(id, name, surname).then((data) => {
-                return resolve(data)
+                let date = '0000-00-00'
+                for(let i = 0 ; i < data.length ; i++){
+                    if (data[i].PERSONAL_BIRTHDAY === null) {
+                        data[i].PERSONAL_BIRTHDAY = undefined
+                    } else {
+                        date = data[i].PERSONAL_BIRTHDAY.toISOString().slice(0, 10)
+                        data[i].PERSONAL_BIRTHDAY = this.formatData('TO-DISPLAY', date)
+                    }
+                    if (data[i].PERSONAL_CARD_ISSUED === null) {
+                        data[i].PERSONAL_CARD_ISSUED = undefined
+                    } else {
+                        date = data[i].PERSONAL_CARD_ISSUED.toISOString().slice(0, 10)
+                        data[i].PERSONAL_CARD_ISSUED = this.formatData('TO-DISPLAY', date)
+                    }
+                    if (data[i].PERSONAL_CARD_EXPIRE === null) {
+                        data[i].PERSONAL_CARD_EXPIRE = undefined
+                    } else {
+                        date = data[i].PERSONAL_CARD_EXPIRE.toISOString().slice(0, 10)
+                        data[i].PERSONAL_CARD_EXPIRE = this.formatData('TO-DISPLAY', date)
+                    }
+                        date = data[i].PERSONAL_UPDATE.toISOString().slice(0, 10)
+                        data[i].PERSONAL_UPDATE = this.formatData('TO-DISPLAY', date)
+                    
+                    //USER_UPDATE
 
+                    if(i == data.length - 1 ){
+                        return resolve(data)
+                    }
+                }
             })
         })
     }
@@ -302,6 +329,8 @@ class service {
     }
     formatInsert(type, data) {
         if (type === 'PERSONAL') {
+            data.surname = '' ? data.surname = 'NULL' : data.surname = `'${data.surname}'`
+            data.title === '' ? data.title = 'NULL' : data.title = `'${data.title}'`
             data.phone === '' ? data.phone = '-' : data.phone = data.phone
             data.nationality === '' ? data.nationality = 'NULL' : data.nationality = `'${data.nationality}'`
             data.race === '' ? data.race = 'NULL' : data.race = data.race = `'${data.race}'`
