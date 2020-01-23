@@ -116,7 +116,7 @@
                                     <option value="บุคคลธรรมดา" selected="selected">บุคคลธรรมดา</option>
                                     <option value="นิติบุคคล">นิติบุคคล</option>
                                 </select>
-                                <a style="margin-left:1vw;">สัญชาติ :</a>
+                                <a id='nationalityTopic' style="margin-left:1vw;">สัญชาติ :</a>
                                 <input list='list-nationality' id="nationality" style="width: 11vw" maxlength="60">
                                 <datalist id="list-nationality">
                                     <option value="" hidden>เลือก...</option>
@@ -125,7 +125,7 @@
                                     <option value="จีน">จีน</option>
                                 </datalist>
                                 </input>
-                                <a style="margin-left: 1vw;">เชื้อชาติ :</a>
+                                <a id='raceTopic' style="margin-left: 1vw;">เชื้อชาติ :</a>
                                 <input list='list-race' id="race" style="width: 11vw;" maxlength="60">
                                 <datalist id="list-race">
                                     <option value="" hidden>เลือก...</option>
@@ -158,16 +158,16 @@
                                     maxlength="13" onkeyup="checkId(this.value)">
                                 <a style="margin-left:0.9vw;">ออกเมื่อ :</a>
                                 <input type="text" id="datepicker1" placeholder="" style="width: 11vw" maxlength="10">
-                                <a style="margin-left: 0.8vw;">หมดอายุ :</a>
+                                <a id='dateExpTopic'style="margin-left: 0.8vw;">หมดอายุ :</a>
                                 <input type="text" id="datepicker2" placeholder="" style="width: 11vw" maxlength="10">
                                 <br>
 
                                 <br>
                                 <!-- row4 -->
-                                <a style="margin-left: 3.7vw;">เกิดวันที่ :</a>
+                                <a id='dateBTopic' style="margin-left: 3.7vw;">เกิดวันที่ :</a>
                                 <input type="text" id="datepicker3" placeholder="" style="width: 11vw;" maxlength="10">
 
-                                <a style="margin-left: 0.7vw;">โทรศัพท์ :</a>
+                                <a id='phoneTopic' style="margin-left: 0.7vw;">โทรศัพท์ :</a>
                                 <input type="text" style="width: 11vw" id="phone"
                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                     maxlength="10">
@@ -208,7 +208,7 @@
                                 <a style="margin-left: 2.1vw;">อัพเดทล่าสุด :</a>
                                 <input type="text" id='last-update' style="width: 11vw;" readonly disabled>
                             </div>
-                            <div style="width: 20vw; ;text-align: center; display: block; padding: 1vw;">
+                            <div id='imgBoxUpload' style="width: 20vw; ;text-align: center; display: block; padding: 1vw;">
                                 <a style="font-size: 1.5vw;"> รูปภาพภาพผู้ประกอบการ</a>
                                 <div>
                                     <img id="operatorImage" class="rounded" src="../../img/userProfile.png"
