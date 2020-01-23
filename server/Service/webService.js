@@ -132,7 +132,6 @@ class service {
     getPersonal(id, name, surname) {
         return new Promise((resolve, reject) => {
             PersonalDAOObj.getPersonal(id, name, surname).then((data) => {
-                console.log(`service status => ${data}`)
                 return resolve(data)
 
             })
@@ -141,10 +140,14 @@ class service {
     searchOperator(id, name, surname) {
         return new Promise((resolve, reject) => {
             this.getPersonal(id, name, surname).then((data) => {
-                this.getAddressByAddressId(data[0].ADDRESS_ID).then((result) =>{
-                    data[0].AID = result[0]
-                    return resolve(data)
-                })
+                for (let i = 0; i < data.length; i++) {
+                    this.getAddressByAddressId(data[i].ADDRESS_ID).then((result) => {
+                        data[i].AID = result[0]
+                        if (i === data.length - 1) {
+                            return resolve(data)
+                        }
+                    })
+                }
             })
         })
     }
@@ -164,7 +167,6 @@ class service {
     getAddressByAddressId(id) {
         return new Promise((resolve, reject) => {
             AddressDAOObj.getAddressByAddressId(id).then((data) => {
-                console.log(data)
                 if (data[0].ADDRESS_MOO === null) {
                     data[0].ADDRESS_MOO = '-'
                 }
@@ -312,11 +314,11 @@ class service {
 
             if (data.birthday.length === 0) {
                 data.birthday = `NULL`
-            } 
+            }
 
             if (data.card_expipe.length === 0) {
                 data.card_expipe = `NULL`
-            } 
+            }
 
             if (data.fax === '') {
                 data.fax = 'NULL'
@@ -368,16 +370,16 @@ class service {
 
         var datetime = new Date();
         let dateForUpdate = datetime.toISOString().slice(0, 10)
-        if (personal.birthday.length != 0){
+        if (personal.birthday.length != 0) {
             personal.birthday = this.formatData('TO-INSERT', personal.birthday)
             personal.birthday = `'${personal.birthday}'`
         }
-            
-        if (personal.card_expipe.length != 0){
+
+        if (personal.card_expipe.length != 0) {
             personal.card_expipe = this.formatData('TO-INSERT', personal.card_expipe)
-            personal.card_expipe =`'${personal.card_expipe}'`
+            personal.card_expipe = `'${personal.card_expipe}'`
         }
-            
+
         personal.card_issued = this.formatData('TO-INSERT', personal.card_issued)
 
         personal.update = dateForUpdate

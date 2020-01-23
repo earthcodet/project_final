@@ -195,12 +195,13 @@ function searchPersonal() {
     if (tSearchId != id || tSearchName != name || tSearchSurname != surname) {
         return new Promise((resolve, reject) => {
             tSearchName = name
-            tSearchId = id
+            tSearchId = id  
             tSearchSurname = surname
 
 
             console.log('Searching')
             axios.get(`http://localhost:5000/search/personal/${id}/${name}/${surname}`).then((result) => {
+                console.log(result.data)
                 createResultSearch(result.data)
                 return resolve(result.data);
             })
