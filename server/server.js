@@ -156,17 +156,8 @@ app.get('/search/personal/:id/:name/:surname', (req, res) => {
   if (req.params.surname === 'none') {
     req.params.surname = ''
   }
-  webService.getPersonal(req.params.id, req.params.name, req.params.surname).then((data) => {
+  webService.searchOperator(req.params.id, req.params.name, req.params.surname).then((data) => {
     console.log(`servar status => ${data}`)
-    if (data != null) {
-      res.json(data)
-    } else {
-      res.sendStatus(404)
-    }
-  })
-})
-app.get('/search/address/:addressId', (req, res) => {
-  webService.getAddressByAddressId(req.params.addressId).then((data) => {
     if (data != null) {
       res.json(data)
     } else {

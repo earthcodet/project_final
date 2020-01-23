@@ -138,6 +138,16 @@ class service {
             })
         })
     }
+    searchOperator(id, name, surname) {
+        return new Promise((resolve, reject) => {
+            this.getPersonal(id, name, surname).then((data) => {
+                this.getAddressByAddressId(data[0].ADDRESS_ID).then((result) =>{
+                    data[0].AID = result[0]
+                    return resolve(data)
+                })
+            })
+        })
+    }
     getPersonalId(id) {
         return new Promise((resolve, reject) => {
             PersonalDAOObj.getPersonalId(id).then((data) => {
@@ -170,6 +180,7 @@ class service {
                 if (data[0].ADDRESS_ROAD === null) {
                     data[0].ADDRESS_MOO = '-'
                 }
+
                 return resolve(data)
             })
         })
@@ -357,10 +368,16 @@ class service {
 
         var datetime = new Date();
         let dateForUpdate = datetime.toISOString().slice(0, 10)
-        if (personal.birthday.length != 0)
+        if (personal.birthday.length != 0){
             personal.birthday = this.formatData('TO-INSERT', personal.birthday)
-        if (personal.card_expipe.length != 0)
+            personal.birthday = `'${personal.birthday}'`
+        }
+            
+        if (personal.card_expipe.length != 0){
             personal.card_expipe = this.formatData('TO-INSERT', personal.card_expipe)
+            personal.card_expipe =`'${personal.card_expipe}'`
+        }
+            
         personal.card_issued = this.formatData('TO-INSERT', personal.card_issued)
 
         personal.update = dateForUpdate

@@ -201,28 +201,13 @@ function searchPersonal() {
 
             console.log('Searching')
             axios.get(`http://localhost:5000/search/personal/${id}/${name}/${surname}`).then((result) => {
-                for (let i = 0; i < result.data.length; i++) {
-                    getAddressByAddressId(result.data[i].ADDRESS_ID).then((data) => {
-                        result.data[i].AID = data
-                        if (i == result.data.length - 1) {
-                            createResultSearch(result.data)
-                        }
-                    })
-                }
-                resolve(result.data);
+                createResultSearch(result.data)
+                return resolve(result.data);
             })
         })
     } else {
         console.log(`list search item not change`)
     }
-
-}
-function getAddressByAddressId(aid) {
-    return new Promise((resolve, reject) => {
-        axios.get(`http://localhost:5000/search/address/${aid}`).then((result) => {
-            return resolve(`บ้านเลขที่ ${result.data[0].ADDRESS_HOME_NUMBER.trim()} หมู่ ${result.data[0].ADDRESS_MOO.trim()} ตรอก ${result.data[0].ADDRESS_TRXK.trim()} ซอย ${result.data[0].ADDRESS_SXY.trim()} อาคาร ${result.data[0].ADDRESS_BUILDING.trim()} ถนน ${result.data[0].ADDRESS_ROAD.trim()} ตำบล ${result.data[0].DISTRICT_NAME.trim()} อำเภอ ${result.data[0].AMPHUR_NAME.trim()} จังหวัด ${result.data[0].PROVINCE_NAME.trim()}`);
-        })
-    })
 }
 function createResultSearch(data) {
     var tbl = document.getElementById("resultItems");
