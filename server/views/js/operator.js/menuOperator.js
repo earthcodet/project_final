@@ -208,6 +208,10 @@ function searchPersonal() {
     }
 
 }
+function showItem(data){
+    console.log(data)
+    setDataUI(data)
+}
 function createResultSearch(data) {
     var tbl = document.getElementById("resultItems");
     if (tbl.getElementsByTagName("tbody")[0] != null || tbl.getElementsByTagName("tbody")[0] != undefined) {
@@ -217,6 +221,8 @@ function createResultSearch(data) {
     for (var i = 0; i < data.length; i++) {
         // creates a table row
         var row = document.createElement("tr");
+        //row index = this.rowIndex
+        row.onclick = function() { showItem(data[this.rowIndex-1])}
 
         for (var j = 0; j < 4; j++) {
             var cell = document.createElement("td");
@@ -239,6 +245,7 @@ function createResultSearch(data) {
             } else {
                 var cellText = document.createTextNode(data[i].PERSONAL_PERSONAL_ID);
             }
+            
             cell.appendChild(cellText);
             row.appendChild(cell);
         }
@@ -264,7 +271,7 @@ function searchOparator() {
     if (addNew) {
         insertTEST()
     } else {
-        // new list ค่าใหม่ 
+        // new list ค่าใหม่   
         tSearchName = ''
         tSearchSurname = ''
         tSearchId = ''

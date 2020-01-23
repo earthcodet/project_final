@@ -40,7 +40,33 @@ let SEprovince = []
 let SEamphur = []
 let SEdistrict = []
 
-
+function setDataUI(data) {
+    //address
+    document.getElementById('homeId').value = data.AID.HOME_NUMBER 
+    document.getElementById('moo').value = data.AID.MOO === null ? '-' : data.AID.road
+    document.getElementById('trxk').value = data.AID.TRXK === null ? '-' : data.AID.road
+    document.getElementById('sxy').value = data.AID.SXY === null ? '-' : data.AID.road
+    document.getElementById('building').value = data.AID.BUILDING === null ? '-' : data.AID.road
+    document.getElementById('road').value = data.AID.ROAD === null ? '-' : data.AID.road
+    //ค่าที่ส่งกลับมาอาจเป็น text ต้องการที่เป็น int
+    document.getElementById(`province`).value = parseInt(getProviceIdByName(data.AID.PROVINCE_NAME))
+    document.getElementById(`district`).value = parseInt(getAmphureIdByName(data.AID.AMPHUR_NAME))
+    document.getElementById(`subdistrict`).value = parseInt(getDistrictIdByName(data.AID.DISTRICT_NAME))
+    //prsonal
+    inPeronal.title = document.getElementById('title').value = data.PERSONAL_TITLE
+    inPeronal.type = document.getElementById('typeUser').value = data.PERSONAL_TYPE
+    inPeronal.name = document.getElementById('nameUser').value = data.PERSONAL_NAME
+    inPeronal.surname = document.getElementById('surnameUser').value = data.PERSONAL_SURNAME
+    inPeronal.nationality = document.getElementById('nationality').value = data.PERSONAL_NATIONALITY === null ? '' : data.PERSONAL_NATIONALITY
+    inPeronal.race = document.getElementById('race').value = data.PERSONAL_RACE === null ? '' : data.PERSONAL_RACE
+    inPeronal.birthday = document.getElementById('datepicker3').value = data.PERSONAL_BIRTHDAY === null ? '00-00-0000' : data.PERSONAL_BIRTHDAY
+    inPeronal.personal_id = document.getElementById('id').value = data.PERSONAL_ID 
+    inPeronal.card_issued = document.getElementById('datepicker1').value = data.PERSONAL_CARD_ISSUED
+    inPeronal.card_expipe = document.getElementById('datepicker2').value = data.PERSONAL_CARD_EXPIRE === null ? '00-00-0000' : data.PERSONAL_CARD_EXPIRE
+    inPeronal.phone = document.getElementById('phone').value = data.PERSONAL_PHONE
+    inPeronal.fax = document.getElementById('fax').value = data.FAX
+    
+}
 function preInsert() {
     if (document.getElementById('id').value.trim() != '' && document.getElementById('id').value.trim().length === 13) {
         console.log(_isUsed)
@@ -58,7 +84,7 @@ function preInsert() {
             let districtValue = parseInt(document.getElementById(`subdistrict`).value)
             inAddress.district_name = district[districtValue - 1].DISTRICT_NAME
             inAddress.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME
-            inAddress.province_name = provice[provinceValue - 1].PROVINCE_NAME
+            inAddress.province_name = province[provinceValue - 1].PROVINCE_NAME
             //prsonal
             inPeronal.title = document.getElementById('title').value
             inPeronal.type = document.getElementById('typeUser').value
@@ -70,6 +96,7 @@ function preInsert() {
             inPeronal.personal_id = document.getElementById('id').value
             inPeronal.card_issued = document.getElementById('datepicker1').value
             inPeronal.card_expipe = document.getElementById('datepicker2').value
+
             inPeronal.phone = document.getElementById('phone').value
             inPeronal.fax = document.getElementById('fax').value
             arrInsert.push(inPeronal)

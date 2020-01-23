@@ -117,7 +117,7 @@
                                     <option value="นิติบุคคล">นิติบุคคล</option>
                                 </select>
                                 <a style="margin-left:1vw;">สัญชาติ :</a>
-                                <input list='list-nationality' id="nationality" style="width: 11vw">
+                                <input list='list-nationality' id="nationality" style="width: 11vw" maxlength="60">
                                 <datalist id="list-nationality">
                                     <option value="" hidden>เลือก...</option>
                                     <option value="ไทย">ไทย</option>
@@ -126,7 +126,7 @@
                                 </datalist>
                                 </input>
                                 <a style="margin-left: 1vw;">เชื้อชาติ :</a>
-                                <input list='list-race' id="race" style="width: 11vw;">
+                                <input list='list-race' id="race" style="width: 11vw;" maxlength="60">
                                 <datalist id="list-race">
                                     <option value="" hidden>เลือก...</option>
                                     <option value="ไทย">ไทย</option>
@@ -137,7 +137,7 @@
                                 <br>
                                 <!-- row 2 -->
                                 <a id='titleNameTopic' style="margin-left: 2vw;">คำนำหน้าชื่อ :</a>
-                                <input list='list-titles' id="title" style="width: 11vw;">
+                                <input list='list-titles' id="title" style="width: 11vw;" maxlength="60">
                                 <datalist id="list-titles">
                                     <option value="" hidden>เลือก...</option>
                                     <option value="นาย">นาย</option>
@@ -146,10 +146,10 @@
                                 </datalist>
                                 </input>
                                 <a id='nameUserTopic' style="margin-left: 3vw;">ชื่อ :</a>
-                                <input type="text" id="nameUser" name="" placeholder="" style="width: 11vw">
+                                <input type="text" id="nameUser" name="" placeholder="" style="width: 11vw" maxlength="70">
                                 <a id="surTopic" style="margin-left: 0.8vw;">นามสกุล :</a>
 
-                                <input type="text" id="surnameUser" name="" placeholder="" style="width: 11vw">
+                                <input type="text" id="surnameUser" name="" placeholder="" style="width: 11vw" maxlength="70">
                                 <br>
                                 <!-- row 3 -->
                                 <a style="margin-left: 1.8vw;">เลขประจำตัว :</a>
@@ -157,15 +157,15 @@
                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                     maxlength="13" onkeyup="checkId(this.value)">
                                 <a style="margin-left:0.9vw;">ออกเมื่อ :</a>
-                                <input type="text" id="datepicker1" placeholder="" style="width: 11vw">
+                                <input type="text" id="datepicker1" placeholder="" style="width: 11vw" maxlength="10">
                                 <a style="margin-left: 0.8vw;">หมดอายุ :</a>
-                                <input type="text" id="datepicker2" placeholder="" style="width: 11vw">
+                                <input type="text" id="datepicker2" placeholder="" style="width: 11vw" maxlength="10">
                                 <br>
 
                                 <br>
                                 <!-- row4 -->
                                 <a style="margin-left: 3.7vw;">เกิดวันที่ :</a>
-                                <input type="text" id="datepicker3" placeholder="" style="width: 11vw;">
+                                <input type="text" id="datepicker3" placeholder="" style="width: 11vw;" maxlength="10">
 
                                 <a style="margin-left: 0.7vw;">โทรศัพท์ :</a>
                                 <input type="text" style="width: 11vw" id="phone"
@@ -180,19 +180,19 @@
 
 
                                 <a style="margin-left: 2vw;">อยู่บ้านเลขที่ :</a>
-                                <input type="text" id="homeId" style="width: 11vw">
+                                <input type="text" id="homeId" style="width: 11vw" maxlength="15">
                                 <a style="margin-left: 2.3vw;">หมู่ที่ :</a>
-                                <input type="int" id="moo" style="width: 11vw">
+                                <input type="int" id="moo" style="width: 11vw" maxlength="5">
                                 <a style="margin-left: 2.05vw;">ตรอก :</a>
-                                <input type="text" id="trxk" style="width: 11vw">
+                                <input type="text" id="trxk" style="width: 11vw" maxlength="50">
                                 <!-- row 6 -->
                                 <br>
                                 <a style="margin-left: 5.15vw;">ซอย :</a>
-                                <input type="text" id="sxy" style="width: 11vw;">
+                                <input type="text" id="sxy" style="width: 11vw;" maxlength="50">
                                 <a style="margin-left: 1.6vw;">อาคาร :</a>
-                                <input type="text" id="building" style="width: 11vw">
+                                <input type="text" id="building" style="width: 11vw" maxlength="100">
                                 <a style="margin-left: 2.45vw;">ถนน :</a>
-                                <input type="text" id="road" style="width: 11vw">
+                                <input type="text" id="road" style="width: 11vw" maxlength="70">
                                 <!-- row 7 -->
                                 <br>
                                 <a style="margin-left: 4.3vw;">จังหวัด :</a>
@@ -244,13 +244,15 @@
 <script src="../../node_modules/axios/dist/axios.min.js"></script>
 <!-- เอาไว้เช็คว่า user login หรือเปล่า -->
 <!-- <script src="../../js/checkUserLogin.js"></script> -->
+<script src="../../js/address.js"></script>
+<script src="../../js/service/serviceAddress.js"></script>
 
 <script src="../../js/operator.js/operator.js"></script>
 <script src="../../js/operator.js/menuOperator.js"></script>
 <script src="../../js/disable.js"></script>
 <script src="../../js/sweet2.js"></script>
 <script src="../../js/js22.js"></script>
-<script src="../../js/address.js"></script>
+
 
 
 

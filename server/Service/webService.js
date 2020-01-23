@@ -34,81 +34,82 @@ class service {
         return Math.pow(10, Math.ceil(Math.log10(v)));
     }
     newId(oldId, typeId) {
-        if (typeId === 'PERSONAL') {
-            // format = P000001
-            let sight = 'P'
-            let num = parseInt(oldId.slice(1))
-            num += 1
-            let newId = ''
-            switch (this.digit(num)) {
-                case 10:
-                    if (num < 10) {
-                        newId = `00000${num}`
-                    } else {
+        return new Promise((resolve, reject) => {
+            if (typeId === 'PERSONAL') {
+                // format = P000001
+                let sight = 'P'
+                let num = parseInt(oldId.slice(1))
+                num += 1
+                let newId = ''
+                switch (this.digit(num)) {
+                    case 10:
+                        if (num < 10) {
+                            newId = `00000${num}`
+                        } else {
+                            newId = `0000${num}`
+                        }
+                        break;
+                    case 100:
+                        newId = `000${num}`
+                        break;
+                    case 1000:
+                        newId = `00${num}`
+                        break;
+                    case 10000:
+                        newId = `0${num}`
+                        break;
+                    default:
+                        newId = num
+                        break
+                }
+                return resolve(sight + newId)
+            } else {
+                //ADDRESS
+                //format ADD0000001
+                let sight = 'ADD'
+                let num = parseInt(oldId.slice(3))
+                num += 1
+                let newId = ''
+                switch (this.digit(num)) {
+                    case 10:
+                        if (num < 10) {
+                            newId = `000000${num}`
+                        } else {
+                            newId = `00000${num}`
+                        }
+                        break;
+                    case 100:
                         newId = `0000${num}`
-                    }
-                    break;
-                case 100:
-                    newId = `000${num}`
-                    break;
-                case 1000:
-                    newId = `00${num}`
-                    break;
-                case 10000:
-                    newId = `0${num}`
-                    break;
-                default:
-                    newId = num
-                    break
+                        break;
+                    case 1000:
+                        newId = `000${num}`
+                        break;
+                    case 10000:
+                        newId = `00${num}`
+                        break;
+                    case 10000:
+                        newId = `0${num}`
+                        break;
+                    default:
+                        newId = num
+                        break
+                }
+                return resolve(sight + newId)
             }
-            return sight + newId
-        } else {
-            //ADDRESS
-            //format ADD0000001
-            let sight = 'ADD'
-            let num = parseInt(oldId.slice(3))
-            num += 1
-            let newId = ''
-            switch (this.digit(num)) {
-                case 10:
-                    if (num < 10) {
-                        newId = `000000${num}`
-                    } else {
-                        newId = `00000${num}`
-                    }
-                    break;
-                case 100:
-                    newId = `0000${num}`
-                    break;
-                case 1000:
-                    newId = `000${num}`
-                    break;
-                case 10000:
-                    newId = `00${num}`
-                    break;
-                case 10000:
-                    newId = `0${num}`
-                    break;
-                default:
-                    newId = num
-                    break
-            }
-            return sight + newId
-        }
+        })
     }
     getNewId(type) {
         if (type === 'PERSONAL') {
             return new Promise((resolve, reject) => {
                 PersonalDAOObj.getMaxIdProsonal().then((data) => {
                     if (data[0].maxId === null) {
-                        let peronalId = "P000001"
-                        console.log('getNewId >' + peronalId)
-                        return resolve(peronalId)
+                        console.log('getNewId > P000001')
+                        return resolve("P000001")
                     } else {
-                        let maxId = data[0].maxId
-                        let peronalId = this.newId(maxId, 'PERSONAL')
-                        console.log('getNewId >' + peronalId)
-                        return resolve(peronalId)
+                        this.newId(data[0].maxId, 'PERSONAL').then((peronalId) => {
+                            console.log('getNewId > ' + peronalId)
+                            return resolve(peronalId)
+                        })
                     }
                 })
             })
@@ -116,14 +117,13 @@ class service {
             return new Promise((resolve, reject) => {
                 AddressDAOObj.getMaxIdAddress().then((data) => {
                     if (data[0].maxId === null) {
-                        let addressId = 'ADD0000001'
-                        console.log('getNewId >' + addressId)
-                        return resolve(addressId)
+                        console.log('getNewId > ADD0000001')
+                        return resolve('ADD0000001')
                     } else {
-                        let maxId = data[0].maxId
-                        let addressId = this.newId(maxId, 'ADDRESS')
-                        console.log('getNewId >' + addressId)
-                        return resolve(addressId)
+                        this.newId(data[0].maxId, 'ADDRESS').then((addressId) => {
+                            console.log('getNewId >' + addressId)
+                            return resolve(addressId)
+                        })
                     }
                 })
             })
@@ -302,71 +302,23 @@ class service {
     }
     formatInsert(type, data) {
         if (type === 'PERSONAL') {
-            if (data.nationality === '') {
-                data.nationality = 'NULL'
-            } else {
-                data.nationality = `'${data.nationality}'`
-            }
-
-            if (data.race === '') {
-                data.race = null
-            } else {
-                data.race = `'${data.race}'`
-            }
-
-            if (data.birthday.length === 0) {
-                data.birthday = `NULL`
-            }
-
-            if (data.card_expipe.length === 0) {
-                data.card_expipe = `NULL`
-            }
-
-            if (data.fax === '') {
-                data.fax = 'NULL'
-            } else {
-                data.fax = `'${data.fax}'`
-            }
-
+            data.phone === '' ? data.phone = '-' : data.phone = data.phone
+            data.nationality === '' ? data.nationality = 'NULL' : data.nationality = `'${data.nationality}'`
+            data.race === '' ? data.race = 'NULL' : data.race = data.race = `'${data.race}'`
+            data.birthday.length === 0 ? data.birthday = 'NULL' : data.birthday = data.birthday
+            data.card_expipe.length === 0 ? data.card_expipe = 'NULL' : data.card_expipe = data.card_expipe
+            data.fax === '' ? data.fax = 'NULL' : data.fax = `'${data.fax}'`
             return data
         } else {
-
-            if (data.moo === '') {
-                data.moo = 'NULL'
-            } else {
-                data.moo = `'${data.moo}'`
-            }
-
-            if (data.trxk === '') {
-                data.trxk = 'NULL'
-            } else {
-                data.trxk = `'${data.trxk}'`
-            }
-
-            if (data.sxy === '') {
-                data.sxy = 'NULL'
-            } else {
-                data.sxy = `'${data.sxy}'`
-            }
-
-            if (data.building === '') {
-                data.building = 'NULL'
-            } else {
-                data.building = `'${data.building}'`
-            }
-
-            if (data.road === '') {
-                data.road = 'NULL'
-            } else {
-                data.road = `'${data.road}'`
-            }
-
+            data.moo === '' ? data.moo = 'NULL' : data.moo = `'${data.moo}'`
+            data.trxk === '' ? data.trxk = 'NULL' : data.trxk = `'${data.trxk}'`
+            data.sxy === '' ? data.sxy = 'NULL' : data.sxy = `'${data.sxy}'`
+            data.building === '' ? data.building = 'NULL' : data.building = `'${data.building}'`
+            data.road === '' ? data.road = 'NULL' : data.road = `'${data.road}'`
             return data
         }
     }
     insertStep(personal, address, image, username) {
-        console.log(personal)
-        console.log(address)
 
         //checknull
 

@@ -1,4 +1,4 @@
-let provice = [];
+let province = [];
 let amphur = [];
 let district = [];
 
@@ -17,7 +17,7 @@ function getProvice() {
             resolve(result.data);
             for (let i = 0; i < result.data.length; i++) {
                 result.data[i].PROVINCE_NAME = result.data[i].PROVINCE_NAME.trim()
-                provice.push(result.data[i])
+                province.push(result.data[i])
             }
             console.log(result.data)
             resolve(result.data);
@@ -125,9 +125,9 @@ function runForm() {
 }
 
 function getProviceName(proviceId){
-    for(let i = 0 ; i < provice.length ; i++){
-        if(provice[i].PROVINCE_ID == proviceId){
-            return provice[i].PROVINCE_NAME
+    for(let i = 0 ; i < province.length ; i++){
+        if(province[i].PROVINCE_ID == proviceId){
+            return province[i].PROVINCE_NAME
         }
     }
 }
