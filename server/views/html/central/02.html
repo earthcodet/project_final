@@ -10,11 +10,9 @@
 
     <link rel="stylesheet" href="../../css/css2.css">
     <link href="../../css/fonts.css" rel="stylesheet">
+    <link href="../../css/jquery.contextMenu.css" rel="stylesheet">
 
     <link rel="stylesheet" href="../../css/jquery-ui-1.12.1.custom/jquery-ui.css">
-
-    <!-- topmenu สำหรับหน้านี้เท่านั้น -->
-    <!-- <link rel="stylesheet" href="../../css/topmenu.css"> -->
 
     <!-- icon -->
     <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.css">
@@ -261,6 +259,7 @@
                             <div style="font-size: 1.7vh;">
                                 <br>
                                 <a>ประวัติใบอนุญาต</a>
+                                <span class="context-menu-one">DSFSDFDS</span>
                                 <br><br>
                                 <table id="requestTable" class="table cursor-pointer table-hover tableresult">
                                     <thead>
@@ -287,8 +286,8 @@
                                         </tr>
                                     </thead>
                                     <tbody style="height: 17vw;  text-align: center;">
-                                        <tr onclick="toRequest(event)">
-                                            <td>2563</td>
+                                        <tr class="context-menu-one">
+                                            <td>256333</td>
                                             <td>ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</td>
                                             <td>0001/2562</td>
                                             <td>9999</td>
@@ -955,13 +954,18 @@
 
 
 </body>
+<script src="../../js/clickRight/jquery.min.js"></script>
+<script src="../../js/clickRight/jquery.ui.position.min.js"></script>
+<script src="../../js/clickRight/jquery.contextMenu.js"></script>
+
+
 
 <script src="../../js/operator.js/operator.js"></script>
 <script src="../../js/operator.js/menuOperator.js"></script>
 <script src="../../js/disable.js"></script>
 <script src="../../js/sweet2.js"></script>
-<script src="../../js/jquery.js"></script>
 <script src="../../js/jquery-ui.js"></script>
+<!-- <script src="../../js/jquery.js"></script -->
 <script src="../../js/js22.js"></script>
 <script src="../../js/dateth.js"></script>
 <script src="../../node_modules/axios/dist/axios.min.js"></script>

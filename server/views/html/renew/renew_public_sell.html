@@ -28,7 +28,8 @@
         <a id="restoreMenu" onclick="restoreTEST()" class="exit disableds"><i class="fa fa-reply"> เรียกคืน</i></a>
         <a id="deleteMenu" onclick="deleteTEST()" class="exit disableds"><i class="fa fa-times"> ยกเลิก</i></a>
         <!-- <a><i class="fa fa-search"> ค้นหา</i></a> -->
-        <a id="exitMenu" onclick="exitTEST()" class="exit" style="float: right;width: 17%;"><i class="fa fa-sign-out-alt">
+        <a id="exitMenu" onclick="exitTEST()" class="exit" style="float: right;width: 17%;"><i
+                class="fa fa-sign-out-alt">
                 ออกจากระบบ</i></a>
     </div>
     <!-- เมนูด้านข้าง -->
@@ -40,7 +41,7 @@
         <button class="dropdown-btn select-active"><b>ระบบงานคำขอ </b><i class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
             <a href="searchRequest.html">- ค้นหา/แก้ไข</a>
-            <a href="request_public_sell.html" class ="dropdown-active">- ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
+            <a href="request_public_sell.html" class="dropdown-active">- ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
             <a href="request_public_hawk.html">- ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
             <a href="request_area_more_sell.html">- ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
             <a href="request_area_more_correct.html">- ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</a>
@@ -84,9 +85,11 @@
             <a href="../report/report_crematory.html">- ตามคำขอ</a>
             <a href="../report/report_summary.html">- สรุป</a>
         </div>
-        <button class="dropdown-btn notification"><b>แจ้งเตือน </b><span id="notficationRequest" class="badge" style="margin-left:0.5vw;">100000</span><i class="fa fa-caret-down"></i></button>
+        <button class="dropdown-btn notification"><b>แจ้งเตือน </b><span id="notficationRequest" class="badge"
+                style="margin-left:0.5vw;">100000</span><i class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
-            <a class="notification" href="../notfication/request.html">- งานคำขอ<span id="notficationRequest" class="badge" style="margin-left:0.5vw;">100000</span></a>
+            <a class="notification" href="../notfication/request.html">- งานคำขอ<span id="notficationRequest"
+                    class="badge" style="margin-left:0.5vw;">100000</span></a>
         </div>
     </div>
     <!-- เนื้อหา -->
@@ -94,25 +97,27 @@
         <fieldset disabled id="disable" style="border: 0;padding: 0;margin: 0;">
             <div class="main">
                 <header class="w3-top2">
-                    <h1 style="font-size:2.8vh;margin-left: 25px;padding: 2px;"> ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</h1>
+                    <h1 style="font-size:2.8vh;margin-left: 25px;padding: 2px;">
+                        คำขอต่อใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</h1>
                 </header>
-                 <!-- ข้อมูลใบ -->
-                 <div class="box">
+                <!-- ข้อมูลใบ -->
+                <div class="box">
                     <h3 style="font-size: 3vh;">ข้อมูลสถานประกอบการ</h3>
                     <a style="margin-left: 0vw;">เลขที่คำขอ :
                         <input type="text" style="width: 16%;" readonly></a>
                     <a>วันที่ยื่นขอ :
                         <input type="text" id="datepicker1" style="width: 16%;"></a>
                     <a>ประเภทคำขอ :
-                        <input list="brow" id="" name="" style="width: 19%;" class="drop" >
-                        <datalist id="brow"  >
+                        <input list="brow" id="" name="" style="width: 19%;" class="drop">
+                        <datalist id="brow">
+                            <option value="" hidden>เลือก...</option>
                             <option
                                 value="1.การจำหน่ายสินค้าในที่ หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น">
                                 1.การจำหน่ายสินค้าในที่
                                 หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
                             </option>
                         </datalist>
-                    </input></a>
+                        </input></a>
                     <a>เขียนที่ :
                         <input type="text" id="place" value="เทศบาลเมืองแสนสุข" style="width:16%;"></a>
                     <br>
@@ -149,17 +154,6 @@
                             <option value="ไทย">ไทย</option>
                             <option value="จีน"></option>
                             <option value="อเมริกัน"></option>
-                            <option value="เขตปลอดร่มเตียงที่ 1">เขตปลอดร่มเตียงที่ 1</option>
-                            <option value="เขตปลอดร่มเตียงที่ 2">เขตปลอดร่มเตียงที่ 2</option>
-                            <option value="เขตปลอดร่มเตียงที่ 3">เขตปลอดร่มเตียงที่ 3</option>
-                            <option value="เขตปลอดร่มเตียงที่ 4">เขตปลอดร่มเตียงที่ 4</option>
-                            <option value="เขตปลอดร่มเตียงที่ 5">เขตปลอดร่มเตียงที่ 5</option>
-                            <option value="เขตปลอดร่มเตียงที่ 6">เขตปลอดร่มเตียงที่ 6</option>
-                            <option value="เขตปลอดร่มเตียงที่ 7">เขตปลอดร่มเตียงที่ 7</option>
-                            <option value="เขตปลอดร่มเตียงที่ 8">เขตปลอดร่มเตียงที่ 8</option>
-                            <option value="เขตปลอดร่มเตียงที่ 9">เขตปลอดร่มเตียงที่ 9</option>
-                            <option value="เขตปลอดร่มเตียงที่ 10">เขตปลอดร่มเตียงที่ 10</option>
-                            <option value="เขตปลอดร่มเตียงที่ 11">เขตปลอดร่มเตียงที่ 11</option>
                         </datalist>
                         </input></a>
                     <br>
@@ -461,222 +455,71 @@
 
                     <br>
                     <br>
-                    <a>
-                        <a>ประกอบกิจการจำหน่ายสินค้าในที่หรือทางสาธารณะ ประเภท</a>
-                        <br>
-                        <a>1) จำหน่ายสินค้าในที่หรือทางสาธารนะ
-                            ประเภท : <select style="width: 30%;">
-                                <option value="1">ล้อเลื่อน (ทั่วไป)</option>
-                                <option value="2">ไก่ย่าง</option>
-                                <option value="3">หาบเร่</option>
-                                <option value="4">แผงลอยอาหารชายหาด</option>
-                                <option value="5">ห่วงยาง</option>
-                                <option value="6">นวดแผนไทยชายหาด</option>
-                                <option value="7">เก้าอี้ผ้าใบ</option>
-                                <option value="8">เรือ</option>
-                                <option value="9">แผงลอยอาหารสวนหย่อมแหลมแท่น</option>
-                                <option value="10">ริมทางแนวหินแกรนิต</option>
-                                <option value="11">จักรยานเช่า</option>
-                                <option value="12">เสื้อผ้า</option>
-                                <option value="13">ล้อเลื่อน (ของที่ระลึก)</option>
-                                <option value="14">แผงลอยถนนสุขุมวิท</option>
-                                <option value="15">ตลาดเช้า</option>
-                                <option value="16">ตลาดเย็น</option>
-                                <option value="17">ตลาดเช้า-เย็น</option>
-                                <option value="18">เขาสามมุข</option>
-                                <option value="19">จักรยานน้ำ</option>
-                                <option value="20">ล้อเลื่อน (ฝั่งบน)</option>
-                                <option value="21">แผงลอย</option>
-                                <option value="22">ล้อเลื่อน</option>
-                                <option value="23">ริมทางสาธารณะ (ชั่วคราว)</option>
-                            </select></a>
-                            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <a>สินค้าประเภท : <input style="width: 32%;">&emsp;&emsp;&emsp;&emsp;
-                            เวลาเริ่ม : <input type="time" style="width: 11.6%;">  เวลาสิ้นสุด : <input type="time" style="width: 11.7%;"></a>
-                        <p class="font">2) &nbsp;ผู้ได้รับอนุญาตต้องปฏิบัติตามหลักเกณฑ์ วิธีการ
-                            และเงื่อนไขที่กำหนดในข้อกำหนดของท้องถิ่น</p>
-                        <p class="font">3)
-                            &nbsp;หากปรากฎในภายหลังว่าการประกอบกิจการที่ได้รับอนุญาตนี้เป็นการขัดต่อกฎหมายอื่นที่เกี่ยวข้องโดยมิอาจแก้ไขได้
-                            เจ้าหน้าที่ท้องถิ่นอื่นอาจพิจารณาให้เพิกถอนการอนุญาตนี้ได้</p>
-                        <p class="font">
-                            <p  class="font">4) &nbsp;ผู้รับใบอนุญาตต้องปฏิบัติตามเงื่อนไขดังต่อไปนี้อีกด้วย คือ</p>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <input style="width: 30%;" type="text" name="mytext[]">
-                            <button type="button" class="add_form_field">
-                                เพิ่ม</button>
-                            <a class="container1"></a>
-                        </p>
-                        <p class="font">5) &nbsp;ใบอนญาตฉบับนี้ออกให้เมื่อวันที่ <input type="text" id="datepicker3"></p>
-                        <p class="font">6) &nbsp;ใบอนญาตฉบับนี้สิ้นอายุวันที่ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text"
-                                id="datepicker4"></p>
-                    </a>
-                    <br>
+                    
+                </div> <br>
+                        <!-- อนุญาต -->
+                        <div class="box">
+                            <br>
+                            <input type="radio" name="confirm" id="confirm" onClick="show_confirm(this.value);"
+                                value="2">
+                            <a> ยืนยันคำขอต่ออายุ </a>
+                            <br>
+                            <br>
+                            <div style="margin-left: 8vw;">
+                                <input type="checkbox" id="documentId" value="cb1"><a>
+                                    หนังสือยินยอมให้ใช้อาคารสถานที่เป็นที่ประกอบการ</a>
+                                <br>
+                                <input type="checkbox" id="documenthHome" value="cb2"><a>
+                                    สำเนาทะเบียนบ้าน/โฉนดที่ดิน(ที่ให้ใช้เป็นสถานที่ประกอบกิจการ)</a>
+                                <br>
+                                <input type="checkbox" id="documentLegalEntity" value="cb3"><a>
+                                    ใบรับรองแพทย์ผู้ขอรับใบอนุญาตและผู้ช่วยจำหน่ายสินค้า (ตามแบบ สณ.๑๑)</a>
+                                <br>
+                                <input type="checkbox" id="documentSignature" value="cb4"><a> หนังสือสัญญาเช่า</a>
+                                <br>
+                                <input type="checkbox" id="documentSJ4" value="cb5"><a>
+                                    หนังสือมอบอำนาจพร้อมติดอากรแสตมป์</a>
+                                <br>
+                                <input type="checkbox" id="documentOther" value="cb6"><a> เอกสารอื่นๆที่เกี่ยวข้อง</a>
+                                <input type="text" id="other" size="40" />
+                            </div>
+                            <br>
+                            <br>
+                            <div class="row" style="text-align: center;">
+                                <div class="col" style="width: 33.33%;">
+                                    <a>
+                                        ข้าพเจ้าขอรับรองว่า
+                                        ข้อความในแบบคำร้องขอต่อใบอนุญาตนี้เป็นจริงทุกประการ
+                                        <br>
+                                        (ลงชื่อ)
+                                        <input type="text" id="documentName" />
+                                        ผู้ขอรับใบอนุญาต
+                                    </a>
+                                </div>
+                                <div class="col" style="width: 33.33%;">
+                                    <a>
+                                        ลงชื่อ <input type="text" id="" />
+                                        <br>
+                                        <p class="text-center">ผู้รับเงิน</p>
+                                    </a>
+                                </div>
+                                <div class="col" style="width: 33.33%;">
+                                    <a>
+                                        &emsp;ลงชื่อ
+                                        <input type="text" id="" readonly disabled>
+                                        <br>
+                                        ตำแหน่ง
+                                        <input type="text" id="" readonly disabled>
+                                        <br>
+                                        เจ้าพนักงานท้องถิ่น
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div><br>
+
+
                 </div>
-                <br>
-
-                <!-- สัมผัสอาหาร -->
-                <div class="box">
-                    <h3 style="font-size: 2.8vh;">ใบอบรมผู้สัมผัสอาหาร</h3>
-                    <input type="radio" name="food" id="food" onClick="show_food(this.value);" value="1"
-                        style="margin-left: 5vw;">
-                    <a>อบรมแล้ว</a>
-                    <input type="radio" name="food" id="food" onClick="show_food(this.value);" value="2" />
-                    <a>ยังไม่ได้อบรม</a>
-                    <br>
-                    <div id="boxFood" class="boxFood" style="display: none;margin-left: 5vw;">
-                        <a>ออกใบประกาศนียบัตรโดย</a>
-                        <input type="text" id="">
-                        <br>
-                        <a>ให้ไว้ ณ วันที่</a>
-                        <input type="text" id="datepicker5" />&nbsp;
-                        <a>มีผลถึง ณ วันที่</a>
-                        <input type="text" id="datepicker6" />
-                    </div>
-                    <br>
-                </div><br>
-                
-                <!-- เพิ่มรูป -->
-                <div class="box">
-                    <br>
-                    <div>
-                        <a>รูปภาพผลการตรวจสอบ</a>
-                        <input type="file" id="uploadFile" style="display: none;" onchange="handleFileSelect(event)"
-                            accept="image/*" multiple>
-                        <button type="button" class="button" onclick="document.getElementById('uploadFile').click()">
-                            <h5><i class="fa fa-upload"></i>
-                                อัพโหลดภาพ</h5>
-                        </button>
-                        <button type="button" class="button" style="float: right;" onclick="printImg()">
-                            <h5><i class="fa fa-print"></i>
-                                พิมพ์รูปภาพ</h5>
-                        </button>
-                        <br>
-                        <br>
-                        <div id='outputImage' style="height: 40vh; overflow-y:auto; border: 0.3vh solid black;">
-                        </div>
-                    </div>
-                </div><br>
-                <!-- อนุญาต -->
-                <div class="box">
-                    <br>
-                    <input type="radio" name="confirm" id="confirm" onClick="show_confirm(this.value);" value="1">
-                    <a> ยืนยันคำขอรับ </a>
-                    &nbsp;
-                    <input type="radio" name="confirm" id="confirm" onClick="show_confirm(this.value);" value="2">
-                    <a> ยืนยันคำขอต่ออายุ </a>
-                    <br>
-                    <div class="row" id="boxConfirm" style="width: 80%;margin-left: 5vw;display: none;">
-                        <div class="col" style="width: 33.33%;">
-                            เลขที่คำขอ : <input readonly>
-                            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            วันที่ยื่น : <input type="text" id="datepicker7">
-                        </div>
-                        <div class="col" style="width: 33.33%;">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            เล่มที่ : <input style="width: 65%;">
-                            <br>
-                            ค่าธรรมเนียม :&nbsp;<input style="width: 65%;">
-                        </div>
-                        <div class="col" style="width: 33.33%;">
-                            &nbsp;&nbsp;
-                            เลขที่ : <input>
-                            <br>
-                            ค่าปรับ : <input>
-                        </div>
-                    </div>
-                    <br>
-                    <br>
-                    <div style="margin-left: 8vw;">
-                        <input type="checkbox" id="documentId" value="cb1"><a>
-                            หนังสือยินยอมให้ใช้อาคารสถานที่เป็นที่ประกอบการ</a>
-                        <br>
-                        <input type="checkbox" id="documenthHome" value="cb2"><a>
-                            สำเนาทะเบียนบ้าน/โฉนดที่ดิน(ที่ให้ใช้เป็นสถานที่ประกอบกิจการ)</a>
-                        <br>
-                        <input type="checkbox" id="documentLegalEntity" value="cb3"><a>
-                            ใบรับรองแพทย์ผู้ขอรับใบอนุญาตและผู้ช่วยจำหน่ายสินค้า (ตามแบบ สณ.๑๑)</a>
-                        <br>
-                        <input type="checkbox" id="documentSignature" value="cb4"><a> หนังสือสัญญาเช่า</a>
-                        <br>
-                        <input type="checkbox" id="documentSJ4" value="cb5"><a> หนังสือมอบอำนาจพร้อมติดอากรแสตมป์</a>
-                        <br>
-                        <input type="checkbox" id="documentOther" value="cb6"><a> เอกสารอื่นๆที่เกี่ยวข้อง</a>
-                        <input type="text" id="other" size="40" />
-                    </div>
-                    <br>
-                    <br>
-                    <div class="row" style="text-align: center;">
-                        <div class="col" style="width: 33.33%;">
-                            <a>
-                                ข้าพเจ้าขอรับรองว่า
-                                ข้อความในแบบคำร้องขอต่อใบอนุญาตนี้เป็นจริงทุกประการ
-                                <br>
-                                (ลงชื่อ)
-                                <input type="text" id="documentName" />
-                                ผู้ขอรับใบอนุญาต
-                            </a>
-                        </div>
-                        <div class="col" style="width: 33.33%;">
-                            <a>
-                                ลงชื่อ <input type="text" id="" />
-                                <br>
-                                <p class="text-center">ผู้รับเงิน</p>
-                            </a>
-                        </div>
-                        <div class="col" style="width: 33.33%;">
-                            <a>
-                                &emsp;ลงชื่อ
-                                <input type="text" id="" readonly disabled>
-                                <br>
-                                ตำแหน่ง
-                                <input type="text" id="" readonly disabled>
-                                <br>
-                                เจ้าพนักงานท้องถิ่น
-                            </a>
-                        </div>
-                    </div>
-
-                </div><br>
-                <!-- ตรวจสอบ -->
-                <div class="box">
-                    <a>
-                        <div class="row">
-                            <div class="col">
-                                <p style="margin-top: 2.8%;"><b>ความถูกต้องของเอกสารคำร้อง</b></p>
-                            </div>
-                            <div class="col">
-                                <p style="margin-top: 1%;"><b>บันทึกอนุมัติคำขอ</b> <input type="text" id="datepicker8">
-                                </p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col" style="text-align: left;">
-                                <div class="box">
-                                    <input type="radio" name="correct1" id="" value=""> &nbsp;เห็นสมควรอนุญาต
-                                    <br>
-                                    <input type="radio" name="correct1" id="" value=""> &nbsp;เห็นสมควรไม่อนุญาต เพราะ
-                                    <textarea rows="4" cols="50"> </textarea>
-                                    <br><br>
-                                    <p>ลงชื่อ <input type="text"> ผู้ตรวจสอบ </p>
-                                </div>
-                            </div>
-
-                            <div class="col" style="text-align: left;">
-                                <div class="box">
-                                    <input type="radio" name="correct2" id="" value=""> &nbsp;เห็นสมควรอนุญาต
-                                    <br>
-                                    <input type="radio" name="correct2" id="" value=""> &nbsp;เห็นสมควรไม่อนุญาต เพราะ
-                                    <textarea rows="4" cols="50"> </textarea>
-                                    <br><br>
-                                    <p>ลงชื่อ <input type="text"> ผู้อนุมัติ </p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div><br>
-
-
-            </div>
 
         </fieldset>
     </form>
@@ -689,4 +532,5 @@
 <script src="../../js/disable.js"></script>
 <script src="../../js/sweet2.js"></script>
 <script src="../../js/utilities.js"></script>
+
 </html>
