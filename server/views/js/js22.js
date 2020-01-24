@@ -84,33 +84,20 @@ function openCity(evt, cityName) {
   evt.currentTarget.className += " active";
 }
 
-<<<<<<< HEAD
 
-$(function () {
-  $.contextMenu({
-    selector: '.context-menu-one',
-    callback: function (key, options) {
-      var m = "clicked: " + key;
-      console.log(key)
-      // window.console && console.log(m) || alert(m); 
-    },
-    items: {
-      "sep2": "---------",
-      "edit": { name: "Edit" },
-      "cut": { name: "Cut" },
-      copy: { name: "Copy" },
-      "paste": { name: "Paste" },
-      "delete": { name: "Delete" },
-      "sep1": "---------"
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
 
-    }
-  });
-
-  $('.context-menu-one').on('click', function (e) {
-    console.log('clicked', this);
-  })
-});
-=======
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("defaultOpen").click();
->>>>>>> 2b57b6da5e008b99d4fb3b76e8ba53cae38b157d
