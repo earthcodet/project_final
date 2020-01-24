@@ -83,21 +83,36 @@ function openCity(evt, cityName) {
   document.getElementById(cityName).style.display = "block";
   evt.currentTarget.className += " active";
 }
-
-
-function openCity(evt, cityName) {
-  var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-  document.getElementById(cityName).style.display = "block";
-  evt.currentTarget.className += " active";
-}
-
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("defaultOpen").click();
+
+
+if($.contextMenu != undefined || $.contextMenu != null){
+  $(function () {
+    $.contextMenu({
+      selector: '.context-menu-one',
+      callback: function (key, options) {
+        var m = "clicked: " + key;
+        console.log(key)
+        // window.console && console.log(m) || alert(m); 
+      },
+      items: {
+        "sep2": "---------",
+        "edit": { name: "Edit" },
+        "cut": { name: "Cut" },
+        copy: { name: "Copy" },
+        "paste": { name: "Paste" },
+        "delete": { name: "Delete" },
+        "sep1": "---------"
+  
+      }
+    });
+  
+    $('.context-menu-one').on('click', function (e) {
+      console.log('clicked', this);
+    })
+  });
+}
+
+
+
