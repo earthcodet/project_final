@@ -14,12 +14,11 @@ class ImageDAO {
                 ,
                 values = {
                     IMAGE_NAME: image.name,
-                    IMAGE_TYPE:image.type,
-                    IMAGE_DATA:image.data
+                    IMAGE_TYPE: image.type,
+                    IMAGE_DATA: image.data
                 };
             con.query(query, values, function (err, result) {
                 if (err) {
-                    console.log('image เอง')
                     console.log(err.code) 
                 }
                 return resolve(result)

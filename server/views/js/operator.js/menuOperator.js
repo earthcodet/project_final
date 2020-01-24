@@ -1,6 +1,9 @@
 var data = false
 var deleteData = false
 var addNew = false
+let tSearchName = ''
+let tSearchSurname = ''
+let tSearchId = ''
 function exitTEST() {
     Swal.fire({
         title: "สำนักงานเทศบาล",
@@ -37,6 +40,7 @@ function addTEST() {
         id.style.textDecoration = ''
     }
     resetFunction()
+
 }
 
 function disableMenuAll() {
@@ -53,8 +57,8 @@ function enableMenu(id) {
 
 function insertTEST() {
     let _redyToInsert = preInsert()
-    
-    if(_redyToInsert){
+
+    if (_redyToInsert) {
         Swal.fire({
             title: "สำนักงานเทศบาล",
             html: "ต้องการบันทึกหรือไม่",
@@ -71,21 +75,21 @@ function insertTEST() {
             imageWidth: 'auto',
             imageHeight: '100%',
             imageAlt: 'Custom image',
-            preConfirm: function() {
-                return new Promise(function(resolve, reject) {
-                  setTimeout(function() {
+            preConfirm: function () {
+                return new Promise(function (resolve, reject) {
+                    setTimeout(function () {
                         insertToDatabase().then((data) => {
                             if (data) {
                                 resolve();
                             }
                         })
-                  }, 1000);
+                    }, 1000);
                 });
-              }
+            }
         }).then((result) => {
             if (result.value) {
                 Swal.fire({
-                    html: "บันทึกสำเร็จ",
+                    html: "<h2>บันทึกสำเร็จ</h2>",
                     icon: "success",
                     confirmButtonColor: "#009688"
                 });
@@ -96,11 +100,44 @@ function insertTEST() {
                 enableMenu('editMenu')
                 enableMenu('deleteMenu')
                 enableFunction()
+                var datetime = new Date();
+                let dateForUpdate = datetime.toISOString().slice(0, 10)
+                let temp = dateForUpdate.split('-')
+                let day = temp[2]
+                let month = temp[1]
+                let year = temp[0]
+                let format = `${day}-${month}-${year}`
+                document.getElementById('last-update').value = format
             } else if (result.dismiss === Swal.DismissReason.cancel) {
-                // Swal.fire("บันทึกล้มเหลว");
-            }});
+                Swal.fire({
+                    icon: 'success',
+                    html: "<h2>ยกเลิกสำเร็จ</h2>",
+                    confirmButtonColor: "#009688"
+                });
+                addNew = false
+                disableMenuAll()
+                enableMenu('addMenu')
+                enableMenu('saveMenu')
+                resetFunction()
+                enableFunction()
+                //deleteImage
+                fileImage = null
+                inImage.type = null
+                document.getElementById('uploadFile').value = ''
+                var img = document.getElementById('operatorImage')
+                img.src = '../../img/userProfile.png'
+
+
+
+                var id = document.getElementById('id')
+                if (id != null) {
+                    id.style.textDecoration = ''
+                }
+
+            }
+        });
     }
- 
+
 }
 
 function editTEST() {
@@ -164,23 +201,128 @@ function deleteTEST() {
         });
 
 }
+function searchPersonal() {
+    console.log('run')
+    let id = document.getElementById('popSearchId').value.trim()
+    let name = document.getElementById('popSearchName').value.trim()
+    let surname = document.getElementById('popSearchSurname').value.trim()
+    console.log(`X id = ${id} , name = ${name} , surname = ${surname}`)
+    if (id.length === 0) {
+        id = 'none'
+    }
+    if (name.length === 0) {
+        name = 'none'
+    }
+    if (surname.length === 0) {
+        surname = 'none'
+    }
+    //ไม่ให้ค้นหา คำค้นหาเดิม
+    if (tSearchId != id || tSearchName != name || tSearchSurname != surname) {
+        return new Promise((resolve, reject) => {
+            tSearchName = name
+            tSearchId = id
+            tSearchSurname = surname
+            console.log('Searching')
+            axios.get(`http://localhost:5000/search/personal/${id}/${name}/${surname}`).then((result) => {
+                createResultSearch(result.data)
+                return resolve(result.data);
+            })
+        })
+    } else {
+        console.log(`list search item not change`)
+    }
+
+}
+function showItem(data) {
+    console.log(data)
+    setDataUI(data)
+    Swal.close()
+    data = true
+    addNew = false
+    disableMenuAll()
+    enableMenu('addMenu')
+    enableMenu('editMenu')
+    enableMenu('deleteMenu')
+    enableFunction()
+    if (id != null) {
+        id.style.textDecoration = ''
+    }
+}
+function createResultSearch(data) {
+    var tbl = document.getElementById("resultItems");
+    if (tbl.getElementsByTagName("tbody")[0] != null || tbl.getElementsByTagName("tbody")[0] != undefined) {
+        tbl.removeChild(tbl.getElementsByTagName("tbody")[0])
+    }
+    var tblBody = document.createElement('tbody')
+    for (var i = 0; i < data.length; i++) {
+        // creates a table row
+        var row = document.createElement("tr");
+        //row index = this.rowIndex
+        row.onclick = function () { showItem(data[this.rowIndex - 1]) }
+
+        for (var j = 0; j < 4; j++) {
+            var cell = document.createElement("td");
+            if (j === 0) {
+                var cellText = document.createTextNode(data[i].PERSONAL_NAME);
+            } else if (j === 1) {
+                var cellText = document.createTextNode(data[i].PERSONAL_SURNAME);
+            } else if (j === 2) {
+                let AddressText = ''
+                AddressText = AddressText + `บ้านเลขที่ ${data[i].AID.ADDRESS_HOME_NUMBER.trim()} `
+                AddressText = AddressText + `หมู่ ${data[i].AID.ADDRESS_MOO.trim()} `
+                AddressText = AddressText + `ตรอก ${data[i].AID.ADDRESS_TRXK.trim()} `
+                AddressText = AddressText + `ซอย ${data[i].AID.ADDRESS_SXY.trim()} `
+                AddressText = AddressText + `อาคาร ${data[i].AID.ADDRESS_BUILDING.trim()} `
+                AddressText = AddressText + `ถนน ${data[i].AID.ADDRESS_ROAD.trim()} `
+                AddressText = AddressText + `ตำบล ${data[i].AID.DISTRICT_NAME.trim()} `
+                AddressText = AddressText + `อำเภอ ${data[i].AID.AMPHUR_NAME.trim()}`
+                AddressText = AddressText + `จังหวัด ${data[i].AID.PROVINCE_NAME.trim()}`
+                var cellText = document.createTextNode(AddressText);
+            } else {
+                var cellText = document.createTextNode(data[i].PERSONAL_PERSONAL_ID);
+            }
+
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+        }
+
+        // add the row to the end of the table body
+        tblBody.appendChild(row);
+    }
+
+    // put the <tbody> in the <table>
+    tbl.appendChild(tblBody);
+    /*
+    <tr ">
+                        <td>นายสมหมาย</td>
+                        <td>จงรัก</td>
+                        <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
+                        <td>1011122111111</td>
+                    </tr>
+    */
+}
+
 function searchOparator() {
     console.log(addNew)
     if (addNew) {
         insertTEST()
     } else {
+        // new list ค่าใหม่   
+        tSearchName = ''
+        tSearchSurname = ''
+        tSearchId = ''
         var swal_html = `<div >
         <div class="display-center">
                     <h5 style="font-size: 100%;">
                         ชื่อ :
-                        <input type="text" id="username" style="width: 18%;">
+                        <input type="text" id="popSearchName" style="width: 18%;">
                         นามสกุล :
-                        <input type="text" id="userlastname" style="width: 18%;" >
+                        <input type="text" id="popSearchSurname" style="width: 18%;" >
                         เลขบัตรประจำตัว :
-                        <input type="text" id="userid" style="width: 18%;" >
+                        <input type="text" id="popSearchId" style="width: 18%;" >
                         <button type="button" style="width: auto;height: auto;"
-                        class="btn btn-secondary is-color" >
-                           
+                        class="btn btn-secondary is-color" onClick='searchPersonal()'>
+    
                                 <i class="fa fa-search"></i> 
                                 ค้นหา
                            
@@ -188,7 +330,7 @@ function searchOparator() {
                     </h5>
                 </div>
         <div class="search-popup-height">
-            <table id='resultItem' class="table tablesearch table-hover cursor-pointer">
+            <table id='resultItems' class="table tablesearch table-hover cursor-pointer">
                 <thead>
                   <tr class="is-color ">
                     <th>ชื่อ</th>
@@ -197,69 +339,6 @@ function searchOparator() {
                     <th>เลขบัตรประจำตัว</th>
                   </tr>
                 </thead>
-                <tbody>
-                <tr ">
-                    <td>นายสมหมาย</td>
-                    <td>จงรัก</td>
-                    <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
-                    <td>1011122111111</td>
-                </tr>
-                <tr ">
-                    <td>นายสมหมาย</td>
-                    <td>จงรัก</td>
-                    <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
-                    <td>1011122111111</td>
-                </tr>
-                <tr ">
-                    <td>นายสมหมาย</td>
-                    <td>จงรัก</td>
-                    <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
-                    <td>1011122111111</td>
-                </tr>
-                <tr ">
-                    <td>นายสมหมาย</td>
-                    <td>จงรัก</td>
-                    <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
-                    <td>1011122111111</td>
-                </tr>
-                <tr ">
-                    <td>นายสมหมาย</td>
-                    <td>จงรัก</td>
-                    <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
-                    <td>1011122111111</td>
-                </tr>
-                <tr ">
-                    <td>นายสมหมาย</td>
-                    <td>จงรัก</td>
-                    <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
-                    <td>1011122111111</td>
-                </tr>
-                <tr ">
-                    <td>นายสมหมาย</td>
-                    <td>จงรัก</td>
-                    <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
-                    <td>1011122111111</td>
-                </tr>
-                <tr ">
-                    <td>นายสมหมาย</td>
-                    <td>จงรัก</td>
-                    <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
-                    <td>1011122111111</td>
-                </tr>
-                <tr ">
-                    <td>นายสมหมาย</td>
-                    <td>จงรัก</td>
-                    <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
-                    <td>1011122111111</td>
-                </tr>
-                
-                <tr ">
-                    <td>นายสมหมาย</td>
-                    <td>จงรัก</td>
-                    <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
-                    <td>1011122111111</td>
-                </tr>
-                </tbody>
               </table>
         </div>
     </div>`
