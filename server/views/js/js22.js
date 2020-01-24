@@ -85,29 +85,35 @@ function openCity(evt, cityName) {
 }
 
 
-$(function () {
-  $.contextMenu({
-    selector: '.context-menu-one',
-    callback: function (key, options) {
-      var m = "clicked: " + key;
-      console.log(key)
-      // window.console && console.log(m) || alert(m); 
-    },
-    items: {
-      "sep2": "---------",
-      "edit": { name: "Edit" },
-      "cut": { name: "Cut" },
-      copy: { name: "Copy" },
-      "paste": { name: "Paste" },
-      "delete": { name: "Delete" },
-      "sep1": "---------"
-
-    }
+if($.contextMenu != undefined || $.contextMenu != null){
+  $(function () {
+    $.contextMenu({
+      selector: '.context-menu-one',
+      callback: function (key, options) {
+        var m = "clicked: " + key;
+        console.log(key)
+        // window.console && console.log(m) || alert(m); 
+      },
+      items: {
+        "sep2": "---------",
+        "edit": { name: "Edit" },
+        "cut": { name: "Cut" },
+        copy: { name: "Copy" },
+        "paste": { name: "Paste" },
+        "delete": { name: "Delete" },
+        "sep1": "---------"
+  
+      }
+    });
+  
+    $('.context-menu-one').on('click', function (e) {
+      console.log('clicked', this);
+    })
   });
+}
 
-  $('.context-menu-one').on('click', function (e) {
-    console.log('clicked', this);
-  })
-});
 // Get the element with id="defaultOpen" and click on it
-document.getElementById("defaultOpen").click();
+if(document.getElementById("defaultOpen") != null || document.getElementById("defaultOpen") != undefined){
+  document.getElementById("defaultOpen").click();
+}
+

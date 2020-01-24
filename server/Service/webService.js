@@ -315,7 +315,7 @@ class service {
     }
     getImageByPersonalId(name) {
         return new Promise((resolve, reject) => {
-            ImageDAOObj.getImageByImage(name).then((data) => {
+            ImageDAOObj.getImageByPersonalId(name).then((data) => {
                 return resolve(data)
             })
         })

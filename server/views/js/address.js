@@ -19,7 +19,6 @@ function getProvice() {
                 result.data[i].PROVINCE_NAME = result.data[i].PROVINCE_NAME.trim()
                 province.push(result.data[i])
             }
-            console.log(result.data)
             resolve(result.data);
         })
     })
@@ -32,7 +31,6 @@ function getAmphur() {
                 result.data[i].AMPHUR_NAME = result.data[i].AMPHUR_NAME.trim()
                 amphur.push(result.data[i])
             }
-            console.log(result.data)
             resolve(result.data);
         })
     })
@@ -44,14 +42,12 @@ function getDistrict() {
                 result.data[i].DISTRICT_NAME = result.data[i].DISTRICT_NAME.trim()
                 district.push(result.data[i])
             }
-            console.log(result.data)
             resolve(result.data);
         })
     })
 }
 
 function removeAlloption(id) {
-    console.log(id)
     var select = document.getElementById(id);
     var length = select.options.length;
     for (i = 0, c = 0; i < length; i++) {
@@ -62,7 +58,7 @@ function removeAlloption(id) {
 //Address
 function districtSelect(amphurId) {
     addressDistrict =[]
-   
+
     for(let i = 0 ; i< district.length ; i++){
         if(district[i].AMPHUR_ID == amphurId && district[i].PROVINCE_ID == document.getElementById('province').value){
             addressDistrict.push(district[i])
@@ -102,7 +98,6 @@ function chageProvice(proviceId){
     districtSelect(addressAmphur[0].AMPHUR_ID)
 }
 function createSelectProvice(data) {
-    console.log(data)
     for (let i = 0; i < data.length; i++) {
         var select = document.getElementById("province");
         var option = document.createElement("option");
@@ -139,4 +134,26 @@ function getAmphurName(amphurId){
         }
     }
 }
+
+function getProviceIdByName(Name) {
+    for (let i = 0; i < province.length; i++) {
+        if (province[i].PROVINCE_NAME === Name)
+            return province[i].PROVINCE_ID
+    }
+}
+
+function getAmphureIdByName(Name) {
+    for (let i = 0; i < amphur.length; i++) {
+        if (amphur[i].AMPHUR_NAME === Name)
+            return amphur[i].AMPHUR_ID
+    }
+}
+
+function getDistrictIdByName(Name) {
+    for (let i = 0; i < district.length; i++) {
+        if (district[i].DISTRICT_NAME === Name)
+            return district[i].DISTRICT_ID
+    }
+}
+
 runForm()

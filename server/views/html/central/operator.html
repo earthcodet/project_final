@@ -28,14 +28,15 @@
 <body>
     <!-- เมนูด้านบน -->
     <div class="w3-top icon-bar">
-        <a id="addMenu" class="exit " onclick="addTEST()"><i class="fa fa-plus-square"><span> เพิ่ม</span></i></a>
-        <a id="editMenu" onclick="editTEST()" class="exit disableds"><i class="fa fa-pencil-alt"><span> แก้ไข</span></i></a>
-        <a id="saveMenu" onclick="insertTEST()" class="exit disableds"><i class="fa fa-save"><span> บันทึก</span></i></a>
-        <a id="restoreMenu" onclick="restoreTEST()" class="exit disableds"><i class="fa fa-reply"><span> เรียกคืน</span></i></a>
-        <a id="deleteMenu" onclick="deleteTEST()" class="exit disableds"><i class="fa fa-times"><span> ยกเลิก</span></i></a>
-        <a id='searchMenu' class="exit" onclick="searchOparator()"><i class="fa fa-search"><span> ค้นหา</span></i></a>
-        <a id="exitMenu" onclick="exitTEST()" class="exit" style="float: right;width: 17%;"><i
-                class="fa fa-sign-out-alt"><span> ออกจากระบบ</span></i></a>
+        <a id="addMenu" class="exit " onclick="addPage()"><i class="fa fa-plus-square"> เพิ่ม</i></a>
+        <a id="editMenu" onclick="editPage()" class="exit disableds"><i class="fa fa-pencil-alt"> แก้ไข</i></a>
+        <a id="saveMenu" onclick="insertPage()" class="exit disableds"><i class="fa fa-save"> บันทึก</i></a>
+        <a id="restoreMenu" onclick="restorePage()" class="exit disableds"><i class="fa fa-reply"> เรียกคืน</i></a>
+        <a id="deleteMenu" onclick="deletePage()" class="exit disableds"><i class="fa fa-times"> ยกเลิก</i></a>
+        <a id='searchMenu' class="exit" onclick="searchOparator()"><i class="fa fa-search"> ค้นหา</i></a>
+        <a id="exitMenu" onclick="exitPage()" class="exit" style="float: right;width: 17%;"><i
+                class="fa fa-sign-out-alt">
+                ออกจากระบบ</i></a>
     </div>
     <!-- เมนูด้านข้าง -->
     <div class="sidenav">
@@ -216,13 +217,13 @@
 
                                 <!-- นิติบุคคล -->
                                 <span id="perTy2" style="display: none;">
-                                    <a id='nameUserTopic' style="margin-left: 3vw;">ชื่อ :</a>
-                                    <input type="text" id="nameUser" name="" placeholder="" style="width: 27.5vw"
+                                    <a  style="margin-left: 3vw;">ชื่อ :</a>
+                                    <input type="text" id="company-nameUser" name="" placeholder="" style="width: 27.5vw"
                                         maxlength="70">
                                     <br>
                                     <!-- row 3 -->
                                     <a style="margin-left: 1.8vw;">เลขประจำตัว :</a>
-                                    <input type="text" id="id" name="" placeholder="" style="width: 11vw"
+                                    <input type="text" id="company-id" name="" placeholder="" style="width: 11vw"
                                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                         maxlength="13" onkeyup="checkId(this.value)">
                                     <a style="margin-left:0.9vw;">ออกเมื่อ :</a>
@@ -230,44 +231,44 @@
                                         maxlength="10">
                                     <br>
                                     <!-- row4 -->
-                                    <a id='phoneTopic' style="margin-left: 3.7vw;">โทรศัพท์ :</a>
-                                    <input type="text" style="width: 11vw" id="phone"
+                                    <a  style="margin-left: 3.7vw;">โทรศัพท์ :</a>
+                                    <input type="text" style="width: 11vw" id="company-phone"
                                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                         maxlength="10">
                                     <a style="margin-left: 1.4vw;">โทรสาร :</a>
-                                    <input type="text" id="fax" style="width: 11vw"
+                                    <input type="text" id="company-fax" style="width: 11vw"
                                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                         maxlength="9">
                                     <br>
                                     <!-- row5 -->
                                     <a style="margin-left: 2.1vw;">อยู่บ้านเลขที่ :</a>
-                                    <input type="text" id="homeId" style="width: 11vw" maxlength="15">
+                                    <input type="text" id="company-homeId" style="width: 11vw" maxlength="15">
                                     <a style="margin-left: 2.3vw;">หมู่ที่ :</a>
-                                    <input type="int" id="moo" style="width: 11vw" maxlength="5">
+                                    <input type="int" id="company-moo" style="width: 11vw" maxlength="5">
                                     <a style="margin-left: 2.05vw;">ตรอก :</a>
-                                    <input type="text" id="trxk" style="width: 11vw" maxlength="50">
+                                    <input type="text" id="company-trxk" style="width: 11vw" maxlength="50">
                                     <!-- row 6 -->
                                     <br>
                                     <a style="margin-left: 5.4vw;">ซอย :</a>
-                                    <input type="text" id="sxy" style="width: 11vw;" maxlength="50">
+                                    <input type="text" id="company-sxy" style="width: 11vw;" maxlength="50">
                                     <a style="margin-left: 1.6vw;">อาคาร :</a>
-                                    <input type="text" id="building" style="width: 11vw" maxlength="100">
+                                    <input type="text" id="company-building" style="width: 11vw" maxlength="100">
                                     <a style="margin-left: 2.45vw;">ถนน :</a>
-                                    <input type="text" id="road" style="width: 11vw" maxlength="70">
+                                    <input type="text" id="company-road" style="width: 11vw" maxlength="70">
                                     <!-- row 7 -->
                                     <br>
                                     <a style="margin-left: 4.4vw;">จังหวัด :</a>
-                                    <select id="province" style="width: 11vw">
+                                    <select id="wProvince" style="width: 11vw">
                                     </select>
                                     <a style="margin-left: 1.6vw;">อำเภอ :</a>
-                                    <select id="district" style="width: 11vw">
+                                    <select id="wDistrict" style="width: 11vw">
                                     </select>
                                     <a style="margin-left: 2vw;">ตำบล :</a>
-                                    <select id="subdistrict" style="width: 11vw">
+                                    <select id="wSubdistrict" style="width: 11vw">
                                     </select>
                                     <br>
                                     <a style="margin-left: 2.1vw;">อัพเดทล่าสุด :</a>
-                                    <input type="text" id='last-update' style="width: 11vw;" readonly disabled>
+                                    <input type="text" id='company-last-update' style="width: 11vw;" readonly disabled>
                                 </span>
                             </div>
                             <div id='imgBoxUpload'
@@ -308,8 +309,7 @@
 <script src="../../node_modules/axios/dist/axios.min.js"></script>
 <!-- เอาไว้เช็คว่า user login หรือเปล่า -->
 <!-- <script src="../../js/checkUserLogin.js"></script> -->
-<script src="../../js/address.js"></script>
-<script src="../../js/service/serviceAddress.js"></script>
+<script src="../../js/twoAddress.js"></script>
 
 <script src="../../js/operator.js/operator.js"></script>
 <script src="../../js/operator.js/menuOperator.js"></script>

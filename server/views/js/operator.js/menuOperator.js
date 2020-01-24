@@ -4,7 +4,8 @@ var addNew = false
 let tSearchName = ''
 let tSearchSurname = ''
 let tSearchId = ''
-function exitTEST() {
+let tempData = {}
+function exitPage() {
     Swal.fire({
         title: "สำนักงานเทศบาล",
         html: "ต้องการออกจากระบบหรือไม่",
@@ -24,23 +25,31 @@ function exitTEST() {
             }
         });
 }
+
 function logout() {
     location.replace("/logout")
 }
-
-function addTEST() {
+function setdeleteData(data) {
+    data === 'NO' ? false : true
+}
+function resetStyleIdDelete() {
+    var id = document.getElementById('id')
+    if (id != undefined || id != null) {
+        id.style.textDecoration = ''
+    }
+}
+function addPage() {
     addNew = true
     deleteData = false
     data = false
     disFunction()
     disableMenuAll()
     enableMenu('saveMenu')
-    var id = document.getElementById('id')
-    if (id != null) {
-        id.style.textDecoration = ''
-    }
+    enableMenu('deleteMenu')
+    resetStyleIdDelete()
     resetFunction()
-
+    resetImageDefault()
+    document.getElementById('typeUser').disabled = false
 }
 
 function disableMenuAll() {
@@ -55,7 +64,7 @@ function enableMenu(id) {
     document.getElementById(id).classList.remove('disableds')
 }
 
-function insertTEST() {
+function insertPage() {
     let _redyToInsert = preInsert()
 
     if (_redyToInsert) {
@@ -78,8 +87,9 @@ function insertTEST() {
             preConfirm: function () {
                 return new Promise(function (resolve, reject) {
                     setTimeout(function () {
-                        insertToDatabase().then((data) => {
-                            if (data) {
+                        //function ใน operator 
+                        insertToDatabase().then((insert) => {
+                            if (insert) {
                                 resolve();
                             }
                         })
@@ -100,6 +110,7 @@ function insertTEST() {
                 enableMenu('editMenu')
                 enableMenu('deleteMenu')
                 enableFunction()
+                // set Date in Last update
                 var datetime = new Date();
                 let dateForUpdate = datetime.toISOString().slice(0, 10)
                 let temp = dateForUpdate.split('-')
@@ -120,33 +131,30 @@ function insertTEST() {
                 enableMenu('saveMenu')
                 resetFunction()
                 enableFunction()
-                //deleteImage
-                fileImage = null
-                inImage.type = null
-                document.getElementById('uploadFile').value = ''
-                var img = document.getElementById('operatorImage')
-                img.src = '../../img/userProfile.png'
-
-
-
-                var id = document.getElementById('id')
-                if (id != null) {
-                    id.style.textDecoration = ''
-                }
+                resetImageDefault()
+                resetStyleIdDelete()
 
             }
         });
     }
 
 }
-
-function editTEST() {
+function resetImageDefault() {
+    //ตัวแปรอยู่ใน operator 
+    fileImage = null
+    inImage.type = null
+    document.getElementById('uploadFile').value = ''
+    var img = document.getElementById('operatorImage')
+    img.src = '../../img/userProfile.png'
+}
+function editPage() {
     if (!deleteData) {
         addNew = true
-        console.log(addNew)
         disableMenuAll()
         enableMenu('saveMenu')
         disableFunction()
+        enableMenu('deleteMenu')
+        //tempData
     } else {
         Swal.fire({
             title: "สำนักงานเทศบาล",
@@ -160,53 +168,109 @@ function editTEST() {
 function setIdDelete() {
     var id = document.getElementById('id')
     if (id != null) {
-        if (id.style.textDecoration == '') {
+        if (id.style.textDecoration === '') {
             id.style.textDecoration = 'line-through'
         } else {
             id.style.textDecoration = ''
         }
     }
 }
-function deleteTEST() {
-    Swal.fire({
-        title: "สำนักงานเทศบาล",
-        html: "ต้องการลบหรือไม่",
-        icon: 'warning',
-        showCancelButton: true,
-        customClass: 'swal-height',
-        // width: '30%',
-        confirmButtonColor: "#009688",
-        confirmButtonText: "ใช่",
-        cancelButtonText: "ไม่ใช่",
-        cancelButtonColor: '#dc3545',
-        closeOnConfirm: false,
-        closeOnCancel: false
-    })
-        .then((result) => {
-            if (result.value) {
-                Swal.fire({
-                    html: "ลบสำเร็จ",
-                    icon: "success",
-                    confirmButtonColor: "#009688"
-                });
-                deleteData = true
-                setIdDelete()
-                disableMenuAll()
-                enableMenu('addMenu')
-                enableMenu('editMenu')
-                enableMenu('restoreMenu')
-            } else if (result.dismiss === Swal.DismissReason.cancel) {
-                // Swal.fire("บันทึกล้มเหลว");
-            }
-        });
+function deletePage() {
+    if (addNew === false) {
+        Swal.fire({
+            title: "สำนักงานเทศบาล",
+            html: "ต้องการลบหรือไม่",
+            icon: 'warning',
+            showCancelButton: true,
+            customClass: 'swal-height',
+            // width: '30%',
+            confirmButtonColor: "#009688",
+            confirmButtonText: "ใช่",
+            cancelButtonText: "ไม่ใช่",
+            cancelButtonColor: '#dc3545',
+            closeOnConfirm: false,
+            closeOnCancel: false
+        })
+            .then((result) => {
+                if (result.value) {
+                    Swal.fire({
+                        html: "ลบสำเร็จ",
+                        icon: "success",
+                        confirmButtonColor: "#009688"
+                    });
+                    // function update
+                    deleteData = true
+                    setIdDelete()
+                    disableMenuAll()
+                    enableMenu('addMenu')
+                    enableMenu('editMenu')
+                    enableMenu('restoreMenu')
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    // Swal.fire("บันทึกล้มเหลว");
+                }
+            });
+    } else {
+        Swal.fire({
+            title: "สำนักงานเทศบาล",
+            html: "ต้องการยกเลิกหรือไม่",
+            icon: 'warning',
+            showCancelButton: true,
+            customClass: 'swal-height',
+            // width: '30%',
+            confirmButtonColor: "#009688",
+            confirmButtonText: "ใช่",
+            cancelButtonText: "ไม่ใช่",
+            cancelButtonColor: '#dc3545',
+            closeOnConfirm: false,
+            closeOnCancel: false
+        })
+            .then((result) => {
+                if (result.value) {
+                    Swal.fire({
+                        html: "ยกเลิกสำเร็จ",
+                        icon: "success",
+                        confirmButtonColor: "#009688"
+                    });
+                    if (data === false) {
+                        resetInputUI()
+                        addNew = false
+                        disableMenuAll()
+                        enableMenu('addMenu')
+                        enableFunction()
+                        resetStyleIdDelete()
+                        resetFunction()
+                        resetImageDefault()
+                    }
+                    if (isEmpty(tempData) === false && data === true) {
+                        resetFunction()
+                        setDataUI(tempData)
+                        disableMenuAll()
+                        addNew = false
+                        enableMenu('addMenu')
+                        enableMenu('editMenu')
+                        enableMenu('deleteMenu')
+                        enableFunction()
+                    }
+
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    // Swal.fire("บันทึกล้มเหลว");
+                }
+            });
+    }
+
 
 }
+
+function isEmpty(arg) {
+    for (var item in arg) {
+        return false;
+    }
+    return true;
+}
 function searchPersonal() {
-    console.log('run')
     let id = document.getElementById('popSearchId').value.trim()
     let name = document.getElementById('popSearchName').value.trim()
     let surname = document.getElementById('popSearchSurname').value.trim()
-    console.log(`X id = ${id} , name = ${name} , surname = ${surname}`)
     if (id.length === 0) {
         id = 'none'
     }
@@ -233,9 +297,30 @@ function searchPersonal() {
     }
 
 }
-function showItem(data) {
-    console.log(data)
-    setDataUI(data)
+function getImageByPeronalId(type, id) {
+    return new Promise((resolve, reject) => {
+        if (type === 'บุคคลธรรมดา') {
+            axios.get(`http://localhost:5000/get/image/${id}`).then((result) => {
+                console.log(result.data[0])
+                return resolve(result.data[0]);
+            })
+        } else {
+            return resolve(false)
+        }
+    })
+}
+function showItem(arrayResult) {
+    console.log(arrayResult)
+    getImageByPeronalId(arrayResult.PERSONAL_TYPE, arrayResult.PERSONAL_ID).then((result) => {
+        if (result != false || result != null) {
+            arrayResult.image = result
+            setDataUI(arrayResult)
+        } else {
+            setDataUI(arrayResult)
+        }
+        tempData = arrayResult
+    })
+
     Swal.close()
     data = true
     addNew = false
@@ -244,9 +329,7 @@ function showItem(data) {
     enableMenu('editMenu')
     enableMenu('deleteMenu')
     enableFunction()
-    if (id != null) {
-        id.style.textDecoration = ''
-    }
+    resetStyleIdDelete()
 }
 function createResultSearch(data) {
     var tbl = document.getElementById("resultItems");
@@ -292,20 +375,12 @@ function createResultSearch(data) {
 
     // put the <tbody> in the <table>
     tbl.appendChild(tblBody);
-    /*
-    <tr ">
-                        <td>นายสมหมาย</td>
-                        <td>จงรัก</td>
-                        <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
-                        <td>1011122111111</td>
-                    </tr>
-    */
 }
 
 function searchOparator() {
     console.log(addNew)
     if (addNew) {
-        insertTEST()
+        insertPage()
     } else {
         // new list ค่าใหม่   
         tSearchName = ''
@@ -355,7 +430,8 @@ function searchOparator() {
     }
 
 }
-function restoreTEST() {
+function restorePage() {
+    //function Update delete 
     deleteData = false
     setIdDelete()
     disableMenuAll()
@@ -363,4 +439,3 @@ function restoreTEST() {
     enableMenu('editMenu')
     enableMenu('deleteMenu')
 }
-
