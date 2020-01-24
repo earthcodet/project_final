@@ -42,6 +42,7 @@ function addPage() {
     addNew = true
     deleteData = false
     data = false
+    // tempData = {}
     // เปิดช่อง input
     disFunction()
     disableMenuAll()
@@ -176,7 +177,6 @@ function setIdDelete() {
     }
 }
 function deletePage() {
-    console.log(addNew)
     if(addNew === false){
         Swal.fire({
             title: "สำนักงานเทศบาล",
@@ -232,6 +232,7 @@ function deletePage() {
                         icon: "success",
                         confirmButtonColor: "#009688"
                     });
+                    resetInputUI()
                     data = false
                     addNew = false
                     disableMenuAll()
@@ -241,8 +242,10 @@ function deletePage() {
                     resetStyleIdDelete()
                     resetFunction()
                     resetImageDefault()
-                    // if(tempData)
-
+                    if(isEmpty(tempData) === false){
+                        setDataUI(tempData)
+                    }
+                    
                 } else if (result.dismiss === Swal.DismissReason.cancel) {
                     // Swal.fire("บันทึกล้มเหลว");
                 }
@@ -251,6 +254,13 @@ function deletePage() {
     
 
 }
+
+    function isEmpty(arg) {
+        for (var item in arg) {
+        return false;
+        }
+        return true;
+    }
 function searchPersonal() {
     let id = document.getElementById('popSearchId').value.trim()
     let name = document.getElementById('popSearchName').value.trim()

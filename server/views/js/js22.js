@@ -83,3 +83,37 @@ function openCity(evt, cityName) {
   document.getElementById(cityName).style.display = "block";
   evt.currentTarget.className += " active";
 }
+
+
+if($.contextMenu != undefined || $.contextMenu != null){
+  $(function () {
+    $.contextMenu({
+      selector: '.context-menu-one',
+      callback: function (key, options) {
+        var m = "clicked: " + key;
+        console.log(key)
+        // window.console && console.log(m) || alert(m); 
+      },
+      items: {
+        "sep2": "---------",
+        "edit": { name: "Edit" },
+        "cut": { name: "Cut" },
+        copy: { name: "Copy" },
+        "paste": { name: "Paste" },
+        "delete": { name: "Delete" },
+        "sep1": "---------"
+  
+      }
+    });
+  
+    $('.context-menu-one').on('click', function (e) {
+      console.log('clicked', this);
+    })
+  });
+}
+
+// Get the element with id="defaultOpen" and click on it
+if(document.getElementById("defaultOpen") != null || document.getElementById("defaultOpen") != undefined){
+  document.getElementById("defaultOpen").click();
+}
+

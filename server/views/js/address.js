@@ -134,4 +134,27 @@ function getAmphurName(amphurId){
         }
     }
 }
+
+function getProviceIdByName(Name) {
+    for (let i = 0; i < province.length; i++) {
+        if (province[i].PROVINCE_NAME === Name)
+            return province[i].PROVINCE_ID
+    }
+}
+
+function getAmphureIdByName(Name) {
+    for (let i = 0; i < amphur.length; i++) {
+
+        if (addressAmphur[i].AMPHUR_NAME === Name)
+            return addressAmphur[i].AMPHUR_ID
+    }
+}
+
+function getDistrictIdByName(Name) {
+    for (let i = 0; i < district.length; i++) {
+        if (addressDistrict[i].DISTRICT_NAME === Name)
+            return addressDistrict[i].DISTRICT_ID
+    }
+}
+
 runForm()

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.css">
+    <link rel="stylesheet" href="../../css/css2.css">
+    <link href="../../css/fonts.css" rel="stylesheet">
+
+    <!-- เรียกไลบารี่สร้างปฎิทิน  -->
+    <script src="../../js/jquery-3.4.1.min.js"></script>
+    <script src="../../js/datetimepicker.full.js"></script>
+    <script src="../../js/dateth.js"></script>
+    <link rel="stylesheet" href="../../css/date.css">
+</head>
+
+<body>
+    <!-- เมนูด้านบน -->
+    <div class="w3-top icon-bar">
+        <a id="addMenu" class="exit " onclick="addTEST()"><i class="fa fa-plus-square"> เพิ่ม</i></a>
+        <a id="editMenu" onclick="editTEST()" class="exit disableds"><i class="fa fa-pencil-alt"> แก้ไข</i></a>
+        <a id="saveMenu" onclick="insertTEST()" class="exit disableds"><i class="fa fa-save"> บันทึก</i></a>
+        <a id="restoreMenu" onclick="restoreTEST()" class="exit disableds"><i class="fa fa-reply"> เรียกคืน</i></a>
+        <a id="deleteMenu" onclick="deleteTEST()" class="exit disableds"><i class="fa fa-times"> ยกเลิก</i></a>
+        <!-- <a><i class="fa fa-search"> ค้นหา</i></a> -->
+        <a id="exitMenu" onclick="exitTEST()" class="exit" style="float: right;width: 17%;"><i
+                class="fa fa-sign-out-alt">
+                ออกจากระบบ</i></a>
+    </div>
+    <!-- เมนูด้านข้าง -->
+    <div class="sidenav">
+        <a href="/" style="margin-top: 15%;">
+            <img src="../../img/img1.jpg" style="width:92%;">
+        </a>
+        <br>
+        <button class="dropdown-btn select-active"><b>ระบบงานคำขอ </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="searchRequest.html">- ค้นหา/แก้ไข</a>
+            <a href="request_public_sell.html">- ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
+            <a href="request_public_hawk.html">- ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
+            <a href="request_area_more_sell.html">- ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
+            <a href="request_area_more_correct.html">- ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</a>
+            <a href="request_area_less_sell.html">- หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
+            <a class="dropdown-active" href="request_area_less_correct.html">-
+                หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
+            <a href="request_market.html">- ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
+            <a href="request_health_danger.html">-
+                กิจการที่เป็นอันตรายต่อสุขภาพ</a>
+            <a href="request_crematory.html">- กิจการฌาปณสถาน</a>
+
+        </div>
+        <button class="dropdown-btn"><b>งานตรวจสอบ/อนุมัติ </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="#"></a>
+            <a href="#"></a>
+            <a href="#"></a>
+        </div>
+        <button class="dropdown-btn"><b>งานใบอนุญาต </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="#"></a>
+            <a href="#"></a>
+            <a href="#"></a>
+        </div>
+        <button class="dropdown-btn"><b>ข้อมูลส่วนกลาง </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="../central/operator.html">- ข้อมูลผู้ประกอบการ</a>
+            <a href="../central/02.html">- ข้อมูลการจดใบอนุญาต</a>
+            <a href="../central/03.html">- โอนใบอนุญาต</a>
+        </div>
+        <button class="dropdown-btn"><b>งานร้องเรียน </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="#">- บันทึกเรื่องร้องเรียน</a>
+            <a href="#">- บันทึกคำร้อง</a>
+        </div>
+        <button class="dropdown-btn"><b>ข้อมูลระบบ </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="#"></a>
+        </div>
+        <button class="dropdown-btn"><b>รายงาน </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="../report/report_crematory.html">- ตามคำขอ</a>
+            <a href="../report/report_summary.html">- สรุป</a>
+        </div>
+        <button class="dropdown-btn notification"><b>แจ้งเตือน </b><span id="notficationRequest" class="badge"
+                style="margin-left:0.5vw;">100000</span><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a class="notification" href="../notfication/request.html">- งานคำขอ<span id="notficationRequest"
+                    class="badge" style="margin-left:0.5vw;">100000</span></a>
+        </div>
+    </div>
+    <!-- เนื้อหา -->
+    <form id="form">
+        <fieldset disabled id="disable" style="border: 0;padding: 0;margin: 0;">
+            <div class="main">
+                <header class="w3-top2">
+                    <h1 style="font-size:2.8vh;margin-left: 25px;padding: 2px;">
+                        คำขอต่อหนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</h1>
+                </header>
+                <!-- ข้อมูลใบ -->
+                <div class="box">
+                    <h3 style="font-size: 3vh;">ข้อมูลสถานประกอบการ</h3>
+                    <a style="margin-left: 0vw;">เลขที่คำขอ :
+                        <input type="text" style="width: 16%;" readonly></a>
+                    <a>วันที่ยื่นขอ :
+                        <input type="text" id="datepicker1" style="width: 16%;"></a>
+                    <a>ประเภทคำขอ :
+                        <input list="brow" id="" name="" style="width: 19%;" class="drop">
+                        <datalist id="brow">
+                            <option value="" hidden>เลือก...</option>
+                            <option
+                                value="1.การจำหน่ายสินค้าในที่ หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น">
+                                1.การจำหน่ายสินค้าในที่
+                                หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
+                            </option>
+                        </datalist>
+                    <a>เขียนที่ :
+                        <input type="text" id="place" value="เทศบาลเมืองแสนสุข" style="width:16%;"></a>
+                    <br>
+
+                    <a style="margin-left: 1.4vw;">ข้าพเจ้า :
+                        <select id="typeUser" style="width: 11%;">
+                            <option value="บุคคลธรรมดา">บุคคลธรรมดา</option>
+                            <option value="นิติบุคคล">นิติบุคคล</option>
+                        </select>
+                        <input type="text" id="name" style="width: 16.5%;">
+                        <button type="button" class="fa fa-search" style="border-radius: 5px;"
+                            onclick="testSearchOparator()"></button></a>
+                    <a>เลขประจำตัว :
+                        <input type="text" id="id"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            maxlength="13" style="width: 13%;"></a>
+                    <a>อายุ :
+                        <input type="text" id="age"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            maxlength="3" style="width: 7%;"></a>
+                    <a>สัญชาติ :
+                        <input class="drop" list="nationality1" id="nationalityList1" name="" style="width: 7%;">
+                        <datalist id="nationality1">
+                            <option value="" hidden>เลือก...</option>
+                            <option value="ไทย">ไทย</option>
+                            <option value="จีน"></option>
+                            <option value="อเมริกัน"></option>
+                        </datalist>
+                        </input></a>
+                    <a>เชื้อชาติ :
+                        <input list="nationality2" id="nationalityList2" name="" style="width: 7%;">
+                        <datalist id="nationality2">
+                            <option value="" hidden>เลือก...</option>
+                            <option value="ไทย">ไทย</option>
+                            <option value="จีน"></option>
+                            <option value="อเมริกัน"></option>
+                        </datalist>
+                        </input></a>
+                    <br>
+                    <a style="margin-left: 0.58vw;">เลขที่บ้าน :
+                        <input type="text" style="width: 7%;"></a>
+                    <a>หมู่ที่ :
+                        <input type="text" style="width: 7%;"></a>
+                    <a>ตรอก :
+                        <input type="text" style="width: 13%;"></a>
+                    <a>ซอย :
+                        <input type="text" id="sxy" style="width: 13%;"></a>
+                    <a>อาคาร :
+                        <input type="text" id="building" style="width: 13.5%;"></a>
+                    <a>ถนน :
+                        <input type="text" id="road" style="width: 13.5%;"></a>
+                    <br>
+                    <a style="margin-left: 1.8vw;">จังหวัด :
+                        <select id="province" style="width: 14%;"></select></a>
+                    <a>อำเภอ :
+                        <select id="district" style="width: 14%;"></select></a>
+                    <a>ตำบล :
+                        <select id="subdistrict" style="width: 13.5%;"></select></a>
+                    <a>โทรศัพท์ :
+                        <input type="text" id="phone"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            maxlength="10" style="width: 12%;"></a>
+                    <a>โทรสาร :
+                        <input type="text" id="fax"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            maxlength="9" style="width: 13.2%;"></a>
+                    <br>
+                    <br>
+                    <a>สถานที่ประกอบการ :
+                        <input type="text" id="workplaceName" style="width: 37.5%"> (ถ้ามี)</a>
+                    <a>พื้นที่ :
+                        <input type="int" id="area" style="width: 10%"> ตารางเมตร</a>
+                    <a>จำนวนคนงาน :
+                        <input type="int" id="numPeople" style="width: 10%;"> คน</a>
+                    <br>
+                    <a style="margin-left: 2.2vw;">ประเภทกิจการ :
+                        <input type="text" id="" style="width: 37.5%"> </a>&emsp;
+                    <a>ใช้เครื่องจักรขนาด :
+                        <input type="text" id="" style="width: 8%;"> แรงม้า</a>
+                    <br>
+                    <a>ตั้งอยู่เลขที่ :
+                        <input type="text" id="wHomeId" style="width: 7%;"></a>
+                    <a>หมู่ที่ :
+                        <input type="int" id="wMoo" style="width: 7%;"></a>
+                    <a>ตรอก:
+                        <input type="text" id="wTrxk" style="width: 13%;"></a>
+                    <a>ซอย :
+                        <input type="text" id="wSxy" style="width: 13%;"></a>
+                    <a>อาคาร :
+                        <input type="text" id="wBuilding" style="width: 13.5%;"></a>
+                    <a>ถนน :
+                        <input type="text" id="wRoad" style="width: 13.5%;"></a>
+                    <br>
+
+                    <a style="margin-left: 1.75vw;">จังหวัด :
+                        <select id="wProvince" style="width: 14%;"></a>
+                    </select>
+                    <a>อำเภอ :
+                        <select id="wDistrict" style="width: 14%;"></a>
+                    </select>
+                    <a>ตำบล :
+                        <select id="wSubdistrict" style="width: 13.5%;"></a>
+                    </select>
+                    <a>โทรศัพท์ :
+                        <input type="text" id="wPhone"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            maxlength="10" style="width: 12%;"></a>
+                    <a>โทรสาร :
+                        <input type="text" id="wFax"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            maxlength="9" style="width: 13.2%;"></a>
+                    <br>
+                    <br>
+                    <a>ใบอนุญาตฉบับจริง
+                        เล่มที่ :
+                        <input type="text" id="" style="width: 5%;"></a>&ensp;
+                    <a>เลขที่ :
+                        <input type="text" id="" style="width: 10%;"></a>&ensp;
+                    <a>ออกให้เมื่อวันที่ :
+                        <input type="text" id="datepicker2" style="width: 12%;"></a>
+                    <a>ค่าธรรมเนียม :
+                        <input type="number" id="" style="width: 12%;"></a>
+                    <a>ค่าปรับ :
+                        <input type="number" id="" style="width: 12%;"></a>
+
+                    <br>
+                    <br>
+                </div>
+                <br>
+
+                
+                
+                <!-- อนุญาต -->
+                <div class="box">
+                    <br>
+                    
+                    <input type="radio" name="confirm" id="confirm" onClick="show_confirm(this.value);" value="2">
+                    <a> ยืนยันคำขอต่ออายุ </a>
+                    <br>
+                    <br>
+                    <div style="margin-left: 8vw;">
+                        <input type="checkbox" id="documentId" value="cb1"><a>
+                            หนังสือยินยอมให้ใช้อาคารสถานที่เป็นที่ประกอบการ</a>
+                        <br>
+                        <input type="checkbox" id="documenthHome" value="cb2"><a>
+                            สำเนาทะเบียนบ้าน/โฉนดที่ดิน(ที่ให้ใช้เป็นสถานที่ประกอบกิจการ)</a>
+                        <br>
+                        <input type="checkbox" id="documentLegalEntity" value="cb3"><a>
+                            ใบรับรองแพทย์ผู้ขอรับใบอนุญาตและผู้ช่วยจำหน่ายสินค้า (ตามแบบ สณ.๑๑)</a>
+                        <br>
+                        <input type="checkbox" id="documentSignature" value="cb4"><a> หนังสือสัญญาเช่า</a>
+                        <br>
+                        <input type="checkbox" id="documentSJ4" value="cb5"><a> หนังสือมอบอำนาจพร้อมติดอากรแสตมป์</a>
+                        <br>
+                        <input type="checkbox" id="documentOther" value="cb6"><a> เอกสารอื่นๆที่เกี่ยวข้อง</a>
+                        <input type="text" id="other" size="40" />
+                        <br><br>
+                        ข้าพเจ้าขอรับรองว่า ข้อความในแบบคำร้องขอต่อใบอนุญาตนี้เป็นจริงทุกประการ
+                    </div>
+                    <br>
+                    <br>
+                    <div class="row" style="text-align: center;">
+                        <div class="col" style="width: 33.33%;">
+                            <a>
+                                <br>
+                                (ลงชื่อ)
+                                <input type="text" id="documentName" />
+                                ผู้ขอรับใบอนุญาต
+                            </a>
+                        </div>
+                        <div class="col" style="width: 33.33%;">
+                            <a>
+                                ลงชื่อ <input type="text" id="" />
+                                <br>
+                                <p class="text-center">ผู้รับเงิน</p>
+                            </a>
+                        </div>
+                        <div class="col" style="width: 33.33%;">
+                            <a>
+                                &emsp;ลงชื่อ
+                                <input type="text" id="" readonly disabled>
+                                <br>
+                                ตำแหน่ง
+                                <input type="text" id="" readonly disabled>
+                                <br>
+                                เจ้าพนักงานท้องถิ่น
+                            </a>
+                        </div>
+                    </div>
+
+                </div><br>
+                
+
+
+            </div>
+
+        </fieldset>
+    </form>
+
+
+</body>
+<script src="../../js/js22.js"></script>
+<script src="../../js/controlTest.js"></script>
+<script src="../../js/disable.js"></script>
+<script src="../../js/sweet2.js"></script>
+<script src="../../js/utilities.js"></script>
+
+</html>
