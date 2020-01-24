@@ -40,6 +40,7 @@ let SEprovince = [];
 let SEamphur = [];
 let SEdistrict = [];
 
+// function changeDis
 function setDataUI(data) {
     //address
     document.getElementById('homeId').value = data.AID.ADDRESS_HOME_NUMBER
@@ -50,13 +51,16 @@ function setDataUI(data) {
     document.getElementById('road').value = data.AID.ADDRESS_ROAD === undefined ? '-' : data.AID.ADDRESS_ROAD
     //ค่าที่ส่งกลับมาอาจเป็น text ต้องการที่เป็น int
     document.getElementById(`province`).value = parseInt(getProviceIdByName(data.AID.PROVINCE_NAME))
-    console.log(parseInt(getAmphureIdByName(data.AID.AMPHUR_NAME)))
-    console.log(parseInt(getDistrictIdByName(data.AID.DISTRICT_NAME)))
+    amphurSelect(parseInt(getProviceIdByName(data.AID.PROVINCE_NAME)))
+    districtSelect(parseInt(getAmphureIdByName(data.AID.AMPHUR_NAME)))
+    console.log(addressAmphur)
     document.getElementById(`district`).value = parseInt(getAmphureIdByName(data.AID.AMPHUR_NAME))
     document.getElementById(`subdistrict`).value = parseInt(getDistrictIdByName(data.AID.DISTRICT_NAME))
     //prsonal
     document.getElementById('title').value = data.PERSONAL_TITLE === undefined ? '' : data.PERSONAL_TITLE
-    document.getElementById('typeUser').value = data.PERSONAL_TYPE
+    document.getElementById('typeUser').value = data.PERSONAL_TYPE 
+    document.getElementById('typeUser').disabled = true 
+    // ('disabled', true)
     document.getElementById('nameUser').value = data.PERSONAL_NAME
     document.getElementById('surnameUser').value = data.PERSONAL_SURNAME === undefined ? '' : data.PERSONAL_SURNAME
     document.getElementById('nationality').value = data.PERSONAL_NATIONALITY === undefined ? '' : data.PERSONAL_NATIONALITY
@@ -233,22 +237,23 @@ function changeInputBytype(value) {
 }
 function resetInputUI(){
     console.log('Runing')
-    document.getElementById("imgBoxUpload").style.display = "block";
+    document.getElementById('typeUser').readOnly = false
+    document.getElementById("imgBoxUpload").style.display = "";
     document.getElementById("phoneTopic").style.marginLeft = "0.7vw";
-    document.getElementById("dateBTopic").style.display = "block";
-    document.getElementById("datepicker3").style.display = "block";
-    document.getElementById("datepicker2").style.display = "block";
-    document.getElementById("dateExpTopic").style.display = "block";
-    document.getElementById("raceTopic").style.display = "block";
-    document.getElementById("nationalityTopic").style.display = "block";
-    document.getElementById("race").style.display = "block";
-    document.getElementById("nationality").style.display = "block";
-    document.getElementById("title").style.display = "block";
-    document.getElementById("surnameUser").style.display = "block";
-    document.getElementById("surTopic").style.display = "block";
+    document.getElementById("dateBTopic").style.display = "";
+    document.getElementById("datepicker3").style.display = "";
+    document.getElementById("datepicker2").style.display = "";
+    document.getElementById("dateExpTopic").style.display = "";
+    document.getElementById("raceTopic").style.display = "";
+    document.getElementById("nationalityTopic").style.display = "";
+    document.getElementById("race").style.display = "";
+    document.getElementById("nationality").style.display = "";
+    document.getElementById("title").style.display = "";
+    document.getElementById("surnameUser").style.display = "";
+    document.getElementById("surTopic").style.display = "";
     document.getElementById("nameUserTopic").style.marginLeft = "3vw";
     document.getElementById("nameUser").style.width = "11vw";
-    document.getElementById("titleNameTopic").style.display = "block";
+    document.getElementById("titleNameTopic").style.display = "";
 }
 function uploadImage(event) {
   var cancelButton = document.getElementById("cancelImage");

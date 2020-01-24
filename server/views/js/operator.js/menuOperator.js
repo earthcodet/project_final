@@ -51,6 +51,8 @@ function addPage() {
     resetStyleIdDelete()
     resetFunction()
     resetImageDefault()
+   
+    document.getElementById('typeUser').disabled = false
 }
 
 function disableMenuAll() {
@@ -242,7 +244,7 @@ function deletePage() {
                     resetStyleIdDelete()
                     resetFunction()
                     resetImageDefault()
-                    if(isEmpty(tempData) === false){
+                    if(isEmpty(tempData) === false && data === true){
                         setDataUI(tempData)
                     }
                     
@@ -304,7 +306,7 @@ function getImageByPeronalId(type, id) {
     })
 }
 function showItem(arrayResult) {
-    
+    console.log(arrayResult)
     getImageByPeronalId(arrayResult.PERSONAL_TYPE, arrayResult.PERSONAL_ID).then((result) => {
         if (result != false || result != null) {
             arrayResult.image = result
