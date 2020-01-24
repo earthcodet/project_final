@@ -42,7 +42,7 @@ let SEdistrict = []
 
 function setDataUI(data) {
     //address
-    document.getElementById('homeId').value = data.AID.ADDRESS_HOME_NUMBER === '' ? '-' : data.AID.ADDRESS_HOME_NUMBER 
+    document.getElementById('homeId').value = data.AID.ADDRESS_HOME_NUMBER
     document.getElementById('moo').value = data.AID.ADDRESS_MOO === undefined ? '-' : data.AID.ADDRESS_MOO
     document.getElementById('trxk').value = data.AID.ADDRESS_TRXK === undefined ? '-' : data.AID.ADDRESS_TRXK
     document.getElementById('sxy').value = data.AID.ADDRESS_SXY === undefined ? '-' : data.AID.ADDRESS_SXY
@@ -64,13 +64,25 @@ function setDataUI(data) {
     document.getElementById('datepicker1').value = data.PERSONAL_CARD_ISSUED
     document.getElementById('datepicker2').value = data.PERSONAL_CARD_EXPIRE === undefined ? '00-00-0000' : data.PERSONAL_CARD_EXPIRE
     document.getElementById('phone').value = data.PERSONAL_PHONE
-    document.getElementById('fax').value = data.PERSONAL_FAX === undefined ? '-' : data.FAX
+    document.getElementById('fax').value = data.PERSONAL_FAX === undefined || data.PERSONAL_FAX === '' ? '-' : data.PERSONAL_FAX
     document.getElementById('last-update').value = data.PERSONAL_UPDATE
+
+    if(data.image != undefined){
+        console.log(data.image)
+        let img = document.getElementById('operatorImage')
+        if(data.image.IMAGE_TYPE != null){
+            img.src = `data:image/${data.image.IMAGE_TYPE};base64,` + data.image.IMAGE_DATA
+        }else{
+            img.src = `../../img/userProfile.png`
+        }
+        
+        inImage.type = data.image.IMAGE_TYPE
+        inImage.data = data.image.IMAGE_DATA
+    }
     
 }
 function preInsert() {
     if (document.getElementById('id').value.trim() != '' && document.getElementById('id').value.trim().length === 13) {
-        console.log(_isUsed)
         if (_isUsed === false) {
             //address
             inAddress.home_number = document.getElementById('homeId').value
@@ -147,7 +159,6 @@ function checkId(value) {
     if (value.length === 13) {
         if (_isIdCheckPersonal != value) {
             duplicateId(value).then((data) => {
-                console.log(data)
                 if (!data) {
                     Swal.fire({
                         title: "เลขประจำตัวผู้ประกอบการนี้สามารถใช้ได้",
@@ -179,10 +190,8 @@ function checkId(value) {
     }
 }
 function changeInputBytype(value) {
-    console.log(value === 'นิติบุคคล')
     if (value === 'นิติบุคคล') {
         document.getElementById('title').style.display = 'none'
-        console.log(document.getElementById('titleNameTopic'))
         document.getElementById('surnameUser').style.display = 'none'
         document.getElementById('surTopic').style.display = 'none'
         document.getElementById('nameUserTopic').style.marginLeft = '5.8vw'
@@ -226,9 +235,7 @@ function uploadImage(event) {
     let typeImg = file[1]
     inImage.type = typeImg
     if (target.value.length == 0) {
-        console.log("Suspect Cancel was hit, no files selected.");
         if (0 == target.files.length) {
-            console.log('im delete image')
             cancelButton.onclick();
         }
     } else {
@@ -238,8 +245,6 @@ function uploadImage(event) {
         reader.onload = function (event) {
             img.src = event.target.result;
             img.alt = 'operator'
-            // img.width = 100%;
-            // img.height = auto
         };
         reader.readAsDataURL(selectedFile)
     }

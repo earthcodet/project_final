@@ -115,7 +115,7 @@ app.get("/get/district", (req, res) => {
     }
   });
 });
-app.get('/get/image/:prsonalId', (req, res) => {
+app.get('/get/image/:personalId', (req, res) => {
   webService.getImageByPersonalId(req.params.personalId).then((data) => {
     if (data != null) {
       res.json(data)

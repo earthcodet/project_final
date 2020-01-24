@@ -25,12 +25,17 @@ class ImageDAO {
             })
         })
     }
-    getImageByImage(name){
+    getImageByPersonalId(id){
         return new Promise((resolve, reject) => {
-            let query = `SELECT * FROM image WHERE IMAGE_NAME='${name}'`
+            let query = `SELECT * FROM image WHERE IMAGE_NAME = '${id}'`
             con.query(query, function (err, result) {
                 if (err) {
                     console.log(err.code) 
+                }
+                if(result.length != 0 && result[0].IMAGE_DATA != null){
+                    result[0].IMAGE_DATA = new Buffer.from(result[0].IMAGE_DATA, 'binary').toString('base64');
+                }else {
+                    result[0].IMAGE_DATA = null
                 }
                 return resolve(result)
             })
