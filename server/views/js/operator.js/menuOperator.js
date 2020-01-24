@@ -34,7 +34,7 @@ function setdeleteData(data) {
 }
 function resetStyleIdDelete() {
     var id = document.getElementById('id')
-    if(id != undefined || id != null){
+    if (id != undefined || id != null) {
         id.style.textDecoration = ''
     }
 }
@@ -42,8 +42,6 @@ function addPage() {
     addNew = true
     deleteData = false
     data = false
-    // tempData = {}
-    // เปิดช่อง input
     disFunction()
     disableMenuAll()
     enableMenu('saveMenu')
@@ -51,7 +49,6 @@ function addPage() {
     resetStyleIdDelete()
     resetFunction()
     resetImageDefault()
-   
     document.getElementById('typeUser').disabled = false
 }
 
@@ -91,8 +88,8 @@ function insertPage() {
                 return new Promise(function (resolve, reject) {
                     setTimeout(function () {
                         //function ใน operator 
-                        insertToDatabase().then((data) => {
-                            if (data) {
+                        insertToDatabase().then((insert) => {
+                            if (insert) {
                                 resolve();
                             }
                         })
@@ -179,7 +176,7 @@ function setIdDelete() {
     }
 }
 function deletePage() {
-    if(addNew === false){
+    if (addNew === false) {
         Swal.fire({
             title: "สำนักงานเทศบาล",
             html: "ต้องการลบหรือไม่",
@@ -212,7 +209,7 @@ function deletePage() {
                     // Swal.fire("บันทึกล้มเหลว");
                 }
             });
-    }else{
+    } else {
         Swal.fire({
             title: "สำนักงานเทศบาล",
             html: "ต้องการยกเลิกหรือไม่",
@@ -234,35 +231,42 @@ function deletePage() {
                         icon: "success",
                         confirmButtonColor: "#009688"
                     });
-                    resetInputUI()
-                    data = false
-                    addNew = false
-                    disableMenuAll()
-                    enableMenu('addMenu')
-                    // เปิดช่อง input
-                    enableFunction()
-                    resetStyleIdDelete()
-                    resetFunction()
-                    resetImageDefault()
-                    if(isEmpty(tempData) === false && data === true){
-                        setDataUI(tempData)
+                    if (data === false) {
+                        resetInputUI()
+                        addNew = false
+                        disableMenuAll()
+                        enableMenu('addMenu')
+                        enableFunction()
+                        resetStyleIdDelete()
+                        resetFunction()
+                        resetImageDefault()
                     }
-                    
+                    if (isEmpty(tempData) === false && data === true) {
+                        resetFunction()
+                        setDataUI(tempData)
+                        disableMenuAll()
+                        addNew = false
+                        enableMenu('addMenu')
+                        enableMenu('editMenu')
+                        enableMenu('deleteMenu')
+                        enableFunction()
+                    }
+
                 } else if (result.dismiss === Swal.DismissReason.cancel) {
                     // Swal.fire("บันทึกล้มเหลว");
                 }
             });
     }
-    
+
 
 }
 
-    function isEmpty(arg) {
-        for (var item in arg) {
+function isEmpty(arg) {
+    for (var item in arg) {
         return false;
-        }
-        return true;
     }
+    return true;
+}
 function searchPersonal() {
     let id = document.getElementById('popSearchId').value.trim()
     let name = document.getElementById('popSearchName').value.trim()
@@ -316,7 +320,7 @@ function showItem(arrayResult) {
         }
         tempData = arrayResult
     })
-    
+
     Swal.close()
     data = true
     addNew = false
