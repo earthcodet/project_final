@@ -84,7 +84,6 @@ function openCity(evt, cityName) {
   evt.currentTarget.className += " active";
 }
 
-<<<<<<< HEAD
 
 $(function () {
   $.contextMenu({
@@ -110,7 +109,5 @@ $(function () {
     console.log('clicked', this);
   })
 });
-=======
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("defaultOpen").click();
->>>>>>> 2b57b6da5e008b99d4fb3b76e8ba53cae38b157d
