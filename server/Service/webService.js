@@ -238,13 +238,13 @@ class service {
                             this.insertImage(imageFile).then((data) => {
                                 console.log(`loopInsertPersonal >image insert !! ${data}`)
                                 if (data) {
-                                    return resolve(true)
+                                    return resolve(personal.id)
                                 } else {
-                                    return resolve(false)
+                                    return resolve('')
                                 }
                             })
                         } else {
-                            return resolve(true)
+                            return resolve(personal.id)
                         }
                     } else {
                         this.loopInsertPersonal(personal)
@@ -261,10 +261,11 @@ class service {
                     if (data) {
                         personal.address_id = address.id
                         this.loopInsertPersonal(personal, imageFile).then((data) => {
-                            if (data) {
-                                return resolve(true)
+                            if (data.length != 0) {
+                                console.log(data)
+                                return resolve(personal.id)
                             } else {
-                                return resolve(false)
+                                return resolve(``)
                             }
                         })
                         console.log(`loopInsertAddress => address insert !! ${data}`)
@@ -409,9 +410,9 @@ class service {
                                     image.name = newpersonal.id
                                     this.updateImage(image).then((data) => {
                                         if (data) {
-                                            return resolve(true)
+                                            return resolve(newpersonal.id)
                                         } else {
-                                            return resolve(false)
+                                            return resolve('')
                                         }
                                     })
                                 } else {
@@ -432,9 +433,9 @@ class service {
                 this.loopInsertAddress(newpersonal, newaddress, image).then((data) => {
                     if (data) {
                         console.log(`main > ${data}`)
-                        return resolve(true)
+                        return resolve(data)
                     } else {
-                        return resolve(false)
+                        return resolve('')
                     }
                 })
             }

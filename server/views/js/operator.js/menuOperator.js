@@ -96,11 +96,22 @@ function insertPage() {
                     setTimeout(function () {
                         //function ใน operator 
                         insertToDatabase().then((insert) => {
-                            if (insert) {
+                            console.log(inPeronal.personal_id)
+                            console.log(insert)
+                            axios.get(`http://localhost:5000/search/personal/${inPeronal.personal_id}/none/none`).then((result) => {
+                                if (insert.length != 0) {
+                                    this.getImageByPeronalId(inPeronal.type, insert).then((resultImage) => {
+                                        console.log(resultImage)
+                                        tempData.image = resultImage
+                                    })
+                                }
+                                tempData = result.data[0]
+                            })
+                            if (insert.length != 0) {
                                 resolve();
                             }
                         })
-                    }, 1000);
+                    }, 1500);
                 });
             }
         }).then((result) => {
@@ -110,22 +121,22 @@ function insertPage() {
                     icon: "success",
                     confirmButtonColor: "#009688"
                 });
-                    data = true
-                    addNew = false
-                    disableMenuAll()
-                    enableMenu('addMenu')
-                    enableMenu('editMenu')
-                    enableMenu('deleteMenu')
-                    enableFunction()
-                    // set Date in Last update
-                    var datetime = new Date();
-                    let dateForUpdate = datetime.toISOString().slice(0, 10)
-                    let temp = dateForUpdate.split('-')
-                    let day = temp[2]
-                    let month = temp[1]
-                    let year = temp[0]
-                    let format = `${day}-${month}-${year}`
-                    document.getElementById('last-update').value = format
+                data = true
+                addNew = false
+                disableMenuAll()
+                enableMenu('addMenu')
+                enableMenu('editMenu')
+                enableMenu('deleteMenu')
+                enableFunction()
+                // set Date in Last update
+                var datetime = new Date();
+                let dateForUpdate = datetime.toISOString().slice(0, 10)
+                let temp = dateForUpdate.split('-')
+                let day = temp[2]
+                let month = temp[1]
+                let year = temp[0]
+                let format = `${day}-${month}-${year}`
+                document.getElementById('last-update').value = format
             } else if (result.dismiss === Swal.DismissReason.cancel) {
                 Swal.fire({
                     icon: 'success',
@@ -224,6 +235,8 @@ function deletePage() {
                     enableMenu('addMenu')
                     enableMenu('editMenu')
                     enableMenu('restoreMenu')
+
+                    resetInputRequired()
                 } else if (result.dismiss === Swal.DismissReason.cancel) {
                     // Swal.fire("บันทึกล้มเหลว");
                 }
@@ -250,6 +263,7 @@ function deletePage() {
                         icon: "success",
                         confirmButtonColor: "#009688"
                     });
+                    resetInputRequired()
                     if (data === false) {
                         resetInputUI()
                         addNew = false
