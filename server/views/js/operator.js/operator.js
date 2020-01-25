@@ -1,15 +1,15 @@
 let _isUsed = false;
 let _isIdCheckPersonal = "";
 let arrInsert = [];
-let fileImage;
+let fileImage = null;
 let inAddress = {
-    id: "test",
+    id: "",
     home_number: "",
-    moo: null,
-    trxk: null,
-    sxy: null,
-    building: null,
-    road: null,
+    moo: '',
+    trxk: '',
+    sxy: '',
+    building: '',
+    road: '',
     district_name: "",
     amphur_name: "",
     province_name: ""
@@ -21,15 +21,16 @@ let inPeronal = {
     type: "",
     name: "",
     surname: "",
-    nationality: null,
-    race: null,
-    birthday: null,
+    nationality: '',
+    race: '',
+    birthday: '',
     personal_id: "",
     card_issued: "",
-    card_expipe: null,
+    card_expipe: '',
     phone: "",
-    fax: null
+    fax: ''
 };
+
 let inImage = {
     id: "",
     type: null,
@@ -39,12 +40,54 @@ let inImage = {
 let SEprovince = [];
 let SEamphur = [];
 let SEdistrict = [];
-function resetConstro(){
-
+function resetParameter() {
+    _isUsed = false;
+    _isIdCheckPersonal = "";
+    arrInsert = [];
+    fileImage = null
+    inPeronal = {
+        id: "",
+        address_id: "",
+        title: "",
+        type: "",
+        name: "",
+        surname: "",
+        nationality: '',
+        race: '',
+        birthday: '',
+        personal_id: "",
+        card_issued: "",
+        card_expipe: '',
+        phone: "",
+        fax: ''
+    };
+    inImage = {
+        id: "",
+        type: null,
+        data: null
+    };
+    inAddress = {
+        id: "test",
+        home_number: "",
+        moo: '',
+        trxk: '',
+        sxy: '',
+        building: '',
+        road: '',
+        district_name: "",
+        amphur_name: "",
+        province_name: ""
+    };
 }
 // function changeDis
 function setDataUI(data) {
-    if (data.PERSONAL_TYPE != 'นิติบุคคล') {
+    console.log(data.PERSONAL_TYPE)
+    document.getElementById('typeUser').value = data.PERSONAL_TYPE
+    document.getElementById('typeUser').disabled = true
+    console.log(data.PERSONAL_TYPE )
+    if (data.PERSONAL_TYPE === 'บุคคลธรรมดา') {
+        changeOption("บุคคลธรรมดา")
+
         //address
         document.getElementById('homeId').value = data.AID.ADDRESS_HOME_NUMBER
         document.getElementById('moo').value = data.AID.ADDRESS_MOO === undefined ? '-' : data.AID.ADDRESS_MOO
@@ -53,17 +96,29 @@ function setDataUI(data) {
         document.getElementById('building').value = data.AID.ADDRESS_BUILDING === undefined ? '-' : data.AID.ADDRESS_BUILDING
         document.getElementById('road').value = data.AID.ADDRESS_ROAD === undefined ? '-' : data.AID.ADDRESS_ROAD
         //ค่าที่ส่งกลับมาอาจเป็น text ต้องการที่เป็น int
-        document.getElementById(`province`).value = parseInt(getProviceIdByName(data.AID.PROVINCE_NAME))
-        amphurSelect(parseInt(getProviceIdByName(data.AID.PROVINCE_NAME)))
-        districtSelect(parseInt(getAmphureIdByName(data.AID.AMPHUR_NAME)))
+        //get id by name [ตั้งตัวแปรเพราะจะทำให้โปรแกรมไม่ต้อง loop เยอะๆ]
+        let provinceId = parseInt(getProviceIdByName(data.AID.PROVINCE_NAME))
+        let amphurId   = parseInt(getAmphureIdByName(data.AID.AMPHUR_NAME, provinceId))
+        let districtId = parseInt(getDistrictIdByName(data.AID.DISTRICT_NAME, amphurId))
+
+        console.log(`provinceId = #${provinceId} and amphurId = #${amphurId} and districtId = #${districtId}`)
+
+        //แสดงค่าจังหวัดที่มาจาก ฐานข้อมูล (จังหวัด) ตาม id
+        document.getElementById(`province`).value = provinceId
+        
+        //ตั้งค่ารายชื่อ อำเภอ, ตำบล ตามจังหวัดที่เลือกลงให้ list input ตาม id
+        amphurSelect(parseInt(provinceId)) // list อำเภอทั้งหมดตาม province Id
+        districtSelect(parseInt(amphurId)) // list ตำบลทั้งหมดตาม ampur_Id
+        console.log(typeof(amphurId))
+        console.log(typeof(districtId))
         console.log(addressAmphur)
-        document.getElementById(`district`).value = parseInt(getAmphureIdByName(data.AID.AMPHUR_NAME))
-        document.getElementById(`subdistrict`).value = parseInt(getDistrictIdByName(data.AID.DISTRICT_NAME))
-        //prsonal
+        console.log(addressDistrict)
+        //แสดงค่าจังหวัดที่มาจาก ฐานข้อมูล (อำเภอ , ตำบล) ตาม id
+        document.getElementById(`district`).value = amphurId
+        document.getElementById(`subdistrict`).value = districtId
+
+        //prsonal 
         document.getElementById('title').value = data.PERSONAL_TITLE === undefined ? '' : data.PERSONAL_TITLE
-        document.getElementById('typeUser').value = data.PERSONAL_TYPE
-        document.getElementById('typeUser').disabled = true
-        // ('disabled', true)
         document.getElementById('nameUser').value = data.PERSONAL_NAME
         document.getElementById('surnameUser').value = data.PERSONAL_SURNAME === undefined ? '' : data.PERSONAL_SURNAME
         document.getElementById('nationality').value = data.PERSONAL_NATIONALITY === undefined ? '' : data.PERSONAL_NATIONALITY
@@ -89,13 +144,36 @@ function setDataUI(data) {
             inImage.data = data.image.IMAGE_DATA
         }
     } else {
+        changeOption("นิติบุคคล")
+        document.getElementById('company-nameUser').value = data.PERSONAL_NAME
+        document.getElementById('company-id').value = data.PERSONAL_PERSONAL_ID
+        document.getElementById('datepicker4').value = data.PERSONAL_CARD_ISSUED
+        document.getElementById('company-phone').value = data.PERSONAL_PHONE
+        document.getElementById('company-fax').value = data.PERSONAL_FAX === undefined || data.PERSONAL_FAX === '' ? '-' : data.PERSONAL_FAX
+
+        document.getElementById('company-homeId').value = data.AID.ADDRESS_HOME_NUMBER
+        document.getElementById('company-moo').value = data.AID.ADDRESS_MOO === undefined ? '-' : data.AID.ADDRESS_MOO
+        document.getElementById('company-trxk').value = data.AID.ADDRESS_TRXK === undefined ? '-' : data.AID.ADDRESS_TRXK
+        document.getElementById('company-sxy').value = data.AID.ADDRESS_SXY === undefined ? '-' : data.AID.ADDRESS_SXY
+        document.getElementById('company-building').value = data.AID.ADDRESS_BUILDING === undefined ? '-' : data.AID.ADDRESS_BUILDING
+        document.getElementById('company-road').value = data.AID.ADDRESS_ROAD === undefined ? '-' : data.AID.ADDRESS_ROAD
+        //ค่าที่ส่งกลับมาอาจเป็น text ต้องการที่เป็น int
+        document.getElementById(`wProvince`).value = parseInt(getProviceIdByName(data.AID.PROVINCE_NAME))
+        wamphurSelect(parseInt(getProviceIdByName(data.AID.PROVINCE_NAME)))
+        wdistrictSelect(parseInt(getAmphureIdByName(data.AID.AMPHUR_NAME)))
+
+        document.getElementById(`wDistrict`).value = parseInt(getAmphureIdByName(data.AID.AMPHUR_NAME))
+        document.getElementById(`wSubdistrict`).value = parseInt(getDistrictIdByName(data.AID.DISTRICT_NAME))
+
+        document.getElementById('company-last-update').value = data.PERSONAL_UPDATE
 
     }
 
 
 }
 function preInsert() {
-    if (document.getElementById('id').value.trim() != '' && document.getElementById('id').value.trim().length === 13) {
+    if (document.getElementById('id').value.trim() != '' && document.getElementById('id').value.trim().length === 13 && document.getElementById("typeUser").value === 'บุคคลธรรมดา'||
+        document.getElementById('company-id').value.trim() != '' && document.getElementById('company-id').value.trim().length === 13 && document.getElementById("typeUser").value === 'นิติบุคคล') {
         if (_isUsed === false) {
 
             if (document.getElementById("typeUser").value === 'บุคคลธรรมดา') {
@@ -115,7 +193,7 @@ function preInsert() {
                 inAddress.district_name = district[districtValue - 1].DISTRICT_NAME;
                 inAddress.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
                 inAddress.province_name = province[provinceValue - 1].PROVINCE_NAME;
-                //prsonal
+                //personal
                 inPeronal.title = document.getElementById("title").value;
                 inPeronal.type = document.getElementById("typeUser").value;
                 inPeronal.name = document.getElementById("nameUser").value;
@@ -138,7 +216,32 @@ function preInsert() {
                 return true;
             } else {
                 // นิติบุคคล
+               inAddress.home_number = document.getElementById('company-homeId').value
+                inAddress.moo = document.getElementById('company-moo').value
+                inAddress.trxk = document.getElementById('company-trxk').value
+                inAddress.sxy = document.getElementById('company-sxy').value
+                inAddress.building = document.getElementById('company-building').value
+                inAddress.road = document.getElementById('company-road').value
 
+                let provinceValue = parseInt(document.getElementById(`wProvince`).value);
+                let amphurValue = parseInt(document.getElementById(`wDistrict`).value);
+                let districtValue = parseInt(document.getElementById(`wSubdistrict`).value);
+                inAddress.district_name = district[districtValue - 1].DISTRICT_NAME;
+                inAddress.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
+                inAddress.province_name = province[provinceValue - 1].PROVINCE_NAME;
+                //personal
+                inPeronal.type = document.getElementById("typeUser").value;
+                inPeronal.name = document.getElementById("company-nameUser").value;
+                inPeronal.personal_id = document.getElementById("company-id").value;
+                inPeronal.card_issued = document.getElementById("datepicker4").value;
+
+                inPeronal.phone = document.getElementById("company-phone").value;
+                inPeronal.fax = document.getElementById("company-fax").value;
+                inImage.id = 'NO_UPlOAD'
+                arrInsert.push(inPeronal);
+                arrInsert.push(inAddress);
+                arrInsert.push(inImage);
+                return true
             }
         } else {
             Swal.fire({
@@ -213,13 +316,24 @@ function checkId(value) {
 }
 
 function resetInputUI() {
-    if (document.getElementById('typeUser').value != "นิติบุคคล") {
-        document.getElementById("perTy2").style.display = "none";
-        document.getElementById("perTy1").style.display = "";
-        document.getElementById("imgText").style.display = "";
-        document.getElementById("operatorImage").src = "../../img/userProfile.png";
-        document.getElementById("imgButton").style.display = "";
-        document.getElementById('typeUser').value = 'บุคคลธรรมดา'
+    // {
+    //     console.log(value === "นิติบุคคล");
+    //     if (value === "นิติบุคคล") {
+    //         document.getElementById("perTy2").style.display = "";
+    //         document.getElementById("perTy1").style.display = "none";
+    //         document.getElementById("operatorImage").src = "../../img/town.png";
+    //         document.getElementById("imgText").style.display = "none";
+    //         document.getElementById("imgButton").style.display = "none";
+    //     } else {
+    //         document.getElementById("perTy2").style.display = "none";
+    //         document.getElementById("perTy1").style.display = "";
+    //         document.getElementById("imgText").style.display = "";
+    //         document.getElementById("operatorImage").src = "../../img/userProfile.png";
+    //         document.getElementById("imgButton").style.display = "";
+    //     }
+    // }
+    if (document.getElementById('typeUser').value === "นิติบุคคล") {
+        changeOption("บุคคลธรรมดา")
     }
 
 }
@@ -281,12 +395,6 @@ function insertToDatabase() {
             });
     });
 }
-// value  ของที่อยู่มันจะเท่ากับ value - 1 index ของ array address
-/*
-let provinceValue = parseInt(document.getElementById(`province`).value)
-    let amphurValue = parseInt(document.getElementById(`district`).value)
-    let districtValue = parseInt(document.getElementById(`subdistrict`).value)
-*/
 
 function changeOption(value) {
     console.log(value === "นิติบุคคล");

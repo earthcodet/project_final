@@ -1,5 +1,5 @@
 //list จังหวัดทั้งหมด
-let provice = [];
+let province = [];
 let amphur = [];
 let district = [];
 
@@ -10,21 +10,20 @@ let addressDistrict = [];
 
 //สำหรับเก็บจังหวัดที่เลือกไว้
 let buiddingProvice = [];
-let buiddingAmphur   =[];
-let buiddingDistrict =[];
+let buiddingAmphur = [];
+let buiddingDistrict = [];
 
 //ตัวแปรเอาไว้ชี้ว่าเลือกจังหวัดอะไรไว้
 var aProviceId = 1;
 var wProviceId = 1;
-
 function getProvice() {
     return new Promise((resolve, reject) => {
         axios.get('http://localhost:5000/get/provice/').then((result) => {
             resolve(result.data);
             for (let i = 0; i < result.data.length; i++) {
-                provice.push(result.data[i])
+                result.data[i].PROVINCE_NAME = result.data[i].PROVINCE_NAME.trim()
+                province.push(result.data[i])
             }
-            console.log(result.data)
             resolve(result.data);
         })
     })
@@ -34,9 +33,9 @@ function getAmphur() {
         axios.get('http://localhost:5000/get/amphur/').then((result) => {
             resolve(result.data);
             for (let i = 0; i < result.data.length; i++) {
+                result.data[i].AMPHUR_NAME = result.data[i].AMPHUR_NAME.trim()
                 amphur.push(result.data[i])
             }
-            console.log(result.data)
             resolve(result.data);
         })
     })
@@ -44,17 +43,15 @@ function getAmphur() {
 function getDistrict() {
     return new Promise((resolve, reject) => {
         axios.get('http://localhost:5000/get/district/').then((result) => {
-            resolve(result.data);
             for (let i = 0; i < result.data.length; i++) {
+                result.data[i].DISTRICT_NAME = result.data[i].DISTRICT_NAME.trim()
                 district.push(result.data[i])
             }
-            console.log(result.data)
             resolve(result.data);
         })
     })
 }
 function removeAlloption(id) {
-    console.log(id)
     var select = document.getElementById(id);
     var length = select.options.length;
     for (i = 0, c = 0; i < length; i++) {
@@ -65,10 +62,10 @@ function removeAlloption(id) {
 //Address Buidding 
 
 function wdistrictSelect(amphurId) {
-    buiddingDistrict =[]
-   
-    for(let i = 0 ; i< district.length ; i++){
-        if(district[i].AMPHUR_ID == amphurId && district[i].PROVINCE_ID == wProviceId){
+    buiddingDistrict = []
+
+    for (let i = 0; i < district.length; i++) {
+        if (district[i].AMPHUR_ID == amphurId && district[i].PROVINCE_ID == wProviceId) {
             buiddingDistrict.push(district[i])
         }
     }
@@ -80,13 +77,13 @@ function wdistrictSelect(amphurId) {
         option.value = buiddingDistrict[i].DISTRICT_ID;
         select.add(option);
     }
-   
+
 }
 function wamphurSelect(proviceId) {
-    buiddingAmphur =[]
+    buiddingAmphur = []
     wProviceId = proviceId
-    for(let i = 0 ; i< amphur.length ; i++){
-        if(amphur[i].PROVINCE_ID == proviceId){
+    for (let i = 0; i < amphur.length; i++) {
+        if (amphur[i].PROVINCE_ID == proviceId) {
             buiddingAmphur.push(amphur[i])
         }
     }
@@ -99,9 +96,9 @@ function wamphurSelect(proviceId) {
         select.onchange = function () { wdistrictSelect(select.value) };
         select.add(option);
     }
-   
+
 }
-function wchageProvice(proviceId){
+function wchageProvice(proviceId) {
     wamphurSelect(proviceId)
     wdistrictSelect(buiddingAmphur[0].AMPHUR_ID)
 }
@@ -120,10 +117,10 @@ function wcreateSelectProvice(data) {
 
 //Address
 function districtSelect(amphurId) {
-    addressDistrict =[]
-   
-    for(let i = 0 ; i< district.length ; i++){
-        if(district[i].AMPHUR_ID == amphurId && district[i].PROVINCE_ID == aProviceId){
+    addressDistrict = []
+
+    for (let i = 0; i < district.length; i++) {
+        if (district[i].AMPHUR_ID == amphurId && district[i].PROVINCE_ID == aProviceId) {
             addressDistrict.push(district[i])
         }
     }
@@ -135,13 +132,13 @@ function districtSelect(amphurId) {
         option.value = addressDistrict[i].DISTRICT_ID;
         select.add(option);
     }
-   
+
 }
 function amphurSelect(proviceId) {
-    addressAmphur =[]
+    addressAmphur = []
     aProviceId = proviceId
-    for(let i = 0 ; i< amphur.length ; i++){
-        if(amphur[i].PROVINCE_ID == proviceId){
+    for (let i = 0; i < amphur.length; i++) {
+        if (amphur[i].PROVINCE_ID == proviceId) {
             addressAmphur.push(amphur[i])
         }
     }
@@ -154,9 +151,9 @@ function amphurSelect(proviceId) {
         select.onchange = function () { districtSelect(select.value) };
         select.add(option);
     }
-   
+
 }
-function chageProvice(proviceId){
+function chageProvice(proviceId) {
     amphurSelect(proviceId)
     districtSelect(addressAmphur[0].AMPHUR_ID)
 }
@@ -179,52 +176,53 @@ function runForm() {
         createSelectProvice(data)
         wcreateSelectProvice(data)
 
-        getAmphur().then((data) =>{
+        getAmphur().then((data) => {
             amphurSelect(1)
             wamphurSelect(1)
-            getDistrict().then((districtTemp) =>{
+            getDistrict().then((districtTemp) => {
                 districtSelect(addressAmphur[0].AMPHUR_ID)
                 wdistrictSelect(buiddingAmphur[0].AMPHUR_ID)
             })
         })
-       
+
     })
-   
-}
-function getProviceName(proviceId){
-    for(let i = 0 ; i < provice.length ; i++){
-        if(provice[i].PROVINCE_ID == proviceId){
-            return provice[i].PROVINCE_NAME
-        }
-    }
+
 }
 
-function getAmphurName(amphurId){
-    for(let i = 0 ; i < amphur.length ; i++){
-        if(amphur[i].AMPHUR_ID == amphurId){
-            return amphur[i].AMPHUR_NAME
-        }
-    }
+function newAddress() {
+
+    createSelectProvice(province)
+    amphurSelect(1)
+    districtSelect(addressAmphur[0].AMPHUR_ID)
+
+    wcreateSelectProvice(province)
+    wamphurSelect(1)
+    wdistrictSelect(buiddingAmphur[0].AMPHUR_ID)
+
 }
-function getProviceIdByName(Name) {
+function getProviceIdByName(province_name) {
     for (let i = 0; i < province.length; i++) {
-        if (province[i].PROVINCE_NAME === Name)
+        if (province[i].PROVINCE_NAME === province_name)
             return province[i].PROVINCE_ID
     }
 }
 
-function getAmphureIdByName(Name) {
+function getAmphureIdByName(amphur_name,province_id) {
+    // console.log(amphur)
+    console.log(`A -> amphur_name = ${amphur_name} and provine_id = ${province_id}`)
     for (let i = 0; i < amphur.length; i++) {
-        if (amphur[i].AMPHUR_NAME === Name)
+        if (amphur[i].AMPHUR_NAME === amphur_name && amphur[i].PROVINCE_ID === province_id)
             return amphur[i].AMPHUR_ID
     }
 }
 
-function getDistrictIdByName(Name) {
+function getDistrictIdByName(district_name,amphur_id) {
+    console.log(`D -> district_name = ${district_name} and amphur_id = ${amphur_id}`)
     for (let i = 0; i < district.length; i++) {
-        if (district[i].DISTRICT_NAME === Name)
+        if (district[i].DISTRICT_NAME === district_name && district[i].AMPHUR_ID === amphur_id)
             return district[i].DISTRICT_ID
     }
 }
+
 
 runForm()

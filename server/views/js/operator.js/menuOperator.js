@@ -49,6 +49,9 @@ function addPage() {
     resetStyleIdDelete()
     resetFunction()
     resetImageDefault()
+    resetParameter()
+    newAddress()
+    tempData = {}
     document.getElementById('typeUser').disabled = false
 }
 
@@ -65,6 +68,7 @@ function enableMenu(id) {
 }
 
 function insertPage() {
+    // resetParameter()
     let _redyToInsert = preInsert()
 
     if (_redyToInsert) {
@@ -311,16 +315,17 @@ function getImageByPeronalId(type, id) {
 }
 function showItem(arrayResult) {
     console.log(arrayResult)
-    getImageByPeronalId(arrayResult.PERSONAL_TYPE, arrayResult.PERSONAL_ID).then((result) => {
-        if (result != false || result != null) {
-            arrayResult.image = result
-            setDataUI(arrayResult)
-        } else {
-            setDataUI(arrayResult)
-        }
-        tempData = arrayResult
-    })
-
+    if(arrayResult.PERSONAL_TYPE === 'บุคคลธรรมดา'){
+        getImageByPeronalId(arrayResult.PERSONAL_TYPE, arrayResult.PERSONAL_ID).then((result) => {
+            if (result != false || result != null) {
+                arrayResult.image = result
+                setDataUI(arrayResult)
+            } else {
+                setDataUI(arrayResult)
+            }
+            tempData = arrayResult
+        })
+    }
     Swal.close()
     data = true
     addNew = false

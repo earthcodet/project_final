@@ -246,16 +246,20 @@ class service {
                 personal.id = id
                 this.insertPersonal(personal).then((data) => {
                     if (data) {
-                        console.log(`loopInsertPersonal > personal insert !! ${data}`)
-                        imageFile.name = personal.id
-                        this.insertImage(imageFile).then((data) => {
-                            console.log(`loopInsertPersonal >image insert !! ${data}`)
-                            if (data) {
-                                return resolve(true)
-                            } else {
-                                return resolve(false)
-                            }
-                        })
+                        if(imageFile.id != 'NO_UPlOAD') {
+                            console.log(`loopInsertPersonal > personal insert !! ${data}`)
+                            imageFile.name = personal.id
+                            this.insertImage(imageFile).then((data) => {
+                                console.log(`loopInsertPersonal >image insert !! ${data}`)
+                                if (data) {
+                                    return resolve(true)
+                                } else {
+                                    return resolve(false)
+                                }
+                            })
+                        }else{
+                            return resolve(true)
+                        }
                     } else {
                         this.loopInsertPersonal(personal)
                     }
@@ -337,6 +341,7 @@ class service {
             data.birthday.length === 0 ? data.birthday = 'NULL' : data.birthday = data.birthday
             data.card_expipe.length === 0 ? data.card_expipe = 'NULL' : data.card_expipe = data.card_expipe
             data.fax === '' ? data.fax = 'NULL' : data.fax = `'${data.fax}'`
+            data.surname === '' ? data.surname = 'NULL' : `'${data.surname}'`
             return data
         } else {
             data.moo === '' ? data.moo = 'NULL' : data.moo = `'${data.moo}'`
