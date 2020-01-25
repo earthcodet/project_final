@@ -377,15 +377,15 @@ class service {
         console.log(newaddress)
         console.log(newpersonal)
         return new Promise((resolve, reject) => {
-            this.loopInsertAddress(newpersonal, newaddress, image).then((data) => {
-                if (data) {
-                    console.log(`main > ${data}`)
-                    return resolve(true)
-                } else {
-                    return resolve(false)
-                }
-            })
-            // return resolve(true)
+            // this.loopInsertAddress(newpersonal, newaddress, image).then((data) => {
+            //     if (data) {
+            //         console.log(`main > ${data}`)
+            //         return resolve(true)
+            //     } else {
+            //         return resolve(false)
+            //     }
+            // })
+            return resolve(true)
         })
     }
     getUser(username, password) {

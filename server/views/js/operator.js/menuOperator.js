@@ -68,7 +68,6 @@ function enableMenu(id) {
 }
 
 function insertPage() {
-    // resetParameter()
     let _redyToInsert = preInsert()
 
     if (_redyToInsert) {

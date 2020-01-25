@@ -84,7 +84,11 @@ function openCity(evt, cityName) {
   evt.currentTarget.className += " active";
 }
 // Get the element with id="defaultOpen" and click on it
-document.getElementById("defaultOpen").click();
+//บางหน้ามันไม่มี id defaultOpen ต้องมี if
+if(document.getElementById("defaultOpen") != null){
+  document.getElementById("defaultOpen").click();
+}
+
 
 
 if($.contextMenu != undefined || $.contextMenu != null){

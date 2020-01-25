@@ -37,12 +37,7 @@ let inImage = {
     data: null
 };
 
-let SEprovince = [];
-let SEamphur = [];
-let SEdistrict = [];
 function resetParameter() {
-    _isUsed = false;
-    _isIdCheckPersonal = "";
     arrInsert = [];
     fileImage = null
     inPeronal = {
@@ -79,7 +74,6 @@ function resetParameter() {
         province_name: ""
     };
 }
-// function changeDis
 function setDataUI(data) {
     console.log('run setDataUI')
     console.log(data.PERSONAL_TYPE === 'บุคคลธรรมดา')
@@ -166,7 +160,7 @@ function setDataUI(data) {
         //แสดงค่าจังหวัดที่มาจาก ฐานข้อมูล (อำเภอ , ตำบล) ตาม id
         document.getElementById(`wDistrict`).value = amphurId
         document.getElementById(`wSubdistrict`).value = districtId
-        
+
         document.getElementById('company-last-update').value = data.PERSONAL_UPDATE
 
     }
@@ -174,8 +168,14 @@ function setDataUI(data) {
 
 }
 function preInsert() {
-    if (document.getElementById('id').value.trim() != '' && document.getElementById('id').value.trim().length === 13 && document.getElementById("typeUser").value === 'บุคคลธรรมดา'||
-        document.getElementById('company-id').value.trim() != '' && document.getElementById('company-id').value.trim().length === 13 && document.getElementById("typeUser").value === 'นิติบุคคล') {
+    resetParameter()
+    let check_id_user = document.getElementById('id').value
+    let type_user = document.getElementById("typeUser").value
+    let check_id_company = document.getElementById('company-id').value
+    // console.log(`_isUsed = ${_isUsed}`)
+    // console.log(`check no 1 : ${check_id_user.trim().length === 13} and ${type_user === 'บุคคลธรรมดา'}  = ${check_id_user.trim().length === 13 && type_user === 'บุคคลธรรมดา'}`)
+    // console.log(`check no 2 : ${check_id_company.trim().length === 13} and ${type_user === 'นิติบุคคล'}  = ${check_id_company.trim().length === 13 && type_user === 'นิติบุคคล'}`)
+    if (check_id_user.trim().length === 13 && type_user === 'บุคคลธรรมดา'||check_id_company.trim().length === 13 && type_user === 'นิติบุคคล') {
         if (_isUsed === false) {
 
             if (document.getElementById("typeUser").value === 'บุคคลธรรมดา') {
@@ -283,10 +283,10 @@ function checkId(value) {
     if (value.length != 13) {
         _isCheckPersonalId = false;
     }
+    // console.log(`value = ${value} and value.length = ${value.length} and _isCheckPersonalId = ${_isIdCheckPersonal}`)
     if (value.length === 13) {
         if (_isIdCheckPersonal != value) {
             duplicateId(value).then(data => {
-                console.log(data);
                 if (!data) {
                     Swal.fire({
                         title: "เลขประจำตัวผู้ประกอบการนี้สามารถใช้ได้",
@@ -297,7 +297,9 @@ function checkId(value) {
                         confirmButtonColor: "#009688",
                         icon: "success"
                     });
+                    _isCheckPersonalId = value
                     _isUsed = false;
+                   
                 } else {
                     Swal.fire({
                         title: "เลขประจำตัวผู้ประกอบการนี้มีในระบบแล้ว",
@@ -310,7 +312,10 @@ function checkId(value) {
                     });
                     _isUsed = true;
                 }
+                console.log(_isUsed);
             });
+        }else{
+            console.log(`personal id not change`)
         }
     } else {
         return false;
@@ -383,17 +388,24 @@ function insertToDatabase() {
 }
 
 function changeOption(value) {
+    _isIdCheckPersonal = false
+        _isUsed = false
+
     if (value === "นิติบุคคล") {
         document.getElementById("perTy2").style.display = "";
         document.getElementById("perTy1").style.display = "none";
         document.getElementById("operatorImage").src = "../../img/town.png";
         document.getElementById("imgText").style.display = "none";
         document.getElementById("imgButton").style.display = "none";
+        resetFunction()
+        document.getElementById('typeUser').value = `นิติบุคคล`
     } else {
         document.getElementById("perTy2").style.display = "none";
         document.getElementById("perTy1").style.display = "";
         document.getElementById("imgText").style.display = "";
         document.getElementById("operatorImage").src = "../../img/userProfile.png";
         document.getElementById("imgButton").style.display = "";
+        resetFunction()
+        
     }
 }
