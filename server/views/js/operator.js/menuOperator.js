@@ -315,6 +315,7 @@ function getImageByPeronalId(type, id) {
 }
 function showItem(arrayResult) {
     console.log(arrayResult)
+    changeOption(arrayResult.PERSONAL_TYPE.trim())
     if(arrayResult.PERSONAL_TYPE === 'บุคคลธรรมดา'){
         getImageByPeronalId(arrayResult.PERSONAL_TYPE, arrayResult.PERSONAL_ID).then((result) => {
             if (result != false || result != null) {
@@ -325,7 +326,10 @@ function showItem(arrayResult) {
             }
             tempData = arrayResult
         })
+    }else{
+        setDataUI(arrayResult)
     }
+
     Swal.close()
     data = true
     addNew = false

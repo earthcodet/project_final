@@ -81,13 +81,12 @@ function resetParameter() {
 }
 // function changeDis
 function setDataUI(data) {
-    console.log(data.PERSONAL_TYPE)
+    console.log('run setDataUI')
+    console.log(data.PERSONAL_TYPE === 'บุคคลธรรมดา')
     document.getElementById('typeUser').value = data.PERSONAL_TYPE
     document.getElementById('typeUser').disabled = true
     console.log(data.PERSONAL_TYPE )
     if (data.PERSONAL_TYPE === 'บุคคลธรรมดา') {
-        changeOption("บุคคลธรรมดา")
-
         //address
         document.getElementById('homeId').value = data.AID.ADDRESS_HOME_NUMBER
         document.getElementById('moo').value = data.AID.ADDRESS_MOO === undefined ? '-' : data.AID.ADDRESS_MOO
@@ -101,18 +100,13 @@ function setDataUI(data) {
         let amphurId   = parseInt(getAmphureIdByName(data.AID.AMPHUR_NAME, provinceId))
         let districtId = parseInt(getDistrictIdByName(data.AID.DISTRICT_NAME, amphurId))
 
-        console.log(`provinceId = #${provinceId} and amphurId = #${amphurId} and districtId = #${districtId}`)
-
         //แสดงค่าจังหวัดที่มาจาก ฐานข้อมูล (จังหวัด) ตาม id
         document.getElementById(`province`).value = provinceId
         
         //ตั้งค่ารายชื่อ อำเภอ, ตำบล ตามจังหวัดที่เลือกลงให้ list input ตาม id
         amphurSelect(parseInt(provinceId)) // list อำเภอทั้งหมดตาม province Id
         districtSelect(parseInt(amphurId)) // list ตำบลทั้งหมดตาม ampur_Id
-        console.log(typeof(amphurId))
-        console.log(typeof(districtId))
-        console.log(addressAmphur)
-        console.log(addressDistrict)
+      
         //แสดงค่าจังหวัดที่มาจาก ฐานข้อมูล (อำเภอ , ตำบล) ตาม id
         document.getElementById(`district`).value = amphurId
         document.getElementById(`subdistrict`).value = districtId
@@ -144,7 +138,6 @@ function setDataUI(data) {
             inImage.data = data.image.IMAGE_DATA
         }
     } else {
-        changeOption("นิติบุคคล")
         document.getElementById('company-nameUser').value = data.PERSONAL_NAME
         document.getElementById('company-id').value = data.PERSONAL_PERSONAL_ID
         document.getElementById('datepicker4').value = data.PERSONAL_CARD_ISSUED
@@ -158,13 +151,22 @@ function setDataUI(data) {
         document.getElementById('company-building').value = data.AID.ADDRESS_BUILDING === undefined ? '-' : data.AID.ADDRESS_BUILDING
         document.getElementById('company-road').value = data.AID.ADDRESS_ROAD === undefined ? '-' : data.AID.ADDRESS_ROAD
         //ค่าที่ส่งกลับมาอาจเป็น text ต้องการที่เป็น int
-        document.getElementById(`wProvince`).value = parseInt(getProviceIdByName(data.AID.PROVINCE_NAME))
-        wamphurSelect(parseInt(getProviceIdByName(data.AID.PROVINCE_NAME)))
-        wdistrictSelect(parseInt(getAmphureIdByName(data.AID.AMPHUR_NAME)))
+        //get id by name [ตั้งตัวแปรเพราะจะทำให้โปรแกรมไม่ต้อง loop เยอะๆ]
+        let provinceId = parseInt(getProviceIdByName(data.AID.PROVINCE_NAME))
+        let amphurId   = parseInt(getAmphureIdByName(data.AID.AMPHUR_NAME, provinceId))
+        let districtId = parseInt(getDistrictIdByName(data.AID.DISTRICT_NAME, amphurId))
 
-        document.getElementById(`wDistrict`).value = parseInt(getAmphureIdByName(data.AID.AMPHUR_NAME))
-        document.getElementById(`wSubdistrict`).value = parseInt(getDistrictIdByName(data.AID.DISTRICT_NAME))
-
+        //แสดงค่าจังหวัดที่มาจาก ฐานข้อมูล (จังหวัด) ตาม id
+        document.getElementById(`wProvince`).value = provinceId
+        
+        //ตั้งค่ารายชื่อ อำเภอ, ตำบล ตามจังหวัดที่เลือกลงให้ list input ตาม id
+        wamphurSelect(parseInt(provinceId)) // list อำเภอทั้งหมดตาม province Id
+        wdistrictSelect(parseInt(amphurId)) // list ตำบลทั้งหมดตาม ampur_Id
+      
+        //แสดงค่าจังหวัดที่มาจาก ฐานข้อมูล (อำเภอ , ตำบล) ตาม id
+        document.getElementById(`wDistrict`).value = amphurId
+        document.getElementById(`wSubdistrict`).value = districtId
+        
         document.getElementById('company-last-update').value = data.PERSONAL_UPDATE
 
     }
@@ -216,7 +218,7 @@ function preInsert() {
                 return true;
             } else {
                 // นิติบุคคล
-               inAddress.home_number = document.getElementById('company-homeId').value
+                inAddress.home_number = document.getElementById('company-homeId').value
                 inAddress.moo = document.getElementById('company-moo').value
                 inAddress.trxk = document.getElementById('company-trxk').value
                 inAddress.sxy = document.getElementById('company-sxy').value
@@ -316,22 +318,6 @@ function checkId(value) {
 }
 
 function resetInputUI() {
-    // {
-    //     console.log(value === "นิติบุคคล");
-    //     if (value === "นิติบุคคล") {
-    //         document.getElementById("perTy2").style.display = "";
-    //         document.getElementById("perTy1").style.display = "none";
-    //         document.getElementById("operatorImage").src = "../../img/town.png";
-    //         document.getElementById("imgText").style.display = "none";
-    //         document.getElementById("imgButton").style.display = "none";
-    //     } else {
-    //         document.getElementById("perTy2").style.display = "none";
-    //         document.getElementById("perTy1").style.display = "";
-    //         document.getElementById("imgText").style.display = "";
-    //         document.getElementById("operatorImage").src = "../../img/userProfile.png";
-    //         document.getElementById("imgButton").style.display = "";
-    //     }
-    // }
     if (document.getElementById('typeUser').value === "นิติบุคคล") {
         changeOption("บุคคลธรรมดา")
     }
@@ -397,7 +383,6 @@ function insertToDatabase() {
 }
 
 function changeOption(value) {
-    console.log(value === "นิติบุคคล");
     if (value === "นิติบุคคล") {
         document.getElementById("perTy2").style.display = "";
         document.getElementById("perTy1").style.display = "none";
