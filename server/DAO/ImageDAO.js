@@ -44,14 +44,14 @@ class ImageDAO {
                 if (err) {
                     console.log(err.code)
                 }
-                console.log(`My image > `+result)
-                return resolve(true)
-                // if(result.affectedRows === 1){
-                //     console.log(`True return`)
-                //     return resolve(true)
-                // }else{
-                //     return resolve(false)
-                // }
+                console.log(result)
+                // return resolve(true)
+                if(result.affectedRows === 1){
+                    console.log(`True return`)
+                    return resolve(true)
+                }else{
+                    return resolve(false)
+                }
                 
             })
         })
