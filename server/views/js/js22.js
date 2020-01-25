@@ -83,6 +83,8 @@ function openCity(evt, cityName) {
   document.getElementById(cityName).style.display = "block";
   evt.currentTarget.className += " active";
 }
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
 
 
 if($.contextMenu != undefined || $.contextMenu != null){
@@ -112,8 +114,5 @@ if($.contextMenu != undefined || $.contextMenu != null){
   });
 }
 
-// Get the element with id="defaultOpen" and click on it
-if(document.getElementById("defaultOpen") != null || document.getElementById("defaultOpen") != undefined){
-  document.getElementById("defaultOpen").click();
-}
+
 
