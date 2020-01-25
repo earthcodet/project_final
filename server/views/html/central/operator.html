@@ -122,7 +122,7 @@
                                 <!-- บุคคลธรรมดา -->
                                 <span id="perTy1">
                                     <a id='nationalityTopic' style="margin-left:1vw;">สัญชาติ :</a>
-                                    <input list='list-nationality' id="nationality" style="width: 11vw" maxlength="60">
+                                    <input list='list-nationality' id="nationality" style="width: 11vw" maxlength="60" placeholder="-">
                                     <datalist id="list-nationality">
                                         <option value="" hidden>เลือก...</option>
                                         <option value="ไทย">ไทย</option>
@@ -131,7 +131,7 @@
                                     </datalist>
                                     </input>
                                     <a id='raceTopic' style="margin-left: 1vw;">เชื้อชาติ :</a>
-                                    <input list='list-race' id="race" style="width: 11vw;" maxlength="60">
+                                    <input list='list-race' id="race" style="width: 11vw;" maxlength="60" placeholder="-">
                                     <datalist id="list-race">
                                         <option value="" hidden>เลือก...</option>
                                         <option value="ไทย">ไทย</option>
@@ -142,7 +142,7 @@
                                     <br>
                                     <!-- row 2 -->
                                     <a id='titleNameTopic' style="margin-left: 2vw;">คำนำหน้าชื่อ :</a>
-                                    <input list='list-titles' id="title" style="width: 11vw;" maxlength="60">
+                                    <input list='list-titles' id="title" style="width: 11vw;" maxlength="60" placeholder="-">
                                     <datalist id="list-titles">
                                         <option value="" hidden>เลือก...</option>
                                         <option value="นาย">นาย</option>
@@ -165,44 +165,52 @@
                                         maxlength="13" onkeyup="checkId(this.value)">
                                     <a style="margin-left:0.9vw;">ออกเมื่อ :</a>
                                     <input type="text" id="datepicker1" placeholder="" style="width: 11vw"
-                                        maxlength="10">
+                                        maxlength="10" readonly>
                                     <a id='dateExpTopic' style="margin-left: 0.8vw;">หมดอายุ :</a>
                                     <input type="text" id="datepicker2" placeholder="" style="width: 11vw"
-                                        maxlength="10">
+                                        maxlength="10" readonly>
                                     <br>
 
                                     <br>
                                     <!-- row4 -->
                                     <a id='dateBTopic' style="margin-left: 3.7vw;">เกิดวันที่ :</a>
                                     <input type="text" id="datepicker3" placeholder="" style="width: 11vw;"
-                                        maxlength="10">
+                                        maxlength="10" readonly>
 
                                     <a id='phoneTopic' style="margin-left: 0.7vw;">โทรศัพท์ :</a>
                                     <input type="text" style="width: 11vw" id="phone"
                                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                        maxlength="10">
+                                        maxlength="10"
+                                        placeholder="-">
                                     <a style="margin-left: 1.4vw;">โทรสาร :</a>
                                     <input type="text" id="fax" style="width: 11vw"
                                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                        maxlength="9">
+                                        maxlength="9"
+                                        placeholder="-">
                                     <br>
                                     <!-- row5 -->
 
 
                                     <a style="margin-left: 2vw;">อยู่บ้านเลขที่ :</a>
-                                    <input type="text" id="homeId" style="width: 11vw" maxlength="15">
+                                    <input type="text" id="homeId" style="width: 11vw" maxlength="15"
+                                    placeholder="-">
                                     <a style="margin-left: 2.3vw;">หมู่ที่ :</a>
-                                    <input type="int" id="moo" style="width: 11vw" maxlength="5">
+                                    <input type="int" id="moo" style="width: 11vw" maxlength="5"
+                                    placeholder="-">
                                     <a style="margin-left: 2.05vw;">ตรอก :</a>
-                                    <input type="text" id="trxk" style="width: 11vw" maxlength="50">
+                                    <input type="text" id="trxk" style="width: 11vw" maxlength="50"
+                                    placeholder="-">
                                     <!-- row 6 -->
                                     <br>
                                     <a style="margin-left: 5.15vw;">ซอย :</a>
-                                    <input type="text" id="sxy" style="width: 11vw;" maxlength="50">
+                                    <input type="text" id="sxy" style="width: 11vw;" maxlength="50"
+                                    placeholder="-">
                                     <a style="margin-left: 1.6vw;">อาคาร :</a>
-                                    <input type="text" id="building" style="width: 11vw" maxlength="100">
+                                    <input type="text" id="building" style="width: 11vw" maxlength="100"
+                                    placeholder="-">
                                     <a style="margin-left: 2.45vw;">ถนน :</a>
-                                    <input type="text" id="road" style="width: 11vw" maxlength="70">
+                                    <input type="text" id="road" style="width: 11vw" maxlength="70"
+                                    placeholder="-">
                                     <!-- row 7 -->
                                     <br>
                                     <a style="margin-left: 4.3vw;">จังหวัด :</a>
@@ -226,39 +234,41 @@
                                         maxlength="70">
                                     <br>
                                     <!-- row 3 -->
-                                    <a style="margin-left: 1.8vw;">เลขประจำตัว :</a>
+                                    <a style="margin-left: 1.8vw;">เลขทะเบียน :</a>
                                     <input type="text" id="company-id" name="" placeholder="" style="width: 11vw"
                                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                         maxlength="13" onkeyup="checkId(this.value)">
                                     <a style="margin-left:0.9vw;">ออกเมื่อ :</a>
                                     <input type="text" id="datepicker4" placeholder="" style="width: 11vw"
-                                        maxlength="10">
+                                        maxlength="10" readonly >
                                     <br>
                                     <!-- row4 -->
                                     <a  style="margin-left: 3.7vw;">โทรศัพท์ :</a>
                                     <input type="text" style="width: 11vw" id="company-phone"
                                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                        maxlength="10">
+                                        maxlength="10"
+                                        placeholder="-">
                                     <a style="margin-left: 1.4vw;">โทรสาร :</a>
                                     <input type="text" id="company-fax" style="width: 11vw"
                                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                        maxlength="9">
+                                        maxlength="9"
+                                        placeholder="-">
                                     <br>
                                     <!-- row5 -->
                                     <a style="margin-left: 2.1vw;">อยู่บ้านเลขที่ :</a>
-                                    <input type="text" id="company-homeId" style="width: 11vw" maxlength="15">
+                                    <input type="text" id="company-homeId" style="width: 11vw" maxlength="15"placeholder="-">
                                     <a style="margin-left: 2.3vw;">หมู่ที่ :</a>
-                                    <input type="int" id="company-moo" style="width: 11vw" maxlength="5">
+                                    <input type="int" id="company-moo" style="width: 11vw" maxlength="5"placeholder="-">
                                     <a style="margin-left: 2.05vw;">ตรอก :</a>
-                                    <input type="text" id="company-trxk" style="width: 11vw" maxlength="50">
+                                    <input type="text" id="company-trxk" style="width: 11vw" maxlength="50"placeholder="-">
                                     <!-- row 6 -->
                                     <br>
                                     <a style="margin-left: 5.4vw;">ซอย :</a>
-                                    <input type="text" id="company-sxy" style="width: 11vw;" maxlength="50">
+                                    <input type="text" id="company-sxy" style="width: 11vw;" maxlength="50"placeholder="-">
                                     <a style="margin-left: 1.6vw;">อาคาร :</a>
-                                    <input type="text" id="company-building" style="width: 11vw" maxlength="100">
+                                    <input type="text" id="company-building" style="width: 11vw" maxlength="100"placeholder="-">
                                     <a style="margin-left: 2.45vw;">ถนน :</a>
-                                    <input type="text" id="company-road" style="width: 11vw" maxlength="70">
+                                    <input type="text" id="company-road" style="width: 11vw" maxlength="70"placeholder="-">
                                     <!-- row 7 -->
                                     <br>
                                     <a style="margin-left: 4.4vw;">จังหวัด :</a>

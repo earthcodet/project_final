@@ -366,14 +366,14 @@ function createResultSearch(data) {
             } else if (j === 2) {
                 let AddressText = ''
                 AddressText = AddressText + `บ้านเลขที่ ${data[i].AID.ADDRESS_HOME_NUMBER} `
-                AddressText = AddressText + `หมู่ ${data[i].AID.ADDRESS_MOO} `
-                AddressText = AddressText + `ตรอก ${data[i].AID.ADDRESS_TRXK} `
-                AddressText = AddressText + `ซอย ${data[i].AID.ADDRESS_SXY} `
-                AddressText = AddressText + `อาคาร ${data[i].AID.ADDRESS_BUILDING} `
-                AddressText = AddressText + `ถนน ${data[i].AID.ADDRESS_ROAD} `
-                AddressText = AddressText + `ตำบล ${data[i].AID.DISTRICT_NAME} `
-                AddressText = AddressText + `อำเภอ ${data[i].AID.AMPHUR_NAME}`
-                AddressText = AddressText + `จังหวัด ${data[i].AID.PROVINCE_NAME}`
+                AddressText = AddressText + `หมู่ ${data[i].AID.ADDRESS_MOO === null ? '-' : data[i].AID.ADDRESS_MOO} `
+                AddressText = AddressText + `ตรอก ${data[i].AID.ADDRESS_TRXK === null ? '-' : data[i].AID.ADDRESS_TRXK} `
+                AddressText = AddressText + `ซอย ${data[i].AID.ADDRESS_SXY === null ? '-' : data[i].AID.ADDRESS_SXY} `
+                AddressText = AddressText + `อาคาร ${data[i].AID.ADDRESS_BUILDING === null ? '-' : data[i].AID.ADDRESS_BUILDING} `
+                AddressText = AddressText + `ถนน ${data[i].AID.ADDRESS_ROAD === null ? '-' : data[i].AID.ADDRESS_ROAD } `
+                AddressText = AddressText + `ตำบล ${data[i].AID.DISTRICT_NAME === null ? '-' : data[i].AID.DISTRICT_NAME} `
+                AddressText = AddressText + `อำเภอ ${data[i].AID.AMPHUR_NAME === null ? '-' : data[i].AID.AMPHUR_NAME}`
+                AddressText = AddressText + `จังหวัด ${data[i].AID.PROVINCE_NAME === null ? '-' : data[i].AID.PROVINCE_NAME}`
                 var cellText = document.createTextNode(AddressText);
             } else {
                 var cellText = document.createTextNode(data[i].PERSONAL_PERSONAL_ID);
