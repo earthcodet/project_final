@@ -109,37 +109,48 @@ function insertPage() {
                     icon: "success",
                     confirmButtonColor: "#009688"
                 });
-                data = true
-                addNew = false
-                disableMenuAll()
-                enableMenu('addMenu')
-                enableMenu('editMenu')
-                enableMenu('deleteMenu')
-                enableFunction()
-                // set Date in Last update
-                var datetime = new Date();
-                let dateForUpdate = datetime.toISOString().slice(0, 10)
-                let temp = dateForUpdate.split('-')
-                let day = temp[2]
-                let month = temp[1]
-                let year = temp[0]
-                let format = `${day}-${month}-${year}`
-                document.getElementById('last-update').value = format
+                    data = true
+                    addNew = false
+                    disableMenuAll()
+                    enableMenu('addMenu')
+                    enableMenu('editMenu')
+                    enableMenu('deleteMenu')
+                    enableFunction()
+                    // set Date in Last update
+                    var datetime = new Date();
+                    let dateForUpdate = datetime.toISOString().slice(0, 10)
+                    let temp = dateForUpdate.split('-')
+                    let day = temp[2]
+                    let month = temp[1]
+                    let year = temp[0]
+                    let format = `${day}-${month}-${year}`
+                    document.getElementById('last-update').value = format
             } else if (result.dismiss === Swal.DismissReason.cancel) {
                 Swal.fire({
                     icon: 'success',
                     html: "<h2>ยกเลิกสำเร็จ</h2>",
                     confirmButtonColor: "#009688"
                 });
-                addNew = false
-                disableMenuAll()
-                enableMenu('addMenu')
-                enableMenu('saveMenu')
-                resetFunction()
-                enableFunction()
-                resetImageDefault()
-                resetStyleIdDelete()
-
+                if (data === false) {
+                    resetInputUI()
+                    addNew = false
+                    disableMenuAll()
+                    enableMenu('addMenu')
+                    enableFunction()
+                    resetStyleIdDelete()
+                    resetFunction()
+                    resetImageDefault()
+                }
+                if (isEmpty(tempData) === false && data === true) {
+                    resetFunction()
+                    setDataUI(tempData)
+                    disableMenuAll()
+                    addNew = false
+                    enableMenu('addMenu')
+                    enableMenu('editMenu')
+                    enableMenu('deleteMenu')
+                    enableFunction()
+                }
             }
         });
     }
@@ -317,11 +328,11 @@ function getImageByPeronalId(type, id) {
     })
 }
 function showItem(arrayResult) {
-    
+
     resetParameter()
     console.log(arrayResult)
     changeOption(arrayResult.PERSONAL_TYPE.trim())
-    if(arrayResult.PERSONAL_TYPE === 'บุคคลธรรมดา'){
+    if (arrayResult.PERSONAL_TYPE === 'บุคคลธรรมดา') {
         getImageByPeronalId(arrayResult.PERSONAL_TYPE, arrayResult.PERSONAL_ID).then((result) => {
             if (result != false || result != null) {
                 arrayResult.image = result
@@ -331,7 +342,7 @@ function showItem(arrayResult) {
             }
             tempData = arrayResult
         })
-    }else{
+    } else {
         setDataUI(arrayResult)
     }
 
@@ -370,7 +381,7 @@ function createResultSearch(data) {
                 AddressText = AddressText + `ตรอก ${data[i].AID.ADDRESS_TRXK === null ? '-' : data[i].AID.ADDRESS_TRXK} `
                 AddressText = AddressText + `ซอย ${data[i].AID.ADDRESS_SXY === null ? '-' : data[i].AID.ADDRESS_SXY} `
                 AddressText = AddressText + `อาคาร ${data[i].AID.ADDRESS_BUILDING === null ? '-' : data[i].AID.ADDRESS_BUILDING} `
-                AddressText = AddressText + `ถนน ${data[i].AID.ADDRESS_ROAD === null ? '-' : data[i].AID.ADDRESS_ROAD } `
+                AddressText = AddressText + `ถนน ${data[i].AID.ADDRESS_ROAD === null ? '-' : data[i].AID.ADDRESS_ROAD} `
                 AddressText = AddressText + `ตำบล ${data[i].AID.DISTRICT_NAME === null ? '-' : data[i].AID.DISTRICT_NAME} `
                 AddressText = AddressText + `อำเภอ ${data[i].AID.AMPHUR_NAME === null ? '-' : data[i].AID.AMPHUR_NAME}`
                 AddressText = AddressText + `จังหวัด ${data[i].AID.PROVINCE_NAME === null ? '-' : data[i].AID.PROVINCE_NAME}`

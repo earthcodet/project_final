@@ -229,6 +229,9 @@ class service {
                 personal.id = id
                 this.insertPersonal(personal).then((data) => {
                     if (data) {
+                        if(personal.title === 'บุคคลธรรมดา'){
+                            imageFile.name = personal.id
+                        }
                         if (imageFile.name != 'NO_UPlOAD') {
                             console.log(`loopInsertPersonal > personal insert !! ${data}`)
                             imageFile.name = personal.id
@@ -392,7 +395,7 @@ class service {
         let newpersonal = this.formatInsert('PERSONAL', personal)
         let newaddress = this.formatInsert('ADDRESS', address)
         // console.log(newaddress)
-        // console.log(newpersonal)
+        console.log(image)
         return new Promise((resolve, reject) => {
             console.log('check insert our update')
             if (newaddress.id.length != 0 || newpersonal.id.length != 0) {
@@ -436,7 +439,7 @@ class service {
                 })
             }
 
-            // return resolve(true)
+            //return resolve(true)
         })
     }
     getUser(username, password) {
