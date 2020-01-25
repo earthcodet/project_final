@@ -122,7 +122,11 @@
                                 <!-- บุคคลธรรมดา -->
                                 <span id="perTy1" >
                                     <a id='nationalityTopic' style="margin-left:1vw;">สัญชาติ :</a>
-                                    <input list='list-nationality' id="nationality" style="width: 11vw" maxlength="60" placeholder="-">
+                                    <input list='list-nationality' id="nationality" style="width: 11vw" 
+                                    maxlength="60" placeholder="-"
+                                        onkeyup="document.getElementById('nationality').classList.remove('alertInput')" 
+                                        onchange="document.getElementById('nationality').classList.remove('alertInput')"
+                                    >
                                     <datalist id="list-nationality">
                                         <option value="" hidden>เลือก...</option>
                                         <option value="ไทย">ไทย</option>
@@ -131,7 +135,11 @@
                                     </datalist>
                                     </input>
                                     <a id='raceTopic' style="margin-left: 1vw;">เชื้อชาติ :</a>
-                                    <input list='list-race' id="race" style="width: 11vw;" maxlength="60" placeholder="-">
+                                    <input list='list-race' id="race" style="width: 11vw;" maxlength="60" 
+                                    placeholder="-"
+                                    onkeyup="document.getElementById('race').classList.remove('alertInput')" 
+                                    onchange="document.getElementById('race').classList.remove('alertInput')"
+                                    >
                                     <datalist id="list-race">
                                         <option value="" hidden>เลือก...</option>
                                         <option value="ไทย">ไทย</option>
@@ -141,8 +149,9 @@
                                     </input>
                                     <br>
                                     <!-- row 2 -->
-                                    <a id='titleNameTopic' style="margin-left: 1.5vw;">คำนำหน้าชื่อ <font color="red">*</font> :</a>
-                                    <input list='list-titles' id="title" style="width: 11vw;" maxlength="60" placeholder="-">
+                                    <a id='titleNameTopic' style="margin-left: 2.15vw;">คำนำหน้าชื่อ :</a>
+                                    <input list='list-titles' id="title" style="width: 11vw;" maxlength="60" placeholder="-"
+                                    onchange="document.getElementById('title').classList.remove('alertInput')">
                                     <datalist id="list-titles">
                                         <option value="" hidden>เลือก...</option>
                                         <option value="นาย">นาย</option>
@@ -152,36 +161,48 @@
                                     </input>
                                     <a id='nameUserTopic' style="margin-left: 2.15vw;">ชื่อ <font color="red">*</font> :</a>
                                     <input type="text" id="nameUser" name="" placeholder="" style="width: 11vw"
-                                        maxlength="70">
+                                        maxlength="70"
+                                        onkeyup="document.getElementById('nameUser').classList.remove('alertInput')" 
+                                        >
                                     <a id="surTopic" style="margin-left: 0.2vw;">นามสกุล <font color="red">*</font> :</a>
 
                                     <input type="text" id="surnameUser" name="" placeholder="" style="width: 11vw"
-                                        maxlength="70">
+                                        maxlength="70"
+                                        onkeyup="document.getElementById('surnameUser').classList.remove('alertInput')"
+                                        >
                                     <br>
                                     <!-- row 3 -->
                                     <a style="margin-left: 1.25vw;">เลขประจำตัว <font color="red">*</font> :</a>
                                     <input type="text" id="id" name="" placeholder="" style="width: 11vw"
                                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                        maxlength="13" onkeyup="checkId(this.value)">
+                                        maxlength="13" onkeyup="checkId(this.value) 
+                                        document.getElementById('id').classList.remove('alertInput')"
+                                        ">
                                     <a style="margin-left:0.25vw;">ออกเมื่อ <font color="red">*</font> :</a>
                                     <input type="text" id="datepicker1" placeholder="" style="width: 10.8vw"
-                                        maxlength="10" readonly>
+                                        maxlength="10" 
+                                        onchange="document.getElementById('datepicker1').classList.remove('alertInput')" 
+                                        readonly>
                                     <a id='dateExpTopic' style="margin-left: 0.3vw;">หมดอายุ <font color="red">*</font> :</a>
                                     <input type="text" id="datepicker2" placeholder="" style="width: 11vw"
-                                        maxlength="10" readonly>
+                                        maxlength="10" readonly
+                                        onchange="document.getElementById('datepicker2').classList.remove('alertInput')" 
+                                        >
                                     <br>
 
                                     <br>
                                     <!-- row4 -->
                                     <a id='dateBTopic' style="margin-left: 3.1vw;">เกิดวันที่ <font color="red">*</font> :</a>
                                     <input type="text" id="datepicker3" placeholder="" style="width: 11vw;"
-                                        maxlength="10" readonly>
+                                        maxlength="10" readonly
+                                        onchange="document.getElementById('datepicker3').classList.remove('alertInput')" 
+                                        >
 
                                     <a id='phoneTopic' style="margin-left: 0.1vw;">โทรศัพท์ <font color="red">*</font> :</a>
                                     <input type="text" style="width: 10.8vw" id="phone"
-                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                        oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
                                         maxlength="10"
-                                        placeholder="-">
+                                        onchange="document.getElementById('phone').classList.remove('alertInput')" >
                                     <a style="margin-left: 1.3vw;">โทรสาร :</a>
                                     <input type="text" id="fax" style="width: 11vw"
                                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
@@ -231,23 +252,29 @@
                                 <span id="perTy2" style="display: none;">
                                     <a  style="margin-left: 2.2vw;">ชื่อ <font color="red">*</font> :</a>
                                     <input type="text" id="company-nameUser" name="" placeholder="" style="width: 27.5vw"
-                                        maxlength="70">
+                                        maxlength="70"
+                                        onchange="document.getElementById('company-nameUser').classList.remove('alertInput')"
+                                        >
                                     <br>
                                     <!-- row 3 -->
                                     <a style="margin-left: 1.8vw;">เลขทะเบียน <font color="red">*</font> :</a>
                                     <input type="text" id="company-id" name="" placeholder="" style="width: 11vw"
                                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                        maxlength="13" onkeyup="checkId(this.value)">
+                                        maxlength="13" onkeyup="checkId(this.value)"
+                                        onchange="document.getElementById('company-id').classList.remove('alertInput')"
+                                        >
                                     <a style="margin-left:0.3vw;">ออกเมื่อ <font color="red">*</font> :</a>
                                     <input type="text" id="datepicker4" placeholder="" style="width: 11vw"
-                                        maxlength="10" readonly >
+                                        maxlength="10" readonly 
+                                        onchange="document.getElementById('datepicker4').classList.remove('alertInput')"
+                                        >
                                     <br>
                                     <!-- row4 -->
                                     <a  style="margin-left: 3.05vw;">โทรศัพท์ <font color="red">*</font> :</a>
                                     <input type="text" style="width: 11vw" id="company-phone"
-                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                        oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
                                         maxlength="10"
-                                        placeholder="-">
+                                        onchange="document.getElementById('company-phone').classList.remove('alertInput')">
                                     <a style="margin-left: 1.2vw;">โทรสาร :</a>
                                     <input type="text" id="company-fax" style="width: 11vw"
                                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"

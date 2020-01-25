@@ -52,6 +52,7 @@ function addPage() {
     resetParameter()
     newAddress()
     tempData = {}
+    newAdd = true
     _isImageChange = false
     document.getElementById('id').disabled = false
     document.getElementById('company-id').disabled = false

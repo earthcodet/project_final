@@ -283,7 +283,9 @@ a.exit:hover {
     /* color: #034b9a; */
     text-decoration: underline;
 }
-
+.alertInput{
+    border-color: red;
+}
 * {
     box-sizing: border-box;
 }

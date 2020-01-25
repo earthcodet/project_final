@@ -3,6 +3,7 @@ let _isIdCheckPersonal = "";
 let arrInsert = [];
 let fileImage = null;
 let _isImageChange = false
+let newAdd = false
 let inAddress = {
     id: "",
     home_number: "",
@@ -84,9 +85,9 @@ function setDataUI(data) {
         document.getElementById('homeId').value = data.AID.ADDRESS_HOME_NUMBER
         document.getElementById('moo').value = data.AID.ADDRESS_MOO === undefined || data.AID.ADDRESS_MOO === null ? '' : data.AID.ADDRESS_MOO
         document.getElementById('trxk').value = data.AID.ADDRESS_TRXK === undefined || data.AID.ADDRESS_TRXK === null ? '' : data.AID.ADDRESS_TRXK
-        document.getElementById('sxy').value = data.AID.ADDRESS_SXY === undefined || data.AID.ADDRESS_SXY ===null  ? '' : data.AID.ADDRESS_SXY
-        document.getElementById('building').value = data.AID.ADDRESS_BUILDING === undefined || data.AID.ADDRESS_BUILDING ===null ? '' : data.AID.ADDRESS_BUILDING
-        document.getElementById('road').value = data.AID.ADDRESS_ROAD === undefined || data.AID.ADDRESS_ROAD ===  null ? '' : data.AID.ADDRESS_ROAD
+        document.getElementById('sxy').value = data.AID.ADDRESS_SXY === undefined || data.AID.ADDRESS_SXY === null ? '' : data.AID.ADDRESS_SXY
+        document.getElementById('building').value = data.AID.ADDRESS_BUILDING === undefined || data.AID.ADDRESS_BUILDING === null ? '' : data.AID.ADDRESS_BUILDING
+        document.getElementById('road').value = data.AID.ADDRESS_ROAD === undefined || data.AID.ADDRESS_ROAD === null ? '' : data.AID.ADDRESS_ROAD
         //ค่าที่ส่งกลับมาอาจเป็น text ต้องการที่เป็น int
         //get id by name [ตั้งตัวแปรเพราะจะทำให้โปรแกรมไม่ต้อง loop เยอะๆ]
         let provinceId = parseInt(getProviceIdByName(data.AID.PROVINCE_NAME))
@@ -105,12 +106,12 @@ function setDataUI(data) {
         document.getElementById(`subdistrict`).value = districtId
 
         //prsonal 
-        document.getElementById('title').value = data.PERSONAL_TITLE === undefined  || data.PERSONAL_TITLE === null ? '' : data.PERSONAL_TITLE
+        document.getElementById('title').value = data.PERSONAL_TITLE === undefined || data.PERSONAL_TITLE === null ? '' : data.PERSONAL_TITLE
         document.getElementById('nameUser').value = data.PERSONAL_NAME
-        document.getElementById('surnameUser').value = data.PERSONAL_SURNAME === undefined || data.PERSONAL_SURNAME ===null ? '' : data.PERSONAL_SURNAME
+        document.getElementById('surnameUser').value = data.PERSONAL_SURNAME === undefined || data.PERSONAL_SURNAME === null ? '' : data.PERSONAL_SURNAME
         document.getElementById('nationality').value = data.PERSONAL_NATIONALITY === undefined || data.PERSONAL_NATIONALITY === null ? '' : data.PERSONAL_NATIONALITY
         document.getElementById('race').value = data.PERSONAL_RACE === undefined || data.PERSONAL_RACE === null ? '' : data.PERSONAL_RACE
-        document.getElementById('datepicker3').value = data.PERSONAL_BIRTHDAY === undefined || data.PERSONAL_BIRTHDAY ===  null ? '' : data.PERSONAL_BIRTHDAY
+        document.getElementById('datepicker3').value = data.PERSONAL_BIRTHDAY === undefined || data.PERSONAL_BIRTHDAY === null ? '' : data.PERSONAL_BIRTHDAY
         document.getElementById('id').value = data.PERSONAL_PERSONAL_ID
         document.getElementById('datepicker1').value = data.PERSONAL_CARD_ISSUED
         document.getElementById('datepicker2').value = data.PERSONAL_CARD_EXPIRE === undefined || data.PERSONAL_CARD_EXPIRE === null ? '' : data.PERSONAL_CARD_EXPIRE
@@ -164,94 +165,186 @@ function setDataUI(data) {
         document.getElementById('company-last-update').value = data.PERSONAL_UPDATE
 
     }
-
-
+}
+function inputRequired() {
+    let type_user = document.getElementById('typeUser').value
+    if (type_user === 'บุคคลธรรมดา') {
+        let checkno1 = document.getElementById('nameUser').value.trim().length === 0
+        let checkno2 = document.getElementById('surnameUser').value.trim().length === 0
+        let checkno3 = document.getElementById('datepicker2').value.trim().length === 0
+        let checkno4 = document.getElementById('datepicker1').value.trim().length === 0
+        let checkno5 = document.getElementById('id').value.trim().length === 0
+        let checkno6 = document.getElementById('datepicker3').value.trim().length === 0
+        let checkno7 = document.getElementById('phone').value.trim().length === 0
+        if (checkno1) {
+            document.getElementById('nameUser').classList.add('alertInput')
+        }
+        if (checkno2) {
+            document.getElementById('surnameUser').classList.add('alertInput')
+        }
+        if (checkno3) {
+            document.getElementById('datepicker2').classList.add('alertInput')
+        }
+        if (checkno4) {
+            document.getElementById('datepicker1').classList.add('alertInput')
+        }
+        if (checkno5) {
+            document.getElementById('id').classList.add('alertInput')
+        }
+        if (checkno6) {
+            document.getElementById('datepicker3').classList.add('alertInput')
+        }
+        if (checkno7) {
+            document.getElementById('phone').classList.add('alertInput')
+        }
+        if (!checkno1 || !checkno2 || !checkno3 || !checkno4 || !checkno5 || !checkno6 || !checkno7) {
+            return false
+        } else {
+            return true
+        }
+    } else {
+        let checkno1e = document.getElementById('company-nameUser').value.trim().length === 0
+        let checkno2e = document.getElementById('company-id').value.trim().length === 0
+        let checkno3e = document.getElementById('datepicker4').value.trim().length === 0
+        let checkno4e = document.getElementById('company-phone').value.trim().length === 0
+        if (checkno1e) {
+            document.getElementById('company-nameUser').classList.add('alertInput')
+        }
+        if (checkno2e) {
+            document.getElementById('company-id').classList.add('alertInput')
+        }
+        if (checkno3e) {
+            document.getElementById('datepicker4').classList.add('alertInput')
+        }
+        if (checkno4e) {
+            document.getElementById('company-phone').classList.add('alertInput')
+        }
+        if (!checkno1e || !checkno2e || !checkno3e || !checkno4e) {
+            return false
+        } else {
+            return true
+        }
+    }
+}
+function resetInputRequired() {
+    document.getElementById('nameUser').classList.remove('alertInput')
+    document.getElementById('surnameUser').classList.remove('alertInput')
+    document.getElementById('datepicker2').classList.remove('alertInput')
+    document.getElementById('datepicker1').classList.remove('alertInput')
+    document.getElementById('id').classList.remove('alertInput')
+    document.getElementById('datepicker3').classList.remove('alertInput')
+    document.getElementById('phone').classList.remove('alertInput')
+    document.getElementById('company-nameUser').classList.remove('alertInput')
+    document.getElementById('company-id').classList.remove('alertInput')
+    document.getElementById('datepicker4').classList.remove('alertInput')
+    document.getElementById('company-phone').classList.remove('alertInput')
+}
+function formatPhone(value) {
+    if ((value.length === 1 && value === '-') || (value.slice(0, 1) === '0' && value.slice(1, 2) != 0 && value.length === 13 && !isNaN(value))) {
+        console.log(`format number`)
+        return true
+    } else {
+        return false
+    }
 }
 function preInsert() {
+    resetInputRequired()
     let check_id_user = document.getElementById('id').value
     let type_user = document.getElementById("typeUser").value
     let check_id_company = document.getElementById('company-id').value
-    // console.log(`_isUsed = ${_isUsed}`)
-    // console.log(`check no 1 : ${check_id_user.trim().length === 13} and ${type_user === 'บุคคลธรรมดา'}  = ${check_id_user.trim().length === 13 && type_user === 'บุคคลธรรมดา'}`)
-    // console.log(`check no 2 : ${check_id_company.trim().length === 13} and ${type_user === 'นิติบุคคล'}  = ${check_id_company.trim().length === 13 && type_user === 'นิติบุคคล'}`)
-    if (check_id_user.trim().length === 13 && type_user === 'บุคคลธรรมดา' || check_id_company.trim().length === 13 && type_user === 'นิติบุคคล') {
-        if (_isUsed === false) {
+    let check_input = inputRequired()
+    if (check_input) {
+        if (check_id_user.trim().length === 13 && type_user === 'บุคคลธรรมดา' || check_id_company.trim().length === 13 && type_user === 'นิติบุคคล') {
+            if (!_isUsed) {
 
-            if (document.getElementById("typeUser").value === 'บุคคลธรรมดา') {
-                //address
-                inAddress.home_number = document.getElementById('homeId').value
-                inAddress.moo = document.getElementById('moo').value
-                inAddress.trxk = document.getElementById('trxk').value
-                inAddress.sxy = document.getElementById('sxy').value
-                inAddress.building = document.getElementById('building').value
-                inAddress.road = document.getElementById('road').value
+                if (document.getElementById("typeUser").value === 'บุคคลธรรมดา') {
+                    //address
+                    inAddress.home_number = document.getElementById('homeId').value
+                    inAddress.moo = document.getElementById('moo').value
+                    inAddress.trxk = document.getElementById('trxk').value
+                    inAddress.sxy = document.getElementById('sxy').value
+                    inAddress.building = document.getElementById('building').value
+                    inAddress.road = document.getElementById('road').value
 
-                let provinceValue = parseInt(document.getElementById(`province`).value);
-                let amphurValue = parseInt(document.getElementById(`district`).value);
-                let districtValue = parseInt(
-                    document.getElementById(`subdistrict`).value
-                );
-                inAddress.district_name = district[districtValue - 1].DISTRICT_NAME;
-                inAddress.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
-                inAddress.province_name = province[provinceValue - 1].PROVINCE_NAME;
-                //personal
-                inPeronal.title = document.getElementById("title").value;
-                inPeronal.type = document.getElementById("typeUser").value;
-                inPeronal.name = document.getElementById("nameUser").value;
-                inPeronal.surname = document.getElementById("surnameUser").value;
-                inPeronal.nationality = document.getElementById("nationality").value;
-                inPeronal.race = document.getElementById("race").value;
-                inPeronal.birthday = document.getElementById("datepicker3").value;
-                inPeronal.personal_id = document.getElementById("id").value;
-                inPeronal.card_issued = document.getElementById("datepicker1").value;
-                inPeronal.card_expipe = document.getElementById("datepicker2").value;
+                    let provinceValue = parseInt(document.getElementById(`province`).value);
+                    let amphurValue = parseInt(document.getElementById(`district`).value);
+                    let districtValue = parseInt(
+                        document.getElementById(`subdistrict`).value
+                    );
+                    inAddress.district_name = district[districtValue - 1].DISTRICT_NAME;
+                    inAddress.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
+                    inAddress.province_name = province[provinceValue - 1].PROVINCE_NAME;
+                    //personal
+                    inPeronal.title = document.getElementById("title").value;
+                    inPeronal.type = document.getElementById("typeUser").value;
+                    inPeronal.name = document.getElementById("nameUser").value;
+                    inPeronal.surname = document.getElementById("surnameUser").value;
+                    inPeronal.nationality = document.getElementById("nationality").value;
+                    inPeronal.race = document.getElementById("race").value;
+                    inPeronal.birthday = document.getElementById("datepicker3").value;
+                    inPeronal.personal_id = document.getElementById("id").value;
+                    inPeronal.card_issued = document.getElementById("datepicker1").value;
+                    inPeronal.card_expipe = document.getElementById("datepicker2").value;
 
-                inPeronal.phone = document.getElementById("phone").value;
-                inPeronal.fax = document.getElementById("fax").value;
-                arrInsert.push(inPeronal);
-                arrInsert.push(inAddress);
-                if(_isImageChange === false){
+                    inPeronal.phone = document.getElementById("phone").value;
+                    inPeronal.fax = document.getElementById("fax").value;
+                    arrInsert.push(inPeronal);
+                    arrInsert.push(inAddress);
+                    if (_isImageChange === false && newAdd === false) {
+                        inImage.name = 'NO_UPlOAD'
+                        arrInsert.push(inImage);
+                    } else {
+                        arrInsert.push(inImage);
+                    }
+
+                    console.log(arrInsert);
+                    console.log(fileImage);
+                    return true;
+                } else {
+                    // นิติบุคคล
+                    inAddress.home_number = document.getElementById('company-homeId').value
+                    inAddress.moo = document.getElementById('company-moo').value
+                    inAddress.trxk = document.getElementById('company-trxk').value
+                    inAddress.sxy = document.getElementById('company-sxy').value
+                    inAddress.building = document.getElementById('company-building').value
+                    inAddress.road = document.getElementById('company-road').value
+
+                    let provinceValue = parseInt(document.getElementById(`wProvince`).value);
+                    let amphurValue = parseInt(document.getElementById(`wDistrict`).value);
+                    let districtValue = parseInt(document.getElementById(`wSubdistrict`).value);
+                    inAddress.district_name = district[districtValue - 1].DISTRICT_NAME;
+                    inAddress.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
+                    inAddress.province_name = province[provinceValue - 1].PROVINCE_NAME;
+                    //personal
+                    inPeronal.type = document.getElementById("typeUser").value;
+                    inPeronal.name = document.getElementById("company-nameUser").value;
+                    inPeronal.personal_id = document.getElementById("company-id").value;
+                    inPeronal.card_issued = document.getElementById("datepicker4").value;
+
+                    inPeronal.phone = document.getElementById("company-phone").value;
+                    inPeronal.fax = document.getElementById("company-fax").value;
                     inImage.name = 'NO_UPlOAD'
+                    arrInsert.push(inPeronal);
+                    arrInsert.push(inAddress);
                     arrInsert.push(inImage);
-                }else{
-                    arrInsert.push(inImage);
+                    return true
                 }
-
-                console.log(arrInsert);
-                console.log(fileImage);
-                return true;
             } else {
-                // นิติบุคคล
-                inAddress.home_number = document.getElementById('company-homeId').value
-                inAddress.moo = document.getElementById('company-moo').value
-                inAddress.trxk = document.getElementById('company-trxk').value
-                inAddress.sxy = document.getElementById('company-sxy').value
-                inAddress.building = document.getElementById('company-building').value
-                inAddress.road = document.getElementById('company-road').value
-
-                let provinceValue = parseInt(document.getElementById(`wProvince`).value);
-                let amphurValue = parseInt(document.getElementById(`wDistrict`).value);
-                let districtValue = parseInt(document.getElementById(`wSubdistrict`).value);
-                inAddress.district_name = district[districtValue - 1].DISTRICT_NAME;
-                inAddress.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
-                inAddress.province_name = province[provinceValue - 1].PROVINCE_NAME;
-                //personal
-                inPeronal.type = document.getElementById("typeUser").value;
-                inPeronal.name = document.getElementById("company-nameUser").value;
-                inPeronal.personal_id = document.getElementById("company-id").value;
-                inPeronal.card_issued = document.getElementById("datepicker4").value;
-
-                inPeronal.phone = document.getElementById("company-phone").value;
-                inPeronal.fax = document.getElementById("company-fax").value;
-                inImage.name = 'NO_UPlOAD'
-                arrInsert.push(inPeronal);
-                arrInsert.push(inAddress);
-                arrInsert.push(inImage);
-                return true
+                Swal.fire({
+                    title: "เลขประจำตัวผู้ประกอบการนี้มีในระบบแล้ว",
+                    width: "30%",
+                    showConfirmButton: true,
+                    closeOnConfirm: false,
+                    closeOnCancel: false,
+                    confirmButtonColor: "#009688",
+                    icon: "error"
+                });
+                document.getElementById('id').classList.add('alertInput')
+                document.getElementById('company-id').classList.add('alertInput')
             }
         } else {
             Swal.fire({
-                title: "เลขประจำตัวผู้ประกอบการนี้มีในระบบแล้ว",
+                title: "กรุณาใส่เลขประจำตัวให้ครบ 13 หลัก",
                 width: "30%",
                 showConfirmButton: true,
                 closeOnConfirm: false,
@@ -259,10 +352,13 @@ function preInsert() {
                 confirmButtonColor: "#009688",
                 icon: "error"
             });
+            document.getElementById('id').classList.add('alertInput')
+            document.getElementById('company-id').classList.add('alertInput')
+            return false;
         }
     } else {
         Swal.fire({
-            title: "กรุณาใส่เลขประจำตัวให้ครบ 13 หลัก",
+            title: "กรุณากรอกข้อมูลให้ครบ",
             width: "30%",
             showConfirmButton: true,
             closeOnConfirm: false,
@@ -270,7 +366,6 @@ function preInsert() {
             confirmButtonColor: "#009688",
             icon: "error"
         });
-        return false;
     }
 }
 function duplicateId(personalId) {
@@ -315,6 +410,8 @@ function checkId(value) {
                         icon: "error"
                     });
                     _isUsed = true;
+                    document.getElementById('id').classList.add('alertInput')
+                document.getElementById('company-id').classList.add('alertInput')
                 }
                 console.log(_isUsed);
             });
@@ -358,8 +455,6 @@ function uploadImage(event) {
         reader.onload = function (event) {
             img.src = event.target.result;
             img.alt = "operator";
-            // img.width = 100%;
-            // img.height = auto
         };
         reader.readAsDataURL(selectedFile);
     }
@@ -394,10 +489,11 @@ function insertToDatabase() {
     });
 }
 
+
 function changeOption(value) {
     _isIdCheckPersonal = false
     _isUsed = false
-
+    resetInputRequired()
     if (value === "นิติบุคคล") {
         document.getElementById("perTy2").style.display = "";
         document.getElementById("perTy1").style.display = "none";
