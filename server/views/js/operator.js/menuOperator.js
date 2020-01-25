@@ -365,15 +365,15 @@ function createResultSearch(data) {
                 var cellText = document.createTextNode(data[i].PERSONAL_SURNAME);
             } else if (j === 2) {
                 let AddressText = ''
-                AddressText = AddressText + `บ้านเลขที่ ${data[i].AID.ADDRESS_HOME_NUMBER.trim()} `
-                AddressText = AddressText + `หมู่ ${data[i].AID.ADDRESS_MOO.trim()} `
-                AddressText = AddressText + `ตรอก ${data[i].AID.ADDRESS_TRXK.trim()} `
-                AddressText = AddressText + `ซอย ${data[i].AID.ADDRESS_SXY.trim()} `
-                AddressText = AddressText + `อาคาร ${data[i].AID.ADDRESS_BUILDING.trim()} `
-                AddressText = AddressText + `ถนน ${data[i].AID.ADDRESS_ROAD.trim()} `
-                AddressText = AddressText + `ตำบล ${data[i].AID.DISTRICT_NAME.trim()} `
-                AddressText = AddressText + `อำเภอ ${data[i].AID.AMPHUR_NAME.trim()}`
-                AddressText = AddressText + `จังหวัด ${data[i].AID.PROVINCE_NAME.trim()}`
+                AddressText = AddressText + `บ้านเลขที่ ${data[i].AID.ADDRESS_HOME_NUMBER} `
+                AddressText = AddressText + `หมู่ ${data[i].AID.ADDRESS_MOO} `
+                AddressText = AddressText + `ตรอก ${data[i].AID.ADDRESS_TRXK} `
+                AddressText = AddressText + `ซอย ${data[i].AID.ADDRESS_SXY} `
+                AddressText = AddressText + `อาคาร ${data[i].AID.ADDRESS_BUILDING} `
+                AddressText = AddressText + `ถนน ${data[i].AID.ADDRESS_ROAD} `
+                AddressText = AddressText + `ตำบล ${data[i].AID.DISTRICT_NAME} `
+                AddressText = AddressText + `อำเภอ ${data[i].AID.AMPHUR_NAME}`
+                AddressText = AddressText + `จังหวัด ${data[i].AID.PROVINCE_NAME}`
                 var cellText = document.createTextNode(AddressText);
             } else {
                 var cellText = document.createTextNode(data[i].PERSONAL_PERSONAL_ID);

@@ -70,6 +70,7 @@ function resetParameter() {
 }
 function setDataUI(data) {
     console.log('run setDataUI')
+    console.log(data)
     console.log(data.PERSONAL_TYPE === 'บุคคลธรรมดา')
     inAddress.id = data.AID.ADDRESS_ID
     inPeronal.id = data.PERSONAL_ID
@@ -81,11 +82,11 @@ function setDataUI(data) {
     if (data.PERSONAL_TYPE === 'บุคคลธรรมดา') {
         //address
         document.getElementById('homeId').value = data.AID.ADDRESS_HOME_NUMBER
-        document.getElementById('moo').value = data.AID.ADDRESS_MOO === undefined ? '-' : data.AID.ADDRESS_MOO
-        document.getElementById('trxk').value = data.AID.ADDRESS_TRXK === undefined ? '-' : data.AID.ADDRESS_TRXK
-        document.getElementById('sxy').value = data.AID.ADDRESS_SXY === undefined ? '-' : data.AID.ADDRESS_SXY
-        document.getElementById('building').value = data.AID.ADDRESS_BUILDING === undefined ? '-' : data.AID.ADDRESS_BUILDING
-        document.getElementById('road').value = data.AID.ADDRESS_ROAD === undefined ? '-' : data.AID.ADDRESS_ROAD
+        document.getElementById('moo').value = data.AID.ADDRESS_MOO === undefined || data.AID.ADDRESS_MOO === null ? '' : data.AID.ADDRESS_MOO
+        document.getElementById('trxk').value = data.AID.ADDRESS_TRXK === undefined || data.AID.ADDRESS_TRXK === null ? '' : data.AID.ADDRESS_TRXK
+        document.getElementById('sxy').value = data.AID.ADDRESS_SXY === undefined || data.AID.ADDRESS_SXY ===null  ? '' : data.AID.ADDRESS_SXY
+        document.getElementById('building').value = data.AID.ADDRESS_BUILDING === undefined || data.AID.ADDRESS_BUILDING ===null ? '' : data.AID.ADDRESS_BUILDING
+        document.getElementById('road').value = data.AID.ADDRESS_ROAD === undefined || data.AID.ADDRESS_ROAD ===  null ? '' : data.AID.ADDRESS_ROAD
         //ค่าที่ส่งกลับมาอาจเป็น text ต้องการที่เป็น int
         //get id by name [ตั้งตัวแปรเพราะจะทำให้โปรแกรมไม่ต้อง loop เยอะๆ]
         let provinceId = parseInt(getProviceIdByName(data.AID.PROVINCE_NAME))
@@ -104,17 +105,17 @@ function setDataUI(data) {
         document.getElementById(`subdistrict`).value = districtId
 
         //prsonal 
-        document.getElementById('title').value = data.PERSONAL_TITLE === undefined ? '' : data.PERSONAL_TITLE
+        document.getElementById('title').value = data.PERSONAL_TITLE === undefined  || data.PERSONAL_TITLE === null ? '' : data.PERSONAL_TITLE
         document.getElementById('nameUser').value = data.PERSONAL_NAME
-        document.getElementById('surnameUser').value = data.PERSONAL_SURNAME === undefined ? '' : data.PERSONAL_SURNAME
-        document.getElementById('nationality').value = data.PERSONAL_NATIONALITY === undefined ? '' : data.PERSONAL_NATIONALITY
-        document.getElementById('race').value = data.PERSONAL_RACE === undefined ? '' : data.PERSONAL_RACE
-        document.getElementById('datepicker3').value = data.PERSONAL_BIRTHDAY === undefined ? '' : data.PERSONAL_BIRTHDAY
+        document.getElementById('surnameUser').value = data.PERSONAL_SURNAME === undefined || data.PERSONAL_SURNAME ===null ? '' : data.PERSONAL_SURNAME
+        document.getElementById('nationality').value = data.PERSONAL_NATIONALITY === undefined || data.PERSONAL_NATIONALITY === null ? '' : data.PERSONAL_NATIONALITY
+        document.getElementById('race').value = data.PERSONAL_RACE === undefined || data.PERSONAL_RACE === null ? '' : data.PERSONAL_RACE
+        document.getElementById('datepicker3').value = data.PERSONAL_BIRTHDAY === undefined || data.PERSONAL_BIRTHDAY ===  null ? '' : data.PERSONAL_BIRTHDAY
         document.getElementById('id').value = data.PERSONAL_PERSONAL_ID
         document.getElementById('datepicker1').value = data.PERSONAL_CARD_ISSUED
-        document.getElementById('datepicker2').value = data.PERSONAL_CARD_EXPIRE === undefined ? '' : data.PERSONAL_CARD_EXPIRE
+        document.getElementById('datepicker2').value = data.PERSONAL_CARD_EXPIRE === undefined || data.PERSONAL_CARD_EXPIRE === null ? '' : data.PERSONAL_CARD_EXPIRE
         document.getElementById('phone').value = data.PERSONAL_PHONE
-        document.getElementById('fax').value = data.PERSONAL_FAX === undefined || data.PERSONAL_FAX === '' ? '-' : data.PERSONAL_FAX
+        document.getElementById('fax').value = data.PERSONAL_FAX === undefined || data.PERSONAL_FAX === null ? '' : data.PERSONAL_FAX
         document.getElementById('last-update').value = data.PERSONAL_UPDATE
 
         if (data.image != undefined) {
@@ -135,14 +136,14 @@ function setDataUI(data) {
         document.getElementById('company-id').value = data.PERSONAL_PERSONAL_ID
         document.getElementById('datepicker4').value = data.PERSONAL_CARD_ISSUED
         document.getElementById('company-phone').value = data.PERSONAL_PHONE
-        document.getElementById('company-fax').value = data.PERSONAL_FAX === undefined || data.PERSONAL_FAX === '' ? '-' : data.PERSONAL_FAX
+        document.getElementById('company-fax').value = data.PERSONAL_FAX === undefined || data.PERSONAL_FAX === null ? '' : data.PERSONAL_FAX
 
         document.getElementById('company-homeId').value = data.AID.ADDRESS_HOME_NUMBER
-        document.getElementById('company-moo').value = data.AID.ADDRESS_MOO === undefined ? '-' : data.AID.ADDRESS_MOO
-        document.getElementById('company-trxk').value = data.AID.ADDRESS_TRXK === undefined ? '-' : data.AID.ADDRESS_TRXK
-        document.getElementById('company-sxy').value = data.AID.ADDRESS_SXY === undefined ? '-' : data.AID.ADDRESS_SXY
-        document.getElementById('company-building').value = data.AID.ADDRESS_BUILDING === undefined ? '-' : data.AID.ADDRESS_BUILDING
-        document.getElementById('company-road').value = data.AID.ADDRESS_ROAD === undefined ? '-' : data.AID.ADDRESS_ROAD
+        document.getElementById('company-moo').value = data.AID.ADDRESS_MOO === undefined || data.AID.ADDRESS_MOO === null ? '' : data.AID.ADDRESS_MOO
+        document.getElementById('company-trxk').value = data.AID.ADDRESS_TRXK === undefined || data.AID.ADDRESS_TRXK === null ? '' : data.AID.ADDRESS_TRXK
+        document.getElementById('company-sxy').value = data.AID.ADDRESS_SXY === undefined || data.AID.ADDRESS_SXY === null ? '' : data.AID.ADDRESS_SXY
+        document.getElementById('company-building').value = data.AID.ADDRESS_BUILDING === undefined || data.AID.ADDRESS_BUILDING === null ? '' : data.AID.ADDRESS_BUILDING
+        document.getElementById('company-road').value = data.AID.ADDRESS_ROAD === undefined || data.AID.ADDRESS_ROAD === null ? '' : data.AID.ADDRESS_ROAD
         //ค่าที่ส่งกลับมาอาจเป็น text ต้องการที่เป็น int
         //get id by name [ตั้งตัวแปรเพราะจะทำให้โปรแกรมไม่ต้อง loop เยอะๆ]
         let provinceId = parseInt(getProviceIdByName(data.AID.PROVINCE_NAME))
