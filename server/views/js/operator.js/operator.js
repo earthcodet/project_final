@@ -197,7 +197,7 @@ function inputRequired() {
         if (checkno7) {
             document.getElementById('phone').classList.add('alertInput')
         }
-        if (!checkno1 || !checkno2 || !checkno3 || !checkno4 || !checkno5 || !checkno6 || !checkno7) {
+        if (checkno1 || checkno2 || checkno3 || checkno4 || checkno5 || checkno6 || checkno7) {
             return false
         } else {
             return true
@@ -219,7 +219,7 @@ function inputRequired() {
         if (checkno4e) {
             document.getElementById('company-phone').classList.add('alertInput')
         }
-        if (!checkno1e || !checkno2e || !checkno3e || !checkno4e) {
+        if (checkno1e || checkno2e || checkno3e || checkno4e) {
             return false
         } else {
             return true
@@ -240,7 +240,7 @@ function resetInputRequired() {
     document.getElementById('company-phone').classList.remove('alertInput')
 }
 function formatPhone(value) {
-    if ((value.length === 1 && value === '-') || (value.slice(0, 1) === '0' && value.slice(1, 2) != 0 && value.length === 13 && !isNaN(value))) {
+    if ((value.length === 1 && value === '-') || (value.slice(0, 1) === '0' && value.slice(1, 2) != 0 && value.length === 10 && !isNaN(value))) {
         console.log(`format number`)
         return true
     } else {
@@ -256,79 +256,93 @@ function preInsert() {
     if (check_input) {
         if (check_id_user.trim().length === 13 && type_user === 'บุคคลธรรมดา' || check_id_company.trim().length === 13 && type_user === 'นิติบุคคล') {
             if (!_isUsed) {
+                if (formatPhone(document.getElementById('phone').value.trim()) || formatPhone(document.getElementById('company-phone').value.trim())) {
+                    if (document.getElementById("typeUser").value === 'บุคคลธรรมดา') {
+                        //address
+                        inAddress.home_number = document.getElementById('homeId').value
+                        inAddress.moo = document.getElementById('moo').value
+                        inAddress.trxk = document.getElementById('trxk').value
+                        inAddress.sxy = document.getElementById('sxy').value
+                        inAddress.building = document.getElementById('building').value
+                        inAddress.road = document.getElementById('road').value
 
-                if (document.getElementById("typeUser").value === 'บุคคลธรรมดา') {
-                    //address
-                    inAddress.home_number = document.getElementById('homeId').value
-                    inAddress.moo = document.getElementById('moo').value
-                    inAddress.trxk = document.getElementById('trxk').value
-                    inAddress.sxy = document.getElementById('sxy').value
-                    inAddress.building = document.getElementById('building').value
-                    inAddress.road = document.getElementById('road').value
+                        let provinceValue = parseInt(document.getElementById(`province`).value);
+                        let amphurValue = parseInt(document.getElementById(`district`).value);
+                        let districtValue = parseInt(
+                            document.getElementById(`subdistrict`).value
+                        );
+                        inAddress.district_name = district[districtValue - 1].DISTRICT_NAME;
+                        inAddress.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
+                        inAddress.province_name = province[provinceValue - 1].PROVINCE_NAME;
+                        //personal
+                        inPeronal.title = document.getElementById("title").value;
+                        inPeronal.type = document.getElementById("typeUser").value;
+                        inPeronal.name = document.getElementById("nameUser").value;
+                        inPeronal.surname = document.getElementById("surnameUser").value;
+                        inPeronal.nationality = document.getElementById("nationality").value;
+                        inPeronal.race = document.getElementById("race").value;
+                        inPeronal.birthday = document.getElementById("datepicker3").value;
+                        inPeronal.personal_id = document.getElementById("id").value;
+                        inPeronal.card_issued = document.getElementById("datepicker1").value;
+                        inPeronal.card_expipe = document.getElementById("datepicker2").value;
 
-                    let provinceValue = parseInt(document.getElementById(`province`).value);
-                    let amphurValue = parseInt(document.getElementById(`district`).value);
-                    let districtValue = parseInt(
-                        document.getElementById(`subdistrict`).value
-                    );
-                    inAddress.district_name = district[districtValue - 1].DISTRICT_NAME;
-                    inAddress.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
-                    inAddress.province_name = province[provinceValue - 1].PROVINCE_NAME;
-                    //personal
-                    inPeronal.title = document.getElementById("title").value;
-                    inPeronal.type = document.getElementById("typeUser").value;
-                    inPeronal.name = document.getElementById("nameUser").value;
-                    inPeronal.surname = document.getElementById("surnameUser").value;
-                    inPeronal.nationality = document.getElementById("nationality").value;
-                    inPeronal.race = document.getElementById("race").value;
-                    inPeronal.birthday = document.getElementById("datepicker3").value;
-                    inPeronal.personal_id = document.getElementById("id").value;
-                    inPeronal.card_issued = document.getElementById("datepicker1").value;
-                    inPeronal.card_expipe = document.getElementById("datepicker2").value;
+                        inPeronal.phone = document.getElementById("phone").value;
+                        inPeronal.fax = document.getElementById("fax").value;
+                        arrInsert.push(inPeronal);
+                        arrInsert.push(inAddress);
+                        if (_isImageChange === false && newAdd === false) {
+                            inImage.name = 'NO_UPlOAD'
+                            arrInsert.push(inImage);
+                        } else {
+                            arrInsert.push(inImage);
+                        }
 
-                    inPeronal.phone = document.getElementById("phone").value;
-                    inPeronal.fax = document.getElementById("fax").value;
-                    arrInsert.push(inPeronal);
-                    arrInsert.push(inAddress);
-                    if (_isImageChange === false && newAdd === false) {
-                        inImage.name = 'NO_UPlOAD'
-                        arrInsert.push(inImage);
+                        console.log(arrInsert);
+                        console.log(fileImage);
+                        return true;
                     } else {
+                        // นิติบุคคล
+                        inAddress.home_number = document.getElementById('company-homeId').value
+                        inAddress.moo = document.getElementById('company-moo').value
+                        inAddress.trxk = document.getElementById('company-trxk').value
+                        inAddress.sxy = document.getElementById('company-sxy').value
+                        inAddress.building = document.getElementById('company-building').value
+                        inAddress.road = document.getElementById('company-road').value
+
+                        let provinceValue = parseInt(document.getElementById(`wProvince`).value);
+                        let amphurValue = parseInt(document.getElementById(`wDistrict`).value);
+                        let districtValue = parseInt(document.getElementById(`wSubdistrict`).value);
+                        inAddress.district_name = district[districtValue - 1].DISTRICT_NAME;
+                        inAddress.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
+                        inAddress.province_name = province[provinceValue - 1].PROVINCE_NAME;
+                        //personal
+                        inPeronal.type = document.getElementById("typeUser").value;
+                        inPeronal.name = document.getElementById("company-nameUser").value;
+                        inPeronal.personal_id = document.getElementById("company-id").value;
+                        inPeronal.card_issued = document.getElementById("datepicker4").value;
+
+                        inPeronal.phone = document.getElementById("company-phone").value;
+                        inPeronal.fax = document.getElementById("company-fax").value;
+                        inImage.name = 'NO_UPlOAD'
+                        arrInsert.push(inPeronal);
+                        arrInsert.push(inAddress);
                         arrInsert.push(inImage);
+                        return true
                     }
-
-                    console.log(arrInsert);
-                    console.log(fileImage);
-                    return true;
                 } else {
-                    // นิติบุคคล
-                    inAddress.home_number = document.getElementById('company-homeId').value
-                    inAddress.moo = document.getElementById('company-moo').value
-                    inAddress.trxk = document.getElementById('company-trxk').value
-                    inAddress.sxy = document.getElementById('company-sxy').value
-                    inAddress.building = document.getElementById('company-building').value
-                    inAddress.road = document.getElementById('company-road').value
-
-                    let provinceValue = parseInt(document.getElementById(`wProvince`).value);
-                    let amphurValue = parseInt(document.getElementById(`wDistrict`).value);
-                    let districtValue = parseInt(document.getElementById(`wSubdistrict`).value);
-                    inAddress.district_name = district[districtValue - 1].DISTRICT_NAME;
-                    inAddress.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
-                    inAddress.province_name = province[provinceValue - 1].PROVINCE_NAME;
-                    //personal
-                    inPeronal.type = document.getElementById("typeUser").value;
-                    inPeronal.name = document.getElementById("company-nameUser").value;
-                    inPeronal.personal_id = document.getElementById("company-id").value;
-                    inPeronal.card_issued = document.getElementById("datepicker4").value;
-
-                    inPeronal.phone = document.getElementById("company-phone").value;
-                    inPeronal.fax = document.getElementById("company-fax").value;
-                    inImage.name = 'NO_UPlOAD'
-                    arrInsert.push(inPeronal);
-                    arrInsert.push(inAddress);
-                    arrInsert.push(inImage);
-                    return true
+                    Swal.fire({
+                        title: "รูปแบบหมายเลขโทรศัพท์ไม่ถูกต้อง",
+                        width: "30%",
+                        showConfirmButton: true,
+                        closeOnConfirm: false,
+                        closeOnCancel: false,
+                        confirmButtonColor: "#009688",
+                        icon: "error"
+                    });
+                    document.getElementById('company-phone').classList.add('alertInput')
+                    document.getElementById('phone').classList.add('alertInput')
                 }
+
             } else {
                 Swal.fire({
                     title: "เลขประจำตัวผู้ประกอบการนี้มีในระบบแล้ว",
@@ -411,7 +425,7 @@ function checkId(value) {
                     });
                     _isUsed = true;
                     document.getElementById('id').classList.add('alertInput')
-                document.getElementById('company-id').classList.add('alertInput')
+                    document.getElementById('company-id').classList.add('alertInput')
                 }
                 console.log(_isUsed);
             });
@@ -489,7 +503,6 @@ function insertToDatabase() {
     });
 }
 
-
 function changeOption(value) {
     _isIdCheckPersonal = false
     _isUsed = false
@@ -512,4 +525,23 @@ function changeOption(value) {
         resetFunction()
 
     }
+}
+function checkPhone(value,id) {
+    console.log(value)
+    let tempCheck = value.split("")
+    console.log(tempCheck.length)
+    console.log(value.length)
+    if(tempCheck[0] === '-' ){
+        document.getElementById(id).value = '-'
+    }
+   for(let i = 1 ; i < tempCheck.length ; i++){
+        if(tempCheck[0] ===  '0'){
+            if(tempCheck[1] === '0'){
+                document.getElementById(id).value = '0'
+            }
+            if(tempCheck[i] === '-'){
+                document.getElementById(id).value = value.slice(0 , value.length - 1)
+            }
+        }
+   }
 }
