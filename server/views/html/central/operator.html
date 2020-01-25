@@ -120,7 +120,7 @@
                                     <option value="นิติบุคคล">นิติบุคคล</option>
                                 </select>
                                 <!-- บุคคลธรรมดา -->
-                                <span id="perTy1">
+                                <span id="perTy1" >
                                     <a id='nationalityTopic' style="margin-left:1vw;">สัญชาติ :</a>
                                     <input list='list-nationality' id="nationality" style="width: 11vw" maxlength="60" placeholder="-">
                                     <datalist id="list-nationality">
@@ -141,7 +141,7 @@
                                     </input>
                                     <br>
                                     <!-- row 2 -->
-                                    <a id='titleNameTopic' style="margin-left: 2vw;">คำนำหน้าชื่อ :</a>
+                                    <a id='titleNameTopic' style="margin-left: 1.5vw;">คำนำหน้าชื่อ <font color="red">*</font> :</a>
                                     <input list='list-titles' id="title" style="width: 11vw;" maxlength="60" placeholder="-">
                                     <datalist id="list-titles">
                                         <option value="" hidden>เลือก...</option>
@@ -150,39 +150,39 @@
                                         <option value="นางสาว">นางสาว</option>
                                     </datalist>
                                     </input>
-                                    <a id='nameUserTopic' style="margin-left: 3vw;">ชื่อ :</a>
+                                    <a id='nameUserTopic' style="margin-left: 2.15vw;">ชื่อ <font color="red">*</font> :</a>
                                     <input type="text" id="nameUser" name="" placeholder="" style="width: 11vw"
                                         maxlength="70">
-                                    <a id="surTopic" style="margin-left: 0.8vw;">นามสกุล :</a>
+                                    <a id="surTopic" style="margin-left: 0.2vw;">นามสกุล <font color="red">*</font> :</a>
 
                                     <input type="text" id="surnameUser" name="" placeholder="" style="width: 11vw"
                                         maxlength="70">
                                     <br>
                                     <!-- row 3 -->
-                                    <a style="margin-left: 1.8vw;">เลขประจำตัว :</a>
+                                    <a style="margin-left: 1.25vw;">เลขประจำตัว <font color="red">*</font> :</a>
                                     <input type="text" id="id" name="" placeholder="" style="width: 11vw"
                                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                         maxlength="13" onkeyup="checkId(this.value)">
-                                    <a style="margin-left:0.9vw;">ออกเมื่อ :</a>
-                                    <input type="text" id="datepicker1" placeholder="" style="width: 11vw"
+                                    <a style="margin-left:0.25vw;">ออกเมื่อ <font color="red">*</font> :</a>
+                                    <input type="text" id="datepicker1" placeholder="" style="width: 10.8vw"
                                         maxlength="10" readonly>
-                                    <a id='dateExpTopic' style="margin-left: 0.8vw;">หมดอายุ :</a>
+                                    <a id='dateExpTopic' style="margin-left: 0.3vw;">หมดอายุ <font color="red">*</font> :</a>
                                     <input type="text" id="datepicker2" placeholder="" style="width: 11vw"
                                         maxlength="10" readonly>
                                     <br>
 
                                     <br>
                                     <!-- row4 -->
-                                    <a id='dateBTopic' style="margin-left: 3.7vw;">เกิดวันที่ :</a>
+                                    <a id='dateBTopic' style="margin-left: 3.1vw;">เกิดวันที่ <font color="red">*</font> :</a>
                                     <input type="text" id="datepicker3" placeholder="" style="width: 11vw;"
                                         maxlength="10" readonly>
 
-                                    <a id='phoneTopic' style="margin-left: 0.7vw;">โทรศัพท์ :</a>
-                                    <input type="text" style="width: 11vw" id="phone"
+                                    <a id='phoneTopic' style="margin-left: 0.1vw;">โทรศัพท์ <font color="red">*</font> :</a>
+                                    <input type="text" style="width: 10.8vw" id="phone"
                                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                         maxlength="10"
                                         placeholder="-">
-                                    <a style="margin-left: 1.4vw;">โทรสาร :</a>
+                                    <a style="margin-left: 1.3vw;">โทรสาร :</a>
                                     <input type="text" id="fax" style="width: 11vw"
                                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                         maxlength="9"
@@ -229,26 +229,26 @@
 
                                 <!-- นิติบุคคล -->
                                 <span id="perTy2" style="display: none;">
-                                    <a  style="margin-left: 3vw;">ชื่อ :</a>
+                                    <a  style="margin-left: 2.2vw;">ชื่อ <font color="red">*</font> :</a>
                                     <input type="text" id="company-nameUser" name="" placeholder="" style="width: 27.5vw"
                                         maxlength="70">
                                     <br>
                                     <!-- row 3 -->
-                                    <a style="margin-left: 1.8vw;">เลขทะเบียน :</a>
+                                    <a style="margin-left: 1.8vw;">เลขทะเบียน <font color="red">*</font> :</a>
                                     <input type="text" id="company-id" name="" placeholder="" style="width: 11vw"
                                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                         maxlength="13" onkeyup="checkId(this.value)">
-                                    <a style="margin-left:0.9vw;">ออกเมื่อ :</a>
+                                    <a style="margin-left:0.3vw;">ออกเมื่อ <font color="red">*</font> :</a>
                                     <input type="text" id="datepicker4" placeholder="" style="width: 11vw"
                                         maxlength="10" readonly >
                                     <br>
                                     <!-- row4 -->
-                                    <a  style="margin-left: 3.7vw;">โทรศัพท์ :</a>
+                                    <a  style="margin-left: 3.05vw;">โทรศัพท์ <font color="red">*</font> :</a>
                                     <input type="text" style="width: 11vw" id="company-phone"
                                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                         maxlength="10"
                                         placeholder="-">
-                                    <a style="margin-left: 1.4vw;">โทรสาร :</a>
+                                    <a style="margin-left: 1.2vw;">โทรสาร :</a>
                                     <input type="text" id="company-fax" style="width: 11vw"
                                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                         maxlength="9"
