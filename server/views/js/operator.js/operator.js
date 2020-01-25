@@ -39,7 +39,6 @@ let inImage = {
 
 function resetParameter() {
     arrInsert = [];
-    fileImage = null
     inPeronal = {
         id: "",
         address_id: "",
@@ -55,11 +54,6 @@ function resetParameter() {
         card_expipe: '',
         phone: "",
         fax: ''
-    };
-    inImage = {
-        id: "",
-        type: null,
-        data: null
     };
     inAddress = {
         id: "test",
@@ -79,7 +73,7 @@ function setDataUI(data) {
     console.log(data.PERSONAL_TYPE === 'บุคคลธรรมดา')
     document.getElementById('typeUser').value = data.PERSONAL_TYPE
     document.getElementById('typeUser').disabled = true
-    console.log(data.PERSONAL_TYPE )
+    console.log(data.PERSONAL_TYPE)
     if (data.PERSONAL_TYPE === 'บุคคลธรรมดา') {
         //address
         document.getElementById('homeId').value = data.AID.ADDRESS_HOME_NUMBER
@@ -91,16 +85,16 @@ function setDataUI(data) {
         //ค่าที่ส่งกลับมาอาจเป็น text ต้องการที่เป็น int
         //get id by name [ตั้งตัวแปรเพราะจะทำให้โปรแกรมไม่ต้อง loop เยอะๆ]
         let provinceId = parseInt(getProviceIdByName(data.AID.PROVINCE_NAME))
-        let amphurId   = parseInt(getAmphureIdByName(data.AID.AMPHUR_NAME, provinceId))
+        let amphurId = parseInt(getAmphureIdByName(data.AID.AMPHUR_NAME, provinceId))
         let districtId = parseInt(getDistrictIdByName(data.AID.DISTRICT_NAME, amphurId))
 
         //แสดงค่าจังหวัดที่มาจาก ฐานข้อมูล (จังหวัด) ตาม id
         document.getElementById(`province`).value = provinceId
-        
+
         //ตั้งค่ารายชื่อ อำเภอ, ตำบล ตามจังหวัดที่เลือกลงให้ list input ตาม id
         amphurSelect(parseInt(provinceId)) // list อำเภอทั้งหมดตาม province Id
         districtSelect(parseInt(amphurId)) // list ตำบลทั้งหมดตาม ampur_Id
-      
+
         //แสดงค่าจังหวัดที่มาจาก ฐานข้อมูล (อำเภอ , ตำบล) ตาม id
         document.getElementById(`district`).value = amphurId
         document.getElementById(`subdistrict`).value = districtId
@@ -147,16 +141,16 @@ function setDataUI(data) {
         //ค่าที่ส่งกลับมาอาจเป็น text ต้องการที่เป็น int
         //get id by name [ตั้งตัวแปรเพราะจะทำให้โปรแกรมไม่ต้อง loop เยอะๆ]
         let provinceId = parseInt(getProviceIdByName(data.AID.PROVINCE_NAME))
-        let amphurId   = parseInt(getAmphureIdByName(data.AID.AMPHUR_NAME, provinceId))
+        let amphurId = parseInt(getAmphureIdByName(data.AID.AMPHUR_NAME, provinceId))
         let districtId = parseInt(getDistrictIdByName(data.AID.DISTRICT_NAME, amphurId))
 
         //แสดงค่าจังหวัดที่มาจาก ฐานข้อมูล (จังหวัด) ตาม id
         document.getElementById(`wProvince`).value = provinceId
-        
+
         //ตั้งค่ารายชื่อ อำเภอ, ตำบล ตามจังหวัดที่เลือกลงให้ list input ตาม id
         wamphurSelect(parseInt(provinceId)) // list อำเภอทั้งหมดตาม province Id
         wdistrictSelect(parseInt(amphurId)) // list ตำบลทั้งหมดตาม ampur_Id
-      
+
         //แสดงค่าจังหวัดที่มาจาก ฐานข้อมูล (อำเภอ , ตำบล) ตาม id
         document.getElementById(`wDistrict`).value = amphurId
         document.getElementById(`wSubdistrict`).value = districtId
@@ -175,7 +169,7 @@ function preInsert() {
     // console.log(`_isUsed = ${_isUsed}`)
     // console.log(`check no 1 : ${check_id_user.trim().length === 13} and ${type_user === 'บุคคลธรรมดา'}  = ${check_id_user.trim().length === 13 && type_user === 'บุคคลธรรมดา'}`)
     // console.log(`check no 2 : ${check_id_company.trim().length === 13} and ${type_user === 'นิติบุคคล'}  = ${check_id_company.trim().length === 13 && type_user === 'นิติบุคคล'}`)
-    if (check_id_user.trim().length === 13 && type_user === 'บุคคลธรรมดา'||check_id_company.trim().length === 13 && type_user === 'นิติบุคคล') {
+    if (check_id_user.trim().length === 13 && type_user === 'บุคคลธรรมดา' || check_id_company.trim().length === 13 && type_user === 'นิติบุคคล') {
         if (_isUsed === false) {
 
             if (document.getElementById("typeUser").value === 'บุคคลธรรมดา') {
@@ -299,7 +293,7 @@ function checkId(value) {
                     });
                     _isCheckPersonalId = value
                     _isUsed = false;
-                   
+
                 } else {
                     Swal.fire({
                         title: "เลขประจำตัวผู้ประกอบการนี้มีในระบบแล้ว",
@@ -314,7 +308,7 @@ function checkId(value) {
                 }
                 console.log(_isUsed);
             });
-        }else{
+        } else {
             console.log(`personal id not change`)
         }
     } else {
@@ -389,7 +383,7 @@ function insertToDatabase() {
 
 function changeOption(value) {
     _isIdCheckPersonal = false
-        _isUsed = false
+    _isUsed = false
 
     if (value === "นิติบุคคล") {
         document.getElementById("perTy2").style.display = "";
@@ -398,6 +392,7 @@ function changeOption(value) {
         document.getElementById("imgText").style.display = "none";
         document.getElementById("imgButton").style.display = "none";
         resetFunction()
+        fileImage = null
         document.getElementById('typeUser').value = `นิติบุคคล`
     } else {
         document.getElementById("perTy2").style.display = "none";
@@ -406,6 +401,6 @@ function changeOption(value) {
         document.getElementById("operatorImage").src = "../../img/userProfile.png";
         document.getElementById("imgButton").style.display = "";
         resetFunction()
-        
+
     }
 }

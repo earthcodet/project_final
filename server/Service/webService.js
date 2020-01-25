@@ -344,11 +344,12 @@ class service {
             data.surname === '' ? data.surname = 'NULL' : `'${data.surname}'`
             return data
         } else {
-            data.moo === '' ? data.moo = 'NULL' : data.moo = `'${data.moo}'`
-            data.trxk === '' ? data.trxk = 'NULL' : data.trxk = `'${data.trxk}'`
-            data.sxy === '' ? data.sxy = 'NULL' : data.sxy = `'${data.sxy}'`
-            data.building === '' ? data.building = 'NULL' : data.building = `'${data.building}'`
-            data.road === '' ? data.road = 'NULL' : data.road = `'${data.road}'`
+            data.home_number === '' ? data.home_number = '-' : data.home_number = data.home_number
+            data.moo === '' || data.moo === '-' ? data.moo = 'NULL' : data.moo = `'${data.moo}'`
+            data.trxk === '' || data.trxk === '-'? data.trxk = 'NULL' : data.trxk = `'${data.trxk}'`
+            data.sxy === '' || data.sxy === '-' ? data.sxy = 'NULL' : data.sxy = `'${data.sxy}'`
+            data.building === '' || data.building === '-' ? data.building = 'NULL' : data.building = `'${data.building}'`
+            data.road === '' || data.road === '-' ? data.road = 'NULL' : data.road = `'${data.road}'`
             return data
         }
     }
@@ -377,15 +378,15 @@ class service {
         console.log(newaddress)
         console.log(newpersonal)
         return new Promise((resolve, reject) => {
-            // this.loopInsertAddress(newpersonal, newaddress, image).then((data) => {
-            //     if (data) {
-            //         console.log(`main > ${data}`)
-            //         return resolve(true)
-            //     } else {
-            //         return resolve(false)
-            //     }
-            // })
-            return resolve(true)
+            this.loopInsertAddress(newpersonal, newaddress, image).then((data) => {
+                if (data) {
+                    console.log(`main > ${data}`)
+                    return resolve(true)
+                } else {
+                    return resolve(false)
+                }
+            })
+           // return resolve(true)
         })
     }
     getUser(username, password) {
