@@ -52,6 +52,9 @@ function addPage() {
     resetParameter()
     newAddress()
     tempData = {}
+    _isImageChange = false
+    document.getElementById('id').disabled = false
+    document.getElementById('company-id').disabled = false
     document.getElementById('typeUser').disabled = false
 }
 
@@ -153,6 +156,7 @@ function resetImageDefault() {
 function editPage() {
     if (!deleteData) {
         addNew = true
+        _isImageChange = false
         disableMenuAll()
         enableMenu('saveMenu')
         disableFunction()
@@ -313,6 +317,8 @@ function getImageByPeronalId(type, id) {
     })
 }
 function showItem(arrayResult) {
+    
+    resetParameter()
     console.log(arrayResult)
     changeOption(arrayResult.PERSONAL_TYPE.trim())
     if(arrayResult.PERSONAL_TYPE === 'บุคคลธรรมดา'){

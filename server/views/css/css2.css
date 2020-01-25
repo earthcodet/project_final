@@ -279,7 +279,6 @@ a.exit {
     color: white;
     cursor: pointer;
 }
-
 a.exit:hover {
     /* color: #034b9a; */
     text-decoration: underline;

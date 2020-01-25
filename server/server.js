@@ -140,7 +140,7 @@ app.post('/insert/personal', (req, res) => {
     var datafile = req.files.image.data
     obj[2].data = datafile
   }
-  webService.insertStep(obj[0], obj[1], obj[2], req.session.username).then((data) => {
+  webService.personalStep(obj[0], obj[1], obj[2], req.session.username).then((data) => {
     console.log(data)
     res.json(data)
   })

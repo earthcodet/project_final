@@ -62,6 +62,30 @@ class AddressDAO {
             })
         })
     }
+    updateAddress(address) {
+        return new Promise((resolve, reject) => {
+            let condition = `'${address.id}'`
+            let value = `ADDRESS_HOME_NUMBER = '${address.home_number}', ADDRESS_MOO = ${address.moo}, `
+            value = value + `ADDRESS_TRXK=${address.trxk}, ADDRESS_SXY=${address.sxy}, `
+            value = value + `ADDRESS_BUILDING = ${address.building},ADDRESS_ROAD = ${address.road}, `
+            value = value + `DISTRICT_NAME = '${address.district_name}', `
+            value = value + `AMPHUR_NAME = '${address.amphur_name}', PROVINCE_NAME='${address.province_name}'`
+            let query = `UPDATE address SET ${value} WHERE ADDRESS_ID = ${condition}`
+            con.query(query, function (err, result) {
+                if (err) {
+                    console.log(err.code)
+                }
+                if(result.affectedRows === 1){
+                    console.log(`True return`)
+                    return resolve(true)
+                }else{
+                    return resolve(false)
+                }
+                
+            })
+        })
+    }
+
     getMaxIdAddress() {
         return new Promise((resolve, reject) => {
             let query = `SELECT MAX(ADDRESS_ID) As 'maxId' FROM address`
@@ -74,4 +98,6 @@ class AddressDAO {
         })
     }
 }
+
+
 module.exports = AddressDAO;

@@ -2,6 +2,7 @@ let _isUsed = false;
 let _isIdCheckPersonal = "";
 let arrInsert = [];
 let fileImage = null;
+let _isImageChange = false
 let inAddress = {
     id: "",
     home_number: "",
@@ -32,7 +33,6 @@ let inPeronal = {
 };
 
 let inImage = {
-    id: "",
     type: null,
     data: null
 };
@@ -56,7 +56,7 @@ function resetParameter() {
         fax: ''
     };
     inAddress = {
-        id: "test",
+        id: "",
         home_number: "",
         moo: '',
         trxk: '',
@@ -71,6 +71,10 @@ function resetParameter() {
 function setDataUI(data) {
     console.log('run setDataUI')
     console.log(data.PERSONAL_TYPE === 'บุคคลธรรมดา')
+    inAddress.id = data.AID.ADDRESS_ID
+    inPeronal.id = data.PERSONAL_ID
+    document.getElementById('company-id').disabled = true
+    document.getElementById('id').disabled = true
     document.getElementById('typeUser').value = data.PERSONAL_TYPE
     document.getElementById('typeUser').disabled = true
     console.log(data.PERSONAL_TYPE)
@@ -105,10 +109,10 @@ function setDataUI(data) {
         document.getElementById('surnameUser').value = data.PERSONAL_SURNAME === undefined ? '' : data.PERSONAL_SURNAME
         document.getElementById('nationality').value = data.PERSONAL_NATIONALITY === undefined ? '' : data.PERSONAL_NATIONALITY
         document.getElementById('race').value = data.PERSONAL_RACE === undefined ? '' : data.PERSONAL_RACE
-        document.getElementById('datepicker3').value = data.PERSONAL_BIRTHDAY === undefined ? '00-00-0000' : data.PERSONAL_BIRTHDAY
+        document.getElementById('datepicker3').value = data.PERSONAL_BIRTHDAY === undefined ? '' : data.PERSONAL_BIRTHDAY
         document.getElementById('id').value = data.PERSONAL_PERSONAL_ID
         document.getElementById('datepicker1').value = data.PERSONAL_CARD_ISSUED
-        document.getElementById('datepicker2').value = data.PERSONAL_CARD_EXPIRE === undefined ? '00-00-0000' : data.PERSONAL_CARD_EXPIRE
+        document.getElementById('datepicker2').value = data.PERSONAL_CARD_EXPIRE === undefined ? '' : data.PERSONAL_CARD_EXPIRE
         document.getElementById('phone').value = data.PERSONAL_PHONE
         document.getElementById('fax').value = data.PERSONAL_FAX === undefined || data.PERSONAL_FAX === '' ? '-' : data.PERSONAL_FAX
         document.getElementById('last-update').value = data.PERSONAL_UPDATE
@@ -126,6 +130,7 @@ function setDataUI(data) {
             inImage.data = data.image.IMAGE_DATA
         }
     } else {
+        inImage.name = 'NO_UPlOAD'
         document.getElementById('company-nameUser').value = data.PERSONAL_NAME
         document.getElementById('company-id').value = data.PERSONAL_PERSONAL_ID
         document.getElementById('datepicker4').value = data.PERSONAL_CARD_ISSUED
@@ -162,7 +167,6 @@ function setDataUI(data) {
 
 }
 function preInsert() {
-    resetParameter()
     let check_id_user = document.getElementById('id').value
     let type_user = document.getElementById("typeUser").value
     let check_id_company = document.getElementById('company-id').value
@@ -205,7 +209,12 @@ function preInsert() {
                 inPeronal.fax = document.getElementById("fax").value;
                 arrInsert.push(inPeronal);
                 arrInsert.push(inAddress);
-                arrInsert.push(inImage);
+                if(_isImageChange === false){
+                    inImage.name = 'NO_UPlOAD'
+                    arrInsert.push(inImage);
+                }else{
+                    arrInsert.push(inImage);
+                }
 
                 console.log(arrInsert);
                 console.log(fileImage);
@@ -233,7 +242,7 @@ function preInsert() {
 
                 inPeronal.phone = document.getElementById("company-phone").value;
                 inPeronal.fax = document.getElementById("company-fax").value;
-                inImage.id = 'NO_UPlOAD'
+                inImage.name = 'NO_UPlOAD'
                 arrInsert.push(inPeronal);
                 arrInsert.push(inAddress);
                 arrInsert.push(inImage);
@@ -331,6 +340,7 @@ function uploadImage(event) {
         .value.split("\\")
         .pop()
         .split(".");
+    _isImageChange = true
     fileImage = imagefile.files[0];
     let typeImg = file[1];
     inImage.type = typeImg;
@@ -356,6 +366,8 @@ function uploadImage(event) {
 function deleteImageOne() {
     fileImage = null;
     inImage.type = null;
+    _isImageChange = true
+    inImage.data = null
     document.getElementById("uploadFile").value = "";
     var img = document.getElementById("operatorImage");
     img.src = "../../img/userProfile.png";

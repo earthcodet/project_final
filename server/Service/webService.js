@@ -133,7 +133,7 @@ class service {
         return new Promise((resolve, reject) => {
             PersonalDAOObj.getPersonal(id, name, surname).then((data) => {
                 let date = '0000-00-00'
-                for(let i = 0 ; i < data.length ; i++){
+                for (let i = 0; i < data.length; i++) {
                     if (data[i].PERSONAL_BIRTHDAY === null) {
                         data[i].PERSONAL_BIRTHDAY = undefined
                     } else {
@@ -152,12 +152,12 @@ class service {
                         date = data[i].PERSONAL_CARD_EXPIRE.toISOString().slice(0, 10)
                         data[i].PERSONAL_CARD_EXPIRE = this.formatData('TO-DISPLAY', date)
                     }
-                        date = data[i].PERSONAL_UPDATE.toISOString().slice(0, 10)
-                        data[i].PERSONAL_UPDATE = this.formatData('TO-DISPLAY', date)
-                    
+                    date = data[i].PERSONAL_UPDATE.toISOString().slice(0, 10)
+                    data[i].PERSONAL_UPDATE = this.formatData('TO-DISPLAY', date)
+
                     //USER_UPDATE
 
-                    if(i == data.length - 1 ){
+                    if (i == data.length - 1) {
                         return resolve(data)
                     }
                 }
@@ -217,6 +217,7 @@ class service {
         })
     }
     insertAddress(address) {
+        console.log(`insertAddress`)
         return new Promise((resolve, reject) => {
             AddressDAOObj.insertAddress(address).then((data) => {
                 if (data == 'true') {
@@ -246,7 +247,7 @@ class service {
                 personal.id = id
                 this.insertPersonal(personal).then((data) => {
                     if (data) {
-                        if(imageFile.id != 'NO_UPlOAD') {
+                        if (imageFile.name != 'NO_UPlOAD') {
                             console.log(`loopInsertPersonal > personal insert !! ${data}`)
                             imageFile.name = personal.id
                             this.insertImage(imageFile).then((data) => {
@@ -257,7 +258,7 @@ class service {
                                     return resolve(false)
                                 }
                             })
-                        }else{
+                        } else {
                             return resolve(true)
                         }
                     } else {
@@ -346,14 +347,47 @@ class service {
         } else {
             data.home_number === '' ? data.home_number = '-' : data.home_number = data.home_number
             data.moo === '' || data.moo === '-' ? data.moo = 'NULL' : data.moo = `'${data.moo}'`
-            data.trxk === '' || data.trxk === '-'? data.trxk = 'NULL' : data.trxk = `'${data.trxk}'`
+            data.trxk === '' || data.trxk === '-' ? data.trxk = 'NULL' : data.trxk = `'${data.trxk}'`
             data.sxy === '' || data.sxy === '-' ? data.sxy = 'NULL' : data.sxy = `'${data.sxy}'`
             data.building === '' || data.building === '-' ? data.building = 'NULL' : data.building = `'${data.building}'`
             data.road === '' || data.road === '-' ? data.road = 'NULL' : data.road = `'${data.road}'`
             return data
         }
     }
-    insertStep(personal, address, image, username) {
+    updateAddress(address) {
+        return new Promise((resolve, reject) => {
+            AddressDAOObj.updateAddress(address).then((data) => {
+                if (data) {
+                    return resolve(true)
+                } else {
+                    return resolve(false)
+                }
+            })
+        })
+    }
+    updatePersonal(personal) {
+        return new Promise((resolve, reject) => {
+            PersonalDAOObj.updatePersonal(personal).then((data) => {
+                if (data) {
+                    return resolve(true)
+                } else {
+                    return resolve(false)
+                }
+            })
+        })
+    }
+    updateImage(image) {
+        return new Promise((resolve, reject) => {
+            ImageDAOObj.updateImage(image).then((data) => {
+                if (data) {
+                    return resolve(true)
+                } else {
+                    return resolve(false)
+                }
+            })
+        })
+    }
+    personalStep(personal, address, image, username) {
 
         //checknull
 
@@ -375,18 +409,52 @@ class service {
         personal.username = username
         let newpersonal = this.formatInsert('PERSONAL', personal)
         let newaddress = this.formatInsert('ADDRESS', address)
-        console.log(newaddress)
-        console.log(newpersonal)
+        // console.log(newaddress)
+        // console.log(newpersonal)
         return new Promise((resolve, reject) => {
-            this.loopInsertAddress(newpersonal, newaddress, image).then((data) => {
-                if (data) {
-                    console.log(`main > ${data}`)
-                    return resolve(true)
-                } else {
-                    return resolve(false)
-                }
-            })
-           // return resolve(true)
+            console.log('check insert our update')
+            if (newaddress.id.length != 0 || newpersonal.id.length != 0) {
+                //Update
+                console.log('Update')
+                this.updateAddress(newaddress).then((data) => {
+                    if (data) {
+                        this.updatePersonal(newpersonal).then((data) => {
+                            if (data) {
+                                if (image.name != 'NO_UPlOAD') {
+                                    image.name = newpersonal.id
+                                    this.updateImage(image).then((data) => {
+                                        if (data) {
+                                            return resolve(true)
+                                        } else {
+                                            return resolve(false)
+                                        }
+                                    })
+                                } else {
+                                    return resolve(true)
+                                }
+                            } else {
+                                return resolve(false)
+                            }
+                        })
+
+                    } else {
+                        return resolve(false)
+                    }
+                })
+            } else {
+                //New
+                
+                this.loopInsertAddress(newpersonal, newaddress, image).then((data) => {
+                    if (data) {
+                        console.log(`main > ${data}`)
+                        return resolve(true)
+                    } else {
+                        return resolve(false)
+                    }
+                })
+            }
+
+            // return resolve(true)
         })
     }
     getUser(username, password) {
