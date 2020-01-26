@@ -317,6 +317,7 @@ function preInsert() {
                         inAddress.province_name = province[provinceValue - 1].PROVINCE_NAME;
                         //personal
                         inPeronal.type = document.getElementById("typeUser").value;
+                        inPeronal.surname = ''
                         inPeronal.name = document.getElementById("company-nameUser").value;
                         inPeronal.personal_id = document.getElementById("company-id").value;
                         inPeronal.card_issued = document.getElementById("datepicker4").value;

@@ -29,13 +29,14 @@ function exitPage() {
 function logout() {
     location.replace("/logout")
 }
-function setdeleteData(data) {
-    data === 'NO' ? false : true
-}
 function resetStyleIdDelete() {
     var id = document.getElementById('id')
     if (id != undefined || id != null) {
         id.style.textDecoration = ''
+    }
+    var company_id = document.getElementById('company-id')
+    if (company_id != undefined || company_id != null) {
+        company_id.style.textDecoration = ''
     }
 }
 function addPage() {
@@ -54,6 +55,7 @@ function addPage() {
     tempData = {}
     newAdd = true
     _isImageChange = false
+    changeOption(`บุคคลธรรมดา`)
     document.getElementById('id').disabled = false
     document.getElementById('company-id').disabled = false
     document.getElementById('typeUser').disabled = false
@@ -111,7 +113,7 @@ function insertPage() {
                                 resolve();
                             }
                         })
-                    }, 1500);
+                    }, 1000);
                 });
             }
         }).then((result) => {
@@ -195,16 +197,42 @@ function editPage() {
         })
     }
 }
-function setIdDelete() {
-    var id = document.getElementById('id')
-    if (id != null) {
-        if (id.style.textDecoration === '') {
-            id.style.textDecoration = 'line-through'
-        } else {
-            id.style.textDecoration = ''
+function setIdDelete(type) {
+    if(type === 'บุคคลธรรมดา'){
+        var id = document.getElementById('id')
+      
+        if (id != null) {
+            if (id.style.textDecoration === '') {
+                id.style.textDecoration = 'line-through'
+            } else {
+                id.style.textDecoration = ''
+            }
+        }
+    }else{
+        var company_id = document.getElementById('company-id')
+        if (company_id != null) {
+            if (company_id.style.textDecoration === '') {
+                company_id.style.textDecoration = 'line-through'
+            } else {
+                company_id.style.textDecoration = ''
+            }
         }
     }
 }
+function changeStatusDelete(status) {
+    let personalDelete = {}
+    personalDelete.id = tempData.PERSONAL_ID
+    personalDelete.is_deleted = status
+    console.log(`changeStatusDelete => `)
+    console.log(personalDelete)
+    return new Promise(function (resolve, reject) {
+        axios.post(`http://localhost:5000/update/status/delete/`, { 'personal': personalDelete }).then((result) => {
+            console.log(`changeStatusDelete = ${result.data}`)
+            return resolve(result.data);
+        })
+    })
+}
+
 function deletePage() {
     if (addNew === false) {
         Swal.fire({
@@ -219,7 +247,22 @@ function deletePage() {
             cancelButtonText: "ไม่ใช่",
             cancelButtonColor: '#dc3545',
             closeOnConfirm: false,
-            closeOnCancel: false
+            closeOnCancel: false,
+            showLoaderOnConfirm: true,
+            preConfirm: function () {
+                return new Promise(function (resolve, reject) {
+                    setTimeout(function () {
+                        //function ใน operator 
+                        changeStatusDelete('YES').then((statusDelete) => {
+                            tempData.is_deleted = 'YES'
+                            console.log(`statusDelete = ${statusDelete}`)
+                            if (statusDelete) {
+                                resolve();
+                            }
+                        })
+                    }, 1000);
+                })
+            }
         })
             .then((result) => {
                 if (result.value) {
@@ -230,7 +273,7 @@ function deletePage() {
                     });
                     // function update
                     deleteData = true
-                    setIdDelete()
+                    setIdDelete(tempData.PERSONAL_TYPE)
                     disableMenuAll()
                     enableMenu('addMenu')
                     enableMenu('editMenu')
@@ -343,8 +386,8 @@ function getImageByPeronalId(type, id) {
     })
 }
 function showItem(arrayResult) {
-
     resetParameter()
+    resetStyleIdDelete()
     console.log(arrayResult)
     changeOption(arrayResult.PERSONAL_TYPE.trim())
     if (arrayResult.PERSONAL_TYPE === 'บุคคลธรรมดา') {
@@ -359,17 +402,35 @@ function showItem(arrayResult) {
         })
     } else {
         setDataUI(arrayResult)
+        tempData = arrayResult
     }
+    console.log(arrayResult.PERSONAL_IS_DELETED === 'YES')
+    if (arrayResult.PERSONAL_IS_DELETED === 'YES') {
+        console.log('YES')
+        resetInputRequired()
+        //แสดง menu - กลุ่มมีข้อมูลที่ลบแล้ว
+        deleteData = true
+        disableMenuAll()
+        enableMenu('addMenu')
+        enableMenu('editMenu')
+        enableMenu('restoreMenu')
+        //เช็คว่าข้อมูลอยู่ในสถานะลบหรือเปล่า
+        setIdDelete(arrayResult.PERSONAL_TYPE) // ทำให้ id เป็นขีด
+        deleteData = true // status ว่าข้อมูลนั้นอยู่ในสถานะลบ
+    } else {
+        //แสดง menu - กลุ่มมีข้อมูลที่ไม่ได้ลบ
+        data = true
+        addNew = false
+        disableMenuAll()
+        enableMenu('addMenu')
+        enableMenu('editMenu')
+        enableMenu('deleteMenu')
+        enableFunction()
 
+        deleteData = false // status ว่าข้อมูลนั้นไม่ได้อยู่ในสถานะลบ
+        resetStyleIdDelete()    //เอา style ลบออก
+    }
     Swal.close()
-    data = true
-    addNew = false
-    disableMenuAll()
-    enableMenu('addMenu')
-    enableMenu('editMenu')
-    enableMenu('deleteMenu')
-    enableFunction()
-    resetStyleIdDelete()
 }
 function createResultSearch(data) {
     var tbl = document.getElementById("resultItems");
@@ -472,10 +533,51 @@ function searchOparator() {
 }
 function restorePage() {
     //function Update delete 
-    deleteData = false
-    setIdDelete()
-    disableMenuAll()
-    enableMenu('addMenu')
-    enableMenu('editMenu')
-    enableMenu('deleteMenu')
+    Swal.fire({
+        title: "สำนักงานเทศบาล",
+        html: "ต้องการยกเลิกสถาะลบหรือไม่",
+        icon: 'warning',
+        showCancelButton: true,
+        customClass: 'swal-height',
+        confirmButtonColor: "#009688",
+        confirmButtonText: "ใช่",
+        cancelButtonText: "ไม่ใช่",
+        cancelButtonColor: '#dc3545',
+        closeOnConfirm: false,
+        closeOnCancel: false,
+        showLoaderOnConfirm: true,
+        preConfirm: function () {
+            return new Promise(function (resolve, reject) {
+                setTimeout(function () {
+                    //function ใน operator 
+                    changeStatusDelete('NO').then((statusDelete) => {
+                        tempData.is_deleted = 'NO'
+                        console.log(`statusDelete = ${statusDelete}`)
+                        if (statusDelete) {
+                            resolve();
+                        }
+                    })
+                }, 1000);
+            })
+        }
+    }).then((result) => {
+        if (result.value) {
+            Swal.fire({
+                html: "ผู้ประกอบการนี้กลับอยู่ในสถานะปกติแล้ว",
+                icon: "success",
+                confirmButtonColor: "#009688"
+            });
+                resetStyleIdDelete()
+                deleteData = false
+                disableMenuAll()
+                enableMenu('addMenu')
+                enableMenu('editMenu')
+                enableMenu('deleteMenu')
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            // Swal.fire("บันทึกล้มเหลว");
+        }
+    });
+
+   
+
 }

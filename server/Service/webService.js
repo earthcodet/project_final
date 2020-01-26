@@ -373,6 +373,22 @@ class service {
             })
         })
     }
+    updateStatusDelete(personal, username) {
+        var datetime = new Date();
+        let dateForUpdate = datetime.toISOString().slice(0, 10)
+        personal.update = dateForUpdate
+        personal.username = username
+
+        return new Promise((resolve, reject) => {
+            PersonalDAOObj.updateStatusPersonal(personal).then((data) => {
+                if (data) {
+                    return resolve(true)
+                } else {
+                    return resolve(false)
+                }
+            })
+        })
+    }
     personalStep(personal, address, image, username) {
 
         //checknull

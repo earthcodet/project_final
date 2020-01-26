@@ -145,6 +145,12 @@ app.post('/insert/personal', (req, res) => {
     res.json(data)
   })
 })
+app.post('/update/status/delete', (req, res) => {
+  webService.updateStatusDelete(req.body.personal, req.session.username).then((data) => {
+    console.log(`return update-status-delete => ${data}`)
+    res.json(data)
+  })
+})
 app.get('/search/personal/:id/:name/:surname', (req, res) => {
   //id/name/surname
   if (req.params.id === 'none') {
