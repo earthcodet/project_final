@@ -73,12 +73,15 @@ class AddressDAO {
             let query = `UPDATE address SET ${value} WHERE ADDRESS_ID = ${condition}`
             con.query(query, function (err, result) {
                 if (err) {
+                    console.log(`DAO message : updateAddress error ${err.code}`)
                     console.log(err.code)
                 }
                 if(result.affectedRows === 1){
-                    console.log(`True return`)
                     return resolve(true)
                 }else{
+                    console.log(`DAO message : updateAddress result.affectedRows != 1`)
+                    console.log(address)
+                    console.log(result)
                     return resolve(false)
                 }
                 

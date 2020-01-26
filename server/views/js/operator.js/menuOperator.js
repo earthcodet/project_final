@@ -59,6 +59,11 @@ function addPage() {
     document.getElementById('id').disabled = false
     document.getElementById('company-id').disabled = false
     document.getElementById('typeUser').disabled = false
+    imageSelectype = ''
+    base64ImageSelect = ''
+    fileImage = null
+    inImage.type = null
+    inImage.data = null
 }
 
 function disableMenuAll() {
@@ -97,18 +102,55 @@ function insertPage() {
                 return new Promise(function (resolve, reject) {
                     setTimeout(function () {
                         //function ใน operator 
+                        console.log(arrInsert)
                         insertToDatabase().then((insert) => {
-                            console.log(inPeronal.personal_id)
+                            arrInsert = []
+                            console.log(`insert return =`)
                             console.log(insert)
-                            axios.get(`http://localhost:5000/search/personal/${inPeronal.personal_id}/none/none`).then((result) => {
-                                if (insert.length != 0) {
-                                    this.getImageByPeronalId(inPeronal.type, insert).then((resultImage) => {
-                                        console.log(resultImage)
-                                        tempData.image = resultImage
-                                    })
+                            inPersonal.id = insert.pid
+                            inAddress.id = insert.aid
+                            console.log(`inPersonal`)
+                            console.log(inPersonal)
+                            console.log(`tempDATA`)
+                            console.log(tempData)
+
+                            tempData.PERSONAL_TITLE = inPersonal.title
+                            tempData.PERSONAL_NAME = inPersonal.name
+                            tempData.PERSONAL_SURNAME = inPersonal.surname
+                            tempData.PERSONAL_NATIONALITY = inPersonal.nationality
+                            tempData.PERSONAL_RACE = inPersonal.race
+                            tempData.PERSONAL_BIRTHDAY = inPersonal.birthday  
+                            tempData.PERSONAL_PERSONAL_ID = inPersonal.personal_id
+                            tempData.PERSONAL_CARD_ISSUED = inPersonal.card_issued
+                            tempData.PERSONAL_CARD_EXPIRE = inPersonal.card_expipe
+                            tempData.PERSONAL_PHONE = inPersonal.phone
+                            tempData.PERSONAL_FAX = inPersonal.fax
+                            tempData.AID.ADDRESS_HOME_NUMBER = inAddress.home_number
+                            tempData.AID.ADDRESS_MOO = inAddress.moo
+                            tempData.AID.ADDRESS_TRXK = inAddress.trxk
+                            tempData.AID.ADDRESS_SXY = inAddress.sxy
+                            tempData.AID.ADDRESS_BUILDING = inAddress.building
+                            tempData.AID.ADDRESS_ROAD = inAddress.road
+                            tempData.AID.DISTRICT_NAME = inAddress.district_name
+                            tempData.AID.AMPHUR_NAME = inAddress.amphur_name
+                            tempData.AID.PROVINCE_NAME = inAddress.province_name
+                            if (inPersonal.type === 'บุคคลธรรมดา' && inImage.name != 'NO_UPlOAD') {
+                                let imageTemp = {
+                                    'IMAGE_NAME': insert.pid,
+                                    'IMAGE_TYPE': imageSelectype,
+                                    'IMAGE_DATA': base64ImageSelect
                                 }
-                                tempData = result.data[0]
-                            })
+                                tempData.image = imageTemp
+                            }
+                            // else if(inImage.name === 'NO_UPlOAD'){
+                            //     let imageTemp = {
+                            //         'IMAGE_NAME': insert.pid,
+                            //         'IMAGE_TYPE': null,
+                            //         'IMAGE_DATA': null
+                            //     }
+                            //     tempData.image = imageTemp
+                            // }
+                            console.log(tempData)
                             if (insert.length != 0) {
                                 resolve();
                             }
@@ -125,6 +167,8 @@ function insertPage() {
                 });
                 data = true
                 addNew = false
+                imageSelectype = ''
+                base64ImageSelect = ''
                 disableMenuAll()
                 enableMenu('addMenu')
                 enableMenu('editMenu')
@@ -198,9 +242,9 @@ function editPage() {
     }
 }
 function setIdDelete(type) {
-    if(type === 'บุคคลธรรมดา'){
+    if (type === 'บุคคลธรรมดา') {
         var id = document.getElementById('id')
-      
+
         if (id != null) {
             if (id.style.textDecoration === '') {
                 id.style.textDecoration = 'line-through'
@@ -208,7 +252,7 @@ function setIdDelete(type) {
                 id.style.textDecoration = ''
             }
         }
-    }else{
+    } else {
         var company_id = document.getElementById('company-id')
         if (company_id != null) {
             if (company_id.style.textDecoration === '') {
@@ -317,6 +361,8 @@ function deletePage() {
                         resetFunction()
                         resetImageDefault()
                     }
+                    console.log(isEmpty(tempData))
+                    console.log(tempData)
                     if (isEmpty(tempData) === false && data === true) {
                         resetFunction()
                         setDataUI(tempData)
@@ -364,14 +410,41 @@ function searchPersonal() {
             tSearchSurname = surname
             console.log('Searching')
             axios.get(`http://localhost:5000/search/personal/${id}/${name}/${surname}`).then((result) => {
-                createResultSearch(result.data)
-                return resolve(result.data);
+                if (result.data != 'Not found') {
+                    createResultSearch(result.data)
+                    errorSearch('', 'HIDE')
+
+                    return resolve(result.data);
+                } else {
+                    errorSearch('not found', 'SHOW')
+                    var tbl = document.getElementById("resultItems");
+                    if (tbl.getElementsByTagName("tbody")[0] != null || tbl.getElementsByTagName("tbody")[0] != undefined) {
+                        tbl.removeChild(tbl.getElementsByTagName("tbody")[0])
+                    }
+                    console.log(result.data)
+
+                }
             })
         })
     } else {
-        console.log(`list search item not change`)
+        console.log(`Search query doesn't change`)
+        errorSearch(`query doesn't change`, 'SHOW')
     }
 
+}
+function errorSearch(texterror, action) {
+    let error = document.getElementById('error_search')
+    error.classList.toggle('animation')
+    if (action === 'SHOW') {
+        error.style.display = ''
+        if (texterror === 'not found') {
+            error.innerText = 'ค้นหารายชื่อผู้ประกอบการไม่พบ'
+        } else {
+            error.innerText = 'คำค้นหาไม่มีการเปลี่ยนแปลง'
+        }
+    } else {
+        error.style.display = 'none'
+    }
 }
 function getImageByPeronalId(type, id) {
     return new Promise((resolve, reject) => {
@@ -392,6 +465,8 @@ function showItem(arrayResult) {
     changeOption(arrayResult.PERSONAL_TYPE.trim())
     if (arrayResult.PERSONAL_TYPE === 'บุคคลธรรมดา') {
         getImageByPeronalId(arrayResult.PERSONAL_TYPE, arrayResult.PERSONAL_ID).then((result) => {
+            console.log(`pid = ${arrayResult.PERSONAL_ID}`)
+            console.log(result)
             if (result != false || result != null) {
                 arrayResult.image = result
                 setDataUI(arrayResult)
@@ -469,15 +544,16 @@ function createResultSearch(data) {
             cell.appendChild(cellText);
             row.appendChild(cell);
         }
-
-        // add the row to the end of the table body
         tblBody.appendChild(row);
     }
-
-    // put the <tbody> in the <table>
     tbl.appendChild(tblBody);
 }
-
+function runScript(e) {
+    if (e.keyCode == 13) {
+        searchPersonal()
+        return false;
+    }
+}
 function searchOparator() {
     console.log(addNew)
     if (addNew) {
@@ -488,7 +564,7 @@ function searchOparator() {
         tSearchSurname = ''
         tSearchId = ''
         var swal_html = `<div >
-        <div class="display-center">
+        <div class="display-center" onkeypress="return runScript(event)">
                     <h5 style="font-size: 100%;">
                         ชื่อ :
                         <input type="text" id="popSearchName" style="width: 18%;">
@@ -498,12 +574,14 @@ function searchOparator() {
                         <input type="text" id="popSearchId" style="width: 18%;" >
                         <button type="button" style="width: auto;height: auto;"
                         class="btn btn-secondary is-color" onClick='searchPersonal()'>
-    
                                 <i class="fa fa-search"></i> 
                                 ค้นหา
                            
                         </button>
-                    </h5>
+                        <br>
+                        <font id='error_search' style='display:none'class='alert'> ค้นหาไม่พบ </font>
+                    </h5>   
+                    
                 </div>
         <div class="search-popup-height">
             <table id='resultItems' class="table tablesearch table-hover cursor-pointer">
@@ -567,17 +645,17 @@ function restorePage() {
                 icon: "success",
                 confirmButtonColor: "#009688"
             });
-                resetStyleIdDelete()
-                deleteData = false
-                disableMenuAll()
-                enableMenu('addMenu')
-                enableMenu('editMenu')
-                enableMenu('deleteMenu')
+            resetStyleIdDelete()
+            deleteData = false
+            disableMenuAll()
+            enableMenu('addMenu')
+            enableMenu('editMenu')
+            enableMenu('deleteMenu')
         } else if (result.dismiss === Swal.DismissReason.cancel) {
             // Swal.fire("บันทึกล้มเหลว");
         }
     });
 
-   
+
 
 }

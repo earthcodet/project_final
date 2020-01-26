@@ -4,6 +4,8 @@ let arrInsert = [];
 let fileImage = null;
 let _isImageChange = false
 let newAdd = false
+let base64ImageSelect = ''
+let imageSelectype = ''
 let inAddress = {
     id: "",
     home_number: "",
@@ -16,7 +18,7 @@ let inAddress = {
     amphur_name: "",
     province_name: ""
 };
-let inPeronal = {
+let inPersonal = {
     id: "",
     address_id: "",
     title: "",
@@ -40,7 +42,7 @@ let inImage = {
 
 function resetParameter() {
     arrInsert = [];
-    inPeronal = {
+    inPersonal = {
         id: "",
         address_id: "",
         title: "",
@@ -74,7 +76,8 @@ function setDataUI(data) {
     console.log(data)
     console.log(data.PERSONAL_TYPE === 'บุคคลธรรมดา')
     inAddress.id = data.AID.ADDRESS_ID
-    inPeronal.id = data.PERSONAL_ID
+    inPersonal.id = data.PERSONAL_ID
+
     document.getElementById('company-id').disabled = true
     document.getElementById('id').disabled = true
     document.getElementById('typeUser').value = data.PERSONAL_TYPE
@@ -122,7 +125,7 @@ function setDataUI(data) {
         if (data.image != undefined) {
             console.log(data.image)
             let img = document.getElementById('operatorImage')
-            if (data.image.IMAGE_TYPE != null) {
+            if (data.image.IMAGE_DATA != null && data.image.IMAGE_DATA != undefined) {
                 img.src = `data:image/${data.image.IMAGE_TYPE};base64,` + data.image.IMAGE_DATA
             } else {
                 img.src = `../../img/userProfile.png`
@@ -259,6 +262,7 @@ function preInsert() {
                 if (formatPhone(document.getElementById('phone').value.trim()) || formatPhone(document.getElementById('company-phone').value.trim())) {
                     if (document.getElementById("typeUser").value === 'บุคคลธรรมดา') {
                         //address
+                        console.log(`preinsert บุคคลธรรมดา`)
                         inAddress.home_number = document.getElementById('homeId').value
                         inAddress.moo = document.getElementById('moo').value
                         inAddress.trxk = document.getElementById('trxk').value
@@ -275,21 +279,23 @@ function preInsert() {
                         inAddress.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
                         inAddress.province_name = province[provinceValue - 1].PROVINCE_NAME;
                         //personal
-                        inPeronal.title = document.getElementById("title").value;
-                        inPeronal.type = document.getElementById("typeUser").value;
-                        inPeronal.name = document.getElementById("nameUser").value;
-                        inPeronal.surname = document.getElementById("surnameUser").value;
-                        inPeronal.nationality = document.getElementById("nationality").value;
-                        inPeronal.race = document.getElementById("race").value;
-                        inPeronal.birthday = document.getElementById("datepicker3").value;
-                        inPeronal.personal_id = document.getElementById("id").value;
-                        inPeronal.card_issued = document.getElementById("datepicker1").value;
-                        inPeronal.card_expipe = document.getElementById("datepicker2").value;
+                        inPersonal.title = document.getElementById("title").value;
+                        inPersonal.type = document.getElementById("typeUser").value;
+                        inPersonal.name = document.getElementById("nameUser").value;
+                        inPersonal.surname = document.getElementById("surnameUser").value;
+                        inPersonal.nationality = document.getElementById("nationality").value;
+                        inPersonal.race = document.getElementById("race").value;
+                        inPersonal.birthday = document.getElementById("datepicker3").value;
+                        inPersonal.personal_id = document.getElementById("id").value;
+                        inPersonal.card_issued = document.getElementById("datepicker1").value;
+                        inPersonal.card_expipe = document.getElementById("datepicker2").value;
 
-                        inPeronal.phone = document.getElementById("phone").value;
-                        inPeronal.fax = document.getElementById("fax").value;
-                        arrInsert.push(inPeronal);
+                        inPersonal.phone = document.getElementById("phone").value;
+                        inPersonal.fax = document.getElementById("fax").value;
+                        arrInsert.push(inPersonal);
                         arrInsert.push(inAddress);
+                        console.log(`_isImageChange ${_isImageChange} === false (${_isImageChange === false}) 
+                        && newAdd ${newAdd} === false (${newAdd === false})`)
                         if (_isImageChange === false && newAdd === false) {
                             inImage.name = 'NO_UPlOAD'
                             arrInsert.push(inImage);
@@ -301,6 +307,7 @@ function preInsert() {
                         console.log(fileImage);
                         return true;
                     } else {
+                        console.log(`preinsert นิติบุคคล`)
                         // นิติบุคคล
                         inAddress.home_number = document.getElementById('company-homeId').value
                         inAddress.moo = document.getElementById('company-moo').value
@@ -316,16 +323,16 @@ function preInsert() {
                         inAddress.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
                         inAddress.province_name = province[provinceValue - 1].PROVINCE_NAME;
                         //personal
-                        inPeronal.type = document.getElementById("typeUser").value;
-                        inPeronal.surname = ''
-                        inPeronal.name = document.getElementById("company-nameUser").value;
-                        inPeronal.personal_id = document.getElementById("company-id").value;
-                        inPeronal.card_issued = document.getElementById("datepicker4").value;
+                        inPersonal.type = document.getElementById("typeUser").value;
+                        inPersonal.surname = ''
+                        inPersonal.name = document.getElementById("company-nameUser").value;
+                        inPersonal.personal_id = document.getElementById("company-id").value;
+                        inPersonal.card_issued = document.getElementById("datepicker4").value;
 
-                        inPeronal.phone = document.getElementById("company-phone").value;
-                        inPeronal.fax = document.getElementById("company-fax").value;
+                        inPersonal.phone = document.getElementById("company-phone").value;
+                        inPersonal.fax = document.getElementById("company-fax").value;
                         inImage.name = 'NO_UPlOAD'
-                        arrInsert.push(inPeronal);
+                        arrInsert.push(inPersonal);
                         arrInsert.push(inAddress);
                         arrInsert.push(inImage);
                         return true
@@ -393,30 +400,62 @@ function duplicateId(personalId) {
             });
     });
 }
-function checkId(value) {
+function checkId(value, type) {
     if (value.length != 13) {
         _isCheckPersonalId = false;
     }
-    // console.log(`value = ${value} and value.length = ${value.length} and _isCheckPersonalId = ${_isIdCheckPersonal}`)
     if (value.length === 13) {
-        if (_isIdCheckPersonal != value) {
-            duplicateId(value).then(data => {
-                if (!data) {
-                    Swal.fire({
-                        title: "เลขประจำตัวผู้ประกอบการนี้สามารถใช้ได้",
-                        width: "30%",
-                        showConfirmButton: true,
-                        closeOnConfirm: false,
-                        closeOnCancel: false,
-                        confirmButtonColor: "#009688",
-                        icon: "success"
-                    });
-                    _isCheckPersonalId = value
-                    _isUsed = false;
+        if (type === 'PERSONAL') {
+            console.log(`Tid =`+_isIdCheckPersonal)
+            console.log(`Qid =`+value)
+            if (_isIdCheckPersonal != value) {
+                let tcp = value.split('')
+                console.log(tcp)
+                let sum_no1 = (parseInt(tcp[0]) * 13) + (parseInt(tcp[1]) * 12) + (parseInt(tcp[2]) * 11) + (parseInt(tcp[3]) * 10)
+                sum_no1 = sum_no1 + (parseInt(tcp[4]) * 9) + (parseInt(tcp[5]) * 8) + (parseInt(tcp[6]) * 7) + (parseInt(tcp[7]) * 6)
+                sum_no1 = sum_no1 + (parseInt(tcp[8]) * 5) + (parseInt(tcp[9]) * 4) + (parseInt(tcp[10]) * 3) + (parseInt(tcp[11]) * 2)
+                sum_no1 = sum_no1 % 11
+                console.log(sum_no1)
+                let sum_no2 = (11 - sum_no1) % 10
+                let checkIdIndex13 = parseInt(tcp[12]) === sum_no2
+                console.log(`parseInt(tcp[12])`+parseInt(tcp[12]))
+                console.log(`sum_no2`+sum_no1)
+                _isIdCheckPersonal = value
+                if (checkIdIndex13) {
+                    duplicateId(value).then(data => {
+                        if (!data) {
+                            Swal.fire({
+                                title: "เลขประจำตัวผู้ประกอบการนี้สามารถใช้ได้",
+                                width: "30%",
+                                showConfirmButton: true,
+                                closeOnConfirm: false,
+                                closeOnCancel: false,
+                                confirmButtonColor: "#009688",
+                                icon: "success"
+                            });
+                            _isCheckPersonalId = value
+                            _isUsed = false;
 
+
+                        } else {
+                            Swal.fire({
+                                title: "เลขประจำตัวผู้ประกอบการนี้มีในระบบแล้ว",
+                                width: "30%",
+                                showConfirmButton: true,
+                                closeOnConfirm: false,
+                                closeOnCancel: false,
+                                confirmButtonColor: "#009688",
+                                icon: "error"
+                            });
+                            _isUsed = true;
+                            document.getElementById('id').classList.add('alertInput')
+                            document.getElementById('company-id').classList.add('alertInput')
+                        }
+                        console.log(_isUsed);
+                    });
                 } else {
                     Swal.fire({
-                        title: "เลขประจำตัวผู้ประกอบการนี้มีในระบบแล้ว",
+                        title: "หมายเลขประจำตัวประชาชนไม่ถูกต้อง",
                         width: "30%",
                         showConfirmButton: true,
                         closeOnConfirm: false,
@@ -428,10 +467,45 @@ function checkId(value) {
                     document.getElementById('id').classList.add('alertInput')
                     document.getElementById('company-id').classList.add('alertInput')
                 }
-                console.log(_isUsed);
-            });
+            } else {
+                console.log(`personal id not change`)
+            }
         } else {
-            console.log(`personal id not change`)
+            if (_isIdCheckPersonal != value) {
+                duplicateId(value).then(data => {
+                    if (!data) {
+                        Swal.fire({
+                            title: "เลขประจำตัวผู้ประกอบการนี้สามารถใช้ได้",
+                            width: "30%",
+                            showConfirmButton: true,
+                            closeOnConfirm: false,
+                            closeOnCancel: false,
+                            confirmButtonColor: "#009688",
+                            icon: "success"
+                        });
+                        _isCheckPersonalId = value
+                        _isUsed = false;
+
+
+                    } else {
+                        Swal.fire({
+                            title: "เลขประจำตัวผู้ประกอบการนี้มีในระบบแล้ว",
+                            width: "30%",
+                            showConfirmButton: true,
+                            closeOnConfirm: false,
+                            closeOnCancel: false,
+                            confirmButtonColor: "#009688",
+                            icon: "error"
+                        });
+                        _isUsed = true;
+                        document.getElementById('id').classList.add('alertInput')
+                        document.getElementById('company-id').classList.add('alertInput')
+                    }
+                    console.log(_isUsed);
+                });
+            } else {
+                console.log(`personal id not change`)
+            }
         }
     } else {
         return false;
@@ -457,22 +531,22 @@ function uploadImage(event) {
     fileImage = imagefile.files[0];
     let typeImg = file[1];
     inImage.type = typeImg;
-    if (target.value.length == 0) {
-        console.log("Suspect Cancel was hit, no files selected.");
-        if (0 == target.files.length) {
-            console.log("im delete image");
-            cancelButton.onclick();
-        }
-    } else {
-        var selectedFile = event.target.files[0];
-        var reader = new FileReader();
-        var img = document.getElementById("operatorImage");
-        reader.onload = function (event) {
-            img.src = event.target.result;
-            img.alt = "operator";
-        };
-        reader.readAsDataURL(selectedFile);
-    }
+    imageSelectype = typeImg
+    var selectedFile = event.target.files[0];
+    var reader = new FileReader();
+    var img = document.getElementById("operatorImage");
+
+    reader.onload = function (event) {
+        img.src = event.target.result;
+        img.alt = "operator";
+        var BASE64_MARKER = ';base64,';
+        var base64Index = event.target.result.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
+        var base64 = event.target.result.substring(base64Index);
+        base64ImageSelect = base64
+        console.log(base64ImageSelect)
+    };
+    reader.readAsDataURL(selectedFile);
+
 }
 function deleteImageOne() {
     fileImage = null;
@@ -492,12 +566,12 @@ function insertToDatabase() {
         var formData = new FormData();
         formData.append("image", fileImage);
         formData.append("personal", JSON.stringify(arrInsert));
-        axios
-            .post("http://localhost:5000/insert/personal", formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data"
-                }
-            })
+        console.log(arrInsert)
+        axios.post("http://localhost:5000/insert/personal", formData, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        })
             .then(data => {
                 return resolve(data.data);
             });
@@ -527,22 +601,25 @@ function changeOption(value) {
 
     }
 }
-function checkPhone(value,id) {
+function checkPhone(value, id) {
     console.log(value)
     let tempCheck = value.split("")
     console.log(tempCheck.length)
     console.log(value.length)
-    if(tempCheck[0] === '-' ){
+    if (tempCheck[0] === '-') {
         document.getElementById(id).value = '-'
     }
-   for(let i = 1 ; i < tempCheck.length ; i++){
-        if(tempCheck[0] ===  '0'){
-            if(tempCheck[1] === '0'){
+    if (tempCheck[0] != '0' && tempCheck != '-') {
+        document.getElementById(id).value = ''
+    }
+    for (let i = 1; i < tempCheck.length; i++) {
+        if (tempCheck[0] === '0') {
+            if (tempCheck[1] === '0') {
                 document.getElementById(id).value = '0'
             }
-            if(tempCheck[i] === '-'){
-                document.getElementById(id).value = value.slice(0 , value.length - 1)
+            if (tempCheck[i] === '-') {
+                document.getElementById(id).value = value.slice(0, value.length - 1)
             }
         }
-   }
+    }
 }

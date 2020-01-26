@@ -74,7 +74,6 @@ class PersonalDAO {
                     return resolve(err.code)
                 }
                 if(result.affectedRows === 1){
-                    console.log(`True return`)
                     return resolve(true)
                 }else{
                     return resolve(false)
@@ -94,7 +93,6 @@ class PersonalDAO {
                     return resolve(err.code)
                 }
                 if(result.affectedRows === 1){
-                    console.log(`True return`)
                     return resolve(true)
                 }else{
                     return resolve(false)
@@ -109,7 +107,6 @@ class PersonalDAO {
             let condition = `PERSONAL_PERSONAL_ID LIKE '%${id}%' AND PERSONAL_NAME LIKE '%${name}%' AND PERSONAL_SURNAME LIKE '%${surname}%'`
             let query = `SELECT ${value} FROM personal WHERE ${condition}`
             con.query(query, function (err, result) {
-                console.log(result)
                 if (err) {
                     console.log(err.code)
                 }else{
