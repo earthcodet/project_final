@@ -40,6 +40,9 @@ function resetStyleIdDelete() {
     }
 }
 function addPage() {
+    window.onbeforeunload = function() {
+        return 'You have unsaved changes!';
+    }
     addNew = true
     deleteData = false
     data = false
@@ -213,6 +216,7 @@ function insertPage() {
                 }
             }
         });
+        window.onbeforeunload = null
     }
 
 }
@@ -226,6 +230,9 @@ function resetImageDefault() {
 }
 function editPage() {
     if (!deleteData) {
+        window.onbeforeunload = function() {
+            return 'You have unsaved changes!';
+        }
         addNew = true
         _isImageChange = false
         disableMenuAll()
@@ -353,6 +360,7 @@ function deletePage() {
                         confirmButtonColor: "#009688"
                     });
                     resetInputRequired()
+                    window.onbeforeunload = null
                     if (data === false) {
                         resetInputUI()
                         addNew = false
