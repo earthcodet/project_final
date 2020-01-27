@@ -54,8 +54,10 @@ class ImageDAO {
                 if (err) {
                     console.log(err.code) 
                 }
+                console.log(result)
                 if(result.length != 0 && result[0].IMAGE_DATA != null){
-                    result[0].IMAGE_DATA = new Buffer.from(result[0].IMAGE_DATA, 'binary').toString('base64');
+                    console.log(result[0].IMAGE_DATA)
+                    result[0].IMAGE_DATA = Buffer.from(result[0].IMAGE_DATA, 'binary').toString('base64');
                 }else {
                     result[0].IMAGE_DATA = null
                 }
