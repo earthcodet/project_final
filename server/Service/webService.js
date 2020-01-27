@@ -342,7 +342,7 @@ class service {
                 let temp = date.split('-')
                 let day = temp[0]
                 let month = temp[1]
-                let year = temp[2]
+                let year = parseInt(temp[2]) - 543
                 let format = `${year}-${month}-${day}` //2020-01-16
                 return format
             }
@@ -355,7 +355,7 @@ class service {
                 let temp = realdate.split('-')
                 let day = temp[2]
                 let month = temp[1]
-                let year = temp[0]
+                let year = parseInt(temp[0])+543
                 let format = `${day}-${month}-${year}` //16-01-2563
                 return format
             }
