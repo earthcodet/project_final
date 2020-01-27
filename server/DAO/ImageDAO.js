@@ -8,7 +8,6 @@ var con = mysql.createConnection({
 
 class ImageDAO {
     insertImage(image) {
-        console.log(image)
         return new Promise((resolve, reject) => {
             var query = "INSERT INTO `image` SET ?"
                 ,
@@ -22,6 +21,29 @@ class ImageDAO {
                     console.log(err.code) 
                 }
                 return resolve(result)
+            })
+        })
+    }
+    updateImage(image) {
+        return new Promise((resolve, reject) => {
+            let text  = 'UPDATE `image` SET ? WHERE IMAGE_NAME = '
+            text = text + `'${image.name}'`
+           let  query = text
+            ,
+            values ={
+                IMAGE_TYPE: image.type,
+                IMAGE_DATA: image.data
+            }
+            con.query(query, values, function (err, result) {
+                if (err) {
+                    console.log(err.code)
+                }
+                if(result.affectedRows === 1){
+                    return resolve(true)
+                }else{
+                    return resolve(false)
+                }
+                
             })
         })
     }

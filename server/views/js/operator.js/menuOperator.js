@@ -29,13 +29,14 @@ function exitPage() {
 function logout() {
     location.replace("/logout")
 }
-function setdeleteData(data) {
-    data === 'NO' ? false : true
-}
 function resetStyleIdDelete() {
     var id = document.getElementById('id')
     if (id != undefined || id != null) {
         id.style.textDecoration = ''
+    }
+    var company_id = document.getElementById('company-id')
+    if (company_id != undefined || company_id != null) {
+        company_id.style.textDecoration = ''
     }
 }
 function addPage() {
@@ -49,7 +50,20 @@ function addPage() {
     resetStyleIdDelete()
     resetFunction()
     resetImageDefault()
+    resetParameter()
+    newAddress()
+    tempData = {}
+    newAdd = true
+    _isImageChange = false
+    changeOption(`บุคคลธรรมดา`)
+    document.getElementById('id').disabled = false
+    document.getElementById('company-id').disabled = false
     document.getElementById('typeUser').disabled = false
+    imageSelectype = ''
+    base64ImageSelect = ''
+    fileImage = null
+    inImage.type = null
+    inImage.data = null
 }
 
 function disableMenuAll() {
@@ -88,8 +102,56 @@ function insertPage() {
                 return new Promise(function (resolve, reject) {
                     setTimeout(function () {
                         //function ใน operator 
+                        console.log(arrInsert)
                         insertToDatabase().then((insert) => {
-                            if (insert) {
+                            arrInsert = []
+                            console.log(`insert return =`)
+                            console.log(insert)
+                            inPersonal.id = insert.pid
+                            inAddress.id = insert.aid
+                            console.log(`inPersonal`)
+                            console.log(inPersonal)
+                            console.log(`tempDATA`)
+                            console.log(tempData)
+
+                            tempData.PERSONAL_TITLE = inPersonal.title
+                            tempData.PERSONAL_NAME = inPersonal.name
+                            tempData.PERSONAL_SURNAME = inPersonal.surname
+                            tempData.PERSONAL_NATIONALITY = inPersonal.nationality
+                            tempData.PERSONAL_RACE = inPersonal.race
+                            tempData.PERSONAL_BIRTHDAY = inPersonal.birthday  
+                            tempData.PERSONAL_PERSONAL_ID = inPersonal.personal_id
+                            tempData.PERSONAL_CARD_ISSUED = inPersonal.card_issued
+                            tempData.PERSONAL_CARD_EXPIRE = inPersonal.card_expipe
+                            tempData.PERSONAL_PHONE = inPersonal.phone
+                            tempData.PERSONAL_FAX = inPersonal.fax
+                            tempData.AID.ADDRESS_HOME_NUMBER = inAddress.home_number
+                            tempData.AID.ADDRESS_MOO = inAddress.moo
+                            tempData.AID.ADDRESS_TRXK = inAddress.trxk
+                            tempData.AID.ADDRESS_SXY = inAddress.sxy
+                            tempData.AID.ADDRESS_BUILDING = inAddress.building
+                            tempData.AID.ADDRESS_ROAD = inAddress.road
+                            tempData.AID.DISTRICT_NAME = inAddress.district_name
+                            tempData.AID.AMPHUR_NAME = inAddress.amphur_name
+                            tempData.AID.PROVINCE_NAME = inAddress.province_name
+                            if (inPersonal.type === 'บุคคลธรรมดา' && inImage.name != 'NO_UPlOAD') {
+                                let imageTemp = {
+                                    'IMAGE_NAME': insert.pid,
+                                    'IMAGE_TYPE': imageSelectype,
+                                    'IMAGE_DATA': base64ImageSelect
+                                }
+                                tempData.image = imageTemp
+                            }
+                            // else if(inImage.name === 'NO_UPlOAD'){
+                            //     let imageTemp = {
+                            //         'IMAGE_NAME': insert.pid,
+                            //         'IMAGE_TYPE': null,
+                            //         'IMAGE_DATA': null
+                            //     }
+                            //     tempData.image = imageTemp
+                            // }
+                            console.log(tempData)
+                            if (insert.length != 0) {
                                 resolve();
                             }
                         })
@@ -105,6 +167,8 @@ function insertPage() {
                 });
                 data = true
                 addNew = false
+                imageSelectype = ''
+                base64ImageSelect = ''
                 disableMenuAll()
                 enableMenu('addMenu')
                 enableMenu('editMenu')
@@ -125,15 +189,26 @@ function insertPage() {
                     html: "<h2>ยกเลิกสำเร็จ</h2>",
                     confirmButtonColor: "#009688"
                 });
-                addNew = false
-                disableMenuAll()
-                enableMenu('addMenu')
-                enableMenu('saveMenu')
-                resetFunction()
-                enableFunction()
-                resetImageDefault()
-                resetStyleIdDelete()
-
+                if (data === false) {
+                    resetInputUI()
+                    addNew = false
+                    disableMenuAll()
+                    enableMenu('addMenu')
+                    enableFunction()
+                    resetStyleIdDelete()
+                    resetFunction()
+                    resetImageDefault()
+                }
+                if (isEmpty(tempData) === false && data === true) {
+                    resetFunction()
+                    setDataUI(tempData)
+                    disableMenuAll()
+                    addNew = false
+                    enableMenu('addMenu')
+                    enableMenu('editMenu')
+                    enableMenu('deleteMenu')
+                    enableFunction()
+                }
             }
         });
     }
@@ -150,6 +225,7 @@ function resetImageDefault() {
 function editPage() {
     if (!deleteData) {
         addNew = true
+        _isImageChange = false
         disableMenuAll()
         enableMenu('saveMenu')
         disableFunction()
@@ -165,16 +241,42 @@ function editPage() {
         })
     }
 }
-function setIdDelete() {
-    var id = document.getElementById('id')
-    if (id != null) {
-        if (id.style.textDecoration === '') {
-            id.style.textDecoration = 'line-through'
-        } else {
-            id.style.textDecoration = ''
+function setIdDelete(type) {
+    if (type === 'บุคคลธรรมดา') {
+        var id = document.getElementById('id')
+
+        if (id != null) {
+            if (id.style.textDecoration === '') {
+                id.style.textDecoration = 'line-through'
+            } else {
+                id.style.textDecoration = ''
+            }
+        }
+    } else {
+        var company_id = document.getElementById('company-id')
+        if (company_id != null) {
+            if (company_id.style.textDecoration === '') {
+                company_id.style.textDecoration = 'line-through'
+            } else {
+                company_id.style.textDecoration = ''
+            }
         }
     }
 }
+function changeStatusDelete(status) {
+    let personalDelete = {}
+    personalDelete.id = tempData.PERSONAL_ID
+    personalDelete.is_deleted = status
+    console.log(`changeStatusDelete => `)
+    console.log(personalDelete)
+    return new Promise(function (resolve, reject) {
+        axios.post(`http://localhost:5000/update/status/delete/`, { 'personal': personalDelete }).then((result) => {
+            console.log(`changeStatusDelete = ${result.data}`)
+            return resolve(result.data);
+        })
+    })
+}
+
 function deletePage() {
     if (addNew === false) {
         Swal.fire({
@@ -189,7 +291,22 @@ function deletePage() {
             cancelButtonText: "ไม่ใช่",
             cancelButtonColor: '#dc3545',
             closeOnConfirm: false,
-            closeOnCancel: false
+            closeOnCancel: false,
+            showLoaderOnConfirm: true,
+            preConfirm: function () {
+                return new Promise(function (resolve, reject) {
+                    setTimeout(function () {
+                        //function ใน operator 
+                        changeStatusDelete('YES').then((statusDelete) => {
+                            tempData.is_deleted = 'YES'
+                            console.log(`statusDelete = ${statusDelete}`)
+                            if (statusDelete) {
+                                resolve();
+                            }
+                        })
+                    }, 1000);
+                })
+            }
         })
             .then((result) => {
                 if (result.value) {
@@ -200,11 +317,13 @@ function deletePage() {
                     });
                     // function update
                     deleteData = true
-                    setIdDelete()
+                    setIdDelete(tempData.PERSONAL_TYPE)
                     disableMenuAll()
                     enableMenu('addMenu')
                     enableMenu('editMenu')
                     enableMenu('restoreMenu')
+
+                    resetInputRequired()
                 } else if (result.dismiss === Swal.DismissReason.cancel) {
                     // Swal.fire("บันทึกล้มเหลว");
                 }
@@ -231,6 +350,7 @@ function deletePage() {
                         icon: "success",
                         confirmButtonColor: "#009688"
                     });
+                    resetInputRequired()
                     if (data === false) {
                         resetInputUI()
                         addNew = false
@@ -241,6 +361,8 @@ function deletePage() {
                         resetFunction()
                         resetImageDefault()
                     }
+                    console.log(isEmpty(tempData))
+                    console.log(tempData)
                     if (isEmpty(tempData) === false && data === true) {
                         resetFunction()
                         setDataUI(tempData)
@@ -288,14 +410,41 @@ function searchPersonal() {
             tSearchSurname = surname
             console.log('Searching')
             axios.get(`http://localhost:5000/search/personal/${id}/${name}/${surname}`).then((result) => {
-                createResultSearch(result.data)
-                return resolve(result.data);
+                if (result.data != 'Not found') {
+                    createResultSearch(result.data)
+                    errorSearch('', 'HIDE')
+
+                    return resolve(result.data);
+                } else {
+                    errorSearch('not found', 'SHOW')
+                    var tbl = document.getElementById("resultItems");
+                    if (tbl.getElementsByTagName("tbody")[0] != null || tbl.getElementsByTagName("tbody")[0] != undefined) {
+                        tbl.removeChild(tbl.getElementsByTagName("tbody")[0])
+                    }
+                    console.log(result.data)
+
+                }
             })
         })
     } else {
-        console.log(`list search item not change`)
+        console.log(`Search query doesn't change`)
+        errorSearch(`query doesn't change`, 'SHOW')
     }
 
+}
+function errorSearch(texterror, action) {
+    let error = document.getElementById('error_search')
+    error.classList.toggle('animation')
+    if (action === 'SHOW') {
+        error.style.display = ''
+        if (texterror === 'not found') {
+            error.innerText = 'ค้นหารายชื่อผู้ประกอบการไม่พบ'
+        } else {
+            error.innerText = 'คำค้นหาไม่มีการเปลี่ยนแปลง'
+        }
+    } else {
+        error.style.display = 'none'
+    }
 }
 function getImageByPeronalId(type, id) {
     return new Promise((resolve, reject) => {
@@ -310,26 +459,53 @@ function getImageByPeronalId(type, id) {
     })
 }
 function showItem(arrayResult) {
-    console.log(arrayResult)
-    getImageByPeronalId(arrayResult.PERSONAL_TYPE, arrayResult.PERSONAL_ID).then((result) => {
-        if (result != false || result != null) {
-            arrayResult.image = result
-            setDataUI(arrayResult)
-        } else {
-            setDataUI(arrayResult)
-        }
-        tempData = arrayResult
-    })
-
-    Swal.close()
-    data = true
-    addNew = false
-    disableMenuAll()
-    enableMenu('addMenu')
-    enableMenu('editMenu')
-    enableMenu('deleteMenu')
-    enableFunction()
+    resetParameter()
     resetStyleIdDelete()
+    console.log(arrayResult)
+    changeOption(arrayResult.PERSONAL_TYPE.trim())
+    if (arrayResult.PERSONAL_TYPE === 'บุคคลธรรมดา') {
+        getImageByPeronalId(arrayResult.PERSONAL_TYPE, arrayResult.PERSONAL_ID).then((result) => {
+            console.log(`pid = ${arrayResult.PERSONAL_ID}`)
+            console.log(result)
+            if (result != false || result != null) {
+                arrayResult.image = result
+                setDataUI(arrayResult)
+            } else {
+                setDataUI(arrayResult)
+            }
+            tempData = arrayResult
+        })
+    } else {
+        setDataUI(arrayResult)
+        tempData = arrayResult
+    }
+    console.log(arrayResult.PERSONAL_IS_DELETED === 'YES')
+    if (arrayResult.PERSONAL_IS_DELETED === 'YES') {
+        console.log('YES')
+        resetInputRequired()
+        //แสดง menu - กลุ่มมีข้อมูลที่ลบแล้ว
+        deleteData = true
+        disableMenuAll()
+        enableMenu('addMenu')
+        enableMenu('editMenu')
+        enableMenu('restoreMenu')
+        //เช็คว่าข้อมูลอยู่ในสถานะลบหรือเปล่า
+        setIdDelete(arrayResult.PERSONAL_TYPE) // ทำให้ id เป็นขีด
+        deleteData = true // status ว่าข้อมูลนั้นอยู่ในสถานะลบ
+    } else {
+        //แสดง menu - กลุ่มมีข้อมูลที่ไม่ได้ลบ
+        data = true
+        addNew = false
+        disableMenuAll()
+        enableMenu('addMenu')
+        enableMenu('editMenu')
+        enableMenu('deleteMenu')
+        enableFunction()
+
+        deleteData = false // status ว่าข้อมูลนั้นไม่ได้อยู่ในสถานะลบ
+        resetStyleIdDelete()    //เอา style ลบออก
+    }
+    Swal.close()
 }
 function createResultSearch(data) {
     var tbl = document.getElementById("resultItems");
@@ -351,15 +527,15 @@ function createResultSearch(data) {
                 var cellText = document.createTextNode(data[i].PERSONAL_SURNAME);
             } else if (j === 2) {
                 let AddressText = ''
-                AddressText = AddressText + `บ้านเลขที่ ${data[i].AID.ADDRESS_HOME_NUMBER.trim()} `
-                AddressText = AddressText + `หมู่ ${data[i].AID.ADDRESS_MOO.trim()} `
-                AddressText = AddressText + `ตรอก ${data[i].AID.ADDRESS_TRXK.trim()} `
-                AddressText = AddressText + `ซอย ${data[i].AID.ADDRESS_SXY.trim()} `
-                AddressText = AddressText + `อาคาร ${data[i].AID.ADDRESS_BUILDING.trim()} `
-                AddressText = AddressText + `ถนน ${data[i].AID.ADDRESS_ROAD.trim()} `
-                AddressText = AddressText + `ตำบล ${data[i].AID.DISTRICT_NAME.trim()} `
-                AddressText = AddressText + `อำเภอ ${data[i].AID.AMPHUR_NAME.trim()}`
-                AddressText = AddressText + `จังหวัด ${data[i].AID.PROVINCE_NAME.trim()}`
+                AddressText = AddressText + `บ้านเลขที่ ${data[i].AID.ADDRESS_HOME_NUMBER} `
+                AddressText = AddressText + `หมู่ ${data[i].AID.ADDRESS_MOO === null ? '-' : data[i].AID.ADDRESS_MOO} `
+                AddressText = AddressText + `ตรอก ${data[i].AID.ADDRESS_TRXK === null ? '-' : data[i].AID.ADDRESS_TRXK} `
+                AddressText = AddressText + `ซอย ${data[i].AID.ADDRESS_SXY === null ? '-' : data[i].AID.ADDRESS_SXY} `
+                AddressText = AddressText + `อาคาร ${data[i].AID.ADDRESS_BUILDING === null ? '-' : data[i].AID.ADDRESS_BUILDING} `
+                AddressText = AddressText + `ถนน ${data[i].AID.ADDRESS_ROAD === null ? '-' : data[i].AID.ADDRESS_ROAD} `
+                AddressText = AddressText + `ตำบล ${data[i].AID.DISTRICT_NAME === null ? '-' : data[i].AID.DISTRICT_NAME} `
+                AddressText = AddressText + `อำเภอ ${data[i].AID.AMPHUR_NAME === null ? '-' : data[i].AID.AMPHUR_NAME}`
+                AddressText = AddressText + `จังหวัด ${data[i].AID.PROVINCE_NAME === null ? '-' : data[i].AID.PROVINCE_NAME}`
                 var cellText = document.createTextNode(AddressText);
             } else {
                 var cellText = document.createTextNode(data[i].PERSONAL_PERSONAL_ID);
@@ -368,15 +544,16 @@ function createResultSearch(data) {
             cell.appendChild(cellText);
             row.appendChild(cell);
         }
-
-        // add the row to the end of the table body
         tblBody.appendChild(row);
     }
-
-    // put the <tbody> in the <table>
     tbl.appendChild(tblBody);
 }
-
+function runScript(e) {
+    if (e.keyCode == 13) {
+        searchPersonal()
+        return false;
+    }
+}
 function searchOparator() {
     console.log(addNew)
     if (addNew) {
@@ -387,7 +564,7 @@ function searchOparator() {
         tSearchSurname = ''
         tSearchId = ''
         var swal_html = `<div >
-        <div class="display-center">
+        <div class="display-center" onkeypress="return runScript(event)">
                     <h5 style="font-size: 100%;">
                         ชื่อ :
                         <input type="text" id="popSearchName" style="width: 18%;">
@@ -397,12 +574,14 @@ function searchOparator() {
                         <input type="text" id="popSearchId" style="width: 18%;" >
                         <button type="button" style="width: auto;height: auto;"
                         class="btn btn-secondary is-color" onClick='searchPersonal()'>
-    
                                 <i class="fa fa-search"></i> 
                                 ค้นหา
                            
                         </button>
-                    </h5>
+                        <br>
+                        <font id='error_search' style='display:none'class='alert'> ค้นหาไม่พบ </font>
+                    </h5>   
+                    
                 </div>
         <div class="search-popup-height">
             <table id='resultItems' class="table tablesearch table-hover cursor-pointer">
@@ -432,10 +611,51 @@ function searchOparator() {
 }
 function restorePage() {
     //function Update delete 
-    deleteData = false
-    setIdDelete()
-    disableMenuAll()
-    enableMenu('addMenu')
-    enableMenu('editMenu')
-    enableMenu('deleteMenu')
+    Swal.fire({
+        title: "สำนักงานเทศบาล",
+        html: "ต้องการยกเลิกสถาะลบหรือไม่",
+        icon: 'warning',
+        showCancelButton: true,
+        customClass: 'swal-height',
+        confirmButtonColor: "#009688",
+        confirmButtonText: "ใช่",
+        cancelButtonText: "ไม่ใช่",
+        cancelButtonColor: '#dc3545',
+        closeOnConfirm: false,
+        closeOnCancel: false,
+        showLoaderOnConfirm: true,
+        preConfirm: function () {
+            return new Promise(function (resolve, reject) {
+                setTimeout(function () {
+                    //function ใน operator 
+                    changeStatusDelete('NO').then((statusDelete) => {
+                        tempData.is_deleted = 'NO'
+                        console.log(`statusDelete = ${statusDelete}`)
+                        if (statusDelete) {
+                            resolve();
+                        }
+                    })
+                }, 1000);
+            })
+        }
+    }).then((result) => {
+        if (result.value) {
+            Swal.fire({
+                html: "ผู้ประกอบการนี้กลับอยู่ในสถานะปกติแล้ว",
+                icon: "success",
+                confirmButtonColor: "#009688"
+            });
+            resetStyleIdDelete()
+            deleteData = false
+            disableMenuAll()
+            enableMenu('addMenu')
+            enableMenu('editMenu')
+            enableMenu('deleteMenu')
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            // Swal.fire("บันทึกล้มเหลว");
+        }
+    });
+
+
+
 }

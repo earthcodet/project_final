@@ -78,14 +78,12 @@ router.get('/login', redirectHome, function (req, res) {
 });
 
 router.get('/', redirectLogin, function (req, res) {
-  console.log(req.session.username)
   res.sendFile(path.join(__dirname + '/views/html/utilities/index.html'));
 });
 
 
 
-//ทำให้ css กับ js ใช้ได้
-app.use(express.static(__dirname + '/views'));
+
 
 app.use('/', router);
 app.get("/get/provice", (req, res) => {
@@ -126,7 +124,6 @@ app.get('/get/image/:personalId', (req, res) => {
 })
 app.get('/get/personalId/:personalId', (req, res) => {
   webService.getPersonalId(req.params.personalId).then((data) => {
-    console.log(`servar status => ${data}`)
     if (data != null) {
       res.json(data)
     } else {
@@ -135,18 +132,24 @@ app.get('/get/personalId/:personalId', (req, res) => {
   })
 })
 app.post('/insert/personal', (req, res) => {
+
   var obj = JSON.parse(req.body.personal);
   if (req.files != null) {
     var datafile = req.files.image.data
     obj[2].data = datafile
   }
-  webService.insertStep(obj[0], obj[1], obj[2], req.session.username).then((data) => {
-    console.log(data)
+  webService.personalStep(obj[0], obj[1], obj[2], req.session.username).then((data) => {
+    console.log(`server : function perosonalStep return = ${data}`)
+    res.json(data)
+  })
+})
+app.post('/update/status/delete', (req, res) => {
+  webService.updateStatusDelete(req.body.personal, req.session.username).then((data) => {
+    console.log(`server : function updateStatusDelete return = ${data}`)
     res.json(data)
   })
 })
 app.get('/search/personal/:id/:name/:surname', (req, res) => {
-  //id/name/surname
   if (req.params.id === 'none') {
     req.params.id = ''
   }
@@ -157,43 +160,12 @@ app.get('/search/personal/:id/:name/:surname', (req, res) => {
     req.params.surname = ''
   }
   webService.searchOperator(req.params.id, req.params.name, req.params.surname).then((data) => {
-    console.log(`servar status => ${data}`)
-    if (data != null) {
+    console.log(`servar : function searchOperator return = ${data}`)
       res.json(data)
-    } else {
-      res.sendStatus(404)
-    }
   })
 })
-let dataTest = {
-  'id': '',
-  'home_number': 'test',
-  'moo': 'test',
-  'trxk': 'test',
-  'sxy': 'test',
-  'building': 'test',
-  'road': 'test',
-  'district_name': 'test',
-  'amphur_name': 'test',
-  'province_name': 'test'
-}
-let personalTest = {
-  'id': '',
-  'address_id': 'test',
-  'title': 'นาย',
-  'type': 'บุคคลธรรมดา',
-  'name': 'ทดสอบ',
-  'surname': 'หาบัค',
-  'nationality': 'ไทย',
-  'race': 'ไทย',
-  'birthday': '24/04/2541',
-  'personal_id': '0124455781255',
-  'card_issued': '10/01/2545',
-  'card_expipe': '10/01/2563',
-  'phone': '0625478965',
-  'fax': '213546987'
-}
-// webService.insertStep(personalTest, dataTest)
+//ทำให้ css กับ js ใช้ได้
+app.use(express.static(__dirname + '/views'));
 app.listen(PORT, () => {
   console.log(`App listening on ${PORT}`);
 });

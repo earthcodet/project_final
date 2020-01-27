@@ -279,12 +279,14 @@ a.exit {
     color: white;
     cursor: pointer;
 }
-
 a.exit:hover {
     /* color: #034b9a; */
     text-decoration: underline;
 }
 
+.alertInput{
+    border-color: red;
+}
 * {
     box-sizing: border-box;
 }
@@ -533,4 +535,37 @@ p.font {
 
 span {
     font-family: 'Sarabun', sans-serif;
+}
+
+/* animation text */
+font.alert{
+    color:red;
+    font-size: 16xw;
+}
+font.animation {
+    position: relative;
+    /* contro */
+    display: inline-block;
+    animation-name: animation;
+    animation-duration: 0.5s;
+    /* animation-timing-function: linear; */
+    /* ทำให้ animation ติด loop */
+    /* animation-iteration-count: infinite; */
+}
+@keyframes animation{
+    10%, 90% {
+        transform: translate3d(-1px, 0, 0);
+      }
+      
+      20%, 80% {
+        transform: translate3d(2px, 0, 0);
+      }
+    
+      30%, 50%, 70% {
+        transform: translate3d(-4px, 0, 0);
+      }
+    
+      40%, 60% {
+        transform: translate3d(4px, 0, 0);
+      }
 }

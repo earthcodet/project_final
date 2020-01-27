@@ -57,10 +57,10 @@ function removeAlloption(id) {
 
 //Address
 function districtSelect(amphurId) {
-    addressDistrict =[]
+    addressDistrict = []
 
-    for(let i = 0 ; i< district.length ; i++){
-        if(district[i].AMPHUR_ID == amphurId && district[i].PROVINCE_ID == document.getElementById('province').value){
+    for (let i = 0; i < district.length; i++) {
+        if (district[i].AMPHUR_ID == amphurId && district[i].PROVINCE_ID == document.getElementById('province').value) {
             addressDistrict.push(district[i])
         }
     }
@@ -72,13 +72,13 @@ function districtSelect(amphurId) {
         option.value = addressDistrict[i].DISTRICT_ID;
         select.add(option);
     }
-   
+
 }
 function amphurSelect(proviceId) {
-    addressAmphur =[]
+    addressAmphur = []
     aProviceId = proviceId
-    for(let i = 0 ; i< amphur.length ; i++){
-        if(amphur[i].PROVINCE_ID == proviceId){
+    for (let i = 0; i < amphur.length; i++) {
+        if (amphur[i].PROVINCE_ID == proviceId) {
             addressAmphur.push(amphur[i])
         }
     }
@@ -91,9 +91,9 @@ function amphurSelect(proviceId) {
         select.onchange = function () { districtSelect(document.getElementById('district').value) };
         select.add(option);
     }
-   
+
 }
-function chageProvice(proviceId){
+function chageProvice(proviceId) {
     amphurSelect(proviceId)
     districtSelect(addressAmphur[0].AMPHUR_ID)
 }
@@ -110,26 +110,28 @@ function createSelectProvice(data) {
 function runForm() {
     getProvice().then((data) => {
         createSelectProvice(data)
-         getAmphur().then((data) =>{
-           amphurSelect(1)
-            getDistrict().then((districtTemp) =>{
+        getAmphur().then((data) => {
+            amphurSelect(1)
+            getDistrict().then((districtTemp) => {
                 districtSelect(addressAmphur[0].AMPHUR_ID)
             })
         })
     })
 }
 
-function getProviceName(proviceId){
-    for(let i = 0 ; i < province.length ; i++){
-        if(province[i].PROVINCE_ID == proviceId){
+
+
+function getProviceName(proviceId) {
+    for (let i = 0; i < province.length; i++) {
+        if (province[i].PROVINCE_ID == proviceId) {
             return province[i].PROVINCE_NAME
         }
     }
 }
 
-function getAmphurName(amphurId){
-    for(let i = 0 ; i < amphur.length ; i++){
-        if(amphur[i].AMPHUR_ID == amphurId){
+function getAmphurName(amphurId) {
+    for (let i = 0; i < amphur.length; i++) {
+        if (amphur[i].AMPHUR_ID == amphurId) {
             return amphur[i].AMPHUR_NAME
         }
     }

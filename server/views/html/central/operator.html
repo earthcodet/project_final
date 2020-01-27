@@ -32,8 +32,12 @@
         <a id="editMenu" onclick="editPage()" class="exit disableds"><i class="fa fa-pencil-alt"> แก้ไข</i></a>
         <a id="saveMenu" onclick="insertPage()" class="exit disableds"><i class="fa fa-save"> บันทึก</i></a>
         <a id="restoreMenu" onclick="restorePage()" class="exit disableds"><i class="fa fa-reply"> เรียกคืน</i></a>
-        <a id="deleteMenu" onclick="deletePage()" class="exit disableds"><i class="fa fa-times"> ยกเลิก</i></a>
+        <a id="deleteMenu" onclick="deletePage()" class="exit disableds"><i class="fa fa-times"> 
+           ยกเลิก
+        </i></a>
         <a id='searchMenu' class="exit" onclick="searchOparator()"><i class="fa fa-search"> ค้นหา</i></a>
+        
+        
         <a id="exitMenu" onclick="exitPage()" class="exit" style="float: right;width: 17%;"><i
                 class="fa fa-sign-out-alt">
                 ออกจากระบบ</i></a>
@@ -116,9 +120,13 @@
                                     <option value="นิติบุคคล">นิติบุคคล</option>
                                 </select>
                                 <!-- บุคคลธรรมดา -->
-                                <span id="perTy1">
+                                <span id="perTy1" >
                                     <a id='nationalityTopic' style="margin-left:1vw;">สัญชาติ :</a>
-                                    <input list='list-nationality' id="nationality" style="width: 11vw" maxlength="60">
+                                    <input list='list-nationality' id="nationality" style="width: 11vw" 
+                                    maxlength="60" placeholder="-"
+                                        onkeyup="document.getElementById('nationality').classList.remove('alertInput')" 
+                                        onchange="document.getElementById('nationality').classList.remove('alertInput')"
+                                    >
                                     <datalist id="list-nationality">
                                         <option value="" hidden>เลือก...</option>
                                         <option value="ไทย">ไทย</option>
@@ -127,7 +135,11 @@
                                     </datalist>
                                     </input>
                                     <a id='raceTopic' style="margin-left: 1vw;">เชื้อชาติ :</a>
-                                    <input list='list-race' id="race" style="width: 11vw;" maxlength="60">
+                                    <input list='list-race' id="race" style="width: 11vw;" maxlength="60" 
+                                    placeholder="-"
+                                    onkeyup="document.getElementById('race').classList.remove('alertInput')" 
+                                    onchange="document.getElementById('race').classList.remove('alertInput')"
+                                    >
                                     <datalist id="list-race">
                                         <option value="" hidden>เลือก...</option>
                                         <option value="ไทย">ไทย</option>
@@ -137,8 +149,9 @@
                                     </input>
                                     <br>
                                     <!-- row 2 -->
-                                    <a id='titleNameTopic' style="margin-left: 2vw;">คำนำหน้าชื่อ :</a>
-                                    <input list='list-titles' id="title" style="width: 11vw;" maxlength="60">
+                                    <a id='titleNameTopic' style="margin-left: 2.15vw;">คำนำหน้าชื่อ :</a>
+                                    <input list='list-titles' id="title" style="width: 11vw;" maxlength="60" placeholder="-"
+                                    onchange="document.getElementById('title').classList.remove('alertInput')">
                                     <datalist id="list-titles">
                                         <option value="" hidden>เลือก...</option>
                                         <option value="นาย">นาย</option>
@@ -146,59 +159,80 @@
                                         <option value="นางสาว">นางสาว</option>
                                     </datalist>
                                     </input>
-                                    <a id='nameUserTopic' style="margin-left: 3vw;">ชื่อ :</a>
+                                    <a id='nameUserTopic' style="margin-left: 2.15vw;">ชื่อ <font color="red">*</font> :</a>
                                     <input type="text" id="nameUser" name="" placeholder="" style="width: 11vw"
-                                        maxlength="70">
-                                    <a id="surTopic" style="margin-left: 0.8vw;">นามสกุล :</a>
+                                        maxlength="70"
+                                        onkeyup="document.getElementById('nameUser').classList.remove('alertInput')" 
+                                        >
+                                    <a id="surTopic" style="margin-left: 0.2vw;">นามสกุล <font color="red">*</font> :</a>
 
                                     <input type="text" id="surnameUser" name="" placeholder="" style="width: 11vw"
-                                        maxlength="70">
+                                        maxlength="70"
+                                        onkeyup="document.getElementById('surnameUser').classList.remove('alertInput')"
+                                        >
                                     <br>
                                     <!-- row 3 -->
-                                    <a style="margin-left: 1.8vw;">เลขประจำตัว :</a>
+                                    <a style="margin-left: 1.25vw;">เลขประจำตัว <font color="red">*</font> :</a>
                                     <input type="text" id="id" name="" placeholder="" style="width: 11vw"
                                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                        maxlength="13" onkeyup="checkId(this.value)">
-                                    <a style="margin-left:0.9vw;">ออกเมื่อ :</a>
-                                    <input type="text" id="datepicker1" placeholder="" style="width: 11vw"
-                                        maxlength="10">
-                                    <a id='dateExpTopic' style="margin-left: 0.8vw;">หมดอายุ :</a>
+                                        maxlength="13" onkeyup="checkId(this.value, 'PERSONAL') 
+                                        document.getElementById('id').classList.remove('alertInput')"
+                                        ">
+                                    <a style="margin-left:0.25vw;">ออกเมื่อ <font color="red">*</font> :</a>
+                                    <input type="text" id="datepicker1" placeholder="" style="width: 10.8vw"
+                                        maxlength="10" 
+                                        onchange="document.getElementById('datepicker1').classList.remove('alertInput')" 
+                                        readonly>
+                                    <a id='dateExpTopic' style="margin-left: 0.3vw;">หมดอายุ <font color="red">*</font> :</a>
                                     <input type="text" id="datepicker2" placeholder="" style="width: 11vw"
-                                        maxlength="10">
+                                        maxlength="10" readonly
+                                        onchange="document.getElementById('datepicker2').classList.remove('alertInput')" 
+                                        >
                                     <br>
 
                                     <br>
                                     <!-- row4 -->
-                                    <a id='dateBTopic' style="margin-left: 3.7vw;">เกิดวันที่ :</a>
+                                    <a id='dateBTopic' style="margin-left: 3.1vw;">เกิดวันที่ <font color="red">*</font> :</a>
                                     <input type="text" id="datepicker3" placeholder="" style="width: 11vw;"
-                                        maxlength="10">
+                                        maxlength="10" readonly
+                                        onchange="document.getElementById('datepicker3').classList.remove('alertInput')" 
+                                        >
 
-                                    <a id='phoneTopic' style="margin-left: 0.7vw;">โทรศัพท์ :</a>
-                                    <input type="text" style="width: 11vw" id="phone"
-                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                        maxlength="10">
-                                    <a style="margin-left: 1.4vw;">โทรสาร :</a>
+                                    <a id='phoneTopic' style="margin-left: 0.1vw;">โทรศัพท์ <font color="red">*</font> :</a>
+                                    <input type="text" style="width: 10.8vw" id="phone"
+                                        oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
+                                        maxlength="10"
+                                        onchange="document.getElementById('phone').classList.remove('alertInput')" 
+                                        onkeyup="checkPhone(this.value,'phone')">
+                                    <a style="margin-left: 1.3vw;">โทรสาร :</a>
                                     <input type="text" id="fax" style="width: 11vw"
                                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                        maxlength="9">
+                                        maxlength="9"
+                                        placeholder="-">
                                     <br>
                                     <!-- row5 -->
 
 
                                     <a style="margin-left: 2vw;">อยู่บ้านเลขที่ :</a>
-                                    <input type="text" id="homeId" style="width: 11vw" maxlength="15">
+                                    <input type="text" id="homeId" style="width: 11vw" maxlength="15"
+                                    placeholder="-">
                                     <a style="margin-left: 2.3vw;">หมู่ที่ :</a>
-                                    <input type="int" id="moo" style="width: 11vw" maxlength="5">
+                                    <input type="int" id="moo" style="width: 11vw" maxlength="5"
+                                    placeholder="-">
                                     <a style="margin-left: 2.05vw;">ตรอก :</a>
-                                    <input type="text" id="trxk" style="width: 11vw" maxlength="50">
+                                    <input type="text" id="trxk" style="width: 11vw" maxlength="50"
+                                    placeholder="-">
                                     <!-- row 6 -->
                                     <br>
                                     <a style="margin-left: 5.15vw;">ซอย :</a>
-                                    <input type="text" id="sxy" style="width: 11vw;" maxlength="50">
+                                    <input type="text" id="sxy" style="width: 11vw;" maxlength="50"
+                                    placeholder="-">
                                     <a style="margin-left: 1.6vw;">อาคาร :</a>
-                                    <input type="text" id="building" style="width: 11vw" maxlength="100">
+                                    <input type="text" id="building" style="width: 11vw" maxlength="100"
+                                    placeholder="-">
                                     <a style="margin-left: 2.45vw;">ถนน :</a>
-                                    <input type="text" id="road" style="width: 11vw" maxlength="70">
+                                    <input type="text" id="road" style="width: 11vw" maxlength="70"
+                                    placeholder="-">
                                     <!-- row 7 -->
                                     <br>
                                     <a style="margin-left: 4.3vw;">จังหวัด :</a>
@@ -217,44 +251,53 @@
 
                                 <!-- นิติบุคคล -->
                                 <span id="perTy2" style="display: none;">
-                                    <a  style="margin-left: 3vw;">ชื่อ :</a>
+                                    <a  style="margin-left: 2.2vw;">ชื่อ <font color="red">*</font> :</a>
                                     <input type="text" id="company-nameUser" name="" placeholder="" style="width: 27.5vw"
-                                        maxlength="70">
+                                        maxlength="70"
+                                        onchange="document.getElementById('company-nameUser').classList.remove('alertInput')"
+                                        >
                                     <br>
                                     <!-- row 3 -->
-                                    <a style="margin-left: 1.8vw;">เลขประจำตัว :</a>
+                                    <a style="margin-left: 1.8vw;">เลขทะเบียน <font color="red">*</font> :</a>
                                     <input type="text" id="company-id" name="" placeholder="" style="width: 11vw"
                                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                        maxlength="13" onkeyup="checkId(this.value)">
-                                    <a style="margin-left:0.9vw;">ออกเมื่อ :</a>
+                                        maxlength="13" onkeyup="checkId(this.value, '')"
+                                        onchange="document.getElementById('company-id').classList.remove('alertInput')"
+                                        >
+                                    <a style="margin-left:0.3vw;">ออกเมื่อ <font color="red">*</font> :</a>
                                     <input type="text" id="datepicker4" placeholder="" style="width: 11vw"
-                                        maxlength="10">
+                                        maxlength="10" readonly 
+                                        onchange="document.getElementById('datepicker4').classList.remove('alertInput')"
+                                        >
                                     <br>
                                     <!-- row4 -->
-                                    <a  style="margin-left: 3.7vw;">โทรศัพท์ :</a>
+                                    <a  style="margin-left: 3.05vw;">โทรศัพท์ <font color="red">*</font> :</a>
                                     <input type="text" style="width: 11vw" id="company-phone"
-                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                        maxlength="10">
-                                    <a style="margin-left: 1.4vw;">โทรสาร :</a>
+                                        oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
+                                        maxlength="10"
+                                        onchange="document.getElementById('company-phone').classList.remove('alertInput')"
+                                        onkeyup="checkPhone(this.value,'company-phone')">
+                                    <a style="margin-left: 1.2vw;">โทรสาร :</a>
                                     <input type="text" id="company-fax" style="width: 11vw"
                                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                        maxlength="9">
+                                        maxlength="9"
+                                        placeholder="-">
                                     <br>
                                     <!-- row5 -->
                                     <a style="margin-left: 2.1vw;">อยู่บ้านเลขที่ :</a>
-                                    <input type="text" id="company-homeId" style="width: 11vw" maxlength="15">
+                                    <input type="text" id="company-homeId" style="width: 11vw" maxlength="15"placeholder="-">
                                     <a style="margin-left: 2.3vw;">หมู่ที่ :</a>
-                                    <input type="int" id="company-moo" style="width: 11vw" maxlength="5">
+                                    <input type="int" id="company-moo" style="width: 11vw" maxlength="5"placeholder="-">
                                     <a style="margin-left: 2.05vw;">ตรอก :</a>
-                                    <input type="text" id="company-trxk" style="width: 11vw" maxlength="50">
+                                    <input type="text" id="company-trxk" style="width: 11vw" maxlength="50"placeholder="-">
                                     <!-- row 6 -->
                                     <br>
                                     <a style="margin-left: 5.4vw;">ซอย :</a>
-                                    <input type="text" id="company-sxy" style="width: 11vw;" maxlength="50">
+                                    <input type="text" id="company-sxy" style="width: 11vw;" maxlength="50"placeholder="-">
                                     <a style="margin-left: 1.6vw;">อาคาร :</a>
-                                    <input type="text" id="company-building" style="width: 11vw" maxlength="100">
+                                    <input type="text" id="company-building" style="width: 11vw" maxlength="100"placeholder="-">
                                     <a style="margin-left: 2.45vw;">ถนน :</a>
-                                    <input type="text" id="company-road" style="width: 11vw" maxlength="70">
+                                    <input type="text" id="company-road" style="width: 11vw" maxlength="70"placeholder="-">
                                     <!-- row 7 -->
                                     <br>
                                     <a style="margin-left: 4.4vw;">จังหวัด :</a>

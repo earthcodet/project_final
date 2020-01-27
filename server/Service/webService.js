@@ -50,13 +50,32 @@ class service {
                         }
                         break;
                     case 100:
-                        newId = `000${num}`
+                        if (num > 10 && num < 100) {
+                            newId = `0000${num}`
+                        } else {
+                            newId = `000${num}`
+                        }
                         break;
                     case 1000:
-                        newId = `00${num}`
+                        if (num > 100 && num < 1000) {
+                            newId = `000${num}`
+                        } else {
+                            newId = `00${num}`
+                        }
                         break;
                     case 10000:
-                        newId = `0${num}`
+                        if (num > 1000 && num < 10000) {
+                            newId = `00${num}`
+                        } else {
+                            newId = `0${num}`
+                        }
+                        break;
+                    case 100000:
+                        if (num > 10000 && num < 100000) {
+                            newId = `0${num}`
+                        } else {
+                            newId = `${num}`
+                        }
                         break;
                     default:
                         newId = num
@@ -70,6 +89,7 @@ class service {
                 let num = parseInt(oldId.slice(3))
                 num += 1
                 let newId = ''
+                console.log(`this.digit(${num}) = ${this.digit(num)}`)
                 switch (this.digit(num)) {
                     case 10:
                         if (num < 10) {
@@ -79,16 +99,39 @@ class service {
                         }
                         break;
                     case 100:
-                        newId = `0000${num}`
+                        if (num > 10 && num < 100) {
+                            newId = `00000${num}`
+                        } else {
+                            newId = `0000${num}`
+                        }
                         break;
                     case 1000:
-                        newId = `000${num}`
+                        if (num > 100 && num < 1000) {
+                            newId = `0000${num}`
+                        } else {
+                            newId = `00${num}`
+                        }
                         break;
                     case 10000:
-                        newId = `00${num}`
+                        if (num > 1000 && num < 10000) {
+                            newId = `000${num}`
+                        } else {
+                            newId = `00${num}`
+                        }
                         break;
-                    case 10000:
-                        newId = `0${num}`
+                    case 100000:
+                        if (num > 10000 && num < 100000) {
+                            newId = `00${num}`
+                        } else {
+                            newId = `0${num}`
+                        }
+                        break;
+                        case 1000000:
+                        if (num > 100000 && num < 1000000) {
+                            newId = `0${num}`
+                        } else {
+                            newId = `${num}`
+                        }
                         break;
                     default:
                         newId = num
@@ -103,11 +146,11 @@ class service {
             return new Promise((resolve, reject) => {
                 PersonalDAOObj.getMaxIdProsonal().then((data) => {
                     if (data[0].maxId === null) {
-                        console.log('getNewId > P000001')
+                        console.log('getNewId : P000001')
                         return resolve("P000001")
                     } else {
                         this.newId(data[0].maxId, 'PERSONAL').then((peronalId) => {
-                            console.log('getNewId > ' + peronalId)
+                            console.log('getNewId : ' + peronalId)
                             return resolve(peronalId)
                         })
                     }
@@ -117,11 +160,11 @@ class service {
             return new Promise((resolve, reject) => {
                 AddressDAOObj.getMaxIdAddress().then((data) => {
                     if (data[0].maxId === null) {
-                        console.log('getNewId > ADD0000001')
+                        console.log('getNewId : ADD0000001')
                         return resolve('ADD0000001')
                     } else {
                         this.newId(data[0].maxId, 'ADDRESS').then((addressId) => {
-                            console.log('getNewId >' + addressId)
+                            console.log('getNewId : ' + addressId)
                             return resolve(addressId)
                         })
                     }
@@ -133,48 +176,59 @@ class service {
         return new Promise((resolve, reject) => {
             PersonalDAOObj.getPersonal(id, name, surname).then((data) => {
                 let date = '0000-00-00'
-                for(let i = 0 ; i < data.length ; i++){
-                    if (data[i].PERSONAL_BIRTHDAY === null) {
-                        data[i].PERSONAL_BIRTHDAY = undefined
-                    } else {
-                        date = data[i].PERSONAL_BIRTHDAY.toISOString().slice(0, 10)
-                        data[i].PERSONAL_BIRTHDAY = this.formatData('TO-DISPLAY', date)
-                    }
-                    if (data[i].PERSONAL_CARD_ISSUED === null) {
-                        data[i].PERSONAL_CARD_ISSUED = undefined
-                    } else {
-                        date = data[i].PERSONAL_CARD_ISSUED.toISOString().slice(0, 10)
-                        data[i].PERSONAL_CARD_ISSUED = this.formatData('TO-DISPLAY', date)
-                    }
-                    if (data[i].PERSONAL_CARD_EXPIRE === null) {
-                        data[i].PERSONAL_CARD_EXPIRE = undefined
-                    } else {
-                        date = data[i].PERSONAL_CARD_EXPIRE.toISOString().slice(0, 10)
-                        data[i].PERSONAL_CARD_EXPIRE = this.formatData('TO-DISPLAY', date)
-                    }
+                if (data.length != 0) {
+                    for (let i = 0; i < data.length; i++) {
+                        if (data[i].PERSONAL_BIRTHDAY === null) {
+                            data[i].PERSONAL_BIRTHDAY = undefined
+                        } else {
+                            date = data[i].PERSONAL_BIRTHDAY.toISOString().slice(0, 10)
+                            data[i].PERSONAL_BIRTHDAY = this.formatData('TO-DISPLAY', date)
+                        }
+                        if (data[i].PERSONAL_CARD_ISSUED === null) {
+                            data[i].PERSONAL_CARD_ISSUED = undefined
+                        } else {
+                            date = data[i].PERSONAL_CARD_ISSUED.toISOString().slice(0, 10)
+                            data[i].PERSONAL_CARD_ISSUED = this.formatData('TO-DISPLAY', date)
+                        }
+                        if (data[i].PERSONAL_CARD_EXPIRE === null) {
+                            data[i].PERSONAL_CARD_EXPIRE = undefined
+                        } else {
+                            date = data[i].PERSONAL_CARD_EXPIRE.toISOString().slice(0, 10)
+                            data[i].PERSONAL_CARD_EXPIRE = this.formatData('TO-DISPLAY', date)
+                        }
                         date = data[i].PERSONAL_UPDATE.toISOString().slice(0, 10)
                         data[i].PERSONAL_UPDATE = this.formatData('TO-DISPLAY', date)
-                    
-                    //USER_UPDATE
 
-                    if(i == data.length - 1 ){
-                        return resolve(data)
+                        //USER_UPDATE
+
+                        if (i == data.length - 1) {
+                            return resolve(data)
+                        }
                     }
+                } else {
+                    return resolve('Not found')
                 }
+
             })
         })
     }
     searchOperator(id, name, surname) {
         return new Promise((resolve, reject) => {
             this.getPersonal(id, name, surname).then((data) => {
-                for (let i = 0; i < data.length; i++) {
-                    this.getAddressByAddressId(data[i].ADDRESS_ID).then((result) => {
-                        data[i].AID = result[0]
-                        if (i === data.length - 1) {
-                            return resolve(data)
-                        }
-                    })
+                console.log('searchOpator : complete')
+                if (data != 'Not found') {
+                    for (let i = 0; i < data.length; i++) {
+                        this.getAddressByAddressId(data[i].ADDRESS_ID).then((result) => {
+                            data[i].AID = result[0]
+                            if (i === data.length - 1) {
+                                return resolve(data)
+                            }
+                        })
+                    }
+                } else {
+                    return resolve(`Not found`)
                 }
+
             })
         })
     }
@@ -194,24 +248,7 @@ class service {
     getAddressByAddressId(id) {
         return new Promise((resolve, reject) => {
             AddressDAOObj.getAddressByAddressId(id).then((data) => {
-                console.log(`address === null ${data[0].ADDRESS_TRXK === null}`)
-                console.log(data[0].ADDRESS_TRXK)
-                if (data[0].ADDRESS_MOO === null) {
-                    data[0].ADDRESS_MOO = '-'
-                }
-                if (data[0].ADDRESS_TRXK === null) {
-                    data[0].ADDRESS_TRXK = '-'
-                }
-                if (data[0].ADDRESS_SXY === null) {
-                    data[0].ADDRESS_SXY = '-'
-                }
-                if (data[0].ADDRESS_BUILDING === null) {
-                    data[0].ADDRESS_BUILDING = '-'
-                }
-                if (data[0].ADDRESS_ROAD === null) {
-                    data[0].ADDRESS_ROAD = '-'
-                }
-                console.log(data[0].ADDRESS_TRXK)
+                console.log(`search : getAddress  complete`)
                 return resolve(data)
             })
         })
@@ -246,16 +283,24 @@ class service {
                 personal.id = id
                 this.insertPersonal(personal).then((data) => {
                     if (data) {
-                        console.log(`loopInsertPersonal > personal insert !! ${data}`)
-                        imageFile.name = personal.id
-                        this.insertImage(imageFile).then((data) => {
-                            console.log(`loopInsertPersonal >image insert !! ${data}`)
-                            if (data) {
-                                return resolve(true)
-                            } else {
-                                return resolve(false)
-                            }
-                        })
+                        console.log(`Insert : personal complete`)
+                        if (personal.title === 'บุคคลธรรมดา') {
+                            imageFile.name = personal.id
+                        }
+                        if (imageFile.name != 'NO_UPlOAD') {
+                            imageFile.name = personal.id
+                            this.insertImage(imageFile).then((data) => {
+                                console.log(`Insert : image complete`)
+                                if (data) {
+                                    return resolve(personal.id)
+                                } else {
+                                    return resolve('')
+                                }
+                            })
+                        } else {
+                            console.log(`Insert : image null complete`)
+                            return resolve(personal.id)
+                        }
                     } else {
                         this.loopInsertPersonal(personal)
                     }
@@ -269,15 +314,19 @@ class service {
                 address.id = id
                 this.insertAddress(address).then((data) => {
                     if (data) {
+                        console.log(`Insert : address complete`)
                         personal.address_id = address.id
                         this.loopInsertPersonal(personal, imageFile).then((data) => {
-                            if (data) {
-                                return resolve(true)
+                            if (data.length != 0) {
+                                let returnTemp = {
+                                    'pid' : personal.id,
+                                    'aid' : address.id
+                                }
+                                return resolve(returnTemp)
                             } else {
-                                return resolve(false)
+                                return resolve(``)
                             }
                         })
-                        console.log(`loopInsertAddress => address insert !! ${data}`)
                     } else {
                         this.loopInsertAddress(address)
                     }
@@ -315,6 +364,7 @@ class service {
     }
     getImageByPersonalId(name) {
         return new Promise((resolve, reject) => {
+            console.log(`image : getImageByPersonalId ( ${name} ) complete`)
             ImageDAOObj.getImageByPersonalId(name).then((data) => {
                 return resolve(data)
             })
@@ -337,17 +387,71 @@ class service {
             data.birthday.length === 0 ? data.birthday = 'NULL' : data.birthday = data.birthday
             data.card_expipe.length === 0 ? data.card_expipe = 'NULL' : data.card_expipe = data.card_expipe
             data.fax === '' ? data.fax = 'NULL' : data.fax = `'${data.fax}'`
+            data.surname === '' ? data.surname = 'NULL' : `'${data.surname}'`
             return data
         } else {
-            data.moo === '' ? data.moo = 'NULL' : data.moo = `'${data.moo}'`
-            data.trxk === '' ? data.trxk = 'NULL' : data.trxk = `'${data.trxk}'`
-            data.sxy === '' ? data.sxy = 'NULL' : data.sxy = `'${data.sxy}'`
-            data.building === '' ? data.building = 'NULL' : data.building = `'${data.building}'`
-            data.road === '' ? data.road = 'NULL' : data.road = `'${data.road}'`
+            data.home_number === '' ? data.home_number = '-' : data.home_number = data.home_number
+            data.moo === '' || data.moo === '-' ? data.moo = 'NULL' : data.moo = `'${data.moo}'`
+            data.trxk === '' || data.trxk === '-' ? data.trxk = 'NULL' : data.trxk = `'${data.trxk}'`
+            data.sxy === '' || data.sxy === '-' ? data.sxy = 'NULL' : data.sxy = `'${data.sxy}'`
+            data.building === '' || data.building === '-' ? data.building = 'NULL' : data.building = `'${data.building}'`
+            data.road === '' || data.road === '-' ? data.road = 'NULL' : data.road = `'${data.road}'`
             return data
         }
     }
-    insertStep(personal, address, image, username) {
+    updateAddress(address) {
+        return new Promise((resolve, reject) => {
+            AddressDAOObj.updateAddress(address).then((data) => {
+                if (data) {
+                    console.log('function updateAddress : complete')
+                    return resolve(true)
+                } else {
+                    console.log('function updateAddress : somthing wrog')
+                    console.log(data)
+                    return resolve(false)
+                }
+            })
+        })
+    }
+    updatePersonal(personal) {
+        return new Promise((resolve, reject) => {
+            PersonalDAOObj.updatePersonal(personal).then((data) => {
+                if (data) {
+                    return resolve(true)
+                } else {
+                    return resolve(false)
+                }
+            })
+        })
+    }
+    updateImage(image) {
+        return new Promise((resolve, reject) => {
+            ImageDAOObj.updateImage(image).then((data) => {
+                if (data) {
+                    return resolve(true)
+                } else {
+                    return resolve(false)
+                }
+            })
+        })
+    }
+    updateStatusDelete(personal, username) {
+        var datetime = new Date();
+        let dateForUpdate = datetime.toISOString().slice(0, 10)
+        personal.update = dateForUpdate
+        personal.username = username
+
+        return new Promise((resolve, reject) => {
+            PersonalDAOObj.updateStatusPersonal(personal).then((data) => {
+                if (data) {
+                    return resolve(true)
+                } else {
+                    return resolve(false)
+                }
+            })
+        })
+    }
+    personalStep(personal, address, image, username) {
 
         //checknull
 
@@ -369,18 +473,61 @@ class service {
         personal.username = username
         let newpersonal = this.formatInsert('PERSONAL', personal)
         let newaddress = this.formatInsert('ADDRESS', address)
-        console.log(newaddress)
-        console.log(newpersonal)
+        // console.log(newaddress)
         return new Promise((resolve, reject) => {
-            this.loopInsertAddress(newpersonal, newaddress, image).then((data) => {
-                if (data) {
-                    console.log(`main > ${data}`)
-                    return resolve(true)
-                } else {
-                    return resolve(false)
-                }
-            })
-            // return resolve(true)
+            console.log('Check function Insert Or Update')
+            if (newaddress.id.length != 0 || newpersonal.id.length != 0) {
+                //Update
+                console.log(`function : Update`)
+                this.updateAddress(newaddress).then((updateAddressStatus) => {
+                    if (updateAddressStatus) {
+                        console.log(`update : address complete`)
+                        this.updatePersonal(newpersonal).then((updatePersonalStatus) => {
+                            if (updatePersonalStatus) {
+                                console.log(`update : personal complete`)
+                                if (image.name != 'NO_UPlOAD') {
+                                    image.name = newpersonal.id
+                                    this.updateImage(image).then((data) => {
+                                        if (data) {
+                                            console.log(`update : image complete`)
+                                            let returnTempUpdate = {
+                                                'pid':newpersonal.id,
+                                                'aid':newaddress.id
+                                            }
+                                            return resolve(returnTempUpdate)
+                                        } else {
+                                            console.log(`somthing wrog : updateImage`)
+                                            return resolve('')
+                                        }
+                                    })
+                                } else {
+                                    let returnTempUpdate = {
+                                        'pid':newpersonal.id,
+                                        'aid':newaddress.id
+                                    }
+                                    console.log(`not updated : The picture is does't change`)
+                                    return resolve(returnTempUpdate)
+                                }
+                            } else {
+                                console.log(`something wrong : function updatePersonal()`)
+                                return resolve(newpersonal.id)
+                            }
+                        })
+                    }
+                })
+            } else {
+                //New
+                console.log(`function : Insert`)
+                this.loopInsertAddress(newpersonal, newaddress, image).then((data) => {
+                    if (data) {
+                        return resolve(data)
+                    } else {
+                        return resolve('')
+                    }
+                })
+            }
+
+            //return resolve(true)
         })
     }
     getUser(username, password) {
