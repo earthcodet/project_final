@@ -96,6 +96,40 @@ if($.contextMenu != undefined || $.contextMenu != null){
     $.contextMenu({
       selector: '.context-menu-one',
       callback: function (key, options) {
+        if(key="cut"){
+          
+          console.log(key+"Yes")
+        }else{
+          
+          console.log(key+"No")
+        }
+        
+        console.log(key)
+        // window.console && console.log(m) || alert(m); 
+      },
+      items: {
+        "sep2": "---------",
+        "edit": { name: "ต่อใบอนุญาต" },
+        "cut": { name: "โอนใบอนุญาต" },
+        "copy": { name: "เพิ่มใบอนุญาต" },
+        "paste": { name: "ดูรายละเอียด" },
+        "delete": { name: "ยกเลิก" },
+        "sep1": "---------"
+  
+      }
+    });
+  
+    $('.context-menu-one').on('click', function (e) {
+      console.log('clicked', this);
+    })
+  });
+}
+
+if($.contextMenu != undefined || $.contextMenu != null){
+  $(function () {
+    $.contextMenu({
+      selector: '.context-menu-one2',
+      callback: function (key, options) {
         var m = "clicked: " + key;
         console.log(key)
         // window.console && console.log(m) || alert(m); 
@@ -112,7 +146,34 @@ if($.contextMenu != undefined || $.contextMenu != null){
       }
     });
   
-    $('.context-menu-one').on('click', function (e) {
+    $('.context-menu-one2').on('click', function (e) {
+      console.log('clicked', this);
+    })
+  });
+}
+
+if($.contextMenu != undefined || $.contextMenu != null){
+  $(function () {
+    $.contextMenu({
+      selector: '.context-menu-one3',
+      callback: function (key, options) {
+        var m = "clicked: " + key;
+        console.log(key)
+        // window.console && console.log(m) || alert(m); 
+      },
+      items: {
+        "sep2": "---------",
+        "edit": { name: "Edit" },
+        "cut": { name: "Cut" },
+        copy: { name: "Copy" },
+        "paste": { name: "Paste" },
+        "delete": { name: "Delete" },
+        "sep1": "---------"
+  
+      }
+    });
+  
+    $('.context-menu-one3').on('click', function (e) {
       console.log('clicked', this);
     })
   });
