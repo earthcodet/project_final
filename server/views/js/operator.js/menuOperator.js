@@ -84,8 +84,8 @@ function enableMenu(id) {
 }
 
 function insertPage() {
+    
     let _redyToInsert = preInsert()
-
     if (_redyToInsert) {
         Swal.fire({
             title: "สำนักงานเทศบาล",
@@ -130,15 +130,17 @@ function insertPage() {
                             tempData.PERSONAL_CARD_EXPIRE = inPersonal.card_expipe
                             tempData.PERSONAL_PHONE = inPersonal.phone
                             tempData.PERSONAL_FAX = inPersonal.fax
-                            tempData.AID.ADDRESS_HOME_NUMBER = inAddress.home_number
-                            tempData.AID.ADDRESS_MOO = inAddress.moo
-                            tempData.AID.ADDRESS_TRXK = inAddress.trxk
-                            tempData.AID.ADDRESS_SXY = inAddress.sxy
-                            tempData.AID.ADDRESS_BUILDING = inAddress.building
-                            tempData.AID.ADDRESS_ROAD = inAddress.road
-                            tempData.AID.DISTRICT_NAME = inAddress.district_name
-                            tempData.AID.AMPHUR_NAME = inAddress.amphur_name
-                            tempData.AID.PROVINCE_NAME = inAddress.province_name
+                            tempData.AID = {
+                                'ADDRESS_HOME_NUMBER':inAddress.home_number,
+                                'ADDRESS_MOO':inAddress.moo,
+                                'ADDRESS_TRXK':inAddress.trxk,
+                                'ADDRESS_SXY':inAddress.sxy,
+                                'ADDRESS_BUILDING':inAddress.building,
+                                'ADDRESS_ROAD':inAddress.road,
+                                'DISTRICT_NAME':inAddress.district_name,
+                                'AMPHUR_NAME':inAddress.amphur_name,
+                                'PROVINCE_NAME':inAddress.province_name
+                            }
                             if (inPersonal.type === 'บุคคลธรรมดา' && inImage.name != 'NO_UPlOAD') {
                                 let imageTemp = {
                                     'IMAGE_NAME': insert.pid,
@@ -147,14 +149,6 @@ function insertPage() {
                                 }
                                 tempData.image = imageTemp
                             }
-                            // else if(inImage.name === 'NO_UPlOAD'){
-                            //     let imageTemp = {
-                            //         'IMAGE_NAME': insert.pid,
-                            //         'IMAGE_TYPE': null,
-                            //         'IMAGE_DATA': null
-                            //     }
-                            //     tempData.image = imageTemp
-                            // }
                             console.log(tempData)
                             if (insert.length != 0) {
                                 resolve();
@@ -185,7 +179,7 @@ function insertPage() {
                 let temp = dateForUpdate.split('-')
                 let day = temp[2]
                 let month = temp[1]
-                let year = temp[0]
+                let year = parseInt(temp[0]) + 543
                 let format = `${day}-${month}-${year}`
                 document.getElementById('last-update').value = format
             } else if (result.dismiss === Swal.DismissReason.cancel) {

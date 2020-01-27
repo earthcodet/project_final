@@ -10,7 +10,7 @@ let textChange = ''
 let iconAlert = ''
 let inAddress = {
     id: "",
-    home_number: "",
+    home_number: "-",
     moo: '',
     trxk: '',
     sxy: '',
@@ -63,7 +63,7 @@ function resetParameter() {
     };
     inAddress = {
         id: "",
-        home_number: "",
+        home_number: "-",
         moo: '',
         trxk: '',
         sxy: '',
@@ -138,6 +138,7 @@ function setDataUI(data) {
 
             inImage.type = data.image.IMAGE_TYPE
             inImage.data = data.image.IMAGE_DATA
+             
         }
     } else {
         inImage.name = 'NO_UPlOAD'
@@ -314,7 +315,8 @@ function preInsert() {
                     } else {
                         console.log(`preinsert นิติบุคคล`)
                         // นิติบุคคล
-                        inAddress.home_number = document.getElementById('company-homeId').value
+                        let ch  = document.getElementById('company-homeId')
+                        inAddress.home_number = ch.value === null ||  ch.value.trim().length === 0 || ch.value === undefined ? '-' : ch.value
                         inAddress.moo = document.getElementById('company-moo').value
                         inAddress.trxk = document.getElementById('company-trxk').value
                         inAddress.sxy = document.getElementById('company-sxy').value
@@ -501,7 +503,8 @@ function checkId(value, type) {
                         });
                         _isCheckPersonalId = value
                         _isUsed = false;
-
+                        iconAlert = 'success'
+                        textChange = 'เลขประจำตัวผู้ประกอบการนี้สามารถใช้ได้'
 
                     } else {
                         Swal.fire({
@@ -514,12 +517,23 @@ function checkId(value, type) {
                             icon: "error"
                         });
                         _isUsed = true;
+                        iconAlert = 'error'
+                        textChange = 'เลขประจำตัวผู้ประกอบการนี้มีในระบบแล้ว'
                         document.getElementById('id').classList.add('alertInput')
                         document.getElementById('company-id').classList.add('alertInput')
                     }
                     console.log(_isUsed);
                 });
             } else {
+                Swal.fire({
+                    title: textChange,
+                    width: "30%",
+                    showConfirmButton: true,
+                    closeOnConfirm: false,
+                    closeOnCancel: false,
+                    confirmButtonColor: "#009688",
+                    icon: iconAlert
+                });
                 console.log(`personal id not change`)
             }
         }

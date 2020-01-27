@@ -1,6 +1,7 @@
 $(function() {
-  $.datetimepicker.setLocale("th"); // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
-
+  if($.datetimepicker != undefined){
+    $.datetimepicker.setLocale("th"); // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
+  
   // กรณีใช้แบบ inline
   /*  $("#datepicker4").datetimepicker({
       timepicker:false,
@@ -256,4 +257,6 @@ $(function() {
       $(this).val(dateValue);
     }
   });
+
+  }
 });
