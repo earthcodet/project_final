@@ -64,6 +64,8 @@ function addPage() {
     fileImage = null
     inImage.type = null
     inImage.data = null
+    textChange = ''
+    iconAlert = ''
 }
 
 function disableMenuAll() {
