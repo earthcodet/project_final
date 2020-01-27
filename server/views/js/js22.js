@@ -90,14 +90,22 @@ if(document.getElementById("defaultOpen") != null){
 }
 
 
-
+let swal_html="asdsfdgsdhfjhdgafsd"
 if($.contextMenu != undefined || $.contextMenu != null){
   $(function () {
     $.contextMenu({
       selector: '.context-menu-one',
       callback: function (key, options) {
-        if(key="cut"){
-          
+        if(key==="transfer"){
+          Swal.fire({
+            title: "โอนใบอนุญาต",
+            html: swal_html,
+            width: '80%',
+            customClass: 'swal-height',
+            showConfirmButton: false,
+            closeOnConfirm: false,
+            closeOnCancel: false
+        });
           console.log(key+"Yes")
         }else{
           
@@ -109,10 +117,10 @@ if($.contextMenu != undefined || $.contextMenu != null){
       },
       items: {
         "sep2": "---------",
-        "edit": { name: "ต่อใบอนุญาต" },
-        "cut": { name: "โอนใบอนุญาต" },
-        "copy": { name: "เพิ่มใบอนุญาต" },
-        "paste": { name: "ดูรายละเอียด" },
+        "per": { name: "ต่อใบอนุญาต" },
+        "transfer": { name: "โอนใบอนุญาต" },
+        "add": { name: "เพิ่มใบอนุญาต" },
+        "see": { name: "ดูรายละเอียด" },
         "delete": { name: "ยกเลิก" },
         "sep1": "---------"
   
