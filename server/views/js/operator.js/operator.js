@@ -6,6 +6,8 @@ let _isImageChange = false
 let newAdd = false
 let base64ImageSelect = ''
 let imageSelectype = ''
+let textChange = ''
+let iconAlert = ''
 let inAddress = {
     id: "",
     home_number: "",
@@ -18,6 +20,7 @@ let inAddress = {
     amphur_name: "",
     province_name: ""
 };
+
 let inPersonal = {
     id: "",
     address_id: "",
@@ -72,6 +75,8 @@ function resetParameter() {
     };
 }
 function setDataUI(data) {
+    iconAlert = ''
+    textChange = ''
     console.log('run setDataUI')
     console.log(data)
     console.log(data.PERSONAL_TYPE === 'บุคคลธรรมดา')
@@ -435,7 +440,8 @@ function checkId(value, type) {
                             });
                             _isCheckPersonalId = value
                             _isUsed = false;
-
+                            textChange = 'เลขประจำตัวผู้ประกอบการนี้สามารถใช้ได้'
+                            iconAlert = 'success'
 
                         } else {
                             Swal.fire({
@@ -448,6 +454,8 @@ function checkId(value, type) {
                                 icon: "error"
                             });
                             _isUsed = true;
+                            iconAlert = 'error'
+                            textChange = 'เลขประจำตัวผู้ประกอบการนี้มีในระบบแล้ว'
                             document.getElementById('id').classList.add('alertInput')
                             document.getElementById('company-id').classList.add('alertInput')
                         }
@@ -455,7 +463,7 @@ function checkId(value, type) {
                     });
                 } else {
                     Swal.fire({
-                        title: "หมายเลขประจำตัวประชาชนไม่ถูกต้อง",
+                        title: `หมายเลขประจำตัวประชาชนไม่ถูกต้อง`,
                         width: "30%",
                         showConfirmButton: true,
                         closeOnConfirm: false,
@@ -463,11 +471,19 @@ function checkId(value, type) {
                         confirmButtonColor: "#009688",
                         icon: "error"
                     });
-                    _isUsed = true;
-                    document.getElementById('id').classList.add('alertInput')
-                    document.getElementById('company-id').classList.add('alertInput')
+                    iconAlert = 'error'
+                    textChange = 'หมายเลขประจำตัวประชาชนไม่ถูกต้อง'
                 }
             } else {
+                Swal.fire({
+                    title: textChange,
+                    width: "30%",
+                    showConfirmButton: true,
+                    closeOnConfirm: false,
+                    closeOnCancel: false,
+                    confirmButtonColor: "#009688",
+                    icon: iconAlert
+                });
                 console.log(`personal id not change`)
             }
         } else {
