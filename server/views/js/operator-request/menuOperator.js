@@ -1,0 +1,277 @@
+
+let tSearchName = ''
+let tSearchSurname = ''
+let tSearchId = ''
+function exitPage() {
+    Swal.fire({
+        title: "สำนักงานเทศบาล",
+        html: "ต้องการออกจากระบบหรือไม่",
+        showCancelButton: true,
+        customClass: 'swal-height',
+        confirmButtonColor: "#009688",
+        confirmButtonText: "ใช่",
+        cancelButtonText: "ไม่ใช่",
+        cancelButtonColor: '#dc3545',
+        closeOnConfirm: false,
+        closeOnCancel: false
+    })
+        .then((result) => {
+            if (result.value) {
+                document.getElementById('exitMenu').classList.add('disableds')
+                logout()
+            }
+        });
+}
+
+function logout() {
+    location.replace("/logout")
+}
+function resetStyleIdDelete() {
+    var id = document.getElementById('id')
+    if (id != undefined || id != null) {
+        id.style.textDecoration = ''
+    }
+    var company_id = document.getElementById('company-id')
+    if (company_id != undefined || company_id != null) {
+        company_id.style.textDecoration = ''
+    }
+}
+
+function disableMenuAll() {
+    document.getElementById('addMenu').classList.add('disableds')
+    document.getElementById('saveMenu').classList.add('disableds')
+    document.getElementById('editMenu').classList.add('disableds')
+    document.getElementById('restoreMenu').classList.add('disableds')
+    document.getElementById('deleteMenu').classList.add('disableds')
+}
+
+function enableMenu(id) {
+    document.getElementById(id).classList.remove('disableds')
+}
+
+
+function resetImageDefault() {
+    //ตัวแปรอยู่ใน operator 
+    fileImage = null
+    inImage.type = null
+    document.getElementById('uploadFile').value = ''
+    var img = document.getElementById('operatorImage')
+    img.src = '../../img/userProfile.png'
+}
+function setIdDelete(type) {
+    if (type === 'บุคคลธรรมดา') {
+        var id = document.getElementById('id')
+
+        if (id != null) {
+            if (id.style.textDecoration === '') {
+                id.style.textDecoration = 'line-through'
+            } else {
+                id.style.textDecoration = ''
+            }
+        }
+    } else {
+        var company_id = document.getElementById('company-id')
+        if (company_id != null) {
+            if (company_id.style.textDecoration === '') {
+                company_id.style.textDecoration = 'line-through'
+            } else {
+                company_id.style.textDecoration = ''
+            }
+        }
+    }
+}
+function searchPersonal() {
+    let id = document.getElementById('popSearchId').value.trim()
+    let name = document.getElementById('popSearchName').value.trim()
+    let surname = document.getElementById('popSearchSurname').value.trim()
+    if (id.length === 0) {
+        id = 'none'
+    }
+    if (name.length === 0) {
+        name = 'none'
+    }
+    if (surname.length === 0) {
+        surname = 'none'
+    }
+    //ไม่ให้ค้นหา คำค้นหาเดิม
+    if (tSearchId != id || tSearchName != name || tSearchSurname != surname) {
+        return new Promise((resolve, reject) => {
+            tSearchName = name
+            tSearchId = id
+            tSearchSurname = surname
+            console.log('Searching')
+            axios.get(`http://localhost:5000/search/personal/${id}/${name}/${surname}`).then((result) => {
+                if (result.data != 'Not found') {
+                    createResultSearch(result.data)
+                    errorSearch('', 'HIDE')
+
+                    return resolve(result.data);
+                } else {
+                    errorSearch('not found', 'SHOW')
+                    var tbl = document.getElementById("resultItems");
+                    if (tbl.getElementsByTagName("tbody")[0] != null || tbl.getElementsByTagName("tbody")[0] != undefined) {
+                        tbl.removeChild(tbl.getElementsByTagName("tbody")[0])
+                    }
+                    console.log(result.data)
+
+                }
+            })
+        })
+    } else {
+        console.log(`Search query doesn't change`)
+        errorSearch(`query doesn't change`, 'SHOW')
+    }
+
+}
+function errorSearch(texterror, action) {
+    let error = document.getElementById('error_search')
+    error.classList.toggle('animation')
+    if (action === 'SHOW') {
+        error.style.display = ''
+        if (texterror === 'not found') {
+            error.innerText = 'ค้นหารายชื่อผู้ประกอบการไม่พบ'
+        } else {
+            error.innerText = 'คำค้นหาไม่มีการเปลี่ยนแปลง'
+        }
+    } else {
+        error.style.display = 'none'
+    }
+}
+function getImageByPeronalId(type, id) {
+    return new Promise((resolve, reject) => {
+        if (type === 'บุคคลธรรมดา') {
+            axios.get(`http://localhost:5000/get/image/${id}`).then((result) => {
+                console.log(result.data[0])
+                return resolve(result.data[0]);
+            })
+        } else {
+            return resolve(false)
+        }
+    })
+}
+function showItem(arrayResult) {
+    resetParameter()
+    resetStyleIdDelete()
+    console.log(arrayResult)
+    changeOption(arrayResult.PERSONAL_TYPE.trim())
+    if (arrayResult.PERSONAL_TYPE === 'บุคคลธรรมดา') {
+        getImageByPeronalId(arrayResult.PERSONAL_TYPE, arrayResult.PERSONAL_ID).then((result) => {
+            console.log(`pid = ${arrayResult.PERSONAL_ID}`)
+            console.log(result)
+            if (result != false || result != null) {
+                arrayResult.image = result
+                setDataUI(arrayResult)
+            } else {
+                setDataUI(arrayResult)
+            }
+            tempData = arrayResult
+        })
+    } else {
+        setDataUI(arrayResult)
+        tempData = arrayResult
+    }
+    console.log(arrayResult.PERSONAL_IS_DELETED === 'YES')
+    if (arrayResult.PERSONAL_IS_DELETED === 'YES') {
+        setIdDelete(arrayResult.PERSONAL_TYPE) // ทำให้ id เป็นขีด
+        
+    } else {
+        resetStyleIdDelete()    //เอา style ลบออก
+    }
+    console.log('run is delete Swal')
+    Swal.close()
+}
+function createResultSearch(data) {
+    var tbl = document.getElementById("resultItems");
+    if (tbl.getElementsByTagName("tbody")[0] != null || tbl.getElementsByTagName("tbody")[0] != undefined) {
+        tbl.removeChild(tbl.getElementsByTagName("tbody")[0])
+    }
+    var tblBody = document.createElement('tbody')
+    for (var i = 0; i < data.length; i++) {
+        // creates a table row
+        var row = document.createElement("tr");
+        //row index = this.rowIndex
+        row.onclick = function () { showItem(data[this.rowIndex - 1]) }
+
+        for (var j = 0; j < 4; j++) {
+            var cell = document.createElement("td");
+            if (j === 0) {
+                var cellText = document.createTextNode(data[i].PERSONAL_NAME);
+            } else if (j === 1) {
+                var cellText = document.createTextNode(data[i].PERSONAL_SURNAME);
+            } else if (j === 2) {
+                let AddressText = ''
+                AddressText = AddressText + `บ้านเลขที่ ${data[i].AID.ADDRESS_HOME_NUMBER} `
+                AddressText = AddressText + `หมู่ ${data[i].AID.ADDRESS_MOO === null ? '-' : data[i].AID.ADDRESS_MOO} `
+                AddressText = AddressText + `ตรอก ${data[i].AID.ADDRESS_TRXK === null ? '-' : data[i].AID.ADDRESS_TRXK} `
+                AddressText = AddressText + `ซอย ${data[i].AID.ADDRESS_SXY === null ? '-' : data[i].AID.ADDRESS_SXY} `
+                AddressText = AddressText + `อาคาร ${data[i].AID.ADDRESS_BUILDING === null ? '-' : data[i].AID.ADDRESS_BUILDING} `
+                AddressText = AddressText + `ถนน ${data[i].AID.ADDRESS_ROAD === null ? '-' : data[i].AID.ADDRESS_ROAD} `
+                AddressText = AddressText + `ตำบล ${data[i].AID.DISTRICT_NAME === null ? '-' : data[i].AID.DISTRICT_NAME} `
+                AddressText = AddressText + `อำเภอ ${data[i].AID.AMPHUR_NAME === null ? '-' : data[i].AID.AMPHUR_NAME}`
+                AddressText = AddressText + `จังหวัด ${data[i].AID.PROVINCE_NAME === null ? '-' : data[i].AID.PROVINCE_NAME}`
+                var cellText = document.createTextNode(AddressText);
+            } else {
+                var cellText = document.createTextNode(data[i].PERSONAL_PERSONAL_ID);
+            }
+
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+        }
+        tblBody.appendChild(row);
+    }
+    tbl.appendChild(tblBody);
+}
+function runScript(e) {
+    if (e.keyCode == 13) {
+        searchPersonal()
+        return false;
+    }
+}
+function searchOparator() {
+        tSearchName = ''
+        tSearchSurname = ''
+        tSearchId = ''
+        var swal_html = `<div >
+        <div class="display-center" onkeypress="return runScript(event)">
+                    <h5 style="font-size: 100%;">
+                        ชื่อ :
+                        <input type="text" id="popSearchName" style="width: 18%;">
+                        นามสกุล :
+                        <input type="text" id="popSearchSurname" style="width: 18%;" >
+                        เลขบัตรประจำตัว :
+                        <input type="text" id="popSearchId" style="width: 18%;" >
+                        <button type="button" style="width: auto;height: auto;"
+                        class="btn btn-secondary is-color" onClick='searchPersonal()'>
+                                <i class="fa fa-search"></i> 
+                                ค้นหา
+                           
+                        </button>
+                        <br>
+                        <font id='error_search' style='display:none'class='alert'> ค้นหาไม่พบ </font>
+                    </h5>   
+                    
+                </div>
+        <div class="search-popup-height">
+            <table id='resultItems' class="table tablesearch table-hover cursor-pointer">
+                <thead>
+                  <tr class="is-color ">
+                    <th>ชื่อ</th>
+                    <th>นามสกุล</th>
+                    <th>ที่อยู่</th>
+                    <th>เลขบัตรประจำตัว</th>
+                  </tr>
+                </thead>
+              </table>
+        </div>
+    </div>`
+
+        Swal.fire({
+            title: "ค้นหารายชื่อผู้ประกอบการ",
+            html: swal_html,
+            width: '80%',
+            customClass: 'swal-height',
+            showConfirmButton: false,
+            closeOnConfirm: false,
+            closeOnCancel: false
+        });
+}
