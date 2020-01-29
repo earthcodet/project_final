@@ -107,8 +107,8 @@ if($.contextMenu != undefined || $.contextMenu != null){
             closeOnCancel: false
         });
           console.log(key+"Yes")
-        }else{
-          
+        }else if(key==="per"){
+          location.href = "../renew/renew_health_danger.html";
           console.log(key+"No")
         }
         
