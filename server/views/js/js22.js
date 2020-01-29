@@ -90,47 +90,9 @@ if(document.getElementById("defaultOpen") != null){
 }
 
 
-let swal_html="asdsfdgsdhfjhdgafsd"
+// let swal_html="asdsfdgsdhfjhdgafsd"
 if($.contextMenu != undefined || $.contextMenu != null){
-  $(function () {
-    $.contextMenu({
-      selector: '.context-menu-one',
-      callback: function (key, options) {
-        if(key==="transfer"){
-          Swal.fire({
-            title: "โอนใบอนุญาต",
-            html: swal_html,
-            width: '80%',
-            customClass: 'swal-height',
-            showConfirmButton: false,
-            closeOnConfirm: false,
-            closeOnCancel: false
-        });
-          console.log(key+"Yes")
-        }else if(key==="per"){
-          location.href = "../renew/renew_health_danger.html";
-          console.log(key+"No")
-        }
-        
-        console.log(key)
-        // window.console && console.log(m) || alert(m); 
-      },
-      items: {
-        "sep2": "---------",
-        "per": { name: "ต่อใบอนุญาต" },
-        "transfer": { name: "โอนใบอนุญาต" },
-        "add": { name: "เพิ่มใบอนุญาต" },
-        "see": { name: "ดูรายละเอียด" },
-        "delete": { name: "ยกเลิก" },
-        "sep1": "---------"
   
-      }
-    });
-  
-    $('.context-menu-one').on('click', function (e) {
-      console.log('clicked', this);
-    })
-  });
 }
 
 if($.contextMenu != undefined || $.contextMenu != null){
