@@ -1,51 +1,11 @@
 
 // อนุญาต
-function approvalPopup(){
+function approvalPopup() {
     let html_display = `
     <div style = 'text-align:left; display:block' >
-        <label class = 'topic' > ชื่อผู้อนุญาต </label> 
-        <br>
-        <input list='list-name' id="app_name" class='tabOne' style="width:30vw;" maxlength="150" >
-            <datalist id="list-name">
-                <option value="นาง น้ำส้ม ซีบีอี"></option>
-                <option value="นาย บัว สีน้ำเงิน"></option>
-            </datalist>
-        </input>
-        <br> 
-        <div class='center'>
-            <label class='alert tabOne' >ช่องนี้เว้นว่างไม่ได้</label>
-        </div>
-        <br>
-        <label>วันที่อนุญาต</label>
-        <br>
-        <input type="text" id="datepicker5" placeholder=""  class='tabOne' style="width: 30vw" readonly>
-        <br> 
-        <div class='center'>
-            <label class='alert tabOne' >ช่องนี้เว้นว่างไม่ได้</label>
-        </div>
-        <br>
-    
-    </div>
-    `
-    Swal.fire({
-        html: html_display,
-        width: '35%',
-        customClass: 'swal-height',
-        showCancelButton: true,
-        showConfirmButton: true,
-        confirmButtonText: "ใช่",
-        cancelButtonText: "ไม่ใช่",
-        confirmButtonColor: "#009688",
-        cancelButtonColor: '#dc3545',
-        closeOnConfirm: false,
-        closeOnCancel: false
-    })
-}
-let html_display = `
-<div style = 'text-align:left; display:block' >
     <label class = 'topic' > ชื่อผู้อนุญาต </label> 
     <br>
-    <input list='list-name' id="app_name" class='tabOne' style="width:30vw;" maxlength="150" >
+    <input list='list-name' id="app_name" class='tabOne' style="width:95%" maxlength="150" >
         <datalist id="list-name">
             <option value="นาง น้ำส้ม ซีบีอี"></option>
             <option value="นาย บัว สีน้ำเงิน"></option>
@@ -58,7 +18,7 @@ let html_display = `
     <br>
     <label>วันที่อนุญาต</label>
     <br>
-    <input type="text" id="datepicker5" placeholder=""  class='tabOne' style="width: 30vw" readonly>
+    <input type="text" id="datepicker5" placeholder=""  class='tabOne' style="width: 95%" readonly>
     <br> 
     <div class='center'>
         <label class='alert tabOne' >ช่องนี้เว้นว่างไม่ได้</label>
@@ -78,9 +38,71 @@ Swal.fire({
     confirmButtonColor: "#009688",
     cancelButtonColor: '#dc3545',
     closeOnConfirm: false,
-    closeOnCancel: false
-})
+    closeOnCancel: false,
+    showLoaderOnConfirm: true,
+    preConfirm: function () {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                resolve();
+            }, 1000);
+        });
+    }
+}).then((result) => {
+    if (result.value) {
+        Swal.fire({
+            html: "<h2>บันทึกสำเร็จ</h2>",
+            icon: "success",
+            confirmButtonColor: "#009688"
+        });
+    } else if (result.dismiss === Swal.DismissReason.cancel) {
+    }
+});
+}
 
+
+let html_display = `
+<div style = 'text-align:left; display:block' >
+    <label class = 'topic' > เหตุผลที่ยกเลิก </label> 
+    <br>
+    <input type="text" id="cancle" placeholder=""  class='tabOne' style="width: 95%" readonly>
+    <br> 
+    <div class='center'>
+        <label class='alert tabOne' >ช่องนี้เว้นว่างไม่ได้</label>
+    </div>
+    <br>
+
+</div>
+`
+Swal.fire({
+    html: html_display,
+    width: '35%',
+    customClass: 'swal-height',
+    showCancelButton: true,
+    showConfirmButton: true,
+    confirmButtonText: "ใช่",
+    cancelButtonText: "ไม่ใช่",
+    confirmButtonColor: "#009688",
+    cancelButtonColor: '#dc3545',
+    closeOnConfirm: false,
+    closeOnCancel: false,
+    showLoaderOnConfirm: true,
+    preConfirm: function () {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                resolve();
+            }, 1000);
+        });
+    }
+}).then((result) => {
+    if (result.value) {
+        Swal.fire({
+            html: "<h2>บันทึกสำเร็จ</h2>",
+            icon: "success",
+            confirmButtonColor: "#009688"
+        });
+    } else if (result.dismiss === Swal.DismissReason.cancel) {
+    }
+});
 
 
 
