@@ -6,29 +6,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title></title>
-    
-</head>
- <!-- bootstrap -->
- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
- integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
- integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
- crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
- integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
- crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
- integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
- crossorigin="anonymous"></script>
 
-<!-- css ส่วนกลาง -->
-<link href="../../css/utilities.css" rel="stylesheet">
+</head>
 <style>
+    body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: #FAFAFA;
+        font: 12pt "Tahoma";
+    }
+
+    * {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+    }
+
+    .page {
+        width: 210mm;
+        min-height: 297mm;
+        padding: 20mm;
+        margin: 10mm auto;
+        border: 1px #D3D3D3 solid;
+        border-radius: 5px;
+        background: white;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .subpage {
+        padding: 1cm;
+        border: 5px red solid;
+        height: 257mm;
+        outline: 2cm #FFEAEA solid;
+    }
+
+    @page {
+        size: A4;
+        margin: 0;
+    }
+
     @media print {
-        @page {
-            size: A4 Vertical;
+
+        html,
+        body {
+            width: 210mm;
+            height: 297mm;
         }
 
+        .page {
+            margin: 0;
+            border: initial;
+            border-radius: initial;
+            width: initial;
+            min-height: initial;
+            box-shadow: initial;
+            background: initial;
+            page-break-after: always;
+        }
         .hideWhenPrint {
             display: none;
         }
@@ -40,20 +75,39 @@
     <br>
 </div>
 
-<body style="text-align: center;">
-    <h3>แบบตรวจสถานประกอบการ สถานที่จำหน่ายอาหาร</h3>
-    <p>ประกอบกิจการประเภท 2 สถานที่จำหน่ายอาหาร พื่นที่เกิน 50 ตรม. แต่ไม่เกิน 100 ตรม.</p>
-    <p>นาย / นาง / นางสาว .............. </p>
-    <p>ที่อยูํ .................................................................. </p>
-    <br>
-    <img src="../../img/P1010119.JPG" width="300" height="250">
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <img src="../../img/P1010119.JPG" width="300" height="250">
-    <br><br>
-    <img src="../../img/P1010119.JPG" width="300" height="250">
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <img src="../../img/P1010119.JPG" width="300" height="250">
-
+<body style="text-align: center; overflow-x: hidden;">
+    <div class="book">
+        <div class="page">
+            <h3>แบบตรวจสถานประกอบการ สถานที่จำหน่ายอาหาร</h3>
+            <p>ประกอบกิจการประเภท 2 สถานที่จำหน่ายอาหาร พื่นที่เกิน 50 ตรม. แต่ไม่เกิน 100 ตรม.</p>
+            <p>นาย / นาง / นางสาว .............. </p>
+            <p>ที่อยูํ .................................................................. </p>
+            <br><br>
+            <br>
+            <div>
+                <img src="../../img/P10.JPG" width="48%">
+                <img src="../../img/P10.JPG" width="48%">
+                <br><br>
+                <img src="../../img/P10.JPG" width="48%">
+                <img src="../../img/P10.JPG" width="48%">
+            </div>
+        </div>
+        <div class="page">
+            <h3>แบบตรวจสถานประกอบการ สถานที่จำหน่ายอาหาร</h3>
+            <p>ประกอบกิจการประเภท 2 สถานที่จำหน่ายอาหาร พื่นที่เกิน 50 ตรม. แต่ไม่เกิน 100 ตรม.</p>
+            <p>นาย / นาง / นางสาว .............. </p>
+            <p>ที่อยูํ .................................................................. </p>
+            <br><br>
+            <br>
+            <div>
+                <img src="../../img/P10.JPG" width="48%">
+                <img src="../../img/P10.JPG" width="48%">
+                <br><br>
+                <img src="../../img/P10.JPG" width="48%">
+                <img src="../../img/P10.JPG" width="48%">
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
