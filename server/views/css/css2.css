@@ -342,7 +342,8 @@ html, body {
     height: 100%;
     margin: 0px;
     padding: 0px;
-    overflow-x: auto;
+    /* ปิดไว้เวลาเปิด popup มันจะไม่ขยับ */
+    /* overflow-x: auto; */
 }
 
 /* popup */
@@ -568,4 +569,19 @@ font.animation {
       40%, 60% {
         transform: translate3d(4px, 0, 0);
       }
+}
+
+.tabOne{
+    margin-left: 1vw;
+}
+
+label.alert{
+    color : red;
+    font-style:italic;
+    font-size: 0.9vw;
+    
+}
+div.center{
+    text-align: center;
+    display: block;
 }
