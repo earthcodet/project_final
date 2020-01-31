@@ -2,20 +2,21 @@
 <html lang="en">
 
 <head>
-    <title>รายงานตามประเภทคำขอ</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <!-- <script src="../js/js22.js"></script> --> -->
 
-    <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.css">
     <link rel="stylesheet" href="../../css/css2.css">
     <link href="../../css/fonts.css" rel="stylesheet">
 
-    <!-- เรียกไลบารี่สร้างปฎิทิน  -->
-    <script src="../../js/jquery-3.4.1.min.js"></script>
-    <script src="../../js/datetimepicker.full.js"></script>
-    <script src="../../js/dateth.js"></script>
-    <link rel="stylesheet" href="../../css/date.css">
+    <!-- <link rel="stylesheet" href="../../css/jquery-ui-1.12.1.custom/jquery-ui.css"> -->
+
+    <!-- topmenu สำหรับหน้านี้เท่านั้น -->
+    <!-- <link rel="stylesheet" href="../../css/topmenu.css"> -->
+
+    <!-- icon -->
+    <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.css">
 </head>
 
 <body>
@@ -47,8 +48,10 @@
             <a href="../request/request_area_less_sell.html">- หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
             <a href="../request/request_area_less_correct.html">- หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
             <a href="../request/request_market.html">- ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
-            <a href="../request/request_health_danger.html">- กิจการที่เป็นอันตรายต่อสุขภาพ</a>
+            <a href="../request/request_health_danger.html">-
+                กิจการที่เป็นอันตรายต่อสุขภาพ</a>
             <a href="../request/request_crematory.html">- กิจการฌาปณสถาน</a>
+
         </div>
         <button class="dropdown-btn"><b>ระบบต่ออายุงานคำขอ </b><i class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
@@ -74,7 +77,7 @@
             <a href="#"></a>
         </div>
         <button class="dropdown-btn"><b>ข้อมูลส่วนกลาง </b><i class="fa fa-caret-down"></i></button>
-        <div class="dropdown-container">
+        <div class="dropdown-container ">
             <a href="../central/operator.html">- ข้อมูลผู้ประกอบการ</a>
             <a href="../central/02.html">- ข้อมูลการจดใบอนุญาต</a>
             <a href="../central/03.html">- โอนใบอนุญาต</a>
@@ -88,73 +91,44 @@
         <div class="dropdown-container">
             <a href="#"></a>
         </div>
-        <button class="dropdown-btn select-active"><b>รายงาน </b><i class="fa fa-caret-down"></i></button>
+        <button class="dropdown-btn"><b>รายงาน </b><i class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
-            <a class="dropdown-active" href="../report/report_crematory.html">- ตามคำขอ</a>
+            <a href="../report/report_crematory.html">- ตามคำขอ</a>
             <a href="../report/report_summary.html">- สรุป</a>
         </div>
-        <button class="dropdown-btn notification"><b>แจ้งเตือน </b><span id="notficationRequest" class="badge"
+        <button class="dropdown-btn "><b>แจ้งเตือน </b><span id="notficationRequest" class="badge"
                 style="margin-left:0.5vw;">100000</span><i class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
-            <a class="notification" href="../notfication/request.html">- งานคำขอ<span id="notficationRequest"
-                    class="badge" style="margin-left:0.5vw;">100000</span></a>
+            <a class="dropdown-active" href="../notfication/request.html">- งานคำขอ<span id="notficationRequest"
+                    class="badge" style="margin-left:0.5vw;" >100000</span></a>
         </div>
         <br><br>
-        <button class="dropdown-btn"><a href="../notfication/request copy.html" style="color: red;"><b>คำขอหมดอายุเกิน 3 ปี </b></a>
+        <button class="dropdown-btn "><a href="request copy.html" style="color: red;"><b>คำขอหมดอายุเกิน 3 ปี </b></a>
             <!-- <i class="fa fa-caret-down"></i> -->
         </button>
     </div>
     <!-- เนื้อหา -->
     <form id="form">
-        <fieldset id="disable" style="border: 0;padding: 0;margin: 0;">
-            <div class="main">
-                <header class="w3-top2">
-                    <h1 style="font-size:2.8vh;margin-left: 25px;padding: 2px;"> รายงานตามประเภทคำขอ</h1>
-                </header>
-                <div style="text-align: center;">
-                    <a>ประเภทคำขอ :
-                    </a>
-                    <input list="brow" id="" name="" style="width: 29%;">
-                    <datalist id="brow">
-                        <option value="ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ">
-                            ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ
-                        </option>
-                        <option value="ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ">
-                            ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ
-                        </option>
-                        <option value="ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร">ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร
-                        </option>
-                        <option value="ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร">ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร
-                        </option>
-                        <option value="หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร">
-                            หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</option>
-                        <option value="หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร">
-                            หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</option>
-                        <option value="ใบอนุญาติให้ใช้สถานที่เป็นตลาดเอกชน">ใบอนุญาติให้ใช้สถานที่เป็นตลาดเอกชน
-                        </option>
-                        <option value="กิจการที่เป็นอันตรายต่อสุขภาพ">กิจการที่เป็นอันตรายต่อสุขภาพ</option>
-                        <option value="กิจการฌาปณสถาน">กิจการฌาปณสถาน</option>
-                    </datalist>
-
-                    <a>วันที่เริ่ม :
-                        <input type="text" id="datepicker1" style="width: 15%;"></a>
-                    <a>วันที่สิ้นสุด :
-                        <input type="text" id="datepicker2" style="width: 15%;"></a>
-                    <br><br>
-                    <a href="report_crematory_preveiw.html" target="popup"
-                        onclick="window.open('report_crematory_preveiw.html','popup','width=1100,height=570'); return false;">
-                        <button type="button" class=""
-                            style="background-color: #009688;color: white ;width: 10%;">ตกลง</button></a>
-                </div>
+        <fieldset style="border: 0;padding: 0;margin: 0;">
+            <div>
+                <br><br><br><br><br><br>
+                <h1 style="text-align: center;"> เดียวค่อยทำในอนาคต </h1>
             </div>
         </fieldset>
     </form>
 
 
 </body>
-<script src="../../js/js22.js"></script>
-<script src="../../js/controlTest.js"></script>
+
+<script src="../../js/operator.js/operator.js"></script>
+<script src="../../js/operator.js/menuOperator.js"></script>
 <script src="../../js/disable.js"></script>
 <script src="../../js/sweet2.js"></script>
+<script src="../../js/jquery.js"></script>
+<!-- <!-- <script src="../../js/jquery-ui.js"></script> --> -->
+<script src="../../js/js22.js"></script>
+<!-- <script src="../../js/dateth.js"></script> -->
+<script src="../../node_modules/axios/dist/axios.min.js"></script>
+<script src="../../js/utilities.js"></script>
 
 </html>
