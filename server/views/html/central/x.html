@@ -1,110 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <title>ข้อมูลผู้ประกอบการ</title>
     <meta charset="UTF-8">
-    <title>Right-Click Menus</title>
-    <meta name="viewport" content="width=device-width">
-    <style>
-        *{
-            padding: 0;
-            margin: 0;
-        }
-        *, *::before, *::after {
-            box-sizing: inherit;
-        }
-        #box{
-            border: 1px solid #999;
-        }
-        .menu{
-            width: 12rem;
-            height: 4.5rem;
-            background-color: #f4f4f4;
-            color: #333;
-            border: 1px solid #aaa;
-            box-shadow: 2px 2px 2px #999;
-            border-radius: 0.2rem;
-            list-style: none;
-            position: fixed;
-        }
-        .menu.off{
-            top: -200%;
-            left: -200%;
-        }
-        .menu-item{
-            height: 1.5rem;
-            line-height: 1.5rem;
-            font-size: 1rem;
-            font-weight: 100;
-            padding: 0 1rem;
-            cursor: pointer;
-        }
-        .menu-item:hover,
-        .menu-item:active{
-            color: #000;
-            font-weight: 500;
-        }
-    </style>
-    <!--
-    
-    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="../../css/css2.css">
+    <link href="../../css/fonts.css" rel="stylesheet">
+
+    <!-- topmenu สำหรับหน้านี้เท่านั้น -->
+    <link rel="stylesheet" href="../../css/topmenu.css">
+
+    <!-- icon -->
+    <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.css">
+
+    <script src="../../js/sweet2.js"></script>
+
+
+    <!-- เรียกไลบารี่สร้างปฎิทิน  -->
+    <script src="../../js/jquery-3.4.1.min.js"></script>
+    <script src="../../js/datetimepicker.full.js"></script>
+    <script src="../../js/dateth.js"></script>
+    <link rel="stylesheet" href="../../css/date.css">
+
+    <link rel="stylesheet" href="../../js/jquery.js">
+    <link href="../../css/jquery.contextMenu.css" rel="stylesheet">
 </head>
+
 <body>
-    <h1>Right-Click Menus</h1>
-    <h2>`contextmenu` Event</h2>
-    <p>Right-click on the text below.</p>
-    <div id="boxss">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed alias iusto iure est veritatis ipsum voluptas nesciunt impedit, quam, distinctio nulla illo obcaecati expedita libero, fugiat porro, unde voluptate rem.</div>
-    
-    <ul class="menu">
-        <li class="menu-item" id="red">Red Item</li>
-        <li class="menu-item" id="gold">Gold Item</li>
-        <li class="menu-item" id="green">Green Item</li>
-    </ul>
-    
-    <script>
-        let menu = null;
-        document.addEventListener('DOMContentLoaded', function(){
-            //make sure the right click menu is hidden
-            menu = document.querySelector('.menu');
-            menu.classList.add('off');
-            
-            //add the right click listener to the box
-            let box = document.getElementById('boxss');
-            box.addEventListener('contextmenu', showmenu);
-            
-            //add a listener for leaving the menu and hiding it
-            menu.addEventListener('mouseleave', hidemenu);
-            
-            //add the listeners for the menu items
-            addMenuListeners();
-        });
-        
-        function addMenuListeners(){
-            document.getElementById('red').addEventListener('click', setColour);
-            document.getElementById('gold').addEventListener('click', setColour);
-            document.getElementById('green').addEventListener('click', setColour);
-        }
-        
-        function setColour(ev){
-            hidemenu();
-            let clr = ev.target.id;
-            document.getElementById('boxss').style.backgroundColor = clr;
-        }
-        
-        function showmenu(ev){
-            //stop the real right click menu
-            ev.preventDefault(); 
-            //show the custom menu
-            console.log( ev.clientX, ev.clientY );
-            menu.style.top = `${ev.clientY - 20}px`;
-            menu.style.left = `${ev.clientX - 20}px`;
-            menu.classList.remove('off');
-        }
-        
-        function hidemenu(ev){
-            menu.classList.add('off');
-            menu.style.top = '-200%';
-            menu.style.left = '-200%';
-        }
-    </script>
+    <div style='text-align:left; display:block'>
+        <br>
+        <label class='per_topic' style='font-size:1.5vw'> ต่อใบอนุญาติ เลขที่ A0001/2563 </label>
+        <br>
+        <a class='topic' style="margin-left: 0.65vw;"> ใบเสร็จเล่มที่ </a>
+        <input type='number' id="per_pay_book" class='tabOne' style="margin-left:1vw;width:8vw" maxlength="150"></input>
+        <a id='per_pay_book_alert' class='tabOne alert'>ช่องนี้เว้นว่างไม่ได้</a>
+        <br>
+        <a class='topic' style="margin-left: 3.7vw;"> เลขที่ </a>
+        <input id="per_pay_order_no" class='tabOne' style="width:8vw;margin-left:1vw" maxlength="150"></input>
+        <a id='per_pay_order_no_alert' class='tabOne alert'>ช่องนี้เว้นว่างไม่ได้</a>
+        <br>
+        <a class='topic' style="margin-left: 0.5vw;"> ค่าธรรมเนียม </a>
+        <input type='number' id="per_pay_fee" class='tabOne' style="margin-left:1vw;width:8vw" maxlength="150"></input>
+        <a id='per_pay_fee_alert' class='tabOne alert'>ช่องนี้เว้นว่างไม่ได้</a>
+        <br>
+        <a class='topic' style="margin-left: 3vw;"> ค่าปรับ </a>
+        <input type='number' id="per_pay_fine" class='tabOne' style="margin-left:1vw;width:8vw" maxlength="150"></input>
+        <a id='per_pay_fine_alert' class='tabOne alert'>ช่องนี้เว้นว่างไม่ได้</a>
+        <br>
+        <a class='topic' style="margin-left: 0.3vw;"> ออกให้เมื่อวันที่ </a>
+        <input id="datepicker8" class='tabOne' style="margin-left:0.5vw;width:8vw" maxlength="150"></input>
+        <a id='datepicker8_alert' class='tabOne alert'>ช่องนี้เว้นว่างไม่ได้</a>
+    </div>
 </body>
+
 </html>

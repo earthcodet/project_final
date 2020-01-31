@@ -478,10 +478,6 @@ html, body {
     color: #212529;
     background-color: rgba(0, 0, 0, .075)
 }
-.table-hover tbody tr:hover:active {
-    color: #212529;
-    background-color: #a59c9c
-}
 
 .cursor-pointer {
     cursor: pointer;
@@ -585,7 +581,7 @@ font.animation {
     color : red;
     font-style:italic;
     font-size: 0.9vw;
-    display: none;
+    /* display: none; */
 }
 div.center{
     text-align: center;

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 
 <head>
     <title>ข้อมูลผู้ประกอบการ</title>
@@ -19,7 +19,6 @@
     <script src="../../js/sweet2.js"></script>
 
 
-    <script src="../../js/clickRight/jquery.contextMenu.js"></script>
     <!-- เรียกไลบารี่สร้างปฎิทิน  -->
     <script src="../../js/jquery-3.4.1.min.js"></script>
     <script src="../../js/datetimepicker.full.js"></script>
@@ -33,13 +32,13 @@
 <body>
     <!-- เมนูด้านบน -->
     <div class="w3-top icon-bar">
-        <a id="addMenu" class="exit  disableds" ><i class="fa fa-plus-square">
+        <a id="addMenu" class="exit  disableds"><i class="fa fa-plus-square">
                 <span>เพิ่ม</span></i></a>
-        <a id="editMenu"  class="exit disableds"><i class="fa fa-pencil-alt">
+        <a id="editMenu" class="exit disableds"><i class="fa fa-pencil-alt">
                 <span>แก้ไข</span></i></a>
         <a id="saveMenu" class="exit disableds"><i class="fa fa-save">
                 <span>บันทึก</span></i></a>
-        <a id="restoreMenu"class="exit disableds"><i class="fa fa-reply">
+        <a id="restoreMenu" class="exit disableds"><i class="fa fa-reply">
                 <span>เรียกคืน</span></i></a>
         <a id="deleteMenu" class="exit disableds"><i class="fa fa-times">
                 <span>ยกเลิก</span></i></a>
@@ -408,9 +407,9 @@
                                 </th>
                             </tr>
                         </thead>
-                       
+
                         <tbody style="height: 17vw;  text-align: center;">
-                            <tr class="available-menu">
+                            <tr class="available-menu" oncontextmenu='markList(this)' onmouseover="resetActiveRightClick()">
                                 <td>256333</td>
                                 <td>ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</td>
                                 <td>0001/2562</td>
@@ -418,7 +417,7 @@
                                 <td>20 มกราคม 2563</td>
                                 <td>300 วัน</td>
                             </tr>
-                            <tr class="available-menu" >
+                            <tr class="available-menu" oncontextmenu='markList(this)' onmouseover="resetActiveRightClick()">
                                 <td>2562</td>
                                 <td>ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</td>
                                 <td>0002/2562</td>
@@ -426,7 +425,7 @@
                                 <td>25 มกราคม 2563</td>
                                 <td>345 วัน</td>
                             </tr>
-                            <tr class="available-menu" >
+                            <tr class="available-menu" oncontextmenu='markList(this)' onmouseover="resetActiveRightClick()">
                                 <td>2561</td>
                                 <td>ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</td>
                                 <td>0003/2562</td>
@@ -434,7 +433,7 @@
                                 <td>27 มกราคม 2563</td>
                                 <td>65 วัน</td>
                             </tr>
-                            <tr class="available-menu">
+                            <tr class="available-menu" oncontextmenu='markList(this)' onmouseover="resetActiveRightClick()">
                                 <td>2563</td>
                                 <td>ใบอนุญาตจัดตั้งสถานที่สะสมอาหาร</td>
                                 <td>0004/2562</td>
@@ -442,7 +441,7 @@
                                 <td>29 มกราคม 2563</td>
                                 <td>36 วัน</td>
                             </tr>
-                            <tr class="available-menu" >
+                            <tr class="available-menu" oncontextmenu='markList(this)' onmouseover="resetActiveRightClick()">
                                 <td>2563</td>
                                 <td>ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</td>
                                 <td>0005/2562</td>
@@ -482,7 +481,7 @@
                                 </tr>
                             </thead>
                             <tbody style="height: 17vw; text-align: center;">
-                                <tr class="detail-menu">
+                                <tr class="detail-menu" oncontextmenu='markList(this)' onmouseover="resetActiveRightClick()">
                                     <td>2563</td>
                                     <td>ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</td>
                                     <td>0001/2562</td>
@@ -490,7 +489,7 @@
                                     <td>20 มกราคม 2563</td>
                                     <td>300 วัน</td>
                                 </tr>
-                                <tr class="detail-menu">
+                                <tr class="detail-menu" oncontextmenu='markList(this)' onmouseover="resetActiveRightClick()">
                                     <td>2562</td>
                                     <td>ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</td>
                                     <td>0002/2562</td>
@@ -498,7 +497,7 @@
                                     <td>25 มกราคม 2563</td>
                                     <td>345 วัน</td>
                                 </tr>
-                                <tr class="detail-menu">
+                                <tr class="detail-menu" oncontextmenu='markList(this)' onmouseover="resetActiveRightClick()">
                                     <td>2561</td>
                                     <td>ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</td>
                                     <td>0003/2562</td>
@@ -506,7 +505,7 @@
                                     <td>27 มกราคม 2563</td>
                                     <td>65 วัน</td>
                                 </tr>
-                                <tr class="detail-menu">
+                                <tr class="detail-menu" oncontextmenu='markList(this)' onmouseover="resetActiveRightClick()">
                                     <td>2563</td>
                                     <td>ใบอนุญาตจัดตั้งสถานที่สะสมอาหาร</td>
                                     <td>0004/2562</td>
@@ -514,7 +513,7 @@
                                     <td>29 มกราคม 2563</td>
                                     <td>36 วัน</td>
                                 </tr>
-                                <tr class="detail-menu">
+                                <tr class="detail-menu" oncontextmenu='markList(this)' onmouseover="resetActiveRightClick()">
                                     <td>2563</td>
                                     <td>ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</td>
                                     <td>0005/2562</td>
@@ -558,7 +557,7 @@
                                 </tr>
                             </thead>
                             <tbody style="height: 17vw; text-align: center;">
-                                <tr class="detail-menu">
+                                <tr class="detail-menu" oncontextmenu='markList(this)' onmouseover="resetActiveRightClick()">
                                     <td>2563</td>
                                     <td>ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</td>
                                     <td>0001/2562</td>
@@ -567,7 +566,7 @@
                                     <td>นาย A</td>
                                     <td>300 วัน</td>
                                 </tr>
-                                <tr class="detail-menu">
+                                <tr class="detail-menu" oncontextmenu='markList(this)' onmouseover="resetActiveRightClick()">
                                     <td>2562</td>
                                     <td>ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</td>
                                     <td>0002/2562</td>
@@ -576,7 +575,7 @@
                                     <td>นาย BB</td>
                                     <td>345 วัน</td>
                                 </tr>
-                                <tr class="detail-menu">
+                                <tr class="detail-menu" oncontextmenu='markList(this)' onmouseover="resetActiveRightClick()">
                                     <td>2561</td>
                                     <td>ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</td>
                                     <td>0003/2562</td>
@@ -585,7 +584,7 @@
                                     <td>นาย CCC</td>
                                     <td>65 วัน</td>
                                 </tr>
-                                <tr class="detail-menu">
+                                <tr class="detail-menu" oncontextmenu='markList(this)' onmouseover="resetActiveRightClick()">
                                     <td>2563</td>
                                     <td>ใบอนุญาตจัดตั้งสถานที่สะสมอาหาร</td>
                                     <td>0004/2562</td>
@@ -594,7 +593,7 @@
                                     <td>นาย DDDD</td>
                                     <td>36 วัน</td>
                                 </tr>
-                                <tr class="detail-menu">
+                                <tr class="detail-menu" oncontextmenu='markList(this)' onmouseover="resetActiveRightClick()">
                                     <td>2563</td>
                                     <td>ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</td>
                                     <td>0005/2562</td>
@@ -639,7 +638,7 @@
                             </tr>
                         </thead>
                         <tbody style="height: 17vw;  text-align: center;">
-                            <tr class="approval-menu">
+                            <tr class="approval-menu" oncontextmenu='markList(this)' onmouseover="resetActiveRightClick()">
                                 <td>256333</td>
                                 <td>ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</td>
                                 <td>0001/2562</td>
@@ -647,7 +646,7 @@
                                 <td>20 มกราคม 2563</td>
                                 <td>300 วัน</td>
                             </tr>
-                            <tr class="approval-menu">
+                            <tr class="approval-menu" oncontextmenu='markList(this)' onmouseover="resetActiveRightClick()">
                                 <td>2562</td>
                                 <td>ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</td>
                                 <td>0002/2562</td>
@@ -655,7 +654,7 @@
                                 <td>25 มกราคม 2563</td>
                                 <td>345 วัน</td>
                             </tr>
-                            <tr class="approval-menu">
+                            <tr class="approval-menu" oncontextmenu='markList(this)' onmouseover="resetActiveRightClick()">
                                 <td>2561</td>
                                 <td>ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</td>
                                 <td>0003/2562</td>
@@ -663,7 +662,7 @@
                                 <td>27 มกราคม 2563</td>
                                 <td>65 วัน</td>
                             </tr>
-                            <tr class="approval-menu">
+                            <tr class="approval-menu" oncontextmenu='markList(this)' onmouseover="resetActiveRightClick()">
                                 <td>2563</td>
                                 <td>ใบอนุญาตจัดตั้งสถานที่สะสมอาหาร</td>
                                 <td>0004/2562</td>
@@ -671,7 +670,7 @@
                                 <td>29 มกราคม 2563</td>
                                 <td>36 วัน</td>
                             </tr>
-                            <tr class="approval-menu">
+                            <tr class="approval-menu" oncontextmenu='markList(this)' onmouseover="resetActiveRightClick()">
                                 <td>2563</td>
                                 <td>ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</td>
                                 <td>0005/2562</td>
@@ -782,7 +781,7 @@
                             </tr>
                         </thead>
                         <tbody style="height: 17vw;  text-align: center;">
-                            <tr class='transfer-menu'>
+                            <tr class='transfer-menu' oncontextmenu='markList(this)' onmouseover="resetActiveRightClick()">
                                 <td>2563</td>
                                 <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
                                 </td>
@@ -790,7 +789,7 @@
                                 <td>9999</td>
                                 <td>20 มกราคม 2563</td>
                             </tr>
-                            <tr class='transfer-menu'>
+                            <tr class='transfer-menu' oncontextmenu='markList(this)' onmouseover="resetActiveRightClick()">
                                 <td>2563</td>
                                 <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
                                 </td>
@@ -798,7 +797,7 @@
                                 <td>9999</td>
                                 <td>20 มกราคม 2563</td>
                             </tr>
-                            <tr class='transfer-menu'>
+                            <tr class='transfer-menu' oncontextmenu='markList(this)' onmouseover="resetActiveRightClick()">
                                 <td>2563</td>
                                 <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
                                 </td>
@@ -806,7 +805,7 @@
                                 <td>9999</td>
                                 <td>20 มกราคม 2563</td>
                             </tr>
-                            <tr class='transfer-menu'>
+                            <tr class='transfer-menu' oncontextmenu='markList(this)' onmouseover="resetActiveRightClick()">
                                 <td>2563</td>
                                 <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
                                 </td>
@@ -814,7 +813,7 @@
                                 <td>9999</td>
                                 <td>20 มกราคม 2563</td>
                             </tr>
-                            <tr class='transfer-menu'>
+                            <tr class='transfer-menu' oncontextmenu='markList(this)' onmouseover="resetActiveRightClick()">
                                 <td>2563</td>
                                 <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
                                 </td>
@@ -921,7 +920,7 @@
                             </tr>
                         </thead>
                         <tbody style="height: 17vw;  text-align: center;">
-                            <tr class='expire-menu'>
+                            <tr class='expire-menu' oncontextmenu='markList(this)' onmouseover="resetActiveRightClick()">
                                 <td>2563</td>
                                 <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
                                 </td>
@@ -930,7 +929,7 @@
                                 <td>20 มกราคม 2563</td>
                                 <td>365 วัน</td>
                             </tr>
-                            <tr class='expire-menu'>
+                            <tr class='expire-menu' oncontextmenu='markList(this)' onmouseover="resetActiveRightClick()">
                                 <td>2563</td>
                                 <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
                                 </td>
@@ -939,7 +938,7 @@
                                 <td>20 มกราคม 2563</td>
                                 <td>365 วัน</td>
                             </tr>
-                            <tr class='expire-menu'>
+                            <tr class='expire-menu' oncontextmenu='markList(this)' onmouseover="resetActiveRightClick()">
                                 <td>2563</td>
                                 <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
                                 </td>
@@ -948,7 +947,7 @@
                                 <td>20 มกราคม 2563</td>
                                 <td>365 วัน</td>
                             </tr>
-                            <tr class='expire-menu'>
+                            <tr class='expire-menu' oncontextmenu='markList(this)' onmouseover="resetActiveRightClick()">
                                 <td>2563</td>
                                 <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
                                 </td>
@@ -957,7 +956,7 @@
                                 <td>20 มกราคม 2563</td>
                                 <td>365 วัน</td>
                             </tr>
-                            <tr class='expire-menu'>
+                            <tr class='expire-menu' oncontextmenu='markList(this)' onmouseover="resetActiveRightClick()">
                                 <td>2563</td>
                                 <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
                                 </td>
@@ -1072,7 +1071,7 @@
                             </tr>
                         </thead>
                         <tbody style="height: 17vw;  text-align: center;">
-                            <tr class='wait-menu'>
+                            <tr class='wait-menu' oncontextmenu='markList(this)' onmouseover="resetActiveRightClick()">
                                 <td>2563</td>
                                 <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
                                 </td>
@@ -1081,7 +1080,7 @@
                                 <td>20 มกราคม 2563</td>
                                 <td>365 วัน</td>
                             </tr>
-                            <tr class='wait-menu'>
+                            <tr class='wait-menu' oncontextmenu='markList(this)' onmouseover="resetActiveRightClick()">
                                 <td>2563</td>
                                 <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
                                 </td>
@@ -1090,7 +1089,7 @@
                                 <td>20 มกราคม 2563</td>
                                 <td>365 วัน</td>
                             </tr>
-                            <tr class='wait-menu'>
+                            <tr class='wait-menu' oncontextmenu='markList(this)' onmouseover="resetActiveRightClick()">
                                 <td>2563</td>
                                 <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
                                 </td>
@@ -1099,7 +1098,7 @@
                                 <td>20 มกราคม 2563</td>
                                 <td>365 วัน</td>
                             </tr>
-                            <tr class='wait-menu'>
+                            <tr class='wait-menu' oncontextmenu='markList(this)' onmouseover="resetActiveRightClick()">
                                 <td>2563</td>
                                 <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
                                 </td>
@@ -1108,7 +1107,7 @@
                                 <td>20 มกราคม 2563</td>
                                 <td>365 วัน</td>
                             </tr>
-                            <tr class='wait-menu'>
+                            <tr class='wait-menu' oncontextmenu='markList(this)' onmouseover="resetActiveRightClick()">
                                 <td>2563</td>
                                 <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
                                 </td>
@@ -1221,7 +1220,7 @@
                             </tr>
                         </thead>
                         <tbody style="height: 17vw;  text-align: center;">
-                            <tr class='cancel-menu'>
+                            <tr class='cancel-menu' oncontextmenu='markList(this)' onmouseover="resetActiveRightClick()">
                                 <td>2563</td>
                                 <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
                                 </td>
@@ -1230,7 +1229,7 @@
                                 <td>20 มกราคม 2563</td>
                                 <td>365 วัน</td>
                             </tr>
-                            <tr class='cancel-menu'>
+                            <tr class='cancel-menu' oncontextmenu='markList(this)' onmouseover="resetActiveRightClick()">
                                 <td>2563</td>
                                 <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
                                 </td>
@@ -1239,7 +1238,7 @@
                                 <td>20 มกราคม 2563</td>
                                 <td>365 วัน</td>
                             </tr>
-                            <tr class='cancel-menu'>
+                            <tr class='cancel-menu' oncontextmenu='markList(this)' onmouseover="resetActiveRightClick()">
                                 <td>2563</td>
                                 <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
                                 </td>
@@ -1248,7 +1247,7 @@
                                 <td>20 มกราคม 2563</td>
                                 <td>365 วัน</td>
                             </tr>
-                            <tr class='cancel-menu'>
+                            <tr class='cancel-menu' oncontextmenu='markList(this)' onmouseover="resetActiveRightClick()">
                                 <td>2563</td>
                                 <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
                                 </td>
@@ -1257,7 +1256,7 @@
                                 <td>20 มกราคม 2563</td>
                                 <td>365 วัน</td>
                             </tr>
-                            <tr class='cancel-menu'>
+                            <tr class='cancel-menu' oncontextmenu='markList(this)' onmouseover="resetActiveRightClick()">
                                 <td>2563</td>
                                 <td>1.การจำหน่ายสินค้าในที่หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
                                 </td>
@@ -1366,7 +1365,8 @@
 
 <script src="../../js/js22.js"></script>
 
+<script src="../../js/clickRight/jquery.contextMenu.js"></script>
 
-
+<script src="../../js/clickRight/jquery.ui.position.min.js"></script>
 
 </html>
