@@ -89,7 +89,8 @@ function setDataUI(data) {
     console.log(data.PERSONAL_TYPE === 'บุคคลธรรมดา')
     inAddress.id = data.AID.ADDRESS_ID
     inPersonal.id = data.PERSONAL_ID
-
+    console.log('inAddress id = '+inAddress.id)
+    console.log('inPersonal id = '+inPersonal.id)
     document.getElementById('company-id').disabled = true
     document.getElementById('id').disabled = true
     document.getElementById('typeUser').value = data.PERSONAL_TYPE
@@ -796,31 +797,7 @@ function insertPage() {
                 let format = `${day}-${month}-${year}`
                 document.getElementById('last-update').value = format
             } else if (result.dismiss === Swal.DismissReason.cancel) {
-                Swal.fire({
-                    icon: 'success',
-                    html: "<h2>ยกเลิกสำเร็จ</h2>",
-                    confirmButtonColor: "#009688"
-                });
-                if (data === false) {
-                    resetInputUI()
-                    addNew = false
-                    disableMenuAll()
-                    enableMenu('addMenu')
-                    enableFunction()
-                    resetStyleIdDelete()
-                    resetFunction()
-                    resetImageDefault()
-                }
-                if (isEmpty(tempData) === false && data === true) {
-                    resetFunction()
-                    setDataUI(tempData)
-                    disableMenuAll()
-                    addNew = false
-                    enableMenu('addMenu')
-                    enableMenu('editMenu')
-                    enableMenu('deleteMenu')
-                    enableFunction()
-                }
+                Swal.close
             }
         });
         window.onbeforeunload = null
