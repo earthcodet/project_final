@@ -1,28 +1,4 @@
 
-function checkOrderNo(value, id) {
-    let tempCheck = value.split("")
-    // 00/2563 7ตัว
-    console.log(tempCheck)
-    let formatCheck = ''
-    for (let i = 0; i < tempCheck.length; i++) {
-
-        if (i === 2) {
-            if (tempCheck[2] === '/') {
-                formatCheck = formatCheck + tempCheck[2]
-                //     console.log(value.slice(0, value.length-1))
-                // document.getElementById(id).value = value.slice(0, value.length-1) + '/'
-            } else {
-                formatCheck = formatCheck + '/'
-            }
-
-        } else {
-            if (!isNaN(tempCheck[i])) {
-                formatCheck = formatCheck + tempCheck[i]
-            }
-        }
-    }
-    document.getElementById(id).value = formatCheck
-}
 //อนุญาต
 function approvalPopup() {
     let html_display = `
@@ -563,7 +539,6 @@ function transferPopup() {
         }
     });
 }
-
 //ยกเลิกสถานะ
 function cancelStatus() {
     Swal.fire({
@@ -668,67 +643,33 @@ function addPopup(type_menu) {
                     icon: "error"
                 })
             } else {
-                openPage(attr)
+                toRequest (attr)
                 console.log(`page -->`)
             }
         } else if (result.dismiss === Swal.DismissReason.cancel) {
         }
     });
 }
-let gropData = {
-    'temp_event': undefined
-
+let controlPage = {
+    'tr_select': undefined
 }
 
 function resetActiveRightClick() {
-    console.log(` resert => ${gropData.temp_event != undefined}`)
-    if (gropData.temp_event != undefined) {
-        gropData.temp_event.style.background = ''
+    if (controlPage.tr_select != undefined) {
+        controlPage.tr_select.style.background = ''
     }
 }
 function markList(event) {
-    if (gropData.temp_event === undefined) {
-        gropData.temp_event = event
+    if (controlPage.tr_select === undefined) {
+        controlPage.tr_select = event
         event.style.background = '#a59c9c'
     } else {
-        gropData.temp_event.style.background = ''
-        gropData.temp_event = event
+        controlPage.tr_select.style.background = ''
+        controlPage.tr_select = event
         event.style.background = '#a59c9c'
     }
 }
-function openPage(type) {
-    
-    switch (type) {
-        case 'กิจการฌาปณสถาน':
-            window.location.href = '../request/request_crematory.html'
-            break;
-        case 'กิจการที่เป็นอันตรายต่อสุขภาพ':
-            window.location.href = '../request/request_health_danger.html'
-            break;
-        case 'ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน':
-            window.location.href = '../request/request_market.html'
-            break;
-        case 'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร':
-            window.location.href = '../request/request_area_less_correct.html'
-            break;
-        case 'หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร':
-            window.location.href = '../request/request_area_less_sell.html'
-            break;
-        case 'ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร':
-            window.location.href = '../request/request_area_more_correct.html'
-            break;
-        case 'ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร':
-            window.location.href = '../request/request_area_more_sell.html'
-            break;
-        case 'ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ':
-            window.location.href = '../request/request_public_hawk.html'
-            break;
-        default:
-            //ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ
-            window.location.href = '../request/request_public_sell.html'
-            break;
-    }
-}
+
 $(function () {
     $.contextMenu({
         selector: '.detail-menu',
@@ -736,7 +677,7 @@ $(function () {
         callback: function (key, options) {
             let type = this[0].cells[1].innerText.trim()
             if (key === 'detail') {
-                openPage(type)
+                toRequest (type)
             }
         },
         items: {
@@ -766,7 +707,7 @@ $(function () {
                         canclePopup()
                         break;
                     default:
-                        openPage(type)
+                        toRequest (type)
                         break;
                 }
                 console.log(key)
@@ -799,7 +740,7 @@ $(function () {
                     cancelStatus()
                     break;
                 default:
-                    openPage(type)
+                    toRequest (type)
                     break;
             }
         },
@@ -819,7 +760,7 @@ $(function () {
         callback: function (key, options) {
             let type = this[0].cells[1].innerText.trim()
             if (key === 'detail') {
-                openPage(type)
+                toRequest (type)
             }
         },
         items: {
@@ -835,7 +776,7 @@ $(function () {
         callback: function (key, options) {
             let type = this[0].cells[1].innerText.trim()
             if (key === 'detail') {
-                openPage(type)
+                toRequest (type)
             }
             if (key === 'delete') {
                 canclePopup(type)
@@ -866,7 +807,7 @@ $(function () {
                     canclePopup()
                     break;
                 default:
-                    openPage(type)
+                    toRequest (type)
                     break;
             }
         },
@@ -886,7 +827,7 @@ $(function () {
         callback: function (key, options) {
             let type = this[0].cells[1].innerText.trim()
             if (key === 'detail') {
-                openPage(type)
+                toRequest (type)
             }
         },
         items: {
