@@ -17,7 +17,6 @@ for (i = 0; i < dropdown.length; i++) {
 
 // ผู้สัมผัสอาหาร
 function show_food(id) {
-  var radio = document.getElementById("food").checked;
   if (id == 1) {
     document.getElementById("boxFood").style.display = "";
   }

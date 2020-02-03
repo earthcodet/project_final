@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="../js/js22.js"></script>
 
     <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.css">
     <link rel="stylesheet" href="../../css/css2.css">
@@ -22,14 +21,18 @@
 <body>
     <!-- เมนูด้านบน -->
     <div class="w3-top icon-bar">
-        <a id="addMenu" class="exit " onclick="addTEST()"><i class="fa fa-plus-square"> เพิ่ม</i></a>
-        <a id="editMenu" onclick="editTEST()" class="exit disableds"><i class="fa fa-pencil-alt"> แก้ไข</i></a>
-        <a id="saveMenu" onclick="insertTEST()" class="exit disableds"><i class="fa fa-save"> บันทึก</i></a>
-        <a id="restoreMenu" onclick="restoreTEST()" class="exit disableds"><i class="fa fa-reply"> เรียกคืน</i></a>
-        <a id="deleteMenu" onclick="deleteTEST()" class="exit disableds"><i class="fa fa-times"> ยกเลิก</i></a>
+        <a id="addMenu" class="exit " onclick="addPage()"><i class="fa fa-plus-square"><span> เพิ่ม</span></i></a>
+        <a id="editMenu" onclick="editPage()" class="exit disableds"><i class="fa fa-pencil-alt"><span>
+                    แก้ไข</span></i></a>
+        <a id="saveMenu" onclick="insertPage()" class="exit disableds"><i class="fa fa-save"><span>
+                    บันทึก</span></i></a>
+        <a id="restoreMenu" onclick="restorePage()" class="exit disableds"><i class="fa fa-reply"><span>
+                    เรียกคืน</span></i></a>
+        <a id="deleteMenu" onclick="deletePage()" class="exit disableds"><i class="fa fa-times"><span>
+                    ยกเลิก</span></i></a>
         <!-- <a><i class="fa fa-search"> ค้นหา</i></a> -->
-        <a id="exitMenu" onclick="exitTEST()" class="exit" style="float: right;width: 17%;"><i class="fa fa-sign-out-alt">
-                ออกจากระบบ</i></a>
+        <a id="exitMenu" onclick="exitPage()" class="exit" style="float: right;width: 17%;">
+            <i class="fa fa-sign-out-alt"><span> ออกจากระบบ</span></i></a>
     </div>
     <!-- เมนูด้านข้าง -->
     <div class="sidenav">
@@ -40,7 +43,7 @@
         <button class="dropdown-btn select-active"><b>ระบบงานคำขอ </b><i class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
             <a href="searchRequest.html">- ค้นหา/แก้ไข</a>
-            <a href="request_public_sell.html" class ="dropdown-active">- ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
+            <a href="request_public_sell.html" class="dropdown-active">- ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
             <a href="request_public_hawk.html">- ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
             <a href="request_area_more_sell.html">- ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
             <a href="request_area_more_correct.html">- ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</a>
@@ -91,9 +94,11 @@
             <a href="../report/report_crematory.html">- ตามคำขอ</a>
             <a href="../report/report_summary.html">- สรุป</a>
         </div>
-        <button class="dropdown-btn notification"><b>แจ้งเตือน </b><span id="notficationRequest" class="badge" style="margin-left:0.5vw;">100000</span><i class="fa fa-caret-down"></i></button>
+        <button class="dropdown-btn notification"><b>แจ้งเตือน </b><span id="notficationRequest" class="badge"
+                style="margin-left:0.5vw;">100000</span><i class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
-            <a class="notification" href="../notfication/request.html">- งานคำขอ<span id="notficationRequest" class="badge" style="margin-left:0.5vw;">100000</span></a>
+            <a class="notification" href="../notfication/request.html">- งานคำขอ<span id="notficationRequest"
+                    class="badge" style="margin-left:0.5vw;">100000</span></a>
         </div>
     </div>
     <!-- เนื้อหา -->
@@ -101,47 +106,55 @@
         <fieldset disabled id="disable" style="border: 0;padding: 0;margin: 0;">
             <div class="main">
                 <header class="w3-top2">
-                    <h1 style="font-size:2.8vh;margin-left: 25px;padding: 2px;"> ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</h1>
+                    <h1 style="font-size:2.8vh;margin-left: 25px;padding: 2px;">
+                        ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</h1>
                 </header>
-                 <!-- ข้อมูลใบ -->
-                 <div class="box">
+                <!-- ข้อมูลใบ -->
+                <div class="box">
                     <h3 style="font-size: 3vh;">ข้อมูลสถานประกอบการ</h3>
                     <a style="margin-left: 0vw;">เลขที่คำขอ :
-                        <input type="text" style="width: 16%;" readonly></a>
-                    <a>วันที่ยื่นขอ :
-                        <input type="text" id="datepicker1" style="width: 16%;"></a>
-                    <a>ประเภทคำขอ :
-                        <input list="brow" id="" name="" style="width: 19%;" class="drop" >
-                        <datalist id="brow"  >
+                        <input id="form_id" type="text" style="width: 16%;" readonly></a>
+                    <a>วันที่ยื่นขอ <font color="red">*</font> :
+                        <input type="text" id="datepicker1" style="width: 16%;" maxlength="70"
+                            onchange="document.getElementById('datepicker1').classList.remove('alertInput')"></a>
+                    <a>ประเภทคำขอ <font color="red">*</font> :
+                        <input id="typeReq" list="brow" id="" name="" style="width: 19%;" class="drop"
+                            onchange="document.getElementById('typeReq').classList.remove('alertInput')">
+                        <datalist id="brow">
                             <option
                                 value="1.การจำหน่ายสินค้าในที่ หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น">
                                 1.การจำหน่ายสินค้าในที่
                                 หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
                             </option>
                         </datalist>
-                    </input></a>
+                        </input></a>
                     <a>เขียนที่ :
                         <input type="text" id="place" value="เทศบาลเมืองแสนสุข" style="width:16%;"></a>
                     <br>
 
-                    <a style="margin-left: 1.4vw;">ข้าพเจ้า :
+                    <a style="margin-left: 1.4vw;">ข้าพเจ้า <font color="red">*</font> :
                         <select id="typeUser" style="width: 11%;">
                             <option value="บุคคลธรรมดา">บุคคลธรรมดา</option>
                             <option value="นิติบุคคล">นิติบุคคล</option>
                         </select>
-                        <input type="text" id="name" style="width: 16.5%;">
+                        <input type="text" id="name" style="width: 16.5%;"
+                        onchange="document.getElementById('name').classList.remove('alertInput')">
                         <button type="button" class="fa fa-search" style="border-radius: 5px;"
                             onclick="testSearchOparator()"></button></a>
-                    <a>เลขประจำตัว :
-                        <input type="text" id="id"
+                    <a>เลขประจำตัว <font color="red">*</font> :
+                        <input type="text" id="id" style="width: 13%;"
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                            maxlength="13" style="width: 13%;"></a>
-                    <a>อายุ :
-                        <input type="text" id="age"
+                            maxlength="13" onkeyup="checkId(this.value, 'PERSON') 
+                                        document.getElementById('id').classList.remove('alertInput')"></a>
+                    <a>อายุ <font color="red">*</font> :
+                        <input type=" text" id="age"
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                            maxlength="3" style="width: 7%;"></a>
-                    <a>สัญชาติ :
-                        <input class="drop" list="nationality1" id="nationalityList1" name="" style="width: 7%;">
+                            maxlength="3" style="width: 7%;"
+                            onchange="document.getElementById('age').classList.remove('alertInput')"></a>
+                    <a>สัญชาติ <font color="red">*</font> :
+                        <input class="drop" list="nationality1" id="nationality" name="" style="width: 7%;"
+                            onkeyup="document.getElementById('nationality').classList.remove('alertInput')"
+                            onchange="document.getElementById('nationality').classList.remove('alertInput')">
                         <datalist id="nationality1">
                             <option value="" hidden>เลือก...</option>
                             <option value="ไทย">ไทย</option>
@@ -149,13 +162,68 @@
                             <option value="อเมริกัน"></option>
                         </datalist>
                         </input></a>
-                    <a>เชื้อชาติ :
-                        <input list="nationality2" id="nationalityList2" name="" style="width: 7%;">
+                    <a>เชื้อชาติ <font color="red">*</font> :
+                        <input list="nationality2" id="race" name="" style="width: 7%;"
+                            onkeyup="document.getElementById('race').classList.remove('alertInput')"
+                            onchange="document.getElementById('race').classList.remove('alertInput')">
                         <datalist id="nationality2">
                             <option value="" hidden>เลือก...</option>
                             <option value="ไทย">ไทย</option>
                             <option value="จีน"></option>
                             <option value="อเมริกัน"></option>
+                        </datalist>
+                        </input></a>
+                    <br>
+                    <a style="margin-left: 0.58vw;">เลขที่บ้าน <font color="red">*</font> :
+                        <input id="home_id" type="text" style="width: 7%;"
+                            onchange="document.getElementById('home_id').classList.remove('alertInput')"></a>
+                    <a>หมู่ที่ <font color="red">*</font> :
+                        <input id="moo" type="text" style="width: 7%;"
+                            onchange="document.getElementById('moo').classList.remove('alertInput')"></a>
+                    <a>ตรอก :
+                        <input id="trxk" type="text" style="width: 13%;"></a>
+                    <a>ซอย :
+                        <input type="text" id="sxy" style="width: 13%;"></a>
+                    <a>อาคาร :
+                        <input type="text" id="building" style="width: 13.5%;"></a>
+                    <a>ถนน :
+                        <input type="text" id="road" style="width: 13.5%;"></a>
+                    <br>
+                    <a style="margin-left: 1.8vw;">จังหวัด <font color="red">*</font> :
+                        <select id="province" style="width: 14%;"
+                            onchange="document.getElementById('province').classList.remove('alertInput')"></select></a>
+                    <a>อำเภอ <font color="red">*</font> :
+                        <select id="district" style="width: 14%;"
+                            onchange="document.getElementById('district').classList.remove('alertInput')"></select></a>
+                    <a>ตำบล <font color="red">*</font> :
+                        <select id="subdistrict" style="width: 13.5%;"
+                            onchange="document.getElementById('subdistrict').classList.remove('alertInput')"></select></a>
+                    <a>โทรศัพท์ <font color="red">*</font> :
+                        <input type="text" style="width: 10.8vw" id="phone"
+                            oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
+                            maxlength="10" onchange="document.getElementById('phone').classList.remove('alertInput')"
+                            onkeyup="checkPhone(this.value,'phone')">
+                        <a>โทรสาร :
+                            <input type="text" id="fax"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                maxlength="9" style="width: 13.2%;"></a>
+                        <br>
+                        <a style="margin-left: 2.2vw;">ผู้ช่วย :
+                            <input type="text" id="person2_name" style="width: 28%;">
+                            <button type="button" class="fa fa-search" style="border-radius: 5px;"
+                                onclick="testSearchOparator()"></button></a>
+                        <a>เลขประจำตัว :
+                            <input id="person2_id" type="text" style="width: 13%;"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                maxlength="13" onkeyup="checkId(this.value, 'PERSONAL') 
+                                        document.getElementById('person2_id').classList.remove('alertInput')"></a>
+                        <br>
+                        <br>
+                        <a>สถานที่จำหน่ายสินค้า <font color="red">*</font> : </a>
+                        <input list="location" id="wLocation" name="" style="width: 29%;"
+                            onchange="document.getElementById('wLocation').classList.remove('alertInput')">
+                        <datalist id="location">
+                            <option value="" hidden>เลือก...</option>
                             <option value="เขตปลอดร่มเตียงที่ 1">เขตปลอดร่มเตียงที่ 1</option>
                             <option value="เขตปลอดร่มเตียงที่ 2">เขตปลอดร่มเตียงที่ 2</option>
                             <option value="เขตปลอดร่มเตียงที่ 3">เขตปลอดร่มเตียงที่ 3</option>
@@ -167,264 +235,212 @@
                             <option value="เขตปลอดร่มเตียงที่ 9">เขตปลอดร่มเตียงที่ 9</option>
                             <option value="เขตปลอดร่มเตียงที่ 10">เขตปลอดร่มเตียงที่ 10</option>
                             <option value="เขตปลอดร่มเตียงที่ 11">เขตปลอดร่มเตียงที่ 11</option>
+                            <option value="หาดบางแสน 1"></option>
+                            <option value="หาดบางแสน 2">หาดบางแสน 2</option>
+                            <option value="หาดบางแสน 3">หาดบางแสน 3</option>
+                            <option value="หาดบางแสน 4">หาดบางแสน 4</option>
+                            <option value="">หาดบางแสน 5</option>
+                            <option value="">หาดบางแสน 6</option>
+                            <option value="">หาดบางแสน 7</option>
+                            <option value="">หาดบางแสน 8</option>
+                            <option value="">หาดบางแสน 9</option>
+                            <option value="">หาดบางแสน 10</option>
+                            <option value="">หาดบางแสน 11</option>
+                            <option value="">หาดบางแสน 12</option>
+                            <option value="">หาดบางแสน 13</option>
+                            <option value="">หาดบางแสน 14</option>
+                            <option value="">หาดบางแสน 15</option>
+                            <option value="">หาดบางแสน 16</option>
+                            <option value="">หาดบางแสน 17</option>
+                            <option value="">หาดบางแสน 18</option>
+                            <option value="">หาดบางแสน 19</option>
+                            <option value="">หาดบางแสน 20</option>
+                            <option value="">หาดบางแสน 21</option>
+                            <option value="">หาดบางแสน 22</option>
+                            <option value="">หาดบางแสน 23</option>
+                            <option value="">หาดบางแสน 24</option>
+                            <option value="">หาดบางแสน 25</option>
+                            <option value="">หาดบางแสน 26</option>
+                            <option value="">หาดบางแสน 27</option>
+                            <option value="">หาดบางแสน 28</option>
+                            <option value="">หาดบางแสน 29</option>
+                            <option value="">หาดบางแสน 30</option>
+                            <option value="">หาดบางแสน 31</option>
+                            <option value="">หาดบางแสน 32</option>
+                            <option value="">หาดบางแสน 33</option>
+                            <option value="">หาดบางแสน 34</option>
+                            <option value="">หาดบางแสน 35</option>
+                            <option value="">หาดบางแสน 36</option>
+                            <option value="">หาดบางแสน 37</option>
+                            <option value="">หาดบางแสน 38</option>
+                            <option value="">หาดบางแสน 39</option>
+                            <option value="">หาดบางแสน 40</option>
+                            <option value="">หาดบางแสน 41</option>
+                            <option value="">หาดบางแสน 42</option>
+                            <option value="">หาดบางแสน 43</option>
+                            <option value="">หาดบางแสน 44</option>
+                            <option value="">หาดบางแสน 45</option>
+                            <option value="">หาดบางแสน 46</option>
+                            <option value="">หาดบางแสน 47</option>
+                            <option value="">หาดบางแสน 48</option>
+                            <option value="">หาดบางแสน 49</option>
+                            <option value="">หาดบางแสน 50</option>
+                            <option value="">หาดบางแสน 51</option>
+                            <option value="">หาดบางแสน 52</option>
+                            <option value="">หาดบางแสน 53</option>
+                            <option value="">หาดบางแสน 54</option>
+                            <option value="">หาดบางแสน 55</option>
+                            <option value="">หาดบางแสน 56</option>
+                            <option value="">หาดบางแสน 57</option>
+                            <option value="">หาดบางแสน 58</option>
+                            <option value="">หาดบางแสน 59</option>
+                            <option value="">หาดบางแสน 60</option>
+                            <option value="">หาดบางแสน 61</option>
+                            <option value="">หาดบางแสน 62</option>
+                            <option value="">หาดบางแสน 63</option>
+                            <option value="">หาดบางแสน 64</option>
+                            <option value="">หาดบางแสน 65</option>
+                            <option value="">หาดบางแสน 66</option>
+                            <option value="">หาดบางแสน 67</option>
+                            <option value="">หาดบางแสน 68</option>
+                            <option value="">หาดบางแสน 69</option>
+                            <option value="">หาดบางแสน 70</option>
+                            <option value="">หาดบางแสน 71</option>
+                            <option value="">หาดบางแสน 72</option>
+                            <option value="">หาดบางแสน 73</option>
+                            <option value="">หาดบางแสน 74</option>
+                            <option value="">หาดบางแสน 75</option>
+                            <option value="">หาดบางแสน 76</option>
+                            <option value="">หาดบางแสน 77</option>
+                            <option value="">หาดบางแสน 78</option>
+                            <option value="">หาดบางแสน 79</option>
+                            <option value="">หาดบางแสน 80</option>
+                            <option value="">หาดบางแสน 81</option>
+                            <option value="">หาดบางแสน 82</option>
+                            <option value="">หาดบางแสน 83</option>
+                            <option value="">หาดบางแสน 84</option>
+                            <option value="">หาดบางแสน 85</option>
+                            <option value="">หาดบางแสน 86</option>
+                            <option value="">บางแสนล่าง 1</option>
+                            <option value="">บางแสนล่าง 2</option>
+                            <option value="">บางแสนล่าง 3</option>
+                            <option value="">บางแสนล่าง 4</option>
+                            <option value="">บางแสนล่าง 5</option>
+                            <option value="">บางแสนล่าง 6</option>
+                            <option value="">บางแสนล่าง 7</option>
+                            <option value="">บางแสนล่าง 8</option>
+                            <option value="">บางแสนล่าง 9</option>
+                            <option value="">บางแสนล่าง 10</option>
+                            <option value="">บางแสนล่าง 11</option>
+                            <option value="">บางแสนล่าง 12</option>
+                            <option value="">บางแสนล่าง 13</option>
+                            <option value="">บางแสนล่าง 14</option>
+                            <option value="">บางแสนล่าง 15</option>
+                            <option value="">บางแสนล่าง 16</option>
+                            <option value="">บางแสนล่าง 17</option>
+                            <option value="">บางแสนล่าง 18</option>
+                            <option value="">บางแสนล่าง 19</option>
+                            <option value="">บางแสนล่าง 20</option>
+                            <option value="">บางแสนล่าง 21</option>
+                            <option value="">บางแสนล่าง 22</option>
+                            <option value="">บางแสนล่าง 23</option>
+                            <option value="">บางแสนล่าง 24</option>
+                            <option value="">บางแสนล่าง 25</option>
+                            <option value="">บางแสนล่าง 26</option>
+                            <option value="">บางแสนล่าง 27</option>
+                            <option value="">บางแสนล่าง 28</option>
+                            <option value="">บางแสนล่าง 29</option>
+                            <option value="">บางแสนล่าง 30</option>
+                            <option value="">บางแสนล่าง 31</option>
+                            <option value="">บางแสนล่าง 32</option>
+                            <option value="">บางแสนล่าง 33</option>
+                            <option value="">บางแสนล่าง 34</option>
+                            <option value="">บางแสนล่าง 35</option>
+                            <option value="">บางแสนล่าง 36</option>
+                            <option value="">บางแสนล่าง 37</option>
+                            <option value="">บางแสนล่าง 38</option>
+                            <option value="">บางแสนล่าง 39</option>
+                            <option value="">บางแสนล่าง 40</option>
+                            <option value="">บางแสนล่าง 41</option>
+                            <option value="">บางแสนล่าง 42</option>
+                            <option value="">บางแสนล่าง 43</option>
+                            <option value="">บางแสนล่าง 44</option>
+                            <option value="">บางแสนล่าง 45</option>
+                            <option value="">บางแสนล่าง 46</option>
+                            <option value="">บางแสนล่าง 47</option>
+                            <option value="">บางแสนล่าง 48</option>
+                            <option value="">บางแสนล่าง 49</option>
+                            <option value="">บางแสนล่าง 50</option>
+                            <option value="">บางแสนล่าง 51</option>
+                            <option value="">บางแสนล่าง 52</option>
+                            <option value="">บางแสนล่าง 53</option>
+                            <option value="">บางแสนล่าง 54</option>
+                            <option value="">บางแสนล่าง 55</option>
+                            <option value="">บางแสนล่าง 56</option>
+                            <option value="">บางแสนล่าง 57</option>
+                            <option value="">บางแสนล่าง 58</option>
+                            <option value="">บางแสนล่าง 59</option>
+                            <option value="">บางแสนล่าง 60</option>
+                            <option value="">บางแสนล่าง 61</option>
+                            <option value="">บางแสนล่าง 62</option>
+                            <option value="">บางแสนล่าง 63</option>
+                            <option value="">บางแสนล่าง 64</option>
+                            <option value="">บางแสนล่าง 65</option>
+                            <option value="">บางแสนล่าง 66</option>
+                            <option value="">บางแสนล่าง 67</option>
+                            <option value="">บางแสนล่าง 68</option>
+                            <option value="">บางแสนล่าง 69</option>
+                            <option value="">บางแสนล่าง 70</option>
+                            <option value="">บางแสนล่าง 71</option>
+                            <option value="">บางแสนล่าง 72</option>
+                            <option value="">บางแสนล่าง 73</option>
+                            <option value="">บางแสนล่าง 74</option>
+                            <option value="">บางแสนล่าง 75</option>
+                            <option value="">บางแสนล่าง 76</option>
+                            <option value="">บางแสนล่าง 77</option>
+                            <option value="">บางแสนล่าง 78</option>
+                            <option value="">บางแสนล่าง 79</option>
+                            <option value="">บางแสนล่าง 80</option>
+                            <option value="">แหลมแท่น 1</option>
+                            <option value="">แหลมแท่น 2</option>
+                            <option value="">แหลมแท่น 3</option>
+                            <option value="">แหลมแท่น 4</option>
+                            <option value="">แหลมแท่น 5</option>
+                            <option value="">แหลมแท่น 6</option>
+                            <option value="">แหลมแท่น 7</option>
+                            <option value="">แหลมแท่น 8</option>
+                            <option value="">แหลมแท่น 9</option>
+                            <option value="">แหลมแท่น 10</option>
+                            <option value="">แหลมแท่น 11</option>
+                            <option value="">แหลมแท่น 12</option>
+                            <option value="">แหลมแท่น 13</option>
+                            <option value="">แหลมแท่น 14</option>
+                            <option value="">แหลมแท่น 15</option>
+                            <option value="">แหลมแท่น 16</option>
+                            <option value="">แหลมแท่น 17</option>
+                            <option value="">แหลมแท่น 18</option>
+                            <option value="">แหลมแท่น 19</option>
+                            <option value="">แหลมแท่น 20</option>
+                            <option value="">แหลมแท่น 21</option>
+                            <option value="">แหลมแท่น 22</option>
+                            <option value="">แหลมแท่น 23</option>
+                            <option value="">แหลมแท่น 24</option>
+                            <option value="">แพงลอยสุขุมวิท</option>
+                            <option value="">ตลาดหนองมน</option>
+                            <option value="">ลานหลังเทศบาล</option>
+                            <option value="">ศาลเจ้าแม่เขาสามมุข</option>
+                            <option value="">ปากซอย 1</option>
+                            <option value="">หน้าโรงแรมเฮอริเทจ</option>
+
                         </datalist>
                         </input></a>
                     <br>
-                    <a style="margin-left: 0.58vw;">เลขที่บ้าน :
-                        <input type="text" style="width: 7%;"></a>
-                    <a>หมู่ที่ :
-                        <input type="text" style="width: 7%;"></a>
-                    <a>ตรอก :
-                        <input type="text" style="width: 13%;"></a>
-                    <a>ซอย :
-                        <input type="text" id="sxy" style="width: 13%;"></a>
-                    <a>อาคาร :
-                        <input type="text" id="building" style="width: 13.5%;"></a>
-                    <a>ถนน :
-                        <input type="text" id="road" style="width: 13.5%;"></a>
-                    <br>
-                    <a style="margin-left: 1.8vw;">จังหวัด :
-                        <select id="province" style="width: 14%;"></select></a>
-                    <a>อำเภอ :
-                        <select id="district" style="width: 14%;"></select></a>
-                    <a>ตำบล :
-                        <select id="subdistrict" style="width: 13.5%;"></select></a>
-                    <a>โทรศัพท์ :
-                        <input type="text" id="phone"
-                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                            maxlength="10" style="width: 12%;"></a>
-                    <a>โทรสาร :
-                        <input type="text" id="fax"
-                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                            maxlength="9" style="width: 13.2%;"></a>
-                    <br>
-                    <a style="margin-left: 2.2vw;">ผู้ช่วย :
-                        <input type="text" id="" style="width: 28%;">
-                        <button type="button" class="fa fa-search" style="border-radius: 5px;"
-                            onclick="testSearchOparator()"></button></a>
-                    <a>เลขประจำตัว :
-                        <input type="text" style="width: 13%;"></a>
-                    <br>
-                    <br>
-                    <a>สถานที่จำหน่ายสินค้า : </a>
-                    <input list="location" id="location1" name="" style="width: 29%;">
-                    <datalist id="location">
-                        <option value="" hidden>เลือก...</option>
-                        <option value="เขตปลอดร่มเตียงที่ 1">เขตปลอดร่มเตียงที่ 1</option>
-                        <option value="เขตปลอดร่มเตียงที่ 2">เขตปลอดร่มเตียงที่ 2</option>
-                        <option value="เขตปลอดร่มเตียงที่ 3">เขตปลอดร่มเตียงที่ 3</option>
-                        <option value="เขตปลอดร่มเตียงที่ 4">เขตปลอดร่มเตียงที่ 4</option>
-                        <option value="เขตปลอดร่มเตียงที่ 5">เขตปลอดร่มเตียงที่ 5</option>
-                        <option value="เขตปลอดร่มเตียงที่ 6">เขตปลอดร่มเตียงที่ 6</option>
-                        <option value="เขตปลอดร่มเตียงที่ 7">เขตปลอดร่มเตียงที่ 7</option>
-                        <option value="เขตปลอดร่มเตียงที่ 8">เขตปลอดร่มเตียงที่ 8</option>
-                        <option value="เขตปลอดร่มเตียงที่ 9">เขตปลอดร่มเตียงที่ 9</option>
-                        <option value="เขตปลอดร่มเตียงที่ 10">เขตปลอดร่มเตียงที่ 10</option>
-                        <option value="เขตปลอดร่มเตียงที่ 11">เขตปลอดร่มเตียงที่ 11</option>
-                        <option value="หาดบางแสน 1"></option>
-                        <option value="หาดบางแสน 2">หาดบางแสน 2</option>
-                        <option value="หาดบางแสน 3">หาดบางแสน 3</option>
-                        <option value="หาดบางแสน 4">หาดบางแสน 4</option>
-                        <option value="">หาดบางแสน 5</option>
-                        <option value="">หาดบางแสน 6</option>
-                        <option value="">หาดบางแสน 7</option>
-                        <option value="">หาดบางแสน 8</option>
-                        <option value="">หาดบางแสน 9</option>
-                        <option value="">หาดบางแสน 10</option>
-                        <option value="">หาดบางแสน 11</option>
-                        <option value="">หาดบางแสน 12</option>
-                        <option value="">หาดบางแสน 13</option>
-                        <option value="">หาดบางแสน 14</option>
-                        <option value="">หาดบางแสน 15</option>
-                        <option value="">หาดบางแสน 16</option>
-                        <option value="">หาดบางแสน 17</option>
-                        <option value="">หาดบางแสน 18</option>
-                        <option value="">หาดบางแสน 19</option>
-                        <option value="">หาดบางแสน 20</option>
-                        <option value="">หาดบางแสน 21</option>
-                        <option value="">หาดบางแสน 22</option>
-                        <option value="">หาดบางแสน 23</option>
-                        <option value="">หาดบางแสน 24</option>
-                        <option value="">หาดบางแสน 25</option>
-                        <option value="">หาดบางแสน 26</option>
-                        <option value="">หาดบางแสน 27</option>
-                        <option value="">หาดบางแสน 28</option>
-                        <option value="">หาดบางแสน 29</option>
-                        <option value="">หาดบางแสน 30</option>
-                        <option value="">หาดบางแสน 31</option>
-                        <option value="">หาดบางแสน 32</option>
-                        <option value="">หาดบางแสน 33</option>
-                        <option value="">หาดบางแสน 34</option>
-                        <option value="">หาดบางแสน 35</option>
-                        <option value="">หาดบางแสน 36</option>
-                        <option value="">หาดบางแสน 37</option>
-                        <option value="">หาดบางแสน 38</option>
-                        <option value="">หาดบางแสน 39</option>
-                        <option value="">หาดบางแสน 40</option>
-                        <option value="">หาดบางแสน 41</option>
-                        <option value="">หาดบางแสน 42</option>
-                        <option value="">หาดบางแสน 43</option>
-                        <option value="">หาดบางแสน 44</option>
-                        <option value="">หาดบางแสน 45</option>
-                        <option value="">หาดบางแสน 46</option>
-                        <option value="">หาดบางแสน 47</option>
-                        <option value="">หาดบางแสน 48</option>
-                        <option value="">หาดบางแสน 49</option>
-                        <option value="">หาดบางแสน 50</option>
-                        <option value="">หาดบางแสน 51</option>
-                        <option value="">หาดบางแสน 52</option>
-                        <option value="">หาดบางแสน 53</option>
-                        <option value="">หาดบางแสน 54</option>
-                        <option value="">หาดบางแสน 55</option>
-                        <option value="">หาดบางแสน 56</option>
-                        <option value="">หาดบางแสน 57</option>
-                        <option value="">หาดบางแสน 58</option>
-                        <option value="">หาดบางแสน 59</option>
-                        <option value="">หาดบางแสน 60</option>
-                        <option value="">หาดบางแสน 61</option>
-                        <option value="">หาดบางแสน 62</option>
-                        <option value="">หาดบางแสน 63</option>
-                        <option value="">หาดบางแสน 64</option>
-                        <option value="">หาดบางแสน 65</option>
-                        <option value="">หาดบางแสน 66</option>
-                        <option value="">หาดบางแสน 67</option>
-                        <option value="">หาดบางแสน 68</option>
-                        <option value="">หาดบางแสน 69</option>
-                        <option value="">หาดบางแสน 70</option>
-                        <option value="">หาดบางแสน 71</option>
-                        <option value="">หาดบางแสน 72</option>
-                        <option value="">หาดบางแสน 73</option>
-                        <option value="">หาดบางแสน 74</option>
-                        <option value="">หาดบางแสน 75</option>
-                        <option value="">หาดบางแสน 76</option>
-                        <option value="">หาดบางแสน 77</option>
-                        <option value="">หาดบางแสน 78</option>
-                        <option value="">หาดบางแสน 79</option>
-                        <option value="">หาดบางแสน 80</option>
-                        <option value="">หาดบางแสน 81</option>
-                        <option value="">หาดบางแสน 82</option>
-                        <option value="">หาดบางแสน 83</option>
-                        <option value="">หาดบางแสน 84</option>
-                        <option value="">หาดบางแสน 85</option>
-                        <option value="">หาดบางแสน 86</option>
-                        <option value="">บางแสนล่าง 1</option>
-                        <option value="">บางแสนล่าง 2</option>
-                        <option value="">บางแสนล่าง 3</option>
-                        <option value="">บางแสนล่าง 4</option>
-                        <option value="">บางแสนล่าง 5</option>
-                        <option value="">บางแสนล่าง 6</option>
-                        <option value="">บางแสนล่าง 7</option>
-                        <option value="">บางแสนล่าง 8</option>
-                        <option value="">บางแสนล่าง 9</option>
-                        <option value="">บางแสนล่าง 10</option>
-                        <option value="">บางแสนล่าง 11</option>
-                        <option value="">บางแสนล่าง 12</option>
-                        <option value="">บางแสนล่าง 13</option>
-                        <option value="">บางแสนล่าง 14</option>
-                        <option value="">บางแสนล่าง 15</option>
-                        <option value="">บางแสนล่าง 16</option>
-                        <option value="">บางแสนล่าง 17</option>
-                        <option value="">บางแสนล่าง 18</option>
-                        <option value="">บางแสนล่าง 19</option>
-                        <option value="">บางแสนล่าง 20</option>
-                        <option value="">บางแสนล่าง 21</option>
-                        <option value="">บางแสนล่าง 22</option>
-                        <option value="">บางแสนล่าง 23</option>
-                        <option value="">บางแสนล่าง 24</option>
-                        <option value="">บางแสนล่าง 25</option>
-                        <option value="">บางแสนล่าง 26</option>
-                        <option value="">บางแสนล่าง 27</option>
-                        <option value="">บางแสนล่าง 28</option>
-                        <option value="">บางแสนล่าง 29</option>
-                        <option value="">บางแสนล่าง 30</option>
-                        <option value="">บางแสนล่าง 31</option>
-                        <option value="">บางแสนล่าง 32</option>
-                        <option value="">บางแสนล่าง 33</option>
-                        <option value="">บางแสนล่าง 34</option>
-                        <option value="">บางแสนล่าง 35</option>
-                        <option value="">บางแสนล่าง 36</option>
-                        <option value="">บางแสนล่าง 37</option>
-                        <option value="">บางแสนล่าง 38</option>
-                        <option value="">บางแสนล่าง 39</option>
-                        <option value="">บางแสนล่าง 40</option>
-                        <option value="">บางแสนล่าง 41</option>
-                        <option value="">บางแสนล่าง 42</option>
-                        <option value="">บางแสนล่าง 43</option>
-                        <option value="">บางแสนล่าง 44</option>
-                        <option value="">บางแสนล่าง 45</option>
-                        <option value="">บางแสนล่าง 46</option>
-                        <option value="">บางแสนล่าง 47</option>
-                        <option value="">บางแสนล่าง 48</option>
-                        <option value="">บางแสนล่าง 49</option>
-                        <option value="">บางแสนล่าง 50</option>
-                        <option value="">บางแสนล่าง 51</option>
-                        <option value="">บางแสนล่าง 52</option>
-                        <option value="">บางแสนล่าง 53</option>
-                        <option value="">บางแสนล่าง 54</option>
-                        <option value="">บางแสนล่าง 55</option>
-                        <option value="">บางแสนล่าง 56</option>
-                        <option value="">บางแสนล่าง 57</option>
-                        <option value="">บางแสนล่าง 58</option>
-                        <option value="">บางแสนล่าง 59</option>
-                        <option value="">บางแสนล่าง 60</option>
-                        <option value="">บางแสนล่าง 61</option>
-                        <option value="">บางแสนล่าง 62</option>
-                        <option value="">บางแสนล่าง 63</option>
-                        <option value="">บางแสนล่าง 64</option>
-                        <option value="">บางแสนล่าง 65</option>
-                        <option value="">บางแสนล่าง 66</option>
-                        <option value="">บางแสนล่าง 67</option>
-                        <option value="">บางแสนล่าง 68</option>
-                        <option value="">บางแสนล่าง 69</option>
-                        <option value="">บางแสนล่าง 70</option>
-                        <option value="">บางแสนล่าง 71</option>
-                        <option value="">บางแสนล่าง 72</option>
-                        <option value="">บางแสนล่าง 73</option>
-                        <option value="">บางแสนล่าง 74</option>
-                        <option value="">บางแสนล่าง 75</option>
-                        <option value="">บางแสนล่าง 76</option>
-                        <option value="">บางแสนล่าง 77</option>
-                        <option value="">บางแสนล่าง 78</option>
-                        <option value="">บางแสนล่าง 79</option>
-                        <option value="">บางแสนล่าง 80</option>
-                        <option value="">แหลมแท่น 1</option>
-                        <option value="">แหลมแท่น 2</option>
-                        <option value="">แหลมแท่น 3</option>
-                        <option value="">แหลมแท่น 4</option>
-                        <option value="">แหลมแท่น 5</option>
-                        <option value="">แหลมแท่น 6</option>
-                        <option value="">แหลมแท่น 7</option>
-                        <option value="">แหลมแท่น 8</option>
-                        <option value="">แหลมแท่น 9</option>
-                        <option value="">แหลมแท่น 10</option>
-                        <option value="">แหลมแท่น 11</option>
-                        <option value="">แหลมแท่น 12</option>
-                        <option value="">แหลมแท่น 13</option>
-                        <option value="">แหลมแท่น 14</option>
-                        <option value="">แหลมแท่น 15</option>
-                        <option value="">แหลมแท่น 16</option>
-                        <option value="">แหลมแท่น 17</option>
-                        <option value="">แหลมแท่น 18</option>
-                        <option value="">แหลมแท่น 19</option>
-                        <option value="">แหลมแท่น 20</option>
-                        <option value="">แหลมแท่น 21</option>
-                        <option value="">แหลมแท่น 22</option>
-                        <option value="">แหลมแท่น 23</option>
-                        <option value="">แหลมแท่น 24</option>
-                        <option value="">แพงลอยสุขุมวิท</option>
-                        <option value="">ตลาดหนองมน</option>
-                        <option value="">ลานหลังเทศบาล</option>
-                        <option value="">ศาลเจ้าแม่เขาสามมุข</option>
-                        <option value="">ปากซอย 1</option>
-                        <option value="">หน้าโรงแรมเฮอริเทจ</option>
-
-                    </datalist>
-                    </input></a>
-                    <br>
-                    <a>ตั้งอยู่เลขที่ :
-                        <input type="text" id="wHomeId" style="width: 7%;"></a>
-                    <a>หมู่ที่ :
-                        <input type="int" id="wMoo" style="width: 7%;"></a>
+                    <a>ตั้งอยู่เลขที่ <font color="red">*</font> :
+                        <input type="text" id="wPlaceId" style="width: 7%;"
+                            onchange="document.getElementById('wPlaceId').classList.remove('alertInput')"></a>
+                    <a>หมู่ที่ <font color="red">*</font> :
+                        <input type="int" id="wMoo" style="width: 7%;"
+                            onchange="document.getElementById('wMoo').classList.remove('alertInput')"></a>
                     <a>ตรอก:
                         <input type="text" id="wTrxk" style="width: 13%;"></a>
                     <a>ซอย :
@@ -435,19 +451,23 @@
                         <input type="text" id="wRoad" style="width: 13.5%;"></a>
                     <br>
 
-                    <a style="margin-left: 1.75vw;">จังหวัด :
-                        <select id="wProvince" style="width: 14%;"></a>
+                    <a style="margin-left: 1.75vw;">จังหวัด <font color="red">*</font> :
+                        <select id="wProvince" style="width: 14%;"
+                            onchange="document.getElementById('wProvince').classList.remove('alertInput')"></a>
                     </select>
-                    <a>อำเภอ :
-                        <select id="wDistrict" style="width: 14%;"></a>
+                    <a>อำเภอ <font color="red">*</font> :
+                        <select id="wDistrict" style="width: 14%;"
+                            onchange="document.getElementById('wDistrict').classList.remove('alertInput')"></a>
                     </select>
-                    <a>ตำบล :
-                        <select id="wSubdistrict" style="width: 13.5%;"></a>
+                    <a>ตำบล <font color="red">*</font> :
+                        <select id="wSubdistrict" style="width: 13.5%;"
+                            onchange="document.getElementById('wSubdistrict').classList.remove('alertInput')"></a>
                     </select>
-                    <a>โทรศัพท์ :
-                        <input type="text" id="wPhone"
-                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                            maxlength="10" style="width: 12%;"></a>
+                    <a>โทรศัพท์ <font color="red">*</font> :
+                        <input type="text" style="width: 10.8vw" id="wPhone"
+                            oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
+                            maxlength="10" onchange="document.getElementById('wPhone').classList.remove('alertInput')"
+                            onkeyup="checkPhone(this.value,'wPhone')"></a>
                     <a>โทรสาร :
                         <input type="text" id="wFax"
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
@@ -455,24 +475,29 @@
                     <br>
                     <br>
                     <a>ใบอนุญาตฉบับจริง
-                        เล่มที่ :
-                        <input type="text" id="" style="width: 5%;"></a>&ensp;
-                    <a>เลขที่ :
-                        <input type="text" id="" style="width: 10%;"></a>&ensp;
-                    <a>ออกให้เมื่อวันที่ :
-                        <input type="text" id="datepicker2" style="width: 12%;"></a>
-                    <a>ค่าธรรมเนียม :
-                        <input type="number" id="" style="width: 12%;"></a>
+                        เล่มที่ <font color="red">*</font> :
+                        <input type="text" id="bNo" style="width: 5%;"
+                            onchange="document.getElementById('bNo').classList.remove('alertInput')"></a>&ensp;
+                    <a>เลขที่ <font color="red">*</font> :
+                        <input type="text" id="bNum" style="width: 10%;"
+                            onchange="document.getElementById('bNum').classList.remove('alertInput')"></a>&ensp;
+                    <a>ออกให้เมื่อวันที่ <font color="red">*</font> :
+                        <input type="text" id="datepicker2" style="width: 12%;"
+                            onchange="document.getElementById('datepicker2').classList.remove('alertInput')"></a>
+                    <a>ค่าธรรมเนียม <font color="red">*</font> :
+                        <input type="number" id="bFee" style="width: 12%;"
+                            onchange="document.getElementById('bFee').classList.remove('alertInput')"></a>
                     <a>ค่าปรับ :
-                        <input type="number" id="" style="width: 12%;"></a>
+                        <input type="number" id="bFine" style="width: 12%;"></a>
 
                     <br>
                     <br>
                     <a>
                         <a>ประกอบกิจการจำหน่ายสินค้าในที่หรือทางสาธารณะ ประเภท</a>
                         <br>
-                        <a>1) จำหน่ายสินค้าในที่หรือทางสาธารนะ
-                            ประเภท : <select style="width: 30%;">
+                        <a>1) จำหน่ายสินค้าในที่หรือทางสาธารณะ
+                            ประเภท <font color="red">*</font> : <select id="typeReForm" style="width: 30%;"
+                                onchange="document.getElementById('typeReForm').classList.remove('alertInput')">
                                 <option value="1">ล้อเลื่อน (ทั่วไป)</option>
                                 <option value="2">ไก่ย่าง</option>
                                 <option value="3">หาบเร่</option>
@@ -497,25 +522,35 @@
                                 <option value="22">ล้อเลื่อน</option>
                                 <option value="23">ริมทางสาธารณะ (ชั่วคราว)</option>
                             </select></a>
-                            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <a>สินค้าประเภท : <input style="width: 32%;">&emsp;&emsp;&emsp;&emsp;
-                            เวลาเริ่ม : <input type="time" style="width: 11.6%;">  เวลาสิ้นสุด : <input type="time" style="width: 11.7%;"></a>
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a>สินค้าประเภท <font color="red">*</font> : <input id="typeProduct" style="width: 32%;"
+                                onchange="document.getElementById('typeProduct').classList.remove('alertInput')">&emsp;&emsp;&emsp;&emsp;
+                            เวลาเริ่ม <font color="red">*</font> : <input id="timeStart" type="time"
+                                style="width: 11.6%;"
+                                onchange="document.getElementById('timeStart').classList.remove('alertInput')">
+                            เวลาสิ้นสุด <font color="red">*</font> : <input id="timeEnd" type="time"
+                                style="width: 11.7%;"
+                                onchange="document.getElementById('timeEnd').classList.remove('alertInput')"></a>
                         <p class="font">2) &nbsp;ผู้ได้รับอนุญาตต้องปฏิบัติตามหลักเกณฑ์ วิธีการ
                             และเงื่อนไขที่กำหนดในข้อกำหนดของท้องถิ่น</p>
                         <p class="font">3)
                             &nbsp;หากปรากฎในภายหลังว่าการประกอบกิจการที่ได้รับอนุญาตนี้เป็นการขัดต่อกฎหมายอื่นที่เกี่ยวข้องโดยมิอาจแก้ไขได้
                             เจ้าหน้าที่ท้องถิ่นอื่นอาจพิจารณาให้เพิกถอนการอนุญาตนี้ได้</p>
                         <p class="font">
-                            <p  class="font">4) &nbsp;ผู้รับใบอนุญาตต้องปฏิบัติตามเงื่อนไขดังต่อไปนี้อีกด้วย คือ</p>
+                            <p class="font">4) &nbsp;ผู้รับใบอนุญาตต้องปฏิบัติตามเงื่อนไขดังต่อไปนี้อีกด้วย คือ</p>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <input style="width: 30%;" type="text" name="mytext[]">
+                            <input id="formNote" style="width: 30%;" type="text" name="mytext[]">
                             <button type="button" class="add_form_field">
                                 เพิ่ม</button>
                             <a class="container1"></a>
                         </p>
-                        <p class="font">5) &nbsp;ใบอนญาตฉบับนี้ออกให้เมื่อวันที่ <input type="text" id="datepicker3"></p>
-                        <p class="font">6) &nbsp;ใบอนญาตฉบับนี้สิ้นอายุวันที่ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text"
-                                id="datepicker4"></p>
+                        <p class="font">5) &nbsp;ใบอนญาตฉบับนี้ออกให้เมื่อวันที่ <font color="red">*</font> <input
+                                type="text" id="datepicker3"
+                                onchange="document.getElementById('datepicker3').classList.remove('alertInput')">
+                        </p>
+                        <p class="font">6) &nbsp;ใบอนญาตฉบับนี้สิ้นอายุวันที่ <font color="red">*</font>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="datepicker4"
+                                onchange="document.getElementById('datepicker4').classList.remove('alertInput')"></p>
                     </a>
                     <br>
                 </div>
@@ -523,16 +558,17 @@
 
                 <!-- สัมผัสอาหาร -->
                 <div class="box">
-                    <h3 style="font-size: 2.8vh;">ใบอบรมผู้สัมผัสอาหาร</h3>
-                    <input type="radio" name="food" id="food" onClick="show_food(this.value);" value="1"
-                        style="margin-left: 5vw;">
+                    <h3 style="font-size: 2.8vh;">ใบอบรมผู้สัมผัสอาหาร <font color="red">*</font>
+                    </h3>
+                    <input type="radio" name="food" id="foodTrain" onClick="show_food(this.value);" value="1"
+                        style="margin-left: 5vw;" required>
                     <a>อบรมแล้ว</a>
-                    <input type="radio" name="food" id="food" onClick="show_food(this.value);" value="2" />
+                    <input type="radio" name="food" id="foodNoTrain" onClick="show_food(this.value);" value="2" />
                     <a>ยังไม่ได้อบรม</a>
                     <br>
                     <div id="boxFood" class="boxFood" style="display: none;margin-left: 5vw;">
                         <a>ออกใบประกาศนียบัตรโดย</a>
-                        <input type="text" id="">
+                        <input type="text" id="foodBy">
                         <br>
                         <a>ให้ไว้ ณ วันที่</a>
                         <input type="text" id="datepicker5" />&nbsp;
@@ -541,7 +577,7 @@
                     </div>
                     <br>
                 </div><br>
-                
+
                 <!-- เพิ่มรูป -->
                 <div class="box">
                     <br>
@@ -618,14 +654,16 @@
                                 ข้าพเจ้าขอรับรองว่า
                                 ข้อความในแบบคำร้องขอต่อใบอนุญาตนี้เป็นจริงทุกประการ
                                 <br>
-                                (ลงชื่อ)
-                                <input type="text" id="documentName" />
+                                (ลงชื่อ) <font color="red">*</font>
+                                <input type="text" id="documentName" 
+                                onchange="document.getElementById('documentName').classList.remove('alertInput')"/>
                                 ผู้ขอรับใบอนุญาต
                             </a>
                         </div>
                         <div class="col" style="width: 33.33%;">
                             <a>
-                                ลงชื่อ <input type="text" id="" />
+                                ลงชื่อ <font color="red">*</font> <input type="text" id="documentName2" 
+                                onchange="document.getElementById('documentName2').classList.remove('alertInput')"/>
                                 <br>
                                 <p class="text-center">ผู้รับเงิน</p>
                             </a>
@@ -691,9 +729,15 @@
 
 </body>
 <!-- <script src="../../js/jquery.js"></script> -->
-<script src="../../js/js22.js"></script>
-<script src="../../js/controlTest.js"></script>
+<script src="../../js/twoAddress.js"></script>
+<script src="../../js/request/request.js"></script>
+<script src="../../js/request/menuRequest.js"></script>
+<!-- <script src="../../js/controlTest.js"></script> -->
+
+
 <script src="../../js/disable.js"></script>
 <script src="../../js/sweet2.js"></script>
 <script src="../../js/utilities.js"></script>
+<script src="../../js/js22.js"></script>
+
 </html>
