@@ -140,6 +140,7 @@ app.post('/insert/personal', (req, res) => {
   }else{
     obj[2].data = null
   }
+  console.log(req.files)
   webService.personalStep(obj[0], obj[1], obj[2], req.session.username).then((data) => {
     console.log(`server : function perosonalStep return = ${data}`)
     res.json(data)
