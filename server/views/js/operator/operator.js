@@ -3,6 +3,7 @@ let _isIdCheckPersonal = "";
 let arrInsert = [];
 let fileImage = null;
 let _isImageChange = false
+console.log(`default === ${_isImageChange}`)
 let newAdd = false
 let base64ImageSelect = ''
 let imageSelectype = ''
@@ -82,7 +83,7 @@ function setDataUI(data) {
     console.log(data.PERSONAL_TYPE === 'บุคคลธรรมดา')
     inAddress.id = data.AID.ADDRESS_ID
     inPersonal.id = data.PERSONAL_ID
-
+    inPersonal.type = data.PERSONAL_TYPE
     document.getElementById('company-id').disabled = true
     document.getElementById('id').disabled = true
     document.getElementById('typeUser').value = data.PERSONAL_TYPE
@@ -292,6 +293,7 @@ function preInsert() {
                         inPersonal.fax = document.getElementById("fax").value;
                         arrInsert.push(inPersonal);
                         arrInsert.push(inAddress);
+                        console.log(`preinsert === ${_isImageChange}`)
                         console.log(`_isImageChange ${_isImageChange} === false (${_isImageChange === false}) 
                         && newAdd ${newAdd} === false (${newAdd === false})`)
                         if (_isImageChange === false && newAdd === false) {
@@ -550,6 +552,7 @@ function uploadImage(event) {
         .pop()
         .split(".");
     _isImageChange = true
+    console.log(`uploadImage === ${_isImageChange}`)
     fileImage = imagefile.files[0];
     let typeImg = file[1];
     inImage.type = typeImg;
@@ -573,7 +576,8 @@ function uploadImage(event) {
 function deleteImageOne() {
     fileImage = null;
     inImage.type = null;
-    _isImageChange = true
+    _isImageChange = true;
+    console.log(`deleteImageOne === ${_isImageChange}`)
     inImage.data = null
     document.getElementById("uploadFile").value = "";
     var img = document.getElementById("operatorImage");

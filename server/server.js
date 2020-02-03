@@ -134,12 +134,15 @@ app.get('/get/personalId/:personalId', (req, res) => {
 app.post('/insert/personal', (req, res) => {
 
   var obj = JSON.parse(req.body.personal);
+  console.log(req.files === null)
+  console.log(req.files === undefined)
   if (req.files != null) {
     var datafile = req.files.image.data
     obj[2].data = datafile
   }else{
     obj[2].data = null
   }
+  console.log(req.files)
   webService.personalStep(obj[0], obj[1], obj[2], req.session.username).then((data) => {
     console.log(`server : function perosonalStep return = ${data}`)
     res.json(data)

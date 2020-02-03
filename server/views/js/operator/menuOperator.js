@@ -16,9 +16,9 @@ function resetStyleIdDelete() {
     }
 }
 function addPage() {
-    window.onbeforeunload = function() {
-        return 'You have unsaved changes!';
-    }
+    // window.onbeforeunload = function() {
+    //     return 'You have unsaved changes!';
+    // }
     addNew = true
     deleteData = false
     data = false
@@ -34,6 +34,7 @@ function addPage() {
     tempData = {}
     newAdd = true
     _isImageChange = false
+    console.log(`addPage === ${_isImageChange}`)
     changeOption(`บุคคลธรรมดา`)
     document.getElementById('id').disabled = false
     document.getElementById('company-id').disabled = false
@@ -82,7 +83,7 @@ function insertPage() {
                             console.log(inPersonal)
                             console.log(`tempDATA`)
                             console.log(tempData)
-
+                            
                             tempData.PERSONAL_TITLE = inPersonal.title
                             tempData.PERSONAL_NAME = inPersonal.name
                             tempData.PERSONAL_SURNAME = inPersonal.surname
@@ -105,6 +106,9 @@ function insertPage() {
                                 'AMPHUR_NAME':inAddress.amphur_name,
                                 'PROVINCE_NAME':inAddress.province_name
                             }
+
+                            tempData.PERSONAL_ID = insert.pid
+                            tempData.AID.ADDRESS_ID = insert.aid
                             if (inPersonal.type === 'บุคคลธรรมดา' && inImage.name != 'NO_UPlOAD') {
                                 let imageTemp = {
                                     'IMAGE_NAME': insert.pid,
@@ -150,7 +154,7 @@ function insertPage() {
                
             }
         });
-        window.onbeforeunload = null
+       // window.onbeforeunload = null
     }
 
 }
@@ -164,11 +168,12 @@ function resetImageDefault() {
 }
 function editPage() {
     if (!deleteData) {
-        window.onbeforeunload = function() {
-            return 'You have unsaved changes!';
-        }
+        // window.onbeforeunload = function() {
+        //     return 'You have unsaved changes!';
+        // }
         addNew = true
         _isImageChange = false
+        console.log(`editPage === ${_isImageChange}`)
         disableMenuAll()
         enableMenu('saveMenu')
         disableFunction()
@@ -208,7 +213,7 @@ function setIdDelete(type) {
 }
 function changeStatusDelete(status) {
     let personalDelete = {}
-    personalDelete.id = tempData.PERSONAL_ID
+    personalDelete.id = inPersonal.id
     personalDelete.is_deleted = status
     console.log(`changeStatusDelete => `)
     console.log(personalDelete)
@@ -260,7 +265,7 @@ function deletePage() {
                     });
                     // function update
                     deleteData = true
-                    setIdDelete(tempData.PERSONAL_TYPE)
+                    setIdDelete(inPersonal.type)
                     disableMenuAll()
                     enableMenu('addMenu')
                     enableMenu('editMenu')
@@ -294,7 +299,7 @@ function deletePage() {
                         confirmButtonColor: "#009688"
                     });
                     resetInputRequired()
-                    window.onbeforeunload = null
+                    // window.onbeforeunload = null
                     if (data === false) {
                         resetInputUI()
                         addNew = false
