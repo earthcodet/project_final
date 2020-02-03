@@ -10,5 +10,5 @@ function checkUserlogin(){
         })
     })
 }
-
+//ต้องแยกไฟล์เพราะ มันจะรัน function checkLogin ตอนแรก
 checkUserlogin()

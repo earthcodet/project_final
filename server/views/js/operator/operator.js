@@ -248,14 +248,6 @@ function resetInputRequired() {
     document.getElementById('datepicker4').classList.remove('alertInput')
     document.getElementById('company-phone').classList.remove('alertInput')
 }
-function formatPhone(value) {
-    if ((value.length === 1 && value === '-') || (value.slice(0, 1) === '0' && value.slice(1, 2) != 0 && value.length === 10 && !isNaN(value))) {
-        console.log(`format number`)
-        return true
-    } else {
-        return false
-    }
-}
 function preInsert() {
     resetInputRequired()
     let check_id_user = document.getElementById('id').value
@@ -629,27 +621,5 @@ function changeOption(value) {
         document.getElementById("imgButton").style.display = "";
         resetFunction()
 
-    }
-}
-function checkPhone(value, id) {
-    console.log(value)
-    let tempCheck = value.split("")
-    console.log(tempCheck.length)
-    console.log(value.length)
-    if (tempCheck[0] === '-') {
-        document.getElementById(id).value = '-'
-    }
-    if (tempCheck[0] != '0' && tempCheck != '-') {
-        document.getElementById(id).value = ''
-    }
-    for (let i = 1; i < tempCheck.length; i++) {
-        if (tempCheck[0] === '0') {
-            if (tempCheck[1] === '0') {
-                document.getElementById(id).value = '0'
-            }
-            if (tempCheck[i] === '-') {
-                document.getElementById(id).value = value.slice(0, value.length - 1)
-            }
-        }
     }
 }

@@ -5,30 +5,6 @@ let tSearchName = ''
 let tSearchSurname = ''
 let tSearchId = ''
 let tempData = {}
-function exitPage() {
-    Swal.fire({
-        title: "สำนักงานเทศบาล",
-        html: "ต้องการออกจากระบบหรือไม่",
-        showCancelButton: true,
-        customClass: 'swal-height',
-        confirmButtonColor: "#009688",
-        confirmButtonText: "ใช่",
-        cancelButtonText: "ไม่ใช่",
-        cancelButtonColor: '#dc3545',
-        closeOnConfirm: false,
-        closeOnCancel: false
-    })
-        .then((result) => {
-            if (result.value) {
-                document.getElementById('exitMenu').classList.add('disableds')
-                logout()
-            }
-        });
-}
-
-function logout() {
-    location.replace("/logout")
-}
 function resetStyleIdDelete() {
     var id = document.getElementById('id')
     if (id != undefined || id != null) {
@@ -46,7 +22,7 @@ function addPage() {
     addNew = true
     deleteData = false
     data = false
-    disFunction()
+    disableFunction()
     disableMenuAll()
     enableMenu('saveMenu')
     enableMenu('deleteMenu')
@@ -69,18 +45,6 @@ function addPage() {
     inImage.data = null
     textChange = ''
     iconAlert = ''
-}
-
-function disableMenuAll() {
-    document.getElementById('addMenu').classList.add('disableds')
-    document.getElementById('saveMenu').classList.add('disableds')
-    document.getElementById('editMenu').classList.add('disableds')
-    document.getElementById('restoreMenu').classList.add('disableds')
-    document.getElementById('deleteMenu').classList.add('disableds')
-}
-
-function enableMenu(id) {
-    document.getElementById(id).classList.remove('disableds')
 }
 
 function insertPage() {
@@ -183,31 +147,7 @@ function insertPage() {
                 let format = `${day}-${month}-${year}`
                 document.getElementById('last-update').value = format
             } else if (result.dismiss === Swal.DismissReason.cancel) {
-                Swal.fire({
-                    icon: 'success',
-                    html: "<h2>ยกเลิกสำเร็จ</h2>",
-                    confirmButtonColor: "#009688"
-                });
-                if (data === false) {
-                    resetInputUI()
-                    addNew = false
-                    disableMenuAll()
-                    enableMenu('addMenu')
-                    enableFunction()
-                    resetStyleIdDelete()
-                    resetFunction()
-                    resetImageDefault()
-                }
-                if (isEmpty(tempData) === false && data === true) {
-                    resetFunction()
-                    setDataUI(tempData)
-                    disableMenuAll()
-                    addNew = false
-                    enableMenu('addMenu')
-                    enableMenu('editMenu')
-                    enableMenu('deleteMenu')
-                    enableFunction()
-                }
+               
             }
         });
         window.onbeforeunload = null

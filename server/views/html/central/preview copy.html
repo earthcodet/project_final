@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+
+    <link rel="stylesheet" href="../../css/fonts.css">
+    
+    <script src="../../js/service/jquery/jquery-3.4.1.min.js"></script>
+    <script src="../../js/service/bootstrap-4.4.1/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../../css/bootstrap-4.4.1/bootstrap.min.css">
+
+</head>
+<style>
+    body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: #FAFAFA;
+        font: 12pt "Tahoma";
+    }
+
+    * {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+    }
+
+    .page {
+        width: 210mm;
+        min-height: 297mm;
+        padding: 15mm;
+        margin: 10mm auto;
+        border: 1px #D3D3D3 solid;
+        border-radius: 1px;
+        background: white;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .subpage {
+        padding: 1cm;
+        border: 2px red solid;
+        height: 257mm;
+        outline: 2cm #FFEAEA solid;
+    }
+
+    @page {
+        size: A4;
+        margin: 0;
+    }
+
+    @media print {
+
+        html,
+        body {
+            width: 210mm;
+            height: 297mm;
+        }
+
+        .page {
+            margin: 0;
+            border: initial;
+            border-radius: initial;
+            width: initial;
+            min-height: initial;
+            box-shadow: initial;
+            background: initial;
+            page-break-after: always;
+        }
+
+        .hideWhenPrint {
+            display: none;
+        }
+    }
+</style>
+
+<body>
+    <div class="book">
+        <div class="page">
+            <br>
+            <div class="container" style="font-family: 'Sarabun';">
+                <h4 class="text-center">คำขอต่อหนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</h4>
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <p class="text-right">เขียนที่ สำนักงานเทศบาลเมืองแสนสุข</p>
+                        <p class="text-right">วันที่ 17 เดือน ธันวาคม พ.ศ. 2562</p>
+                    </div>
+                </div>
+                <br>
+                <!-- 1. -->
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col">
+                        <p>1. ข้าพเจ้า
+                            <input type="checkbox" name="nametype" id="">บุคคลธรรมดา <input type="checkbox"
+                                name="nametype" id="">นิติบุคคล</p>
+                    </div>
+                    <div class="col">ชื่อ <a>sdddddddddsd</a></div>
+                    <div class="col">อายุ <a>sdผsd</a></div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p>สัญชาติ <a>sdddddddddsd</a></p>
+                    </div>
+                    <div class="col">เลขบัตรประชาชนเลขที่ <a>sdddddddddsd</a></div>
+                    <div class="col">อยู่บ้าน/สำนักงานเลขที่ <a>sdddddddddsd</a>s</div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p>ตรอก</p>
+                    </div>
+                    <div class="col">ซอย</div>
+                    <div class="col">ถนน</div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p>แขวง/ตำบล</p>
+                    </div>
+                    <div class="col">เขต/อำเภอ</div>
+                    <div class="col">จังหวัด</div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p>โทรศัพท์</p>
+                    </div>
+                    <div class="col">โทรสาร</div>
+                    <div class="col"></div>
+                </div>
+                <br>
+                <!-- 2. -->
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col">
+                        <p>2. ชื่อสถานประกอบกิจการ</p>
+                    </div>
+                    <div class="col">ประเภท</div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p>มีพื้นที่</p>
+                    </div>
+                    <div class="col">ตั้งอยู่เลขที่</div>
+                    <div class="col">ตรอก/ซอย</div>
+                    <div class="col">ถนน</div>
+                    <div class="col">หมู่ที่</div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p>ตำบล</p>
+                    </div>
+                    <div class="col">อำเภอ</div>
+                    <div class="col">จังหวัด</div>
+                    <div class="col">โทรศัพท์</div>
+                </div>
+                <br>
+                <!-- 3. -->
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col">
+                        <p>3. พร้อมคำขอนี้ข้าพเจ้าได้แนบเอกสารต่างๆมาด้วย คือ</p>
+                        <p>[ &nbsp; ] สำเนาบัตรประจำตัว (ประชาชน/ข้าราชการ/พนักงานรัฐวิสาหกิจ/อื่นๆ ระบุ
+                            ........................................)</p>
+                        <p>[ &nbsp; ] สำเนาทะเบียนบ้าน</p>
+                        <p>[ &nbsp; ] หลักฐานที่แสดงการเป็นผู้มีอำนาจลงนามแทนนิติบุคคลและใบมอบอำนาจ
+                            (กรณีที่มีการมอบอำนาจ)</p>
+                        <p>[ &nbsp; ] สำเนาหนังสือรับรองการจดทะเบียนเป็นนิติบุคคล</p>
+                        <p>[ &nbsp; ] สำเนาใบอนุญาตตามกฎหมายที่เกี่ยวข้องได้แก่
+                            .........................................................</p>
+                        <p>[ &nbsp; ] เอกสารและหลักฐานอื่นๆ ตามที่ราชการส่วนท้องถิ่นประกาศกำหนดได้แก่
+                            ....................................................</p>
+                        <p>ข้าพเจ้าขอรับรองว่าข้อความในแบบคำขอนี้เป็นความจริงทุกประการ</p>
+                    </div>
+                </div>
+                <br>
+                <!-- ลงชื่อ -->
+                <div class="row">
+                    <div class="col-6"></div>
+                    <div class="col text-center">
+                        (ลงชื่อ).........................................................................ผู้ขอรับใบอนุญาต
+                        <br>
+                        นาย ไพบูลย์ ธนากรวาณิชย์
+                    </div>
+                </div>
+                <br>
+                <!--  -->
+                <div class="row">
+                    <div class="col">
+                        ความเห็นของเจ้าหน้าที่/หัวหน้างาน
+                        <br>[ &nbsp; ] เห็นควรอนุญาต โดยให้ชำระเงินค่าธรรมเนียมเป็นเงิน........................บาท
+                        <br>[ &nbsp; ] ไม่เห็นสมควรอนุญาต เพราะ.............................................
+                        <br>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ลงชื่อ)...................................................
+                            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(...................................................)
+                        </p>
+                    </div>
+                    <div class="col-5">
+                        ความเห็นของหัวหน้าฝ่ายสุขาภิบาล
+                        <br>[ &nbsp; ] เห็นควรอนุญาต โดยให้ชำระเงินค่าธรรมเนียมฯ
+                        <br>[ &nbsp; ] ไม่เห็นสมควรอนุญาต เพราะ.............................................
+                        <br>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ลงชื่อ)...................................................
+                            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(...................................................)
+                        </p>
+                    </div>
+                </div>
+                <br>
+                <!--  -->
+                <div class="row">
+                    <div class="col">
+                        ความเห็นของผู้อำนวยการกองสาธารณสุขฯ
+                        <br>[ &nbsp; ] เห็นควรอนุญาต โดยให้ชำระเงินค่าธรรมเนียมฯ
+                        <br>[ &nbsp; ] ไม่เห็นสมควรอนุญาต เพราะ.............................................
+                        <br>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ลงชื่อ)...................................................
+                            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(...................................................)
+                        </p>
+                    </div>
+                    <div class="col-5">
+                        ความเห็นของปลัดเทศบาล
+                        <br>[ &nbsp; ] เห็นควรอนุญาต โดยให้ชำระเงินค่าธรรมเนียมฯ
+                        <br>[ &nbsp; ] ไม่เห็นสมควรอนุญาต เพราะ.............................................
+                        <br>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ลงชื่อ)...................................................
+                            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(...................................................)
+                        </p>
+                    </div>
+                </div>
+                <br>
+                <!--  -->
+                <div class="row">
+                    <div class="" style="margin-left: 25%;">
+                        ความเห็นของเจ้าพนักงานท้องถิ่น
+                        <br>[ &nbsp; ] เห็นควรอนุญาต โดยให้ชำระเงินค่าธรรมเนียมฯ
+                        <br>[ &nbsp; ] ไม่เห็นสมควรอนุญาต เพราะ.............................................
+                        <br>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ลงชื่อ)...................................................
+                            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(...................................................)
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

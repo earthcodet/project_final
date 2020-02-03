@@ -6,16 +6,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="../js/js22.js"></script>
 
     <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.css">
     <link rel="stylesheet" href="../../css/css2.css">
     <link href="../../css/fonts.css" rel="stylesheet">
 
     <!-- เรียกไลบารี่สร้างปฎิทิน  -->
-    <script src="../../js/jquery-3.4.1.min.js"></script>
-    <script src="../../js/datetimepicker.full.js"></script>
-    <script src="../../js/dateth.js"></script>
+    <script src="../../js/service/jquery/jquery-3.4.1.min.js"></script>
+    <script src="../../js/service/date/datetimepicker.full.js"></script>
+    <script src="../../js/service/date/dateth.js"></script>
     <link rel="stylesheet" href="../../css/date.css">
 </head>
 
@@ -94,6 +93,10 @@
         <div class="dropdown-container">
             <a class="notification" href="../notfication/request.html">- งานคำขอ<span id="notficationRequest" class="badge" style="margin-left:0.5vw;">100000</span></a>
         </div>
+        <br><br>
+        <button class="dropdown-btn"><a href="../notfication/request copy.html" style="color: red;"><b>คำขอหมดอายุเกิน 3 ปี </b></a>
+            <!-- <i class="fa fa-caret-down"></i> -->
+        </button>
     </div>
     <!-- เนื้อหา -->
     <form id="form">
@@ -346,8 +349,7 @@
                     <input type="radio" name="confirm" id="confirm" onClick="show_confirm(this.value);" value="1">
                     <a> ยืนยันคำขอรับ </a>
                     &nbsp;
-                    <input type="radio" name="confirm" id="confirm" onClick="show_confirm(this.value);" value="2">
-                    <a> ยืนยันคำขอต่ออายุ </a>
+     
                     <br>
                     <div class="row" id="boxConfirm" style="width: 80%;margin-left: 5vw;display: none;">
                         <div class="col" style="width: 33.33%;">
@@ -421,43 +423,7 @@
                     </div>
 
                 </div><br>
-                <!-- ตรวจสอบ -->
-                <div class="box">
-                    <a>
-                        <div class="row">
-                            <div class="col">
-                                <p style="margin-top: 2.8%;"><b>ความถูกต้องของเอกสารคำร้อง</b></p>
-                            </div>
-                            <div class="col">
-                                <p style="margin-top: 1%;"><b>บันทึกอนุมัติคำขอ</b> <input type="text" id="datepicker5">
-                                </p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col" style="text-align: left;">
-                                <div class="box">
-                                    <input type="radio" name="correct1" id="" value=""> &nbsp;เห็นสมควรอนุญาต
-                                    <br>
-                                    <input type="radio" name="correct1" id="" value=""> &nbsp;เห็นสมควรไม่อนุญาต เพราะ
-                                    <textarea rows="4" cols="50"> </textarea>
-                                    <br><br>
-                                    <p>ลงชื่อ <input type="text"> ผู้ตรวจสอบ </p>
-                                </div>
-                            </div>
-
-                            <div class="col" style="text-align: left;">
-                                <div class="box">
-                                    <input type="radio" name="correct2" id="" value=""> &nbsp;เห็นสมควรอนุญาต
-                                    <br>
-                                    <input type="radio" name="correct2" id="" value=""> &nbsp;เห็นสมควรไม่อนุญาต เพราะ
-                                    <textarea rows="4" cols="50"> </textarea>
-                                    <br><br>
-                                    <p>ลงชื่อ <input type="text"> ผู้อนุมัติ </p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div><br>
+                
 
 
             </div>
@@ -467,9 +433,11 @@
 
 
 </body>
-<script src="../../js/js22.js"></script>
-<script src="../../js/controlTest.js"></script>
-<script src="../../js/disable.js"></script>
-<script src="../../js/sweet2.js"></script>
-<script src="../../js/utilities.js"></script>
+<script src="../../node_modules/axios/dist/axios.min.js"></script>
+<script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>   
+<script src="../../js/service/utilities.js"></script>
+
+<script src="../../js/service/sideMenu.js"></script>
+<script src="../../js/request/controlTest.js"></script>
+<!-- <script src="../../js/service/checkUserLogin.js"></script> -->
 </html>

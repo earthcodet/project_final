@@ -343,7 +343,8 @@ html, body {
     height: 100%;
     margin: 0px;
     padding: 0px;
-    overflow-x: auto;
+    /* ปิดไว้เวลาเปิด popup มันจะไม่ขยับ */
+    /* overflow-x: auto; */
 }
 
 /* popup */
@@ -569,4 +570,53 @@ font.animation {
       40%, 60% {
         transform: translate3d(4px, 0, 0);
       }
+}
+
+.tabOne{
+    margin-left: 1vw;
+}
+.tabTwo{
+    margin-left: 6vw;
+}
+.alert{
+    color : red;
+    font-style:italic;
+    font-size: 0.9vw;
+    /* display: none; */
+}
+div.center{
+    text-align: center;
+    display: block;
+}
+topics{
+    font-size: 10vw
+}
+
+.menu{
+    width: 12rem;
+    height: 4.5rem;
+    background-color: #f4f4f4;
+    color: #333;
+    border: 1px solid #aaa;
+    box-shadow: 2px 2px 2px #999;
+    border-radius: 0.2rem;
+    list-style: none;
+    position: fixed;
+}
+.menu.off{
+    top: -200%;
+    left: -200%;
+}
+.menu-item{
+    height: 1.5rem;
+    line-height: 1.5rem;
+    font-size: 1rem;
+    font-weight: 100;
+    padding: 0 1rem;
+    cursor: pointer;
+}
+.menu-item:hover,
+.menu-item:active{
+    color: #000;
+    font-weight: 500;
 }

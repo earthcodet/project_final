@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- <script src="../js/js22.js"></script> -->
 
     <link rel="stylesheet" href="../../css/css2.css">
     <link href="../../css/fonts.css" rel="stylesheet">
@@ -18,9 +17,9 @@
     <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.css">
 
     <!-- เรียกไลบารี่สร้างปฎิทิน  -->
-    <script src="../../js/jquery-3.4.1.min.js"></script>
-    <script src="../../js/datetimepicker.full.js"></script>
-    <script src="../../js/dateth.js"></script>
+    <script src="../../js/service/jquery/jquery-3.4.1.min.js"></script>
+    <script src="../../js/service/date/datetimepicker.full.js"></script>
+    <script src="../../js/service/date/dateth.js"></script>
     <link rel="stylesheet" href="../../css/date.css">
 
 </head>
@@ -112,6 +111,10 @@
             <a class="notification" href="../notfication/request.html">- งานคำขอ<span id="notficationRequest"
                     class="badge" style="margin-left:0.5vw;">100000</span></a>
         </div>
+        <br><br>
+        <button class="dropdown-btn"><a href="../notfication/request copy.html" style="color: red;"><b>คำขอหมดอายุเกิน 3 ปี </b></a>
+            <!-- <i class="fa fa-caret-down"></i> -->
+        </button>
     </div>
     <!-- เนื้อหา -->
     <form id="form">
@@ -194,6 +197,7 @@
                                         maxlength="10" 
                                         onchange="document.getElementById('datepicker1').classList.remove('alertInput')" 
                                         readonly>
+
                                     <a id='dateExpTopic' style="margin-left: 0.3vw;">หมดอายุ <font color="red">*</font> :</a>
                                     <input type="text" id="datepicker2" placeholder="" style="width: 11vw"
                                         maxlength="10" readonly
@@ -361,17 +365,17 @@
 
 </body>
 <script src="../../node_modules/axios/dist/axios.min.js"></script>
+<script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>   
+<script src="../../js/service/utilities.js"></script>
+
 <!-- เอาไว้เช็คว่า user login หรือเปล่า --> -->
-<script src="../../js/checkUserLogin.js"></script>
-<script src="../../js/twoAddress.js"></script>
+<!-- <script src="../../js/service/checkUserLogin.js"></script> -->
 
-<script src="../../js/operator.js/operator.js"></script>
-<script src="../../js/operator.js/menuOperator.js"></script>
+<script src="../../js/service/address/twoAddress.js"></script>
 
-
-<script src="../../js/disable.js"></script>
-<script src="../../js/sweet2.js"></script>
-<script src="../../js/js22.js"></script>
+<script src="../../js/operator/operator.js"></script>
+<script src="../../js/operator/menuOperator.js"></script>
+<script src="../../js/service/sideMenu.js"></script>
 
 
 

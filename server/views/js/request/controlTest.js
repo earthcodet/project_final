@@ -29,7 +29,7 @@ function addTEST() {
     addNew = true
     deleteData = false
     data = false
-    disFunction()
+    disableFunction()
     disableMenuAll()
     enableMenu('saveMenu')
     var id = document.getElementById('id')
