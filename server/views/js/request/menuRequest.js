@@ -46,7 +46,7 @@ function addPage() {
     addNew = true
     deleteData = false
     data = false
-    disFunction()
+    disableFunction()
     disableMenuAll()
     enableMenu('saveMenu')
     enableMenu('deleteMenu')

@@ -134,6 +134,8 @@ app.get('/get/personalId/:personalId', (req, res) => {
 app.post('/insert/personal', (req, res) => {
 
   var obj = JSON.parse(req.body.personal);
+  console.log(req.files === null)
+  console.log(req.files === undefined)
   if (req.files != null) {
     var datafile = req.files.image.data
     obj[2].data = datafile
