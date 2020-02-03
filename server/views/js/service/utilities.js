@@ -280,9 +280,10 @@ function toRequest(value) {
     let type = ''
 
     if (value.path != undefined) {
-        type = value
-    } else {
         type = value.path[0].textContent
+        
+    } else {
+        type = value
     }
 
     switch (type) {
