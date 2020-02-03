@@ -108,7 +108,7 @@ function setDataUI(data) {
 
         //ตั้งค่ารายชื่อ อำเภอ, ตำบล ตามจังหวัดที่เลือกลงให้ list input ตาม id
         amphurSelect(parseInt(provinceId)) // list อำเภอทั้งหมดตาม province Id
-        districtSelect(parseInt(amphurId)) // list ตำบลทั้งหมดตาม ampur_Id
+        onwerDistrictSelect(parseInt(amphurId)) // list ตำบลทั้งหมดตาม ampur_Id
 
         //แสดงค่าจังหวัดที่มาจาก ฐานข้อมูล (อำเภอ , ตำบล) ตาม id
         document.getElementById(`district`).value = amphurId
@@ -165,8 +165,8 @@ function setDataUI(data) {
         document.getElementById(`wProvince`).value = provinceId
 
         //ตั้งค่ารายชื่อ อำเภอ, ตำบล ตามจังหวัดที่เลือกลงให้ list input ตาม id
-        wamphurSelect(parseInt(provinceId)) // list อำเภอทั้งหมดตาม province Id
-        wdistrictSelect(parseInt(amphurId)) // list ตำบลทั้งหมดตาม ampur_Id
+        landAmphurSelect(parseInt(provinceId)) // list อำเภอทั้งหมดตาม province Id
+        landDistrictSelect(parseInt(amphurId)) // list ตำบลทั้งหมดตาม ampur_Id
 
         //แสดงค่าจังหวัดที่มาจาก ฐานข้อมูล (อำเภอ , ตำบล) ตาม id
         document.getElementById(`wDistrict`).value = amphurId

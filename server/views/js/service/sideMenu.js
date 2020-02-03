@@ -26,6 +26,7 @@ function show_food(id) {
 }
 // เจ้าของที่
 function show_spirits(id) {
+  openLand(); 
   var radio = document.getElementById("spirits").checked;
   if (id == 1) {
     document.getElementById("boxSpirits").style.display = "";

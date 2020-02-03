@@ -138,10 +138,11 @@ function amphurSelect(proviceId) {
     addressAmphur = []
     aProviceId = proviceId
     for (let i = 0; i < amphur.length; i++) {
-        if (amphur[i].PROVINCE_ID == proviceId) {
+        if (amphur[i].PROVINCE_ID === proviceId) {
             addressAmphur.push(amphur[i])
         }
     }
+    
     removeAlloption('district')
     for (let i = 0; i < addressAmphur.length; i++) {
         var select = document.getElementById("district");
