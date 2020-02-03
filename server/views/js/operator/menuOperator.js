@@ -83,7 +83,7 @@ function insertPage() {
                             console.log(inPersonal)
                             console.log(`tempDATA`)
                             console.log(tempData)
-
+                            
                             tempData.PERSONAL_TITLE = inPersonal.title
                             tempData.PERSONAL_NAME = inPersonal.name
                             tempData.PERSONAL_SURNAME = inPersonal.surname
@@ -106,6 +106,9 @@ function insertPage() {
                                 'AMPHUR_NAME':inAddress.amphur_name,
                                 'PROVINCE_NAME':inAddress.province_name
                             }
+
+                            tempData.PERSONAL_ID = insert.pid
+                            tempData.AID.ADDRESS_ID = insert.aid
                             if (inPersonal.type === 'บุคคลธรรมดา' && inImage.name != 'NO_UPlOAD') {
                                 let imageTemp = {
                                     'IMAGE_NAME': insert.pid,
