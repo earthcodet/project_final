@@ -281,7 +281,6 @@ function toRequest(value) {
 
     if (value.path != undefined) {
         type = value.path[0].textContent
-        
     } else {
         type = value
     }
