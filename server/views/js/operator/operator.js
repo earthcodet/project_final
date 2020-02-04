@@ -136,7 +136,7 @@ function setDataUI(data) {
             } else {
                 img.src = `../../img/userProfile.png`
             }
-
+            inImage.name = data.PERSONAL_ID
             inImage.type = data.image.IMAGE_TYPE
             inImage.data = data.image.IMAGE_DATA
              

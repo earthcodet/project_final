@@ -149,7 +149,11 @@ function insertPage() {
                 let month = temp[1]
                 let year = parseInt(temp[0]) + 543
                 let format = `${day}-${month}-${year}`
-                document.getElementById('last-update').value = format
+                if(inPersonal.type === 'บุคคลธรรมดา'){
+                    document.getElementById('last-update').value = format
+                }else{
+                    document.getElementById('company-last-update').value = format
+                }
             } else if (result.dismiss === Swal.DismissReason.cancel) {
                
             }
