@@ -245,8 +245,8 @@ function deletePage() {
                 return new Promise(function (resolve, reject) {
                     setTimeout(function () {
                         //function ใน operator 
-                        changeStatusDelete('YES').then((statusDelete) => {
-                            tempData.is_deleted = 'YES'
+                        changeStatusDelete('Y').then((statusDelete) => {
+                            tempData.is_deleted = 'Y'
                             console.log(`statusDelete = ${statusDelete}`)
                             if (statusDelete) {
                                 resolve();
@@ -428,9 +428,9 @@ function showItem(arrayResult) {
         setDataUI(arrayResult)
         tempData = arrayResult
     }
-    console.log(arrayResult.PERSONAL_IS_DELETED === 'YES')
-    if (arrayResult.PERSONAL_IS_DELETED === 'YES') {
-        console.log('YES')
+    console.log(arrayResult.PERSONAL_IS_DELETED === 'Y')
+    if (arrayResult.PERSONAL_IS_DELETED === 'Y') {
+        console.log('Y')
         resetInputRequired()
         //แสดง menu - กลุ่มมีข้อมูลที่ลบแล้ว
         deleteData = true
@@ -577,8 +577,8 @@ function restorePage() {
             return new Promise(function (resolve, reject) {
                 setTimeout(function () {
                     //function ใน operator 
-                    changeStatusDelete('NO').then((statusDelete) => {
-                        tempData.is_deleted = 'NO'
+                    changeStatusDelete('N').then((statusDelete) => {
+                        tempData.is_deleted = 'N'
                         console.log(`statusDelete = ${statusDelete}`)
                         if (statusDelete) {
                             resolve();
