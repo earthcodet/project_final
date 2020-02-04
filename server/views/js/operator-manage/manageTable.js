@@ -1,4 +1,4 @@
-
+// window.open('../../report/report_summary', '_blank');
 //อนุญาต
 function approvalPopup() {
     let html_display = `
@@ -83,6 +83,36 @@ function approvalPopup() {
                 confirmButtonColor: "#009688"
             });
         } else if (result.dismiss === Swal.DismissReason.cancel) {
+        }
+    });
+    // กรณีใช้แบบ input
+    $("#datepicker5").datetimepicker({
+        timepicker: false,
+        format: "d-m-Y", // กำหนดรูปแบบวันที่ ที่ใช้ เป็น 00-00-0000
+        lang: "th", // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
+        onSelectDate: function (dp, $input) {
+            var yearT = new Date(dp).getFullYear();
+            var yearTH = yearT + 543;
+            var fulldate = $input.val();
+            var fulldateTH = fulldate.replace(yearT, yearTH);
+            $input.val(fulldateTH);
+        }
+    });
+    // กรณีใช้กับ input ต้องกำหนดส่วนนี้ด้วยเสมอ เพื่อปรับปีให้เป็น ค.ศ. ก่อนแสดงปฏิทิน
+    $("#datepicker5").on("mouseenter mouseleave", function (e) {
+        var dateValue = $(this).val();
+        if (dateValue != "") {
+            var arr_date = dateValue.split("-"); // ถ้าใช้ตัวแบ่งรูปแบบอื่น ให้เปลี่ยนเป็นตามรูปแบบนั้น
+            // ในที่นี้อยู่ในรูปแบบ 00-00-0000 เป็น d-m-Y  แบ่งด่วย - ดังนั้น ตัวแปรที่เป็นปี จะอยู่ใน array
+            //  ตัวที่สอง arr_date[2] โดยเริ่มนับจาก 0
+            if (e.type == "mouseenter") {
+                var yearT = arr_date[2] - 543;
+            }
+            if (e.type == "mouseleave") {
+                var yearT = parseInt(arr_date[2]) + 543;
+            }
+            dateValue = dateValue.replace(arr_date[2], yearT);
+            $(this).val(dateValue);
         }
     });
 }
@@ -251,6 +281,36 @@ function notApprovalPopup() {
         } else if (result.dismiss === Swal.DismissReason.cancel) {
         }
     });
+    // กรณีใช้แบบ input
+    $("#datepicker6").datetimepicker({
+        timepicker: false,
+        format: "d-m-Y", // กำหนดรูปแบบวันที่ ที่ใช้ เป็น 00-00-0000
+        lang: "th", // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
+        onSelectDate: function (dp, $input) {
+            var yearT = new Date(dp).getFullYear();
+            var yearTH = yearT + 543;
+            var fulldate = $input.val();
+            var fulldateTH = fulldate.replace(yearT, yearTH);
+            $input.val(fulldateTH);
+        }
+    });
+    // กรณีใช้กับ input ต้องกำหนดส่วนนี้ด้วยเสมอ เพื่อปรับปีให้เป็น ค.ศ. ก่อนแสดงปฏิทิน
+    $("#datepicker6").on("mouseenter mouseleave", function (e) {
+        var dateValue = $(this).val();
+        if (dateValue != "") {
+            var arr_date = dateValue.split("-"); // ถ้าใช้ตัวแบ่งรูปแบบอื่น ให้เปลี่ยนเป็นตามรูปแบบนั้น
+            // ในที่นี้อยู่ในรูปแบบ 00-00-0000 เป็น d-m-Y  แบ่งด่วย - ดังนั้น ตัวแปรที่เป็นปี จะอยู่ใน array
+            //  ตัวที่สอง arr_date[2] โดยเริ่มนับจาก 0
+            if (e.type == "mouseenter") {
+                var yearT = arr_date[2] - 543;
+            }
+            if (e.type == "mouseleave") {
+                var yearT = parseInt(arr_date[2]) + 543;
+            }
+            dateValue = dateValue.replace(arr_date[2], yearT);
+            $(this).val(dateValue);
+        }
+    });
 }
 //ชำระเงิน
 function payPopup() {
@@ -374,10 +434,39 @@ function payPopup() {
         } else if (result.dismiss === Swal.DismissReason.cancel) {
         }
     });
-
+    // กรณีใช้แบบ input
+    $("#datepicker7").datetimepicker({
+        timepicker: false,
+        format: "d-m-Y", // กำหนดรูปแบบวันที่ ที่ใช้ เป็น 00-00-0000
+        lang: "th", // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
+        onSelectDate: function (dp, $input) {
+            var yearT = new Date(dp).getFullYear();
+            var yearTH = yearT + 543;
+            var fulldate = $input.val();
+            var fulldateTH = fulldate.replace(yearT, yearTH);
+            $input.val(fulldateTH);
+        }
+    });
+    // กรณีใช้กับ input ต้องกำหนดส่วนนี้ด้วยเสมอ เพื่อปรับปีให้เป็น ค.ศ. ก่อนแสดงปฏิทิน
+    $("#datepicker7").on("mouseenter mouseleave", function (e) {
+        var dateValue = $(this).val();
+        if (dateValue != "") {
+            var arr_date = dateValue.split("-"); // ถ้าใช้ตัวแบ่งรูปแบบอื่น ให้เปลี่ยนเป็นตามรูปแบบนั้น
+            // ในที่นี้อยู่ในรูปแบบ 00-00-0000 เป็น d-m-Y  แบ่งด่วย - ดังนั้น ตัวแปรที่เป็นปี จะอยู่ใน array
+            //  ตัวที่สอง arr_date[2] โดยเริ่มนับจาก 0
+            if (e.type == "mouseenter") {
+                var yearT = arr_date[2] - 543;
+            }
+            if (e.type == "mouseleave") {
+                var yearT = parseInt(arr_date[2]) + 543;
+            }
+            dateValue = dateValue.replace(arr_date[2], yearT);
+            $(this).val(dateValue);
+        }
+    });
 }
 //ต่อใบอนุญาต
-function perPopup() {
+function perPopup(menutype) {
     let html_display = `
 <div >
 <br>
@@ -496,15 +585,65 @@ function perPopup() {
             <a id='success_date_issue'>วันที่เริ่มใบ : 25-05-2563 </a><br>
             <a id='success_date_expired'>วันที่หมดอายุ : 25-05-2564 </a>
         </div>
+        <br>
+        <br>
+        <button type="button"  onclick="printPer('${menutype}')" style='width:10% height:30%'> 
+        
+        <i class="fa fa-print"></i>
+        พิมพ์คำขอต่อ
+        
+        </button>
         `
             Swal.fire({
                 html: html_commit,
                 icon: "success",
-                confirmButtonColor: "#009688"
+                showConfirmButton: false,
+                closeOnConfirm: false,
+                closeOnCancel: false
             });
         } else if (result.dismiss === Swal.DismissReason.cancel) {
         }
     });
+    // กรณีใช้แบบ input
+    $("#datepicker8").datetimepicker({
+        timepicker: false,
+        format: "d-m-Y", // กำหนดรูปแบบวันที่ ที่ใช้ เป็น 00-00-0000
+        lang: "th", // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
+        onSelectDate: function (dp, $input) {
+            var yearT = new Date(dp).getFullYear();
+            var yearTH = yearT + 543;
+            var fulldate = $input.val();
+            var fulldateTH = fulldate.replace(yearT, yearTH);
+            $input.val(fulldateTH);
+        }
+    });
+    // กรณีใช้กับ input ต้องกำหนดส่วนนี้ด้วยเสมอ เพื่อปรับปีให้เป็น ค.ศ. ก่อนแสดงปฏิทิน
+    $("#datepicker8").on("mouseenter mouseleave", function (e) {
+        var dateValue = $(this).val();
+        if (dateValue != "") {
+            var arr_date = dateValue.split("-"); // ถ้าใช้ตัวแบ่งรูปแบบอื่น ให้เปลี่ยนเป็นตามรูปแบบนั้น
+            // ในที่นี้อยู่ในรูปแบบ 00-00-0000 เป็น d-m-Y  แบ่งด่วย - ดังนั้น ตัวแปรที่เป็นปี จะอยู่ใน array
+            //  ตัวที่สอง arr_date[2] โดยเริ่มนับจาก 0
+            if (e.type == "mouseenter") {
+                var yearT = arr_date[2] - 543;
+            }
+            if (e.type == "mouseleave") {
+                var yearT = parseInt(arr_date[2]) + 543;
+            }
+            dateValue = dateValue.replace(arr_date[2], yearT);
+            $(this).val(dateValue);
+        }
+    });
+}
+function printPer(mymanu){
+    if(mymanu === 'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร' || mymanu === 'หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร'){
+        window.open('preview copy.html', '_blank');
+    }else if(mymanu === 'ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ' || mymanu === 'ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ') {
+        window.open('preview copy 2.html', '_blank');
+    }else{
+        window.open('preview copy 3.html', '_blank');
+    }
+    
 }
 //โอนใบอนุญาติ
 function transferPopup() {
@@ -558,7 +697,6 @@ function cancelStatus() {
         imageWidth: 'auto',
         imageHeight: '100%',
         imageAlt: 'Custom image',
-        icon: 'warning',
         preConfirm: function () {
             return new Promise(function (resolve, reject) {
                 setTimeout(function () {
@@ -709,7 +847,7 @@ $(function () {
                 } else {
                     switch (key) {
                         case 'per':
-                            perPopup()
+                            perPopup(type)
                             break;
                         case 'transfer':
                             transferPopup()

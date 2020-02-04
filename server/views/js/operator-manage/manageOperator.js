@@ -284,8 +284,6 @@ function getImageByPeronalId(type, id) {
     })
 }
 function showItem(dataOperator) {
-    document.getElementById("disabless").disabled = false;
-    document.getElementById("defaultOpen").click();
     tempPersonal = dataOperator
     resetParameter()
     resetStyleIdDelete()
