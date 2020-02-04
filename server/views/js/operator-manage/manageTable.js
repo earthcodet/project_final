@@ -558,7 +558,7 @@ function cancelStatus() {
         imageWidth: 'auto',
         imageHeight: '100%',
         imageAlt: 'Custom image',
-        icon:'warning',
+        icon: 'warning',
         preConfirm: function () {
             return new Promise(function (resolve, reject) {
                 setTimeout(function () {
@@ -570,7 +570,7 @@ function cancelStatus() {
         if (result.value) {
             Swal.fire({
                 title: 'ยกเลิกสำเร็จ',
-                icon:'success'
+                icon: 'success'
             })
         } else if (result.dismiss === Swal.DismissReason.cancel) {
         }
@@ -643,12 +643,21 @@ function addPopup(type_menu) {
                     icon: "error"
                 })
             } else {
-                toRequest (attr)
+                toRequest(attr)
                 console.log(`page -->`)
             }
         } else if (result.dismiss === Swal.DismissReason.cancel) {
         }
     });
+}
+//สถานะลบแล้ว
+function statusDelete() {
+    Swal.fire({
+        html: 'ผู้ประกอบการนี้อยู่ในสถานะยกเลิก',
+        width: '30%',
+        customClass: 'swal-height',
+        icon: 'warning'
+    })
 }
 let controlPage = {
     'tr_select': undefined
@@ -676,8 +685,10 @@ $(function () {
 
         callback: function (key, options) {
             let type = this[0].cells[1].innerText.trim()
-            if (key === 'detail') {
-                toRequest (type)
+            if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
+                statusDelete()
+            } else {
+                toRequest(type)
             }
         },
         items: {
@@ -693,25 +704,27 @@ $(function () {
             callback: function (key, options) {
                 let type = this[0].cells[1].innerText.trim()
                 let indexData = this[0].rowIndex
-                switch (key) {
-                    case 'per':
-                        perPopup()
-                        break;
-                    case 'transfer':
-                        transferPopup()
-                        break;
-                    case 'add':
-                        addPopup(type)
-                        break;
-                    case 'delete':
-                        canclePopup()
-                        break;
-                    default:
-                        toRequest (type)
-                        break;
+                if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
+                    statusDelete()
+                } else {
+                    switch (key) {
+                        case 'per':
+                            perPopup()
+                            break;
+                        case 'transfer':
+                            transferPopup()
+                            break;
+                        case 'add':
+                            addPopup(type)
+                            break;
+                        case 'detail':
+                            toRequest(type)
+                            break;
+                        default:
+                            canclePopup()
+                            break;
+                    }
                 }
-                console.log(key)
-                // window.console && console.log(m) || alert(m); 
             },
             items: {
                 "per": { name: "ต่อใบอนุญาต" },
@@ -729,19 +742,23 @@ $(function () {
         callback: function (key, options) {
             let type = this[0].cells[1].innerText.trim()
             let indexData = this[0].rowIndex
-            switch (key) {
-                case 'pay':
-                    payPopup()
-                    break;
-                case 'delete':
-                    canclePopup()
-                    break;
-                case 'cancel-status':
-                    cancelStatus()
-                    break;
-                default:
-                    toRequest (type)
-                    break;
+            if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
+                statusDelete()
+            } else {
+                switch (key) {
+                    case 'pay':
+                        payPopup()
+                        break;
+                    case 'delete':
+                        canclePopup()
+                        break;
+                    case 'cancel-status':
+                        cancelStatus()
+                        break;
+                    default:
+                        toRequest(type)
+                        break;
+                }
             }
         },
         items: {
@@ -759,8 +776,10 @@ $(function () {
 
         callback: function (key, options) {
             let type = this[0].cells[1].innerText.trim()
-            if (key === 'detail') {
-                toRequest (type)
+            if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
+                statusDelete()
+            } else {
+                toRequest(type)
             }
         },
         items: {
@@ -775,12 +794,17 @@ $(function () {
 
         callback: function (key, options) {
             let type = this[0].cells[1].innerText.trim()
-            if (key === 'detail') {
-                toRequest (type)
+            if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
+                statusDelete()
+            } else {
+                if (key === 'detail') {
+                    toRequest(type)
+                }
+                if (key === 'delete') {
+                    canclePopup(type)
+                }
             }
-            if (key === 'delete') {
-                canclePopup(type)
-            }
+
         },
         items: {
             "detail": { name: "ดูรายละเอียด" },
@@ -796,19 +820,23 @@ $(function () {
         callback: function (key, options) {
             let type = this[0].cells[1].innerText.trim()
             let indexData = this[0].rowIndex
-            switch (key) {
-                case 'approval':
-                    approvalPopup()
-                    break;
-                case 'not-approval':
-                    notApprovalPopup(type)
-                    break;
-                case 'delete':
-                    canclePopup()
-                    break;
-                default:
-                    toRequest (type)
-                    break;
+            if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
+                statusDelete()
+            } else {
+                switch (key) {
+                    case 'approval':
+                        approvalPopup()
+                        break;
+                    case 'not-approval':
+                        notApprovalPopup(type)
+                        break;
+                    case 'delete':
+                        canclePopup()
+                        break;
+                    default:
+                        toRequest(type)
+                        break;
+                }
             }
         },
         items: {
@@ -826,8 +854,10 @@ $(function () {
 
         callback: function (key, options) {
             let type = this[0].cells[1].innerText.trim()
-            if (key === 'detail') {
-                toRequest (type)
+            if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
+                statusDelete()
+            } else {
+                toRequest(type)
             }
         },
         items: {

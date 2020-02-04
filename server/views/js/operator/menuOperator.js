@@ -495,6 +495,10 @@ function createResultSearch(data) {
             }
 
             cell.appendChild(cellText);
+            if( j === 3 && data[i].PERSONAL_IS_DELETED === 'Y'){
+                cell.style.textDecoration = 'line-through'
+            }
+            
             row.appendChild(cell);
         }
         tblBody.appendChild(row);
