@@ -19,7 +19,7 @@ function approvalPopup() {
     <br>
     <label>วันที่อนุญาต <label class='alert''>*</label></label>
     <br>
-    <input type="text" id="datepicker5" placeholder=""  class='tabOne' style="width: 95%" readonly>
+    <input type="text" id="datepicker5" placeholder=""  class='tabOne' style="width: 95%" maxlength="10">
     <br> 
     <div class='center'>
         <label id='datepicker5_alert' class='alert tabOne' style='display:none' >ช่องนี้เว้นว่างไม่ได้</label>
@@ -99,22 +99,9 @@ function approvalPopup() {
         }
     });
     // กรณีใช้กับ input ต้องกำหนดส่วนนี้ด้วยเสมอ เพื่อปรับปีให้เป็น ค.ศ. ก่อนแสดงปฏิทิน
-    $("#datepicker5").on("mouseenter mouseleave", function (e) {
-        var dateValue = $(this).val();
-        if (dateValue != "") {
-            var arr_date = dateValue.split("-"); // ถ้าใช้ตัวแบ่งรูปแบบอื่น ให้เปลี่ยนเป็นตามรูปแบบนั้น
-            // ในที่นี้อยู่ในรูปแบบ 00-00-0000 เป็น d-m-Y  แบ่งด่วย - ดังนั้น ตัวแปรที่เป็นปี จะอยู่ใน array
-            //  ตัวที่สอง arr_date[2] โดยเริ่มนับจาก 0
-            if (e.type == "mouseenter") {
-                var yearT = arr_date[2] - 543;
-            }
-            if (e.type == "mouseleave") {
-                var yearT = parseInt(arr_date[2]) + 543;
-            }
-            dateValue = dateValue.replace(arr_date[2], yearT);
-            $(this).val(dateValue);
-        }
-    });
+    $('#datepicker5').keyup(function() {
+        formatDate(this.value , 'datepicker5')
+      });
 }
 //ยกเลิก
 function canclePopup() {
@@ -207,7 +194,7 @@ function notApprovalPopup() {
     <br>
     <label>วันที่อนุญาต</label>
     <br>
-    <input type="text" id="datepicker6" placeholder=""  class='tabOne' style="width: 95%" readonly>
+    <input type="text" id="datepicker6" placeholder=""  class='tabOne' style="width: 95%" maxlength="10">
     <br> 
     <div class='center'>
         <label id='datepicker6_alert' class='alert tabOne' style='display:none' >ช่องนี้เว้นว่างไม่ได้</label>
@@ -294,23 +281,9 @@ function notApprovalPopup() {
             $input.val(fulldateTH);
         }
     });
-    // กรณีใช้กับ input ต้องกำหนดส่วนนี้ด้วยเสมอ เพื่อปรับปีให้เป็น ค.ศ. ก่อนแสดงปฏิทิน
-    $("#datepicker6").on("mouseenter mouseleave", function (e) {
-        var dateValue = $(this).val();
-        if (dateValue != "") {
-            var arr_date = dateValue.split("-"); // ถ้าใช้ตัวแบ่งรูปแบบอื่น ให้เปลี่ยนเป็นตามรูปแบบนั้น
-            // ในที่นี้อยู่ในรูปแบบ 00-00-0000 เป็น d-m-Y  แบ่งด่วย - ดังนั้น ตัวแปรที่เป็นปี จะอยู่ใน array
-            //  ตัวที่สอง arr_date[2] โดยเริ่มนับจาก 0
-            if (e.type == "mouseenter") {
-                var yearT = arr_date[2] - 543;
-            }
-            if (e.type == "mouseleave") {
-                var yearT = parseInt(arr_date[2]) + 543;
-            }
-            dateValue = dateValue.replace(arr_date[2], yearT);
-            $(this).val(dateValue);
-        }
-    });
+    $('#datepicker6').keyup(function() {
+        formatDate(this.value , 'datepicker6')
+      });
 }
 //ชำระเงิน
 function payPopup() {
@@ -321,7 +294,7 @@ function payPopup() {
     <br>
     <br>
         <a class='topic' style="margin-left: 0.65vw;"> ใบเสร็จเล่มที่ </a>
-        <input type='number' id="pay_book" class='tabOne' style="margin-left:1vw;width:8vw" maxlength="150"></input><br>
+        <input type='number' id="pay_book" class='tabOne' style="margin-left:1vw;width:8vw"></input><br>
         <a id='pay_book_alert' class='tabTwo alert'  style='display:none'>ช่องนี้เว้นว่างไม่ได้</a>
         <br>
         <a class='topic' style="margin-left: 3.7vw;"> เลขที่ </a>
@@ -330,15 +303,15 @@ function payPopup() {
         <a id='pay_order_no_alert' class='tabTwo alert'  style='display:none'>ช่องนี้เว้นว่างไม่ได้</a>
         <br>
         <a class='topic' style="margin-left: 0.5vw;"> ค่าธรรมเนียม </a>
-        <input type='number' id="pay_fee" class='tabOne' style="margin-left:1vw;width:8vw" maxlength="150"></input><br>
+        <input type='number' id="pay_fee" class='tabOne' style="margin-left:1vw;width:8vw" maxlength="5"></input><br>
         <a id='pay_fee_alert' class='tabTwo alert'  style='display:none'>ช่องนี้เว้นว่างไม่ได้</a>
         <br>
         <a class='topic' style="margin-left: 3vw;"> ค่าปรับ </a>
-        <input type='number' id="pay_fine" class='tabOne' style="margin-left:1vw;width:8vw" maxlength="150"></input><br>
+        <input type='number' id="pay_fine" class='tabOne' style="margin-left:1vw;width:8vw" maxlength="5"></input><br>
         <a id='pay_fine_alert' class='tabTwo alert'  style='display:none'>ช่องนี้เว้นว่างไม่ได้</a>
         <br>
         <a class='topic' style="margin-left: 0.3vw;"> ออกให้เมื่อวันที่ </a>
-        <input id="datepicker7" class='tabOne' style="margin-left:0.5vw;width:8vw" maxlength="150" readonly></input><br>
+        <input type='text' id="datepicker7" class='tabOne' style="margin-left:0.5vw;width:8vw" maxlength="10" ></input><br>
         <a id='datepicker7_alert' class='tabTwo alert'  style='display:none'>ช่องนี้เว้นว่างไม่ได้</a>
         <br>
         <br>    
@@ -448,22 +421,9 @@ function payPopup() {
         }
     });
     // กรณีใช้กับ input ต้องกำหนดส่วนนี้ด้วยเสมอ เพื่อปรับปีให้เป็น ค.ศ. ก่อนแสดงปฏิทิน
-    $("#datepicker7").on("mouseenter mouseleave", function (e) {
-        var dateValue = $(this).val();
-        if (dateValue != "") {
-            var arr_date = dateValue.split("-"); // ถ้าใช้ตัวแบ่งรูปแบบอื่น ให้เปลี่ยนเป็นตามรูปแบบนั้น
-            // ในที่นี้อยู่ในรูปแบบ 00-00-0000 เป็น d-m-Y  แบ่งด่วย - ดังนั้น ตัวแปรที่เป็นปี จะอยู่ใน array
-            //  ตัวที่สอง arr_date[2] โดยเริ่มนับจาก 0
-            if (e.type == "mouseenter") {
-                var yearT = arr_date[2] - 543;
-            }
-            if (e.type == "mouseleave") {
-                var yearT = parseInt(arr_date[2]) + 543;
-            }
-            dateValue = dateValue.replace(arr_date[2], yearT);
-            $(this).val(dateValue);
-        }
-    });
+    $('#datepicker7').keyup(function() {
+        formatDate(this.value , 'datepicker7')
+      });
 }
 //ต่อใบอนุญาต
 function perPopup(menutype) {
@@ -474,7 +434,7 @@ function perPopup(menutype) {
     <br>
     <br>
         <a class='topic' style="margin-left: 0.65vw;"> ใบเสร็จเล่มที่ </a>
-        <input type='number' id="per_pay_book" class='tabOne' style="margin-left:1vw;width:8vw" maxlength="150"></input><br>
+        <input type='number' id="per_pay_book" class='tabOne' style="margin-left:1vw;width:8vw"></input><br>
         <a id='per_pay_book_alert' class='tabTwo alert' style='display:none'>ช่องนี้เว้นว่างไม่ได้</a>
         <br>
         <a class='topic' style="margin-left: 3.7vw;"> เลขที่ </a>
@@ -482,15 +442,15 @@ function perPopup(menutype) {
         <a id='per_pay_order_no_alert' class='tabTwo alert' style='display:none'>ช่องนี้เว้นว่างไม่ได้</a>
         <br>
         <a class='topic' style="margin-left: 0.5vw;"> ค่าธรรมเนียม </a>
-        <input type='number' id="per_pay_fee" class='tabOne' style="margin-left:1vw;width:8vw" maxlength="150"></input><br>
+        <input type='number' id="per_pay_fee" class='tabOne' style="margin-left:1vw;width:8vw" maxlength="5"></input><br>
         <a id='per_pay_fee_alert' class='tabTwo alert' style='display:none'>ช่องนี้เว้นว่างไม่ได้</a>
         <br>
         <a class='topic' style="margin-left: 3vw;"> ค่าปรับ </a>
-        <input type='number' id="per_pay_fine" class='tabOne' style="margin-left:1vw;width:8vw" maxlength="150"></input><br>
+        <input type='number' id="per_pay_fine" class='tabOne' style="margin-left:1vw;width:8vw" maxlength="5"></input><br>
         <a id='per_pay_fine_alert' class='tabTwo alert' style='display:none'>ช่องนี้เว้นว่างไม่ได้</a>
         <br>
         <a class='topic' style="margin-left: 0.3vw;"> ออกให้เมื่อวันที่ </a>
-        <input id="datepicker8" class='tabOne' style="margin-left:0.5vw;width:8vw" maxlength="150" readonly></input><br>
+        <input type='text' id="datepicker8" class='tabOne' style="margin-left:0.5vw;width:8vw" maxlength="10"  ></input><br>
         <a id='datepicker8_alert' class='tabTwo alert' style='display:none'>ช่องนี้เว้นว่างไม่ได้</a>
         <br>
         <br>
@@ -618,22 +578,9 @@ function perPopup(menutype) {
         }
     });
     // กรณีใช้กับ input ต้องกำหนดส่วนนี้ด้วยเสมอ เพื่อปรับปีให้เป็น ค.ศ. ก่อนแสดงปฏิทิน
-    $("#datepicker8").on("mouseenter mouseleave", function (e) {
-        var dateValue = $(this).val();
-        if (dateValue != "") {
-            var arr_date = dateValue.split("-"); // ถ้าใช้ตัวแบ่งรูปแบบอื่น ให้เปลี่ยนเป็นตามรูปแบบนั้น
-            // ในที่นี้อยู่ในรูปแบบ 00-00-0000 เป็น d-m-Y  แบ่งด่วย - ดังนั้น ตัวแปรที่เป็นปี จะอยู่ใน array
-            //  ตัวที่สอง arr_date[2] โดยเริ่มนับจาก 0
-            if (e.type == "mouseenter") {
-                var yearT = arr_date[2] - 543;
-            }
-            if (e.type == "mouseleave") {
-                var yearT = parseInt(arr_date[2]) + 543;
-            }
-            dateValue = dateValue.replace(arr_date[2], yearT);
-            $(this).val(dateValue);
-        }
-    });
+    $('#datepicker8').keyup(function() {
+        formatDate(this.value , 'datepicker8')
+      });
 }
 function printPer(mymanu){
     if(mymanu === 'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร' || mymanu === 'หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร'){
