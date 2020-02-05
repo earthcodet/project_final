@@ -266,6 +266,7 @@ function checkId(value, type) {
     return false;
   }
 }
+
 function resetParameter() {
   arrInsert = [];
   inPerson = {
@@ -337,6 +338,8 @@ function resetParameter() {
     foodEnd: ""
   };
 }
+
+
 function inputRequired() {
   // let checkno1 = document.getElementById("form_id").value.trim().length === 0;
   let checkno2 =
@@ -393,6 +396,7 @@ function inputRequired() {
   // if (checkno1) {
   //   checkno1 = document.getElementById("form_id").classList.add("alertInput");
   // }
+
   if (checkno2) {
     document.getElementById("datepicker1").classList.add("alertInput");
   }
@@ -575,6 +579,7 @@ function resetInputRequired() {
   document.getElementById("documentName").classList.add("alertInput");
   document.getElementById("documentName2").classList.add("alertInput");
 }
+
 function preInsert() {
   resetInputRequired();
   let check_id_user = document.getElementById("id").value;

@@ -296,7 +296,7 @@ var DateFormatter;
             }
             break;
           case 2:
-            vYear = vDate.getFullYear();
+            vYear = vDate.getFullYear()+543;
             if (iPart.length < 4) {
               vDate.setFullYear(
                 parseInt(vYear.toString().substr(0, 4 - iPart.length) + iPart)
@@ -396,7 +396,7 @@ var DateFormatter;
          */
         W: function() {
           var a = new Date(fmt.Y(), fmt.n() - 1, fmt.j() - fmt.N() + 3),
-            b = new Date(a.getFullYear(), 0, 4);
+            b = new Date(a.getFullYear()+543, 0, 4);
           return _lpad(1 + Math.round((a - b) / DAY / 7), 2);
         },
 
@@ -465,7 +465,7 @@ var DateFormatter;
          * @return {number}
          */
         Y: function() {
-          return vDate.getFullYear();
+          return vDate.getFullYear()+543;
         },
         /**
          * Last two digits of year: `00...99`
@@ -826,8 +826,10 @@ var DateFormatter;
     mask: false,
     validateOnBlur: true,
     allowBlank: true,
-    yearStart: 1950,
-    yearEnd: 2050,
+    // yearStart: 1950,
+    // yearEnd: 2050,
+    yearStart: 2400,
+    yearEnd: 2700,
     monthStart: 0,
     monthEnd: 11,
     style: "",
@@ -930,7 +932,7 @@ var DateFormatter;
     };
   }
   Date.prototype.countDaysInMonth = function() {
-    return new Date(this.getFullYear(), this.getMonth() + 1, 0).getDate();
+    return new Date(this.getFullYear()+543, this.getMonth() + 1, 0).getDate();
   };
   $.fn.xdsoftScroller = function(percent) {
     return this.each(function() {
@@ -1303,7 +1305,7 @@ var DateFormatter;
             _xdsoft_datetime.currentTime = _xdsoft_datetime.now();
           }
 
-          var year = _xdsoft_datetime.currentTime.getFullYear();
+          var year = _xdsoft_datetime.currentTime.getFullYear()+543;
           if (_xdsoft_datetime && _xdsoft_datetime.currentTime) {
             _xdsoft_datetime.currentTime[
               $(this)
@@ -1331,7 +1333,7 @@ var DateFormatter;
           }
 
           if (
-            year !== _xdsoft_datetime.currentTime.getFullYear() &&
+            year !== _xdsoft_datetime.currentTime.getFullYear()+543 &&
             $.isFunction(options.onChangeYear)
           ) {
             //						console.log("onChangeYear");
@@ -1622,7 +1624,7 @@ var DateFormatter;
           monthselect.hide();
           return false;
         });
-
+console.log(new Date().getFullYear()+543 +543)
       //scroll_element = timepicker.find('.xdsoft_time_box');
       timeboxparent.append(timebox);
       timeboxparent.xdsoftScroller();
@@ -1653,16 +1655,16 @@ var DateFormatter;
 
           if (!norecursion && options.defaultDate) {
             date = _this.strToDateTime(options.defaultDate);
-            d.setFullYear(date.getFullYear());
+            d.setFullYear(date.getFullYear()+543);
             d.setMonth(date.getMonth());
             d.setDate(date.getDate());
           }
 
           if (options.yearOffset) {
             if (options.lang == "th") {
-              d.setFullYear(d.getFullYear());
+              d.setFullYear(d.getFullYear()+543);
             } else {
-              d.setFullYear(d.getFullYear() + options.yearOffset);
+              d.setFullYear(d.getFullYear()+543 + options.yearOffset);
             }
           }
 
@@ -1707,15 +1709,15 @@ var DateFormatter;
           var month = _this.currentTime.getMonth() + 1,
             year;
           if (month === 12) {
-            _this.currentTime.setFullYear(_this.currentTime.getFullYear() + 1);
+            _this.currentTime.setFullYear(_this.currentTime.getFullYear()+543 + 1);
             month = 0;
           }
 
-          year = _this.currentTime.getFullYear();
+          year = _this.currentTime.getFullYear()+543;
 
           _this.currentTime.setDate(
             Math.min(
-              new Date(_this.currentTime.getFullYear(), month + 1, 0).getDate(),
+              new Date(_this.currentTime.getFullYear()+543, month + 1, 0).getDate(),
               _this.currentTime.getDate()
             )
           );
@@ -1731,7 +1733,7 @@ var DateFormatter;
           }
 
           if (
-            year !== _this.currentTime.getFullYear() &&
+            year !== _this.currentTime.getFullYear()+543 &&
             $.isFunction(options.onChangeYear)
           ) {
             //						console.log("onChangeYear2");
@@ -1753,12 +1755,12 @@ var DateFormatter;
 
           var month = _this.currentTime.getMonth() - 1;
           if (month === -1) {
-            _this.currentTime.setFullYear(_this.currentTime.getFullYear() - 1);
+            _this.currentTime.setFullYear(_this.currentTime.getFullYear()+543 - 1);
             month = 11;
           }
           _this.currentTime.setDate(
             Math.min(
-              new Date(_this.currentTime.getFullYear(), month + 1, 0).getDate(),
+              new Date(_this.currentTime.getFullYear()+543, month + 1, 0).getDate(),
               _this.currentTime.getDate()
             )
           );
@@ -1785,7 +1787,7 @@ var DateFormatter;
               return week;
             }
           }
-          var onejan = new Date(datetime.getFullYear(), 0, 1);
+          var onejan = new Date(datetime.getFullYear()+543, 0, 1);
           //First week of the year is th one with the first Thursday according to ISO8601
           if (onejan.getDay() != 4)
             onejan.setMonth(0, 1 + ((4 - onejan.getDay() + 7) % 7));
@@ -2091,7 +2093,14 @@ var DateFormatter;
 
               day = start.getDay();
               d = start.getDate();
+              /// this is year
               y = start.getFullYear();
+              if(y > 2400){
+                y = start.getFullYear()-543;
+              }else{
+                y = start.getFullYear();
+              }
+              //2563
               m = start.getMonth();
               w = _xdsoft_datetime.getWeekOfYear(start);
               description = "";
@@ -2256,7 +2265,9 @@ var DateFormatter;
               mounth_picker
                 .find(".xdsoft_label span")
                 .eq(1)
-                .text(_xdsoft_datetime.currentTime.getFullYear() + 543);
+                // .text(_xdsoft_datetime.currentTime.getFullYear()+543 + 543);
+                .text(_xdsoft_datetime.currentTime.getFullYear() > 2400 ? _xdsoft_datetime.currentTime.getFullYear() : _xdsoft_datetime.currentTime.getFullYear() + 543);
+
             } else {
               mounth_picker
                 .find(".xdsoft_label span")
@@ -2397,18 +2408,19 @@ var DateFormatter;
                 //								console.log(i);
                 opt +=
                   '<div class="xdsoft_option ' +
-                  (_xdsoft_datetime.currentTime.getFullYear() === i
+                  (_xdsoft_datetime.currentTime.getFullYear()+543 === i
                     ? "xdsoft_current"
                     : "") +
                   '" data-value="' +
                   i +
                   '">' +
-                  (i + 543) +
+                  // (i + 543) +
+                  (i) +
                   "</div>";
               } else {
                 opt +=
                   '<div class="xdsoft_option ' +
-                  (_xdsoft_datetime.currentTime.getFullYear() === i
+                  (_xdsoft_datetime.currentTime.getFullYear()+543 === i
                     ? "xdsoft_current"
                     : "") +
                   '" data-value="' +

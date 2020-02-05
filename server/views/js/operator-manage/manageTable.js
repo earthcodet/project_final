@@ -1,4 +1,4 @@
-
+// window.open('../../report/report_summary', '_blank');
 //อนุญาต
 function approvalPopup() {
     let html_display = `
@@ -19,7 +19,7 @@ function approvalPopup() {
     <br>
     <label>วันที่อนุญาต <label class='alert''>*</label></label>
     <br>
-    <input type="text" id="datepicker5" placeholder=""  class='tabOne' style="width: 95%" readonly>
+    <input type="text" id="datepicker5" placeholder=""  class='tabOne' style="width: 95%" maxlength="10">
     <br> 
     <div class='center'>
         <label id='datepicker5_alert' class='alert tabOne' style='display:none' >ช่องนี้เว้นว่างไม่ได้</label>
@@ -85,6 +85,23 @@ function approvalPopup() {
         } else if (result.dismiss === Swal.DismissReason.cancel) {
         }
     });
+    // กรณีใช้แบบ input
+    $("#datepicker5").datetimepicker({
+        timepicker: false,
+        format: "d-m-Y", // กำหนดรูปแบบวันที่ ที่ใช้ เป็น 00-00-0000
+        lang: "th", // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
+        onSelectDate: function (dp, $input) {
+            var yearT = new Date(dp).getFullYear();
+            var yearTH = yearT + 543;
+            var fulldate = $input.val();
+            var fulldateTH = fulldate.replace(yearT, yearTH);
+            $input.val(fulldateTH);
+        }
+    });
+    // กรณีใช้กับ input ต้องกำหนดส่วนนี้ด้วยเสมอ เพื่อปรับปีให้เป็น ค.ศ. ก่อนแสดงปฏิทิน
+    $('#datepicker5').keyup(function() {
+        formatDate(this.value , 'datepicker5')
+      });
 }
 //ยกเลิก
 function canclePopup() {
@@ -177,7 +194,7 @@ function notApprovalPopup() {
     <br>
     <label>วันที่อนุญาต</label>
     <br>
-    <input type="text" id="datepicker6" placeholder=""  class='tabOne' style="width: 95%" readonly>
+    <input type="text" id="datepicker6" placeholder=""  class='tabOne' style="width: 95%" maxlength="10">
     <br> 
     <div class='center'>
         <label id='datepicker6_alert' class='alert tabOne' style='display:none' >ช่องนี้เว้นว่างไม่ได้</label>
@@ -251,6 +268,22 @@ function notApprovalPopup() {
         } else if (result.dismiss === Swal.DismissReason.cancel) {
         }
     });
+    // กรณีใช้แบบ input
+    $("#datepicker6").datetimepicker({
+        timepicker: false,
+        format: "d-m-Y", // กำหนดรูปแบบวันที่ ที่ใช้ เป็น 00-00-0000
+        lang: "th", // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
+        onSelectDate: function (dp, $input) {
+            var yearT = new Date(dp).getFullYear();
+            var yearTH = yearT + 543;
+            var fulldate = $input.val();
+            var fulldateTH = fulldate.replace(yearT, yearTH);
+            $input.val(fulldateTH);
+        }
+    });
+    $('#datepicker6').keyup(function() {
+        formatDate(this.value , 'datepicker6')
+      });
 }
 //ชำระเงิน
 function payPopup() {
@@ -261,7 +294,7 @@ function payPopup() {
     <br>
     <br>
         <a class='topic' style="margin-left: 0.65vw;"> ใบเสร็จเล่มที่ </a>
-        <input type='number' id="pay_book" class='tabOne' style="margin-left:1vw;width:8vw" maxlength="150"></input><br>
+        <input type='number' id="pay_book" class='tabOne' style="margin-left:1vw;width:8vw"></input><br>
         <a id='pay_book_alert' class='tabTwo alert'  style='display:none'>ช่องนี้เว้นว่างไม่ได้</a>
         <br>
         <a class='topic' style="margin-left: 3.7vw;"> เลขที่ </a>
@@ -270,15 +303,15 @@ function payPopup() {
         <a id='pay_order_no_alert' class='tabTwo alert'  style='display:none'>ช่องนี้เว้นว่างไม่ได้</a>
         <br>
         <a class='topic' style="margin-left: 0.5vw;"> ค่าธรรมเนียม </a>
-        <input type='number' id="pay_fee" class='tabOne' style="margin-left:1vw;width:8vw" maxlength="150"></input><br>
+        <input type='number' id="pay_fee" class='tabOne' style="margin-left:1vw;width:8vw" maxlength="5"></input><br>
         <a id='pay_fee_alert' class='tabTwo alert'  style='display:none'>ช่องนี้เว้นว่างไม่ได้</a>
         <br>
         <a class='topic' style="margin-left: 3vw;"> ค่าปรับ </a>
-        <input type='number' id="pay_fine" class='tabOne' style="margin-left:1vw;width:8vw" maxlength="150"></input><br>
+        <input type='number' id="pay_fine" class='tabOne' style="margin-left:1vw;width:8vw" maxlength="5"></input><br>
         <a id='pay_fine_alert' class='tabTwo alert'  style='display:none'>ช่องนี้เว้นว่างไม่ได้</a>
         <br>
         <a class='topic' style="margin-left: 0.3vw;"> ออกให้เมื่อวันที่ </a>
-        <input id="datepicker7" class='tabOne' style="margin-left:0.5vw;width:8vw" maxlength="150" readonly></input><br>
+        <input type='text' id="datepicker7" class='tabOne' style="margin-left:0.5vw;width:8vw" maxlength="10" ></input><br>
         <a id='datepicker7_alert' class='tabTwo alert'  style='display:none'>ช่องนี้เว้นว่างไม่ได้</a>
         <br>
         <br>    
@@ -374,10 +407,26 @@ function payPopup() {
         } else if (result.dismiss === Swal.DismissReason.cancel) {
         }
     });
-
+    // กรณีใช้แบบ input
+    $("#datepicker7").datetimepicker({
+        timepicker: false,
+        format: "d-m-Y", // กำหนดรูปแบบวันที่ ที่ใช้ เป็น 00-00-0000
+        lang: "th", // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
+        onSelectDate: function (dp, $input) {
+            var yearT = new Date(dp).getFullYear();
+            var yearTH = yearT + 543;
+            var fulldate = $input.val();
+            var fulldateTH = fulldate.replace(yearT, yearTH);
+            $input.val(fulldateTH);
+        }
+    });
+    // กรณีใช้กับ input ต้องกำหนดส่วนนี้ด้วยเสมอ เพื่อปรับปีให้เป็น ค.ศ. ก่อนแสดงปฏิทิน
+    $('#datepicker7').keyup(function() {
+        formatDate(this.value , 'datepicker7')
+      });
 }
 //ต่อใบอนุญาต
-function perPopup() {
+function perPopup(menutype) {
     let html_display = `
 <div >
 <br>
@@ -385,7 +434,7 @@ function perPopup() {
     <br>
     <br>
         <a class='topic' style="margin-left: 0.65vw;"> ใบเสร็จเล่มที่ </a>
-        <input type='number' id="per_pay_book" class='tabOne' style="margin-left:1vw;width:8vw" maxlength="150"></input><br>
+        <input type='number' id="per_pay_book" class='tabOne' style="margin-left:1vw;width:8vw"></input><br>
         <a id='per_pay_book_alert' class='tabTwo alert' style='display:none'>ช่องนี้เว้นว่างไม่ได้</a>
         <br>
         <a class='topic' style="margin-left: 3.7vw;"> เลขที่ </a>
@@ -393,15 +442,15 @@ function perPopup() {
         <a id='per_pay_order_no_alert' class='tabTwo alert' style='display:none'>ช่องนี้เว้นว่างไม่ได้</a>
         <br>
         <a class='topic' style="margin-left: 0.5vw;"> ค่าธรรมเนียม </a>
-        <input type='number' id="per_pay_fee" class='tabOne' style="margin-left:1vw;width:8vw" maxlength="150"></input><br>
+        <input type='number' id="per_pay_fee" class='tabOne' style="margin-left:1vw;width:8vw" maxlength="5"></input><br>
         <a id='per_pay_fee_alert' class='tabTwo alert' style='display:none'>ช่องนี้เว้นว่างไม่ได้</a>
         <br>
         <a class='topic' style="margin-left: 3vw;"> ค่าปรับ </a>
-        <input type='number' id="per_pay_fine" class='tabOne' style="margin-left:1vw;width:8vw" maxlength="150"></input><br>
+        <input type='number' id="per_pay_fine" class='tabOne' style="margin-left:1vw;width:8vw" maxlength="5"></input><br>
         <a id='per_pay_fine_alert' class='tabTwo alert' style='display:none'>ช่องนี้เว้นว่างไม่ได้</a>
         <br>
         <a class='topic' style="margin-left: 0.3vw;"> ออกให้เมื่อวันที่ </a>
-        <input id="datepicker8" class='tabOne' style="margin-left:0.5vw;width:8vw" maxlength="150" readonly></input><br>
+        <input type='text' id="datepicker8" class='tabOne' style="margin-left:0.5vw;width:8vw" maxlength="10"  ></input><br>
         <a id='datepicker8_alert' class='tabTwo alert' style='display:none'>ช่องนี้เว้นว่างไม่ได้</a>
         <br>
         <br>
@@ -496,15 +545,52 @@ function perPopup() {
             <a id='success_date_issue'>วันที่เริ่มใบ : 25-05-2563 </a><br>
             <a id='success_date_expired'>วันที่หมดอายุ : 25-05-2564 </a>
         </div>
+        <br>
+        <br>
+        <button type="button"  onclick="printPer('${menutype}')" style='width:10% height:30%'> 
+        
+        <i class="fa fa-print"></i>
+        พิมพ์คำขอต่อ
+        
+        </button>
         `
             Swal.fire({
                 html: html_commit,
                 icon: "success",
-                confirmButtonColor: "#009688"
+                showConfirmButton: false,
+                closeOnConfirm: false,
+                closeOnCancel: false
             });
         } else if (result.dismiss === Swal.DismissReason.cancel) {
         }
     });
+    // กรณีใช้แบบ input
+    $("#datepicker8").datetimepicker({
+        timepicker: false,
+        format: "d-m-Y", // กำหนดรูปแบบวันที่ ที่ใช้ เป็น 00-00-0000
+        lang: "th", // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
+        onSelectDate: function (dp, $input) {
+            var yearT = new Date(dp).getFullYear();
+            var yearTH = yearT + 543;
+            var fulldate = $input.val();
+            var fulldateTH = fulldate.replace(yearT, yearTH);
+            $input.val(fulldateTH);
+        }
+    });
+    // กรณีใช้กับ input ต้องกำหนดส่วนนี้ด้วยเสมอ เพื่อปรับปีให้เป็น ค.ศ. ก่อนแสดงปฏิทิน
+    $('#datepicker8').keyup(function() {
+        formatDate(this.value , 'datepicker8')
+      });
+}
+function printPer(mymanu){
+    if(mymanu === 'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร' || mymanu === 'หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร'){
+        window.open('preview copy.html', '_blank');
+    }else if(mymanu === 'ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ' || mymanu === 'ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ') {
+        window.open('preview copy 2.html', '_blank');
+    }else{
+        window.open('preview copy 3.html', '_blank');
+    }
+    
 }
 //โอนใบอนุญาติ
 function transferPopup() {
@@ -558,7 +644,6 @@ function cancelStatus() {
         imageWidth: 'auto',
         imageHeight: '100%',
         imageAlt: 'Custom image',
-        icon:'warning',
         preConfirm: function () {
             return new Promise(function (resolve, reject) {
                 setTimeout(function () {
@@ -570,7 +655,7 @@ function cancelStatus() {
         if (result.value) {
             Swal.fire({
                 title: 'ยกเลิกสำเร็จ',
-                icon:'success'
+                icon: 'success'
             })
         } else if (result.dismiss === Swal.DismissReason.cancel) {
         }
@@ -643,12 +728,21 @@ function addPopup(type_menu) {
                     icon: "error"
                 })
             } else {
-                toRequest (attr)
+                toRequest(attr)
                 console.log(`page -->`)
             }
         } else if (result.dismiss === Swal.DismissReason.cancel) {
         }
     });
+}
+//สถานะลบแล้ว
+function statusDelete() {
+    Swal.fire({
+        html: 'ผู้ประกอบการนี้อยู่ในสถานะยกเลิก',
+        width: '30%',
+        customClass: 'swal-height',
+        icon: 'warning'
+    })
 }
 let controlPage = {
     'tr_select': undefined
@@ -676,8 +770,10 @@ $(function () {
 
         callback: function (key, options) {
             let type = this[0].cells[1].innerText.trim()
-            if (key === 'detail') {
-                toRequest (type)
+            if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
+                statusDelete()
+            } else {
+                toRequest(type)
             }
         },
         items: {
@@ -693,25 +789,27 @@ $(function () {
             callback: function (key, options) {
                 let type = this[0].cells[1].innerText.trim()
                 let indexData = this[0].rowIndex
-                switch (key) {
-                    case 'per':
-                        perPopup()
-                        break;
-                    case 'transfer':
-                        transferPopup()
-                        break;
-                    case 'add':
-                        addPopup(type)
-                        break;
-                    case 'delete':
-                        canclePopup()
-                        break;
-                    default:
-                        toRequest (type)
-                        break;
+                if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
+                    statusDelete()
+                } else {
+                    switch (key) {
+                        case 'per':
+                            perPopup(type)
+                            break;
+                        case 'transfer':
+                            transferPopup()
+                            break;
+                        case 'add':
+                            addPopup(type)
+                            break;
+                        case 'detail':
+                            toRequest(type)
+                            break;
+                        default:
+                            canclePopup()
+                            break;
+                    }
                 }
-                console.log(key)
-                // window.console && console.log(m) || alert(m); 
             },
             items: {
                 "per": { name: "ต่อใบอนุญาต" },
@@ -729,19 +827,23 @@ $(function () {
         callback: function (key, options) {
             let type = this[0].cells[1].innerText.trim()
             let indexData = this[0].rowIndex
-            switch (key) {
-                case 'pay':
-                    payPopup()
-                    break;
-                case 'delete':
-                    canclePopup()
-                    break;
-                case 'cancel-status':
-                    cancelStatus()
-                    break;
-                default:
-                    toRequest (type)
-                    break;
+            if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
+                statusDelete()
+            } else {
+                switch (key) {
+                    case 'pay':
+                        payPopup()
+                        break;
+                    case 'delete':
+                        canclePopup()
+                        break;
+                    case 'cancel-status':
+                        cancelStatus()
+                        break;
+                    default:
+                        toRequest(type)
+                        break;
+                }
             }
         },
         items: {
@@ -759,8 +861,10 @@ $(function () {
 
         callback: function (key, options) {
             let type = this[0].cells[1].innerText.trim()
-            if (key === 'detail') {
-                toRequest (type)
+            if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
+                statusDelete()
+            } else {
+                toRequest(type)
             }
         },
         items: {
@@ -775,12 +879,17 @@ $(function () {
 
         callback: function (key, options) {
             let type = this[0].cells[1].innerText.trim()
-            if (key === 'detail') {
-                toRequest (type)
+            if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
+                statusDelete()
+            } else {
+                if (key === 'detail') {
+                    toRequest(type)
+                }
+                if (key === 'delete') {
+                    canclePopup(type)
+                }
             }
-            if (key === 'delete') {
-                canclePopup(type)
-            }
+
         },
         items: {
             "detail": { name: "ดูรายละเอียด" },
@@ -796,19 +905,23 @@ $(function () {
         callback: function (key, options) {
             let type = this[0].cells[1].innerText.trim()
             let indexData = this[0].rowIndex
-            switch (key) {
-                case 'approval':
-                    approvalPopup()
-                    break;
-                case 'not-approval':
-                    notApprovalPopup(type)
-                    break;
-                case 'delete':
-                    canclePopup()
-                    break;
-                default:
-                    toRequest (type)
-                    break;
+            if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
+                statusDelete()
+            } else {
+                switch (key) {
+                    case 'approval':
+                        approvalPopup()
+                        break;
+                    case 'not-approval':
+                        notApprovalPopup(type)
+                        break;
+                    case 'delete':
+                        canclePopup()
+                        break;
+                    default:
+                        toRequest(type)
+                        break;
+                }
             }
         },
         items: {
@@ -826,8 +939,10 @@ $(function () {
 
         callback: function (key, options) {
             let type = this[0].cells[1].innerText.trim()
-            if (key === 'detail') {
-                toRequest (type)
+            if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
+                statusDelete()
+            } else {
+                toRequest(type)
             }
         },
         items: {

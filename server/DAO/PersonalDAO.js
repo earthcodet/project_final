@@ -37,7 +37,7 @@ class PersonalDAO {
         })
     }
     insertPersonal(personal){
-        personal.is_deleted = 'NO'
+        personal.is_deleted = 'N'
         return new Promise((resolve, reject) => {
             let value  = `'${personal.id}', '${personal.address_id}', ${personal.title}, `
             value = value + `'${personal.type}', '${personal.name}', ${personal.surname}, `

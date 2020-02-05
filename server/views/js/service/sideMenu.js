@@ -26,6 +26,7 @@ function show_food(id) {
 }
 // เจ้าของที่
 function show_spirits(id) {
+  openLand(); 
   var radio = document.getElementById("spirits").checked;
   if (id == 1) {
     document.getElementById("boxSpirits").style.display = "";
@@ -89,64 +90,6 @@ if(document.getElementById("defaultOpen") != null){
 }
 
 
-// let swal_html="asdsfdgsdhfjhdgafsd"
-if($.contextMenu != undefined || $.contextMenu != null){
-  
-}
-
-if($.contextMenu != undefined || $.contextMenu != null){
-  $(function () {
-    $.contextMenu({
-      selector: '.context-menu-one2',
-      callback: function (key, options) {
-        var m = "clicked: " + key;
-        console.log(key)
-        // window.console && console.log(m) || alert(m); 
-      },
-      items: {
-        "sep2": "---------",
-        "edit": { name: "Edit" },
-        "cut": { name: "Cut" },
-        copy: { name: "Copy" },
-        "paste": { name: "Paste" },
-        "delete": { name: "Delete" },
-        "sep1": "---------"
-  
-      }
-    });
-  
-    $('.context-menu-one2').on('click', function (e) {
-      console.log('clicked', this);
-    })
-  });
-}
-
-if($.contextMenu != undefined || $.contextMenu != null){
-  $(function () {
-    $.contextMenu({
-      selector: '.context-menu-one3',
-      callback: function (key, options) {
-        var m = "clicked: " + key;
-        console.log(key)
-        // window.console && console.log(m) || alert(m); 
-      },
-      items: {
-        "sep2": "---------",
-        "edit": { name: "Edit" },
-        "cut": { name: "Cut" },
-        copy: { name: "Copy" },
-        "paste": { name: "Paste" },
-        "delete": { name: "Delete" },
-        "sep1": "---------"
-  
-      }
-    });
-  
-    $('.context-menu-one3').on('click', function (e) {
-      console.log('clicked', this);
-    })
-  });
-}
 
 
 

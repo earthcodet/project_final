@@ -215,7 +215,77 @@ function checkOrderNo(value, id) {
     }
     document.getElementById(id).value = formatCheck
 }
+//format date input 
+function formatDate(value, id) {
+    let tempCheck = value.split("")
+    // format_example = 22-05-2549  length = 10 //01 2 34 5 6789
+    let formatCheck = ''
+    for (let i = 0; i < tempCheck.length; i++) {
+        if( i === 0 ){
+            if(tempCheck[0] != 0 && tempCheck[0] != 1 && tempCheck[0] != 2 && tempCheck[0] != 3){
+                formatCheck = formatCheck 
+            }else{
+                formatCheck = formatCheck + tempCheck[0]
+            }
+        }
+        else if (i === 1) {
+            if (!isNaN(tempCheck[1]) && tempCheck[0] != 3) {
+                formatCheck = formatCheck + tempCheck[1] + '-'
+            }else{
+               if (!isNaN(tempCheck[1])){
+                  if(tempCheck[0] == 3 && tempCheck[1] != 1 && tempCheck[0] == 3 && tempCheck[1] != 0){
+                    formatCheck = formatCheck
+                  }else{
+                    formatCheck = formatCheck + tempCheck[1] + '-'
+                  }
+                }
+            }   
+        }
+        else if (i === 2 && tempCheck[2] != '-') {
+            formatCheck = formatCheck + '-'
+        }
+        else if (i === 3) {
+            if(tempCheck[3] != 0 && tempCheck[3] != 1){
+                formatCheck = formatCheck
+            }else{
+                formatCheck = formatCheck + tempCheck[3]
+            }
+        }
+        else if (i === 4) {
+            if (!isNaN(tempCheck[4])) {
+                if(tempCheck[3] == 1 && tempCheck[4] != 0 && tempCheck[3] == 1 && tempCheck[4] != 1 && tempCheck[3] == 1 && tempCheck[4] != 2){
+                    formatCheck = formatCheck
+                }else{
+                    formatCheck = formatCheck + tempCheck[4] + '-'
+                }
+               
+            }
+        }
+        else if (i === 5 && tempCheck[5] != '-') {
+            formatCheck = formatCheck + '-'
+        }
+        else if (i === 6) {
+            if (!isNaN(tempCheck[6])) {
+                if (tempCheck[6] == 2) {
+                    formatCheck = formatCheck + tempCheck[6]
+                }
+            }
+        }
+        else if (i === 7) {
+            if (!isNaN(tempCheck[7])) {
+                if (tempCheck[7] == 5 ||  tempCheck[7] == 4) {
+                    formatCheck = formatCheck + tempCheck[7]
+                }
+            }
+        }else{
+            if (!isNaN(tempCheck[i])) {
+                formatCheck = formatCheck + tempCheck[i]
+            }
+        }
 
+    }
+    document.getElementById(id).value = formatCheck
+}
 // logout system//
 function exitPage() {
     Swal.fire({

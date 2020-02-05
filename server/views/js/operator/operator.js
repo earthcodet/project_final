@@ -136,7 +136,7 @@ function setDataUI(data) {
             } else {
                 img.src = `../../img/userProfile.png`
             }
-
+            inImage.name = data.PERSONAL_ID
             inImage.type = data.image.IMAGE_TYPE
             inImage.data = data.image.IMAGE_DATA
              
@@ -165,8 +165,8 @@ function setDataUI(data) {
         document.getElementById(`wProvince`).value = provinceId
 
         //ตั้งค่ารายชื่อ อำเภอ, ตำบล ตามจังหวัดที่เลือกลงให้ list input ตาม id
-        wamphurSelect(parseInt(provinceId)) // list อำเภอทั้งหมดตาม province Id
-        wdistrictSelect(parseInt(amphurId)) // list ตำบลทั้งหมดตาม ampur_Id
+        wamphurSelect(provinceId) // list อำเภอทั้งหมดตาม province Id
+        wdistrictSelect(amphurId) // list ตำบลทั้งหมดตาม ampur_Id
 
         //แสดงค่าจังหวัดที่มาจาก ฐานข้อมูล (อำเภอ , ตำบล) ตาม id
         document.getElementById(`wDistrict`).value = amphurId
