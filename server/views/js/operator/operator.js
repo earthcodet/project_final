@@ -127,7 +127,6 @@ function setDataUI(data) {
         document.getElementById('datepicker3').value = data.PERSONAL_BIRTHDAY === undefined || data.PERSONAL_BIRTHDAY === null ? '' : data.PERSONAL_BIRTHDAY
         document.getElementById('id').value = data.PERSONAL_PERSONAL_ID
         document.getElementById('datepicker1').value = data.PERSONAL_CARD_ISSUED
-        console.log(data.PERSONAL_CARD_EXPIRE === undefined)
         //radioLife()
         document.getElementById('datepicker2').value = data.PERSONAL_CARD_EXPIRE === undefined || data.PERSONAL_CARD_EXPIRE === null ? '' : data.PERSONAL_CARD_EXPIRE
         data.PERSONAL_CARD_EXPIRE === undefined ? radioLife() : ''

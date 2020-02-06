@@ -109,6 +109,7 @@ function setDataUI(data) {
         document.getElementById('id').value = data.PERSONAL_PERSONAL_ID
         document.getElementById('datepicker1').value = data.PERSONAL_CARD_ISSUED
         document.getElementById('datepicker2').value = data.PERSONAL_CARD_EXPIRE === undefined || data.PERSONAL_CARD_EXPIRE === null ? '' : data.PERSONAL_CARD_EXPIRE
+        data.PERSONAL_CARD_EXPIRE === undefined ? radioLife() : ''
         document.getElementById('phone').value = data.PERSONAL_PHONE
         document.getElementById('fax').value = data.PERSONAL_FAX === undefined || data.PERSONAL_FAX === null ? '' : data.PERSONAL_FAX
         document.getElementById('last-update').value = data.PERSONAL_UPDATE
@@ -257,6 +258,22 @@ function searchPersonal() {
     }
 
 }
+function onClickRadio(){
+    if(document.getElementById('datepicker2').disabled === true){
+     document.getElementById('datepicker2').disabled = false 
+     document.getElementById('life-id').checked = false
+    }else{
+     document.getElementById('datepicker2').disabled = true 
+     document.getElementById('life-id').checked = true
+     document.getElementById('datepicker2').value = ''
+    }
+ }
+ function radioLife(){
+     document.getElementById('datepicker2').value = ''
+     document.getElementById('datepicker2').disabled = true 
+     document.getElementById('life-id').checked = true
+     document.getElementById('datepicker2').value = ''
+ }
 function errorSearch(texterror, action) {
     let error = document.getElementById('error_search')
     error.classList.toggle('animation')
@@ -284,6 +301,9 @@ function getImageByPeronalId(type, id) {
     })
 }
 function showItem(dataOperator) {
+    document.getElementById('datepicker2').disabled = false 
+    document.getElementById('life-id').checked = false
+    document.getElementById('datepicker2').value = ''
     tempPersonal = dataOperator
     resetParameter()
     resetStyleIdDelete()
