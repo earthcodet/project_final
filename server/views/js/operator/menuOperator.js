@@ -317,6 +317,9 @@ function deletePage() {
                     console.log(isEmpty(tempData))
                     console.log(tempData)
                     if (isEmpty(tempData) === false && data === true) {
+                        document.getElementById('datepicker2').disabled = false 
+                        document.getElementById('life-id').checked = false
+                        document.getElementById('datepicker2').value = ''
                         resetFunction()
                         setDataUI(tempData)
                         disableMenuAll()
