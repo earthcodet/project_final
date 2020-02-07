@@ -398,10 +398,6 @@ function inputRequired() {
   let checkno21 = document.getElementById("wPhone").value.trim().length === 0;
   let checkno28 =
     document.getElementById("typeProduct").value.trim().length === 0;
-  let checkno31 =
-    document.getElementById("datepicker3").value.trim().length === 0;
-  let checkno32 =
-    document.getElementById("datepicker4").value.trim().length === 0;
   let checkno35 =
     document.getElementById("documentName").value.trim().length === 0;
   let checkno36 =
@@ -470,12 +466,6 @@ function inputRequired() {
   if (checkno28) {
     document.getElementById("typeProduct").classList.add("alertInput");
   }
-  if (checkno31) {
-    document.getElementById("datepicker3").classList.add("alertInput");
-  }
-  if (checkno32) {
-    document.getElementById("datepicker4").classList.add("alertInput");
-  }
   if (checkno35) {
     document.getElementById("documentName").classList.add("alertInput");
   }
@@ -505,8 +495,6 @@ function inputRequired() {
     checkno20 ||
     checkno21 ||
     checkno28 ||
-    checkno31 ||
-    checkno32 ||
     checkno35 ||
     checkno36
   ) {

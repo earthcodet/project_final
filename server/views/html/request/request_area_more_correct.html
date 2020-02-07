@@ -149,8 +149,8 @@
                             onclick="testSearchOparator()"></button></a>
                     <a>เลขประจำตัว <font color="red">*</font> :
                         <input type="text" id="id" readonly style="width: 13%;"
-                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                        maxlength="13" onkeyup="checkId(this.value, 'PERSON') 
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            maxlength="13" onkeyup="checkId(this.value, 'PERSON') 
                                     document.getElementById('id').classList.remove('alertInput')"></a>
                     <a>อายุ <font color="red">*</font> :
                         <input type="text" id="age" readonly
@@ -159,8 +159,8 @@
                             onchange="document.getElementById('age').classList.remove('alertInput')"></a>
                     <a>สัญชาติ <font color="red">*</font> :
                         <input class="drop" list="nationality1" id="nationality" name="" style="width: 7%;" readonly
-                        onkeyup="document.getElementById('nationality').classList.remove('alertInput')"
-                        onchange="document.getElementById('nationality').classList.remove('alertInput')">
+                            onkeyup="document.getElementById('nationality').classList.remove('alertInput')"
+                            onchange="document.getElementById('nationality').classList.remove('alertInput')">
                         <datalist id="nationality1">
                             <option value="" hidden>เลือก...</option>
                             <option value="ไทย">ไทย</option>
@@ -170,8 +170,8 @@
                         </input></a>
                     <a>เชื้อชาติ <font color="red">*</font> :
                         <input list="nationality2" id="race" name="" style="width: 7%;" readonly
-                        onkeyup="document.getElementById('race').classList.remove('alertInput')"
-                        onchange="document.getElementById('race').classList.remove('alertInput')">
+                            onkeyup="document.getElementById('race').classList.remove('alertInput')"
+                            onchange="document.getElementById('race').classList.remove('alertInput')">
                         <datalist id="nationality2">
                             <option value="" hidden>เลือก...</option>
                             <option value="ไทย">ไทย</option>
@@ -182,10 +182,10 @@
                     <br>
                     <a style="margin-left: 0.58vw;">เลขที่บ้าน <font color="red">*</font> :
                         <input type="text" id="home_id" style="width: 7%;"
-                        onchange="document.getElementById('home_id').classList.remove('alertInput')"></a>
+                            onchange="document.getElementById('home_id').classList.remove('alertInput')"></a>
                     <a>หมู่ที่ <font color="red">*</font> :
                         <input type="text" id="moo" style="width: 7%;"
-                        onchange="document.getElementById('moo').classList.remove('alertInput')"></a>
+                            onchange="document.getElementById('moo').classList.remove('alertInput')"></a>
                     <a>ตรอก :
                         <input type="text" id="trxk" style="width: 13%;"></a>
                     <a>ซอย :
@@ -197,18 +197,18 @@
                     <br>
                     <a style="margin-left: 1.8vw;">จังหวัด <font color="red">*</font> :
                         <select id="province" style="width: 14%;"
-                        onchange="document.getElementById('province').classList.remove('alertInput')"></select></a>
+                            onchange="document.getElementById('province').classList.remove('alertInput')"></select></a>
                     <a>อำเภอ <font color="red">*</font> :
                         <select id="district" style="width: 14%;"
-                        onchange="document.getElementById('district').classList.remove('alertInput')"></select></a>
+                            onchange="document.getElementById('district').classList.remove('alertInput')"></select></a>
                     <a>ตำบล <font color="red">*</font> :
                         <select id="subdistrict" style="width: 13.5%;"
-                        onchange="document.getElementById('subdistrict').classList.remove('alertInput')"></select></a>
+                            onchange="document.getElementById('subdistrict').classList.remove('alertInput')"></select></a>
                     <a>โทรศัพท์ <font color="red">*</font> :
                         <input type="text" id="phone" style="width: 12%;"
-                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                        maxlength="10" onchange="document.getElementById('phone').classList.remove('alertInput')"
-                        onkeyup="checkPhone(this.value,'phone')"></a>
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            maxlength="10" onchange="document.getElementById('phone').classList.remove('alertInput')"
+                            onkeyup="checkPhone(this.value,'phone')"></a>
                     <a>โทรสาร :
                         <input type="text" id="fax"
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
@@ -229,10 +229,10 @@
                     <br>
                     <a>ตั้งอยู่เลขที่ <font color="red">*</font> :
                         <input type="text" id="wPlaceId" style="width: 7%;"
-                        onchange="document.getElementById('wPlaceId').classList.remove('alertInput')"></a>
+                            onchange="document.getElementById('wPlaceId').classList.remove('alertInput')"></a>
                     <a>หมู่ที่ <font color="red">*</font> :
                         <input type="int" id="wMoo" style="width: 7%;"
-                        onchange="document.getElementById('wMoo').classList.remove('alertInput')"></a>
+                            onchange="document.getElementById('wMoo').classList.remove('alertInput')"></a>
                     <a>ตรอก:
                         <input type="text" id="wTrxk" style="width: 13%;"></a>
                     <a>ซอย :
@@ -245,21 +245,21 @@
 
                     <a style="margin-left: 1.75vw;">จังหวัด <font color="red">*</font> :
                         <select id="wProvince" style="width: 14%;"
-                        onchange="document.getElementById('wProvince').classList.remove('alertInput')"></a>
+                            onchange="document.getElementById('wProvince').classList.remove('alertInput')"></a>
                     </select>
                     <a>อำเภอ <font color="red">*</font> :
                         <select id="wDistrict" style="width: 14%;"
-                        onchange="document.getElementById('wDistrict').classList.remove('alertInput')"></a>
+                            onchange="document.getElementById('wDistrict').classList.remove('alertInput')"></a>
                     </select>
                     <a>ตำบล <font color="red">*</font> :
                         <select id="wSubdistrict" style="width: 13.5%;"
-                        onchange="document.getElementById('wSubdistrict').classList.remove('alertInput')"></a>
+                            onchange="document.getElementById('wSubdistrict').classList.remove('alertInput')"></a>
                     </select>
                     <a>โทรศัพท์ <font color="red">*</font> :
                         <input type="text" id="wPhone" style="width: 12%;"
-                        oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
-                        maxlength="10" onchange="document.getElementById('wPhone').classList.remove('alertInput')"
-                        onkeyup="checkPhone(this.value,'wPhone')"></a>
+                            oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
+                            maxlength="10" onchange="document.getElementById('wPhone').classList.remove('alertInput')"
+                            onkeyup="checkPhone(this.value,'wPhone')"></a>
                     <a>โทรสาร :
                         <input type="text" id="wFax"
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
@@ -280,10 +280,20 @@
                     <br>
                 </div>
                 <br>
-
+               <!-- วันที่หมดอายุ -->
+               <div class="box">
+                <p class="font">&nbsp;&nbsp;&nbsp;&nbsp;ใบอนญาตฉบับนี้ออกให้เมื่อวันที่</font> <input
+                    type="text" id="request_date_issued" disabled readonly>
+                    
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ใบอนญาตฉบับนี้สิ้นอายุวันที่ </font>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="request_date_date" disabled readonly>
+            </p>
+            </div>
+                <br>
                 <!-- ข้อมูลเจ้าของ -->
                 <div class="box" id="Demo">
-                    <h3 style="font-size: 2.8vh;">ใช้อาคารสถานที่ประกอบการของผู้อื่น <font color="red">*</font></h3>
+                    <h3 style="font-size: 2.8vh;">ใช้อาคารสถานที่ประกอบการของผู้อื่น <font color="red">*</font>
+                    </h3>
                     <input type="radio" name="owner" id="useOtherPlace" onClick="show_owner(this.value);" value="1"
                         style="margin-left: 5vw;">
                     <a>ใช้สถานที่ประกอบการของผู้อื่น</a>&ensp;
@@ -306,9 +316,10 @@
                             <input type="text" id="ownAge" style="width: 7%;"> ปี</a>
                         <a>โทรศัพท์ :
                             <input type="text" id="ownPhone" style="width: 13%;"
-                            oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
-                            maxlength="10" onchange="document.getElementById('wPhone').classList.remove('alertInput')"
-                            onkeyup="checkPhone(this.value,'ownPhone')"></a>
+                                oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
+                                maxlength="10"
+                                onchange="document.getElementById('wPhone').classList.remove('alertInput')"
+                                onkeyup="checkPhone(this.value,'ownPhone')"></a>
                         <br>
                         <a style="margin-left: 5vw;">อยู่บ้านเลขที่ :
                             <input type="text" id="ownHomeId" style="width: 7%;"></a style="margin-left: 7.4vw;">
@@ -351,13 +362,14 @@
                         </select>
                         <br><br>
                         <input style="margin-left:9vw;" type="file" id="uploadFilePdf" onchange="uploadImage(event)"
-                            accept="application/pdf" >
+                            accept="application/pdf">
                     </div>
                     <br><br>
                 </div><br>
                 <!-- สุรา -->
                 <div class="box">
-                    <h3 style="font-size: 2.8vh;">ใบอนุญาตจำหน่ายสุรา <font color="red">*</font></h3>
+                    <h3 style="font-size: 2.8vh;">ใบอนุญาตจำหน่ายสุรา <font color="red">*</font>
+                    </h3>
                     <input type="radio" name="spirits" id="useSpirits" value="ออกใบอนุญาต" style="margin-left: 5vw;">
                     <a>ออกใบอนุญาต</a>&ensp;
                     <input type="radio" name="spirits" id="useSpirits" value="ไม่ออกใบอนุญาต" checked>

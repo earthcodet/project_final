@@ -6,6 +6,8 @@ const AddressDAO = require('../DAO/AddressDAO')
 const AddressDAOObj = new AddressDAO
 const LoginDAO = require('../DAO/UserDAO')
 const LoginDAOObj = new LoginDAO()
+const ReferenceDAO = require('../DAO/ReferenceDAO')
+const ReferenceDAOObj = new ReferenceDAO()
 
 class service {
     getProvince() {
@@ -89,7 +91,7 @@ class service {
                 let num = parseInt(oldId.slice(3))
                 num += 1
                 let newId = ''
-                console.log(`this.digit(${num}) = ${this.digit(num)}`)
+                
                 switch (this.digit(num)) {
                     case 10:
                         if (num < 10) {
@@ -145,7 +147,7 @@ class service {
                 let num = parseInt(oldId.slice(1))
                 num += 1
                 let newId = ''
-                console.log(`this.digit(${num}) = ${this.digit(num)}`)
+                
                 switch (this.digit(num)) {
                     case 10:
                         if (num < 10) {
@@ -191,7 +193,7 @@ class service {
                 let num = parseInt(oldId.slice(1))
                 num += 1
                 let newId = ''
-                console.log(`this.digit(${num}) = ${this.digit(num)}`)
+                
                 switch (this.digit(num)) {
                     case 10:
                         if (num < 10) {
@@ -233,7 +235,7 @@ class service {
                 let num = parseInt(oldId.slice(2))
                 num += 1
                 let newId = ''
-                console.log(`this.digit(${num}) = ${this.digit(num)}`)
+                
                 switch (this.digit(num)) {
                     case 10:
                         if (num < 10) {
@@ -279,7 +281,7 @@ class service {
                 let num = parseInt(oldId.slice(2))
                 num += 1
                 let newId = ''
-                console.log(`this.digit(${num}) = ${this.digit(num)}`)
+                
                 switch (this.digit(num)) {
                     case 10:
                         if (num < 10) {
@@ -318,7 +320,7 @@ class service {
                 let num = parseInt(oldId.slice(1))
                 num += 1
                 let newId = ''
-                console.log(`this.digit(${num}) = ${this.digit(num)}`)
+                
                 switch (this.digit(num)) {
                     case 10:
                         if (num < 10) {
@@ -350,7 +352,7 @@ class service {
                 let num = parseInt(oldId.slice(2))
                 num += 1
                 let newId = ''
-                console.log(`this.digit(${num}) = ${this.digit(num)}`)
+                
                 switch (this.digit(num)) {
                     case 10:
                         if (num < 10) {
@@ -441,7 +443,8 @@ class service {
                     }
                 })
             })
-        } else {
+        } 
+        if (type === 'ADDRESS') {
             return new Promise((resolve, reject) => {
                 AddressDAOObj.getMaxIdAddress().then((data) => {
                     if (data[0].maxId === null) {
@@ -451,6 +454,21 @@ class service {
                         this.newId(data[0].maxId, 'ADDRESS').then((addressId) => {
                             console.log('getNewId : ' + addressId)
                             return resolve(addressId)
+                        })
+                    }
+                })
+            })
+        }
+        if( type === 'REFERENCE'){
+            return new Promise((resolve, reject) => {
+                ReferenceDAOObj.getMaxIdReference().then((data) => {
+                    if (data[0].maxId === null) {
+                        console.log('getNewId : RF00001')
+                        return resolve('RF00001')
+                    } else {
+                        this.newId(data[0].maxId, 'REFERENCE').then((referenceId) => {
+                            console.log('getNewId : ' + referenceId)
+                            return resolve(referenceId)
                         })
                     }
                 })
@@ -562,6 +580,59 @@ class service {
             })
         })
     }
+    insertReference(reference) {
+        if(reference != null){
+            return new Promise((resolve, reject) => {
+                ReferenceDAOObj.getReference(reference).then((referenceData) => {
+                    if(referenceData.length != 0){
+                        return resolve(referenceData[0])
+                    }else{
+                        ReferenceDAOObj.insertReference(reference).then((data) => {
+                            if (data == 'true') {
+                                return resolve('true')
+                            } else {
+                                /* Duplicate Key : ER_DUP_ENTRY */
+                                return resolve('false')
+                            }
+                        })
+                    }
+                })
+                
+            })
+        }
+    }
+    loopInsertReference(reference) {
+        return new Promise((resolve, reject) => {
+            this.getNewId('REFERENCE').then((id) => {
+                reference.id = id
+                this.insertReference(reference).then((data) => {
+                    // console.log(`Data =>${data}`)
+                    // console.log(data)
+                    if (data.length != 0 ) {
+                        console.log(data)
+                        console.log(`Insert : reference complete`)
+                        if(data === 'true'){
+                            let referenceResult = {
+                                REFERENCE_ID:id,
+                                REFERENCE_TITLE: reference.title,
+                                REFERENCE_NAME: reference.name,
+                                REFERENCE_SURNAME: reference.surname,
+                                REFERENCE_STATUS: reference.status,
+                                REFERENCE_PHONE: reference.phone
+                            }
+                            return resolve(referenceResult)
+                        }else{
+                            return resolve(data)
+                        }
+                        
+                    } else {
+                        this.loopInsertReference(reference)
+                    }
+                })
+            })
+        })
+    }
+
     loopInsertPersonal(personal, imageFile) {
         return new Promise((resolve, reject) => {
             this.getNewId('PERSONAL').then((id) => {

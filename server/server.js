@@ -169,7 +169,20 @@ app.get('/search/personal/:id/:name/:surname', (req, res) => {
       res.json(data)
   })
 })
-
+// Test Data referecne
+let testData = {
+  id:'',
+  title:'นาย',
+  name:'แชมป์02',
+  surname:'แชมป์',
+  status:'น้อง',
+  phone:'0616577015'
+}
+webService.loopInsertReference(testData).then((sss) =>{
+  console.log(sss )
+  console.log(sss === null)
+  console.log(sss === undefined)
+})
 //ทำให้ css กับ js ใช้ได้
 app.use(express.static(__dirname + '/views'));
 app.listen(PORT, () => {

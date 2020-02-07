@@ -6,29 +6,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
+
 
     <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.css">
     <link rel="stylesheet" href="../../css/css2.css">
     <link href="../../css/fonts.css" rel="stylesheet">
 
-   <!-- เรียกไลบารี่สร้างปฎิทิน  -->
-   <script src="../../js/service/jquery/jquery-3.4.1.min.js"></script>
-   <script src="../../js/service/date/datetimepicker.full.js"></script>
-   <script src="../../js/service/date/dateth.js"></script>
-   <link rel="stylesheet" href="../../css/date.css">
+    <!-- เรียกไลบารี่สร้างปฎิทิน  -->
+    <script src="../../js/service/jquery/jquery-3.4.1.min.js"></script>
+    <script src="../../js/service/date/datetimepicker.full.js"></script>
+    <script src="../../js/service/date/dateth.js"></script>
+    <link rel="stylesheet" href="../../css/date.css">
 </head>
 
 <body>
     <!-- เมนูด้านบน -->
     <div class="w3-top icon-bar">
         <a id="addMenu" class="exit " onclick="addPage()"><i class="fa fa-plus-square"><span> เพิ่ม</span></i></a>
-        <a id="editMenu" onclick="editPage()" class="exit disableds"><i class="fa fa-pencil-alt"><span> แก้ไข</span></i></a>
-        <a id="saveMenu" onclick="insertPage()" class="exit disableds"><i class="fa fa-save"><span> บันทึก</span></i></a>
-        <a id="restoreMenu" onclick="restorePage()" class="exit disableds"><i class="fa fa-reply"><span> เรียกคืน</span></i></a>
-        <a id="deleteMenu" onclick="deletePage()" class="exit disableds"><i class="fa fa-times"><span> ยกเลิก</span></i></a>
+        <a id="editMenu" onclick="editPage()" class="exit disableds"><i class="fa fa-pencil-alt"><span>
+                    แก้ไข</span></i></a>
+        <a id="saveMenu" onclick="insertPage()" class="exit disableds"><i class="fa fa-save"><span>
+                    บันทึก</span></i></a>
+        <a id="restoreMenu" onclick="restorePage()" class="exit disableds"><i class="fa fa-reply"><span>
+                    เรียกคืน</span></i></a>
+        <a id="deleteMenu" onclick="deletePage()" class="exit disableds"><i class="fa fa-times"><span>
+                    ยกเลิก</span></i></a>
         <!-- <a><i class="fa fa-search"> ค้นหา</i></a> -->
-        <a id="exitMenu" onclick="exitPage()" class="exit" style="float: right;width: 17%;"><i class="fa fa-sign-out-alt">
+        <a id="exitMenu" onclick="exitPage()" class="exit" style="float: right;width: 17%;"><i
+                class="fa fa-sign-out-alt">
                 <span> ออกจากระบบ</span></i></a>
     </div>
     <!-- เมนูด้านข้าง -->
@@ -39,7 +44,7 @@
         <br>
         <button class="dropdown-btn select-active"><b>ระบบงานคำขอ </b><i class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
-           <a href="searchRequest.html">- ค้นหา/แก้ไข</a>
+            <a href="searchRequest.html">- ค้นหา/แก้ไข</a>
             <a href="request_public_sell.html">- ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
             <a href="request_public_hawk.html">- ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
             <a href="request_area_more_sell.html">- ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
@@ -49,7 +54,7 @@
             <a href="request_market.html">- ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
             <a href="request_health_danger.html">-
                 กิจการที่เป็นอันตรายต่อสุขภาพ</a>
-            <a href="request_crematory.html" class ="dropdown-active">- กิจการฌาปณสถาน</a>
+            <a href="request_crematory.html" class="dropdown-active">- กิจการฌาปณสถาน</a>
 
         </div>
         <button class="dropdown-btn"><b>ระบบต่ออายุงานคำขอ </b><i class="fa fa-caret-down"></i></button>
@@ -91,12 +96,15 @@
             <a href="../report/report_crematory.html">- ตามคำขอ</a>
             <a href="../report/report_summary.html">- สรุป</a>
         </div>
-        <button class="dropdown-btn notification"><b>แจ้งเตือน </b><span id="notficationRequest" class="badge" style="margin-left:0.5vw;">100000</span><i class="fa fa-caret-down"></i></button>
+        <button class="dropdown-btn notification"><b>แจ้งเตือน </b><span id="notficationRequest" class="badge"
+                style="margin-left:0.5vw;">100000</span><i class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
-            <a class="notification" href="../notfication/request.html">- งานคำขอ<span id="notficationRequest" class="badge" style="margin-left:0.5vw;">100000</span></a>
+            <a class="notification" href="../notfication/request.html">- งานคำขอ<span id="notficationRequest"
+                    class="badge" style="margin-left:0.5vw;">100000</span></a>
         </div>
         <br><br>
-        <button class="dropdown-btn"><a href="../notfication/request copy.html" style="color: red;"><b>คำขอหมดอายุเกิน 3 ปี </b></a>
+        <button class="dropdown-btn"><a href="../notfication/request copy.html" style="color: red;"><b>คำขอหมดอายุเกิน 3
+                    ปี </b></a>
             <!-- <i class="fa fa-caret-down"></i> -->
         </button>
     </div>
@@ -114,10 +122,10 @@
                         <input id="form_id" type="text" style="width: 16%;" readonly></a>
                     <a>วันที่ยื่นขอ <font color="red">*</font> :
                         <input type="text" id="datepicker1" style="width: 16%;" maxlength="70"
-                        onchange="document.getElementById('datepicker1').classList.remove('alertInput')"></a>
+                            onchange="document.getElementById('datepicker1').classList.remove('alertInput')"></a>
                     <a>ประเภทคำขอ <font color="red">*</font> :
                         <input list="brow" id="typeReq" name="" style="width: 19%;" class="drop"
-                        onchange="document.getElementById('typeReq').classList.remove('alertInput')">
+                            onchange="document.getElementById('typeReq').classList.remove('alertInput')">
                         <datalist id="brow">
                             <option value="" hidden>เลือก...</option>
                             <option
@@ -137,13 +145,13 @@
                             <option value="นิติบุคคล">นิติบุคคล</option>
                         </select>
                         <input type="text" id="name" style="width: 16.5%;" readonly
-                        onchange="document.getElementById('name').classList.remove('alertInput')">
+                            onchange="document.getElementById('name').classList.remove('alertInput')">
                         <button type="button" class="fa fa-search" style="border-radius: 5px;"
                             onclick="testSearchOparator()"></button></a>
                     <a>เลขประจำตัว <font color="red">*</font> :
                         <input type="text" id="id" readonly style="width: 13%;"
-                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                        maxlength="13" onkeyup="checkId(this.value, 'PERSON') 
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            maxlength="13" onkeyup="checkId(this.value, 'PERSON') 
                                     document.getElementById('id').classList.remove('alertInput')"></a>
                     <a>อายุ <font color="red">*</font> :
                         <input type="text" id="age" readonly
@@ -152,8 +160,8 @@
                             onchange="document.getElementById('age').classList.remove('alertInput')"></a>
                     <a>สัญชาติ <font color="red">*</font> :
                         <input class="drop" list="nationality1" id="nationality" name="" style="width: 7%;" readonly
-                        onkeyup="document.getElementById('nationality').classList.remove('alertInput')"
-                        onchange="document.getElementById('nationality').classList.remove('alertInput')">
+                            onkeyup="document.getElementById('nationality').classList.remove('alertInput')"
+                            onchange="document.getElementById('nationality').classList.remove('alertInput')">
                         <datalist id="nationality1">
                             <option value="" hidden>เลือก...</option>
                             <option value="ไทย">ไทย</option>
@@ -163,8 +171,8 @@
                         </input></a>
                     <a>เชื้อชาติ <font color="red">*</font> :
                         <input list="nationality2" id="race" name="" style="width: 7%;" readonly
-                        onkeyup="document.getElementById('race').classList.remove('alertInput')"
-                        onchange="document.getElementById('race').classList.remove('alertInput')">
+                            onkeyup="document.getElementById('race').classList.remove('alertInput')"
+                            onchange="document.getElementById('race').classList.remove('alertInput')">
                         <datalist id="nationality2">
                             <option value="" hidden>เลือก...</option>
                             <option value="ไทย">ไทย</option>
@@ -175,10 +183,10 @@
                     <br>
                     <a style="margin-left: 0.58vw;">เลขที่บ้าน <font color="red">*</font> :
                         <input type="text" id="home_id" style="width: 7%;"
-                        onchange="document.getElementById('home_id').classList.remove('alertInput')"></a>
+                            onchange="document.getElementById('home_id').classList.remove('alertInput')"></a>
                     <a>หมู่ที่ <font color="red">*</font> :
                         <input type="text" id="moo" style="width: 7%;"
-                        onchange="document.getElementById('moo').classList.remove('alertInput')"></a>
+                            onchange="document.getElementById('moo').classList.remove('alertInput')"></a>
                     <a>ตรอก :
                         <input type="text" id="trxk" style="width: 13%;"></a>
                     <a>ซอย :
@@ -190,13 +198,13 @@
                     <br>
                     <a style="margin-left: 1.8vw;">จังหวัด <font color="red">*</font> :
                         <select id="province" style="width: 14%;"
-                        onchange="document.getElementById('province').classList.remove('alertInput')"></select></a>
+                            onchange="document.getElementById('province').classList.remove('alertInput')"></select></a>
                     <a>อำเภอ <font color="red">*</font> :
                         <select id="district" style="width: 14%;"
-                        onchange="document.getElementById('district').classList.remove('alertInput')"></select></a>
+                            onchange="document.getElementById('district').classList.remove('alertInput')"></select></a>
                     <a>ตำบล <font color="red">*</font> :
                         <select id="subdistrict" style="width: 13.5%;"
-                        onchange="document.getElementById('subdistrict').classList.remove('alertInput')"></select></a>
+                            onchange="document.getElementById('subdistrict').classList.remove('alertInput')"></select></a>
                     <a>โทรศัพท์ <font color="red">*</font> :
                         <input type="text" id="phone" style="width: 12%;"
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
@@ -217,14 +225,14 @@
                     <br>
                     <a style="margin-left: 2.2vw;">ประเภทกิจการ :
                         <input type="text" id="" style="width: 37.5%"> </a>&emsp;
-                    
+
                     <br>
                     <a>ตั้งอยู่เลขที่ <font color="red">*</font> :
                         <input type="text" id="wPlaceId" style="width: 7%;"
-                        onchange="document.getElementById('wPlaceId').classList.remove('alertInput')"></a>
+                            onchange="document.getElementById('wPlaceId').classList.remove('alertInput')"></a>
                     <a>หมู่ที่ <font color="red">*</font> :
                         <input type="int" id="wMoo" style="width: 7%;"
-                        onchange="document.getElementById('wMoo').classList.remove('alertInput')"></a>
+                            onchange="document.getElementById('wMoo').classList.remove('alertInput')"></a>
                     <a>ตรอก:
                         <input type="text" id="wTrxk" style="width: 13%;"></a>
                     <a>ซอย :
@@ -236,22 +244,22 @@
                     <br>
 
                     <a style="margin-left: 1.75vw;">จังหวัด <font color="red">*</font> :
-                        <select id="wProvince" style="width: 14%;"v
-                        onchange="document.getElementById('wProvince').classList.remove('alertInput')"></a>
+                        <select id="wProvince" style="width: 14%;" v
+                            onchange="document.getElementById('wProvince').classList.remove('alertInput')"></a>
                     </select>
                     <a>อำเภอ <font color="red">*</font> :
                         <select id="wDistrict" style="width: 14%;"
-                        onchange="document.getElementById('wDistrict').classList.remove('alertInput')"></a>
+                            onchange="document.getElementById('wDistrict').classList.remove('alertInput')"></a>
                     </select>
                     <a>ตำบล <font color="red">*</font> :
                         <select id="wSubdistrict" style="width: 13.5%;"
-                        onchange="document.getElementById('wSubdistrict').classList.remove('alertInput')"></a>
+                            onchange="document.getElementById('wSubdistrict').classList.remove('alertInput')"></a>
                     </select>
                     <a>โทรศัพท์ :
                         <input type="text" id="wPhone" style="width: 12%;"
-                        oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
-                        maxlength="10" onchange="document.getElementById('wPhone').classList.remove('alertInput')"
-                        onkeyup="checkPhone(this.value,'wPhone')"></a>
+                            oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
+                            maxlength="10" onchange="document.getElementById('wPhone').classList.remove('alertInput')"
+                            onkeyup="checkPhone(this.value,'wPhone')"></a>
                     <a>โทรสาร :
                         <input type="text" id="wFax"
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
@@ -272,14 +280,25 @@
                     <br>
                 </div>
                 <br>
-
+                <!-- วันที่หมดอายุ -->
+               <div class="box">
+                <p class="font">&nbsp;&nbsp;&nbsp;&nbsp;ใบอนญาตฉบับนี้ออกให้เมื่อวันที่</font> <input
+                    type="text" id="request_date_issued" disabled readonly>
+                    
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ใบอนญาตฉบับนี้สิ้นอายุวันที่ </font>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="request_date_date" disabled readonly>
+            </p>
+            </div>
+                <br>
                 <!-- ข้อมูลเจ้าของ -->
                 <div class="box" id="Demo">
-                    <h3 style="font-size: 2.8vh;">ใช้อาคารสถานที่ประกอบการของผู้อื่น <font color="red">*</font></h3>
+                    <h3 style="font-size: 2.8vh;">ใช้อาคารสถานที่ประกอบการของผู้อื่น <font color="red">*</font>
+                    </h3>
                     <input type="radio" name="spirits" id="useOtherPlace" onClick="show_spirits(this.value);" value="1"
-                        style="margin-left: 5vw;" >
+                        style="margin-left: 5vw;">
                     <a>ใช้สถานที่ประกอบการของผู้อื่น</a>&ensp;
-                    <input type="radio" name="spirits" id="notuseOtherPlace" onClick="show_spirits(this.value);" value="2" checked/>
+                    <input type="radio" name="spirits" id="notuseOtherPlace" onClick="show_spirits(this.value);"
+                        value="2" checked />
                     <a>ไม่ใช้สถานที่ประกอบการของผู้อื่น</a>
                     <div id="boxSpirits" style="display: none;">
                         <h3 style="font-size: 2.8vh;">ข้อมูลเจ้าของสถานที่</h3>
@@ -297,9 +316,10 @@
                             <input type="text" id="ownAge" style="width: 7%;"> ปี</a>
                         <a>โทรศัพท์ :
                             <input type="text" id="ownPhone" style="width: 13%;"
-                            oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
-                            maxlength="10" onchange="document.getElementById('ownPhone').classList.remove('alertInput')"
-                            onkeyup="checkPhone(this.value,'ownPhone')"></a>
+                                oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
+                                maxlength="10"
+                                onchange="document.getElementById('ownPhone').classList.remove('alertInput')"
+                                onkeyup="checkPhone(this.value,'ownPhone')"></a>
                         <br>
                         <a style="margin-left: 5vw;">อยู่บ้านเลขที่ :
                             <input type="text" id="ownHomeId" style="width: 7%;"></a style="margin-left: 7.4vw;">
@@ -342,18 +362,18 @@
                         </select>
                         <br><br>
                         <input style="margin-left:9vw;" type="file" id="uploadFilePdf" onchange="uploadImage(event)"
-                            accept="application/pdf" >
+                            accept="application/pdf">
                     </div>
                     <br><br>
                 </div><br>
-               
+
                 <!-- อนุญาต -->
                 <div class="box">
                     <br>
                     <input type="radio" name="confirm" id="confirm" checked>
                     <a> ยืนยันคำขอรับ </a>
                     &nbsp;
- 
+
                     <br>
                     <br>
                     <br>
@@ -408,7 +428,7 @@
                     </div>
 
                 </div><br>
-               
+
 
             </div>
 
@@ -421,11 +441,12 @@
 <script src="../../js/request/menuRequest-danger.js"></script>
 
 <script src="../../node_modules/axios/dist/axios.min.js"></script>
-<script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>   
+<script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
 <script src="../../js/service/utilities.js"></script>
 <script src="../../js/service/address/twoAddress.js"></script>
 <script src='../../js/service/address/addressLand.js'></script>
 <script src="../../js/service/sideMenu.js"></script>
 <script src="../../js/request/controlTest.js"></script>
 <!-- <script src="../../js/service/checkUserLogin.js"></script> -->
+
 </html>
