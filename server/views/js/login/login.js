@@ -8,22 +8,23 @@ function checkLogin() {
         hideAlert()
         var username = document.getElementById('username').value.trim()
         var password = document.getElementById('password').value.trim()
-
-        if (tusername != username && tpassword != password) {
+        if (tusername != username || tpassword != password) {
             if (username.length === 0 || password.length === 0) {
                 showAlert()
             } else {
+                tusername = username
+                tpassword = password
                 loading = !loading
                 buttonLoading()
                 getUser(username, password).then((data) => {
+                    console.log(data)
                     if (data.length == 0) {
                         showAlert()
                         setTimeout(function () {
                             buttonLoading()
                             loading = !loading
                         }, 500);
-                        tusername = username
-                        tpassword = password
+                        console.log(`password is incorrect`)
                     }
                     else {
                         window.location.href = '/'
