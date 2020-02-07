@@ -168,8 +168,28 @@ function insertPage() {
               tempData.REQUEST_RECEIPT_FEE=inForm.bFee
               tempData.REQUEST_RECEIPT_FINE=inForm.bFine
 
-              tempData.FOOD_FOODTRAIN = inFood.foodTrain;
-              tempData.FOOD_FOODNOTRAIN = inFood.foodNoTrain;
+              tempData.LAND_TITLE=inOwner.ownPrefix
+              tempData.LAND_NAME=inOwner.ownName
+              tempData.LAND_SURNAME=inOwner.ownSurname
+              tempData.LAND_BIRTHDAY=inOwner.ownAge
+              tempData.LAND_PHONE=inOwner.ownPhone
+              tempData.ADDRESS_HOME_NUMBER=inOwner.ownHomeId
+              tempData.ADDRESS_MOO=inOwner.ownMoo
+              tempData.ADDRESS_TRXK=inOwner.ownTrxk
+              tempData.ADDRESS_SXY=inOwner.ownSxy
+              tempData.ADDRESS_ROAD=inOwner.ownRoad
+              tempData.PROVINCE_NAME=inOwner.ownProvince
+              tempData.AMPHUR_NAME=inOwner.ownDistrict
+              tempData.DISTRICT_NAME=inOwner.ownSubdistrict
+              tempData.ADDRESS_HOME_NUMBER=inOwner.ownDeedId
+              tempData.ADDRESS_MOO=inOwner.ownDeedMoo
+              tempData.ADDRESS_TRXK=inOwner.ownDeedTrxk
+              tempData.ADDRESS_SXY=inOwner.ownDeedSxy
+              tempData.ADDRESS_ROAD=inOwner.ownDeedRoad
+              tempData.PROVINCE_NAME=inOwner.ownDeedProvince
+              tempData.AMPHUR_NAME=inOwner.ownDeedDistrict
+              tempData.DISTRICT_NAME=inOwner.ownDeedSubdistrict
+
               tempData.TRAIN_ISSUED = inFood.foodBy;
               tempData.TRAIN_DATE_ISSUED = inFood.foodStart;
               tempData.TRAIN_DATE_EXP = inFood.foodEnd;

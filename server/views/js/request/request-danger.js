@@ -306,10 +306,9 @@ function resetParameter() {
     id: "",
     age: "",
     nationality: "",
-    race: "",
-    phone: "",
-    fax: ""
+    race: ""
   };
+  
   inAddress = {
     home_id: "-",
     moo: "",
@@ -317,17 +316,20 @@ function resetParameter() {
     sxy: "",
     building: "",
     road: "",
-    province: "",
-    district: "",
-    subdistrict: ""
+    province_name: "",
+    amphur_name: "",
+    district_name: "",
+    phone: "",
+    fax: ""
   };
-  inPerson2 = {
-    person2: "",
-    person2_id: ""
-  };
+  
   inWorkplace2 = {
-    wLocation: "",
-    wPlaceId: "-",
+    workplaceName: "",
+    area: "",
+    numPeople: "",
+    typeWorkplace: "",
+    machinery: "",
+    wPlaceId: "",
     wMoo: "",
     wTrxk: "",
     wSxy: "",
@@ -339,24 +341,41 @@ function resetParameter() {
     wPhone: "",
     wFax: ""
   };
+  
   inForm = {
-    bNo: "",
     bNum: "",
     datepicker2: "",
     bFee: "",
-    bFine: "",
-
-    typeReForm: "",
-    typeProduct: "",
-    timeStart: "",
-    timeEnd: "",
-    formNote: "",
-    dateFormStart: "",
-    dateFormEnd: "",
-
-    documentName: "",
-    documentName2: ""
+    bFine:""
   };
+  
+  inOwner = {
+    useOtherPlace:"",
+    notuseOtherPlace:"",
+    ownPrefix: "",
+    ownName: "",
+    ownSurname: "",
+    ownAge: "",
+    ownPhone: "",
+    ownHomeId: "",
+    ownMoo: "",
+    ownTrxk: "",
+    ownSxy: "",
+    ownRoad: "",
+    ownProvince: "",
+    ownDistrict: "",
+    ownSubdistrict: "",
+    ownDeedId: "",
+    ownDeedMoo: "",
+    ownDeedTrxk: "",
+    ownDeedSxy: "",
+    ownDeedRoad: "",
+    ownDeedProvince: "",
+    ownDeedDistrict: "",
+    ownDeedSubdistrict: "",
+    uploadFilePdf: ""
+  };
+  
   inFood = {
     foodTrain: "",
     foodNoTrain: "",
@@ -364,18 +383,33 @@ function resetParameter() {
     foodStart: "",
     foodEnd: ""
   };
+  
+  inLastBox = {
+    confirm: "",
+    documentId: "",
+    documenthHome: "",
+    documentLegalEntity: "",
+    documentSignature: "",
+    documentSJ4: "",
+    documentOther: "",
+    other: "",
+    documentName: "",
+    documentName2: "",
+    documentName3: "",
+    position: ""
+  };
 }
 function inputRequired() {
   let checkno2 =
     document.getElementById("datepicker1").value.trim().length === 0;
   let checkno3 = document.getElementById("typeReq").value.trim().length === 0;
   // let checkno4 = document.getElementById("typeUser").value.trim().length === 0;
-  // let checkno5 = document.getElementById("name").value.trim().length === 0;
-  // let checkno6 = document.getElementById("id").value.trim().length === 0;
-  // let checkno7 = document.getElementById("age").value.trim().length === 0;
-  // let checkno8 =
-  //   document.getElementById("nationality").value.trim().length === 0;
-  // let checkno9 = document.getElementById("race").value.trim().length === 0;
+  let checkno5 = document.getElementById("name").value.trim().length === 0;
+  let checkno6 = document.getElementById("id").value.trim().length === 0;
+  let checkno7 = document.getElementById("age").value.trim().length === 0;
+  let checkno8 =
+    document.getElementById("nationality").value.trim().length === 0;
+  let checkno9 = document.getElementById("race").value.trim().length === 0;
   let checkno10 = document.getElementById("home_id").value.trim().length === 0;
   let checkno101=document.getElementById("moo").value.trim().length === 0;
   let checkno11 = document.getElementById("province").value.trim().length === 0;
@@ -383,8 +417,6 @@ function inputRequired() {
   let checkno13 =
     document.getElementById("subdistrict").value.trim().length === 0;
   let checkno14 = document.getElementById("phone").value.trim().length === 0;
-  // let checkno15 =
-  //   document.getElementById("wLocation").value.trim().length === 0;
   let checkno16 = document.getElementById("wPlaceId").value.trim().length === 0;
   let checkno17 = document.getElementById("wMoo").value.trim().length === 0;
   let checkno18 =
@@ -394,26 +426,6 @@ function inputRequired() {
   let checkno20 =
     document.getElementById("wSubdistrict").value.trim().length === 0;
   let checkno21 = document.getElementById("wPhone").value.trim().length === 0;
-  // let checkno22 = document.getElementById("bNo").value.trim().length === 0;
-  // let checkno23 = document.getElementById("bNum").value.trim().length === 0;
-  // let checkno24 =
-  //   document.getElementById("datepicker2").value.trim().length === 0;
-  // let checkno25 = document.getElementById("bFee").value.trim().length === 0;
-  // let checkno27 =
-  //   document.getElementById("typeReForm").value.trim().length === 0;
-  // let checkno28 =
-  //   document.getElementById("typeProduct").value.trim().length === 0;
-  // let checkno29 =
-  //   document.getElementById("timeStart").value.trim().length === 0;
-  // let checkno30 = document.getElementById("timeEnd").value.trim().length === 0;
-  // let checkno31 =
-  //   document.getElementById("datepicker3").value.trim().length === 0;
-  // let checkno32 =
-  //   document.getElementById("datepicker4").value.trim().length === 0;
-  // let checkno33 =
-  //   document.getElementById("foodTrain").value.trim().length === 0;
-  // let checkno34 =
-  //   document.getElementById("foodNoTrain").value.trim().length === 0;
   let checkno35 =
     document.getElementById("documentName").value.trim().length === 0;
   let checkno36 =
@@ -428,21 +440,21 @@ function inputRequired() {
   // if (checkno4) {
   //   document.getElementById("typeUser").classList.add("alertInput");
   // }
-  // if (checkno5) {
-  //   document.getElementById("name").classList.add("alertInput");
-  // }
-  // if (checkno6) {
-  //   document.getElementById("id").classList.add("alertInput");
-  // }
-  // if (checkno7) {
-  //   document.getElementById("age").classList.add("alertInput");
-  // }
-  // if (checkno8) {
-  //   document.getElementById("nationality").classList.add("alertInput");
-  // }
-  // if (checkno9) {
-  //   document.getElementById("race").classList.add("alertInput");
-  // }
+  if (checkno5) {
+    document.getElementById("name").classList.add("alertInput");
+  }
+  if (checkno6) {
+    document.getElementById("id").classList.add("alertInput");
+  }
+  if (checkno7) {
+    document.getElementById("age").classList.add("alertInput");
+  }
+  if (checkno8) {
+    document.getElementById("nationality").classList.add("alertInput");
+  }
+  if (checkno9) {
+    document.getElementById("race").classList.add("alertInput");
+  }
   if (checkno10) {
     document.getElementById("home_id").classList.add("alertInput");
   }
@@ -482,42 +494,6 @@ function inputRequired() {
   if (checkno21) {
     document.getElementById("wPhone").classList.add("alertInput");
   }
-  // if (checkno22) {
-  //   document.getElementById("bNo").classList.add("alertInput");
-  // }
-  // if (checkno23) {
-  //   document.getElementById("bNum").classList.add("alertInput");
-  // }
-  // if (checkno24) {
-  //   document.getElementById("datepicker2").classList.add("alertInput");
-  // }
-  // if (checkno25) {
-  //   document.getElementById("bFee").classList.add("alertInput");
-  // // }
-  // if (checkno27) {
-  //   document.getElementById("typeReForm").classList.add("alertInput");
-  // }
-  // if (checkno28) {
-  //   document.getElementById("typeProduct").classList.add("alertInput");
-  // }
-  // if (checkno29) {
-  //   document.getElementById("timeStart").classList.add("alertInput");
-  // }
-  // if (checkno30) {
-  //   document.getElementById("timeEnd").classList.add("alertInput");
-  // }
-  // if (checkno31) {
-  //   document.getElementById("datepicker3").classList.add("alertInput");
-  // }
-  // if (checkno32) {
-  //   document.getElementById("datepicker4").classList.add("alertInput");
-  // }
-  // if (checkno33) {
-  //   document.getElementById("foodTrain").classList.add("alertInput");
-  // }
-  // if (checkno34) {
-  //   document.getElementById("foodNoTrain").classList.add("alertInput");
-  // }
   if (checkno35) {
     document.getElementById("documentName").classList.add("alertInput");
   }
@@ -526,40 +502,26 @@ function inputRequired() {
   }
 
   if (
-    // checkno1
     checkno2 ||
     checkno3 ||
     // checkno4 ||
-    // checkno5 ||
-    // checkno6 ||
-    // checkno7 ||
-    // checkno8 ||
-    // checkno9 ||
+    checkno5 ||
+    checkno6 ||
+    checkno7 ||
+    checkno8 ||
+    checkno9 ||
     checkno10 ||
     checkno101 ||
     checkno11 ||
     checkno12 ||
     checkno13 ||
     checkno14 ||
-    // checkno15 ||
     checkno16 ||
     checkno17 ||
     checkno18 ||
     checkno19 ||
     checkno20 ||
     checkno21 ||
-    // checkno22 ||
-    // checkno23 ||
-    // checkno24 ||
-    // checkno25 ||
-    // checkno27 ||
-    // checkno28 ||
-    // checkno29 ||
-    // checkno30 ||
-    // checkno31 ||
-    // checkno32 ||
-    // checkno33 ||
-    // checkno34 ||
     checkno35 ||
     checkno36
   ) {
@@ -572,37 +534,24 @@ function resetInputRequired() {
   // document.getElementById("form_id").classList.remove("alertInput");
   document.getElementById("datepicker1").classList.remove("alertInput");
   document.getElementById("typeReq").classList.remove("alertInput");
-  // document.getElementById("typeUser").classList.remove("alertInput");
-  // document.getElementById("name").classList.remove("alertInput");
-  // document.getElementById("id").classList.remove("alertInput");
-  // document.getElementById("age").classList.remove("alertInput");
-  // document.getElementById("nationality").classList.remove("alertInput");
-  // document.getElementById("race").classList.remove("alertInput");
+  document.getElementById("typeUser").classList.remove("alertInput");
+  document.getElementById("name").classList.remove("alertInput");
+  document.getElementById("id").classList.remove("alertInput");
+  document.getElementById("age").classList.remove("alertInput");
+  document.getElementById("nationality").classList.remove("alertInput");
+  document.getElementById("race").classList.remove("alertInput");
   document.getElementById("home_id").classList.remove("alertInput");
   document.getElementById("moo").classList.remove("alertInput");
   document.getElementById("province").classList.remove("alertInput");
   document.getElementById("district").classList.remove("alertInput");
   document.getElementById("subdistrict").classList.remove("alertInput");
   document.getElementById("phone").classList.remove("alertInput");
-  // document.getElementById("wLocation").classList.remove("alertInput");
   document.getElementById("wPlaceId").classList.remove("alertInput");
   document.getElementById("wMoo").classList.remove("alertInput");
   document.getElementById("wProvince").classList.remove("alertInput");
   document.getElementById("wDistrict").classList.remove("alertInput");
   document.getElementById("wSubdistrict").classList.remove("alertInput");
   document.getElementById("wPhone").classList.remove("alertInput");
-  // document.getElementById("bNo").classList.remove("alertInput");
-  // document.getElementById("bNum").classList.remove("alertInput");
-  // document.getElementById("datepicker2").classList.remove("alertInput");
-  // document.getElementById("bFee").classList.remove("alertInput");
-  // document.getElementById("typeReForm").classList.remove("alertInput");
-  // document.getElementById("typeProduct").classList.remove("alertInput");
-  // document.getElementById("timeStart").classList.remove("alertInput");
-  // document.getElementById("timeEnd").classList.remove("alertInput");
-  // document.getElementById("datepicker3").classList.remove("alertInput");
-  // document.getElementById("datepicker4").classList.remove("alertInput");
-  // document.getElementById("foodTrain").classList.add("alertInput") ||
-  //   document.getElementById("foodNoTrain").classList.add("alertInput");
   document.getElementById("documentName").classList.add("alertInput");
   document.getElementById("documentName2").classList.add("alertInput");
 }
@@ -623,10 +572,13 @@ function preInsert() {
           inPerson.age = document.getElementById("age").value;
           inPerson.nationality = document.getElementById("nationality").value;
           inPerson.race = document.getElementById("race").value;
-          inAddress.phone = document.getElementById("phone").value;
 
           inAddress.home_id = document.getElementById("home_id").value;
           inAddress.moo = document.getElementById("moo").value;
+          inAddress.trxk = document.getElementById("trxk").value;
+          inAddress.sxy = document.getElementById("sxy").value;
+          inAddress.building = document.getElementById("building").value;
+          inAddress.road = document.getElementById("road").value;
           let provinceValue = parseInt(
             document.getElementById(`province`).value
           );
@@ -637,9 +589,19 @@ function preInsert() {
           inAddress.district_name = district[districtValue - 1].DISTRICT_NAME;
           inAddress.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
           inAddress.province_name = province[provinceValue - 1].PROVINCE_NAME;
+          inAddress.phone = document.getElementById("phone").value;
+          inAddress.fax = getElementById("fax").value;
 
+          inWorkplace2.workplaceName=document.getElementById("").value;
+          inWorkplace2.area=document.getElementById("area").value;
+          inWorkplace2.numPeople=document.getElementById("").value;
+          inWorkplace2.typeWorkplace=document.getElementById("").value;
           inWorkplace2.wPlaceId = document.getElementById("wPlaceId").value;
           inWorkplace2.wMoo = document.getElementById("wMoo").value;
+          inWorkplace.wTrxk = document.getElementById("wTrxk").value;
+          inWorkplace.wSxy = document.getElementById("wSxy").value;
+          inWorkplace.wBuilding = document.getElementById("wBuilding").value;
+          inWorkplace.wRoad = document.getElementById("wRoad").value;
           let provinceValue2 = parseInt(
             document.getElementById(`wProvince`).value
           );
@@ -653,24 +615,55 @@ function preInsert() {
           inWorkplace2.wDistrict = amphur[amphurValue2 - 1].AMPHUR_NAME;
           inWorkplace2.wProvince = province[provinceValue2 - 1].PROVINCE_NAME;
           inWorkplace2.wPhone = document.getElementById("wPhone").value;
+          inWorkplace2.wFax = document.getElementById("wFax").value;
 
-          inForm.bNo = document.getElementById("bNo").value;
           inForm.bNum = document.getElementById("bNum").value;
           inForm.datepicker2 = document.getElementById("datepicker2").value;
           inForm.bFee = document.getElementById("bFee").value;
-          inForm.typeReForm = document.getElementById("typeReForm").value;
-          inForm.typeProduct = document.getElementById("typeProduct").value;
-          inForm.dateStart = document.getElementById("timeStart").value;
-          inForm.dateEnd = document.getElementById("timeEnd").value;
-          inForm.datepicker3 = document.getElementById("datepicker3").value;
-          inForm.datepicker4 = document.getElementById("datepicker4").value;
-          inForm.documentName = document.getElementById("documentName").value;
-          inForm.documentName2 = document.getElementById("documentName2").value;
+          inForm.bFine = document.getElementById("bFine").value;
+
+          inOwner.ownPrefix=document.getElementById("ownPrefix").value;
+          inOwner.ownName=document.getElementById("ownName").value;
+          inOwner.ownSurname=document.getElementById("ownSurname").value;
+          inOwner.ownAge=document.getElementById("ownAge");
+          inOwner.ownPhone=document.getElementById("ownPhone").value;
+          inOwner.ownHomeId=document.getElementById("ownHomeId").value;
+          inOwner.ownMoo=document.getElementById("ownMoo").value;
+          inOwner.ownTrxk=document.getElementById("ownTrxk").value;
+          inOwner.ownSxy=document.getElementById("ownSxy").value;
+          inOwner.ownRoad=document.getElementById("ownRoad").value;
+          inOwner.ownProvince=document.getElementById("ownerProvince").value;
+          inOwner.ownDistrict=document.getElementById("ownerDistrict").value;
+          inOwner.ownSubdistrict=document.getElementById("ownerSubdistrict").value;
+          inOwner.ownDeedId=document.getElementById("ownDeedId").value;
+          inOwner.ownDeedMoo=document.getElementById("ownDeedMoo").value;
+          inOwner.ownDeedTrxk=document.getElementById("ownDeedTrxk").value;
+          inOwner.ownDeedSxy=document.getElementById("ownDeedSxy").value;
+          inOwner.ownDeedRoad=document.getElementById("ownDeedRoad").value;
+          inOwner.ownDeedProvince=document.getElementById("landProvince").value;
+          inOwner.ownDeedDistrict=document.getElementById("landDistrict").value;
+          inOwner.ownDeedSubdistrict=document.getElementById("landSubdistrict").value;
+          inOwner.uploadFilePdf=document.getElementById("uploadFilePdf").value;
+
+          inLastBox.confirm=document.getElementById("confirm").value;
+          inLastBox.documentId=document.getElementById("documentId").value;
+          inLastBox.documenthHome=document.getElementById("documenthHome").value;
+          inLastBox.documentLegalEntity=document.getElementById("documentLegalEntity").value;
+          inLastBox.documentSignature=document.getElementById("documentSignature").value;
+          inLastBox.documentSJ4=document.getElementById("documentSJ4").value;
+          inLastBox.documentOther=document.getElementById("documentOther").value;
+          inLastBox.other=document.getElementById("other").value;
+          inLastBox.documentName = document.getElementById("documentName").value;
+          inLastBox.documentName2 = document.getElementById("documentName2").value;
+          inLastBox.documentName2 = document.getElementById("documentName3").value;
+          inLastBox.position = document.getElementById("position").value;
 
           arrInsert.push(inPerson);
           arrInsert.push(inAddress);
           arrInsert.push(inWorkplace2);
           arrInsert.push(inForm);
+          arrInsert.push(inOwner);
+          arrInsert.push(inLastBox);
           console.log(arrInsert);
           return true;
         } else {

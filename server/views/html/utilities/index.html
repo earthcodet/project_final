@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="../js/js22.js"></script>
+    <!-- <script src="../js/js22.js"></script> -->
 
     <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script> -->
     <!-- icon -->
@@ -18,13 +18,13 @@
 <body>
     <!-- เมนูด้านบน -->
     <div class="w3-top icon-bar">
-        <a id="addMenu" class="exit disableds" onclick="addTEST()"><i class="fa fa-plus-square"> เพิ่ม</i></a>
-        <a id="editMenu" onclick="editTEST()" class="exit disableds"><i class="fa fa-pencil-alt"> แก้ไข</i></a>
-        <a id="saveMenu" onclick="insertTEST()" class="exit disableds"><i class="fa fa-save"> บันทึก</i></a>
-        <a id="restoreMenu" onclick="restoreTEST()" class="exit disableds"><i class="fa fa-reply"> เรียกคืน</i></a>
-        <a id="deleteMenu" onclick="deleteTEST()" class="exit disableds"><i class="fa fa-times"> ยกเลิก</i></a>
+        <a id="addMenu"     class="exit disableds"><i class="fa fa-plus-square"> เพิ่ม</i></a>
+        <a id="editMenu"    class="exit disableds"><i class="fa fa-pencil-alt"> แก้ไข</i></a>
+        <a id="saveMenu"    class="exit disableds"><i class="fa fa-save"> บันทึก</i></a>
+        <a id="restoreMenu" class="exit disableds"><i class="fa fa-reply"> เรียกคืน</i></a>
+        <a id="deleteMenu"  class="exit disableds"><i class="fa fa-times"> ยกเลิก</i></a>
         <!-- <a><i class="fa fa-search"> ค้นหา</i></a> -->
-        <a id="exitMenu" onclick="exitTEST()" class="exit" style="float: right;width: 17%;"><i class="fa fa-sign-out-alt">
+        <a id="exitMenu" onclick="exitPage()" class="exit" style="float: right;width: 17%;"><i class="fa fa-sign-out-alt">
                 ออกจากระบบ</i></a>
     </div>
     <!-- เมนูด้านข้าง -->
@@ -108,6 +108,8 @@
 
 
 </body>
+<script src="../../js/service/jquery/jquery-3.4.1.min.js"></script>
+<script src="../../js/service/jquery/jquery.js"></script>
 <script src="../../node_modules/axios/dist/axios.min.js"></script>
 <script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>   
 <script src="../../js/service/utilities.js"></script>

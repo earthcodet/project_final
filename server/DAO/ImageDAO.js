@@ -5,7 +5,7 @@ var con = mysql.createConnection({
     password: '',
     database: "web_database"
 })
-
+con.timeout = 0;
 class ImageDAO {
     insertImage(image) {
         return new Promise((resolve, reject) => {

@@ -265,6 +265,27 @@
                     
                     <input type="radio" name="confirm" id="confirm" onClick="show_confirm(this.value);" value="2">
                     <a> ยืนยันคำขอต่ออายุ </a>
+                    <button type="button" style="position: absolute;right: 10%;">พิมพ์ใบขอต่ออนุญาต</button>
+                    <br><br>
+                    <div class="row" id="boxConfirm" style="width: 80%;margin-left: 5vw;display: none;">
+                        <div class="col" style="width: 33.33%;">
+                            เลขที่คำขอ : <input readonly>
+                            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            วันที่ยื่น : <input type="text" id="datepicker5">
+                        </div>
+                        <div class="col" style="width: 33.33%;">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            เล่มที่ : <input style="width: 65%;">
+                            <br>
+                            ค่าธรรมเนียม :&nbsp;<input style="width: 65%;">
+                        </div>
+                        <div class="col" style="width: 33.33%;">
+                            &nbsp;&nbsp;
+                            เลขที่ : <input>
+                            <br>
+                            ค่าปรับ : <input>
+                        </div>
+                    </div>
                     <br>
                     <br>
                     <div style="margin-left: 8vw;">

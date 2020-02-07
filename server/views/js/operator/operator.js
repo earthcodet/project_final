@@ -74,7 +74,11 @@ function resetParameter() {
         amphur_name: "",
         province_name: ""
     };
+    document.getElementById('datepicker2').disabled = false 
+    document.getElementById('life-id').checked = false
+    document.getElementById('datepicker2').value = ''
 }
+
 function setDataUI(data) {
     iconAlert = ''
     textChange = ''
@@ -123,7 +127,9 @@ function setDataUI(data) {
         document.getElementById('datepicker3').value = data.PERSONAL_BIRTHDAY === undefined || data.PERSONAL_BIRTHDAY === null ? '' : data.PERSONAL_BIRTHDAY
         document.getElementById('id').value = data.PERSONAL_PERSONAL_ID
         document.getElementById('datepicker1').value = data.PERSONAL_CARD_ISSUED
+        //radioLife()
         document.getElementById('datepicker2').value = data.PERSONAL_CARD_EXPIRE === undefined || data.PERSONAL_CARD_EXPIRE === null ? '' : data.PERSONAL_CARD_EXPIRE
+        data.PERSONAL_CARD_EXPIRE === undefined ? radioLife() : ''
         document.getElementById('phone').value = data.PERSONAL_PHONE
         document.getElementById('fax').value = data.PERSONAL_FAX === undefined || data.PERSONAL_FAX === null ? '' : data.PERSONAL_FAX
         document.getElementById('last-update').value = data.PERSONAL_UPDATE
@@ -136,7 +142,7 @@ function setDataUI(data) {
             } else {
                 img.src = `../../img/userProfile.png`
             }
-
+            inImage.name = data.PERSONAL_ID
             inImage.type = data.image.IMAGE_TYPE
             inImage.data = data.image.IMAGE_DATA
              
@@ -165,8 +171,8 @@ function setDataUI(data) {
         document.getElementById(`wProvince`).value = provinceId
 
         //ตั้งค่ารายชื่อ อำเภอ, ตำบล ตามจังหวัดที่เลือกลงให้ list input ตาม id
-        wamphurSelect(parseInt(provinceId)) // list อำเภอทั้งหมดตาม province Id
-        wdistrictSelect(parseInt(amphurId)) // list ตำบลทั้งหมดตาม ampur_Id
+        wamphurSelect(provinceId) // list อำเภอทั้งหมดตาม province Id
+        wdistrictSelect(amphurId) // list ตำบลทั้งหมดตาม ampur_Id
 
         //แสดงค่าจังหวัดที่มาจาก ฐานข้อมูล (อำเภอ , ตำบล) ตาม id
         document.getElementById(`wDistrict`).value = amphurId
@@ -181,7 +187,7 @@ function inputRequired() {
     if (type_user === 'บุคคลธรรมดา') {
         let checkno1 = document.getElementById('nameUser').value.trim().length === 0
         let checkno2 = document.getElementById('surnameUser').value.trim().length === 0
-        let checkno3 = document.getElementById('datepicker2').value.trim().length === 0
+        let checkno3 = document.getElementById('datepicker2').value.trim().length === 0 && document.getElementById('life-id').checked === false
         let checkno4 = document.getElementById('datepicker1').value.trim().length === 0
         let checkno5 = document.getElementById('id').value.trim().length === 0
         let checkno6 = document.getElementById('datepicker3').value.trim().length === 0
@@ -248,6 +254,22 @@ function resetInputRequired() {
     document.getElementById('company-id').classList.remove('alertInput')
     document.getElementById('datepicker4').classList.remove('alertInput')
     document.getElementById('company-phone').classList.remove('alertInput')
+}
+function onClickRadio(){
+   if(document.getElementById('datepicker2').disabled === true){
+    document.getElementById('datepicker2').disabled = false 
+    document.getElementById('life-id').checked = false
+   }else{
+    document.getElementById('datepicker2').disabled = true 
+    document.getElementById('life-id').checked = true
+    document.getElementById('datepicker2').value = ''
+   }
+}
+function radioLife(){
+    document.getElementById('datepicker2').value = ''
+    document.getElementById('datepicker2').disabled = true 
+    document.getElementById('life-id').checked = true
+    document.getElementById('datepicker2').value = ''
 }
 function preInsert() {
     resetInputRequired()

@@ -149,7 +149,11 @@ function insertPage() {
                 let month = temp[1]
                 let year = parseInt(temp[0]) + 543
                 let format = `${day}-${month}-${year}`
-                document.getElementById('last-update').value = format
+                if(inPersonal.type === 'บุคคลธรรมดา'){
+                    document.getElementById('last-update').value = format
+                }else{
+                    document.getElementById('company-last-update').value = format
+                }
             } else if (result.dismiss === Swal.DismissReason.cancel) {
                
             }
@@ -245,8 +249,8 @@ function deletePage() {
                 return new Promise(function (resolve, reject) {
                     setTimeout(function () {
                         //function ใน operator 
-                        changeStatusDelete('YES').then((statusDelete) => {
-                            tempData.is_deleted = 'YES'
+                        changeStatusDelete('Y').then((statusDelete) => {
+                            tempData.is_deleted = 'Y'
                             console.log(`statusDelete = ${statusDelete}`)
                             if (statusDelete) {
                                 resolve();
@@ -313,6 +317,9 @@ function deletePage() {
                     console.log(isEmpty(tempData))
                     console.log(tempData)
                     if (isEmpty(tempData) === false && data === true) {
+                        document.getElementById('datepicker2').disabled = false 
+                        document.getElementById('life-id').checked = false
+                        document.getElementById('datepicker2').value = ''
                         resetFunction()
                         setDataUI(tempData)
                         disableMenuAll()
@@ -428,9 +435,9 @@ function showItem(arrayResult) {
         setDataUI(arrayResult)
         tempData = arrayResult
     }
-    console.log(arrayResult.PERSONAL_IS_DELETED === 'YES')
-    if (arrayResult.PERSONAL_IS_DELETED === 'YES') {
-        console.log('YES')
+    console.log(arrayResult.PERSONAL_IS_DELETED === 'Y')
+    if (arrayResult.PERSONAL_IS_DELETED === 'Y') {
+        console.log('Y')
         resetInputRequired()
         //แสดง menu - กลุ่มมีข้อมูลที่ลบแล้ว
         deleteData = true
@@ -491,6 +498,10 @@ function createResultSearch(data) {
             }
 
             cell.appendChild(cellText);
+            if( j === 3 && data[i].PERSONAL_IS_DELETED === 'Y'){
+                cell.style.textDecoration = 'line-through'
+            }
+            
             row.appendChild(cell);
         }
         tblBody.appendChild(row);
@@ -577,8 +588,8 @@ function restorePage() {
             return new Promise(function (resolve, reject) {
                 setTimeout(function () {
                     //function ใน operator 
-                    changeStatusDelete('NO').then((statusDelete) => {
-                        tempData.is_deleted = 'NO'
+                    changeStatusDelete('N').then((statusDelete) => {
+                        tempData.is_deleted = 'N'
                         console.log(`statusDelete = ${statusDelete}`)
                         if (statusDelete) {
                             resolve();

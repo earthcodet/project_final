@@ -194,17 +194,19 @@
                                     <a style=" margin-left:0.25vw;">ออกเมื่อ <font color="red">*</font> :
                 </a>
                 <input type="text" id="datepicker1" placeholder="" style="width: 10.8vw" maxlength="10"
-                    onchange="document.getElementById('datepicker1').classList.remove('alertInput')" readonly>
+                    onchange="document.getElementById('datepicker1').classList.remove('alertInput')" >
 
                 <a id='dateExpTopic' style="margin-left: 0.3vw;">หมดอายุ <font color="red">*</font> :</a>
-                <input type="text" id="datepicker2" placeholder="" style="width: 11vw" maxlength="10" readonly
-                    onchange="document.getElementById('datepicker2').classList.remove('alertInput')">
+                <input type="text" id="datepicker2" placeholder="" style="width: 7vw" maxlength="10" 
+                    onchange="document.getElementById('datepicker2').classList.remove('alertInput')"> 
+                    <input id='life-id' type="radio" style="border: 0px;width:  1em;height: 1em;" onclick="onClickRadio()"
+                    <a>ตลอดชีพ</a>
                 <br>
 
                 <br>
                 <!-- row4 -->
                 <a id='dateBTopic' style="margin-left: 3.1vw;">เกิดวันที่ <font color="red">*</font> :</a>
-                <input type="text" id="datepicker3" placeholder="" style="width: 11vw;" maxlength="10" readonly
+                <input type="text" id="datepicker3" placeholder="" style="width: 11vw;" maxlength="10" 
                     onchange="document.getElementById('datepicker3').classList.remove('alertInput')">
 
                 <a id='phoneTopic' style="margin-left: 0.1vw;">โทรศัพท์ <font color="red">*</font> :</a>
@@ -263,7 +265,7 @@
                         maxlength="13" onkeyup="checkId(this.value, '')"
                         onchange="document.getElementById('company-id').classList.remove('alertInput')">
                     <a style="margin-left:0.3vw;">ออกเมื่อ <font color="red">*</font> :</a>
-                    <input type="text" id="datepicker4" placeholder="" style="width: 11vw" maxlength="10" readonly
+                    <input type="text" id="datepicker4" placeholder="" style="width: 11vw" maxlength="10" 
                         onchange="document.getElementById('datepicker4').classList.remove('alertInput')">
                     <br>
                     <!-- row4 -->

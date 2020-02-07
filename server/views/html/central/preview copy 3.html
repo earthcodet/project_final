@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+
+    <link rel="stylesheet" href="../../css/fonts.css">
+
+    <script src="../../js/service/jquery/jquery-3.4.1.min.js"></script>
+    <script src="../../js/service/bootstrap-4.4.1/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../../css/bootstrap-4.4.1/bootstrap.min.css">
+
+</head>
+<style>
+    a {
+        text-decoration: none !important;
+    }
+
+    body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: #FAFAFA;
+        font: 12pt "Tahoma";
+    }
+
+    * {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+    }
+
+    .page {
+        width: 300mm;
+        min-height: 297mm;
+        padding: 15mm;
+        margin: 10mm auto;
+        border: 1px #D3D3D3 solid;
+        border-radius: 1px;
+        background: white;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .subpage {
+        padding: 1cm;
+        border: 2px red solid;
+        height: 257mm;
+        outline: 2cm #FFEAEA solid;
+    }
+
+    @page {
+        size: A4;
+        margin: 0;
+    }
+
+    @media print {
+
+        html,
+        body {
+            width: 210mm;
+            height: 297mm;
+        }
+
+        .page {
+            margin: 0;
+            border: initial;
+            border-radius: initial;
+            width: initial;
+            min-height: initial;
+            box-shadow: initial;
+            background: initial;
+            page-break-after: always;
+        }
+
+        .hideWhenPrint {
+            display: none;
+        }
+    }
+</style>
+
+<body>
+    <div class="book">
+        <div class="page">
+            <br>
+            <div class="container" style="font-family: 'Sarabun';">
+                <h4 class="text-center">แบบคำขอต่อใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</h4>
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <p class="text-right">เขียนที่ สำนักงานเทศบาลเมืองแสนสุข</p>
+                        <p class="text-right">วันที่ 17 เดือน ธันวาคม พ.ศ. 2562</p>
+                    </div>
+                </div>
+                <br>
+                <!-- 1. -->
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col">
+                        <p>ข้าพเจ้า
+                            <input type="checkbox" name="nametype" id="">บุคคลธรรมดา <input type="checkbox"
+                                name="nametype" id="">นิติบุคคล</p>
+                    </div>
+                    <div class="col">ชื่อ <a>sdddddddddsd</a></div>
+                    <div class="col">อายุ <a>sdผsd</a></div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p>สัญชาติ <a>sdddddddddsd</a></p>
+                    </div>
+                    <div class="col">เลขบัตรประชาชนเลขที่ <a>sdddddddddsd</a></div>
+                    <div class="col">อยู่บ้าน/สำนักงานเลขที่ <a>sdddddddddsd</a>s</div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p>ตรอก</p>
+                    </div>
+                    <div class="col">ซอย</div>
+                    <div class="col">ถนน</div>
+                    <div class="col-2">หมู่ที่</div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p>แขวง/ตำบล</p>
+                    </div>
+                    <div class="col">เขต/อำเภอ</div>
+                    <div class="col">จังหวัด</div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p>โทรศัพท์</p>
+                    </div>
+                    <div class="col">โทรสาร</div>
+                    <div class="col"></div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p>ขอยื่นคำขอต่อใบอนุญาตเป็นผู้จำหน่ายสินค้าในที่หรือทางสาธารณะ ประเภท </p>
+                        <a>สถานที่จำหน่ายสินค้า ประเภท </a>
+                        &emsp;&emsp;&emsp;&emsp;<a>ผู้ช่วยจำหน่ายสินค้า </a>
+                    </div>
+                </div>
+                <br>
+                <!-- 2. -->
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col">
+                        <p>พร้อมคำขอนี้ข้าพเจ้าได้แนบเอกและหลักฐานสำคัญต่างๆมาด้วยแล้ว คือ</p>
+                        <p>[ &nbsp; ] สำเนาบัตรประจำตัวประชาชนของผู้ต่อใบอนุญาต</p>
+                        <p>[ &nbsp; ] สำเนาทะเบียนบ้านของผู้ต่อใบอนุญาตฯ</p>
+                        <p>[ &nbsp; ] ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ (ของปีที่แล้ว)</p>
+                        <p>[ &nbsp; ] บัตรสุขลักษณะประจำตัวผู้ได้รับอนุญาตให้จำหน่ายสินค้าในที่หรือทางสาธารณะ</p>
+                        <p>[ &nbsp; ] เอกสารและหลักฐานอื่นๆ ที่เกี่ยวข้อง
+                            ....................................................</p>
+                        <p>ขอรับรองว่าข้อความในแบบคำขอนี้เป็นความจริงทุกประการ</p>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <!-- 3. -->
+            <br>
+            <!-- ลงชื่อ -->
+            <div class="row">
+                <div class="col-5"></div>
+                <div class="col text-center">
+                    (ลงชื่อ).............................................................ผู้ขอรับใบอนุญาต
+                    <br>
+                    <p>นาย ABC DEFG</p>
+                    <br>
+                </div>
+            </div>
+            <br>
+            <!--  -->
+            <div class="row">
+                <div class="col">
+                    ความเห็นของเจ้าหน้าที่/หัวหน้างาน
+                    <br>[ &nbsp; ] เห็นควรอนุญาต โดยให้ชำระเงินค่าธรรมเนียมเป็นเงิน...............บาท
+                    <br>[ &nbsp; ] ไม่เห็นสมควรอนุญาต เพราะ.............................................
+                    <br><br>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ลงชื่อ)...................................................
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(...................................................)
+                    </p>
+                </div>
+                <div class="col-5">
+                    ความเห็นของหัวหน้าฝ่ายสุขาภิบาล
+                    <br>[ &nbsp; ] เห็นควรอนุญาต โดยให้ชำระเงินค่าธรรมเนียมฯ
+                    <br>[ &nbsp; ] ไม่เห็นสมควรอนุญาต เพราะ..............................
+                    <br><br>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ลงชื่อ)...................................................
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(...................................................)
+                    </p>
+                </div>
+            </div>
+            <br>
+            <!--  -->
+            <div class="row">
+                <div class="col">
+                    ความเห็นของผู้อำนวยการกองสาธารณสุขฯ
+                    <br>[ &nbsp; ] เห็นควรอนุญาต โดยให้ชำระเงินค่าธรรมเนียมฯ
+                    <br>[ &nbsp; ] ไม่เห็นสมควรอนุญาต เพราะ.............................................
+                    <br><br>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ลงชื่อ)...................................................
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(...................................................)
+                    </p>
+                </div>
+                <div class="col-5">
+                    ความเห็นของปลัดเทศบาล
+                    <br>[ &nbsp; ] เห็นควรอนุญาต โดยให้ชำระเงินค่าธรรมเนียมฯ
+                    <br>[ &nbsp; ] ไม่เห็นสมควรอนุญาต เพราะ..............................
+                    <br><br>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ลงชื่อ)...................................................
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(...................................................)
+                    </p>
+                </div>
+            </div>
+            <br>
+            <!--  -->
+            <div class="row">
+                <div class="" style="margin-left: 25%;">
+                    ความเห็นของเจ้าพนักงานท้องถิ่น
+                    <br>[ &nbsp; ] เห็นควรอนุญาต โดยให้ชำระเงินค่าธรรมเนียมฯ
+                    <br>[ &nbsp; ] ไม่เห็นสมควรอนุญาต เพราะ................................
+                    <br><br>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ลงชื่อ)...................................................
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(...................................................)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>

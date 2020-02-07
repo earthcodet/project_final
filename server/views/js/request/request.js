@@ -277,6 +277,7 @@ function checkId(value, type) {
     return false;
   }
 }
+
 function resetParameter() {
   arrInsert = [];
   inPerson = {
@@ -365,6 +366,8 @@ function resetParameter() {
     position: ""
   };
 }
+
+
 function inputRequired() {
   let checkno2 =
     document.getElementById("datepicker1").value.trim().length === 0;
@@ -539,6 +542,7 @@ function resetInputRequired() {
   document.getElementById("documentName").classList.add("alertInput");
   document.getElementById("documentName2").classList.add("alertInput");
 }
+
 function preInsert() {
   resetInputRequired();
   let check_id_user = document.getElementById("id").value;

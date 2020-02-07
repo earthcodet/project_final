@@ -20,9 +20,9 @@
 
     <!-- เรียกไลบารี่สร้างปฎิทิน  -->
     <script src="../../js/service/jquery/jquery-3.4.1.min.js"></script>
-    <script src="../../js/service/date/datetimepicker.full.js"></script>
+    <script src="../../js/service/date/datetimepicker.full.js"></script> -->
     <script src="../../js/service/date/dateth.js"></script>
-    <link rel="stylesheet" href="../../css/date.css">
+     <link rel="stylesheet" href="../../css/date.css">
 
     <link rel="stylesheet" href="../../js/service/jquery/jquery.js">
     <link href="../../css/jquery.contextMenu.css" rel="stylesheet">
@@ -202,10 +202,11 @@
                 </a>
                 <input type="text" id="datepicker1" placeholder="" style="width: 10.8vw" maxlength="10"
                     onchange="document.getElementById('datepicker1').classList.remove('alertInput')" readonly>
-
                 <a id='dateExpTopic' style="margin-left: 0.3vw;">หมดอายุ <font color="red">*</font> :</a>
-                <input type="text" id="datepicker2" placeholder="" style="width: 11vw" maxlength="10" readonly
-                    onchange="document.getElementById('datepicker2').classList.remove('alertInput')">
+                <input type="text" id="datepicker2" placeholder="" style="width: 7vw" maxlength="10" 
+                    onchange="document.getElementById('datepicker2').classList.remove('alertInput')"> 
+                    <input id='life-id' type="radio" style="border: 0px;width:  1em;height: 1em;" onclick="onClickRadio()"
+                    <a>ตลอดชีพ</a>
                 <br>
 
                 <br>
@@ -342,7 +343,6 @@
         </fieldset>
         </div>
         <br>
-
         <div class="box">
             <p class="font">ประวัติการออกใบอนุญาต</p>
             <a>ปีงบประมาณ : <input type="text"

@@ -319,11 +319,11 @@
                             <input type="text" id="ownRoad" style="width: 15%;"></a>
                         <br>
                         <a style="margin-left: 7.4vw;">จังหวัด :
-                            <select id="ownProvince" style="width: 17.5%;"></select></a>
+                            <select id="ownerProvince" style="width: 17.5%;"></select></a>
                         <a>อำเภอ :
-                            <select id="ownDistrict" style="width: 17.5%;"></select></a>
+                            <select id="ownerDistrict" style="width: 17.5%;"></select></a>
                         <a>ตำบล :
-                            <select id="ownSubdistrict" style="width: 17.5%;"></select></a>
+                            <select id="ownerSubdistrict" style="width: 17.5%;"></select></a>
                         <br>
                         <br>
                         <a>บ้านเลขที่หรือโฉนดที่ดิน :
@@ -338,17 +338,17 @@
                             <input type="text" id="ownDeedRoad" style="width: 15%;"></a>
                         <br>
                         <a style="margin-left: 7.4vw;">จังหวัด :
-                            <select id="ownDeedProvince" style="width: 17.5%;"></a>
+                            <select id="landProvince" style="width: 17.5%;"></a>
                         </select>
                         <a>อำเภอ :
-                            <select id="ownDeedDistrict" style="width: 17.5%;"></a>
+                            <select id="landDistrict" style="width: 17.5%;"></a>
                         </select>&nbsp;
                         <a>ตำบล :
-                            <select id="ownDeedSubdistrict" style="width: 17.5%;"></a>
+                            <select id="landSubdistrict" style="width: 17.5%;"></a>
                         </select>
                         <br><br>
                         <input style="margin-left:9vw;" type="file" id="uploadFilePdf" onchange="uploadImage(event)"
-                            accept="application/pdf" multiple>
+                            accept="application/pdf" >
                     </div>
                     <br><br>
                 </div><br>
@@ -452,7 +452,8 @@
 <script src="../../node_modules/axios/dist/axios.min.js"></script>
 <script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
 <script src="../../js/service/utilities.js"></script>
-
+<script src="../../js/service/address/twoAddress.js"></script>
+<script src='../../js/service/address/addressLand.js'></script>
 <script src="../../js/service/sideMenu.js"></script>
 <!-- <script src="../../js/request/controlTest.js"></script> -->
 <!-- <script src="../../js/service/checkUserLogin.js"></script> -->

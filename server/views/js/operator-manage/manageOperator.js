@@ -33,6 +33,7 @@ let tSearchName = ''
 let tSearchSurname = ''
 let tSearchId = ''
 
+let tempPersonal = {}
 let _operatorData = {}
 function resetParameter() {
     arrInsert = [];
@@ -104,9 +105,11 @@ function setDataUI(data) {
         document.getElementById('nationality').value = data.PERSONAL_NATIONALITY === undefined || data.PERSONAL_NATIONALITY === null ? '' : data.PERSONAL_NATIONALITY
         document.getElementById('race').value = data.PERSONAL_RACE === undefined || data.PERSONAL_RACE === null ? '' : data.PERSONAL_RACE
         document.getElementById('datepicker3').value = data.PERSONAL_BIRTHDAY === undefined || data.PERSONAL_BIRTHDAY === null ? '' : data.PERSONAL_BIRTHDAY
+        
         document.getElementById('id').value = data.PERSONAL_PERSONAL_ID
         document.getElementById('datepicker1').value = data.PERSONAL_CARD_ISSUED
         document.getElementById('datepicker2').value = data.PERSONAL_CARD_EXPIRE === undefined || data.PERSONAL_CARD_EXPIRE === null ? '' : data.PERSONAL_CARD_EXPIRE
+        data.PERSONAL_CARD_EXPIRE === undefined ? radioLife() : ''
         document.getElementById('phone').value = data.PERSONAL_PHONE
         document.getElementById('fax').value = data.PERSONAL_FAX === undefined || data.PERSONAL_FAX === null ? '' : data.PERSONAL_FAX
         document.getElementById('last-update').value = data.PERSONAL_UPDATE
@@ -255,6 +258,22 @@ function searchPersonal() {
     }
 
 }
+function onClickRadio(){
+    if(document.getElementById('datepicker2').disabled === true){
+     document.getElementById('datepicker2').disabled = false 
+     document.getElementById('life-id').checked = false
+    }else{
+     document.getElementById('datepicker2').disabled = true 
+     document.getElementById('life-id').checked = true
+     document.getElementById('datepicker2').value = ''
+    }
+ }
+ function radioLife(){
+     document.getElementById('datepicker2').value = ''
+     document.getElementById('datepicker2').disabled = true 
+     document.getElementById('life-id').checked = true
+     document.getElementById('datepicker2').value = ''
+ }
 function errorSearch(texterror, action) {
     let error = document.getElementById('error_search')
     error.classList.toggle('animation')
@@ -282,6 +301,10 @@ function getImageByPeronalId(type, id) {
     })
 }
 function showItem(dataOperator) {
+    document.getElementById('datepicker2').disabled = false 
+    document.getElementById('life-id').checked = false
+    document.getElementById('datepicker2').value = ''
+    tempPersonal = dataOperator
     resetParameter()
     resetStyleIdDelete()
     changeOption(dataOperator.PERSONAL_TYPE.trim())
@@ -300,7 +323,7 @@ function showItem(dataOperator) {
     // static operator 
     _operatorData = dataOperator
 
-    if (dataOperator.PERSONAL_IS_DELETED === 'YES') {
+    if (dataOperator.PERSONAL_IS_DELETED === 'Y') {
         setIdDelete(dataOperator.PERSONAL_TYPE) // ทำให้ id เป็นขีด
         
     } else {
@@ -344,6 +367,9 @@ function createResultSearch(data) {
             }
 
             cell.appendChild(cellText);
+            if( j === 3 && data[i].PERSONAL_IS_DELETED === 'Y'){
+                cell.style.textDecoration = 'line-through'
+            }
             row.appendChild(cell);
         }
         tblBody.appendChild(row);
