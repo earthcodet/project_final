@@ -25,13 +25,12 @@ function show_food(id) {
   }
 }
 // เจ้าของที่
-function show_spirits(id) {
-  var radio = document.getElementById("spirits").checked;
+function show_owner(id) {
   if (id == 1) {
-    document.getElementById("boxSpirits").style.display = "";
+    document.getElementById("boxOwner").style.display = "";
   }
   else if (id == 2) {
-    document.getElementById("boxSpirits").style.display = "none";
+    document.getElementById("boxOwner").style.display = "none";
   }
 }
 // เจ้าของที่

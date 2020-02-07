@@ -109,11 +109,11 @@ function insertPage() {
               console.log(insert);
               inPerson.id = insert.pid;
               inAddress.id = insert.aid;
-              inPerson2.id=insert.p2id;
-              inWorkplace.id=insert.wid;
-              inForm.id=insert.fid;
-              inFood.id=insert.foid;
-              inLastBox.id=insert.lid;
+              inPerson2.id = insert.p2id;
+              inWorkplace2.id = insert.wid;
+              inForm.id = insert.fid;
+              inFood.id = insert.foid;
+              inLastBox.id = insert.lid;
               console.log(`inPerson`);
               console.log(inPerson);
               console.log(`tempData`);
@@ -124,9 +124,9 @@ function insertPage() {
               tempData.REQUEST_MENU = inPerson.typeReq;
               tempData.REQUEST_WRITE = inPerson.place;
               tempData.PERSONAL_TYPE = inPerson.typeUser;
-              // tempData. = inPerson.name;
+              //   tempData. = inPerson.name;
               tempData.PERSONAL_PERSONAL_ID = inPerson.id;
-              // tempData. = inPerson.age;
+              //   tempData. = inPerson.age;
               tempData.PERSONAL_NATIONALITY = inPerson.nationality;
               tempData.PERSONAL_RACE = inPerson.race;
 
@@ -143,32 +143,30 @@ function insertPage() {
                 'PERSONAL_PHONE':inAddress.phone,
                 'PERSONAL_FAX':inAddress.fax
               };
-
+              
               tempData.WID = {
-                // : inWorkplace.wLocation,
-                'ESTABLISHMENT_NAME':inWorkplace.workplaceName,
-                'ADDRESS_MOO':inWorkplace.moo,
-                'ADDRESS_TRXK':inWorkplace.trxk,
-                'ADDRESS_SXY':inWorkplace.sxy,
-                'ADDRESS_BUILDING':inWorkplace.building,
-                'ADDRESS_ROAD':inWorkplace.road,
-                'PROVINCE_NAME': inWorkplace.wProvince,
-                'AMPHUR_NAME': inWorkplace.wDistrict,
-                'DISTRICT_NAME': inWorkplace.wSubdistrict,
-                'ESTABLISHMENT_PHONE': inWorkplace.wPhone,
-                'ESTABLISHMENT_FAX': inWorkplace.wFax
+                'ESTABLISHMENT_NAME':inWorkplace2.workplaceName,
+                'ESTABLISHMENT_AREA_SIZE':inWorkplace2.area,
+                'ESTABLISHMENT_WORKER':inWorkplace2.numPeople,
+                'ESTABLISHMENT_TYPE':inWorkplace2.typeWorkplace,
+                'ESTABLISHMENT_MACHINE_SIZE':inWorkplace2.machinery,
+                'ADDRESS_HOME_NUMBER': inWorkplace2.wPlaceId,
+                'ADDRESS_MOO':inWorkplace2.moo,
+                'ADDRESS_TRXK':inWorkplace2.trxk,
+                'ADDRESS_SXY':inWorkplace2.sxy,
+                'ADDRESS_BUILDING':inWorkplace2.building,
+                'ADDRESS_ROAD':inWorkplace2.road,
+                'PROVINCE_NAME': inWorkplace2.wProvince,
+                'AMPHUR_NAME': inWorkplace2.wDistrict,
+                'DISTRICT_NAME': inWorkplace2.wSubdistrict,
+                'ESTABLISHMENT_PHONE': inWorkplace2.wPhone,
+                'ESTABLISHMENT_FAX': inWorkplace2.wFax
               };
 
-              tempData.REQUEST_RECEIPT_ORDER = inForm.bNum;
-              tempData.REQUEST_RECEIPT_DATE = inForm.datepicker2;
-              tempData.REQUEST_RECEIPT_FEE = inForm.bFee;
-              tempData.REQUEST_RECEIPT_FINE = inForm.bFine;
-              tempData.REQUEST_SUBCATEGORY = inForm.typeReForm;
-              tempData.REQUEST_PRODUCT_TYPE = inForm.typeProduct;
-              tempData.REQUEST_SELL_START = inForm.timeStart;
-              tempData.REQUEST_SELL_END = inForm.timeEnd;
-              tempData.REQUEST_DATE_ISSUED = inForm.datepicker3;
-              tempData.REQUEST_DATE_EXPIRED = inForm.datepicker4;
+              tempData.REQUEST_RECEIPT_ORDER=inForm.bNum
+              tempData.REQUEST_RECEIPT_DATE=inForm.datepicker2
+              tempData.REQUEST_RECEIPT_FEE=inForm.bFee
+              tempData.REQUEST_RECEIPT_FINE=inForm.bFine
 
               tempData.FOOD_FOODTRAIN = inFood.foodTrain;
               tempData.FOOD_FOODNOTRAIN = inFood.foodNoTrain;
@@ -182,7 +180,6 @@ function insertPage() {
               tempData.REQUEST_DOC_NO4 = inLastBox.documentSignature;
               tempData.REQUEST_DOC_NO5 = inLastBox.documentSJ4;
               tempData.REQUEST_DOC_NO6 = inLastBox.documentOther;
-              tempData.STAFF_ID = inLastBox.documentName2;
 
               console.log(tempData);
               if (insert.length != 0) {
