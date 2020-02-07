@@ -169,10 +169,7 @@ app.get('/search/personal/:id/:name/:surname', (req, res) => {
       res.json(data)
   })
 })
-webService.newId('LE599999','LAND').then((sc) =>{
-console.log(sc)
-console.log(sc.length)
-})
+
 //ทำให้ css กับ js ใช้ได้
 app.use(express.static(__dirname + '/views'));
 app.listen(PORT, () => {
