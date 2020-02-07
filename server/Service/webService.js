@@ -82,8 +82,8 @@ class service {
                         break
                 }
                 return resolve(sight + newId)
-            } else {
-                //ADDRESS
+            }
+            if (typeId === 'ADDRESS') {
                 //format ADD0000001
                 let sight = 'ADD'
                 let num = parseInt(oldId.slice(3))
@@ -126,7 +126,7 @@ class service {
                             newId = `0${num}`
                         }
                         break;
-                        case 1000000:
+                    case 1000000:
                         if (num > 100000 && num < 1000000) {
                             newId = `0${num}`
                         } else {
@@ -139,7 +139,292 @@ class service {
                 }
                 return resolve(sight + newId)
             }
+            if (typeId === 'ESTABLISHMENT') {
+                //format E000001 
+                let sight = 'E'
+                let num = parseInt(oldId.slice(1))
+                num += 1
+                let newId = ''
+                console.log(`this.digit(${num}) = ${this.digit(num)}`)
+                switch (this.digit(num)) {
+                    case 10:
+                        if (num < 10) {
+                            newId = `00000${num}`
+                        } else {
+                            newId = `0000${num}`
+                        }
+                        break;
+                    case 100:
+                        if (num > 10 && num < 100) {
+                            newId = `0000${num}`
+                        } else {
+                            newId = `000${num}`
+                        }
+                        break;
+                    case 1000:
+                        if (num > 100 && num < 1000) {
+                            newId = `000${num}`
+                        } else {
+                            newId = `00${num}`
+                        }
+                        break;
+                    case 10000:
+                        if (num > 1000 && num < 10000) {
+                            newId = `00${num}`
+                        } else {
+                            newId = `0${num}`
+                        }
+                        break;
+                    default:
+                        if (num > 10000 && num < 100000) {
+                            newId = `0${num}`
+                        } else {
+                            newId = `${num}`
+                        }
+                        break
+                }
+                return resolve(sight + newId)
+            }
+            if (typeId === 'REQUEST') {
+                //format A00001
+                let sight = oldId.slice(0, oldId.length - (oldId.length - 1))
+                let num = parseInt(oldId.slice(1))
+                num += 1
+                let newId = ''
+                console.log(`this.digit(${num}) = ${this.digit(num)}`)
+                switch (this.digit(num)) {
+                    case 10:
+                        if (num < 10) {
+                            newId = `0000${num}`
+                        } else {
+                            newId = `000${num}`
+                        }
+                        break;
+                    case 100:
+                        if (num > 10 && num < 100) {
+                            newId = `000${num}`
+                        } else {
+                            newId = `00${num}`
+                        }
+                        break;
+                    case 1000:
+                        if (num > 100 && num < 1000) {
+                            newId = `00${num}`
+                        } else {
+                            newId = `0${num}`
+                        }
+                        break;
+                    case 10000:
+                        if (num > 1000 && num < 10000) {
+                            newId = `0${num}`
+                        } else {
+                            newId = `${num}`
+                        }
+                        break;
+                    default:
+                        newId = `${num}`
+                        break
+                }
+                return resolve(sight + newId)
+            }
+            if (typeId === 'TRAIN') {
+                //format FT000001
+                let sight = 'FT'
+                let num = parseInt(oldId.slice(2))
+                num += 1
+                let newId = ''
+                console.log(`this.digit(${num}) = ${this.digit(num)}`)
+                switch (this.digit(num)) {
+                    case 10:
+                        if (num < 10) {
+                            newId = `00000${num}`
+                        } else {
+                            newId = `0000${num}`
+                        }
+                        break;
+                    case 100:
+                        if (num > 10 && num < 100) {
+                            newId = `0000${num}`
+                        } else {
+                            newId = `000${num}`
+                        }
+                        break;
+                    case 1000:
+                        if (num > 100 && num < 1000) {
+                            newId = `000${num}`
+                        } else {
+                            newId = `00${num}`
+                        }
+                        break;
+                    case 10000:
+                        if (num > 1000 && num < 10000) {
+                            newId = `00${num}`
+                        } else {
+                            newId = `0${num}`
+                        }
+                        break;
+                    default:
+                        if (num > 10000 && num < 100000) {
+                            newId = `0${num}`
+                        } else {
+                            newId = `${num}`
+                        }
+                        break
+                }
+                return resolve(sight + newId)
+            }
+            if (typeId === 'REFERENCE') {
+                //format RF00001
+                let sight = 'RF'
+                let num = parseInt(oldId.slice(2))
+                num += 1
+                let newId = ''
+                console.log(`this.digit(${num}) = ${this.digit(num)}`)
+                switch (this.digit(num)) {
+                    case 10:
+                        if (num < 10) {
+                            newId = `0000${num}`
+                        } else {
+                            newId = `000${num}`
+                        }
+                        break;
+                    case 100:
+                        if (num > 10 && num < 100) {
+                            newId = `000${num}`
+                        } else {
+                            newId = `00${num}`
+                        }
+                        break;
+                    case 1000:
+                        if (num > 100 && num < 1000) {
+                            newId = `00${num}`
+                        } else {
+                            newId = `0${num}`
+                        }
+                        break;
+                    default:
+                        if (num > 1000 && num < 10000) {
+                            newId = `0${num}`
+                        } else {
+                            newId = `${num}`
+                        }
+                        break
+                }
+                return resolve(sight + newId)
+            }
+            if (typeId === 'USER') {
+                //format S0001
+                let sight = 'S'
+                let num = parseInt(oldId.slice(1))
+                num += 1
+                let newId = ''
+                console.log(`this.digit(${num}) = ${this.digit(num)}`)
+                switch (this.digit(num)) {
+                    case 10:
+                        if (num < 10) {
+                            newId = `000${num}`
+                        } else {
+                            newId = `00${num}`
+                        }
+                        break;
+                    case 100:
+                        if (num > 10 && num < 100) {
+                            newId = `00${num}`
+                        } else {
+                            newId = `0${num}`
+                        }
+                        break;
+                    default:
+                        if (num > 100 && num < 1000) {
+                            newId = `0${num}`
+                        } else {
+                            newId = `${num}`
+                        }
+                        break;
+                }
+                return resolve(sight + newId)
+            }
+            if (typeId === 'LAND') {
+                //format LE000001
+                let sight = 'LE'
+                let num = parseInt(oldId.slice(2))
+                num += 1
+                let newId = ''
+                console.log(`this.digit(${num}) = ${this.digit(num)}`)
+                switch (this.digit(num)) {
+                    case 10:
+                        if (num < 10) {
+                            newId = `00000${num}`
+                        } else {
+                            newId = `0000${num}`
+                        }
+                        break;
+                    case 100:
+                        if (num > 10 && num < 100) {
+                            newId = `0000${num}`
+                        } else {
+                            newId = `000${num}`
+                        }
+                        break;
+                    case 1000:
+                        if (num > 100 && num < 1000) {
+                            newId = `000${num}`
+                        } else {
+                            newId = `00${num}`
+                        }
+                        break;
+                    case 10000:
+                        if (num > 1000 && num < 10000) {
+                            newId = `00${num}`
+                        } else {
+                            newId = `0${num}`
+                        }
+                        break;
+                    default:
+                        if (num > 10000 && num < 100000) {
+                            newId = `0${num}`
+                        } else {
+                            newId = `${num}`
+                        }
+                        break
+                }
+                return resolve(sight + newId)
+            }
         })
+    }
+    getSightFormType(type) {
+        let sightT = ''
+        switch (type) {
+            case 'ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ':
+                sightT = 'A'
+                break;
+            case 'ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ':
+                sightT = 'B'
+                break;
+            case 'ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร':
+                sightT = 'C'
+                break;
+            case 'ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร':
+                sightT = 'D'
+                break;
+            case 'หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร':
+                sightT = 'E'
+                break;
+            case 'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร':
+                sightT = 'F'
+                break;
+            case 'ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน':
+                sightT = 'G'
+                break;
+            case 'กิจการที่เป็นอันตรายต่อสุขภาพ':
+                sightT = 'H'
+                break;
+            default:
+                //กิจการฌาปณสถาน
+                sightT = 'I'
+                break;
+        }
+        return sightT
     }
     getNewId(type) {
         if (type === 'PERSONAL') {
@@ -319,8 +604,8 @@ class service {
                         this.loopInsertPersonal(personal, imageFile).then((data) => {
                             if (data.length != 0) {
                                 let returnTemp = {
-                                    'pid' : personal.id,
-                                    'aid' : address.id
+                                    'pid': personal.id,
+                                    'aid': address.id
                                 }
                                 return resolve(returnTemp)
                             } else {
@@ -355,7 +640,7 @@ class service {
                 let temp = realdate.split('-')
                 let day = temp[2]
                 let month = temp[1]
-                let year = parseInt(temp[0])+543
+                let year = parseInt(temp[0]) + 543
                 let format = `${day}-${month}-${year}` //16-01-2563
                 return format
             }
@@ -491,8 +776,8 @@ class service {
                                         if (data) {
                                             console.log(`update : image complete`)
                                             let returnTempUpdate = {
-                                                'pid':newpersonal.id,
-                                                'aid':newaddress.id
+                                                'pid': newpersonal.id,
+                                                'aid': newaddress.id
                                             }
                                             return resolve(returnTempUpdate)
                                         } else {
@@ -502,8 +787,8 @@ class service {
                                     })
                                 } else {
                                     let returnTempUpdate = {
-                                        'pid':newpersonal.id,
-                                        'aid':newaddress.id
+                                        'pid': newpersonal.id,
+                                        'aid': newaddress.id
                                     }
                                     console.log(`not updated : The picture is does't change`)
                                     return resolve(returnTempUpdate)
