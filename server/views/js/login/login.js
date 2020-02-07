@@ -8,16 +8,10 @@ function checkLogin() {
         hideAlert()
         var username = document.getElementById('username').value.trim()
         var password = document.getElementById('password').value.trim()
-        console.log(`@ username = ${username} and password = ${password}`)
-        console.log(`# username = ${tusername} and password = ${tpassword}`)
-        console.log(tusername != username && tpassword != password)
-        console.log(`${tusername} and ${username} = ${tusername != username}`)
-        console.log(`${tpassword} and ${password} = ${tpassword != password}`)
         if (tusername != username || tpassword != password) {
             if (username.length === 0 || password.length === 0) {
                 showAlert()
             } else {
-                console.log('checking for database')
                 tusername = username
                 tpassword = password
                 loading = !loading
