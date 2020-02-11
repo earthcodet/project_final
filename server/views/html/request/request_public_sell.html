@@ -66,14 +66,14 @@
             <a href="../renew/renew_market.html">- คำขอต่อใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
             <a href="../renew/renew_health_danger.html">- คำขอต่อกิจการที่เป็นอันตรายต่อสุขภาพ</a>
         </div>
-        <button class="dropdown-btn"><b>งานตรวจสอบ/อนุมัติ </b><i class="fa fa-caret-down"></i></button>
+        <!-- <button class="dropdown-btn"><b>งานตรวจสอบ/อนุมัติ </b><i class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
             <a href="#"></a>
         </div>
         <button class="dropdown-btn"><b>งานใบอนุญาต </b><i class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
             <a href="#"></a>
-        </div>
+        </div> -->
         <button class="dropdown-btn"><b>ข้อมูลส่วนกลาง </b><i class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
             <a href="../central/operator.html">- ข้อมูลผู้ประกอบการ</a>
@@ -85,10 +85,10 @@
             <a href="#">- บันทึกเรื่องร้องเรียน</a>
             <a href="#">- บันทึกคำร้อง</a>
         </div>
-        <button class="dropdown-btn"><b>ข้อมูลระบบ </b><i class="fa fa-caret-down"></i></button>
+        <!-- <button class="dropdown-btn"><b>ข้อมูลระบบ </b><i class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
             <a href="#"></a>
-        </div>
+        </div> -->
         <button class="dropdown-btn"><b>รายงาน </b><i class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
             <a href="../report/report_crematory.html">- ตามคำขอ</a>
@@ -101,7 +101,8 @@
                     class="badge" style="margin-left:0.5vw;">100000</span></a>
         </div>
         <br><br>
-        <button class="dropdown-btn"><a href="../notfication/request copy.html" style="color: red;"><b>คำขอหมดอายุเกิน 3 ปี </b></a>
+        <button class="dropdown-btn"><a href="../notfication/request copy.html" style="color: red;"><b>คำขอหมดอายุเกิน 3
+                    ปี </b></a>
             <!-- <i class="fa fa-caret-down"></i> -->
         </button>
     </div>
@@ -137,26 +138,26 @@
                     <br>
 
                     <a style="margin-left: 1.4vw;">ข้าพเจ้า <font color="red">*</font> :
-                        <select id="typeUser" style="width: 11%;">
+                        <select id="typeUser" style="width: 11%;" disabled>
                             <option value="บุคคลธรรมดา">บุคคลธรรมดา</option>
                             <option value="นิติบุคคล">นิติบุคคล</option>
                         </select>
-                        <input type="text" id="name" style="width: 16.5%;"
-                        onchange="document.getElementById('name').classList.remove('alertInput')">
+                        <input type="text" id="name" style="width: 16.5%;" readonly
+                            onchange="document.getElementById('name').classList.remove('alertInput')">
                         <button type="button" class="fa fa-search" style="border-radius: 5px;"
                             onclick="testSearchOparator()"></button></a>
                     <a>เลขประจำตัว <font color="red">*</font> :
-                        <input type="text" id="id" style="width: 13%;"
+                        <input type="text" id="id" style="width: 13%;" readonly
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                             maxlength="13" onkeyup="checkId(this.value, 'PERSON') 
                                         document.getElementById('id').classList.remove('alertInput')"></a>
                     <a>อายุ <font color="red">*</font> :
-                        <input type=" text" id="age"
+                        <input type=" text" id="age" readonly
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                             maxlength="3" style="width: 7%;"
                             onchange="document.getElementById('age').classList.remove('alertInput')"></a>
                     <a>สัญชาติ <font color="red">*</font> :
-                        <input class="drop" list="nationality1" id="nationality" name="" style="width: 7%;"
+                        <input class="drop" list="nationality1" id="nationality" name="" style="width: 7%;" readonly
                             onkeyup="document.getElementById('nationality').classList.remove('alertInput')"
                             onchange="document.getElementById('nationality').classList.remove('alertInput')">
                         <datalist id="nationality1">
@@ -167,7 +168,7 @@
                         </datalist>
                         </input></a>
                     <a>เชื้อชาติ <font color="red">*</font> :
-                        <input list="nationality2" id="race" name="" style="width: 7%;"
+                        <input list="nationality2" id="race" name="" style="width: 7%;" readonly
                             onkeyup="document.getElementById('race').classList.remove('alertInput')"
                             onchange="document.getElementById('race').classList.remove('alertInput')">
                         <datalist id="nationality2">
@@ -181,17 +182,12 @@
                     <a style="margin-left: 0.58vw;">เลขที่บ้าน <font color="red">*</font> :
                         <input id="home_id" type="text" style="width: 7%;"
                             onchange="document.getElementById('home_id').classList.remove('alertInput')"></a>
-                    <a>หมู่ที่ <font color="red">*</font> :
-                        <input id="moo" type="text" style="width: 7%;"
+                    <a>หมู่ที่ <font color="red">*</font> : <input id="moo" type="text" style="width: 7%;"
                             onchange="document.getElementById('moo').classList.remove('alertInput')"></a>
-                    <a>ตรอก :
-                        <input id="trxk" type="text" style="width: 13%;"></a>
-                    <a>ซอย :
-                        <input type="text" id="sxy" style="width: 13%;"></a>
-                    <a>อาคาร :
-                        <input type="text" id="building" style="width: 13.5%;"></a>
-                    <a>ถนน :
-                        <input type="text" id="road" style="width: 13.5%;"></a>
+                    <a>ตรอก : <input id="trxk" type="text" style="width: 13%;"></a>
+                    <a>ซอย : <input type="text" id="sxy" style="width: 13%;"></a>
+                    <a>อาคาร : <input type="text" id="building" style="width: 13.5%;"></a>
+                    <a>ถนน : <input type="text" id="road" style="width: 13.5%;"></a>
                     <br>
                     <a style="margin-left: 1.8vw;">จังหวัด <font color="red">*</font> :
                         <select id="province" style="width: 14%;"
@@ -213,11 +209,11 @@
                                 maxlength="9" style="width: 13.2%;"></a>
                         <br>
                         <a style="margin-left: 2.2vw;">ผู้ช่วย :
-                            <input type="text" id="person2_name" style="width: 28%;">
+                            <input type="text" id="person2_name" style="width: 28%;" readonly>
                             <button type="button" class="fa fa-search" style="border-radius: 5px;"
                                 onclick="testSearchOparator()"></button></a>
                         <a>เลขประจำตัว :
-                            <input id="person2_id" type="text" style="width: 13%;"
+                            <input id="person2_id" type="text" style="width: 13%;" readonly
                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                 maxlength="13" onkeyup="checkId(this.value, 'PERSONAL') 
                                         document.getElementById('person2_id').classList.remove('alertInput')"></a>
@@ -438,21 +434,17 @@
 
                         </datalist>
                         </input></a>
+                        <a>ใช้ชื่อสถานที่ประกอบการว่า : <input type="text" id="workplaceName" style="width: 37.5%"> (ถ้ามี)</a>   
                     <br>
                     <a>ตั้งอยู่เลขที่ <font color="red">*</font> :
                         <input type="text" id="wPlaceId" style="width: 7%;"
                             onchange="document.getElementById('wPlaceId').classList.remove('alertInput')"></a>
-                    <a>หมู่ที่ <font color="red">*</font> :
-                        <input type="int" id="wMoo" style="width: 7%;"
+                    <a>หมู่ที่ <font color="red">*</font> : <input type="int" id="wMoo" style="width: 7%;"
                             onchange="document.getElementById('wMoo').classList.remove('alertInput')"></a>
-                    <a>ตรอก:
-                        <input type="text" id="wTrxk" style="width: 13%;"></a>
-                    <a>ซอย :
-                        <input type="text" id="wSxy" style="width: 13%;"></a>
-                    <a>อาคาร :
-                        <input type="text" id="wBuilding" style="width: 13.5%;"></a>
-                    <a>ถนน :
-                        <input type="text" id="wRoad" style="width: 13.5%;"></a>
+                    <a>ตรอก : <input type="text" id="wTrxk" style="width: 13%;"></a>
+                    <a>ซอย : <input type="text" id="wSxy" style="width: 13%;"></a>
+                    <a>อาคาร : <input type="text" id="wBuilding" style="width: 13.5%;"></a>
+                    <a>ถนน : <input type="text" id="wRoad" style="width: 13.5%;"></a>
                     <br>
 
                     <a style="margin-left: 1.75vw;">จังหวัด <font color="red">*</font> :
@@ -478,19 +470,13 @@
                             maxlength="9" style="width: 13.2%;"></a>
                     <br>
                     <br>
-                    <a>ใบอนุญาตฉบับจริง
-                        เล่มที่ <font color="red">*</font> :
-                        <input type="text" id="bNo" style="width: 5%;"
-                            onchange="document.getElementById('bNo').classList.remove('alertInput')"></a>&ensp;
-                    <a>เลขที่ <font color="red">*</font> :
-                        <input type="text" id="bNum" style="width: 10%;"
-                            onchange="document.getElementById('bNum').classList.remove('alertInput')"></a>&ensp;
-                    <a>ออกให้เมื่อวันที่ <font color="red">*</font> :
-                        <input type="text" id="datepicker2" style="width: 12%;"
-                            onchange="document.getElementById('datepicker2').classList.remove('alertInput')"></a>
-                    <a>ค่าธรรมเนียม <font color="red">*</font> :
-                        <input type="number" id="bFee" style="width: 12%;"
-                            onchange="document.getElementById('bFee').classList.remove('alertInput')"></a>
+                    <a>ใบอนุญาตฉบับจริง</a>&ensp;
+                    <a>เลขที่ :
+                        <input type="text" id="bNum" style="width: 10%;"></a>&ensp;
+                    <a>ออกให้เมื่อวันที่ :
+                        <input type="text" id="datepicker2" style="width: 12%;"></a>
+                    <a>ค่าธรรมเนียม :
+                        <input type="number" id="bFee" style="width: 12%;"></a>
                     <a>ค่าปรับ :
                         <input type="number" id="bFine" style="width: 12%;"></a>
 
@@ -499,8 +485,8 @@
                     <a>
                         <a>ประกอบกิจการจำหน่ายสินค้าในที่หรือทางสาธารณะ ประเภท</a>
                         <br>
-                        <a>1) จำหน่ายสินค้าในที่หรือทางสาธารณะ
-                            ประเภท <font color="red">*</font> : <select id="typeReForm" style="width: 30%;"
+                        <a>1) &nbsp;ประเภทย่อย &nbsp;&nbsp; <font color="red">*</font> :
+                            <select id="typeReForm" style="width: 32%;"
                                 onchange="document.getElementById('typeReForm').classList.remove('alertInput')">
                                 <option value="1">ล้อเลื่อน (ทั่วไป)</option>
                                 <option value="2">ไก่ย่าง</option>
@@ -528,13 +514,10 @@
                             </select></a>
                         <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <a>สินค้าประเภท <font color="red">*</font> : <input id="typeProduct" style="width: 32%;"
-                                onchange="document.getElementById('typeProduct').classList.remove('alertInput')">&emsp;&emsp;&emsp;&emsp;
-                            เวลาเริ่ม <font color="red">*</font> : <input id="timeStart" type="time"
-                                style="width: 11.6%;"
-                                onchange="document.getElementById('timeStart').classList.remove('alertInput')">
-                            เวลาสิ้นสุด <font color="red">*</font> : <input id="timeEnd" type="time"
-                                style="width: 11.7%;"
-                                onchange="document.getElementById('timeEnd').classList.remove('alertInput')"></a>
+                                onchange="document.getElementById('typeProduct').classList.remove('alertInput')">
+                            &emsp;&emsp;&emsp;&emsp;
+                            เวลาเริ่ม : <input id="timeStart" type="time" style="width: 11.6%;">
+                            เวลาสิ้นสุด : <input id="timeEnd" type="time" style="width: 11.7%;"></a>
                         <p class="font">2) &nbsp;ผู้ได้รับอนุญาตต้องปฏิบัติตามหลักเกณฑ์ วิธีการ
                             และเงื่อนไขที่กำหนดในข้อกำหนดของท้องถิ่น</p>
                         <p class="font">3)
@@ -548,13 +531,10 @@
                                 เพิ่ม</button>
                             <a class="container1"></a>
                         </p>
-                        <p class="font">5) &nbsp;ใบอนญาตฉบับนี้ออกให้เมื่อวันที่ <font color="red">*</font> <input
-                                type="text" id="datepicker3"
-                                onchange="document.getElementById('datepicker3').classList.remove('alertInput')">
-                        </p>
-                        <p class="font">6) &nbsp;ใบอนญาตฉบับนี้สิ้นอายุวันที่ <font color="red">*</font>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="datepicker4"
-                                onchange="document.getElementById('datepicker4').classList.remove('alertInput')"></p>
+                    <p>5) &nbsp;ใบอนญาตฉบับนี้ออกให้เมื่อวันที่  <input type="text"
+                            id="request_date_issued" disabled readonly></p>
+                    <p>6) &nbsp;ใบอนญาตฉบับนี้สิ้นอายุวันที่ 
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="request_date_date" disabled readonly></p>
                     </a>
                     <br>
                 </div>
@@ -565,12 +545,12 @@
                     <h3 style="font-size: 2.8vh;">ใบอบรมผู้สัมผัสอาหาร <font color="red">*</font>
                     </h3>
                     <input type="radio" name="food" id="foodTrain" onClick="show_food(this.value);" value="1"
-                        style="margin-left: 5vw;" required>
+                        style="margin-left: 5vw;"/>
                     <a>อบรมแล้ว</a>
-                    <input type="radio" name="food" id="foodNoTrain" onClick="show_food(this.value);" value="2" />
+                    <input type="radio" name="food" id="foodNoTrain" onClick="show_food(this.value);" value="2" checked>
                     <a>ยังไม่ได้อบรม</a>
                     <br>
-                    <div id="boxFood" class="boxFood" style="display: none;margin-left: 5vw;">
+                    <div id="boxFood" class="boxFood" style="display:none;margin-left: 5vw;">
                         <a>ออกใบประกาศนียบัตรโดย</a>
                         <input type="text" id="foodBy">
                         <br>
@@ -606,30 +586,11 @@
                 <!-- อนุญาต -->
                 <div class="box">
                     <br>
-                    <input type="radio" name="confirm" id="confirm" onClick="show_confirm(this.value);" value="1">
+                    <input type="radio" name="confirm" id="confirm" onClick="show_confirm(this.value);" value="1"
+                        checked>
                     <a> ยืนยันคำขอรับ </a>
                     &nbsp;
-                    
-                    <br>
-                    <div class="row" id="boxConfirm" style="width: 80%;margin-left: 5vw;display: none;">
-                        <div class="col" style="width: 33.33%;">
-                            เลขที่คำขอ : <input readonly>
-                            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            วันที่ยื่น : <input type="text" id="datepicker7">
-                        </div>
-                        <div class="col" style="width: 33.33%;">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            เล่มที่ : <input style="width: 65%;">
-                            <br>
-                            ค่าธรรมเนียม :&nbsp;<input style="width: 65%;">
-                        </div>
-                        <div class="col" style="width: 33.33%;">
-                            &nbsp;&nbsp;
-                            เลขที่ : <input>
-                            <br>
-                            ค่าปรับ : <input>
-                        </div>
-                    </div>
+
                     <br>
                     <br>
                     <div style="margin-left: 8vw;">
@@ -658,15 +619,15 @@
                                 ข้อความในแบบคำร้องขอต่อใบอนุญาตนี้เป็นจริงทุกประการ
                                 <br>
                                 (ลงชื่อ) <font color="red">*</font>
-                                <input type="text" id="documentName" 
-                                onchange="document.getElementById('documentName').classList.remove('alertInput')"/>
+                                <input type="text" id="documentName"
+                                    onchange="document.getElementById('documentName').classList.remove('alertInput')" />
                                 ผู้ขอรับใบอนุญาต
                             </a>
                         </div>
                         <div class="col" style="width: 33.33%;">
                             <a>
-                                ลงชื่อ <font color="red">*</font> <input type="text" id="documentName2" 
-                                onchange="document.getElementById('documentName2').classList.remove('alertInput')"/>
+                                ลงชื่อ <font color="red">*</font> <input type="text" id="documentName2"
+                                    onchange="document.getElementById('documentName2').classList.remove('alertInput')" />
                                 <br>
                                 <p class="text-center">ผู้รับเงิน</p>
                             </a>
@@ -674,10 +635,10 @@
                         <div class="col" style="width: 33.33%;">
                             <a>
                                 &emsp;ลงชื่อ
-                                <input type="text" id="" readonly disabled>
+                                <input type="text" id="documentName3" readonly disabled>
                                 <br>
                                 ตำแหน่ง
-                                <input type="text" id="" readonly disabled>
+                                <input type="text" id="position" readonly disabled>
                                 <br>
                                 เจ้าพนักงานท้องถิ่น
                             </a>
@@ -685,7 +646,7 @@
                     </div>
 
                 </div><br>
-           
+
 
             </div>
 
@@ -694,23 +655,15 @@
 
 
 </body>
-<!-- <script src="../../js/jquery.js"></script> -->
-<script src="../../js/twoAddress.js"></script>
 <script src="../../js/request/request.js"></script>
 <script src="../../js/request/menuRequest.js"></script>
-<!-- <script src="../../js/controlTest.js"></script> -->
-
-
-<!-- <script src="../../js/disable.js"></script> -->
-<!-- <script src="../../js/sweet2.js"></script> -->
-<!-- <script src="../../js/utilities.js"></script> -->
-<!-- <script src="../../js/js22.js"></script> -->
 
 <script src="../../node_modules/axios/dist/axios.min.js"></script>
-<script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>   
+<script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
 <script src="../../js/service/utilities.js"></script>
 <script src="../../js/service/address/twoAddress.js"></script>
 <script src="../../js/service/sideMenu.js"></script>
 <!-- <script src="../../js/request/controlTest.js"></script> -->
 <script src="../../js/service/checkUserLogin.js"></script>
+
 </html>

@@ -169,7 +169,43 @@ app.get('/search/personal/:id/:name/:surname', (req, res) => {
       res.json(data)
   })
 })
+// Test Data referecne
+let testData = {
+  id:'',
+  title:'นาย',
+  name:'แชมป์02',
+  surname:'แชมป์',
+  status:'น้อง',
+  phone:'0616577015'
+}
+let trianData = {
+  id: '',
+  issuse: 'สำนักงานเทศบาล',
+  date_exp:'02-05-2541',
+  date_issued:'02-05-2563'
+}
+//TEST INSERT TRIAN AND SELECT
+ /*
+                        train.id
+                        train.issuse
+                        train.date_exp
+                        train.date_issued
 
+                        TRAIN_ID 
+                        TRAIN_ISSUED 
+                        TRAIN_DATE_EXP 
+                        TRAIN_DATE_ISSUED
+                        */
+webService.getReferenceByReferenceId('RF00001').then((ds) =>{
+  console.log(ds)
+})
+
+/*
+webService.loopInsertTrain(trianData).then((data)=>{
+  console.log(`===================`)
+  console.log(data)
+})
+*/
 //ทำให้ css กับ js ใช้ได้
 app.use(express.static(__dirname + '/views'));
 app.listen(PORT, () => {

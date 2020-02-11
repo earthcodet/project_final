@@ -3,9 +3,13 @@ const PersonalDAOObj = new PersonalDAO()
 const ImageDAO = require('../DAO/ImageDAO')
 const ImageDAOObj = new ImageDAO()
 const AddressDAO = require('../DAO/AddressDAO')
-const AddressDAOObj = new AddressDAO
+const AddressDAOObj = new AddressDAO()
 const LoginDAO = require('../DAO/UserDAO')
 const LoginDAOObj = new LoginDAO()
+const ReferenceDAO = require('../DAO/ReferenceDAO')
+const ReferenceDAOObj = new ReferenceDAO()
+const TrainDAO = require('../DAO/TrainDAO')
+const TrainDAOObj = new TrainDAO()
 
 class service {
     getProvince() {
@@ -82,14 +86,14 @@ class service {
                         break
                 }
                 return resolve(sight + newId)
-            } else {
-                //ADDRESS
+            }
+            if (typeId === 'ADDRESS') {
                 //format ADD0000001
                 let sight = 'ADD'
                 let num = parseInt(oldId.slice(3))
                 num += 1
                 let newId = ''
-                console.log(`this.digit(${num}) = ${this.digit(num)}`)
+
                 switch (this.digit(num)) {
                     case 10:
                         if (num < 10) {
@@ -126,7 +130,7 @@ class service {
                             newId = `0${num}`
                         }
                         break;
-                        case 1000000:
+                    case 1000000:
                         if (num > 100000 && num < 1000000) {
                             newId = `0${num}`
                         } else {
@@ -139,7 +143,292 @@ class service {
                 }
                 return resolve(sight + newId)
             }
+            if (typeId === 'ESTABLISHMENT') {
+                //format E000001 
+                let sight = 'E'
+                let num = parseInt(oldId.slice(1))
+                num += 1
+                let newId = ''
+
+                switch (this.digit(num)) {
+                    case 10:
+                        if (num < 10) {
+                            newId = `00000${num}`
+                        } else {
+                            newId = `0000${num}`
+                        }
+                        break;
+                    case 100:
+                        if (num > 10 && num < 100) {
+                            newId = `0000${num}`
+                        } else {
+                            newId = `000${num}`
+                        }
+                        break;
+                    case 1000:
+                        if (num > 100 && num < 1000) {
+                            newId = `000${num}`
+                        } else {
+                            newId = `00${num}`
+                        }
+                        break;
+                    case 10000:
+                        if (num > 1000 && num < 10000) {
+                            newId = `00${num}`
+                        } else {
+                            newId = `0${num}`
+                        }
+                        break;
+                    default:
+                        if (num > 10000 && num < 100000) {
+                            newId = `0${num}`
+                        } else {
+                            newId = `${num}`
+                        }
+                        break
+                }
+                return resolve(sight + newId)
+            }
+            if (typeId === 'REQUEST') {
+                //format A00001
+                let sight = oldId.slice(0, oldId.length - (oldId.length - 1))
+                let num = parseInt(oldId.slice(1))
+                num += 1
+                let newId = ''
+
+                switch (this.digit(num)) {
+                    case 10:
+                        if (num < 10) {
+                            newId = `0000${num}`
+                        } else {
+                            newId = `000${num}`
+                        }
+                        break;
+                    case 100:
+                        if (num > 10 && num < 100) {
+                            newId = `000${num}`
+                        } else {
+                            newId = `00${num}`
+                        }
+                        break;
+                    case 1000:
+                        if (num > 100 && num < 1000) {
+                            newId = `00${num}`
+                        } else {
+                            newId = `0${num}`
+                        }
+                        break;
+                    case 10000:
+                        if (num > 1000 && num < 10000) {
+                            newId = `0${num}`
+                        } else {
+                            newId = `${num}`
+                        }
+                        break;
+                    default:
+                        newId = `${num}`
+                        break
+                }
+                return resolve(sight + newId)
+            }
+            if (typeId === 'TRAIN') {
+                //format FT000001
+                let sight = 'FT'
+                let num = parseInt(oldId.slice(2))
+                num += 1
+                let newId = ''
+
+                switch (this.digit(num)) {
+                    case 10:
+                        if (num < 10) {
+                            newId = `00000${num}`
+                        } else {
+                            newId = `0000${num}`
+                        }
+                        break;
+                    case 100:
+                        if (num > 10 && num < 100) {
+                            newId = `0000${num}`
+                        } else {
+                            newId = `000${num}`
+                        }
+                        break;
+                    case 1000:
+                        if (num > 100 && num < 1000) {
+                            newId = `000${num}`
+                        } else {
+                            newId = `00${num}`
+                        }
+                        break;
+                    case 10000:
+                        if (num > 1000 && num < 10000) {
+                            newId = `00${num}`
+                        } else {
+                            newId = `0${num}`
+                        }
+                        break;
+                    default:
+                        if (num > 10000 && num < 100000) {
+                            newId = `0${num}`
+                        } else {
+                            newId = `${num}`
+                        }
+                        break
+                }
+                return resolve(sight + newId)
+            }
+            if (typeId === 'REFERENCE') {
+                //format RF00001
+                let sight = 'RF'
+                let num = parseInt(oldId.slice(2))
+                num += 1
+                let newId = ''
+
+                switch (this.digit(num)) {
+                    case 10:
+                        if (num < 10) {
+                            newId = `0000${num}`
+                        } else {
+                            newId = `000${num}`
+                        }
+                        break;
+                    case 100:
+                        if (num > 10 && num < 100) {
+                            newId = `000${num}`
+                        } else {
+                            newId = `00${num}`
+                        }
+                        break;
+                    case 1000:
+                        if (num > 100 && num < 1000) {
+                            newId = `00${num}`
+                        } else {
+                            newId = `0${num}`
+                        }
+                        break;
+                    default:
+                        if (num > 1000 && num < 10000) {
+                            newId = `0${num}`
+                        } else {
+                            newId = `${num}`
+                        }
+                        break
+                }
+                return resolve(sight + newId)
+            }
+            if (typeId === 'USER') {
+                //format S0001
+                let sight = 'S'
+                let num = parseInt(oldId.slice(1))
+                num += 1
+                let newId = ''
+
+                switch (this.digit(num)) {
+                    case 10:
+                        if (num < 10) {
+                            newId = `000${num}`
+                        } else {
+                            newId = `00${num}`
+                        }
+                        break;
+                    case 100:
+                        if (num > 10 && num < 100) {
+                            newId = `00${num}`
+                        } else {
+                            newId = `0${num}`
+                        }
+                        break;
+                    default:
+                        if (num > 100 && num < 1000) {
+                            newId = `0${num}`
+                        } else {
+                            newId = `${num}`
+                        }
+                        break;
+                }
+                return resolve(sight + newId)
+            }
+            if (typeId === 'LAND') {
+                //format LE000001
+                let sight = 'LE'
+                let num = parseInt(oldId.slice(2))
+                num += 1
+                let newId = ''
+
+                switch (this.digit(num)) {
+                    case 10:
+                        if (num < 10) {
+                            newId = `00000${num}`
+                        } else {
+                            newId = `0000${num}`
+                        }
+                        break;
+                    case 100:
+                        if (num > 10 && num < 100) {
+                            newId = `0000${num}`
+                        } else {
+                            newId = `000${num}`
+                        }
+                        break;
+                    case 1000:
+                        if (num > 100 && num < 1000) {
+                            newId = `000${num}`
+                        } else {
+                            newId = `00${num}`
+                        }
+                        break;
+                    case 10000:
+                        if (num > 1000 && num < 10000) {
+                            newId = `00${num}`
+                        } else {
+                            newId = `0${num}`
+                        }
+                        break;
+                    default:
+                        if (num > 10000 && num < 100000) {
+                            newId = `0${num}`
+                        } else {
+                            newId = `${num}`
+                        }
+                        break
+                }
+                return resolve(sight + newId)
+            }
         })
+    }
+    getSightFormType(type) {
+        let sightT = ''
+        switch (type) {
+            case 'ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ':
+                sightT = 'A'
+                break;
+            case 'ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ':
+                sightT = 'B'
+                break;
+            case 'ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร':
+                sightT = 'C'
+                break;
+            case 'ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร':
+                sightT = 'D'
+                break;
+            case 'หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร':
+                sightT = 'E'
+                break;
+            case 'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร':
+                sightT = 'F'
+                break;
+            case 'ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน':
+                sightT = 'G'
+                break;
+            case 'กิจการที่เป็นอันตรายต่อสุขภาพ':
+                sightT = 'H'
+                break;
+            default:
+                //กิจการฌาปณสถาน
+                sightT = 'I'
+                break;
+        }
+        return sightT
     }
     getNewId(type) {
         if (type === 'PERSONAL') {
@@ -156,7 +445,8 @@ class service {
                     }
                 })
             })
-        } else {
+        }
+        if (type === 'ADDRESS') {
             return new Promise((resolve, reject) => {
                 AddressDAOObj.getMaxIdAddress().then((data) => {
                     if (data[0].maxId === null) {
@@ -166,6 +456,37 @@ class service {
                         this.newId(data[0].maxId, 'ADDRESS').then((addressId) => {
                             console.log('getNewId : ' + addressId)
                             return resolve(addressId)
+                        })
+                    }
+                })
+            })
+        }
+        if (type === 'REFERENCE') {
+            return new Promise((resolve, reject) => {
+                ReferenceDAOObj.getMaxIdReference().then((data) => {
+                    if (data[0].maxId === null) {
+                        console.log('getNewId : RF00001')
+                        return resolve('RF00001')
+                    } else {
+                        this.newId(data[0].maxId, 'REFERENCE').then((referenceId) => {
+                            console.log('getNewId : ' + referenceId)
+                            return resolve(referenceId)
+                        })
+                    }
+                })
+            })
+        }
+        if (type === 'TRIAN') {
+            return new Promise((resolve, reject) => {
+                TrainDAOObj.getMaxIdTrian().then((data) => {
+                    console.log(data)
+                    if (data[0].maxId === null) {
+                        console.log('getNewId : FT000001')
+                        return resolve('FT000001')
+                    } else {
+                        this.newId(data[0].maxId, 'TRAIN').then((trainId) => {
+                            console.log('getNewId : ' + trainId)
+                            return resolve(trainId)
                         })
                     }
                 })
@@ -182,22 +503,22 @@ class service {
                             data[i].PERSONAL_BIRTHDAY = undefined
                         } else {
                             date = data[i].PERSONAL_BIRTHDAY.toISOString().slice(0, 10)
-                            data[i].PERSONAL_BIRTHDAY = this.formatData('TO-DISPLAY', date)
+                            data[i].PERSONAL_BIRTHDAY = this.formatDate('TO-DISPLAY', date)
                         }
                         if (data[i].PERSONAL_CARD_ISSUED === null) {
                             data[i].PERSONAL_CARD_ISSUED = undefined
                         } else {
                             date = data[i].PERSONAL_CARD_ISSUED.toISOString().slice(0, 10)
-                            data[i].PERSONAL_CARD_ISSUED = this.formatData('TO-DISPLAY', date)
+                            data[i].PERSONAL_CARD_ISSUED = this.formatDate('TO-DISPLAY', date)
                         }
                         if (data[i].PERSONAL_CARD_EXPIRE === null) {
                             data[i].PERSONAL_CARD_EXPIRE = undefined
                         } else {
                             date = data[i].PERSONAL_CARD_EXPIRE.toISOString().slice(0, 10)
-                            data[i].PERSONAL_CARD_EXPIRE = this.formatData('TO-DISPLAY', date)
+                            data[i].PERSONAL_CARD_EXPIRE = this.formatDate('TO-DISPLAY', date)
                         }
                         date = data[i].PERSONAL_UPDATE.toISOString().slice(0, 10)
-                        data[i].PERSONAL_UPDATE = this.formatData('TO-DISPLAY', date)
+                        data[i].PERSONAL_UPDATE = this.formatDate('TO-DISPLAY', date)
 
                         //USER_UPDATE
 
@@ -277,6 +598,126 @@ class service {
             })
         })
     }
+    insertReference(reference) {
+        return new Promise((resolve, reject) => {
+            ReferenceDAOObj.getReference(reference).then((referenceData) => {
+                if (referenceData.length != 0) {
+                    return resolve(referenceData[0])
+                } else {
+                    ReferenceDAOObj.insertReference(reference).then((data) => {
+                        if (data == 'true') {
+                            return resolve('true')
+                        } else {
+                            /* Duplicate Key : ER_DUP_ENTRY */
+                            return resolve('false')
+                        }
+                    })
+                }
+            })
+        })
+    }
+    loopInsertReference(reference) {
+        return new Promise((resolve, reject) => {
+            this.getNewId('REFERENCE').then((id) => {
+                reference.id = id
+                this.insertReference(reference).then((data) => {
+                    // console.log(`Data =>${data}`)
+                    // console.log(data)
+                    if (data.length != 0) {
+                        console.log(data)
+                        console.log(`Insert : reference complete`)
+                        if (data === 'true') {
+                            let referenceResult = {
+                                REFERENCE_ID: id,
+                                REFERENCE_TITLE: reference.title,
+                                REFERENCE_NAME: reference.name,
+                                REFERENCE_SURNAME: reference.surname,
+                                REFERENCE_STATUS: reference.status,
+                                REFERENCE_PHONE: reference.phone
+                            }
+                            return resolve(referenceResult)
+                        } else {
+                            return resolve(data)
+                        }
+
+                    } else {
+                        this.loopInsertReference(reference)
+                    }
+                })
+            })
+        })
+    }
+    getReferenceByReferenceId(id) {
+        return new Promise((resolve, reject) => {
+            ReferenceDAOObj.getReference(id).then((getReferenceData) => {
+                return resolve(getReferenceData)
+            })
+        })
+    }
+    getTrainByTrainId(id) {
+        return new Promise((resolve, reject) => {
+            TrainDAOObj.getTrian(id).then((trainData) => {
+                trainData[0].TRAIN_DATE_EXP = this.formatDate('TO-DISPLAY', trainData[0].TRAIN_DATE_EXP.toISOString().slice(0, 10))
+                trainData[0].TRAIN_DATE_ISSUED = this.formatDate('TO-DISPLAY', trainData[0].TRAIN_DATE_ISSUED.toISOString().slice(0, 10))
+                return resolve(trainData)
+            })
+        })
+    }
+    
+    insertTrain(train) {
+        return new Promise((resolve, reject) => {
+            TrainDAOObj.getTrianDuplication(train).then((trainData) => {
+                if (trainData.length != 0) {
+                    console.log('asdsd')
+                    trainData[0].TRAIN_DATE_EXP = this.formatDate('TO-DISPLAY', trainData[0].TRAIN_DATE_EXP.toISOString().slice(0, 10))
+                    trainData[0].TRAIN_DATE_ISSUED = this.formatDate('TO-DISPLAY', trainData[0].TRAIN_DATE_ISSUED.toISOString().slice(0, 10))
+                    return resolve(trainData[0])
+                } else {
+                    TrainDAOObj.insertTrian(train).then((data) => {
+                        if (data == 'true') {
+                            return resolve('true')
+                        } else {
+                            /* Duplicate Key : ER_DUP_ENTRY */
+                            console.log(`ERROR INSERT TRAIN : ${data}`)
+                            return resolve('false')
+                        }
+                    })
+                }
+            })
+        })
+    }
+    loopInsertTrain(train) {
+        return new Promise((resolve, reject) => {
+            this.getNewId('TRIAN').then((id) => {
+                train.id = id
+                train.date_exp = this.formatDate('TO-INSERT', train.date_exp)
+                train.date_issued = this.formatDate('TO-INSERT', train.date_issued)
+                //if (type === 'TO-DISPLAY') {
+                this.insertTrain(train).then((data) => {
+                    // console.log(`Data =>${data}`)
+                    // console.log(data)
+                    if (data.length != 0) {
+                        console.log(data)
+                        console.log(`Insert : train complete`)
+                        if (data === 'true') {
+                            let trainResult = {
+                                TRAIN_ID: train.id,
+                                TRAIN_ISSUED: train.issuse,
+                                TRAIN_DATE_EXP: this.formatDate('TO-DISPLAY', train.date_exp),
+                                TRAIN_DATE_ISSUED: this.formatDate('TO-DISPLAY', train.date_issued)
+                            }
+                            return resolve(trainResult)
+                        } else {
+                            return resolve(data)
+                        }
+
+                    } else {
+                        this.loopInsertTrain(train)
+                    }
+                })
+            })
+        })
+    }
     loopInsertPersonal(personal, imageFile) {
         return new Promise((resolve, reject) => {
             this.getNewId('PERSONAL').then((id) => {
@@ -319,8 +760,8 @@ class service {
                         this.loopInsertPersonal(personal, imageFile).then((data) => {
                             if (data.length != 0) {
                                 let returnTemp = {
-                                    'pid' : personal.id,
-                                    'aid' : address.id
+                                    'pid': personal.id,
+                                    'aid': address.id
                                 }
                                 return resolve(returnTemp)
                             } else {
@@ -335,7 +776,7 @@ class service {
         })
     }
 
-    formatData(type, date) {
+    formatDate(type, date) {
         if (type === 'TO-INSERT') {
             //16-01-2563
             if (date != null) {
@@ -355,7 +796,7 @@ class service {
                 let temp = realdate.split('-')
                 let day = temp[2]
                 let month = temp[1]
-                let year = parseInt(temp[0])+543
+                let year = parseInt(temp[0]) + 543
                 let format = `${day}-${month}-${year}` //16-01-2563
                 return format
             }
@@ -458,16 +899,16 @@ class service {
         var datetime = new Date();
         let dateForUpdate = datetime.toISOString().slice(0, 10)
         if (personal.birthday.length != 0) {
-            personal.birthday = this.formatData('TO-INSERT', personal.birthday)
+            personal.birthday = this.formatDate('TO-INSERT', personal.birthday)
             personal.birthday = `'${personal.birthday}'`
         }
 
         if (personal.card_expipe.length != 0) {
-            personal.card_expipe = this.formatData('TO-INSERT', personal.card_expipe)
+            personal.card_expipe = this.formatDate('TO-INSERT', personal.card_expipe)
             personal.card_expipe = `'${personal.card_expipe}'`
         }
 
-        personal.card_issued = this.formatData('TO-INSERT', personal.card_issued)
+        personal.card_issued = this.formatDate('TO-INSERT', personal.card_issued)
 
         personal.update = dateForUpdate
         personal.username = username
@@ -491,8 +932,8 @@ class service {
                                         if (data) {
                                             console.log(`update : image complete`)
                                             let returnTempUpdate = {
-                                                'pid':newpersonal.id,
-                                                'aid':newaddress.id
+                                                'pid': newpersonal.id,
+                                                'aid': newaddress.id
                                             }
                                             return resolve(returnTempUpdate)
                                         } else {
@@ -502,8 +943,8 @@ class service {
                                     })
                                 } else {
                                     let returnTempUpdate = {
-                                        'pid':newpersonal.id,
-                                        'aid':newaddress.id
+                                        'pid': newpersonal.id,
+                                        'aid': newaddress.id
                                     }
                                     console.log(`not updated : The picture is does't change`)
                                     return resolve(returnTempUpdate)

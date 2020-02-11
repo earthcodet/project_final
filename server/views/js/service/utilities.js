@@ -184,7 +184,7 @@ function checkPhone(value, id) {
 }
 
 function formatPhone(value) {
-    if ((value.length === 1 && value === '-') || (value.slice(0, 1) === '0' && value.slice(1, 2) != 0 && value.length === 10 && !isNaN(value))) {
+    if ((value.length === 1 && value === '-') || (value.slice(0, 1) === '0' && value.slice(1, 2) != 0 && (value.length === 10 || value.length === 9) && !isNaN(value))) {
         return true
     } else {
         return false

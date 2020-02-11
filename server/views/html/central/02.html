@@ -205,7 +205,7 @@
                 <a id='dateExpTopic' style="margin-left: 0.3vw;">หมดอายุ <font color="red">*</font> :</a>
                 <input type="text" id="datepicker2" placeholder="" style="width: 7vw" maxlength="10" 
                     onchange="document.getElementById('datepicker2').classList.remove('alertInput')"> 
-                    <input id='life-id' type="radio" style="border: 0px;width:  1em;height: 1em;" onclick="onClickRadio()"
+                    <input id='life-id' type="radio" style="border: 0px;width:  1em;height: 1em;" onclick="onClickRadio()">
                     <a>ตลอดชีพ</a>
                 <br>
 
@@ -324,11 +324,12 @@
                     <img id="operatorImage" class="rounded" src="../../img/userProfile.png"
                         style="width: 18vw;height: 18vw;">
                 </div>
+                <br>
                 <div id="imgButton">
                     <input style='display: none;' type="file" id="uploadFile" onchange="uploadImage(event)"
                         accept="image/*">
 
-                    <button type="button" class="addimage" onclick="buttonImage()" style="width:5vw ">แทน</button>
+                    <button type="button" class="addimage" onclick="buttonImage()" style="width:5vw ">รูปภาพ</button>
 
                     <button type="button" class="delete" id="cancelImage" style="width:5vw;margin-left: 0.5vw;"
                         onclick="deleteImageOne()"> ลบ </button>

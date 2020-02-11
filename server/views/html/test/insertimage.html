@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="../../js/service/imageupload.js"></script>
+<link rel="stylesheet" href="../../css/css2.css">
+<body>
+    <!-- เพิ่มรูป -->
+    <div style="width: 100%;">
+        <br>
+        <div>
+            <a>รูปภาพผลการตรวจสอบ</a>
+            <input type="file" id="uploadFile" style="display: none;" onchange="handleFileSelect(event)"
+                accept="image/*" multiple>
+            <button type="button" class="button" onclick="document.getElementById('uploadFile').click()">
+                <h5><i class="fa fa-upload"></i>
+                    อัพโหลดภาพ</h5>
+            </button>
+            <br>
+            <br>
+            <div id='outputImage' style="height: 80vh; overflow-y:auto; border: 0.3vh solid black;">
+            </div>
+        </div>
+    </div><br>
+</body>
+</html>
