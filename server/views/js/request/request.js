@@ -73,8 +73,6 @@ let inForm = {
 };
 
 let inFood = {
-  foodTrain: "",
-  foodNoTrain: "",
   foodBy: "",
   foodStart: "",
   foodEnd: ""
@@ -117,6 +115,7 @@ function checkPhone(value, id) {
     }
   }
 }
+
 function formatPhone(value) {
   if (
     (value.length === 1 && value === "-") ||
@@ -131,6 +130,7 @@ function formatPhone(value) {
     return false;
   }
 }
+
 function checkId(value, type) {
   if (value.length != 13) {
     _isCheckPersonalId = false;
@@ -344,8 +344,6 @@ function resetParameter() {
   };
 
   inFood = {
-    foodTrain: "",
-    foodNoTrain: "",
     foodBy: "",
     foodStart: "",
     foodEnd: ""
@@ -366,7 +364,6 @@ function resetParameter() {
     position: ""
   };
 }
-
 
 function inputRequired() {
   let checkno2 =
@@ -503,6 +500,7 @@ function inputRequired() {
     return true;
   }
 }
+
 function resetInputRequired() {
   document.getElementById("datepicker1").classList.remove("alertInput");
   document.getElementById("typeReq").classList.remove("alertInput");
@@ -525,117 +523,199 @@ function resetInputRequired() {
   document.getElementById("wSubdistrict").classList.remove("alertInput");
   document.getElementById("wPhone").classList.remove("alertInput");
   document.getElementById("typeProduct").classList.remove("alertInput");
-  // document.getElementById("datepicker3").classList.remove("alertInput");
-  // document.getElementById("datepicker4").classList.remove("alertInput");
-  document.getElementById("documentName").classList.add("alertInput");
-  document.getElementById("documentName2").classList.add("alertInput");
+  document.getElementById("documentName").classList.remove("alertInput");
+  document.getElementById("documentName2").classList.remove("alertInput");
+
+  document.getElementById("foodBy").classList.remove("alertInput");
+  document.getElementById("datepicker5").classList.remove("alertInput");
+  document.getElementById("datepicker6").classList.remove("alertInput");
+}
+
+function foodRequired() {
+  let checkfood1 = document.getElementById("foodBy").value.trim().length === 0;
+  let checkfood2 =
+    document.getElementById("datepicker5").value.trim().length === 0;
+  let checkfood3 =
+    document.getElementById("datepicker6").value.trim().length === 0;
+
+  if (checkfood1) {
+    document.getElementById("foodBy").classList.add("alertInput");
+  }
+  if (checkfood2) {
+    document.getElementById("datepicker5").classList.add("alertInput");
+  }
+  if (checkfood3) {
+    document.getElementById("datepicker6").classList.add("alertInput");
+  }
+
+  if (checkfood1 || checkfood2 || checkfood3) {
+    return false;
+  } else {
+    return true;
+  }
 }
 
 function preInsert() {
   resetInputRequired();
   let check_id_user = document.getElementById("id").value;
   let check_input = inputRequired();
+  let check_input_food = foodRequired();
+  let check_food = document.getElementById("foodTrain").checked;
   if (check_input) {
     if (check_id_user.trim().length === 13) {
       if (!_isUsed) {
         if (formatPhone(document.getElementById("phone").value.trim())) {
-          inPerson.form_id = document.getElementById("form_id").value;
-          inPerson.datepicker1 = document.getElementById("datepicker1").value;
-          inPerson.typeReq = document.getElementById("typeReq").value;
-          inPerson.place = document.getElementById("place").value;
-          inPerson.typeUser = document.getElementById("typeUser").value;
-          inPerson.name = document.getElementById("name").value;
-          inPerson.id = document.getElementById("id").value;
-          inPerson.age = document.getElementById("age").value;
-          inPerson.nationality = document.getElementById("nationality").value;
-          inPerson.race = document.getElementById("race").value;
+          if (check_food === true) {
+            if (check_input_food) {
+              inPerson.form_id = document.getElementById("form_id").value;
+              inPerson.datepicker1 = document.getElementById(
+                "datepicker1"
+              ).value;
+              inPerson.typeReq = document.getElementById("typeReq").value;
+              inPerson.place = document.getElementById("place").value;
+              inPerson.typeUser = document.getElementById("typeUser").value;
+              inPerson.name = document.getElementById("name").value;
+              inPerson.id = document.getElementById("id").value;
+              inPerson.age = document.getElementById("age").value;
+              inPerson.nationality = document.getElementById(
+                "nationality"
+              ).value;
+              inPerson.race = document.getElementById("race").value;
 
-          inAddress.home_id = document.getElementById("home_id").value;
-          inAddress.moo = document.getElementById("moo").value;
-          inAddress.trxk = document.getElementById("trxk").value;
-          inAddress.sxy = document.getElementById("sxy").value;
-          inAddress.building = document.getElementById("building").value;
-          inAddress.road = document.getElementById("road").value;
-          let provinceValue = parseInt(
-            document.getElementById(`province`).value
-          );
-          let amphurValue = parseInt(document.getElementById(`district`).value);
-          let districtValue = parseInt(
-            document.getElementById(`subdistrict`).value
-          );
-          inAddress.district_name = district[districtValue - 1].DISTRICT_NAME;
-          inAddress.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
-          inAddress.province_name = province[provinceValue - 1].PROVINCE_NAME;
-          inAddress.phone = getElementById("phone").value;
-          inAddress.fax = getElementById("fax").value;
+              inAddress.home_id = document.getElementById("home_id").value;
+              inAddress.moo = document.getElementById("moo").value;
+              inAddress.trxk = document.getElementById("trxk").value;
+              inAddress.sxy = document.getElementById("sxy").value;
+              inAddress.building = document.getElementById("building").value;
+              inAddress.road = document.getElementById("road").value;
+              let provinceValue = parseInt(
+                document.getElementById(`province`).value
+              );
+              let amphurValue = parseInt(
+                document.getElementById(`district`).value
+              );
+              let districtValue = parseInt(
+                document.getElementById(`subdistrict`).value
+              );
+              inAddress.district_name =
+                district[districtValue - 1].DISTRICT_NAME;
+              inAddress.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
+              inAddress.province_name =
+                province[provinceValue - 1].PROVINCE_NAME;
+              inAddress.phone = document.getElementById("phone").value;
+              inAddress.fax = document.getElementById("fax").value;
 
-          inPerson2.person2_name = getElementById("person2_name").value;
-          inPerson2.person2_id = getElementById("person2_id").value;
+              inPerson2.person2_name = document.getElementById(
+                "person2_name"
+              ).value;
+              inPerson2.person2_id = document.getElementById(
+                "person2_id"
+              ).value;
 
-          inWorkplace.wLocation = document.getElementById("wLocation").value;
-          inWorkplace.workplaceName = document.getElementById(
-            "workplaceName"
-          ).value;
-          inWorkplace.wPlaceId = document.getElementById("wPlaceId").value;
-          inWorkplace.wMoo = document.getElementById("wMoo").value;
-          inWorkplace.wTrxk = document.getElementById("wTrxk").value;
-          inWorkplace.wSxy = document.getElementById("wSxy").value;
-          inWorkplace.wBuilding = document.getElementById("wBuilding").value;
-          inWorkplace.wRoad = document.getElementById("wRoad").value;
-          let provinceValue2 = parseInt(
-            document.getElementById(`wProvince`).value
-          );
-          let amphurValue2 = parseInt(
-            document.getElementById(`wDistrict`).value
-          );
-          let districtValue2 = parseInt(
-            document.getElementById(`wSubdistrict`).value
-          );
-          inWorkplace.wSubdistrict = district[districtValue2 - 1].DISTRICT_NAME;
-          inWorkplace.wDistrict = amphur[amphurValue2 - 1].AMPHUR_NAME;
-          inWorkplace.wProvince = province[provinceValue2 - 1].PROVINCE_NAME;
-          inWorkplace.wPhone = document.getElementById("wPhone").value;
-          inWorkplace.wFax = document.getElementById("wFax").value;
+              inWorkplace.wLocation = document.getElementById(
+                "wLocation"
+              ).value;
+              inWorkplace.workplaceName = document.getElementById(
+                "workplaceName"
+              ).value;
+              inWorkplace.wPlaceId = document.getElementById("wPlaceId").value;
+              inWorkplace.wMoo = document.getElementById("wMoo").value;
+              inWorkplace.wTrxk = document.getElementById("wTrxk").value;
+              inWorkplace.wSxy = document.getElementById("wSxy").value;
+              inWorkplace.wBuilding = document.getElementById(
+                "wBuilding"
+              ).value;
+              inWorkplace.wRoad = document.getElementById("wRoad").value;
+              let provinceValue2 = parseInt(
+                document.getElementById(`wProvince`).value
+              );
+              let amphurValue2 = parseInt(
+                document.getElementById(`wDistrict`).value
+              );
+              let districtValue2 = parseInt(
+                document.getElementById(`wSubdistrict`).value
+              );
+              inWorkplace.wSubdistrict =
+                district[districtValue2 - 1].DISTRICT_NAME;
+              inWorkplace.wDistrict = amphur[amphurValue2 - 1].AMPHUR_NAME;
+              inWorkplace.wProvince =
+                province[provinceValue2 - 1].PROVINCE_NAME;
+              inWorkplace.wPhone = document.getElementById("wPhone").value;
+              inWorkplace.wFax = document.getElementById("wFax").value;
 
-          inForm.bNum = document.getElementById("bNum").value;
-          inForm.datepicker2 = document.getElementById("datepicker2").value;
-          inForm.bFee = document.getElementById("bFee").value;
-          inForm.bFine = document.getElementById("bFine").value;
-          inForm.typeReForm = document.getElementById("typeReForm").value;
-          inForm.typeProduct = document.getElementById("typeProduct").value;
-          inForm.dateStart = document.getElementById("timeStart").value;
-          inForm.dateEnd = document.getElementById("timeEnd").value;
-          inForm.dateFormStart = document.getElementById("datepicker3").value;
-          inForm.dateFormEnd = document.getElementById("datepicker4").value;
+              inForm.bNum = document.getElementById("bNum").value;
+              inForm.datepicker2 = document.getElementById("datepicker2").value;
+              inForm.bFee = document.getElementById("bFee").value;
+              inForm.bFine = document.getElementById("bFine").value;
+              inForm.typeReForm = document.getElementById("typeReForm").value;
+              inForm.typeProduct = document.getElementById("typeProduct").value;
+              inForm.dateStart = document.getElementById("timeStart").value;
+              inForm.dateEnd = document.getElementById("timeEnd").value;
+              inForm.dateFormStart = document.getElementById(
+                "request_date_issued"
+              ).value;
+              inForm.dateFormEnd = document.getElementById(
+                "request_date_date"
+              ).value;
 
-          inFood.foodTrain = document.getElementById("foodTrain").value;
-          inFood.foodNoTrain = document.getElementById("foodNoTrain").value;
-          inFood.foodBy = document.getElementById("foodBy").value;
-          inFood.foodStart = document.getElementById("datepicker5").value;
-          inFood.foodEnd = document.getElementById("datepicker6").value;
+              inFood.foodBy = document.getElementById("foodBy").value;
+              inFood.foodStart = document.getElementById("datepicker5").value;
+              inFood.foodEnd = document.getElementById("datepicker6").value;
 
-          inLastBox.confirm=document.getElementById("confirm").value;
-          inLastBox.documentId=document.getElementById("documentId").value;
-          inLastBox.documenthHome=document.getElementById("documenthHome").value;
-          inLastBox.documentLegalEntity=document.getElementById("documentLegalEntity").value;
-          inLastBox.documentSignature=document.getElementById("documentSignature").value;
-          inLastBox.documentSJ4=document.getElementById("documentSJ4").value;
-          inLastBox.documentOther=document.getElementById("documentOther").value;
-          inLastBox.other=document.getElementById("other").value;
-          inLastBox.documentName = document.getElementById("documentName").value;
-          inLastBox.documentName2 = document.getElementById("documentName2").value;
-          inLastBox.documentName2 = document.getElementById("documentName3").value;
-          inLastBox.position = document.getElementById("position").value;
+              inLastBox.confirm = document.getElementById("confirm").value;
+              inLastBox.documentId = document.getElementById(
+                "documentId"
+              ).value;
+              inLastBox.documenthHome = document.getElementById(
+                "documenthHome"
+              ).value;
+              inLastBox.documentLegalEntity = document.getElementById(
+                "documentLegalEntity"
+              ).value;
+              inLastBox.documentSignature = document.getElementById(
+                "documentSignature"
+              ).value;
+              inLastBox.documentSJ4 = document.getElementById(
+                "documentSJ4"
+              ).value;
+              inLastBox.documentOther = document.getElementById(
+                "documentOther"
+              ).value;
+              inLastBox.other = document.getElementById("other").value;
+              inLastBox.documentName = document.getElementById(
+                "documentName"
+              ).value;
+              inLastBox.documentName2 = document.getElementById(
+                "documentName2"
+              ).value;
+              inLastBox.documentName2 = document.getElementById(
+                "documentName3"
+              ).value;
+              inLastBox.position = document.getElementById("position").value;
 
-          arrInsert.push(inPerson);
-          arrInsert.push(inAddress);
-          arrInsert.push(inPerson2);
-          arrInsert.push(inWorkplace);
-          arrInsert.push(inForm);
-          arrInsert.push(inFood);
-          arrInsert.push(inLastBox);
-          console.log(arrInsert);
-          return true;
+              arrInsert.push(inPerson);
+              arrInsert.push(inAddress);
+              arrInsert.push(inPerson2);
+              arrInsert.push(inWorkplace);
+              arrInsert.push(inForm);
+              arrInsert.push(inFood);
+              arrInsert.push(inLastBox);
+              console.log(arrInsert);
+              return true;
+            } else {
+              Swal.fire({
+                title: "กรุณากรอกข้อมูลใบอบรมผู้สัมผัสอาหาร",
+                width: "30%",
+                showConfirmButton: true,
+                closeOnConfirm: false,
+                closeOnCancel: false,
+                confirmButtonColor: "#009688",
+                icon: "error"
+              });
+            }
+          } else {
+            return true;
+          }
         } else {
           Swal.fire({
             title: "รูปแบบหมายเลขโทรศัพท์ไม่ถูกต้อง",
