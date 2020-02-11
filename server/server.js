@@ -181,15 +181,31 @@ let testData = {
 let trianData = {
   id: '',
   issuse: 'สำนักงานเทศบาล',
-  date_exp:'2009-05-02',
-  date_issued:'2007-05-02'
+  date_exp:'02-05-2541',
+  date_issued:'02-05-2563'
 }
 //TEST INSERT TRIAN AND SELECT
+ /*
+                        train.id
+                        train.issuse
+                        train.date_exp
+                        train.date_issued
 
-webService.getNewId('TRIAN').then((data)=>{
-  console.log(`NEW ID ${data}`)
+                        TRAIN_ID 
+                        TRAIN_ISSUED 
+                        TRAIN_DATE_EXP 
+                        TRAIN_DATE_ISSUED
+                        */
+webService.getReferenceByReferenceId('RF00001').then((ds) =>{
+  console.log(ds)
 })
 
+/*
+webService.loopInsertTrain(trianData).then((data)=>{
+  console.log(`===================`)
+  console.log(data)
+})
+*/
 //ทำให้ css กับ js ใช้ได้
 app.use(express.static(__dirname + '/views'));
 app.listen(PORT, () => {

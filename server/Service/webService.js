@@ -93,7 +93,7 @@ class service {
                 let num = parseInt(oldId.slice(3))
                 num += 1
                 let newId = ''
-                
+
                 switch (this.digit(num)) {
                     case 10:
                         if (num < 10) {
@@ -149,7 +149,7 @@ class service {
                 let num = parseInt(oldId.slice(1))
                 num += 1
                 let newId = ''
-                
+
                 switch (this.digit(num)) {
                     case 10:
                         if (num < 10) {
@@ -195,7 +195,7 @@ class service {
                 let num = parseInt(oldId.slice(1))
                 num += 1
                 let newId = ''
-                
+
                 switch (this.digit(num)) {
                     case 10:
                         if (num < 10) {
@@ -237,7 +237,7 @@ class service {
                 let num = parseInt(oldId.slice(2))
                 num += 1
                 let newId = ''
-                
+
                 switch (this.digit(num)) {
                     case 10:
                         if (num < 10) {
@@ -283,7 +283,7 @@ class service {
                 let num = parseInt(oldId.slice(2))
                 num += 1
                 let newId = ''
-                
+
                 switch (this.digit(num)) {
                     case 10:
                         if (num < 10) {
@@ -322,7 +322,7 @@ class service {
                 let num = parseInt(oldId.slice(1))
                 num += 1
                 let newId = ''
-                
+
                 switch (this.digit(num)) {
                     case 10:
                         if (num < 10) {
@@ -354,7 +354,7 @@ class service {
                 let num = parseInt(oldId.slice(2))
                 num += 1
                 let newId = ''
-                
+
                 switch (this.digit(num)) {
                     case 10:
                         if (num < 10) {
@@ -445,7 +445,7 @@ class service {
                     }
                 })
             })
-        } 
+        }
         if (type === 'ADDRESS') {
             return new Promise((resolve, reject) => {
                 AddressDAOObj.getMaxIdAddress().then((data) => {
@@ -461,7 +461,7 @@ class service {
                 })
             })
         }
-        if( type === 'REFERENCE'){
+        if (type === 'REFERENCE') {
             return new Promise((resolve, reject) => {
                 ReferenceDAOObj.getMaxIdReference().then((data) => {
                     if (data[0].maxId === null) {
@@ -476,7 +476,7 @@ class service {
                 })
             })
         }
-        if( type === 'TRIAN'){
+        if (type === 'TRIAN') {
             return new Promise((resolve, reject) => {
                 TrainDAOObj.getMaxIdTrian().then((data) => {
                     console.log(data)
@@ -503,22 +503,22 @@ class service {
                             data[i].PERSONAL_BIRTHDAY = undefined
                         } else {
                             date = data[i].PERSONAL_BIRTHDAY.toISOString().slice(0, 10)
-                            data[i].PERSONAL_BIRTHDAY = this.formatData('TO-DISPLAY', date)
+                            data[i].PERSONAL_BIRTHDAY = this.formatDate('TO-DISPLAY', date)
                         }
                         if (data[i].PERSONAL_CARD_ISSUED === null) {
                             data[i].PERSONAL_CARD_ISSUED = undefined
                         } else {
                             date = data[i].PERSONAL_CARD_ISSUED.toISOString().slice(0, 10)
-                            data[i].PERSONAL_CARD_ISSUED = this.formatData('TO-DISPLAY', date)
+                            data[i].PERSONAL_CARD_ISSUED = this.formatDate('TO-DISPLAY', date)
                         }
                         if (data[i].PERSONAL_CARD_EXPIRE === null) {
                             data[i].PERSONAL_CARD_EXPIRE = undefined
                         } else {
                             date = data[i].PERSONAL_CARD_EXPIRE.toISOString().slice(0, 10)
-                            data[i].PERSONAL_CARD_EXPIRE = this.formatData('TO-DISPLAY', date)
+                            data[i].PERSONAL_CARD_EXPIRE = this.formatDate('TO-DISPLAY', date)
                         }
                         date = data[i].PERSONAL_UPDATE.toISOString().slice(0, 10)
-                        data[i].PERSONAL_UPDATE = this.formatData('TO-DISPLAY', date)
+                        data[i].PERSONAL_UPDATE = this.formatDate('TO-DISPLAY', date)
 
                         //USER_UPDATE
 
@@ -599,25 +599,22 @@ class service {
         })
     }
     insertReference(reference) {
-        if(reference != null){
-            return new Promise((resolve, reject) => {
-                ReferenceDAOObj.getReference(reference).then((referenceData) => {
-                    if(referenceData.length != 0){
-                        return resolve(referenceData[0])
-                    }else{
-                        ReferenceDAOObj.insertReference(reference).then((data) => {
-                            if (data == 'true') {
-                                return resolve('true')
-                            } else {
-                                /* Duplicate Key : ER_DUP_ENTRY */
-                                return resolve('false')
-                            }
-                        })
-                    }
-                })
-                
+        return new Promise((resolve, reject) => {
+            ReferenceDAOObj.getReference(reference).then((referenceData) => {
+                if (referenceData.length != 0) {
+                    return resolve(referenceData[0])
+                } else {
+                    ReferenceDAOObj.insertReference(reference).then((data) => {
+                        if (data == 'true') {
+                            return resolve('true')
+                        } else {
+                            /* Duplicate Key : ER_DUP_ENTRY */
+                            return resolve('false')
+                        }
+                    })
+                }
             })
-        }
+        })
     }
     loopInsertReference(reference) {
         return new Promise((resolve, reject) => {
@@ -626,12 +623,12 @@ class service {
                 this.insertReference(reference).then((data) => {
                     // console.log(`Data =>${data}`)
                     // console.log(data)
-                    if (data.length != 0 ) {
+                    if (data.length != 0) {
                         console.log(data)
                         console.log(`Insert : reference complete`)
-                        if(data === 'true'){
+                        if (data === 'true') {
                             let referenceResult = {
-                                REFERENCE_ID:id,
+                                REFERENCE_ID: id,
                                 REFERENCE_TITLE: reference.title,
                                 REFERENCE_NAME: reference.name,
                                 REFERENCE_SURNAME: reference.surname,
@@ -639,10 +636,10 @@ class service {
                                 REFERENCE_PHONE: reference.phone
                             }
                             return resolve(referenceResult)
-                        }else{
+                        } else {
                             return resolve(data)
                         }
-                        
+
                     } else {
                         this.loopInsertReference(reference)
                     }
@@ -650,33 +647,72 @@ class service {
             })
         })
     }
-
+    getReferenceByReferenceId(id) {
+        return new Promise((resolve, reject) => {
+            ReferenceDAOObj.getReference(id).then((getReferenceData) => {
+                return resolve(getReferenceData)
+            })
+        })
+    }
+    getTrainByTrainId(id) {
+        return new Promise((resolve, reject) => {
+            TrainDAOObj.getTrian(id).then((trainData) => {
+                trainData[0].TRAIN_DATE_EXP = this.formatDate('TO-DISPLAY', trainData[0].TRAIN_DATE_EXP.toISOString().slice(0, 10))
+                trainData[0].TRAIN_DATE_ISSUED = this.formatDate('TO-DISPLAY', trainData[0].TRAIN_DATE_ISSUED.toISOString().slice(0, 10))
+                return resolve(trainData)
+            })
+        })
+    }
+    
+    insertTrain(train) {
+        return new Promise((resolve, reject) => {
+            TrainDAOObj.getTrianDuplication(train).then((trainData) => {
+                if (trainData.length != 0) {
+                    console.log('asdsd')
+                    trainData[0].TRAIN_DATE_EXP = this.formatDate('TO-DISPLAY', trainData[0].TRAIN_DATE_EXP.toISOString().slice(0, 10))
+                    trainData[0].TRAIN_DATE_ISSUED = this.formatDate('TO-DISPLAY', trainData[0].TRAIN_DATE_ISSUED.toISOString().slice(0, 10))
+                    return resolve(trainData[0])
+                } else {
+                    TrainDAOObj.insertTrian(train).then((data) => {
+                        if (data == 'true') {
+                            return resolve('true')
+                        } else {
+                            /* Duplicate Key : ER_DUP_ENTRY */
+                            console.log(`ERROR INSERT TRAIN : ${data}`)
+                            return resolve('false')
+                        }
+                    })
+                }
+            })
+        })
+    }
     loopInsertTrain(train) {
         return new Promise((resolve, reject) => {
-            this.getNewId('REFERENCE').then((id) => {
-                reference.id = id
-                this.insertReference(reference).then((data) => {
+            this.getNewId('TRIAN').then((id) => {
+                train.id = id
+                train.date_exp = this.formatDate('TO-INSERT', train.date_exp)
+                train.date_issued = this.formatDate('TO-INSERT', train.date_issued)
+                //if (type === 'TO-DISPLAY') {
+                this.insertTrain(train).then((data) => {
                     // console.log(`Data =>${data}`)
                     // console.log(data)
-                    if (data.length != 0 ) {
+                    if (data.length != 0) {
                         console.log(data)
-                        console.log(`Insert : reference complete`)
-                        if(data === 'true'){
-                            let referenceResult = {
-                                REFERENCE_ID:id,
-                                REFERENCE_TITLE: reference.title,
-                                REFERENCE_NAME: reference.name,
-                                REFERENCE_SURNAME: reference.surname,
-                                REFERENCE_STATUS: reference.status,
-                                REFERENCE_PHONE: reference.phone
+                        console.log(`Insert : train complete`)
+                        if (data === 'true') {
+                            let trainResult = {
+                                TRAIN_ID: train.id,
+                                TRAIN_ISSUED: train.issuse,
+                                TRAIN_DATE_EXP: this.formatDate('TO-DISPLAY', train.date_exp),
+                                TRAIN_DATE_ISSUED: this.formatDate('TO-DISPLAY', train.date_issued)
                             }
-                            return resolve(referenceResult)
-                        }else{
+                            return resolve(trainResult)
+                        } else {
                             return resolve(data)
                         }
-                        
+
                     } else {
-                        this.loopInsertReference(reference)
+                        this.loopInsertTrain(train)
                     }
                 })
             })
@@ -740,7 +776,7 @@ class service {
         })
     }
 
-    formatData(type, date) {
+    formatDate(type, date) {
         if (type === 'TO-INSERT') {
             //16-01-2563
             if (date != null) {
@@ -863,16 +899,16 @@ class service {
         var datetime = new Date();
         let dateForUpdate = datetime.toISOString().slice(0, 10)
         if (personal.birthday.length != 0) {
-            personal.birthday = this.formatData('TO-INSERT', personal.birthday)
+            personal.birthday = this.formatDate('TO-INSERT', personal.birthday)
             personal.birthday = `'${personal.birthday}'`
         }
 
         if (personal.card_expipe.length != 0) {
-            personal.card_expipe = this.formatData('TO-INSERT', personal.card_expipe)
+            personal.card_expipe = this.formatDate('TO-INSERT', personal.card_expipe)
             personal.card_expipe = `'${personal.card_expipe}'`
         }
 
-        personal.card_issued = this.formatData('TO-INSERT', personal.card_issued)
+        personal.card_issued = this.formatDate('TO-INSERT', personal.card_issued)
 
         personal.update = dateForUpdate
         personal.username = username

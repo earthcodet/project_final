@@ -64,6 +64,16 @@ class ReferenceDAO {
             })
         })
     }
+    getReference(reference_id){
+        return new Promise((resolve, reject) =>{
+            con.query(`SELECT * FROM reference WHERE REFERENCE_ID='${reference_id}'`, function (err,result){
+                if(err) {
+                    throw err
+                }
+                return resolve(result)
+            })
+        })
+    }
     
 }   
 

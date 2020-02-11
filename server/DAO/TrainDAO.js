@@ -13,8 +13,6 @@ class TrainDAO {
                 if(err) {
                     throw err
                 }
-                console.log(`result item form getTrianDuplication = >`)
-                console.log(result[0])
                 return resolve(result)
             })
         })
@@ -25,8 +23,6 @@ class TrainDAO {
                 if(err) {
                     throw err
                 }
-                console.log(`result item form getTrian = >`)
-                console.log(result[0])
                 return resolve(result)
             })
         })
