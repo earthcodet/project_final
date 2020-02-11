@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+
+    <link rel="stylesheet" href="../../css/fonts.css">
+
+
+    <script src="../../js/service/jquery/jquery-3.4.1.min.js"></script>
+    <script src="../../js/service/bootstrap-4.4.1/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../../css/bootstrap-4.4.1/bootstrap.min.css">
+
+</head>
+<style>
+    a {
+        text-decoration: none !important;
+        font-weight: bold;
+    }
+
+    body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: #FAFAFA;
+        font-size: 12pt;
+    }
+
+    * {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+    }
+
+    .page {
+        width: 310mm;
+        min-height: 297mm;
+        /* padding: 15mm; */
+        padding-left: 15mm;
+        padding-right: 15mm;
+        padding-top: 3mm;
+        margin: 10mm auto;
+        border: 1px #D3D3D3 solid;
+        border-radius: 1px;
+        background: white;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .subpage {
+        padding: 1cm;
+        border: 2px red solid;
+        height: 257mm;
+        outline: 2cm #FFEAEA solid;
+    }
+
+    @page {
+        size: A4;
+        margin: 0;
+    }
+
+    @media print {
+
+        html,
+        body {
+            width: 210mm;
+            height: 297mm;
+        }
+
+        .page {
+            margin: 0;
+            border: initial;
+            border-radius: initial;
+            width: initial;
+            min-height: initial;
+            box-shadow: initial;
+            background: initial;
+            page-break-after: always;
+        }
+
+        .align {
+            position: absolute;
+            bottom: 10mm;
+        }
+    }
+</style>
+
+<body>
+    <div class="page">
+        <div class="container" style="font-family: 'Sarabun';">
+            <div style="text-align: center;">
+                <p style="float: right;">แบบ ตล.3</p>
+                <br>
+                <br>
+                <p><img src="../../img/ตราครุฑ.png" style="width: 110px;"></p>
+                <h4>ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</h4>
+            </div>
+            <br><br>
+            <div class="row">
+                <div class="col">
+                    เลขที่&emsp; <a>07/2563</a>
+                    <a style="float: right;padding-right: 2cm;">สำนักงาน เทศบาลเมืองแสนสุข</a>
+                </div>
+            </div><br>
+            <br>
+            <!-- 1. -->
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-5">
+                    <p>เจ้าพนักงานท้องถิ่น &emsp;<a>เทศบาลเมืองแสนสุข</a></p>
+                </div>
+                <div class="col">อนุญาตให้ &emsp;<a>นางสาว ณัฐิดา ต้นบุญ</a></div>
+            </div>
+            <div class="row">
+                <div class="col-2">
+                    <p>อายุ &emsp;<a>50</a>&emsp; ปี</p>
+                </div>
+                <div class="col-3">
+                    สัญชาติ &emsp;<a>ไทย</a>
+                </div>
+                <div class="col-3">
+                    เชื่อชาติ &emsp;<a>ไทย</a>
+                </div>
+                <div class="col">อยู่บ้านเลขที่ &emsp;<a>260/170</a></div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p>ตรอก &emsp;<a>-</a></p>
+                </div>
+                <div class="col">ซอย &emsp;<a>-</a></div>
+                <div class="col">ถนน &emsp;<a>-</a></div>
+                <div class="col">หมู่ที่ &emsp;<a>5</a></div>
+            </div>
+            <div class="row">
+                <div class="col">แขวง/ตำบล &emsp;<a>บึง</a></div>
+                <div class="col">
+                    <p>เขต/อำเภอ &emsp;<a>ศรีราชา</a></p>
+                </div>
+                <div class="col">จังหวัด &emsp;<a>ชลบุรี</a></div>
+            </div><br>
+            <!-- 2. -->
+            <div class="row">
+                <div class="col-7">
+                    <p>ใช้สถานที่ตลาด &emsp;<a>ตลาดนัด หาดวอนนภา (จันทร์,ศุกร์)</a></p>
+                </div>
+                <div class="col">ซึ่งมีจำนวนพื้นที่ตลาด &emsp;<a>-</a>&emsp; ตารางเมตร</div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p>ตั้งอยู่เลขที่ &emsp;<a>236,238</a></p>
+                </div>
+                <div class="col">ถนน &emsp;<a>บางแสนล่าง</a></div>
+                <div class="col">แขวง/ตำบล &emsp;<a>บึง</a></div>
+                <div class="col">เขต/อำเภอ &emsp;<a>ศรีราชา</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p>จังหวัด &emsp;<a>ชลบุรี</a></p>
+                </div>
+                <div class="col">ค่าธรรมเนียมฉบับละ &emsp;<a>2,000</a>&emsp; บาทต่อปี</div>
+            </div>
+            <br><br>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-4">
+                    <p>ใบอนุญาตฉบับนี้ให้ไว้ตั้งแต่วันที่ &emsp;<a>9</a></p>
+                </div>
+                <div class="col-3">เดือน &emsp;<a>มกราคม</a></div>
+                <div class="col-3">พ.ศ. &emsp;<a>2563</a></div>
+            </div>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-4">
+                    <p>และสิ้นอายุใบอนุญาตในวันที่ &emsp;&emsp;<a>9</a></p>
+                </div>
+                <div class="col-3">เดือน &emsp;<a>มกราคม</a></div>
+                <div class="col-3">พ.ศ. &emsp;<a>2563</a></div>
+            </div>
+            <br><br><br><br><br><br><br><br><br><br>
+            <!-- ลงชื่อ -->
+            <div class="row">
+                <div class="col-6 text-center">(ลงชื่อ).........................................................................
+                    <br>
+                    ( นายวรชาติ ศักดิ์วราสวัสดิ์ )
+                    <br>
+                    ผู้รับเงิน
+                    </div>
+                <div class="col text-center">
+                    (ลงชื่อ).........................................................................
+                    <br>
+                    ( นายประณีต ศักดิ์วราสวัสดิ์ )
+                    <br>
+                    รองนายกเทศมนตรี ปฏิบัติราชการแทน
+                    <br>
+                    นายกเทศมนตรีเมืองแสนสุข
+                    <br>
+                    เจ้าพนักงานท้องถิ่น
+                </div>
+            </div>
+<br><br>
+            <div class="align">
+                <u><b>คำเตือน</b></u>&ensp;1. ต้องแสดงใบอนุญาตนี้ไว้ในที่เปิดเผย เห็นได้ง่าย ณ
+                สถานที่ที่ได้รับอนุญาต<br>
+                &emsp;&emsp;&emsp;&ensp;
+            </div>
+        </div>
+        <br>
+
+    </div>
+
+</body>
+
+</html>

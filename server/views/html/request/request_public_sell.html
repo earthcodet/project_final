@@ -147,7 +147,7 @@
                         <button type="button" class="fa fa-search" style="border-radius: 5px;"
                             onclick="testSearchOparator()"></button></a>
                     <a>เลขประจำตัว <font color="red">*</font> :
-                        <input type="text" id="id" style="width: 13%;" readonly
+                        <input type="text" id="id" style="width: 13%;" 
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                             maxlength="13" onkeyup="checkId(this.value, 'PERSON') 
                                         document.getElementById('id').classList.remove('alertInput')"></a>
@@ -552,12 +552,15 @@
                     <br>
                     <div id="boxFood" class="boxFood" style="display:none;margin-left: 5vw;">
                         <a>ออกใบประกาศนียบัตรโดย</a>
-                        <input type="text" id="foodBy">
+                        <input type="text" id="foodBy"
+                        onchange="document.getElementById('foodBy').classList.remove('alertInput')" />
                         <br>
                         <a>ให้ไว้ ณ วันที่</a>
-                        <input type="text" id="datepicker5" />&nbsp;
+                        <input type="text" id="datepicker5" 
+                        onchange="document.getElementById('datepicker5').classList.remove('alertInput')" />&nbsp;
                         <a>มีผลถึง ณ วันที่</a>
-                        <input type="text" id="datepicker6" />
+                        <input type="text" id="datepicker6"
+                        onchange="document.getElementById('datepicker6').classList.remove('alertInput')" />
                     </div>
                     <br>
                 </div><br>
