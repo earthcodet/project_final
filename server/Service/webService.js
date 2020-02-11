@@ -3,11 +3,13 @@ const PersonalDAOObj = new PersonalDAO()
 const ImageDAO = require('../DAO/ImageDAO')
 const ImageDAOObj = new ImageDAO()
 const AddressDAO = require('../DAO/AddressDAO')
-const AddressDAOObj = new AddressDAO
+const AddressDAOObj = new AddressDAO()
 const LoginDAO = require('../DAO/UserDAO')
 const LoginDAOObj = new LoginDAO()
 const ReferenceDAO = require('../DAO/ReferenceDAO')
 const ReferenceDAOObj = new ReferenceDAO()
+const TrainDAO = require('../DAO/TrainDAO')
+const TrainDAOObj = new TrainDAO()
 
 class service {
     getProvince() {
@@ -474,6 +476,22 @@ class service {
                 })
             })
         }
+        if( type === 'TRIAN'){
+            return new Promise((resolve, reject) => {
+                TrainDAOObj.getMaxIdTrian().then((data) => {
+                    console.log(data)
+                    if (data[0].maxId === null) {
+                        console.log('getNewId : FT000001')
+                        return resolve('FT000001')
+                    } else {
+                        this.newId(data[0].maxId, 'TRAIN').then((trainId) => {
+                            console.log('getNewId : ' + trainId)
+                            return resolve(trainId)
+                        })
+                    }
+                })
+            })
+        }
     }
     getPersonal(id, name, surname) {
         return new Promise((resolve, reject) => {
@@ -633,6 +651,37 @@ class service {
         })
     }
 
+    loopInsertTrain(train) {
+        return new Promise((resolve, reject) => {
+            this.getNewId('REFERENCE').then((id) => {
+                reference.id = id
+                this.insertReference(reference).then((data) => {
+                    // console.log(`Data =>${data}`)
+                    // console.log(data)
+                    if (data.length != 0 ) {
+                        console.log(data)
+                        console.log(`Insert : reference complete`)
+                        if(data === 'true'){
+                            let referenceResult = {
+                                REFERENCE_ID:id,
+                                REFERENCE_TITLE: reference.title,
+                                REFERENCE_NAME: reference.name,
+                                REFERENCE_SURNAME: reference.surname,
+                                REFERENCE_STATUS: reference.status,
+                                REFERENCE_PHONE: reference.phone
+                            }
+                            return resolve(referenceResult)
+                        }else{
+                            return resolve(data)
+                        }
+                        
+                    } else {
+                        this.loopInsertReference(reference)
+                    }
+                })
+            })
+        })
+    }
     loopInsertPersonal(personal, imageFile) {
         return new Promise((resolve, reject) => {
             this.getNewId('PERSONAL').then((id) => {

@@ -25,7 +25,6 @@ class ReferenceDAO {
             let query = `INSERT INTO reference(${column}) VALUES (${value})`
             con.query(query, function (err, result) {
                 if (err) {
-                    console.log('error This')
                     console.log(err.code)
                     return resolve(err.code)
                 }

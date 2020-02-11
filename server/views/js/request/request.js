@@ -525,8 +525,8 @@ function resetInputRequired() {
   document.getElementById("wSubdistrict").classList.remove("alertInput");
   document.getElementById("wPhone").classList.remove("alertInput");
   document.getElementById("typeProduct").classList.remove("alertInput");
-  document.getElementById("datepicker3").classList.remove("alertInput");
-  document.getElementById("datepicker4").classList.remove("alertInput");
+  // document.getElementById("datepicker3").classList.remove("alertInput");
+  // document.getElementById("datepicker4").classList.remove("alertInput");
   document.getElementById("documentName").classList.add("alertInput");
   document.getElementById("documentName2").classList.add("alertInput");
 }

@@ -178,11 +178,18 @@ let testData = {
   status:'น้อง',
   phone:'0616577015'
 }
-webService.loopInsertReference(testData).then((sss) =>{
-  console.log(sss )
-  console.log(sss === null)
-  console.log(sss === undefined)
+let trianData = {
+  id: '',
+  issuse: 'สำนักงานเทศบาล',
+  date_exp:'2009-05-02',
+  date_issued:'2007-05-02'
+}
+//TEST INSERT TRIAN AND SELECT
+
+webService.getNewId('TRIAN').then((data)=>{
+  console.log(`NEW ID ${data}`)
 })
+
 //ทำให้ css กับ js ใช้ได้
 app.use(express.static(__dirname + '/views'));
 app.listen(PORT, () => {
