@@ -1,5 +1,6 @@
 let selectImageFile = 0
 let maxImageFile = 8
+let fileImage = []
 // function checkPhoneInput(tagId) {
 //     var text = document.getElementById(tagId).value
 //     text = text.replace(/(\d{3})(\d{7})/, "$1-$2");
@@ -36,7 +37,9 @@ function handleFileSelect(evt) {
             })(f);
             reader.readAsDataURL(f);
             selectImageFile = selectImageFile + 1
+          
         }
+        console.log(totalFiles)
     }
 }
 function deleteImage() {
@@ -45,4 +48,28 @@ function deleteImage() {
     totalFiles.splice(index, 1);
     document.getElementById('uploadFile').value = ''
     selectImageFile = selectImageFile - 1
+    console.log(totalFiles)
+}
+function searchImage(){
+
+}
+function insetImage() {
+    return new Promise((resolve, reject) => {
+        console.log("insertToDatabase");
+        var formData = new FormData();
+        for( var i = 0; i < totalFiles.length; i++ ){
+            let file = totalFiles[i];
+            console.log(file);
+            formData.append('files'+i, file);
+        }
+        formData.append('maxSizeImage', totalFiles.length)
+        axios.post("http://localhost:5000/insert/request", formData, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        })
+            .then(data => {
+                return resolve(data.data);
+            });
+    });
 }

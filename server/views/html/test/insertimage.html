@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<script src="../../node_modules/axios/dist/axios.min.js"></script>
 <script src="../../js/service/imageupload.js"></script>
 <link rel="stylesheet" href="../../css/css2.css">
 <body>
@@ -19,10 +20,20 @@
                 <h5><i class="fa fa-upload"></i>
                     อัพโหลดภาพ</h5>
             </button>
+            <button type="button" class="button" onclick="insetImage()">
+                <h5><i class="fa fa-upload"></i>
+                    INSERT IMAGE</h5>
+            </button>
+            <input id='is'>
+            <button type="button" class="button" onclick="searchImage()">
+                <h5><i class="fa fa-upload"></i>
+                    SEARCH IMAGE</h5>
+            </button>
             <br>
             <br>
             <div id='outputImage' style="height: 80vh; overflow-y:auto; border: 0.3vh solid black;">
             </div>
+            
         </div>
     </div><br>
 </body>
