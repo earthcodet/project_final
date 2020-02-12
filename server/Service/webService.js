@@ -498,7 +498,7 @@ class service {
                 })
             })
         }
-        if (type === 'ESTABLISHMENT'){
+        if (type === 'ESTABLISHMENT') {
             return new Promise((resolve, reject) => {
                 EstablishmentDAOObj.getMaxId().then((data) => {
                     console.log(data)
@@ -514,7 +514,7 @@ class service {
                 })
             })
         }
-        if (type === 'LAND'){
+        if (type === 'LAND') {
             return new Promise((resolve, reject) => {
                 LandDAOObj.getMaxId().then((data) => {
                     console.log(data)
@@ -701,7 +701,7 @@ class service {
             })
         })
     }
-    
+
     insertTrain(train) {
         return new Promise((resolve, reject) => {
             TrainDAOObj.getTrianDuplication(train).then((trainData) => {
@@ -787,24 +787,24 @@ class service {
             })
         })
     }
-    createIdImage(item, MASK){
-        for(let i = 1 ; i <= item.length ; i++ ){
-                item[i-1].name = `${MASK}-0${i}`
+    createIdImage(item, MASK) {
+        for (let i = 1; i <= item.length; i++) {
+            item[i - 1].name = `${MASK}-0${i}`
         }
         return item
     }
-    insertImageEstablishments(image, id){
-       let newImage = this.createIdImage(image, id)
+    insertImageEstablishments(image, id) {
+        let newImage = this.createIdImage(image, id)
         return new Promise((resolve, reject) => {
-            ImageDAOObj.deleteImageEstablishment(id).then((data) =>{
+            ImageDAOObj.deleteImageEstablishment(id).then((data) => {
                 console.log(data)
-                if(data){
-                    ImageDAOObj.insertImageEstablishment(newImage).then((result) =>{
+                if (data) {
+                    ImageDAOObj.insertImageEstablishment(newImage).then((result) => {
                         return resolve(result)
                     })
                 }
             })
-           
+
         })
     }
     loopInsertAddress(personal, address, imageFile) {
@@ -888,8 +888,8 @@ class service {
             data.fax === '' ? data.fax = 'NULL' : data.fax = `'${data.fax}'`
             data.surname === '' ? data.surname = 'NULL' : `'${data.surname}'`
             return data
-        } 
-        if(type === 'ADDRESS') {
+        }
+        if (type === 'ADDRESS') {
             data.home_number === '' ? data.home_number = '-' : data.home_number = data.home_number
             data.moo === '' || data.moo === '-' ? data.moo = 'NULL' : data.moo = `'${data.moo}'`
             data.trxk === '' || data.trxk === '-' ? data.trxk = 'NULL' : data.trxk = `'${data.trxk}'`
@@ -899,23 +899,23 @@ class service {
             return data
         }
 
-        if(type === 'ESTABLISHMENT') {
+        if (type === 'ESTABLISHMENT') {
             data.is_land_owned === 'NO' ? data.is_land_owned = 'NULL' : data.is_land_owned = `'${data.is_land_owned}'`
-            data.type === '' ? data.type =  'NULL' : data.type =  `'${data.type}'`
+            data.type === '' ? data.type = 'NULL' : data.type = `'${data.type}'`
             data.name === '' ? data.name = 'NULL' : data.name = `'${data.name}'`
 
-            data.machine_size === '' ? data.machine_size = 0 :  ''
-            data.area_size === '' ? data.area_size = 0 :  ''
-            data.worker === '' ? data.worker = 0 :  ''
+            data.machine_size === '' ? data.machine_size = 0 : ''
+            data.area_size === '' ? data.area_size = 0 : ''
+            data.worker === '' ? data.worker = 0 : ''
 
             data.fax === '' ? data.fax = 'NULL' : data.fax = `'${data.fax}'`
             data.grond === '' ? data.grond = 'NULL' : data.grond = `'${data.grond}'`
             return data
         }
     }
-    loopInsertEstablishment(Edata){
+    loopInsertEstablishment(Edata) {
         return new Promise((resolve, reject) => {
-            this.getNewId('ESTABLISHMENT').then((newId) =>{
+            this.getNewId('ESTABLISHMENT').then((newId) => {
                 Edata.id = newId
                 EstablishmentDAOObj.insert(Edata).then((data) => {
                     if (data === 'true') {
@@ -923,18 +923,43 @@ class service {
                         return resolve(true)
                     } else {
                         // key duplication 
-                       this.loopInsertEstablishment(Edata)
+                        this.loopInsertEstablishment(Edata)
                     }
                 })
-            }) 
+            })
         })
     }
-    insertEstablishment(Edata){
-        Edata = this.formatInsert('ESTABLISHMENT', Edata)
-        console.log(Edata)
+    insertAddressOne(address) {
         return new Promise((resolve, reject) => {
-            this.loopInsertEstablishment(Edata).then((result) => {
-                return resolve(result)
+            this.getNewId('ADDRESS').then((id) => {
+                address.id = id
+                this.insertAddress(address).then((data) => {
+                    console.log(data)
+                    if (data) {
+                        console.log(`Insert : address complete`)
+                        let result = {
+                            check:true,
+                            id:address.id
+                        }
+                        return resolve(result)
+                    } else {
+                        this.insertAddressOne(address)
+                    }
+                })
+            })
+        })
+    }
+    insertEstablishment(Edata,address) {
+        Edata = this.formatInsert('ESTABLISHMENT', Edata)
+        address = this.formatInsert('ADDRESS',address)
+        return new Promise((resolve, reject) => {
+            this.insertAddressOne(address).then((resultaddress)=>{
+                if(resultaddress.check){
+                    Edata.address_id = resultaddress.id
+                    this.loopInsertEstablishment(Edata).then((result) => {
+                        return resolve(result)
+                    })
+                }
             })
         })
     }

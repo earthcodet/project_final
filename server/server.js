@@ -237,9 +237,21 @@ let testE = {
   worker: 77.5,
   phone: '-',
   fax: '',
-  grond: '',
+  grond: ''
 }
-webService.insertEstablishment(testE).then((data) => {
+let address = {
+  id: "",
+  home_number: "TEST",
+  moo: 'TEST',
+  trxk: 'TEST',
+  sxy: 'TEST',
+  building: 'TEST',
+  road: 'TEST',
+  district_name: "TEST",
+  amphur_name: "TEST",
+  province_name: "TEST"
+}
+webService.insertEstablishment(testE,address).then((data) => {
   console.log(data)
 })
 //ทำให้ css กับ js ใช้ได้
