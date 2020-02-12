@@ -44,9 +44,9 @@ app.use(session({
   }
 }))
 app.get('/get/username/login', (req, res) => {
-  if(req.session.username != undefined){
+  if (req.session.username != undefined) {
     res.json(true)
-  }else{
+  } else {
     res.json(false)
   }
 })
@@ -139,7 +139,7 @@ app.post('/insert/personal', (req, res) => {
   if (req.files != null) {
     var datafile = req.files.image.data
     obj[2].data = datafile
-  }else{
+  } else {
     obj[2].data = null
   }
   console.log(req.files)
@@ -166,46 +166,66 @@ app.get('/search/personal/:id/:name/:surname', (req, res) => {
   }
   webService.searchOperator(req.params.id, req.params.name, req.params.surname).then((data) => {
     console.log(`servar : function searchOperator return = ${data}`)
-      res.json(data)
+    res.json(data)
   })
 })
 // Test Data referecne
 let testData = {
-  id:'',
-  title:'นาย',
-  name:'แชมป์02',
-  surname:'แชมป์',
-  status:'น้อง',
-  phone:'0616577015'
+  id: '',
+  title: 'นาย',
+  name: 'แชมป์',
+  surname: 'แชมป์',
+  status: 'น้อง',
+  phone: '0616577015'
 }
 let trianData = {
   id: '',
   issuse: 'สำนักงานเทศบาล',
-  date_exp:'02-05-2541',
-  date_issued:'02-05-2563'
+  date_exp: '02-05-2541',
+  date_issued: '02-05-2563'
 }
-//TEST INSERT TRIAN AND SELECT
- /*
-                        train.id
-                        train.issuse
-                        train.date_exp
-                        train.date_issued
+let MASK = 'R000012562'
+app.post('/insert/request', (req, res) => {
+  let size = parseInt(req.body.maxSizeImage)
+  let formatInsertImage = []
+  let object = {
+    name: '',
+    type: '',
+    data: ''
+  }
 
-                        TRAIN_ID 
-                        TRAIN_ISSUED 
-                        TRAIN_DATE_EXP 
-                        TRAIN_DATE_ISSUED
-                        */
-webService.getReferenceByReferenceId('RF00001').then((ds) =>{
-  console.log(ds)
+  for (let i = 1; i <= size; i++) {
+    let files
+    i === 1 ? files = req.files.files0 : ''
+    i === 2 ? files = req.files.files1 : ''
+    i === 3 ? files = req.files.files2 : ''
+    i === 4 ? files = req.files.files3 : ''
+    i === 5 ? files = req.files.files4 : ''
+    i === 6 ? files = req.files.files5 : ''
+    i === 7 ? files = req.files.files6 : ''
+    i === 8 ? files = req.files.files7 : ''
+    object.name = i
+    object.type = files.mimetype.slice(6, files.mimetype.length)
+    object.data = files.data
+    formatInsertImage.push(object)
+    object = {
+      name: '',
+      type: '',
+      data: ''
+    }
+  }
+  console.log(formatInsertImage)
+  webService.insertImageEstablishments(formatInsertImage,MASK).then((data) => {
+    console.log(data)
+  })
 })
-
 /*
 webService.loopInsertTrain(trianData).then((data)=>{
   console.log(`===================`)
   console.log(data)
 })
 */
+
 //ทำให้ css กับ js ใช้ได้
 app.use(express.static(__dirname + '/views'));
 app.listen(PORT, () => {

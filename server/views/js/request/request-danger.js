@@ -552,8 +552,8 @@ function resetInputRequired() {
   document.getElementById("wDistrict").classList.remove("alertInput");
   document.getElementById("wSubdistrict").classList.remove("alertInput");
   document.getElementById("wPhone").classList.remove("alertInput");
-  document.getElementById("documentName").classList.add("alertInput");
-  document.getElementById("documentName2").classList.add("alertInput");
+  document.getElementById("documentName").classList.remove("alertInput");
+  document.getElementById("documentName2").classList.remove("alertInput");
 }
 function preInsert() {
   resetInputRequired();
@@ -590,7 +590,7 @@ function preInsert() {
           inAddress.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
           inAddress.province_name = province[provinceValue - 1].PROVINCE_NAME;
           inAddress.phone = document.getElementById("phone").value;
-          inAddress.fax = getElementById("fax").value;
+          inAddress.fax = document.getElementById("fax").value;
 
           inWorkplace2.workplaceName=document.getElementById("").value;
           inWorkplace2.area=document.getElementById("area").value;

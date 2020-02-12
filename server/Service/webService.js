@@ -749,6 +749,26 @@ class service {
             })
         })
     }
+    createIdImage(item, MASK){
+        for(let i = 1 ; i <= item.length ; i++ ){
+                item[i-1].name = `${MASK}-0${i}`
+        }
+        return item
+    }
+    insertImageEstablishments(image, id){
+       let newImage = this.createIdImage(image, id)
+        return new Promise((resolve, reject) => {
+            ImageDAOObj.deleteImageEstablishment(id).then((data) =>{
+                console.log(data)
+                if(data){
+                    ImageDAOObj.insertImageEstablishment(newImage).then((result) =>{
+                        return resolve(result)
+                    })
+                }
+            })
+           
+        })
+    }
     loopInsertAddress(personal, address, imageFile) {
         return new Promise((resolve, reject) => {
             this.getNewId('ADDRESS').then((id) => {
