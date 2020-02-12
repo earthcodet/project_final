@@ -10,6 +10,12 @@ const ReferenceDAO = require('../DAO/ReferenceDAO')
 const ReferenceDAOObj = new ReferenceDAO()
 const TrainDAO = require('../DAO/TrainDAO')
 const TrainDAOObj = new TrainDAO()
+const EstablishmentDAO = require('../DAO/EstablishmentDAO')
+const EstablishmentDAOObj = new EstablishmentDAO()
+const LandDAO = require('../DAO/LandDAO')
+const LandDAOObj = new LandDAO()
+const FileDAO = require('../DAO/FileDAO')
+const FileDAOObj = new FileDAO()
 
 class service {
     getProvince() {
@@ -492,6 +498,38 @@ class service {
                 })
             })
         }
+        if (type === 'ESTABLISHMENT'){
+            return new Promise((resolve, reject) => {
+                EstablishmentDAOObj.getMaxId().then((data) => {
+                    console.log(data)
+                    if (data[0].maxId === null) {
+                        console.log('getNewId : E000001')
+                        return resolve('E000001')
+                    } else {
+                        this.newId(data[0].maxId, 'ESTABLISHMENT').then((EstablishmentId) => {
+                            console.log('getNewId : ' + EstablishmentId)
+                            return resolve(EstablishmentId)
+                        })
+                    }
+                })
+            })
+        }
+        if (type === 'LAND'){
+            return new Promise((resolve, reject) => {
+                LandDAOObj.getMaxId().then((data) => {
+                    console.log(data)
+                    if (data[0].maxId === null) {
+                        console.log('getNewId : LE000001')
+                        return resolve('LE000001')
+                    } else {
+                        this.newId(data[0].maxId, 'LAND').then((landId) => {
+                            console.log('getNewId : ' + landId)
+                            return resolve(landId)
+                        })
+                    }
+                })
+            })
+        }
     }
     getPersonal(id, name, surname) {
         return new Promise((resolve, reject) => {
@@ -850,7 +888,8 @@ class service {
             data.fax === '' ? data.fax = 'NULL' : data.fax = `'${data.fax}'`
             data.surname === '' ? data.surname = 'NULL' : `'${data.surname}'`
             return data
-        } else {
+        } 
+        if(type === 'ADDRESS') {
             data.home_number === '' ? data.home_number = '-' : data.home_number = data.home_number
             data.moo === '' || data.moo === '-' ? data.moo = 'NULL' : data.moo = `'${data.moo}'`
             data.trxk === '' || data.trxk === '-' ? data.trxk = 'NULL' : data.trxk = `'${data.trxk}'`
@@ -859,6 +898,45 @@ class service {
             data.road === '' || data.road === '-' ? data.road = 'NULL' : data.road = `'${data.road}'`
             return data
         }
+
+        if(type === 'ESTABLISHMENT') {
+            data.is_land_owned === 'NO' ? data.is_land_owned = 'NULL' : data.is_land_owned = `'${data.is_land_owned}'`
+            data.type === '' ? data.type =  'NULL' : data.type =  `'${data.type}'`
+            data.name === '' ? data.name = 'NULL' : data.name = `'${data.name}'`
+
+            data.machine_size === '' ? data.machine_size = 0 :  ''
+            data.area_size === '' ? data.area_size = 0 :  ''
+            data.worker === '' ? data.worker = 0 :  ''
+
+            data.fax === '' ? data.fax = 'NULL' : data.fax = `'${data.fax}'`
+            data.grond === '' ? data.grond = 'NULL' : data.grond = `'${data.grond}'`
+            return data
+        }
+    }
+    loopInsertEstablishment(Edata){
+        return new Promise((resolve, reject) => {
+            this.getNewId('ESTABLISHMENT').then((newId) =>{
+                Edata.id = newId
+                EstablishmentDAOObj.insert(Edata).then((data) => {
+                    if (data === 'true') {
+                        console.log('function insertEstablishment : complete')
+                        return resolve(true)
+                    } else {
+                        // key duplication 
+                       this.loopInsertEstablishment(Edata)
+                    }
+                })
+            }) 
+        })
+    }
+    insertEstablishment(Edata){
+        Edata = this.formatInsert('ESTABLISHMENT', Edata)
+        console.log(Edata)
+        return new Promise((resolve, reject) => {
+            this.loopInsertEstablishment(Edata).then((result) => {
+                return resolve(result)
+            })
+        })
     }
     updateAddress(address) {
         return new Promise((resolve, reject) => {

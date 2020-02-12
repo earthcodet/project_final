@@ -185,6 +185,9 @@ let trianData = {
   date_issued: '02-05-2563'
 }
 let MASK = 'R000012562'
+let eop = {
+
+}
 app.post('/insert/request', (req, res) => {
   let size = parseInt(req.body.maxSizeImage)
   let formatInsertImage = []
@@ -193,7 +196,6 @@ app.post('/insert/request', (req, res) => {
     type: '',
     data: ''
   }
-
   for (let i = 1; i <= size; i++) {
     let files
     i === 1 ? files = req.files.files0 : ''
@@ -219,13 +221,27 @@ app.post('/insert/request', (req, res) => {
     console.log(data)
   })
 })
-/*
-webService.loopInsertTrain(trianData).then((data)=>{
-  console.log(`===================`)
+webService.getNewId('LAND').then((data) =>{
   console.log(data)
 })
-*/
-
+//insertEstablishment
+let testE = {
+  id : '',
+  address_id: 'SAVE',
+  perosonal_id: 'SAVE',
+  is_land_owned: 'NO',
+  type: '',
+  name: '',
+  machine_size: 15,
+  area_size: 15.5,
+  worker: 77.5,
+  phone: '-',
+  fax: '',
+  grond: '',
+}
+webService.insertEstablishment(testE).then((data) => {
+  console.log(data)
+})
 //ทำให้ css กับ js ใช้ได้
 app.use(express.static(__dirname + '/views'));
 app.listen(PORT, () => {
