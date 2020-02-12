@@ -221,15 +221,12 @@ app.post('/insert/request', (req, res) => {
     console.log(data)
   })
 })
-webService.getNewId('LAND').then((data) =>{
-  console.log(data)
-})
 //insertEstablishment
 let testE = {
   id : '',
   address_id: 'SAVE',
-  perosonal_id: 'SAVE',
-  is_land_owned: 'NO',
+  perosonal_id: 'P000001',
+  is_land_owned: 'YES',
   type: '',
   name: '',
   machine_size: 15,
@@ -241,18 +238,46 @@ let testE = {
 }
 let address = {
   id: "",
-  home_number: "TEST",
-  moo: 'TEST',
-  trxk: 'TEST',
-  sxy: 'TEST',
-  building: 'TEST',
-  road: 'TEST',
-  district_name: "TEST",
-  amphur_name: "TEST",
-  province_name: "TEST"
+  home_number: 'test',
+  moo: 'test',
+  trxk: 'test',
+  sxy: '',
+  building: '',
+  road: '',
+  district_name: 'test',
+  amphur_name: 'test',
+  province_name: 'test'
 }
-webService.insertEstablishment(testE,address).then((data) => {
-  console.log(data)
+let address2 = {
+  id: "",
+  home_number: 'test',
+  moo: 'test',
+  trxk: 'test',
+  sxy: 'test',
+  building: 'test',
+  road: 'test',
+  district_name: 'test',
+  amphur_name: 'test',
+  province_name: 'test'
+}
+let land ={
+  id:"",
+  address_id:"",
+  title:'test',
+  name:'test',
+  surname:'test',
+  birthday:"30-05-2563",
+  phone:"-",
+}
+app.post('/insert/establishment', (req, res) => {
+  let file = {
+    name:'',
+    data:req.files.files.data
+  }
+  console.log(req.files.files.data)
+  webService.insertEstablishment(testE,address,land,address2,file).then((data) => {
+    console.log(data)
+  })
 })
 //ทำให้ css กับ js ใช้ได้
 app.use(express.static(__dirname + '/views'));

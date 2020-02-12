@@ -912,6 +912,10 @@ class service {
             data.grond === '' ? data.grond = 'NULL' : data.grond = `'${data.grond}'`
             return data
         }
+        if (type === 'LAND') {
+            data.birthday === '' ? data.birthday = 'NULL' : data.birthday = `'${this.formatDate("TO-INSERT", data.birthday)}'`
+            return data
+        }
     }
     loopInsertEstablishment(Edata) {
         return new Promise((resolve, reject) => {
@@ -938,8 +942,8 @@ class service {
                     if (data) {
                         console.log(`Insert : address complete`)
                         let result = {
-                            check:true,
-                            id:address.id
+                            check: true,
+                            id: address.id
                         }
                         return resolve(result)
                     } else {
@@ -949,17 +953,80 @@ class service {
             })
         })
     }
-    insertEstablishment(Edata,address) {
+    insertEstablishment(Edata, address, land, addressOwner,file) {
+        //Main personal set 
         Edata = this.formatInsert('ESTABLISHMENT', Edata)
-        address = this.formatInsert('ADDRESS',address)
+        address = this.formatInsert('ADDRESS', address)
+        addressOwner = this.formatInsert('ADDRESS', addressOwner)
+        land = this.formatInsert('LAND', land)
         return new Promise((resolve, reject) => {
-            this.insertAddressOne(address).then((resultaddress)=>{
-                if(resultaddress.check){
+            this.insertAddressOne(address).then((resultaddress) => {
+                console.log(address)
+                console.log(addressOwner)
+                if (resultaddress.check) {
                     Edata.address_id = resultaddress.id
-                    this.loopInsertEstablishment(Edata).then((result) => {
-                        return resolve(result)
+                    if(Edata.is_land_owned != 'NULL'){
+                        this.insertLand(land,addressOwner).then((land_id) =>{
+                            Edata.is_land_owned = `'${land_id}'`
+                            file.name = land_id
+                            this.insertFile(file).then((resultFile) =>{
+                                if(resultFile){
+                                    this.loopInsertEstablishment(Edata).then((result) => {
+                                        return resolve(result)
+                                    })
+                                }
+                            })
+                        })
+                    }else{
+                        this.loopInsertEstablishment(Edata).then((result) => {
+                            return resolve(result)
+                        })
+                    }
+                }
+            })
+        })
+    }
+    insertLand(land, address) {
+        return new Promise((resolve, reject) => {
+            this.insertAddressOne(address).then((addressResult) => {
+                if (addressResult.check) {
+                    land.address_id = addressResult.id
+                    this.loopInsertLand(land).then((data) =>{
+                        if(data.check){
+                            return resolve(data.id)
+                        }
                     })
                 }
+            })
+
+        })
+    }
+    insertFile(file){
+        return new Promise((resolve, reject) => {
+            FileDAOObj.insert(file).then((fileResult) => {
+                if(fileResult){
+                    return resolve(fileResult)
+                }
+            })
+        })
+    }
+    loopInsertLand(land) {
+        return new Promise((resolve, reject) => {
+            this.getNewId('LAND').then((id) => {
+                land.id = id
+                LandDAOObj.insert(land).then((data) =>{
+                    if(data === 'true'){
+                        console.log('function loopInsertLand : complete')
+                        let resultReturn = {
+                            check:true,
+                            id:land.id
+                        }
+                        return resolve(resultReturn)
+                    }else{
+                        console.log('function loopInsertLand : something wrog')
+                        this.loopInsertLand(land)
+                    }
+                })
             })
         })
     }
@@ -970,7 +1037,7 @@ class service {
                     console.log('function updateAddress : complete')
                     return resolve(true)
                 } else {
-                    console.log('function updateAddress : somthing wrog')
+                    console.log('function updateAddress : something wrog')
                     console.log(data)
                     return resolve(false)
                 }

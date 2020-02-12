@@ -8,7 +8,7 @@ function insertE() {
         console.log("insertToDatabase");
         var formData = new FormData();
         formData.append('files', files);
-        axios.post("http://localhost:5000/insert/request", formData, {
+        axios.post("http://localhost:5000/insert/establishment", formData, {
             headers: {
                 "Content-Type": "multipart/form-data"
             }
