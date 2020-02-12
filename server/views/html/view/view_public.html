@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+
+    <link rel="stylesheet" href="../../css/fonts.css">
+
+
+    <script src="../../js/service/jquery/jquery-3.4.1.min.js"></script>
+    <script src="../../js/service/bootstrap-4.4.1/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../../css/bootstrap-4.4.1/bootstrap.min.css">
+
+</head>
+<style>
+    a {
+        text-decoration: none !important;
+        font-weight: bold;
+    }
+
+    body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: #FAFAFA;
+        font-size: 12pt;
+    }
+
+    * {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+    }
+
+    .page {
+        width: 310mm;
+        min-height: 297mm;
+        /* padding: 15mm; */
+        padding-left: 25mm;
+        padding-right: 25mm;
+        padding-top: 3mm;
+        margin: 10mm auto;
+        border: 1px #D3D3D3 solid;
+        border-radius: 1px;
+        background: white;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .subpage {
+        padding: 1cm;
+        border: 2px red solid;
+        height: 257mm;
+        outline: 2cm #FFEAEA solid;
+    }
+
+    @page {
+        size: A4;
+        margin: 0;
+    }
+
+    @media print {
+
+        html,
+        body {
+            width: 210mm;
+            height: 297mm;
+        }
+
+        .page {
+            margin: 0;
+            border: initial;
+            border-radius: initial;
+            width: initial;
+            min-height: initial;
+            box-shadow: initial;
+            background: initial;
+            page-break-after: always;
+        }
+
+        .align {
+            position: absolute;
+            bottom: 10mm;
+        }
+    }
+</style>
+
+<body>
+    <div class="page">
+        <div class="container" style="font-family: 'Sarabun';">
+            <div style="text-align: center;">
+                <p style="float: right;">แบบ สณ.5</p>
+                <br>
+                <br>
+                <p><img src="../../img/ตราครุฑ.png" style="width: 110px;"></p>
+                <h4>ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</h4>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-2">
+                    <img src="../../img/userProfile.png" style="height: 4.2cm;float: right;">
+                </div>
+                <div class="col-3">
+                    <br>
+                    <p>ผู้ได้รับใบอนุญาต</p>
+                    <p>ชื่อ &emsp;<a>นางสาวยู้</a></p>
+                    <p>นามสกุล &emsp;<a>บุญช่วยชาติ</a></p>
+                </div>
+                <div class="col-1"></div>
+                <div class="col-2">
+                    <p><img src="../../img/userProfile.png" style="height: 4.2cm;float: right;"></p>
+                </div>
+                <div class="col-3">
+                    <br>
+                    <p>ผู้ช่วยจำหน่าย</p>
+                    <p>ชื่อ &emsp;<a>นางสาวยู้</a></p>
+                    <p>นามสกุล &emsp;<a>บุญช่วยชาติ</a></p>
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col">
+                    เลขที่&emsp; <a>12/2563</a>
+                    <a style="float: right;padding-right: 2cm;">สำนักงาน เทศบาลเมืองแสนสุข</a>
+                </div>
+            </div>
+            <br>
+            <!-- 1. -->
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-5"><p>อนุญาตให้&emsp;<a>นางสาว ณัฐิดา ต้นบุญ</a></p></div>
+                <div class="col">สัญชาติ &emsp;<a>ไทย</a></div>
+                <div class="col">อายุ &emsp;<a>28</a> &emsp;ปี</div>
+            </div>
+            <div class="row">
+                <div class="col-3"><p>อยู่บ้านเลขที่ &emsp;<a>250</a></p></div>
+                <div class="col"> ตอก &emsp;<a>-</a></div>
+                <div class="col">ซอย &emsp;<a>-</a></div>
+                <div class="col">ถนน &emsp;<a>-</a></div>
+                <div class="col">หมู่ที่ &emsp;<a>5</a></div>
+            </div>
+            <div class="row">
+                <div class="col">แขวง/ตำบล &emsp;<a>บึง</a></div>
+                <div class="col">
+                    <p>เขต/อำเภอ &emsp;<a>ศรีราชา</a></p>
+                </div>
+                <div class="col">จังหวัด &emsp;<a>ชลบุรี</a></div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <p>โทรศัพท์ &emsp;<a>0955021002</a></p>
+                </div>
+            </div>
+            <!-- 2. -->
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col">
+                    <p>1. จำหน่ายสินค้าในที่หรือทางสาธารณะ สินค้าประเภท &emsp;<a>ข้าวหลาม ขนมจาก</a></p>
+                    <p>2. สถานที่เร่ขายสินค้าอยู่ในพื้นที่ที่มีการประกาศผ่อนผันให้จำหน่ายสินค้าได้ในท้องที่เขต &emsp;<a>บางแสนเดินเร่</a></p>
+                    <p>3. ใบอนุญาตฉบับนี้ให้ใช้ได้เฉพาะผู้ได้รับใบอนุญาตและผู้ช่วยจำหน่าย</p>
+                    <p>4. ค่าธรรมเนียมฉบับละ &emsp;<a>50</a>&emsp; บาทต่อปี</p>
+                    <p>5. ผู้รับบใอนุญาตต้องปฏิบัติตามเงื่อนไขดังต่อไปนี้</p>
+                    <p>&emsp;&ensp;1 )&emsp; <a>หาบเร่</a></p>
+                    <p>&emsp;&ensp;2 )&emsp; <a></a></p>
+                    <p>&emsp;&ensp;3 )&emsp; <a></a></p>
+                    <p>&emsp;&ensp;4 )&emsp; <a></a></p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-4">
+                    <p>ใบอนุญาตฉบับนี้ให้ใช้ได้จนถึงวันที่ &emsp;<a>9</a></p>
+                </div>
+                <div class="col-3">เดือน &emsp;<a>มกราคม</a></div>
+                <div class="col-3">พ.ศ. &emsp;<a>2563</a></div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp; ออกให้ ณ วันที่ &emsp;<a>9</a></p>
+                </div>
+                <div class="col-3">เดือน &emsp;<a>มกราคม</a></div>
+                <div class="col-3">พ.ศ. &emsp;<a>2563</a></div>
+            </div>
+            <br><br><br>
+            <!-- ลงชื่อ -->
+            <div class="row">
+                <div class="col-6 text-center">(ลงชื่อ).........................................................................
+                    <br>
+                    ( นายวรชาติ ศักดิ์วราสวัสดิ์ )
+                    <br>
+                    ผู้รับเงิน
+                    </div>
+                <div class="col text-center">
+                    (ลงชื่อ).........................................................................
+                    <br>
+                    ( นายประณีต ศักดิ์วราสวัสดิ์ )
+                    <br>
+                    รองนายกเทศมนตรี ปฏิบัติราชการแทน
+                    <br>
+                    นายกเทศมนตรีเมืองแสนสุข
+                    <br>
+                    เจ้าพนักงานท้องถิ่น
+                </div>
+            </div>
+<br><br>
+
+            <div class="align">
+                <u><b>คำเตือน</b></u>&ensp;1. ต้องแสดงใบอนุญาตนี้ไว้ในที่เปิดเผย เห็นได้ง่าย ณ
+                สถานที่ที่ได้รับอนุญาต<br>
+                &emsp;&emsp;&emsp;&ensp;
+            </div>
+        </div>
+        <br>
+
+    </div>
+
+</body>
+
+</html>
