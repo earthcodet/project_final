@@ -848,7 +848,7 @@ class service {
             return date
         }
         if (type === 'TO-DISPLAY') {
-            //2563-01-04T17:00:00.000Z
+            //2020-05-29T17:00:00.000Z
             if (date != null) {
                 let realdate = date.substring(0, 10);
                 let temp = realdate.split('-')
@@ -953,35 +953,71 @@ class service {
             })
         })
     }
-    insertEstablishment(Edata, address, land, addressOwner,file) {
+    insertEstablishment(Edata, address, land, addressOwner, file) {
         //Main personal set 
         Edata = this.formatInsert('ESTABLISHMENT', Edata)
         address = this.formatInsert('ADDRESS', address)
         addressOwner = this.formatInsert('ADDRESS', addressOwner)
         land = this.formatInsert('LAND', land)
+        console.log(address)
+        console.log(addressOwner)
+        // return new Promise((resolve, reject) => {
+        //     return resolve(true)
+        // })
         return new Promise((resolve, reject) => {
             this.insertAddressOne(address).then((resultaddress) => {
                 console.log(address)
                 console.log(addressOwner)
                 if (resultaddress.check) {
                     Edata.address_id = resultaddress.id
-                    if(Edata.is_land_owned != 'NULL'){
-                        this.insertLand(land,addressOwner).then((land_id) =>{
+                    if (Edata.is_land_owned != 'NULL') {
+                        this.insertLand(land, addressOwner).then((land_id) => {
                             Edata.is_land_owned = `'${land_id}'`
                             file.name = land_id
-                            this.insertFile(file).then((resultFile) =>{
-                                if(resultFile){
+                            this.insertFile(file).then((resultFile) => {
+                                if (resultFile) {
                                     this.loopInsertEstablishment(Edata).then((result) => {
                                         return resolve(result)
                                     })
                                 }
                             })
                         })
-                    }else{
+                    } else {
                         this.loopInsertEstablishment(Edata).then((result) => {
                             return resolve(result)
                         })
                     }
+                }
+            })
+        })
+    }
+    getEstablishment(id) {
+        return new Promise((resolve, reject) => {
+            EstablishmentDAOObj.get(id).then((e_data) => {
+                if (e_data != undefined) {
+                    this.getAddressByAddressId(e_data.ADDRESS_ID).then((e_address_data) =>{
+                        e_data.ADDRESS = e_address_data[0]
+                        if(e_data.ESTABLISHMENT_IS_LAND_OWNED != null){
+                            LandDAOObj.get(e_data.ESTABLISHMENT_IS_LAND_OWNED).then((land_data) =>{
+                                if(land_data.LAND_BIRTHDAY != null){
+                                    land_data.LAND_BIRTHDAY = this.formatDate('TO-DISPLAY', land_data.LAND_BIRTHDAY.toISOString())
+                                }else{
+                                    land_data.LAND_BIRTHDAY = ''
+                                }
+                                 this.getAddressByAddressId(land_data.ADDRESS_ID).then((land_address_data) =>{
+                                    land_data.ADDRESS = land_address_data[0]
+                                    e_data.LAND = land_data
+                                    return resolve(e_data)
+                                 })
+                               
+                                // this.getAddressByAddressId(land_data.ADDRESS_ID)
+                            })
+                        }else{
+                            return resolve(e_data)
+                        }
+                    })
+                }else{
+                    return resolve(false)
                 }
             })
         })
@@ -991,8 +1027,8 @@ class service {
             this.insertAddressOne(address).then((addressResult) => {
                 if (addressResult.check) {
                     land.address_id = addressResult.id
-                    this.loopInsertLand(land).then((data) =>{
-                        if(data.check){
+                    this.loopInsertLand(land).then((data) => {
+                        if (data.check) {
                             return resolve(data.id)
                         }
                     })
@@ -1001,10 +1037,10 @@ class service {
 
         })
     }
-    insertFile(file){
+    insertFile(file) {
         return new Promise((resolve, reject) => {
             FileDAOObj.insert(file).then((fileResult) => {
-                if(fileResult){
+                if (fileResult) {
                     return resolve(fileResult)
                 }
             })
@@ -1014,15 +1050,15 @@ class service {
         return new Promise((resolve, reject) => {
             this.getNewId('LAND').then((id) => {
                 land.id = id
-                LandDAOObj.insert(land).then((data) =>{
-                    if(data === 'true'){
+                LandDAOObj.insert(land).then((data) => {
+                    if (data === 'true') {
                         console.log('function loopInsertLand : complete')
                         let resultReturn = {
-                            check:true,
-                            id:land.id
+                            check: true,
+                            id: land.id
                         }
                         return resolve(resultReturn)
-                    }else{
+                    } else {
                         console.log('function loopInsertLand : something wrog')
                         this.loopInsertLand(land)
                     }

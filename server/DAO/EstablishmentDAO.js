@@ -20,7 +20,6 @@ class EstablishmentDAO {
     }
     insert(em){
         return new Promise((resolve, reject) => {
-
             let column = `ESTABLISHMENT_ID, ADDRESS_ID, PERSONAL_ID, ESTABLISHMENT_IS_LAND_OWNED, `
             column = column + `ESTABLISHMENT_TYPE, ESTABLISHMENT_NAME, ESTABLISHMENT_MACHINE_SIZE, ESTABLISHMENT_AREA_SIZE, `
             column = column + `ESTABLISHMENT_WORKER, ESTABLISHMENT_PHONE, ESTABLISHMENT_FAX, ESTABLISHMENT_GROUND`
@@ -35,6 +34,18 @@ class EstablishmentDAO {
                 return resolve(`true`)
             })
         })
+    }
+    get(id){
+        return new Promise((resolve, reject) => {  
+            let query = `SELECT * FROM establishment WHERE ESTABLISHMENT_ID='${id}'`
+            con.query(query, function (err, result) {
+                if (err) {
+                    console.log(err.code) 
+                    return resolve(err.code)
+                }
+                return resolve(result[0])
+            })
+        }) 
     }
 }
 module.exports = EstablishmentDAO

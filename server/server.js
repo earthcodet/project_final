@@ -226,7 +226,7 @@ let testE = {
   id : '',
   address_id: 'SAVE',
   perosonal_id: 'P000001',
-  is_land_owned: 'YES',
+  is_land_owned: 'NO',
   type: '',
   name: '',
   machine_size: 15,
@@ -266,7 +266,7 @@ let land ={
   title:'test',
   name:'test',
   surname:'test',
-  birthday:"30-05-2563",
+  birthday:"",
   phone:"-",
 }
 app.post('/insert/establishment', (req, res) => {
@@ -278,6 +278,12 @@ app.post('/insert/establishment', (req, res) => {
   webService.insertEstablishment(testE,address,land,address2,file).then((data) => {
     console.log(data)
   })
+})
+
+
+let mid = 'E000001'
+webService.getEstablishment(mid).then((tt) =>{
+  console.log(tt)
 })
 //ทำให้ css กับ js ใช้ได้
 app.use(express.static(__dirname + '/views'));

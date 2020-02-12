@@ -33,5 +33,17 @@ class LandDAO {
             })
         })
     }
+    get(id){
+        return new Promise((resolve, reject) => {  
+            let query = `SELECT * FROM land WHERE LAND_ID='${id}'`
+            con.query(query, function (err, result) {
+                if (err) {
+                    console.log(err.code) 
+                    return resolve(err.code)
+                }
+                return resolve(result[0])
+            })
+        }) 
+    }
 }
 module.exports = LandDAO
