@@ -430,13 +430,29 @@
                                 ข้อความในแบบคำร้องขอต่อใบอนุญาตนี้เป็นจริงทุกประการ
                                 <br>
                                 (ลงชื่อ) <font color="red">*</font>
-                                <input type="text" id="documentName" />
+                                <!-- <input type="text" id="documentName" /> -->
+                                <input list="documentName1" id="documentName" name="">
+                                <datalist id="documentName1">
+                                    <option value="" hidden>เลือก...</option>
+                                    <option value="นาย A"></option>
+                                    <option value="นาย B"></option>
+                                    <option value="นาย C"></option>
+                                </datalist>
+                                </input>
                                 ผู้ขอรับใบอนุญาต
                             </a>
                         </div>
                         <div class="col" style="width: 33.33%;">
                             <a>
-                                ลงชื่อ <font color="red">*</font> <input type="text" id="documentName2" />
+                                ลงชื่อ <font color="red">*</font> 
+                                <input list="documentName12" id="documentNam2" name="">
+                                <datalist id="documentName12">
+                                    <option value="" hidden>เลือก...</option>
+                                    <option value="นาย A"></option>
+                                    <option value="นาย B"></option>
+                                    <option value="นาย C"></option>
+                                </datalist>
+                                </input>
                                 <br>
                                 <p class="text-center">ผู้รับเงิน</p>
                             </a>
