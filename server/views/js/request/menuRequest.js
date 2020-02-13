@@ -392,6 +392,7 @@ function deletePage() {
           // resetStyleIdDelete()
           resetFunction();
           // resetImageDefault()
+          document.getElementById("boxFood").style.display="none";
         }
         console.log(isEmpty(tempData));
         console.log(tempData);

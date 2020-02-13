@@ -59,12 +59,12 @@ let inForm = {
   bNum: "",
   datepicker2: "",
   bFee: "",
-  bFine:""
+  bFine: ""
 };
 
 let inOwner = {
-  useOtherPlace:"",
-  notuseOtherPlace:"",
+  useOtherPlace: "",
+  notuseOtherPlace: "",
   ownPrefix: "",
   ownName: "",
   ownSurname: "",
@@ -78,14 +78,14 @@ let inOwner = {
   ownProvince: "",
   ownDistrict: "",
   ownSubdistrict: "",
-  ownDeedId: "",
-  ownDeedMoo: "",
-  ownDeedTrxk: "",
-  ownDeedSxy: "",
-  ownDeedRoad: "",
-  ownDeedProvince: "",
-  ownDeedDistrict: "",
-  ownDeedSubdistrict: "",
+  // ownDeedId: "",
+  // ownDeedMoo: "",
+  // ownDeedTrxk: "",
+  // ownDeedSxy: "",
+  // ownDeedRoad: "",
+  // ownDeedProvince: "",
+  // ownDeedDistrict: "",
+  // ownDeedSubdistrict: "",
   uploadFilePdf: ""
 };
 
@@ -308,7 +308,7 @@ function resetParameter() {
     nationality: "",
     race: ""
   };
-  
+
   inAddress = {
     home_id: "-",
     moo: "",
@@ -322,7 +322,7 @@ function resetParameter() {
     phone: "",
     fax: ""
   };
-  
+
   inWorkplace2 = {
     workplaceName: "",
     area: "",
@@ -341,17 +341,17 @@ function resetParameter() {
     wPhone: "",
     wFax: ""
   };
-  
+
   inForm = {
     bNum: "",
     datepicker2: "",
     bFee: "",
-    bFine:""
+    bFine: ""
   };
-  
+
   inOwner = {
-    useOtherPlace:"",
-    notuseOtherPlace:"",
+    useOtherPlace: "",
+    notuseOtherPlace: "",
     ownPrefix: "",
     ownName: "",
     ownSurname: "",
@@ -365,17 +365,9 @@ function resetParameter() {
     ownProvince: "",
     ownDistrict: "",
     ownSubdistrict: "",
-    ownDeedId: "",
-    ownDeedMoo: "",
-    ownDeedTrxk: "",
-    ownDeedSxy: "",
-    ownDeedRoad: "",
-    ownDeedProvince: "",
-    ownDeedDistrict: "",
-    ownDeedSubdistrict: "",
     uploadFilePdf: ""
   };
-  
+
   inFood = {
     foodTrain: "",
     foodNoTrain: "",
@@ -383,7 +375,7 @@ function resetParameter() {
     foodStart: "",
     foodEnd: ""
   };
-  
+
   inLastBox = {
     confirm: "",
     documentId: "",
@@ -403,7 +395,6 @@ function inputRequired() {
   let checkno2 =
     document.getElementById("datepicker1").value.trim().length === 0;
   let checkno3 = document.getElementById("typeReq").value.trim().length === 0;
-  // let checkno4 = document.getElementById("typeUser").value.trim().length === 0;
   let checkno5 = document.getElementById("name").value.trim().length === 0;
   let checkno6 = document.getElementById("id").value.trim().length === 0;
   let checkno7 = document.getElementById("age").value.trim().length === 0;
@@ -411,7 +402,7 @@ function inputRequired() {
     document.getElementById("nationality").value.trim().length === 0;
   let checkno9 = document.getElementById("race").value.trim().length === 0;
   let checkno10 = document.getElementById("home_id").value.trim().length === 0;
-  let checkno101=document.getElementById("moo").value.trim().length === 0;
+  let checkno1001 = document.getElementById("moo").value.trim().length === 0;
   let checkno11 = document.getElementById("province").value.trim().length === 0;
   let checkno12 = document.getElementById("district").value.trim().length === 0;
   let checkno13 =
@@ -437,9 +428,6 @@ function inputRequired() {
   if (checkno3) {
     document.getElementById("typeReq").classList.add("alertInput");
   }
-  // if (checkno4) {
-  //   document.getElementById("typeUser").classList.add("alertInput");
-  // }
   if (checkno5) {
     document.getElementById("name").classList.add("alertInput");
   }
@@ -458,7 +446,7 @@ function inputRequired() {
   if (checkno10) {
     document.getElementById("home_id").classList.add("alertInput");
   }
-  if (checkno101) {
+  if (checkno1001) {
     document.getElementById("moo").classList.add("alertInput");
   }
   if (checkno11) {
@@ -473,9 +461,6 @@ function inputRequired() {
   if (checkno14) {
     document.getElementById("phone").classList.add("alertInput");
   }
-  // if (checkno15) {
-  //   document.getElementById("wLocation").classList.add("alertInput");
-  // }
   if (checkno16) {
     document.getElementById("wPlaceId").classList.add("alertInput");
   }
@@ -504,14 +489,13 @@ function inputRequired() {
   if (
     checkno2 ||
     checkno3 ||
-    // checkno4 ||
     checkno5 ||
     checkno6 ||
     checkno7 ||
     checkno8 ||
     checkno9 ||
     checkno10 ||
-    checkno101 ||
+    checkno1001 ||
     checkno11 ||
     checkno12 ||
     checkno13 ||
@@ -531,10 +515,8 @@ function inputRequired() {
   }
 }
 function resetInputRequired() {
-  // document.getElementById("form_id").classList.remove("alertInput");
   document.getElementById("datepicker1").classList.remove("alertInput");
   document.getElementById("typeReq").classList.remove("alertInput");
-  document.getElementById("typeUser").classList.remove("alertInput");
   document.getElementById("name").classList.remove("alertInput");
   document.getElementById("id").classList.remove("alertInput");
   document.getElementById("age").classList.remove("alertInput");
@@ -554,118 +536,235 @@ function resetInputRequired() {
   document.getElementById("wPhone").classList.remove("alertInput");
   document.getElementById("documentName").classList.remove("alertInput");
   document.getElementById("documentName2").classList.remove("alertInput");
+
+  document.getElementById("ownName").classList.remove("alertInput");
+  document.getElementById("ownSurname").classList.remove("alertInput");
+  document.getElementById("ownPhone").classList.remove("alertInput");
+  document.getElementById("ownHomeId").classList.remove("alertInput");
+  document.getElementById("ownMoo").classList.remove("alertInput");
+  document.getElementById("ownerProvince").classList.remove("alertInput");
+  document.getElementById("ownerDistrict").classList.remove("alertInput");
+  document.getElementById("ownerSubdistrict").classList.remove("alertInput");
 }
+
+function ownerRequire() {
+  let owner1 = document.getElementById("ownName").value.trim().length === 0;
+  let owner2 = document.getElementById("ownSurname").value.trim().length === 0;
+  let owner3 = document.getElementById("ownPhone").value.trim().length === 0;
+  let owner4 = document.getElementById("ownHomeId").value.trim().length === 0;
+  let owner5 = document.getElementById("ownMoo").value.trim().length === 0;
+  let owner6 =
+    document.getElementById("ownerProvince").value.trim().length === 0;
+  let owner7 =
+    document.getElementById("ownerDistrict").value.trim().length === 0;
+  let owner8 =
+    document.getElementById("ownerSubdistrict").value.trim().length === 0;
+
+  if (owner1) {
+    document.getElementById("ownName").classList.add("alertInput");
+  }
+  if (owner2) {
+    document.getElementById("ownSurname").classList.add("alertInput");
+  }
+  if (owner3) {
+    document.getElementById("ownPhone").classList.add("alertInput");
+  }
+  if (owner4) {
+    document.getElementById("ownHomeId").classList.add("alertInput");
+  }
+  if (owner5) {
+    document.getElementById("ownMoo").classList.add("alertInput");
+  }
+  if (owner6) {
+    document.getElementById("ownerProvince").classList.add("alertInput");
+  }
+  if (owner7) {
+    document.getElementById("ownerDistrict").classList.add("alertInput");
+  }
+  if (owner8) {
+    document.getElementById("ownerSubdistrict").classList.add("alertInput");
+  }
+
+  if (
+    owner1 ||
+    owner2 ||
+    owner3 ||
+    owner4 ||
+    owner5 ||
+    owner6 ||
+    owner7 ||
+    owner8
+  ) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
 function preInsert() {
   resetInputRequired();
   let check_id_user = document.getElementById("id").value;
   let check_input = inputRequired();
+  let check_input_owner = ownerRequire();
+  let check_owner = document.getElementById("useOtherPlace").checked;
   if (check_input) {
     if (check_id_user.trim().length === 13) {
       if (!_isUsed) {
         if (formatPhone(document.getElementById("phone").value.trim())) {
-          inPerson.form_id=document.getElementById("form_id").value;
-          inPerson.datepicker1 = document.getElementById("datepicker1").value;
-          inPerson.typeReq = document.getElementById("typeReq").value;
-          inPerson.typeUser = document.getElementById("typeUser").value;
-          inPerson.name = document.getElementById("name").value;
-          inPerson.id = document.getElementById("id").value;
-          inPerson.age = document.getElementById("age").value;
-          inPerson.nationality = document.getElementById("nationality").value;
-          inPerson.race = document.getElementById("race").value;
+          if (check_owner === true) {
+            if (check_input_owner) {
+              inPerson.form_id = document.getElementById("form_id").value;
+              inPerson.datepicker1 = document.getElementById(
+                "datepicker1"
+              ).value;
+              inPerson.typeReq = document.getElementById("typeReq").value;
+              inPerson.typeUser = document.getElementById("typeUser").value;
+              inPerson.name = document.getElementById("name").value;
+              inPerson.id = document.getElementById("id").value;
+              inPerson.age = document.getElementById("age").value;
+              inPerson.nationality = document.getElementById(
+                "nationality"
+              ).value;
+              inPerson.race = document.getElementById("race").value;
 
-          inAddress.home_id = document.getElementById("home_id").value;
-          inAddress.moo = document.getElementById("moo").value;
-          inAddress.trxk = document.getElementById("trxk").value;
-          inAddress.sxy = document.getElementById("sxy").value;
-          inAddress.building = document.getElementById("building").value;
-          inAddress.road = document.getElementById("road").value;
-          let provinceValue = parseInt(
-            document.getElementById(`province`).value
-          );
-          let amphurValue = parseInt(document.getElementById(`district`).value);
-          let districtValue = parseInt(
-            document.getElementById(`subdistrict`).value
-          );
-          inAddress.district_name = district[districtValue - 1].DISTRICT_NAME;
-          inAddress.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
-          inAddress.province_name = province[provinceValue - 1].PROVINCE_NAME;
-          inAddress.phone = document.getElementById("phone").value;
-          inAddress.fax = document.getElementById("fax").value;
+              inAddress.home_id = document.getElementById("home_id").value;
+              inAddress.moo = document.getElementById("moo").value;
+              inAddress.trxk = document.getElementById("trxk").value;
+              inAddress.sxy = document.getElementById("sxy").value;
+              inAddress.building = document.getElementById("building").value;
+              inAddress.road = document.getElementById("road").value;
+              let provinceValue = parseInt(
+                document.getElementById(`province`).value
+              );
+              let amphurValue = parseInt(
+                document.getElementById(`district`).value
+              );
+              let districtValue = parseInt(
+                document.getElementById(`subdistrict`).value
+              );
+              inAddress.district_name =
+                district[districtValue - 1].DISTRICT_NAME;
+              inAddress.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
+              inAddress.province_name =
+                province[provinceValue - 1].PROVINCE_NAME;
+              inAddress.phone = document.getElementById("phone").value;
+              inAddress.fax = document.getElementById("fax").value;
 
-          inWorkplace2.workplaceName=document.getElementById("").value;
-          inWorkplace2.area=document.getElementById("area").value;
-          inWorkplace2.numPeople=document.getElementById("").value;
-          inWorkplace2.typeWorkplace=document.getElementById("").value;
-          inWorkplace2.wPlaceId = document.getElementById("wPlaceId").value;
-          inWorkplace2.wMoo = document.getElementById("wMoo").value;
-          inWorkplace.wTrxk = document.getElementById("wTrxk").value;
-          inWorkplace.wSxy = document.getElementById("wSxy").value;
-          inWorkplace.wBuilding = document.getElementById("wBuilding").value;
-          inWorkplace.wRoad = document.getElementById("wRoad").value;
-          let provinceValue2 = parseInt(
-            document.getElementById(`wProvince`).value
-          );
-          let amphurValue2 = parseInt(
-            document.getElementById(`wDistrict`).value
-          );
-          let districtValue2 = parseInt(
-            document.getElementById(`wSubdistrict`).value
-          );
-          inWorkplace2.wSubdistrict = district[districtValue2 - 1].DISTRICT_NAME;
-          inWorkplace2.wDistrict = amphur[amphurValue2 - 1].AMPHUR_NAME;
-          inWorkplace2.wProvince = province[provinceValue2 - 1].PROVINCE_NAME;
-          inWorkplace2.wPhone = document.getElementById("wPhone").value;
-          inWorkplace2.wFax = document.getElementById("wFax").value;
+              inWorkplace2.workplaceName = document.getElementById("workplaceName").value;
+              inWorkplace2.area = document.getElementById("area").value;
+              inWorkplace2.numPeople = document.getElementById("numPeople").value;
+              inWorkplace2.typeWorkplace = document.getElementById("typeWorkplace").value;
+              inWorkplace2.wPlaceId = document.getElementById("wPlaceId").value;
+              inWorkplace2.wMoo = document.getElementById("wMoo").value;
+              inWorkplace2.wTrxk = document.getElementById("wTrxk").value;
+              inWorkplace2.wSxy = document.getElementById("wSxy").value;
+              inWorkplace2.wBuilding = document.getElementById(
+                "wBuilding"
+              ).value;
+              inWorkplace2.wRoad = document.getElementById("wRoad").value;
+              let provinceValue2 = parseInt(
+                document.getElementById(`wProvince`).value
+              );
+              let amphurValue2 = parseInt(
+                document.getElementById(`wDistrict`).value
+              );
+              let districtValue2 = parseInt(
+                document.getElementById(`wSubdistrict`).value
+              );
+              inWorkplace2.wSubdistrict =
+                district[districtValue2 - 1].DISTRICT_NAME;
+              inWorkplace2.wDistrict = amphur[amphurValue2 - 1].AMPHUR_NAME;
+              inWorkplace2.wProvince =
+                province[provinceValue2 - 1].PROVINCE_NAME;
+              inWorkplace2.wPhone = document.getElementById("wPhone").value;
+              inWorkplace2.wFax = document.getElementById("wFax").value;
 
-          inForm.bNum = document.getElementById("bNum").value;
-          inForm.datepicker2 = document.getElementById("datepicker2").value;
-          inForm.bFee = document.getElementById("bFee").value;
-          inForm.bFine = document.getElementById("bFine").value;
+              inForm.bNum = document.getElementById("bNum").value;
+              inForm.datepicker2 = document.getElementById("datepicker2").value;
+              inForm.bFee = document.getElementById("bFee").value;
+              inForm.bFine = document.getElementById("bFine").value;
 
-          inOwner.ownPrefix=document.getElementById("ownPrefix").value;
-          inOwner.ownName=document.getElementById("ownName").value;
-          inOwner.ownSurname=document.getElementById("ownSurname").value;
-          inOwner.ownAge=document.getElementById("ownAge");
-          inOwner.ownPhone=document.getElementById("ownPhone").value;
-          inOwner.ownHomeId=document.getElementById("ownHomeId").value;
-          inOwner.ownMoo=document.getElementById("ownMoo").value;
-          inOwner.ownTrxk=document.getElementById("ownTrxk").value;
-          inOwner.ownSxy=document.getElementById("ownSxy").value;
-          inOwner.ownRoad=document.getElementById("ownRoad").value;
-          inOwner.ownProvince=document.getElementById("ownerProvince").value;
-          inOwner.ownDistrict=document.getElementById("ownerDistrict").value;
-          inOwner.ownSubdistrict=document.getElementById("ownerSubdistrict").value;
-          inOwner.ownDeedId=document.getElementById("ownDeedId").value;
-          inOwner.ownDeedMoo=document.getElementById("ownDeedMoo").value;
-          inOwner.ownDeedTrxk=document.getElementById("ownDeedTrxk").value;
-          inOwner.ownDeedSxy=document.getElementById("ownDeedSxy").value;
-          inOwner.ownDeedRoad=document.getElementById("ownDeedRoad").value;
-          inOwner.ownDeedProvince=document.getElementById("landProvince").value;
-          inOwner.ownDeedDistrict=document.getElementById("landDistrict").value;
-          inOwner.ownDeedSubdistrict=document.getElementById("landSubdistrict").value;
-          inOwner.uploadFilePdf=document.getElementById("uploadFilePdf").value;
+              inOwner.ownPrefix = document.getElementById("ownPrefix").value;
+              inOwner.ownName = document.getElementById("ownName").value;
+              inOwner.ownSurname = document.getElementById("ownSurname").value;
+              inOwner.ownAge = document.getElementById("ownAge");
+              inOwner.ownPhone = document.getElementById("ownPhone").value;
+              inOwner.ownHomeId = document.getElementById("ownHomeId").value;
+              inOwner.ownMoo = document.getElementById("ownMoo").value;
+              inOwner.ownTrxk = document.getElementById("ownTrxk").value;
+              inOwner.ownSxy = document.getElementById("ownSxy").value;
+              inOwner.ownRoad = document.getElementById("ownRoad").value;
+              let provinceValue3 = parseInt(
+                document.getElementById(`ownerProvince`).value
+              );
+              let amphurValue3 = parseInt(
+                document.getElementById(`ownerDistrict`).value
+              );
+              let districtValue3 = parseInt(
+                document.getElementById(`ownerSubdistrict`).value
+              );
+              inOwner.ownSubdistrict =
+                district[districtValue3 - 1].DISTRICT_NAME;
+              inOwner.ownDistrict = amphur[amphurValue3 - 1].AMPHUR_NAME;
+              inOwner.ownProvince =
+                province[provinceValue3 - 1].PROVINCE_NAME;
+              inOwner.uploadFilePdf = document.getElementById(
+                "uploadFilePdf"
+              ).value;
 
-          inLastBox.confirm=document.getElementById("confirm").value;
-          inLastBox.documentId=document.getElementById("documentId").value;
-          inLastBox.documenthHome=document.getElementById("documenthHome").value;
-          inLastBox.documentLegalEntity=document.getElementById("documentLegalEntity").value;
-          inLastBox.documentSignature=document.getElementById("documentSignature").value;
-          inLastBox.documentSJ4=document.getElementById("documentSJ4").value;
-          inLastBox.documentOther=document.getElementById("documentOther").value;
-          inLastBox.other=document.getElementById("other").value;
-          inLastBox.documentName = document.getElementById("documentName").value;
-          inLastBox.documentName2 = document.getElementById("documentName2").value;
-          inLastBox.documentName2 = document.getElementById("documentName3").value;
-          inLastBox.position = document.getElementById("position").value;
+              inLastBox.confirm = document.getElementById("confirm").value;
+              inLastBox.documentId = document.getElementById(
+                "documentId"
+              ).value;
+              inLastBox.documenthHome = document.getElementById(
+                "documenthHome"
+              ).value;
+              inLastBox.documentLegalEntity = document.getElementById(
+                "documentLegalEntity"
+              ).value;
+              inLastBox.documentSignature = document.getElementById(
+                "documentSignature"
+              ).value;
+              inLastBox.documentSJ4 = document.getElementById(
+                "documentSJ4"
+              ).value;
+              inLastBox.documentOther = document.getElementById(
+                "documentOther"
+              ).value;
+              inLastBox.other = document.getElementById("other").value;
+              inLastBox.documentName = document.getElementById(
+                "documentName"
+              ).value;
+              inLastBox.documentName2 = document.getElementById(
+                "documentName2"
+              ).value;
+              inLastBox.documentName2 = document.getElementById(
+                "documentName3"
+              ).value;
+              inLastBox.position = document.getElementById("position").value;
 
-          arrInsert.push(inPerson);
-          arrInsert.push(inAddress);
-          arrInsert.push(inWorkplace2);
-          arrInsert.push(inForm);
-          arrInsert.push(inOwner);
-          arrInsert.push(inLastBox);
-          console.log(arrInsert);
-          return true;
+              arrInsert.push(inPerson);
+              arrInsert.push(inAddress);
+              arrInsert.push(inWorkplace2);
+              arrInsert.push(inForm);
+              arrInsert.push(inOwner);
+              arrInsert.push(inLastBox);
+              console.log(arrInsert);
+              return true;
+            } else {
+              Swal.fire({
+                title: "กรุณากรอกข้อมูลเจ้าของสถานที่",
+                width: "30%",
+                showConfirmButton: true,
+                closeOnConfirm: false,
+                closeOnCancel: false,
+                confirmButtonColor: "#009688",
+                icon: "error"
+              });
+            }
+          } else {
+            return true;
+          }
         } else {
           Swal.fire({
             title: "รูปแบบหมายเลขโทรศัพท์ไม่ถูกต้อง",
