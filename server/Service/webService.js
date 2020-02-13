@@ -10,6 +10,12 @@ const ReferenceDAO = require('../DAO/ReferenceDAO')
 const ReferenceDAOObj = new ReferenceDAO()
 const TrainDAO = require('../DAO/TrainDAO')
 const TrainDAOObj = new TrainDAO()
+const EstablishmentDAO = require('../DAO/EstablishmentDAO')
+const EstablishmentDAOObj = new EstablishmentDAO()
+const LandDAO = require('../DAO/LandDAO')
+const LandDAOObj = new LandDAO()
+const FileDAO = require('../DAO/FileDAO')
+const FileDAOObj = new FileDAO()
 
 class service {
     getProvince() {
@@ -492,6 +498,38 @@ class service {
                 })
             })
         }
+        if (type === 'ESTABLISHMENT') {
+            return new Promise((resolve, reject) => {
+                EstablishmentDAOObj.getMaxId().then((data) => {
+                    console.log(data)
+                    if (data[0].maxId === null) {
+                        console.log('getNewId : E000001')
+                        return resolve('E000001')
+                    } else {
+                        this.newId(data[0].maxId, 'ESTABLISHMENT').then((EstablishmentId) => {
+                            console.log('getNewId : ' + EstablishmentId)
+                            return resolve(EstablishmentId)
+                        })
+                    }
+                })
+            })
+        }
+        if (type === 'LAND') {
+            return new Promise((resolve, reject) => {
+                LandDAOObj.getMaxId().then((data) => {
+                    console.log(data)
+                    if (data[0].maxId === null) {
+                        console.log('getNewId : LE000001')
+                        return resolve('LE000001')
+                    } else {
+                        this.newId(data[0].maxId, 'LAND').then((landId) => {
+                            console.log('getNewId : ' + landId)
+                            return resolve(landId)
+                        })
+                    }
+                })
+            })
+        }
     }
     getPersonal(id, name, surname) {
         return new Promise((resolve, reject) => {
@@ -663,7 +701,7 @@ class service {
             })
         })
     }
-    
+
     insertTrain(train) {
         return new Promise((resolve, reject) => {
             TrainDAOObj.getTrianDuplication(train).then((trainData) => {
@@ -749,24 +787,24 @@ class service {
             })
         })
     }
-    createIdImage(item, MASK){
-        for(let i = 1 ; i <= item.length ; i++ ){
-                item[i-1].name = `${MASK}-0${i}`
+    createIdImage(item, MASK) {
+        for (let i = 1; i <= item.length; i++) {
+            item[i - 1].name = `${MASK}-0${i}`
         }
         return item
     }
-    insertImageEstablishments(image, id){
-       let newImage = this.createIdImage(image, id)
+    insertImageEstablishments(image, id) {
+        let newImage = this.createIdImage(image, id)
         return new Promise((resolve, reject) => {
-            ImageDAOObj.deleteImageEstablishment(id).then((data) =>{
+            ImageDAOObj.deleteImageEstablishment(id).then((data) => {
                 console.log(data)
-                if(data){
-                    ImageDAOObj.insertImageEstablishment(newImage).then((result) =>{
+                if (data) {
+                    ImageDAOObj.insertImageEstablishment(newImage).then((result) => {
                         return resolve(result)
                     })
                 }
             })
-           
+
         })
     }
     loopInsertAddress(personal, address, imageFile) {
@@ -810,7 +848,7 @@ class service {
             return date
         }
         if (type === 'TO-DISPLAY') {
-            //2563-01-04T17:00:00.000Z
+            //2020-05-29T17:00:00.000Z
             if (date != null) {
                 let realdate = date.substring(0, 10);
                 let temp = realdate.split('-')
@@ -850,7 +888,8 @@ class service {
             data.fax === '' ? data.fax = 'NULL' : data.fax = `'${data.fax}'`
             data.surname === '' ? data.surname = 'NULL' : `'${data.surname}'`
             return data
-        } else {
+        }
+        if (type === 'ADDRESS') {
             data.home_number === '' ? data.home_number = '-' : data.home_number = data.home_number
             data.moo === '' || data.moo === '-' ? data.moo = 'NULL' : data.moo = `'${data.moo}'`
             data.trxk === '' || data.trxk === '-' ? data.trxk = 'NULL' : data.trxk = `'${data.trxk}'`
@@ -859,6 +898,173 @@ class service {
             data.road === '' || data.road === '-' ? data.road = 'NULL' : data.road = `'${data.road}'`
             return data
         }
+
+        if (type === 'ESTABLISHMENT') {
+            data.is_land_owned === 'NO' ? data.is_land_owned = 'NULL' : data.is_land_owned = `'${data.is_land_owned}'`
+            data.type === '' ? data.type = 'NULL' : data.type = `'${data.type}'`
+            data.name === '' ? data.name = 'NULL' : data.name = `'${data.name}'`
+
+            data.machine_size === '' ? data.machine_size = 0 : ''
+            data.area_size === '' ? data.area_size = 0 : ''
+            data.worker === '' ? data.worker = 0 : ''
+
+            data.fax === '' ? data.fax = 'NULL' : data.fax = `'${data.fax}'`
+            data.grond === '' ? data.grond = 'NULL' : data.grond = `'${data.grond}'`
+            return data
+        }
+        if (type === 'LAND') {
+            data.birthday === '' ? data.birthday = 'NULL' : data.birthday = `'${this.formatDate("TO-INSERT", data.birthday)}'`
+            return data
+        }
+    }
+    loopInsertEstablishment(Edata) {
+        return new Promise((resolve, reject) => {
+            this.getNewId('ESTABLISHMENT').then((newId) => {
+                Edata.id = newId
+                EstablishmentDAOObj.insert(Edata).then((data) => {
+                    if (data === 'true') {
+                        console.log('function insertEstablishment : complete')
+                        return resolve(true)
+                    } else {
+                        // key duplication 
+                        this.loopInsertEstablishment(Edata)
+                    }
+                })
+            })
+        })
+    }
+    insertAddressOne(address) {
+        return new Promise((resolve, reject) => {
+            this.getNewId('ADDRESS').then((id) => {
+                address.id = id
+                this.insertAddress(address).then((data) => {
+                    console.log(data)
+                    if (data) {
+                        console.log(`Insert : address complete`)
+                        let result = {
+                            check: true,
+                            id: address.id
+                        }
+                        return resolve(result)
+                    } else {
+                        this.insertAddressOne(address)
+                    }
+                })
+            })
+        })
+    }
+    insertEstablishment(Edata, address, land, addressOwner, file) {
+        //Main personal set 
+        Edata = this.formatInsert('ESTABLISHMENT', Edata)
+        address = this.formatInsert('ADDRESS', address)
+        addressOwner = this.formatInsert('ADDRESS', addressOwner)
+        land = this.formatInsert('LAND', land)
+        console.log(address)
+        console.log(addressOwner)
+        // return new Promise((resolve, reject) => {
+        //     return resolve(true)
+        // })
+        return new Promise((resolve, reject) => {
+            this.insertAddressOne(address).then((resultaddress) => {
+                console.log(address)
+                console.log(addressOwner)
+                if (resultaddress.check) {
+                    Edata.address_id = resultaddress.id
+                    if (Edata.is_land_owned != 'NULL') {
+                        this.insertLand(land, addressOwner).then((land_id) => {
+                            Edata.is_land_owned = `'${land_id}'`
+                            file.name = land_id
+                            this.insertFile(file).then((resultFile) => {
+                                if (resultFile) {
+                                    this.loopInsertEstablishment(Edata).then((result) => {
+                                        return resolve(result)
+                                    })
+                                }
+                            })
+                        })
+                    } else {
+                        this.loopInsertEstablishment(Edata).then((result) => {
+                            return resolve(result)
+                        })
+                    }
+                }
+            })
+        })
+    }
+    getEstablishment(id) {
+        return new Promise((resolve, reject) => {
+            EstablishmentDAOObj.get(id).then((e_data) => {
+                if (e_data != undefined) {
+                    this.getAddressByAddressId(e_data.ADDRESS_ID).then((e_address_data) =>{
+                        e_data.ADDRESS = e_address_data[0]
+                        if(e_data.ESTABLISHMENT_IS_LAND_OWNED != null){
+                            LandDAOObj.get(e_data.ESTABLISHMENT_IS_LAND_OWNED).then((land_data) =>{
+                                if(land_data.LAND_BIRTHDAY != null){
+                                    land_data.LAND_BIRTHDAY = this.formatDate('TO-DISPLAY', land_data.LAND_BIRTHDAY.toISOString())
+                                }else{
+                                    land_data.LAND_BIRTHDAY = ''
+                                }
+                                 this.getAddressByAddressId(land_data.ADDRESS_ID).then((land_address_data) =>{
+                                    land_data.ADDRESS = land_address_data[0]
+                                    e_data.LAND = land_data
+                                    return resolve(e_data)
+                                 })
+                               
+                                // this.getAddressByAddressId(land_data.ADDRESS_ID)
+                            })
+                        }else{
+                            return resolve(e_data)
+                        }
+                    })
+                }else{
+                    return resolve(false)
+                }
+            })
+        })
+    }
+    insertLand(land, address) {
+        return new Promise((resolve, reject) => {
+            this.insertAddressOne(address).then((addressResult) => {
+                if (addressResult.check) {
+                    land.address_id = addressResult.id
+                    this.loopInsertLand(land).then((data) => {
+                        if (data.check) {
+                            return resolve(data.id)
+                        }
+                    })
+                }
+            })
+
+        })
+    }
+    insertFile(file) {
+        return new Promise((resolve, reject) => {
+            FileDAOObj.insert(file).then((fileResult) => {
+                if (fileResult) {
+                    return resolve(fileResult)
+                }
+            })
+        })
+    }
+    loopInsertLand(land) {
+        return new Promise((resolve, reject) => {
+            this.getNewId('LAND').then((id) => {
+                land.id = id
+                LandDAOObj.insert(land).then((data) => {
+                    if (data === 'true') {
+                        console.log('function loopInsertLand : complete')
+                        let resultReturn = {
+                            check: true,
+                            id: land.id
+                        }
+                        return resolve(resultReturn)
+                    } else {
+                        console.log('function loopInsertLand : something wrog')
+                        this.loopInsertLand(land)
+                    }
+                })
+            })
+        })
     }
     updateAddress(address) {
         return new Promise((resolve, reject) => {
@@ -867,7 +1073,7 @@ class service {
                     console.log('function updateAddress : complete')
                     return resolve(true)
                 } else {
-                    console.log('function updateAddress : somthing wrog')
+                    console.log('function updateAddress : something wrog')
                     console.log(data)
                     return resolve(false)
                 }

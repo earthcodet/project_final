@@ -376,7 +376,7 @@ function inputRequired() {
     document.getElementById("nationality").value.trim().length === 0;
   let checkno9 = document.getElementById("race").value.trim().length === 0;
   let checkno10 = document.getElementById("home_id").value.trim().length === 0;
-  let checkno101 = document.getElementById("moo").value.trim().length === 0;
+  let checkno1001 = document.getElementById("moo").value.trim().length === 0;
   let checkno11 = document.getElementById("province").value.trim().length === 0;
   let checkno12 = document.getElementById("district").value.trim().length === 0;
   let checkno13 =
@@ -424,7 +424,7 @@ function inputRequired() {
   if (checkno10) {
     document.getElementById("home_id").classList.add("alertInput");
   }
-  if (checkno101) {
+  if (checkno1001) {
     document.getElementById("moo").classList.add("alertInput");
   }
   if (checkno11) {
@@ -479,7 +479,7 @@ function inputRequired() {
     checkno8 ||
     checkno9 ||
     checkno10 ||
-    checkno101 ||
+    checkno1001 ||
     checkno11 ||
     checkno12 ||
     checkno13 ||

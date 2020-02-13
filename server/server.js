@@ -185,6 +185,9 @@ let trianData = {
   date_issued: '02-05-2563'
 }
 let MASK = 'R000012562'
+let eop = {
+
+}
 app.post('/insert/request', (req, res) => {
   let size = parseInt(req.body.maxSizeImage)
   let formatInsertImage = []
@@ -193,7 +196,6 @@ app.post('/insert/request', (req, res) => {
     type: '',
     data: ''
   }
-
   for (let i = 1; i <= size; i++) {
     let files
     i === 1 ? files = req.files.files0 : ''
@@ -219,13 +221,70 @@ app.post('/insert/request', (req, res) => {
     console.log(data)
   })
 })
-/*
-webService.loopInsertTrain(trianData).then((data)=>{
-  console.log(`===================`)
-  console.log(data)
+//insertEstablishment
+let testE = {
+  id : '',
+  address_id: 'SAVE',
+  perosonal_id: 'P000001',
+  is_land_owned: 'NO',
+  type: '',
+  name: '',
+  machine_size: 15,
+  area_size: 15.5,
+  worker: 77.5,
+  phone: '-',
+  fax: '',
+  grond: ''
+}
+let address = {
+  id: "",
+  home_number: 'test',
+  moo: 'test',
+  trxk: 'test',
+  sxy: '',
+  building: '',
+  road: '',
+  district_name: 'test',
+  amphur_name: 'test',
+  province_name: 'test'
+}
+let address2 = {
+  id: "",
+  home_number: 'test',
+  moo: 'test',
+  trxk: 'test',
+  sxy: 'test',
+  building: 'test',
+  road: 'test',
+  district_name: 'test',
+  amphur_name: 'test',
+  province_name: 'test'
+}
+let land ={
+  id:"",
+  address_id:"",
+  title:'test',
+  name:'test',
+  surname:'test',
+  birthday:"",
+  phone:"-",
+}
+app.post('/insert/establishment', (req, res) => {
+  let file = {
+    name:'',
+    data:req.files.files.data
+  }
+  console.log(req.files.files.data)
+  webService.insertEstablishment(testE,address,land,address2,file).then((data) => {
+    console.log(data)
+  })
 })
-*/
 
+
+let mid = 'E000001'
+webService.getEstablishment(mid).then((tt) =>{
+  console.log(tt)
+})
 //ทำให้ css กับ js ใช้ได้
 app.use(express.static(__dirname + '/views'));
 app.listen(PORT, () => {
