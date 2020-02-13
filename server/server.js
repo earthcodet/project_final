@@ -143,8 +143,8 @@ app.post('/insert/personal', (req, res) => {
     obj[2].data = null
   }
   console.log(req.files)
-  webService.personalStep(obj[0], obj[1], obj[2], req.session.username).then((data) => {
-    console.log(`server : function perosonalStep return = ${data}`)
+  webService.InsertPersonalStep(obj[0], obj[1], obj[2], req.session.username).then((data) => {
+    console.log(`server : function InsertPersonalStep return = ${data}`)
     res.json(data)
   })
 })
@@ -170,7 +170,7 @@ app.get('/search/personal/:id/:name/:surname', (req, res) => {
   })
 })
 // Test Data referecne
-let testData = {
+let referecneData = {
   id: '',
   title: 'นาย',
   name: 'แชมป์',
@@ -188,7 +188,7 @@ let MASK = 'R000012562'
 let eop = {
 
 }
-app.post('/insert/request', (req, res) => {
+app.post('/insert/requestss', (req, res) => {
   let size = parseInt(req.body.maxSizeImage)
   let formatInsertImage = []
   let object = {
@@ -217,74 +217,139 @@ app.post('/insert/request', (req, res) => {
     }
   }
   console.log(formatInsertImage)
-  webService.insertImageEstablishments(formatInsertImage,MASK).then((data) => {
+  webService.insertImageEstablishments(formatInsertImage, MASK).then((data) => {
     console.log(data)
   })
 })
 //insertEstablishment
-let testE = {
-  id : '',
-  address_id: 'SAVE',
-  perosonal_id: 'P000001',
-  is_land_owned: 'NO',
-  type: '',
-  name: '',
-  machine_size: 15,
-  area_size: 15.5,
-  worker: 77.5,
-  phone: '-',
-  fax: '',
-  grond: ''
-}
-let address = {
-  id: "",
-  home_number: 'test',
-  moo: 'test',
-  trxk: 'test',
-  sxy: '',
-  building: '',
-  road: '',
-  district_name: 'test',
-  amphur_name: 'test',
-  province_name: 'test'
-}
-let address2 = {
-  id: "",
-  home_number: 'test',
-  moo: 'test',
-  trxk: 'test',
-  sxy: 'test',
-  building: 'test',
-  road: 'test',
-  district_name: 'test',
-  amphur_name: 'test',
-  province_name: 'test'
-}
-let land ={
-  id:"",
-  address_id:"",
-  title:'test',
-  name:'test',
-  surname:'test',
-  birthday:"",
-  phone:"-",
-}
-app.post('/insert/establishment', (req, res) => {
-  let file = {
-    name:'',
-    data:req.files.files.data
-  }
-  console.log(req.files.files.data)
-  webService.insertEstablishment(testE,address,land,address2,file).then((data) => {
+// let testE = {
+//   id: '',
+//   address_id: 'SAVE',
+//   perosonal_id: 'P000001',
+//   is_land_owned: 'NO',
+//   type: '',
+//   name: '',
+//   machine_size: 15,
+//   area_size: 15.5,
+//   worker: 77.5,
+//   phone: '-',
+//   fax: '',
+//   grond: ''
+// }
+// let address = {
+//   id: "",
+//   home_number: 'test',
+//   moo: 'test',
+//   trxk: 'test',
+//   sxy: '',
+//   building: '',
+//   road: '',
+//   district_name: 'test',
+//   amphur_name: 'test',
+//   province_name: 'test'
+// }
+// let address2 = {
+//   id: "",
+//   home_number: 'test',
+//   moo: 'test',
+//   trxk: 'test',
+//   sxy: 'test',
+//   building: 'test',
+//   road: 'test',
+//   district_name: 'test',
+//   amphur_name: 'test',
+//   province_name: 'test'
+// }
+// let land = {
+//   id: "",
+//   address_id: "",
+//   title: 'test',
+//   name: 'test',
+//   surname: 'test',
+//   birthday: "",
+//   phone: "-",
+// }
+app.post('/insert/request', (req, res) => {
+  
+  var obj = JSON.parse(req.body.gropData);
+  obj[6].data = req.files != null ? req.files.files.data :  ''
+  // console.log(obj)
+  //InsertRequestStep(request, personal, Edata, address, land, addressOwner, file, reference, train)
+  //ets = Edata, address, land, addressOwner, file
+  webService.InsertRequestStep(obj[0],obj[1],obj[2],obj[3],obj[4],obj[5],obj[6],obj[7],obj[8]).then((data) => {
     console.log(data)
   })
 })
 
 
-let mid = 'E000001'
-webService.getEstablishment(mid).then((tt) =>{
-  console.log(tt)
-})
+// let mid = 'E000001'
+// webService.getEstablishment(mid).then((tt) =>{
+//   console.log(tt)
+// }))
+
+// let testInsertRequest = {
+//   no: 'C00001',
+//   year: '2563',
+//   personal_id_owner: 'P000001',
+//   request_type_id: 15,
+//   staff_id_alderman: 'S0001',
+//   establishment_id: '',
+//   staff_id_money: 'S0001',
+//   reference_id: 'RF00001',
+//   train_id: 'YES',
+//   personal_id_assistant: '',
+//   staff_id_approve: 'S0001',
+//   menu: 'ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร',
+//   date_submission: '30-05-2563',
+//   date_approve: '30-05-2563',
+//   doc_no1: 'N',
+//   doc_no2: 'N',
+//   doc_no3: 'x',
+//   doc_no4: 'x',
+//   doc_no5: 'x',
+//   doc_no6: 'x',
+//   subcategory: '',
+//   product_type: '',
+//   sell_start: '13:48:00.000',
+//   sell_end: '13:48:00.000',
+//   sell_allow: 'N',
+//   receipt_order: '',
+//   receipt_fine: 10,
+//   receipt_fee: 15.5,
+//   receipt_total: '',
+//   //
+//   receipt_date: '30-05-2563',
+//   date_issued: '30-05-2563',
+//   date_expired: '30-05-2563',
+//   //
+//   condition_no_1: '',
+//   condition_no_2: '',
+//   condition_no_3: '',
+//   condition_no_4: '',
+//   image_name: '',
+//   total_image: 0,
+//   status: '',
+//   delete_logic: '',
+//   is_deleted: '',
+//   last_update: '20-05-2563',
+//   user_update: 'ADMIN'
+
+// }
+// webService.InsertRequestStep(testInsertRequest).then((data) =>{
+//   console.log(data)
+// })
+// webService.updateRequestStatus('approval','C00003', `2563`).then((data) =>{
+//   console.log(data)
+// })
+// webService.getRequestByTpyeAndOwnerId('wait','P000001').then((data) =>{
+//     console.log(data.length)
+//   })
+// webService.updateRequest(testInsertRequest).then((data) => {
+//   console.log(data)
+// })
+// webService.getRequestByIdAndYear('C00001', `2563`).then((data) =>{
+//   console.log(data)
+// })
 //ทำให้ css กับ js ใช้ได้
 app.use(express.static(__dirname + '/views'));
 app.listen(PORT, () => {
