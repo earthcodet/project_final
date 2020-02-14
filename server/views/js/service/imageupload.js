@@ -7,6 +7,7 @@ let filePdf = {
     data: ''
   }
 let testInsertRequest = {
+    is_request_changed:false,
     no: '',
     year: parseInt(new Date().toISOString().slice(0, 4)) + 543,
     personal_id_owner: 'P000001',
@@ -18,6 +19,7 @@ let testInsertRequest = {
     train_id: 'YES',
     personal_id_assistant: '',
     staff_id_approve: 'S0001',
+    establishment_is_land_owned:'',
     menu: 'ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร',
     date_submission: '30-05-2563',
     date_approve: '30-05-2563',
@@ -51,14 +53,15 @@ let testInsertRequest = {
     delete_logic: '',
     is_deleted: '',
     last_update: '20-05-2563',
-    user_update: 'ADMIN'
+    username: 'ADMIN'
   
   }
   let testE = {
+    is_establishment_changed:true,
     id: '',
     address_id: 'SAVE',
     perosonal_id: 'P000001',
-    is_land_owned: 'YES',
+    is_land_owned: 'NO',
     type: '',
     name: 'ร้านไอติมอร่อยมาก',
     machine_size: 90,
@@ -69,6 +72,7 @@ let testInsertRequest = {
     grond: ''
   }
   let address = {
+    is_address_establishment_changed:true,
     id: "",
     home_number: '88/99',
     moo: '5',
@@ -81,6 +85,7 @@ let testInsertRequest = {
     province_name: 'กรุงเทพ'
   }
   let address2 = {
+    is_address_owner_changed:false,
     id: "",
     home_number: '147/292',
     moo: '3',
@@ -93,6 +98,7 @@ let testInsertRequest = {
     province_name: 'กรุงเทพ'
   }
   let land = {
+    is_land_changed:false,
     id: "",
     address_id: "",
     title: 'นาย',
@@ -129,7 +135,7 @@ let testInsertRequest = {
     province_name: "ชลบุรี"
 };
 let inPersonal = {
-    is_personal_changed:true,
+    is_personal_changed:false,
     id: "P000001",
     address_id: "",
     title: "นางสาว",

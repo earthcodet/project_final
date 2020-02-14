@@ -657,14 +657,6 @@ class service {
             })
         })
     }
-    testget(reference) {
-        
-        return new Promise((resolve, reject) => {
-            ReferenceDAOObj.getReference(reference).then((referenceData) => {
-                return resolve(referenceData)
-            })
-        })
-    }
     insertReference(reference) {
         return new Promise((resolve, reject) => {
             ReferenceDAOObj.getReference(reference).then((referenceData) => {
@@ -1025,33 +1017,46 @@ class service {
     }
     insertEstablishment(Edata, address, land, addressOwner, file) {
         //Main personal set 
-        Edata = this.formatInsert('ESTABLISHMENT', Edata)
-        address = this.formatInsert('ADDRESS', address)
-        addressOwner = this.formatInsert('ADDRESS', addressOwner)
-        land = this.formatInsert('LAND', land)
+        let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+        let new_address = this.formatInsert('ADDRESS', address)
+        let new_addressOwner = this.formatInsert('ADDRESS', addressOwner)
+        let new_land = this.formatInsert('LAND', land)
         return new Promise((resolve, reject) => {
-            this.insertAddressOne(address).then((resultaddress) => {
-                if (resultaddress.check) {
-                    Edata.address_id = resultaddress.id
-                    if (Edata.is_land_owned != 'NULL') {
-                        this.insertLand(land, addressOwner).then((land_id) => {
-                            Edata.is_land_owned = `'${land_id}'`
-                            file.name = land_id
-                            this.insertFile(file).then((resultFile) => {
-                                if (resultFile) {
-                                    this.loopInsertEstablishment(Edata).then((result) => {
-                                        return resolve(result)
+            console.log(new_edata)
+            EstablishmentDAOObj.getDuplication(Edata, address).then((establishmentData) => {
+                console.log(establishmentData)
+                if (establishmentData.length != 0) {
+                    new_edata.id  = establishmentData[0].ESTABLISHMENT_ID
+                    new_edata.is_land_owned = establishmentData[0].ESTABLISHMENT_IS_LAND_OWNED
+                    console.log(new_edata.is_land_owned )
+                    return resolve(new_edata)
+                } else {
+                    this.insertAddressOne(new_address).then((resultaddress) => {
+                        if (resultaddress.check) {
+                            new_edata.address_id = resultaddress.id
+                            if (new_edata.is_land_owned != 'NULL') {
+                                this.insertLand(new_land, new_addressOwner).then((land_id) => {
+                                    new_edata.is_land_owned = `'${land_id}'`
+                                    file.name = land_id
+                                    this.insertFile(file).then((resultFile) => {
+                                        if (resultFile) {
+                                           
+                                            this.loopInsertEstablishment(new_edata).then((result) => {
+                                                return resolve(result)
+                                            })
+                                        }
                                     })
-                                }
-                            })
-                        })
-                    } else {
-                        this.loopInsertEstablishment(Edata).then((result) => {
-                            return resolve(result)
-                        })
-                    }
+                                })
+                            } else {
+                                this.loopInsertEstablishment(new_edata).then((result) => {
+                                    return resolve(result)
+                                })
+                            }
+                        }
+                    })
                 }
             })
+
         })
     }
     getEstablishment(id) {
@@ -1324,13 +1329,31 @@ class service {
             })
         })
     }
-    InsertRequestStep(request, personal, Edata, address, land, addressOwner, file, reference, train) {
+    
+    InsertRequestStep(request, personal, Edata, address, land, addressOwner, file, reference, train, username) {
         //ets = Edata, address, land, addressOwner, file
         var datetime = new Date();
         let dateForUpdate = datetime.toISOString().slice(0, 10)
         request.last_update = dateForUpdate
-        console.log(personal)
+        // console.log(personal)
+
         if (personal[0].is_personal_changed) {
+            var datetime = new Date();
+            let dateForUpdate = datetime.toISOString().slice(0, 10)
+            if (personal[0].birthday.length != 0) {
+                personal[0].birthday = this.formatDate('TO-INSERT', personal[0].birthday)
+                personal[0].birthday = `'${personal[0].birthday}'`
+            }
+
+            if (personal[0].card_expipe.length != 0) {
+                personal[0].card_expipe = this.formatDate('TO-INSERT', personal[0].card_expipe)
+                personal[0].card_expipe = `'${personal[0].card_expipe}'`
+            }
+
+            personal[0].card_issued = this.formatDate('TO-INSERT', personal[0].card_issued)
+
+            personal[0].update = dateForUpdate
+            personal[0].username = username
             let newpersonal = this.formatInsert('PERSONAL', personal[0])
             console.log(`InsertRequestStep : Update Personal`)
             this.updatePersonal(newpersonal).then((updatePersonalStatus) => {
@@ -1344,14 +1367,46 @@ class service {
                 console.log(updateAddressStatus)
             })
         }
-        return new Promise((resolve, reject) => {
-            console.log('InsertRequestStep : loading')
-            this.insertEstablishment(Edata, address, land, addressOwner, file).then((data) => {
-                request.establishment_id = data.id
-                if (request.reference_id === 'YES') {
-                    this.loopInsertReference(reference).then((result) => {
-                        request.reference_id = result.REFERENCE_ID
+        if (request.no != '') {
+            //Update !!
+            return new Promise((resolve, reject) => {
+                Edata = this.formatInsert('ESTABLISHMENT', Edata)
+                address = this.formatInsert('ADDRESS', address)
+                addressOwner = this.formatInsert('ADDRESS', addressOwner)
+                land = this.formatInsert('LAND', land)
+                if (Edata.is_establishment_changed != true) {
+                    EstablishmentDAOObj.update()
+                }
+            })
+        } else {
+            //insert !!
+            return new Promise((resolve, reject) => {
+                console.log('InsertRequestStep : loading')
+                this.insertEstablishment(Edata, address, land, addressOwner, file).then((data) => {
+                    request.establishment_id = data.id
+                    console.log(data)
+                    request.establishment_is_land_owned = data.is_land_owned === null ? 'NULL' : `'${data.is_land_owned}'`
+                    console.log(request.establishment_is_land_owned)
+                    if (request.reference_id === 'YES') {
+                        this.loopInsertReference(reference).then((result) => {
+                            request.reference_id = result.REFERENCE_ID
 
+                            if (request.train_id === 'YES') {
+                                this.loopInsertTrain(train).then((trainData) => {
+                                    request.train_id = trainData.TRAIN_ID
+                                    let new_request = this.formatInsert('REQUEST', request)
+                                    this.loopInsertRequest(new_request).then((requestData) => {
+                                        return resolve(requestData)
+                                    })
+                                })
+                            } else {
+                                let new_request = this.formatInsert('REQUEST', request)
+                                this.loopInsertRequest(new_request).then((requestData) => {
+                                    return resolve(requestData)
+                                })
+                            }
+                        })
+                    } else {
                         if (request.train_id === 'YES') {
                             this.loopInsertTrain(train).then((trainData) => {
                                 request.train_id = trainData.TRAIN_ID
@@ -1366,26 +1421,11 @@ class service {
                                 return resolve(requestData)
                             })
                         }
-                    })
-                } else {
-                    if (request.train_id === 'YES') {
-                        this.loopInsertTrain(train).then((trainData) => {
-                            request.train_id = trainData.TRAIN_ID
-                            let new_request = this.formatInsert('REQUEST', request)
-                            this.loopInsertRequest(new_request).then((requestData) => {
-                                return resolve(requestData)
-                            })
-                        })
-                    } else {
-                        let new_request = this.formatInsert('REQUEST', request)
-                        this.loopInsertRequest(new_request).then((requestData) => {
-                            return resolve(requestData)
-                        })
                     }
-                }
-                //insertImageEstablishments(image, id)
+                    //insertImageEstablishments(image, id)
+                })
             })
-        })
+        }
     }
     loopInsertRequest(request) {
         return new Promise((resolve, reject) => {

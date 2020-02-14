@@ -50,12 +50,7 @@ class ReferenceDAO {
         })
     }
     getReference(reference){
-        console.log('=================')
-        console.log(reference)
         return new Promise((resolve, reject) => {
-            console.log('=================')
-            console.log(reference)
-            console.log('=================')
             let value = '*'
             let condition = `REFERENCE_NAME = '${reference.name}' AND REFERENCE_SURNAME = '${reference.surname}'`
             let query = `SELECT ${value} FROM reference WHERE ${condition}`

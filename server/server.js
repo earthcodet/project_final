@@ -205,7 +205,7 @@ app.post('/insert/requestss', (req, res) => {
 app.post('/insert/request', (req, res) => {
   
   var obj = JSON.parse(req.body.gropData);
-  obj[6].data = req.files != null ? req.files.files.data :  ''
+  obj[6].data = req.files != null ? req.files.files.data :  null
   // console.log(obj)
   //InsertRequestStep(request, personal, Edata, address, land, addressOwner, file, reference, train)
   //ets = Edata, address, land, addressOwner, file
