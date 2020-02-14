@@ -210,19 +210,8 @@ app.post('/insert/request', (req, res) => {
   //InsertRequestStep(request, personal, Edata, address, land, addressOwner, file, reference, train)
   //ets = Edata, address, land, addressOwner, file
   webService.InsertRequestStep(obj[0],obj[1],obj[2],obj[3],obj[4],obj[5],obj[6],obj[7],obj[8]).then((data) => {
-    console.log(data)
+    // console.log(data)
   })
-})
-let referecneData = {
-  id: '',
-  title: 'นาย',
-  name: 'ภานุวัฒน์',
-  surname: 'ฤหะรมณ์',
-  status: 'น้อง',
-  phone: '0616577015'
-}
-webService.testget(referecneData).then((data) => {
-  console.log(data)
 })
 //ทำให้ css กับ js ใช้ได้
 app.use(express.static(__dirname + '/views'));

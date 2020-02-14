@@ -117,32 +117,32 @@ let testInsertRequest = {
   }
   let inAddress = {
     is_address_changed:false,
-    id: "",
-    home_number: "-",
-    moo: '',
+    id: "ADD0000001",
+    home_number: "147/525",
+    moo: '99',
     trxk: '',
     sxy: '',
     building: '',
     road: '',
-    district_name: "",
-    amphur_name: "",
-    province_name: ""
+    district_name: "ห้วยกะปิ",
+    amphur_name: "เมืองชลบุรี",
+    province_name: "ชลบุรี"
 };
 let inPersonal = {
-    is_personal_changed:false,
-    id: "",
+    is_personal_changed:true,
+    id: "P000001",
     address_id: "",
-    title: "",
-    type: "",
-    name: "",
-    surname: "",
-    nationality: '',
-    race: '',
-    birthday: '',
-    personal_id: "",
-    card_issued: "",
+    title: "นางสาว",
+    type: "บุคคลธรรมดา",
+    name: "เขมนิจ",
+    surname: "จามิกรณ์",
+    nationality: 'ลาว',
+    race: 'ไทย',
+    birthday: '31-01-2546',
+    personal_id: "1254233652124",
+    card_issued: "04-02-2560",
     card_expipe: '',
-    phone: "",
+    phone: "0616588521",
     fax: ''
 };
 function handleFileSelect(evt) {

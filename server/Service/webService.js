@@ -506,7 +506,6 @@ class service {
         if (type === 'ESTABLISHMENT') {
             return new Promise((resolve, reject) => {
                 EstablishmentDAOObj.getMaxId().then((data) => {
-                    console.log(data)
                     if (data[0].maxId === null) {
                         console.log('getNewId : E000001')
                         return resolve('E000001')
@@ -522,7 +521,6 @@ class service {
         if (type === 'LAND') {
             return new Promise((resolve, reject) => {
                 LandDAOObj.getMaxId().then((data) => {
-                    console.log(data)
                     if (data[0].maxId === null) {
                         console.log('getNewId : LE000001')
                         return resolve('LE000001')
@@ -537,11 +535,9 @@ class service {
         }
         if (type === 'REQUEST') {
             return new Promise((resolve, reject) => {
-                console.log(`run`)
                 let year = parseInt(new Date().toISOString().slice(0, 4)) + 543
                 let sight = this.getSightFormType(menu)
                 RequestDAOObj.getMaxId(sight, year).then((data) => {
-                    console.log(data)
                     if (data[0].maxId === null) {
                         //#00001
                         console.log(`getNewId : ${sight}00001`)
@@ -672,10 +668,6 @@ class service {
     insertReference(reference) {
         return new Promise((resolve, reject) => {
             ReferenceDAOObj.getReference(reference).then((referenceData) => {
-                console.log(`***************************`)
-                console.log(referenceData)
-                console.log(referenceData.length != 0)
-                console.log(`***************************`)
                 if (referenceData.length != 0) {
                     return resolve(referenceData[0])
                 } else {
@@ -696,10 +688,7 @@ class service {
             this.getNewId('REFERENCE').then((id) => {
                 reference.id = id
                 this.insertReference(reference).then((data) => {
-                    // console.log(`Data =>${data}`)
-                    // console.log(data)
                     if (data.length != 0) {
-                        console.log(data)
                         console.log(`Insert : reference complete`)
                         if (data === 'true') {
                             let referenceResult = {
@@ -766,12 +755,8 @@ class service {
                 train.id = id
                 train.date_exp = this.formatDate('TO-INSERT', train.date_exp)
                 train.date_issued = this.formatDate('TO-INSERT', train.date_issued)
-                //if (type === 'TO-DISPLAY') {
                 this.insertTrain(train).then((data) => {
-                    // console.log(`Data =>${data}`)
-                    // console.log(data)
                     if (data.length != 0) {
-                        console.log(data)
                         console.log(`Insert : train complete`)
                         if (data === 'true') {
                             let trainResult = {
@@ -833,7 +818,6 @@ class service {
         let newImage = this.createIdImage(image, id)
         return new Promise((resolve, reject) => {
             ImageDAOObj.deleteImageEstablishment(id).then((data) => {
-                console.log(data)
                 if (data) {
                     ImageDAOObj.insertImageEstablishment(newImage).then((result) => {
                         return resolve(result)
@@ -1153,7 +1137,6 @@ class service {
                     return resolve(true)
                 } else {
                     console.log('function updateAddress : something wrog')
-                    console.log(data)
                     return resolve(false)
                 }
             })
@@ -1346,6 +1329,7 @@ class service {
         var datetime = new Date();
         let dateForUpdate = datetime.toISOString().slice(0, 10)
         request.last_update = dateForUpdate
+        console.log(personal)
         if (personal[0].is_personal_changed) {
             let newpersonal = this.formatInsert('PERSONAL', personal[0])
             console.log(`InsertRequestStep : Update Personal`)
@@ -1354,6 +1338,7 @@ class service {
             })
         }
         if (personal[1].is_address_changed) {
+            console.log(personal[1].is_address_changed)
             let newaddress = this.formatInsert('ADDRESS', personal[1])
             this.updateAddress(newaddress).then((updateAddressStatus) => {
                 console.log(updateAddressStatus)
