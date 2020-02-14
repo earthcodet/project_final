@@ -8,7 +8,7 @@ let filePdf = {
   }
 let testInsertRequest = {
     no: '',
-    year: '2563',
+    year: parseInt(new Date().toISOString().slice(0, 4)) + 543,
     personal_id_owner: 'P000001',
     request_type_id: 15,
     staff_id_alderman: 'S0001',
@@ -32,9 +32,9 @@ let testInsertRequest = {
     sell_start: '13:48:00.000',
     sell_end: '13:48:00.000',
     sell_allow: 'Y',
-    receipt_order: '',
-    receipt_fine: 10,
-    receipt_fee: 15.5,
+    receipt_order: '15-05-2562',
+    receipt_fine: 300,
+    receipt_fee: 60.5,
     receipt_total: '',
     //
     receipt_date: '30-05-2563',
@@ -60,59 +60,59 @@ let testInsertRequest = {
     perosonal_id: 'P000001',
     is_land_owned: 'YES',
     type: '',
-    name: '',
-    machine_size: 15,
-    area_size: 15.5,
-    worker: 77.5,
+    name: 'ร้านไอติมอร่อยมาก',
+    machine_size: 90,
+    area_size: 500.55,
+    worker: 100,
     phone: '-',
     fax: '',
     grond: ''
   }
   let address = {
     id: "",
-    home_number: 'test',
-    moo: 'test',
-    trxk: 'test',
-    sxy: '',
+    home_number: '88/99',
+    moo: '5',
+    trxk: 'สถานประกอบการ',
+    sxy: 'สถานประกอบการ',
     building: '',
     road: '',
-    district_name: 'test',
-    amphur_name: 'test',
-    province_name: 'test'
+    district_name: 'สอง',
+    amphur_name: 'หนึ่ง',
+    province_name: 'กรุงเทพ'
   }
   let address2 = {
     id: "",
-    home_number: 'test',
-    moo: 'test',
-    trxk: 'test',
-    sxy: 'test',
-    building: 'test',
-    road: 'test',
-    district_name: 'test',
-    amphur_name: 'test',
-    province_name: 'test'
+    home_number: '147/292',
+    moo: '3',
+    trxk: 'เจ้าของที่ดิน',
+    sxy: 'เจ้าของที่ดิน',
+    building: 'เจ้าของที่ดิน',
+    road: 'เจ้าของที่ดิน',
+    district_name: 'สอง',
+    amphur_name: 'หนึ่ง',
+    province_name: 'กรุงเทพ'
   }
   let land = {
     id: "",
     address_id: "",
-    title: 'test',
-    name: 'test',
-    surname: 'test',
-    birthday: "",
+    title: 'นาย',
+    name: 'ซี',
+    surname: 'บี',
+    birthday: "20-05-2563",
     phone: "-",
   }
   let referecneData = {
     id: '',
-    title: 'นาย',
-    name: 'แชมป์',
-    surname: 'แชมป์',
-    status: 'น้อง',
-    phone: '0616577015'
+    title: 'นางสาว',
+    name: 'ซูซี่',
+    surname: 'มานัด',
+    status: 'พี่',
+    phone: '0657214578'
   }
   let trianData = {
     id: '',
     issuse: 'สำนักงานเทศบาล',
-    date_exp: '02-05-2541',
+    date_exp: '02-05-2562',
     date_issued: '02-05-2563'
   }
   let inAddress = {

@@ -661,9 +661,21 @@ class service {
             })
         })
     }
+    testget(reference) {
+        
+        return new Promise((resolve, reject) => {
+            ReferenceDAOObj.getReference(reference).then((referenceData) => {
+                return resolve(referenceData)
+            })
+        })
+    }
     insertReference(reference) {
         return new Promise((resolve, reject) => {
             ReferenceDAOObj.getReference(reference).then((referenceData) => {
+                console.log(`***************************`)
+                console.log(referenceData)
+                console.log(referenceData.length != 0)
+                console.log(`***************************`)
                 if (referenceData.length != 0) {
                     return resolve(referenceData[0])
                 } else {
@@ -712,7 +724,7 @@ class service {
     }
     getReferenceByReferenceId(id) {
         return new Promise((resolve, reject) => {
-            ReferenceDAOObj.getReference(id).then((getReferenceData) => {
+            ReferenceDAOObj.getReferenceById(id).then((getReferenceData) => {
                 return resolve(getReferenceData)
             })
         })
@@ -748,7 +760,7 @@ class service {
         })
     }
     loopInsertTrain(train) {
-         //Mian InsertTrain
+        //Mian InsertTrain
         return new Promise((resolve, reject) => {
             this.getNewId('TRIAN').then((id) => {
                 train.id = id
@@ -932,8 +944,8 @@ class service {
         }
 
         if (type === 'ESTABLISHMENT') {
-            data.reference_id =  data.reference_id === '' ? 'NULL' : 'YES'
-            data.train_id =  data.train_id === '' ? 'NULL' : 'YES'
+            data.reference_id = data.reference_id === '' ? 'NULL' : 'YES'
+            data.train_id = data.train_id === '' ? 'NULL' : 'YES'
             data.is_land_owned === 'NO' ? data.is_land_owned = 'NULL' : data.is_land_owned = `'${data.is_land_owned}'`
             data.type === '' ? data.type = 'NULL' : data.type = `'${data.type}'`
             data.name === '' ? data.name = 'NULL' : data.name = `'${data.name}'`
@@ -1013,7 +1025,6 @@ class service {
             this.getNewId('ADDRESS').then((id) => {
                 address.id = id
                 this.insertAddress(address).then((data) => {
-                    console.log(data)
                     if (data) {
                         console.log(`Insert : address complete`)
                         let result = {
@@ -1034,15 +1045,8 @@ class service {
         address = this.formatInsert('ADDRESS', address)
         addressOwner = this.formatInsert('ADDRESS', addressOwner)
         land = this.formatInsert('LAND', land)
-        console.log(address)
-        console.log(addressOwner)
-        // return new Promise((resolve, reject) => {
-        //     return resolve(true)
-        // })
         return new Promise((resolve, reject) => {
             this.insertAddressOne(address).then((resultaddress) => {
-                console.log(address)
-                console.log(addressOwner)
                 if (resultaddress.check) {
                     Edata.address_id = resultaddress.id
                     if (Edata.is_land_owned != 'NULL') {
@@ -1215,7 +1219,6 @@ class service {
         personal.username = username
         let newpersonal = this.formatInsert('PERSONAL', personal)
         let newaddress = this.formatInsert('ADDRESS', address)
-        // console.log(newaddress)
         return new Promise((resolve, reject) => {
             console.log('Check function Insert Or Update')
             if (newaddress.id.length != 0 || newpersonal.id.length != 0) {
@@ -1343,82 +1346,61 @@ class service {
         var datetime = new Date();
         let dateForUpdate = datetime.toISOString().slice(0, 10)
         request.last_update = dateForUpdate
-            if (personal[0].is_personal_changed) {
-                let newpersonal = this.formatInsert('PERSONAL', personal[0])
-                console.log(`InsertRequestStep : Update Personal`)
-                this.updatePersonal(newpersonal).then((updatePersonalStatus) => {
-                    console.log(updatePersonalStatus)
-                })
-            }
-            if (personal[1].is_address_changed) {
-                let newaddress = this.formatInsert('ADDRESS', personal[1])
-                this.updateAddress(newaddress).then((updateAddressStatus) => {
-                    console.log(updateAddressStatus)
-                })
-            }
-            return new Promise((resolve, reject) => {
-                this.insertEstablishment(Edata, address, land, addressOwner, file).then((data) => {
-                    request.establishment_id = data.id 
-                    if(request.reference_id === 'YES'){
-                        this.loopInsertReference(reference).then((result) =>{
-                            request.reference_id =  result.REFERENCE_ID
+        if (personal[0].is_personal_changed) {
+            let newpersonal = this.formatInsert('PERSONAL', personal[0])
+            console.log(`InsertRequestStep : Update Personal`)
+            this.updatePersonal(newpersonal).then((updatePersonalStatus) => {
+                console.log(updatePersonalStatus)
+            })
+        }
+        if (personal[1].is_address_changed) {
+            let newaddress = this.formatInsert('ADDRESS', personal[1])
+            this.updateAddress(newaddress).then((updateAddressStatus) => {
+                console.log(updateAddressStatus)
+            })
+        }
+        return new Promise((resolve, reject) => {
+            console.log('InsertRequestStep : loading')
+            this.insertEstablishment(Edata, address, land, addressOwner, file).then((data) => {
+                request.establishment_id = data.id
+                if (request.reference_id === 'YES') {
+                    this.loopInsertReference(reference).then((result) => {
+                        request.reference_id = result.REFERENCE_ID
 
-                            if(request.train_id === 'YES'){
-                                this.loopInsertTrain(train).then((trainData) =>{
-                                   request.train_id = trainData.TRAIN_ID
-                                   let new_request = this.formatInsert('REQUEST', request)
-                                   this.loopInsertRequest(new_request).then((requestData) =>{
-                                       return resolve(requestData)
-                                   })
-                                })
-                            }else{
-                                let new_request = this.formatInsert('REQUEST', request)
-                                this.loopInsertRequest(new_request).then((requestData) =>{
-                                    return resolve(requestData)
-                                })
-                            }
-                        })
-                    }else{
-                        if(request.train_id === 'YES'){
-                            this.loopInsertTrain(train).then((trainData) =>{
+                        if (request.train_id === 'YES') {
+                            this.loopInsertTrain(train).then((trainData) => {
                                 request.train_id = trainData.TRAIN_ID
                                 let new_request = this.formatInsert('REQUEST', request)
-                                this.loopInsertRequest(new_request).then((requestData) =>{
+                                this.loopInsertRequest(new_request).then((requestData) => {
                                     return resolve(requestData)
                                 })
-                             })
-                        }else{
+                            })
+                        } else {
                             let new_request = this.formatInsert('REQUEST', request)
-                            this.loopInsertRequest(new_request).then((requestData) =>{
+                            this.loopInsertRequest(new_request).then((requestData) => {
                                 return resolve(requestData)
-                             /*
-                                if(request.total_image != 0){
-                                    let requestIdImage = request.no + request.year
-                                    this.insertImageEstablishments(image, requestIdImage).then((imageUpload) =>{
-                                        if(imageUpload){
-                                            return resolve(requestData)
-                                        }
-                                    })
-                                }else{
-                                     return resolve(requestData)
-                                }
-                             */
-                               
                             })
                         }
-                    }
-                    /*
-                    insertRequest(request){
-                        let new_request = this.formatInsert('REQUEST', request)
-                        console.log(new_request)
-                        this.loopInsertRequest(new_request).then((result) => {
-                            return resolve(result)
+                    })
+                } else {
+                    if (request.train_id === 'YES') {
+                        this.loopInsertTrain(train).then((trainData) => {
+                            request.train_id = trainData.TRAIN_ID
+                            let new_request = this.formatInsert('REQUEST', request)
+                            this.loopInsertRequest(new_request).then((requestData) => {
+                                return resolve(requestData)
+                            })
                         })
-    }
-                    */
-                   //insertImageEstablishments(image, id)
-                })
+                    } else {
+                        let new_request = this.formatInsert('REQUEST', request)
+                        this.loopInsertRequest(new_request).then((requestData) => {
+                            return resolve(requestData)
+                        })
+                    }
+                }
+                //insertImageEstablishments(image, id)
             })
+        })
     }
     loopInsertRequest(request) {
         return new Promise((resolve, reject) => {
@@ -1427,7 +1409,6 @@ class service {
                 RequestDAOObj.insert(request).then((data) => {
                     if (data === 'true') {
                         request.no = id
-                        console.log(data)
                         console.log(`Insert : request complete`)
                         return resolve(request)
                     }
@@ -1438,7 +1419,7 @@ class service {
             })
         })
     }
-    
+
     getUser(username, password) {
         return new Promise((resolve, reject) => {
             LoginDAOObj.getUser(username, password).then((data) => {
