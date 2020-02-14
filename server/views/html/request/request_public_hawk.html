@@ -131,7 +131,7 @@
                         </datalist>
                         </input></a>
                     <a>เขียนที่ :
-                        <input type="text" id="place" value="เทศบาลเมืองแสนสุข" style="width:16%;"></a>
+                        <input type="text" id="place" value="เทศบาลเมืองแสนสุข" style="width:16%;" readonly></a>
                     <br>
 
                     <a style="margin-left: 1.4vw;">ข้าพเจ้า <font color="red">*</font> :
@@ -530,10 +530,13 @@
                         <p>
                             <p>4) &nbsp;ผู้รับใบอนุญาตต้องปฏิบัติตามเงื่อนไขดังต่อไปนี้อีกด้วย คือ</p>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <input style="width: 30%;" type="text" name="mytext[]">
-                            <button type="button" class="add_form_field">
-                                เพิ่ม</button>
-                            <a class="container1"></a>
+                            <a>4.1  </a><input type="text" style="width: 40%;">
+                            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a>4.2  </a><input type="text" style="width: 40%;">
+                            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a>4.3  </a><input type="text" style="width: 40%;">
+                            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a>4.4  </a><input type="text" style="width: 40%;">
                         </p>
                         <p>5) &nbsp;ใบอนญาตฉบับนี้ออกให้เมื่อวันที่  <input type="text"
                                 id="request_date_issued" disabled readonly></p>
@@ -623,15 +626,29 @@
                                 ข้อความในแบบคำร้องขอต่อใบอนุญาตนี้เป็นจริงทุกประการ
                                 <br>
                                 (ลงชื่อ) <font color="red">*</font>
-                                <input type="text" id="documentName" 
-                                onchange="document.getElementById('documentName').classList.remove('alertInput')"/>
+                                <!-- <input type="text" id="documentName" /> -->
+                                <input list="documentName1" id="documentName" name="">
+                                <datalist id="documentName1">
+                                    <option value="" hidden>เลือก...</option>
+                                    <option value="นาย A"></option>
+                                    <option value="นาย B"></option>
+                                    <option value="นาย C"></option>
+                                </datalist>
+                                </input>
                                 ผู้ขอรับใบอนุญาต
                             </a>
                         </div>
                         <div class="col" style="width: 33.33%;">
                             <a>
-                                ลงชื่อ <font color="red">*</font> <input type="text" id="documentName2" 
-                                onchange="document.getElementById('documentName2').classList.remove('alertInput')"/>
+                                ลงชื่อ <font color="red">*</font> 
+                                <input list="documentName12" id="documentNam2" name="">
+                                <datalist id="documentName12">
+                                    <option value="" hidden>เลือก...</option>
+                                    <option value="นาย A"></option>
+                                    <option value="นาย B"></option>
+                                    <option value="นาย C"></option>
+                                </datalist>
+                                </input>
                                 <br>
                                 <p class="text-center">ผู้รับเงิน</p>
                             </a>
