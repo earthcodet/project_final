@@ -24,7 +24,7 @@ class RequestDAO {
         console.log(request.date_issued)
         return new Promise((resolve, reject) => {
             let column = `REQUEST_NO, REQUEST_YEAR, PERSONAL_ID_OWNER, REQUEST_TYPE_ID, STAFF_ID_ALDERMAN, ESTABLISHMENT_ID, `
-            column = column + `STAFF_ID_MONEY, REFERENCE_ID, TRAIN_ID, PERSONAL_ID_ASSISTANT, STAFF_ID_APPROVE, ESTABLISHMENT_IS_LAND_OWNED, REQUEST_MENU, `
+            column = column + `STAFF_ID_MONEY, REFERENCE_ID, TRAIN_ID, PERSONAL_ID_ASSISTANT, STAFF_ID_APPROVE, ESTABLISHMENT_IS_LAND_OWNED,ESTABLISHMENT_ADDRESS_ID , REQUEST_MENU, `
             column = column + `REQUEST_DATE_SUBMISSION, REQUEST_DATE_APPROVE, REQUEST_DOC_NO1, REQUEST_DOC_NO2, REQUEST_DOC_NO3, `
             column = column + `REQUEST_DOC_NO4, REQUEST_DOC_NO5, REQUEST_DOC_NO6, REQUEST_SUBCATEGORY, REQUEST_PRODUCT_TYPE,` 
             column = column + `REQUEST_SELL_START, REQUEST_SELL_END, REQUEST_SELL_ALLOW, REQUEST_RECEIPT_ORDER, REQUEST_RECEIPT_FINE, `
@@ -35,7 +35,7 @@ class RequestDAO {
 
             let values = `'${request.no}','${request.year }', '${request.personal_id_owner }', '${request.request_type_id }', '${request.staff_id_alderman }', ` 
             values = values +  `'${request.establishment_id }', ${request.staff_id_money }, ${request.reference_id}, ${request.train_id}, `
-            values = values +  `${request.personal_id_assistant }, ${request.staff_id_approve }, ${request.establishment_is_land_owned}, '${request.menu }', '${request.date_submission }', `
+            values = values +  `${request.personal_id_assistant }, ${request.staff_id_approve }, ${request.establishment_is_land_owned},${request.establishment_address_id}, '${request.menu }', '${request.date_submission }', `
             values = values +  `${request.date_approve }, '${request.doc_no1}', '${request.doc_no2}', '${request.doc_no3}', `
             values = values +  `'${request.doc_no4}', '${request.doc_no5}', '${request.doc_no6}', ${request.subcategory}, `
             values = values +  `${request.product_type }, ${request.sell_start }, ${request.sell_end}, '${request.sell_allow}', `

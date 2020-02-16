@@ -132,7 +132,7 @@ app.get('/get/personalId/:personalId', (req, res) => {
   })
 })
 app.post('/insert/personal', (req, res) => {
-
+console.log(req.body.personal)
   var obj = JSON.parse(req.body.personal);
   console.log(req.files === null)
   console.log(req.files === undefined)
@@ -142,7 +142,6 @@ app.post('/insert/personal', (req, res) => {
   } else {
     obj[2].data = null
   }
-  console.log(req.files)
   webService.InsertPersonalStep(obj[0], obj[1], obj[2], req.session.username).then((data) => {
     console.log(`server : function InsertPersonalStep return = ${data}`)
     res.json(data)
@@ -205,13 +204,30 @@ app.post('/insert/requestss', (req, res) => {
 app.post('/insert/request', (req, res) => {
   
   var obj = JSON.parse(req.body.gropData);
-  obj[6].data = req.files != null ? req.files.files.data :  null
-  // console.log(obj)
-  //InsertRequestStep(request, personal, Edata, address, land, addressOwner, file, reference, train)
-  //ets = Edata, address, land, addressOwner, file
-  webService.InsertRequestStep(obj[0],obj[1],obj[2],obj[3],obj[4],obj[5],obj[6],obj[7],obj[8]).then((data) => {
+  obj[6].data = req.files.files != null ? req.files.files.data :  null
+  for (let i = 0; i < obj[9].length; i++) {
+    let image
+    i === 0 ? image = req.files.files0 : ''
+    i === 1 ? image = req.files.files1 : ''
+    i === 2 ? image = req.files.files2 : ''
+    i === 3 ? image = req.files.files3 : ''
+    i === 4 ? image = req.files.files4 : ''
+    i === 5 ? image = req.files.files5 : ''
+    i === 6 ? image = req.files.files6 : ''
+    i === 7 ? image = req.files.files7 : ''
+    // console.log(image)
+    obj[9][i].name = i+1
+    obj[9][i].type = image.mimetype.slice(6, image.mimetype.length)
+    obj[9][i].data = image.data
+  }
+  // console.log(obj[9])
+  // InsertRequestStep(request, personal, Edata, address, land, addressOwner, file, reference, train, username, image)
+  // InsertRequestStep(request, personal, Edata, address, land, addressOwner, file, reference, train)
+  // ets = Edata, address, land, addressOwner, file , image
+  webService.InsertRequestStep(obj[0],obj[1],obj[2],obj[3],obj[4],obj[5],obj[6],obj[7],obj[8],'Admin',obj[9]).then((data) => {
     // console.log(data)
   })
+ 
 })
 //ทำให้ css กับ js ใช้ได้
 app.use(express.static(__dirname + '/views'));

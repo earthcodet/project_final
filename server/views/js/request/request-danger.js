@@ -419,8 +419,8 @@ function inputRequired() {
   let checkno21 = document.getElementById("wPhone").value.trim().length === 0;
   let checkno35 =
     document.getElementById("documentName").value.trim().length === 0;
-  let checkno36 =
-    document.getElementById("documentName2").value.trim().length === 0;
+  // let checkno36 =
+    // document.getElementById("documentName2").value.trim().length === 0;
 
   if (checkno2) {
     document.getElementById("datepicker1").classList.add("alertInput");
@@ -482,9 +482,9 @@ function inputRequired() {
   if (checkno35) {
     document.getElementById("documentName").classList.add("alertInput");
   }
-  if (checkno36) {
-    document.getElementById("documentName2").classList.add("alertInput");
-  }
+  // if (checkno36) {
+  //   document.getElementById("documentName2").classList.add("alertInput");
+  // }
 
   if (
     checkno2 ||
@@ -506,8 +506,9 @@ function inputRequired() {
     checkno19 ||
     checkno20 ||
     checkno21 ||
-    checkno35 ||
-    checkno36
+    checkno35 
+    // ||
+    // checkno36
   ) {
     return false;
   } else {
@@ -535,7 +536,7 @@ function resetInputRequired() {
   document.getElementById("wSubdistrict").classList.remove("alertInput");
   document.getElementById("wPhone").classList.remove("alertInput");
   document.getElementById("documentName").classList.remove("alertInput");
-  document.getElementById("documentName2").classList.remove("alertInput");
+  // document.getElementById("documentName2").classList.remove("alertInput");
 
   document.getElementById("ownName").classList.remove("alertInput");
   document.getElementById("ownSurname").classList.remove("alertInput");

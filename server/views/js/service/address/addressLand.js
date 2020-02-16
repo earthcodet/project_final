@@ -131,11 +131,11 @@ function onwerCreateSelectProvice(data) {
 //ฟังชันเริ่มต้น
 function openLand() {
     onwerCreateSelectProvice(province)
-    landCreateSelectProvice(province)
+    // landCreateSelectProvice(province)
     onwerAmphurSelect(1)
-    landAmphurSelect(1)
+    // landAmphurSelect(1)
     onwerDistrictSelect(addressAmphurLand[0].AMPHUR_ID)
-    landDistrictSelect(buiddingAmphurLand[0].AMPHUR_ID)
+    // landDistrictSelect(buiddingAmphurLand[0].AMPHUR_ID)
 
 
 

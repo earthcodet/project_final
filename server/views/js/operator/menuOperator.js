@@ -74,6 +74,7 @@ function insertPage() {
                         //function ใน operator 
                         console.log(arrInsert)
                         insertToDatabase().then((insert) => {
+                            data = true
                             arrInsert = []
                             console.log(`insert return =`)
                             console.log(insert)
@@ -83,7 +84,7 @@ function insertPage() {
                             console.log(inPersonal)
                             console.log(`tempDATA`)
                             console.log(tempData)
-                            
+                            tempData.PERSONAL_TYPE =  inPersonal.type
                             tempData.PERSONAL_TITLE = inPersonal.title
                             tempData.PERSONAL_NAME = inPersonal.name
                             tempData.PERSONAL_SURNAME = inPersonal.surname
@@ -118,6 +119,9 @@ function insertPage() {
                                 tempData.image = imageTemp
                             }
                             console.log(tempData)
+                            console.log('insert // Update return')
+                            console.log(insert)
+                            console.log(insert.length)
                             if (insert.length != 0) {
                                 resolve();
                             }
@@ -305,6 +309,7 @@ function deletePage() {
                     resetInputRequired()
                     // window.onbeforeunload = null
                     if (data === false) {
+                        console.log('new delete no data')
                         resetInputUI()
                         addNew = false
                         disableMenuAll()
@@ -314,9 +319,11 @@ function deletePage() {
                         resetFunction()
                         resetImageDefault()
                     }
-                    console.log(isEmpty(tempData))
-                    console.log(tempData)
+                    // console.log(isEmpty(tempData))
+                    // console.log(tempData)
+                    // console.log(data)
                     if (isEmpty(tempData) === false && data === true) {
+                        console.log('have data delelte')
                         document.getElementById('datepicker2').disabled = false 
                         document.getElementById('life-id').checked = false
                         document.getElementById('datepicker2').value = ''

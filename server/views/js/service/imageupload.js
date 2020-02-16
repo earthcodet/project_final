@@ -18,8 +18,10 @@ let testInsertRequest = {
     reference_id: 'YES',
     train_id: 'YES',
     personal_id_assistant: '',
-    staff_id_approve: 'S0001',
+    staff_id_approve: 'S0001', // '' and '-' => 'NULL'
     establishment_is_land_owned:'',
+    establishment_address_id:'',
+    image_is_changed : false,
     menu: 'ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร',
     date_submission: '30-05-2563',
     date_approve: '30-05-2563',
@@ -63,7 +65,7 @@ let testInsertRequest = {
     perosonal_id: 'P000001',
     is_land_owned: 'NO',
     type: '',
-    name: 'ร้านไอติมอร่อยมาก',
+    name: 'Aร้านไอติมอร่อยมาก',
     machine_size: 90,
     area_size: 500.55,
     worker: 100,
@@ -76,7 +78,7 @@ let testInsertRequest = {
     id: "",
     home_number: '88/99',
     moo: '5',
-    trxk: 'สถานประกอบการ',
+    trxk: '55สถานประกอบการ',
     sxy: 'สถานประกอบการ',
     building: '',
     road: '',
@@ -240,6 +242,17 @@ function preInsert(){
     arrayItem.push(filePdf) // file 6
     arrayItem.push(referecneData) // reference 7
     arrayItem.push(trianData) // train 8
+    let object = {
+
+        name: '',
+        type: '',
+        data: ''
+      }
+      let = imageData = []
+      for(let i = 0 ; i < totalFiles.length ; i++){
+        imageData.push(object)
+      }
+      arrayItem.push(imageData)
     return arrayItem
 }
 function insertE() {
@@ -248,6 +261,11 @@ function insertE() {
         var formData = new FormData();
         formData.append('files', files);
        
+        for( var i = 0; i < totalFiles.length; i++ ){
+            let file = totalFiles[i];
+            console.log(file);
+            formData.append('files'+i, file);
+        }
         formData.append("gropData", JSON.stringify(preInsert()));
         axios.post("http://localhost:5000/insert/request", formData, {
             headers: {

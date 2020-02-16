@@ -1,6 +1,8 @@
 //รอ ไปแยก
+let files 
 let selectImageFile = 0
 let maxImageFile = 4
+let image_changed = false
 // function checkPhoneInput(tagId) {
 //     var text = document.getElementById(tagId).value
 //     text = text.replace(/(\d{3})(\d{7})/, "$1-$2");
@@ -14,6 +16,7 @@ function handleFileSelect(evt) {
             continue;
         }
         if (selectImageFile < maxImageFile) {
+            image_changed = true
             totalFiles.push(f)
             var reader = new FileReader();
             reader.onload = (function (theFile) {
@@ -39,6 +42,9 @@ function handleFileSelect(evt) {
             selectImageFile = selectImageFile + 1
         }
     }
+}
+function pdfFile(evt) {
+    files = evt.target.files[0];
 }
 function deleteImage() {
     var index = Array.from(document.getElementById('outputImage').children).indexOf(event.target.parentNode.parentNode)

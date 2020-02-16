@@ -610,9 +610,13 @@ function buttonImage() {
 }
 function insertToDatabase() {
     return new Promise((resolve, reject) => {
+        let tempimage = arrInsert[2].data
         console.log("insertToDatabase");
         var formData = new FormData();
         formData.append("image", fileImage);
+        if(arrInsert[2].name === 'NO_UPlOAD'){
+            arrInsert[2].data = null
+        }
         formData.append("personal", JSON.stringify(arrInsert));
         console.log(arrInsert)
         axios.post("http://localhost:5000/insert/personal", formData, {
@@ -621,6 +625,9 @@ function insertToDatabase() {
             }
         })
             .then(data => {
+                if(arrInsert[2].name === 'NO_UPlOAD'){
+                    arrInsert[2].data = tempimage
+                }
                 return resolve(data.data);
             });
     });
