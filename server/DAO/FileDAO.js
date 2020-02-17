@@ -30,5 +30,44 @@ class FileDAO {
             })
         })
     }
+    update(file) {
+        return new Promise((resolve, reject) => {
+            let text = 'UPDATE `file` SET ? WHERE File_name = '
+            text = text + `'${file.name}'`
+            let query = text
+                ,
+                values = {
+                    File_name: file.name,
+                    File_data: file.data
+                };
+            con.query(query, values, function (err, result) {
+                if (err) {
+                    console.log(err.code)
+                }
+                if (result.affectedRows === 1) {
+                    return resolve(true)
+                } else {
+                    return resolve(false)
+                }
+
+            })
+        })
+    }
+    getfile(id) {
+        return new Promise((resolve, reject) => {
+            let query = `SELECT * FROM file WHERE File_name = '${id}'`
+            con.query(query, function (err, result) {
+                if (err) {
+                    console.log(err.code)
+                }
+                if (result.length != 0 && result[0].File_data != null) {
+                    return resolve(true)
+                } else {
+                    return resolve(false)
+                }
+
+            })
+        })
+    }
 }
 module.exports = FileDAO

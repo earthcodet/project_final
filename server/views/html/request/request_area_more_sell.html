@@ -207,12 +207,12 @@
                             onchange="document.getElementById('subdistrict').classList.remove('alertInput')"></select></a>
                     <a>โทรศัพท์ <font color="red">*</font> :
                         <input type="text" id="phone" style="width: 12%;"
-                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                        oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
                             maxlength="10" onchange="document.getElementById('phone').classList.remove('alertInput')"
                             onkeyup="checkPhone(this.value,'phone')"></a>
                     <a>โทรสาร :
                         <input type="text" id="fax"
-                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                        oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
                             maxlength="9" style="width: 13.2%;"></a>
                     <br>
                     <br>
@@ -337,8 +337,8 @@
                     </p>
                 </div>
                 <br>
-                <!-- ข้อมูลเจ้าของ -->
-                <div class="box" id="Demo">
+                 <!-- ข้อมูลเจ้าของ -->
+                 <div class="box" id="Demo">
                     <h3 style="font-size: 2.8vh;">ใช้อาคารสถานที่ประกอบการของผู้อื่น <font color="red">*</font>
                     </h3>
                     <input type="radio" name="owner" id="useOtherPlace" onClick="show_owner(this.value);" value="1"
@@ -359,11 +359,13 @@
                             <input type="text" id="ownName" style="width: 13%;"></a>
                         <a>นามสกุล <font color="red">*</font> :
                             <input type="text" id="ownSurname" style="width: 13%;"></a>
-                        <a>อายุ :
-                            <input type="text" id="ownAge" style="width: 7%;"> ปี</a>
+                        <a>วันเกิด :
+                            <input type="text" id="datepicker9" style="width: 10%;"> </a>:
                         <a>โทรศัพท์ <font color="red">*</font> :
                             <input type="text" id="ownPhone" style="width: 13%;"
-                                onchange="document.getElementById('wPhone').classList.remove('alertInput')"></a>
+                                oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
+                                onkeyup="checkPhone(this.value,'ownPhone')"
+                                maxlength="10"></a>
                         <br>
                         <a style="margin-left: 5vw;">อยู่บ้านเลขที่ <font color="red">*</font> :
                             <input type="text" id="ownHomeId" style="width: 7%;"></a style="margin-left: 7.4vw;">
@@ -384,7 +386,7 @@
                             <select id="ownerSubdistrict" style="width: 17.5%;"></select></a>
                         <br>
                         <br>
-                        <input style="margin-left:9vw;" type="file" id="uploadFilePdf" onchange="uploadImage(event)"
+                        <input style="margin-left:9vw;" type="file" id="uploadFilePdf" onchange="pdfFile(event)"
                             accept="application/pdf">
                     </div>
                     <br><br>

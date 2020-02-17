@@ -211,7 +211,7 @@
                             onkeyup="checkPhone(this.value,'phone')"></a>
                     <a>โทรสาร :
                         <input type="text" id="fax"
-                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
                             maxlength="9" style="width: 13.2%;"></a>
                     <br>
                     <a style="margin-left: 2.2vw;">ผู้ช่วย :
@@ -475,7 +475,7 @@
                             onkeyup="checkPhone(this.value,'wPhone')"></a>
                     <a>โทรสาร :
                         <input type="text" id="wFax"
-                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
                             maxlength="9" style="width: 13.2%;"></a>
                     <br>
                     <br>

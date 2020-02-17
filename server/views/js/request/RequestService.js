@@ -56,18 +56,128 @@ function setDataOperator(raw_data, type) {
 
 //set data full raw data
 function setRequestData(raw_data) {
+    requestData.no = raw_data.REQUEST_NO
+    requestData.year = raw_data.REQUEST_YEAR
+    requestData.personal_id_owner = raw_data.PERSONAL_ID_OWNER
+    requestData.request_type_id = raw_data.REQUEST_TYPE_ID
+    requestData.staff_id_alderman = raw_data.STAFF_ID_ALDERMAN
+    requestData.establishment_id = raw_data.ESTABLISHMENT_ID
+    requestData.staff_id_money = raw_data.STAFF_ID_MONEY === null ? '' : raw_data.STAFF_ID_MONEY
+    requestData.personal_id_assistant = raw_data.PERSONAL_ID_ASSISTANT === null ? '' : raw_data.PERSONAL_ID_ASSISTANT
+    requestData.staff_id_approve = raw_data.STAFF_ID_APPROVE === null ? '' : raw_data.STAFF_ID_APPROVE
+    requestData.establishment_is_land_owned = raw_data.ESTABLISHMENT_IS_LAND_OWNED === null ? '' : raw_data.ESTABLISHMENT_IS_LAND_OWNED
+    requestData.establishment_address_id = raw_data.ESTABLISHMENT_ADDRESS_ID === null ? '' : raw_data.ESTABLISHMENT_ADDRESS_ID
+    requestData.menu = raw_data.REQUEST_MENU
+    requestData.date_submission = raw_data.REQUEST_DATE_SUBMISSION
+    requestData.date_approve = raw_data.REQUEST_DATE_APPROVE = null ? '' : raw_data.REQUEST_DATE_APPROVE
+    requestData.doc_no1 = raw_data.REQUEST_DOC_NO2
+    requestData.doc_no2 = raw_data.REQUEST_DOC_NO2
+    requestData.doc_no3 = raw_data.REQUEST_DOC_NO3
+    requestData.doc_no4 = raw_data.REQUEST_DOC_NO4
+    requestData.doc_no5 = raw_data.REQUEST_DOC_NO5
+    requestData.doc_no6 = raw_data.REQUEST_DOC_NO6
+    requestData.subcategory = raw_data.REQUEST_SUBCATEGORY = null ? '' : raw_data.REQUEST_SUBCATEGORY
+    requestData.product_type = raw_data.REQUEST_PRODUCT_TYPE = null ? '' : raw_data.REQUEST_PRODUCT_TYPE
+    requestData.sell_start = raw_data.REQUEST_SELL_START = null ? '' : raw_data.REQUEST_SELL_START
+    requestData.sell_end = raw_data.REQUEST_SELL_END = null ? '' : raw_data.REQUEST_SELL_END
+    requestData.sell_allow = raw_data.REQUEST_SELL_ALLOW
+    requestData.receipt_order = raw_data.REQUEST_RECEIPT_ORDER = null ? '' : raw_data.REQUEST_RECEIPT_ORDER
+    requestData.receipt_fine = raw_data.REQUEST_RECEIPT_FINE = null ? '' : raw_data.REQUEST_RECEIPT_FINE
+    requestData.receipt_fee = raw_data.REQUEST_RECEIPT_FEE = null ? '' : raw_data.REQUEST_RECEIPT_FEE
+    requestData.receipt_total = raw_data.REQUEST_RECEIPT_TOTAL = null ? '' : raw_data.REQUEST_RECEIPT_TOTAL
+    requestData.receipt_date = raw_data.REQUEST_RECEIPT_DATE = null ? '' : raw_data.REQUEST_RECEIPT_DATE
+    requestData.date_issued = raw_data.REQUEST_DATE_ISSUED = null ? '' : raw_data.REQUEST_DATE_ISSUED
+    requestData.date_expired = raw_data.REQUEST_DATE_EXPIRED = null ? '' : raw_data.REQUEST_DATE_EXPIRED
+    requestData.condition_no_1 = raw_data.REQUEST_CONDITION_NO_1 = null ? '' : raw_data.REQUEST_CONDITION_NO_1
+    requestData.condition_no_2 = raw_data.REQUEST_CONDITION_NO_2 = null ? '' : raw_data.REQUEST_CONDITION_NO_2
+    requestData.condition_no_3 = raw_data.REQUEST_CONDITION_NO_3 = null ? '' : raw_data.REQUEST_CONDITION_NO_3
+    requestData.condition_no_4 = raw_data.REQUEST_CONDITION_NO_4 = null ? '' : raw_data.REQUEST_CONDITION_NO_4
+    requestData.image_name = raw_data.REQUEST_IMAGE_NAME = null ? '' : raw_data.REQUEST_IMAGE_NAME
+    requestData.total_image = raw_data.REQUEST_TOTAL_IMAGE
+    requestData.status = raw_data.REQUEST_STATUS
+    requestData.delete_logic = raw_data.REQUEST_DELETE_LOGIC = null ? '' : raw_data.REQUEST_DELETE_LOGIC
+    requestData.is_deleted = raw_data.REQUEST_IS_DELETED
+    // requestData.last_update: '20-05-2563',
+    // requestData.username: 'ADMIN'
+
 }
 function setEstablishmentData(raw_data) {
+    establishmentData.id = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_ID
+    establishmentData.address_id = raw_data.ESTABLISHMENT_DATA.ADDRESS_ID
+    establishmentData.perosonal_id = raw_data.ESTABLISHMENT_DATA.PERSONAL_ID
+    establishmentData.type = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_TYPE
+    establishmentData.name = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_NAME
+    establishmentData.machine_size = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_MACHINE_SIZE === null ? 0 : raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_MACHINE_SIZE
+    establishmentData.area_size = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_AREA_SIZE === null ? 0 : raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_AREA_SIZE
+    establishmentData.worker = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_WORKER === null ? 0 : raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_WORKER
+    establishmentData.phone = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_PHONE
+    establishmentData.fax = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_FAX === null ? '' : raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_FAX
+    establishmentData.grond = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_GROUND === null ? '' : raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_GROUND
 }
 function setAddressEstablishmentData(raw_data) {
+    addressEstablishmentData.id = raw_data.ESTABLISHMENT_DATA.ADDRESS.ADDRESS_ID
+    addressEstablishmentData.home_number = raw_data.ESTABLISHMENT_DATA.ADDRESS.ADDRESS_HOME_NUMBER
+    addressEstablishmentData.moo = raw_data.ESTABLISHMENT_DATA.ADDRESS.ADDRESS_MOO === null ? '' : raw_data.ESTABLISHMENT_DATA.ADDRESS.ADDRESS_MOO
+    addressEstablishmentData.trxk = raw_data.ESTABLISHMENT_DATA.ADDRESS.ADDRESS_TRXK === null ? '' : raw_data.ESTABLISHMENT_DATA.ADDRESS.ADDRESS_TRXK
+    addressEstablishmentData.sxy = raw_data.ESTABLISHMENT_DATA.ADDRESS.ADDRESS_SXY === null ? '' : raw_data.ESTABLISHMENT_DATA.ADDRESS.ADDRESS_SXY
+    addressEstablishmentData.building = raw_data.ESTABLISHMENT_DATA.ADDRESS.ADDRESS_BUILDING === null ? '' : raw_data.ESTABLISHMENT_DATA.ADDRESS.ADDRESS_BUILDING
+    addressEstablishmentData.road = raw_data.ESTABLISHMENT_DATA.ADDRESS.ADDRESS_ROAD === null ? '' : raw_data.ESTABLISHMENT_DATA.ADDRESS.ADDRESS_ROAD
+    addressEstablishmentData.district_name = raw_data.ESTABLISHMENT_DATA.ADDRESS.DISTRICT_NAME
+    addressEstablishmentData.amphur_name = raw_data.ESTABLISHMENT_DATA.ADDRESS.AMPHUR_NAME
+    addressEstablishmentData.province_name = raw_data.ESTABLISHMENT_DATA.ADDRESS.PROVINCE_NAME
 }
 function setAddressOwnerLandData(raw_data) {
+    if (raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_IS_LAND_OWNED != null) {
+        addressOwnerLandData.id = raw_data.ESTABLISHMENT_DATA.LAND.ADDRESS.ADDRESS_ID
+        addressOwnerLandData.home_number = raw_data.ESTABLISHMENT_DATA.LAND.ADDRESS.ADDRESS_HOME_NUMBER
+        addressOwnerLandData.moo = raw_data.ESTABLISHMENT_DATA.LAND.ADDRESS.ADDRESS_MOO === null ? '' : raw_data.ESTABLISHMENT_DATA.LAND.ADDRESS.ADDRESS_MOO
+        addressOwnerLandData.trxk = raw_data.ESTABLISHMENT_DATA.LAND.ADDRESS.ADDRESS_TRXK === null ? '' : raw_data.ESTABLISHMENT_DATA.LAND.ADDRESS.ADDRESS_TRXK
+        addressOwnerLandData.sxy = raw_data.ESTABLISHMENT_DATA.LAND.ADDRESS.ADDRESS_SXY === null ? '' : raw_data.ESTABLISHMENT_DATA.LAND.ADDRESS.ADDRESS_SXY
+        addressOwnerLandData.building = raw_data.ESTABLISHMENT_DATA.LAND.ADDRESS.ADDRESS_BUILDING === null ? '' : raw_data.ESTABLISHMENT_DATA.LAND.ADDRESS.ADDRESS_BUILDING
+        addressOwnerLandData.road = raw_data.ESTABLISHMENT_DATA.LAND.ADDRESS.ADDRESS_ROAD === null ? '' : raw_data.ESTABLISHMENT_DATA.LAND.ADDRESS.ADDRESS_ROAD
+        addressOwnerLandData.district_name = raw_data.ESTABLISHMENT_DATA.LAND.ADDRESS.DISTRICT_NAME
+        addressOwnerLandData.amphur_name = raw_data.ESTABLISHMENT_DATA.LAND.ADDRESS.AMPHUR_NAME
+        addressOwnerLandData.province_name = raw_data.ESTABLISHMENT_DATA.LAND.ADDRESS.PROVINCE_NAME
+    }
 }
 function setLandData(raw_data) {
+    //ADDRESS
+    if (raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_IS_LAND_OWNED != null) {
+        landData.id = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_IS_LAND_OWNED
+        landData.address_id = raw_data.ESTABLISHMENT_DATA.LAND.ADDRESS_ID
+        landData.title = raw_data.ESTABLISHMENT_DATA.LAND.LAND_TITLE
+        landData.name = raw_data.ESTABLISHMENT_DATA.LAND.LAND_NAME
+        landData.surname = raw_data.ESTABLISHMENT_DATA.LAND.LAND_SURNAME
+        landData.birthday = raw_data.ESTABLISHMENT_DATA.LAND.LAND_BIRTHDAY === null ? '' : raw_data.ESTABLISHMENT_DATA.LAND.LAND_BIRTHDAY
+        landData.phone = raw_data.ESTABLISHMENT_DATA.LAND.LAND_PHONE
+    } else {
+        establishmentData.is_land_owned = 'NO'
+    }
+
 }
 function setReferecneData(raw_data) {
+    if (raw_data.REFERENCE_ID != null) {
+        referecneData.id = raw_data.REFERENCE_DATA.REFERENCE_ID
+        referecneData.title = raw_data.REFERENCE_DATA.REFERENCE_TITLE
+        referecneData.name = raw_data.REFERENCE_DATA.REFERENCE_NAME
+        referecneData.surname = raw_data.REFERENCE_DATA.REFERENCE_SURNAME
+        referecneData.status = raw_data.REFERENCE_DATA.REFERENCE_SURNAME
+        referecneData.phone = raw_data.REFERENCE_DATA.REFERENCE_PHONE
+    } else {
+        requestData.reference_id = 'NO'
+    }
+
+
 }
 function setTrianData(raw_data) {
+    if (raw_data.TRAIN_ID != null) {
+        trianData.id = raw_data.TRAIN_DATA.TRAIN_ID
+        trianData.issuse = raw_data.TRAIN_DATA.TRAIN_ISSUED
+        trianData.date_exp = raw_data.TRAIN_DATA.TRAIN_DATE_EXP
+        trianData.date_issued = raw_data.TRAIN_DATA.TRAIN_DATE_ISSUED
+    } else {
+        requestData.train_id = 'YES'
+    }
 }
 function setOperatorAddressData(raw_data) {
     operatorAddressData.id = raw_data.AID.ADDRESS_ID
@@ -98,8 +208,6 @@ function setOperatorData(raw_data) {
     operatorData.fax = raw_data.PERSONAL_FAX === null ? '' : raw_data.PERSONAL_FAX
 }
 function setassistantOperatorData(raw_data) {
-    console.log(`dsadasdsad`)
-    console.log(raw_data)
     assistantOperatorData.id = raw_data.PERSONAL_ID
     assistantOperatorData.title = raw_data.PERSONAL_TITLE === null ? '' : raw_data.PERSONAL_TITLE
     assistantOperatorData.name = raw_data.PERSONAL_NAME
@@ -135,9 +243,14 @@ function createGroupData() {
         operatorAddressData.sxy = document.getElementById('sxy').value
         operatorAddressData.building = document.getElementById('building').value
         operatorAddressData.road = document.getElementById('road').value
-        operatorAddressData.district_name = document.getElementById('subdistrict').value
-        operatorAddressData.amphur_name = document.getElementById('district').value
-        operatorAddressData.province_name = document.getElementById('province').value
+
+        let provinceValue = parseInt(document.getElementById(`province`).value);
+        let amphurValue = parseInt(document.getElementById(`district`).value);
+        let districtValue = parseInt(document.getElementById(`subdistrict`).value);
+
+        operatorAddressData.district_name = district[districtValue - 1].DISTRICT_NAME;
+        operatorAddressData.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
+        operatorAddressData.province_name = province[provinceValue - 1].PROVINCE_NAME;
     }
     if (newDocument) {
         requestData.no = ''
@@ -157,14 +270,15 @@ function createGroupData() {
             referecneData.phone = document.getElementById('reference_phone').value
         }
 
-
-        requestData.train_id = document.getElementById('foodTrain').checked === true ? 'YES' : 'NO'
-        if (requestData.train_id === 'YES') {
-            trianData.issuse = document.getElementById('foodBy').value.trim()
-            trianData.date_exp = document.getElementById('datepicker5').value
-            trianData.date_issued = document.getElementById('datepicker6').value
+        if(document.getElementById('foodTrain') != undefined){
+            requestData.train_id = document.getElementById('foodTrain').checked === true ? 'YES' : 'NO'
+            if (requestData.train_id === 'YES') {
+                trianData.issuse = document.getElementById('foodBy').value.trim()
+                trianData.date_exp = document.getElementById('datepicker5').value
+                trianData.date_issued = document.getElementById('datepicker6').value
+            }
         }
-        //Index xxxxxxxxxxxxxxxx
+        
         requestData.personal_id_assistant = assistantOperatorData.id != '' ? assistantOperatorData.id : ''
 
         requestData.image_is_changed = image_changed //ตัวแปรอยู่ใน utilities.js
@@ -243,6 +357,70 @@ function createGroupData() {
         requestData.total_image = totalFiles.length
         // requestData.status =   '' //ไม่ให้เซ็ตเอง
 
+        //สถานประกอบการ
+
+        establishmentData.perosonal_id =  operatorData.id
+        if(document.getElementById('useOtherPlace') != undefined){
+            establishmentData.is_land_owned =  document.getElementById('useOtherPlace').checked === true ? 'YES' : 'NO'
+        }else{
+            establishmentData.is_land_owned = 'NO'
+        }
+        if(document.getElementById('typeWorkplace') != undefined){
+            establishmentData.type =  document.getElementById('typeWorkplace').value.trim()
+        }
+        
+        establishmentData.name =  document.getElementById('workplaceName').value.trim()
+        if(document.getElementById('machinery') != undefined){
+            establishmentData.machine_size =  document.getElementById('machinery').value.trim()
+        }
+        if(document.getElementById('area') != undefined){
+            establishmentData.area_size =  document.getElementById('area').value.trim()
+        }
+        if(document.getElementById('numPeople') != undefined){
+            establishmentData.worker =  document.getElementById('numPeople').value.trim()
+        }
+        establishmentData.phone =  document.getElementById('wPhone').value.trim()
+        establishmentData.fax =  document.getElementById('wFax').value.trim()
+        if(document.getElementById('typeWorkplace') != undefined){
+            establishmentData.grond =  document.getElementById('typeWorkplace').value.trim()
+        }
+
+        addressEstablishmentData.home_number =  document.getElementById('wPlaceId').value.trim()
+        addressEstablishmentData.moo =  document.getElementById('wMoo').value.trim()
+        addressEstablishmentData.trxk =  document.getElementById('wTrxk').value.trim()
+        addressEstablishmentData.sxy =  document.getElementById('wSxy').value.trim()
+        addressEstablishmentData.building =  document.getElementById('wBuilding').value.trim()
+        addressEstablishmentData.road =  document.getElementById('wRoad').value.trim()
+
+        let provinceValue = parseInt(document.getElementById(`wProvince`).value);
+        let amphurValue = parseInt(document.getElementById(`wDistrict`).value);
+        let districtValue = parseInt(document.getElementById(`wSubdistrict`).value);
+
+        addressEstablishmentData.district_name = district[districtValue - 1].DISTRICT_NAME;
+        addressEstablishmentData.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
+        addressEstablishmentData.province_name = province[provinceValue - 1].PROVINCE_NAME;
+
+        if(document.getElementById('ownPrefix') != undefined){
+            landData.title =  document.getElementById('ownPrefix').value.trim()
+            landData.name =  document.getElementById('ownName').value.trim()
+            landData.surname =  document.getElementById('ownSurname').value.trim()
+            landData.birthday =  document.getElementById('datepicker9').value.trim()
+            landData.phone =  document.getElementById('ownPhone').value.trim()
+            addressOwnerLandData.home_number =  document.getElementById('ownHomeId').value.trim()
+            addressOwnerLandData.moo =  document.getElementById('ownMoo').value.trim()
+            addressOwnerLandData.trxk =  document.getElementById('ownTrxk').value.trim()
+            addressOwnerLandData.sxy =  document.getElementById('ownSxy').value.trim()
+            addressOwnerLandData.road =  document.getElementById('ownRoad').value.trim()
+    
+            let provinceValue = parseInt(document.getElementById(`ownerProvince`).value);
+            let amphurValue = parseInt(document.getElementById(`ownerDistrict`).value);
+            let districtValue = parseInt(document.getElementById(`ownerSubdistrict`).value);
+    
+            addressOwnerLandData.district_name = district[districtValue - 1].DISTRICT_NAME;
+            addressOwnerLandData.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
+            addressOwnerLandData.province_name = province[provinceValue - 1].PROVINCE_NAME;
+        }
+        
 
     } else {
         // มีข้อมูลแล้ว
@@ -353,6 +531,29 @@ function createArrayInsert() {
     for (let i = 0; i < totalFiles.length; i++) {
         imageData.push(object)
     }
-    arrayItem.push(imageData)
+    arrayItem.push(imageData) // image 9
     return arrayItem
+}
+function insertRequest() {
+    createGroupData()
+    return new Promise((resolve, reject) => {
+        console.log("insertToDatabase");
+        var formData = new FormData();
+        formData.append('files', files);
+       
+        for( var i = 0; i < totalFiles.length; i++ ){
+            let file = totalFiles[i];
+            console.log(file);
+            formData.append('files'+i, file);
+        }
+        formData.append("gropData", JSON.stringify(createArrayInsert()));
+        axios.post("http://localhost:5000/insert/request", formData, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        })
+            .then(data => {
+                return resolve(data.data);
+            });
+    });
 }

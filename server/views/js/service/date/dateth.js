@@ -139,6 +139,22 @@ $(function() {
   $('#datepicker8').keyup(function() {
     formatDate(this.value , 'datepicker8')
   });
+
+  $("#datepicker9").datetimepicker({
+    timepicker: false,
+    format: "d-m-Y", // กำหนดรูปแบบวันที่ ที่ใช้ เป็น 00-00-0000
+    lang: "th", // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
+    onSelectDate: function(dp, $input) {
+      var yearT = new Date(dp).getFullYear();
+      var yearTH = yearT + 543;
+      var fulldate = $input.val();
+      var fulldateTH = fulldate.replace(yearT, yearTH);
+      $input.val(fulldateTH);
+    }
+  });
+  $('#datepicker9').keyup(function() {
+    formatDate(this.value , 'datepicker9')
+  });
   // กรณีใช้กับ input ต้องกำหนดส่วนนี้ด้วยเสมอ เพื่อปรับปีให้เป็น ค.ศ. ก่อนแสดงปฏิทิน
   // $("#datepicker8").on("mouseenter mouseleave", function(e) {
   //   var dateValue = $(this).val();

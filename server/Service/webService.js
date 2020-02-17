@@ -712,8 +712,11 @@ class service {
     getTrainByTrainId(id) {
         return new Promise((resolve, reject) => {
             TrainDAOObj.getTrian(id).then((trainData) => {
-                trainData[0].TRAIN_DATE_EXP = this.formatDate('TO-DISPLAY', trainData[0].TRAIN_DATE_EXP.toISOString().slice(0, 10))
-                trainData[0].TRAIN_DATE_ISSUED = this.formatDate('TO-DISPLAY', trainData[0].TRAIN_DATE_ISSUED.toISOString().slice(0, 10))
+                console.log(trainData[0] != undefined)
+                if(trainData[0] != undefined){
+                    trainData[0].TRAIN_DATE_EXP = this.formatDate('TO-DISPLAY', trainData[0].TRAIN_DATE_EXP.toISOString().slice(0, 10))
+                    trainData[0].TRAIN_DATE_ISSUED = this.formatDate('TO-DISPLAY', trainData[0].TRAIN_DATE_ISSUED.toISOString().slice(0, 10))
+                }
                 return resolve(trainData)
             })
         })
@@ -904,7 +907,7 @@ class service {
             data.race === '' || data.race === '-' ? data.race = 'NULL' : data.race = data.race = `'${data.race}'`
             data.birthday.length === 0 ? data.birthday = 'NULL' : data.birthday = data.birthday
             data.card_expipe.length === 0 ? data.card_expipe = 'NULL' : data.card_expipe = data.card_expipe
-            data.fax === '' ? data.fax = 'NULL' : data.fax = `'${data.fax}'`
+            data.fax === '' || data.fax === '-'  ? data.fax = 'NULL' : data.fax = `'${data.fax}'`
             data.surname === '' ? data.surname = 'NULL' : `'${data.surname}'`
             return data
         }
@@ -920,7 +923,7 @@ class service {
 
         if (type === 'ESTABLISHMENT') {
             data.reference_id = data.reference_id === '' ? 'NULL' : 'YES'
-            data.train_id = data.train_id === '' ? 'NULL' : 'YES'
+            data.train_id = data.train_id === '' || data.train_id === 'NO' ? 'NULL' : 'YES'
             data.is_land_owned === 'NO' ? data.is_land_owned = 'NULL' : data.is_land_owned = `'${data.is_land_owned}'`
             data.type === '' ? data.type = 'NULL' : data.type = `'${data.type}'`
             data.name === '' ? data.name = 'NULL' : data.name = `'${data.name}'`
@@ -929,7 +932,7 @@ class service {
             data.area_size === '' ? data.area_size = 0 : ''
             data.worker === '' ? data.worker = 0 : ''
 
-            data.fax === '' ? data.fax = 'NULL' : data.fax = `'${data.fax}'`
+            data.fax === '' || data.fax === '-'  ? data.fax = 'NULL' : data.fax = `'${data.fax}'`
             data.grond === '' ? data.grond = 'NULL' : data.grond = `'${data.grond}'`
             return data
         }
@@ -942,8 +945,8 @@ class service {
             //Time Web 13:48:00.000
             //Time  = time.slice(0,8)
             data.staff_id_money = data.staff_id_money === '-' || data.staff_id_money === '' ? 'NULL' : `'${data.staff_id_money}'`
-            data.reference_id = data.reference_id === '-' || data.reference_id === '' ? 'NULL' : `'${data.reference_id}'`
-            data.train_id = data.train_id === '-' || data.train_id === '' ? 'NULL' : `'${data.train_id}'`
+            data.reference_id = data.reference_id === '-' || data.reference_id === '' || data.reference_id === 'NO' ? 'NULL' : `'${data.reference_id}'`
+            data.train_id = data.train_id === '-' || data.train_id === '' || data.train_id === 'NO' ? 'NULL' : `'${data.train_id}'`
             data.personal_id_assistant = data.personal_id_assistant === '-' || data.personal_id_assistant === '' ? 'NULL' : `'${data.personal_id_assistant}'`
             data.staff_id_approve = data.staff_id_approve === '-' || data.staff_id_approve === '' ? 'NULL' : `'${data.staff_id_approve}'`
             data.date_submission = this.formatDate('TO-INSERT', data.date_submission)
@@ -961,7 +964,7 @@ class service {
                     data.receipt_total = parseFloat(data.receipt_fine)
                 }
             } else {
-                data.receipt_total = 0.15
+                data.receipt_total = 0
             }
             data.receipt_fine = data.receipt_fine === '-' || data.receipt_fine === '' ? 'NULL' : data.receipt_fine
             data.receipt_fee = data.receipt_fee === '-' || data.receipt_fee === '' ? 'NULL' : data.receipt_fee
@@ -1026,6 +1029,7 @@ class service {
                     new_edata.id  = establishmentData[0].ESTABLISHMENT_ID
                     new_edata.address_id = establishmentData[0].ADDRESS_ID
                     new_edata.is_land_owned = establishmentData[0].ESTABLISHMENT_IS_LAND_OWNED
+                    new_edata.land_used = establishmentData[0].ESTABLISHMENT_IS_LAND_OWNED
                     return resolve(new_edata)
                 } else {
                     this.insertAddressOne(new_address).then((resultaddress) => {
@@ -1034,6 +1038,7 @@ class service {
                             if (new_edata.is_land_owned != 'NULL') {
                                 this.insertLand(new_land, new_addressOwner).then((land_id) => {
                                     new_edata.is_land_owned = `'${land_id}'`
+                                    new_edata.land_used = land_id
                                     file.name = land_id
                                     this.insertFile(file).then((resultFile) => {
                                         if (resultFile) {
@@ -1070,9 +1075,13 @@ class service {
                                     land_data.LAND_BIRTHDAY = ''
                                 }
                                 this.getAddressByAddressId(land_data.ADDRESS_ID).then((land_address_data) => {
-                                    land_data.ADDRESS = land_address_data[0]
-                                    e_data.LAND = land_data
-                                    return resolve(e_data)
+                                    FileDAOObj.getfile(land_data.LAND_ID).then((data) => {
+                                        land_data.UPLOADFILE = data
+                                        land_data.ADDRESS = land_address_data[0]
+                                        e_data.LAND = land_data
+                                        return resolve(e_data)
+                                    })
+                                   
                                 })
 
                                 // this.getAddressByAddressId(land_data.ADDRESS_ID)
@@ -1270,8 +1279,48 @@ class service {
                     data.REQUEST_DATE_ISSUED = data.REQUEST_DATE_ISSUED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_ISSUED.toISOString()) : data.REQUEST_DATE_ISSUED
                     data.REQUEST_DATE_EXPIRED = data.REQUEST_DATE_EXPIRED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_EXPIRED.toISOString()) : data.REQUEST_DATE_EXPIRED
                     data.REQUEST_LAST_UPDATE = data.REQUEST_LAST_UPDATE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_LAST_UPDATE.toISOString()) : data.REQUEST_LAST_UPDATE
+                    this.getEstablishment(data.ESTABLISHMENT_ID).then((dataEstablishment) =>{
+                        data.ESTABLISHMENT_DATA = dataEstablishment
+                        if(data.TRAIN_ID != null){
+                            this.getTrainByTrainId(data.TRAIN_ID).then((dataTrain) =>{
+                                data.TRAIN_DATA = dataTrain[0]
+                                if(data.REFERENCE_ID != null){
+                                    this.getReferenceByReferenceId(data.REFERENCE_ID).then((dataReference) =>{
+                                        data.REFERENCE_DATA = dataReference[0]
+                                        ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) =>{
+                                            data.IMAGE_REVIEW = imageDatas
+                                            return resolve(data)
+                                        })
+                                       
+                                    })  
+                                }else{
+                                    ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) =>{
+                                        data.IMAGE_REVIEW = imageDatas
+                                        return resolve(data)
+                                    })
+                                }
+                            })
+                        }else{
+                            if(data.REFERENCE_ID != null){
+                                this.getReferenceByReferenceId(data.REFERENCE_ID).then((dataReference) =>{
+                                    data.REFERENCE_DATA = dataReference[0]
+                                    ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) =>{
+                                        data.IMAGE_REVIEW = imageDatas
+                                        return resolve(data)
+                                    })
+                                })  
+                            }else{
+                                ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) =>{
+                                    data.IMAGE_REVIEW = imageDatas
+                                    return resolve(data)
+                                })
+                            }
+                        }
+                        
+                    })
+                    
                 }
-                return resolve(data)
+                
             })
         })
     }

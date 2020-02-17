@@ -39,13 +39,16 @@ function insertDocument() {
                     icon: "success",
                     confirmButtonColor: "#009688"
                 });
-                data = true
-                addNew = false
-                disableMenuAll()
-                enableMenu('addMenu')
-                enableMenu('editMenu')
-                enableMenu('deleteMenu')
-                enableFunction()
+                insertRequest().then((data) => {
+                    console.log(data)
+                })
+                // data = true
+                // addNew = false
+                // disableMenuAll()
+                // enableMenu('addMenu')
+                // enableMenu('editMenu')
+                // enableMenu('deleteMenu')
+                // enableFunction()
             } else if (result.dismiss === Swal.DismissReason.cancel) {
                 // Swal.fire("บันทึกล้มเหลว");
             }

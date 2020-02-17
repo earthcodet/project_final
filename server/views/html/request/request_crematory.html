@@ -207,12 +207,12 @@
                             onchange="document.getElementById('subdistrict').classList.remove('alertInput')"></select></a>
                     <a>โทรศัพท์ <font color="red">*</font> :
                         <input type="text" id="phone" style="width: 12%;"
-                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                        oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
                             maxlength="10" onchange="document.getElementById('phone').classList.remove('alertInput')"
                             onkeyup="checkPhone(this.value,'phone')"></a>
                     <a>โทรสาร :
                         <input type="text" id="fax"
-                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                        oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
                             maxlength="9" style="width: 13.2%;"></a>
                     <br>
                     <br>
@@ -257,12 +257,12 @@
                     </select>
                     <a>โทรศัพท์ :
                         <input type="text" id="wPhone" style="width: 12%;"
-                            oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
+                        oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
                             maxlength="10" onchange="document.getElementById('wPhone').classList.remove('alertInput')"
                             onkeyup="checkPhone(this.value,'wPhone')"></a>
                     <a>โทรสาร :
                         <input type="text" id="wFax"
-                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                        oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
                             maxlength="9" style="width: 13.2%;"></a>
                     <br>
                     <br>
@@ -327,13 +327,13 @@
                     <input type="radio" name="owner" id="useOtherPlace" onClick="show_owner(this.value);" value="1"
                         style="margin-left: 5vw;">
                     <a>ใช้สถานที่ประกอบการของผู้อื่น</a>&ensp;
-                    <input type="radio" name="owner" id="notuseOtherPlace" onClick="show_owner(this.value);"
-                        value="2" checked />
+                    <input type="radio" name="owner" id="notuseOtherPlace" onClick="show_owner(this.value);" value="2"
+                        checked />
                     <a>ไม่ใช้สถานที่ประกอบการของผู้อื่น</a>
                     <div id="boxOwner" style="display: none;">
                         <h3 style="font-size: 2.8vh;">ข้อมูลเจ้าของสถานที่</h3>
                         <a style="margin-left: 6.1vw;">คำนำหน้า <font color="red">*</font> :
-                            <select id="" style="width: 10%;">
+                            <select id="ownPrefix" style="width: 10%;">
                                 <option value="นาย">นาย</option>
                                 <option value="นาง">นาง</option>
                                 <option value="นางสาว">นางสาว</option>
@@ -342,14 +342,13 @@
                             <input type="text" id="ownName" style="width: 13%;"></a>
                         <a>นามสกุล <font color="red">*</font> :
                             <input type="text" id="ownSurname" style="width: 13%;"></a>
-                        <a>อายุ :
-                            <input type="text" id="ownAge" style="width: 7%;"> ปี</a>
+                        <a>วันเกิด :
+                            <input type="text" id="datepicker9" style="width: 10%;"> </a>:
                         <a>โทรศัพท์ <font color="red">*</font> :
                             <input type="text" id="ownPhone" style="width: 13%;"
                                 oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
-                                maxlength="10"
-                                onchange="document.getElementById('ownPhone').classList.remove('alertInput')"
-                                onkeyup="checkPhone(this.value,'ownPhone')"></a>
+                                onkeyup="checkPhone(this.value,'ownPhone')"
+                                maxlength="10"></a>
                         <br>
                         <a style="margin-left: 5vw;">อยู่บ้านเลขที่ <font color="red">*</font> :
                             <input type="text" id="ownHomeId" style="width: 7%;"></a style="margin-left: 7.4vw;">
@@ -370,7 +369,7 @@
                             <select id="ownerSubdistrict" style="width: 17.5%;"></select></a>
                         <br>
                         <br>
-                        <input style="margin-left:9vw;" type="file" id="uploadFilePdf" onchange="uploadImage(event)"
+                        <input style="margin-left:9vw;" type="file" id="uploadFilePdf" onchange="pdfFile(event)"
                             accept="application/pdf">
                     </div>
                     <br><br>
