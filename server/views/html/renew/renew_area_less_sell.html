@@ -22,14 +22,15 @@
 <body>
     <!-- เมนูด้านบน -->
     <div class="w3-top icon-bar">
-        <a id="addMenu" class="exit " onclick="addTEST()"><i class="fa fa-plus-square"> เพิ่ม</i></a>
-        <a id="editMenu" onclick="editTEST()" class="exit disableds"><i class="fa fa-pencil-alt"> แก้ไข</i></a>
-        <a id="saveMenu" onclick="insertTEST()" class="exit disableds"><i class="fa fa-save"> บันทึก</i></a>
-        <a id="restoreMenu" onclick="restoreTEST()" class="exit disableds"><i class="fa fa-reply"> เรียกคืน</i></a>
-        <a id="deleteMenu" onclick="deleteTEST()" class="exit disableds"><i class="fa fa-times"> ยกเลิก</i></a>
+        <a id="addMenu" class="exit " onclick="addTEST()"><i class="fa fa-plus-square"><span> เพิ่ม</span></i></a>
+        <a id="editMenu" onclick="editTEST()" class="exit disableds"><i class="fa fa-pencil-alt"><span> แก้ไข</span></i></a>
+        <a id="saveMenu" onclick="insertTEST()" class="exit disableds"><i class="fa fa-save"><span> บันทึก</span></i></a>
+        <a id="restoreMenu" onclick="restoreTEST()" class="exit disableds"><i class="fa fa-reply"><span> เรียกคืน</span></i></a>
+        <a id="deleteMenu" onclick="deleteTEST()" class="exit disableds"><i class="fa fa-times"><span> ยกเลิก</span></i></a>
         <!-- <a><i class="fa fa-search"> ค้นหา</i></a> -->
-        <a id="exitMenu" onclick="exitTEST()" class="exit" style="float: right;width: 17%;"><i class="fa fa-sign-out-alt">
-                ออกจากระบบ</i></a>
+        <a id="exitMenu" onclick="exitTEST()" class="exit" style="float: right;width: 17%;"><i
+                class="fa fa-sign-out-alt">
+               <span> ออกจากระบบ</span></i></a>
     </div>
     <!-- เมนูด้านข้าง -->
     <div class="sidenav">
@@ -55,27 +56,16 @@
         </div>
         <button class="dropdown-btn select-active"><b>ระบบต่ออายุงานคำขอ </b><i class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
-            <a href="renew_public_sell.html" >- คำขอต่อใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
-            <a href="renew_public_hawk.html">- คำขอต่อใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
+            <a href="renew_public_sell.html">- คำขอต่อใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
+            <a href="renew_public_hawk.html">-
+                คำขอต่อใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
             <a href="renew_area_more_sell.html">- คำขอต่อใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
             <a href="renew_area_more_correct.html">- คำขอต่อใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</a>
-            <a href="renew_area_less_sell.html" class ="dropdown-active">- คำขอต่อหนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
-            <a href="renew_area_less_correct.html" >- คำขอต่อหนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
+            <a href="renew_area_less_sell.html" class="dropdown-active">- คำขอต่อหนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
+            <a href="renew_area_less_correct.html">- คำขอต่อหนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
             <a href="renew_market.html">- คำขอต่อใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
             <a href="renew_health_danger.html">- คำขอต่อกิจการที่เป็นอันตรายต่อสุขภาพ</a>
-        </div>
-        <button class="dropdown-btn"><b>งานตรวจสอบ/อนุมัติ </b><i class="fa fa-caret-down"></i></button>
-        <div class="dropdown-container">
-            <a href="#"></a>
-            <a href="#"></a>
-            <a href="#"></a>
-        </div>
-        <button class="dropdown-btn"><b>งานใบอนุญาต </b><i class="fa fa-caret-down"></i></button>
-        <div class="dropdown-container">
-            <a href="#"></a>
-            <a href="#"></a>
-            <a href="#"></a>
-        </div>
+        </div>  
         <button class="dropdown-btn"><b>ข้อมูลส่วนกลาง </b><i class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
             <a href="../central/operator.html">- ข้อมูลผู้ประกอบการ</a>
@@ -96,12 +86,15 @@
             <a href="../report/report_crematory.html">- ตามคำขอ</a>
             <a href="../report/report_summary.html">- สรุป</a>
         </div>
-        <button class="dropdown-btn notification"><b>แจ้งเตือน </b><span id="notficationRequest" class="badge" style="margin-left:0.5vw;">100000</span><i class="fa fa-caret-down"></i></button>
+        <button class="dropdown-btn notification"><b>แจ้งเตือน </b><span id="notficationRequest" class="badge"
+                style="margin-left:0.5vw;">100000</span><i class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
-            <a class="notification" href="../notfication/request.html">- งานคำขอ<span id="notficationRequest" class="badge" style="margin-left:0.5vw;">100000</span></a>
+            <a class="notification" href="../notfication/request.html">- งานคำขอ<span id="notficationRequest"
+                    class="badge" style="margin-left:0.5vw;">100000</span></a>
         </div>
         <br><br>
-        <button class="dropdown-btn"><a href="../notfication/request copy.html" style="color: red;"><b>คำขอหมดอายุเกิน 3 ปี </b></a>
+        <button class="dropdown-btn"><a href="../notfication/request copy.html" style="color: red;"><b>คำขอหมดอายุเกิน 3
+                    ปี </b></a>
             <!-- <i class="fa fa-caret-down"></i> -->
         </button>
     </div>
