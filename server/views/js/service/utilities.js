@@ -1,7 +1,7 @@
 //รอ ไปแยก
 let files 
 let selectImageFile = 0
-let maxImageFile = 4
+let maxImageFile = 8
 let image_changed = false
 // function checkPhoneInput(tagId) {
 //     var text = document.getElementById(tagId).value

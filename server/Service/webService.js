@@ -713,7 +713,7 @@ class service {
         return new Promise((resolve, reject) => {
             TrainDAOObj.getTrian(id).then((trainData) => {
                 console.log(trainData[0] != undefined)
-                if(trainData[0] != undefined){
+                if (trainData[0] != undefined) {
                     trainData[0].TRAIN_DATE_EXP = this.formatDate('TO-DISPLAY', trainData[0].TRAIN_DATE_EXP.toISOString().slice(0, 10))
                     trainData[0].TRAIN_DATE_ISSUED = this.formatDate('TO-DISPLAY', trainData[0].TRAIN_DATE_ISSUED.toISOString().slice(0, 10))
                 }
@@ -907,7 +907,7 @@ class service {
             data.race === '' || data.race === '-' ? data.race = 'NULL' : data.race = data.race = `'${data.race}'`
             data.birthday.length === 0 ? data.birthday = 'NULL' : data.birthday = data.birthday
             data.card_expipe.length === 0 ? data.card_expipe = 'NULL' : data.card_expipe = data.card_expipe
-            data.fax === '' || data.fax === '-'  ? data.fax = 'NULL' : data.fax = `'${data.fax}'`
+            data.fax === '' || data.fax === '-' ? data.fax = 'NULL' : data.fax = `'${data.fax}'`
             data.surname === '' ? data.surname = 'NULL' : `'${data.surname}'`
             return data
         }
@@ -932,7 +932,7 @@ class service {
             data.area_size === '' ? data.area_size = 0 : ''
             data.worker === '' ? data.worker = 0 : ''
 
-            data.fax === '' || data.fax === '-'  ? data.fax = 'NULL' : data.fax = `'${data.fax}'`
+            data.fax === '' || data.fax === '-' ? data.fax = 'NULL' : data.fax = `'${data.fax}'`
             data.grond === '' ? data.grond = 'NULL' : data.grond = `'${data.grond}'`
             return data
         }
@@ -1026,7 +1026,7 @@ class service {
         return new Promise((resolve, reject) => {
             EstablishmentDAOObj.getDuplication(Edata, address).then((establishmentData) => {
                 if (establishmentData.length != 0) {
-                    new_edata.id  = establishmentData[0].ESTABLISHMENT_ID
+                    new_edata.id = establishmentData[0].ESTABLISHMENT_ID
                     new_edata.address_id = establishmentData[0].ADDRESS_ID
                     new_edata.is_land_owned = establishmentData[0].ESTABLISHMENT_IS_LAND_OWNED
                     new_edata.land_used = establishmentData[0].ESTABLISHMENT_IS_LAND_OWNED
@@ -1042,7 +1042,7 @@ class service {
                                     file.name = land_id
                                     this.insertFile(file).then((resultFile) => {
                                         if (resultFile) {
-                                           
+
                                             this.loopInsertEstablishment(new_edata).then((result) => {
                                                 return resolve(result)
                                             })
@@ -1081,7 +1081,7 @@ class service {
                                         e_data.LAND = land_data
                                         return resolve(e_data)
                                     })
-                                   
+
                                 })
 
                                 // this.getAddressByAddressId(land_data.ADDRESS_ID)
@@ -1279,48 +1279,48 @@ class service {
                     data.REQUEST_DATE_ISSUED = data.REQUEST_DATE_ISSUED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_ISSUED.toISOString()) : data.REQUEST_DATE_ISSUED
                     data.REQUEST_DATE_EXPIRED = data.REQUEST_DATE_EXPIRED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_EXPIRED.toISOString()) : data.REQUEST_DATE_EXPIRED
                     data.REQUEST_LAST_UPDATE = data.REQUEST_LAST_UPDATE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_LAST_UPDATE.toISOString()) : data.REQUEST_LAST_UPDATE
-                    this.getEstablishment(data.ESTABLISHMENT_ID).then((dataEstablishment) =>{
+                    this.getEstablishment(data.ESTABLISHMENT_ID).then((dataEstablishment) => {
                         data.ESTABLISHMENT_DATA = dataEstablishment
-                        if(data.TRAIN_ID != null){
-                            this.getTrainByTrainId(data.TRAIN_ID).then((dataTrain) =>{
+                        if (data.TRAIN_ID != null) {
+                            this.getTrainByTrainId(data.TRAIN_ID).then((dataTrain) => {
                                 data.TRAIN_DATA = dataTrain[0]
-                                if(data.REFERENCE_ID != null){
-                                    this.getReferenceByReferenceId(data.REFERENCE_ID).then((dataReference) =>{
+                                if (data.REFERENCE_ID != null) {
+                                    this.getReferenceByReferenceId(data.REFERENCE_ID).then((dataReference) => {
                                         data.REFERENCE_DATA = dataReference[0]
-                                        ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) =>{
+                                        ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) => {
                                             data.IMAGE_REVIEW = imageDatas
                                             return resolve(data)
                                         })
-                                       
-                                    })  
-                                }else{
-                                    ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) =>{
+
+                                    })
+                                } else {
+                                    ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) => {
                                         data.IMAGE_REVIEW = imageDatas
                                         return resolve(data)
                                     })
                                 }
                             })
-                        }else{
-                            if(data.REFERENCE_ID != null){
-                                this.getReferenceByReferenceId(data.REFERENCE_ID).then((dataReference) =>{
+                        } else {
+                            if (data.REFERENCE_ID != null) {
+                                this.getReferenceByReferenceId(data.REFERENCE_ID).then((dataReference) => {
                                     data.REFERENCE_DATA = dataReference[0]
-                                    ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) =>{
+                                    ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) => {
                                         data.IMAGE_REVIEW = imageDatas
                                         return resolve(data)
                                     })
-                                })  
-                            }else{
-                                ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) =>{
+                                })
+                            } else {
+                                ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) => {
                                     data.IMAGE_REVIEW = imageDatas
                                     return resolve(data)
                                 })
                             }
                         }
-                        
+
                     })
-                    
+
                 }
-                
+
             })
         })
     }
@@ -1375,7 +1375,7 @@ class service {
             })
         })
     }
-    
+
     InsertRequestStep(request, personal, Edata, address, land, addressOwner, file, reference, train, username, image) {
         //ets = Edata, address, land, addressOwner, file
         var datetime = new Date();
@@ -1430,7 +1430,7 @@ class service {
                 console.log('InsertRequestStep : loading')
                 this.insertEstablishment(Edata, address, land, addressOwner, file).then((data) => {
                     request.establishment_id = data.id
-                    request.establishment_is_land_owned = data.is_land_owned === null ? 'NULL' : `'${data.is_land_owned}'`
+                    request.establishment_is_land_owned = data.is_land_owned === null ? 'NULL' : `'${data.land_used}'`
                     request.establishment_address_id = data.is_land_owned === null ? 'NULL' : `'${data.address_id}'`
                     if (request.reference_id === 'YES') {
                         this.loopInsertReference(reference).then((result) => {
@@ -1482,14 +1482,14 @@ class service {
                         request.no = id
                         console.log(`Insert : request complete`)
                         console.log(image != undefined)
-                        if(image != undefined){
+                        if (image != undefined) {
                             console.log(image != undefined)
-                            this.insertImageEstablishments(image, `${request.no}${request.year}`).then((result_image) =>{
-                                if(result_image){
+                            this.insertImageEstablishments(image, `${request.no}${request.year}`).then((result_image) => {
+                                if (result_image) {
                                     return resolve(request)
                                 }
                             })
-                        }else{
+                        } else {
                             return resolve(request)
                         }
                     }
@@ -1512,7 +1512,7 @@ class service {
     insertRequestType(request) {
         return new Promise((resolve, reject) => {
             RequestTypeDAOObj.insert(request).then((data) => {
-                console.log(`== insert || insertRequestType ==`)
+                // console.log(`== insert || insertRequestType ==`)
                 return resolve(true)
             })
         })
@@ -1520,7 +1520,13 @@ class service {
     getRequestTypeById(id) {
         return new Promise((resolve, reject) => {
             RequestTypeDAOObj.getRequestTypeById(id).then((data) => {
-                console.log(`== get || getRequestTypeById ==`)
+                return resolve(data)
+            })
+        })
+    }
+    getRequestTypeByType(type) {
+        return new Promise((resolve, reject) => {
+            RequestTypeDAOObj.getRequestTypeByType(type).then((data) => {
                 return resolve(data)
             })
         })
@@ -1528,7 +1534,6 @@ class service {
     getRequestType() {
         return new Promise((resolve, reject) => {
             RequestTypeDAOObj.get().then((data) => {
-                console.log(`== get || getRequestType ==`)
                 return resolve(data)
             })
         })

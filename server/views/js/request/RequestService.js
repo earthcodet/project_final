@@ -1,4 +1,5 @@
 let newDocument = true
+let requestType = []
 // set data form database 
 function setDataOperator(raw_data, type) {
     setOperatorData(raw_data)
@@ -9,6 +10,7 @@ function setDataOperator(raw_data, type) {
         document.getElementById("typeUser").value = operatorData.type
         document.getElementById("id").value = operatorData.personal_id
         document.getElementById("name").value = `${operatorData.title} ${operatorData.name} ${operatorData.surname}`
+        document.getElementById("documentName").value = `${operatorData.title} ${operatorData.name} ${operatorData.surname}`
         document.getElementById("age").value = operatorData.birthday === '' ? '' : parseInt(getAge(operatorData.birthday))
         document.getElementById("nationality").value = operatorData.nationality
         document.getElementById("nationality").readOnly = operatorData.type === 'บุคคลธรรมดา' ? false : true
@@ -24,7 +26,8 @@ function setDataOperator(raw_data, type) {
         document.getElementById("sxy").value = operatorAddressData.sxy
         document.getElementById("building").value = operatorAddressData.building
         document.getElementById("road").value = operatorAddressData.road
-
+        
+        
         let provinceId = parseInt(getProviceIdByName(operatorAddressData.province_name))
         let amphurId = parseInt(getAmphureIdByName(operatorAddressData.amphur_name, provinceId))
         let districtId = parseInt(getDistrictIdByName(operatorAddressData.district_name, amphurId))
@@ -257,7 +260,7 @@ function createGroupData() {
         requestData.year = parseInt(new Date().toISOString().slice(0, 4)) + 543
         requestData.personal_id_owner = operatorData.id
         //create Database
-        requestData.request_type_id = 1
+        requestData.request_type_id = getRequestTypeId(document.getElementById('typeReq').value)
 
 
         // -- - - 
@@ -556,4 +559,46 @@ function insertRequest() {
                 return resolve(data.data);
             });
     });
+}
+
+//get request type 
+function getRequestType(type){
+    return new Promise((resolve, reject) => {
+        axios.get(`http://localhost:5000/get/requestType/${type}`).then((result) => {
+            resolve(result.data);
+            for (let i = 0; i < result.data.length; i++) {
+                requestType.push(result.data[i])
+            }
+            resolve(result.data);
+        })
+    })
+}
+
+function setRequsetType(type){
+    getRequestType(type).then((data_test) =>{
+        addRequestTypeToDatalist()
+    })
+}
+function addRequestTypeToDatalist(){
+    const list = document.getElementById('brow')
+    for(let i = 0 ; i < requestType.length ; i ++){
+        let option = document.createElement('option');
+        option.value = requestType[i].REQUEST_TYPE_NAME 
+        list.appendChild(option);
+    }
+}
+
+function getRequestTypeId(type){
+    for(let i = 0 ; i < requestType.length; i++){
+        if(requestType[i].REQUEST_TYPE_NAME === type){
+            return requestType[i].REQUEST_TYPE_ID
+        }
+    }
+}
+function getRequestTypeValue(value){
+    for(let i = 0 ; i < requestType.length; i++){
+        if(requestType[i].REQUEST_TYPE_ID === value){
+            return requestType[i].REQUEST_TYPE_NAME
+        }
+    }
 }

@@ -2,7 +2,7 @@ let search_id = ''
 let search_name = ''
 let search_surname = ''
 
-function addDocument() {
+function addPage() {
     addNew = true
     deleteData = false
     data = false
@@ -15,7 +15,7 @@ function addDocument() {
     }
     resetFunction()
 }
-function insertDocument() {
+function insertPage() {
     Swal.fire({
         title: "สำนักงานเทศบาล",
         html: "ต้องการบันทึกหรือไม่",
@@ -42,6 +42,7 @@ function insertDocument() {
                 insertRequest().then((data) => {
                     console.log(data)
                 })
+                // console.log(preInsert())
                 // data = true
                 // addNew = false
                 // disableMenuAll()
@@ -90,7 +91,7 @@ function printImg() {
         });
 
 }
-function editDocument() {
+function editPage() {
     if (!deleteData) {
         addNew = true
         console.log(addNew)
@@ -107,7 +108,7 @@ function editDocument() {
         })
     }
 }
-function deleteDocument() {
+function deletePage() {
     Swal.fire({
         title: "สำนักงานเทศบาล",
         html: "ต้องการลบหรือไม่",
@@ -141,7 +142,7 @@ function deleteDocument() {
         });
 
 }
-function restoreDocument() {
+function restorePage() {
     disableMenuAll()
     enableMenu('addMenu')
     enableMenu('editMenu')

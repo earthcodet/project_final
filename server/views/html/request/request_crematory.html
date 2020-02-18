@@ -128,15 +128,10 @@
                             onchange="document.getElementById('typeReq').classList.remove('alertInput')">
                         <datalist id="brow">
                             <option value="" hidden>เลือก...</option>
-                            <option
-                                value="1.การจำหน่ายสินค้าในที่ หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น">
-                                1.การจำหน่ายสินค้าในที่
-                                หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
-                            </option>
                         </datalist>
                         </input></a>
                     <a>เขียนที่ :
-                        <input type="text" id="place" value="เทศบาลเมืองแสนสุข" style="width:16%;" readonly></a>
+                        <input type="text" id="place" value="เทศบาลเมืองแสนสุข" style="width:16%;" disabled readonly></a>
                     <br>
 
                     <a style="margin-left: 1.4vw;">ข้าพเจ้า <font color="red">*</font> :
@@ -153,12 +148,12 @@
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                             maxlength="13" onkeyup="checkId(this.value, 'PERSON') 
                                     document.getElementById('id').classList.remove('alertInput')"></a>
-                    <a>อายุ <font color="red">*</font> :
+                    <a>อายุ  :
                         <input type="text" id="age" readonly
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                             maxlength="3" style="width: 7%;"
                             onchange="document.getElementById('age').classList.remove('alertInput')"></a>
-                    <a>สัญชาติ <font color="red">*</font> :
+                    <a>สัญชาติ  :
                         <input class="drop" list="nationality1" id="nationality" name="" style="width: 7%;"
                             onkeyup="document.getElementById('nationality').classList.remove('alertInput')"
                             onchange="document.getElementById('nationality').classList.remove('alertInput')">
@@ -169,7 +164,7 @@
                             <option value="อเมริกัน"></option>
                         </datalist>
                         </input></a>
-                    <a>เชื้อชาติ <font color="red">*</font> :
+                    <a>เชื้อชาติ  :
                         <input list="nationality2" id="race" name="" style="width: 7%;"
                             onkeyup="document.getElementById('race').classList.remove('alertInput')"
                             onchange="document.getElementById('race').classList.remove('alertInput')">
@@ -268,13 +263,13 @@
                     <br>
                     <a>ใบอนุญาตฉบับจริง</a>&ensp;
                     <a>เลขที่ :
-                        <input type="text" id="bNum" style="width: 10%;"></a>&ensp;
+                        <input type="text" id="bNum" style="width: 10%;" disabled readonly></a>&ensp;
                     <a>ออกให้เมื่อวันที่ :
-                        <input type="text" id="datepicker2" id="" style="width: 12%;"></a>
+                        <input type="text" id="datepicker2" id="" style="width: 12%;" disabled readonly></a>
                     <a>ค่าธรรมเนียม :
-                        <input type="number" id="bFee" style="width: 12%;"></a>
+                        <input type="number" id="bFee" style="width: 12%;" disabled readonly></a>
                     <a>ค่าปรับ :
-                        <input type="number" id="bFine" style="width: 12%;"></a>
+                        <input type="number" id="bFine" style="width: 12%;" disabled readonly></a>
 
                     <br>
                     <br>
@@ -410,30 +405,16 @@
                                 ข้าพเจ้าขอรับรองว่า
                                 ข้อความในแบบคำร้องขอต่อใบอนุญาตนี้เป็นจริงทุกประการ
                                 <br>
-                                (ลงชื่อ) <font color="red">*</font>
+                                (ลงชื่อ)
                                 <!-- <input type="text" id="documentName" /> -->
-                                <input list="documentName1" id="documentName" name="">
-                                <datalist id="documentName1">
-                                    <option value="" hidden>เลือก...</option>
-                                    <option value="นาย A"></option>
-                                    <option value="นาย B"></option>
-                                    <option value="นาย C"></option>
-                                </datalist>
-                                </input>
+                                <input id="documentName" name="" disabled readonly>
                                 ผู้ขอรับใบอนุญาต
                             </a>
                         </div>
                         <div class="col" style="width: 33.33%;">
                             <a>
-                                ลงชื่อ <font color="red">*</font> 
-                                <input list="documentName12" id="documentNam2" name="">
-                                <datalist id="documentName12">
-                                    <option value="" hidden>เลือก...</option>
-                                    <option value="นาย A"></option>
-                                    <option value="นาย B"></option>
-                                    <option value="นาย C"></option>
-                                </datalist>
-                                </input>
+                                ลงชื่อ 
+                                <input  id="documentName2" name="" disabled readonly>
                                 <br>
                                 <p class="text-center">ผู้รับเงิน</p>
                             </a>
@@ -461,8 +442,6 @@
 
 
 </body>
-<script src="../../js/request/request-danger.js"></script>
-<script src="../../js/request/menuRequest-danger.js"></script>
 
 <script src="../../node_modules/axios/dist/axios.min.js"></script>
 <script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
@@ -470,7 +449,13 @@
 <script src="../../js/service/address/threeAddress.js"></script>
 <script src='../../js/service/address/addressLand.js'></script>
 <script src="../../js/service/sideMenu.js"></script>
-<script src="../../js/request/controlTest.js"></script>
+<script src="../../js/request/request-danger.js"></script>
+<script src="../../js/request/RequestData.js"></script>
+<script src="../../js/request/RequestService.js"></script>
+<script src="../../js/request/RequestControl.js"></script>
+<script>
+    setRequsetType('กิจการฌาปณสถาน')
+</script>
 <!-- <script src="../../js/service/checkUserLogin.js"></script> -->
 
 </html>

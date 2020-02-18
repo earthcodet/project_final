@@ -131,6 +131,25 @@ app.get('/get/personalId/:personalId', (req, res) => {
     }
   })
 })
+app.get('/get/requestType', (req, res) => {
+  webService.getRequestType().then((data) => {
+    if (data != null) {
+      res.json(data)
+    } else {
+      res.sendStatus(404)
+    }
+  })
+})
+app.get('/get/requestType/:type', (req, res) => {
+  console.log(req.params.type)
+  webService.getRequestTypeByType(req.params.type).then((data) => {
+    if (data != null) {
+      res.json(data)
+    } else {
+      res.sendStatus(404)
+    }
+  })
+})
 app.post('/insert/personal', (req, res) => {
 console.log(req.body.personal)
   var obj = JSON.parse(req.body.personal);
@@ -229,24 +248,11 @@ app.post('/insert/request', (req, res) => {
     obj[9][i].type = image.mimetype.slice(6, image.mimetype.length)
     obj[9][i].data = image.data
   }
-  // console.log(obj[9])
-  // InsertRequestStep(request, personal, Edata, address, land, addressOwner, file, reference, train, username, image)
-  // InsertRequestStep(request, personal, Edata, address, land, addressOwner, file, reference, train)
-  // ets = Edata, address, land, addressOwner, file , image
   webService.InsertRequestStep(obj[0],obj[1],obj[2],obj[3],obj[4],obj[5],obj[6],obj[7],obj[8],req.session.username,obj[9]).then((data) => {
     res.json(data);
   })
  
 })
-
-app.get('/xx', (req, res) => {
-  webService.getRequestByIdAndYear('F00007','2563').then((data) =>{
-    res.json(data.IMAGE_REVIEW[0].E_IMAGE_DATA)
-  })
-})
-// webService.getTrainByTrainId('FT000001').then((data) =>{
-//   console.log(data)
-// })
 //ทำให้ css กับ js ใช้ได้
 app.use(express.static(__dirname + '/views'));
 app.listen(PORT, () => {
