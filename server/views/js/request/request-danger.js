@@ -214,8 +214,20 @@ function preInsert() {
   if (check_input) {
     if (check_owner === true) {
       if (check_input_owner) {
-        //
-        return true;
+        if(getRequestTypeId(document.getElementById('typeReq').value.trim()) != undefined){
+          return true;
+        }else{
+          Swal.fire({
+            title: "ประเภทคำขอไม่ถูกต้อง",
+            width: "30%",
+            showConfirmButton: true,
+            closeOnConfirm: false,
+            closeOnCancel: false,
+            confirmButtonColor: "#009688",
+            icon: "error"
+          });
+          document.getElementById("typeReq").classList.add("alertInput");
+        }
       } else {
         Swal.fire({
           title: "กรุณากรอกข้อมูลเจ้าของสถานที่",
@@ -228,7 +240,20 @@ function preInsert() {
         });
       }
     } else {
-      return true;
+      if(getRequestTypeId(document.getElementById('typeReq').value.trim()) != undefined){
+        return true;
+      }else{
+        Swal.fire({
+          title: "ประเภทคำขอไม่ถูกต้อง",
+          width: "30%",
+          showConfirmButton: true,
+          closeOnConfirm: false,
+          closeOnCancel: false,
+          confirmButtonColor: "#009688",
+          icon: "error"
+        });
+        document.getElementById("typeReq").classList.add("alertInput");
+      }
     }
   } else {
     Swal.fire({

@@ -39,9 +39,12 @@ function insertPage() {
                     icon: "success",
                     confirmButtonColor: "#009688"
                 });
-                insertRequest().then((data) => {
-                    console.log(data)
-                })
+                if(preInsert()){
+                    insertRequest().then((data) => {
+                        console.log(data)
+                    })
+                }
+                
                 // console.log(preInsert())
                 // data = true
                 // addNew = false

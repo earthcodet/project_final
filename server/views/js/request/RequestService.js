@@ -260,7 +260,7 @@ function createGroupData() {
         requestData.year = parseInt(new Date().toISOString().slice(0, 4)) + 543
         requestData.personal_id_owner = operatorData.id
         //create Database
-        requestData.request_type_id = getRequestTypeId(document.getElementById('typeReq').value)
+        requestData.request_type_id = getRequestTypeId(document.getElementById('typeReq').value.trim())
 
 
         // -- - - 

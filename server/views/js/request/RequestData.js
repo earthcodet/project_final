@@ -121,32 +121,32 @@ let trianData = {
 }
 let operatorAddressData = {
     is_address_changed: false,
-    id: "ADD0000001",
-    home_number: "147/525",
-    moo: '99',
+    id: "",
+    home_number: "",
+    moo: '',
     trxk: '',
     sxy: '',
     building: '',
     road: '',
-    district_name: "ห้วยกะปิ",
-    amphur_name: "เมืองชลบุรี",
-    province_name: "ชลบุรี"
+    district_name: "",
+    amphur_name: "",
+    province_name: ""
 };
 let operatorData = {
     is_personal_changed: false,
-    id: "P000001",
+    id: "",
     address_id: "",
-    title: "นางสาว",
-    type: "บุคคลธรรมดา",
-    name: "เขมนิจ",
-    surname: "จามิกรณ์",
-    nationality: 'ลาว',
-    race: 'ไทย',
-    birthday: '31-01-2546',
-    personal_id: "1254233652124",
-    card_issued: "04-02-2560",
+    title: "",
+    type: "",
+    name: "",
+    surname: "",
+    nationality: '',
+    race: '',
+    birthday: '',
+    personal_id: "",
+    card_issued: "",
     card_expipe: '',
-    phone: "0616588521",
+    phone: "",
     fax: ''
 };
 
