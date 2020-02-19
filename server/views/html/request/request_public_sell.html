@@ -169,7 +169,7 @@
                     <a style="margin-left: 0.58vw;">เลขที่บ้าน <font color="red">*</font> :
                         <input id="home_id" type="text" style="width: 7%;"
                             onchange="document.getElementById('home_id').classList.remove('alertInput')"></a>
-                    <a>หมู่ที่ <font color="red">*</font> : <input id="moo" type="text" style="width: 7%;"
+                    <a>หมู่ที่ : <input id="moo" type="text" style="width: 7%;"
                             onchange="document.getElementById('moo').classList.remove('alertInput')"></a>
                     <a>ตรอก : <input id="trxk" type="text" style="width: 13%;"></a>
                     <a>ซอย : <input type="text" id="sxy" style="width: 13%;"></a>
@@ -426,7 +426,7 @@
                     <a>ตั้งอยู่เลขที่ <font color="red">*</font> :
                         <input type="text" id="wPlaceId" style="width: 7%;"
                             onchange="document.getElementById('wPlaceId').classList.remove('alertInput')"></a>
-                    <a>หมู่ที่ <font color="red">*</font> : <input type="int" id="wMoo" style="width: 7%;"
+                    <a>หมู่ที่ : <input type="int" id="wMoo" style="width: 7%;"
                             onchange="document.getElementById('wMoo').classList.remove('alertInput')"></a>
                     <a>ตรอก : <input type="text" id="wTrxk" style="width: 13%;"></a>
                     <a>ซอย : <input type="text" id="wSxy" style="width: 13%;"></a>
@@ -688,7 +688,11 @@
 <script src="../../js/request/RequestService.js"></script>
 <script src="../../js/request/RequestControl.js"></script>
 <script>
+     console.log('sadasd')
     setRequsetType('ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร')
+    //0, 30 MAX 50
+    console.log(window.location.href.toString().slice(22,26))
+    console.log(window.location.href.slice(50, window.location.href.toString().length))
 </script>
 <!-- <script src="../../js/request/controlTest.js"></script> -->
 <!-- <script src="../../js/service/checkUserLogin.js"></script> -->

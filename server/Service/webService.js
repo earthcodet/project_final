@@ -1029,14 +1029,11 @@ class service {
                     new_edata.id = establishmentData[0].ESTABLISHMENT_ID
                     new_edata.address_id = establishmentData[0].ADDRESS_ID
                     //use_land
-                    console.log(new_edata.is_land_owned)
                     if(establishmentData[0].ESTABLISHMENT_GROUND != null && new_edata.grond != 'NULL'){
                         EstablishmentDAOObj.updateGround(new_edata.id, new_edata.grond)
                     }
                     if (new_edata.is_land_owned != 'NULL') {
                         this.insertLand(new_land, new_addressOwner).then((land_id) => {
-                            console.log(`=====asdasdasdasds=========@@@@+=========== `)
-                            console.log(land_id)
                             new_edata.is_land_owned = `'${land_id.id}'`
                             new_edata.land_used = land_id.id
                             new_edata.land_address_owner = land_id.address
@@ -1045,7 +1042,6 @@ class service {
                                 this.insertFile(file).then((resultFile) => {
                                     if (resultFile) {
                                         //NEW LAND 
-                                        console.log(`===================@@@@+=========== ${land_id.id}`)
                                         EstablishmentDAOObj.updateUseLand(establishmentData[0].ESTABLISHMENT_ID, new_edata.is_land_owned).then((data_update_success) => {
                                             if (data_update_success) {
                                                 return resolve(new_edata)
@@ -1099,12 +1095,10 @@ class service {
                             new_edata.address_id = resultaddress.id
                             if (new_edata.is_land_owned != 'NULL') {
                                 this.insertLand(new_land, new_addressOwner).then((land_id) => {
-                                    console.log(land_id)
                                     new_edata.is_land_owned = `'${land_id.id}'`
                                     new_edata.land_used = land_id.id
                                     new_edata.land_address_owner = land_id.address
                                     file.name = land_id.id
-                                    console.log('fileeeeessss')
                                     this.insertFile(file).then((resultFile) => {
                                         if (resultFile) {
 
