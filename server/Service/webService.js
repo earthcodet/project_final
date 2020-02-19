@@ -1028,18 +1028,83 @@ class service {
                 if (establishmentData.length != 0) {
                     new_edata.id = establishmentData[0].ESTABLISHMENT_ID
                     new_edata.address_id = establishmentData[0].ADDRESS_ID
-                    new_edata.is_land_owned = establishmentData[0].ESTABLISHMENT_IS_LAND_OWNED
-                    new_edata.land_used = establishmentData[0].ESTABLISHMENT_IS_LAND_OWNED
-                    return resolve(new_edata)
+                    //use_land
+                    console.log(new_edata.is_land_owned)
+                    if(establishmentData[0].ESTABLISHMENT_GROUND != null && new_edata.grond != 'NULL'){
+                        EstablishmentDAOObj.updateGround(new_edata.id, new_edata.grond)
+                    }
+                    if (new_edata.is_land_owned != 'NULL') {
+                        this.insertLand(new_land, new_addressOwner).then((land_id) => {
+                            console.log(`=====asdasdasdasds=========@@@@+=========== `)
+                            console.log(land_id)
+                            new_edata.is_land_owned = `'${land_id.id}'`
+                            new_edata.land_used = land_id.id
+                            new_edata.land_address_owner = land_id.address
+                            file.name = land_id.id
+                            if (land_id.uploadfile) {
+                                this.insertFile(file).then((resultFile) => {
+                                    if (resultFile) {
+                                        //NEW LAND 
+                                        console.log(`===================@@@@+=========== ${land_id.id}`)
+                                        EstablishmentDAOObj.updateUseLand(establishmentData[0].ESTABLISHMENT_ID, new_edata.is_land_owned).then((data_update_success) => {
+                                            if (data_update_success) {
+                                                return resolve(new_edata)
+                                            } else {
+                                                console.log('error update UseLand Establishment')
+                                                return resolve(new_edata)
+                                            }
+                                        })
+                                    }
+                                })
+                            } else {
+                                //LAND DUPLICATE
+                                EstablishmentDAOObj.updateUseLand(establishmentData[0].ESTABLISHMENT_ID, new_edata.is_land_owned).then((data_update_success) => {
+                                    if (data_update_success) {
+                                        return resolve(new_edata)
+                                    } else {
+                                        console.log('error update UseLand Establishment')
+                                        return resolve(new_edata)
+                                    }
+                                })
+                                return resolve(new_edata)
+                            }
+
+                        })
+                    } else {
+                        if (establishmentData[0].ESTABLISHMENT_IS_LAND_OWNED === null) {
+                            new_edata.is_land_owned =  null
+                            new_edata.land_used = null
+                            new_edata.land_address_owner = null
+                            return resolve(new_edata)
+                        } else {
+                            //establishmentData[0].ESTABLISHMENT_IS_LAND_OWNED != null
+                            console.log(`ww222===================@@@@+=========== ${new_edata.is_land_owned}`)
+
+                            new_edata.is_land_owned = null
+                            new_edata.land_used = null
+                            new_edata.land_address_owner = null
+                            EstablishmentDAOObj.updateUseLand(establishmentData[0].ESTABLISHMENT_ID, new_edata.is_land_owned).then((data_update_success) => {
+                                if (data_update_success) {
+                                    return resolve(new_edata)
+                                } else {
+                                    console.log('error update UseLand Establishment')
+                                    return resolve(new_edata)
+                                }
+                            })
+                        }
+                    }
                 } else {
                     this.insertAddressOne(new_address).then((resultaddress) => {
                         if (resultaddress.check) {
                             new_edata.address_id = resultaddress.id
                             if (new_edata.is_land_owned != 'NULL') {
                                 this.insertLand(new_land, new_addressOwner).then((land_id) => {
-                                    new_edata.is_land_owned = `'${land_id}'`
-                                    new_edata.land_used = land_id
-                                    file.name = land_id
+                                    console.log(land_id)
+                                    new_edata.is_land_owned = `'${land_id.id}'`
+                                    new_edata.land_used = land_id.id
+                                    new_edata.land_address_owner = land_id.address
+                                    file.name = land_id.id
+                                    console.log('fileeeeessss')
                                     this.insertFile(file).then((resultFile) => {
                                         if (resultFile) {
 
@@ -1098,17 +1163,33 @@ class service {
     }
     insertLand(land, address) {
         return new Promise((resolve, reject) => {
-            this.insertAddressOne(address).then((addressResult) => {
-                if (addressResult.check) {
-                    land.address_id = addressResult.id
-                    this.loopInsertLand(land).then((data) => {
-                        if (data.check) {
-                            return resolve(data.id)
+            LandDAOObj.getDuplicate(land).then((land_data) => {
+                console.log(land_data)
+                if (land_data != undefined) {
+                    let object = {
+                        'id': land_data.LAND_ID,
+                        'address': land_data.ADDRESS_ID,
+                        'uploadfile': false
+                    }
+                    return resolve(object)
+                } else {
+                    this.insertAddressOne(address).then((addressResult) => {
+                        if (addressResult.check) {
+                            land.address_id = addressResult.id
+                            this.loopInsertLand(land).then((data) => {
+                                if (data.check) {
+                                    let object = {
+                                        'id': data.id,
+                                        'address': land.address_id,
+                                        'uploadfile': true
+                                    }
+                                    return resolve(object)
+                                }
+                            })
                         }
                     })
                 }
             })
-
         })
     }
     insertFile(file) {
@@ -1378,6 +1459,7 @@ class service {
 
     InsertRequestStep(request, personal, Edata, address, land, addressOwner, file, reference, train, username, image) {
         //ets = Edata, address, land, addressOwner, file
+        console.log(Edata)
         var datetime = new Date();
         let dateForUpdate = datetime.toISOString().slice(0, 10)
         request.last_update = dateForUpdate
@@ -1413,45 +1495,31 @@ class service {
                 console.log(updateAddressStatus)
             })
         }
-        if (request.no != '') {
-            //Update !!
-            return new Promise((resolve, reject) => {
-                Edata = this.formatInsert('ESTABLISHMENT', Edata)
-                address = this.formatInsert('ADDRESS', address)
-                addressOwner = this.formatInsert('ADDRESS', addressOwner)
-                land = this.formatInsert('LAND', land)
-                if (Edata.is_establishment_changed != true) {
-                    EstablishmentDAOObj.update()
-                }
-            })
-        } else {
-            //insert !!
-            return new Promise((resolve, reject) => {
-                console.log('InsertRequestStep : loading')
-                this.insertEstablishment(Edata, address, land, addressOwner, file).then((data) => {
-                    request.establishment_id = data.id
-                    request.establishment_is_land_owned = data.is_land_owned === null ? 'NULL' : `'${data.land_used}'`
-                    request.establishment_address_id = data.is_land_owned === null ? 'NULL' : `'${data.address_id}'`
-                    if (request.reference_id === 'YES') {
-                        this.loopInsertReference(reference).then((result) => {
-                            request.reference_id = result.REFERENCE_ID
+        // if (request.no != '') {
+        //     //Update !!
+        //     return new Promise((resolve, reject) => {
+        //         Edata = this.formatInsert('ESTABLISHMENT', Edata)
+        //         address = this.formatInsert('ADDRESS', address)
+        //         addressOwner = this.formatInsert('ADDRESS', addressOwner)
+        //         land = this.formatInsert('LAND', land)
+        //         if (Edata.is_establishment_changed != true) {
+        //             EstablishmentDAOObj.update()
+        //         }
+        //     })
+        // } else {
+        //insert !!
+        return new Promise((resolve, reject) => {
+            console.log('InsertRequestStep : loading')
+            this.insertEstablishment(Edata, address, land, addressOwner, file).then((data) => {
+                request.establishment_id = data.id
+                request.land_address_establishment = data.address_id
+                request.establishment_is_land_owned = data.land_used === null || data.land_used === undefined ? 'NULL' : `'${data.land_used}'`
+                request.establishment_address_id = data.land_address_owner === null || data.land_address_owner === undefined ? 'NULL' : `'${data.land_address_owner}'`
+                request.status = 'wait'
+                if (request.reference_id === 'YES') {
+                    this.loopInsertReference(reference).then((result) => {
+                        request.reference_id = result.REFERENCE_ID
 
-                            if (request.train_id === 'YES') {
-                                this.loopInsertTrain(train).then((trainData) => {
-                                    request.train_id = trainData.TRAIN_ID
-                                    let new_request = this.formatInsert('REQUEST', request)
-                                    this.loopInsertRequest(new_request, image).then((requestData) => {
-                                        return resolve(requestData)
-                                    })
-                                })
-                            } else {
-                                let new_request = this.formatInsert('REQUEST', request)
-                                this.loopInsertRequest(new_request, image).then((requestData) => {
-                                    return resolve(requestData)
-                                })
-                            }
-                        })
-                    } else {
                         if (request.train_id === 'YES') {
                             this.loopInsertTrain(train).then((trainData) => {
                                 request.train_id = trainData.TRAIN_ID
@@ -1466,11 +1534,27 @@ class service {
                                 return resolve(requestData)
                             })
                         }
+                    })
+                } else {
+                    if (request.train_id === 'YES') {
+                        this.loopInsertTrain(train).then((trainData) => {
+                            request.train_id = trainData.TRAIN_ID
+                            let new_request = this.formatInsert('REQUEST', request)
+                            this.loopInsertRequest(new_request, image).then((requestData) => {
+                                return resolve(requestData)
+                            })
+                        })
+                    } else {
+                        let new_request = this.formatInsert('REQUEST', request)
+                        this.loopInsertRequest(new_request, image).then((requestData) => {
+                            return resolve(requestData)
+                        })
                     }
-                    //insertImageEstablishments(image, id)
-                })
+                }
+                //insertImageEstablishments(image, id)
             })
-        }
+        })
+        // }
     }
     loopInsertRequest(request, image) {
         return new Promise((resolve, reject) => {
@@ -1481,14 +1565,20 @@ class service {
                     if (data === 'true') {
                         request.no = id
                         console.log(`Insert : request complete`)
+                        console.log(request.image_name)
                         console.log(image != undefined)
+                        console.log(image)
                         if (image != undefined) {
-                            console.log(image != undefined)
-                            this.insertImageEstablishments(image, `${request.no}${request.year}`).then((result_image) => {
-                                if (result_image) {
-                                    return resolve(request)
-                                }
-                            })
+                            if (image.length != 0) {
+                                console.log(image != undefined)
+                                this.insertImageEstablishments(image, `${request.no}${request.year}`).then((result_image) => {
+                                    if (result_image) {
+                                        return resolve(request)
+                                    }
+                                })
+                            } else {
+                                return resolve(request)
+                            }
                         } else {
                             return resolve(request)
                         }
@@ -1535,6 +1625,16 @@ class service {
         return new Promise((resolve, reject) => {
             RequestTypeDAOObj.get().then((data) => {
                 return resolve(data)
+            })
+        })
+    }
+
+    // update use land
+    updateLandEstablishment(id, status) {
+        let IdStatus = status === '' || status === null ? status = 'NULL' : status = `'${status}'`
+        return new Promise((resolve, reject) => {
+            EstablishmentDAOObj.updateUseLand(id, IdStatus).then((data) => {
+                return resolve(true)
             })
         })
     }

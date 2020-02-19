@@ -55,7 +55,48 @@ function setDataOperator(raw_data, type) {
             document.getElementById("person2_id").value = assistantOperatorData.personal_id
     }
 }
+function checkformatReturn(value){
+    let temp = ''
+    value === null || value === 'NULL' ? temp = '' : temp = value
+    return temp
+}
+//set data return form insert
+function setRequestDataReturn(raw_data){
+    requestData.no = raw_data.no
+    requestData.year = raw_data.year
+    requestData.establishment_id = checkformatReturn(raw_data.establishment_is_land_owned) 
+    requestData.establishment_is_land_owned = checkformatReturn(raw_data.establishment_is_land_owned)
+    requestData.establishment_address_id = checkformatReturn(raw_data.establishment_address_id)
+    requestData.train_id = checkformatReturn(raw_data.train_id) === '' ? 'NO' : 'YES'
+    requestData.reference_id = checkformatReturn(raw_data.reference_id) === '' ? 'NO' : 'YES'
+    requestData.image_name = raw_data.image_name
 
+    establishmentData.address_id = checkformatReturn(raw_data.establishment_is_land_owned)
+    landData.address_id = checkformatReturn(raw_data.land_address_establishment)
+    addressOwnerLandData.id = checkformatReturn(raw_data.establishment_is_land_owned)
+    trianData.id = checkformatReturn(raw_data.train_id)
+    referecneData.id = checkformatReturn(raw_data.reference_id)
+    landData.id = requestData.establishment_is_land_owned
+    addressEstablishmentData.id = establishmentData.address_id
+    establishmentData.id = requestData.establishment_id
+    requestData.status = raw_data.status
+    console.log(`landData`)
+    console.log(landData)
+    console.log(`referecneData`)
+    console.log(referecneData)
+    console.log(`trianData`)
+    console.log(trianData)
+    console.log(`establishmentData`)
+    console.log(establishmentData)
+    console.log(`addressEstablishmentData`)
+    console.log(addressEstablishmentData)
+    console.log(`addressOwnerLandData`)
+    console.log(addressOwnerLandData)
+    console.log(`requestData`)
+    console.log(requestData)
+    console.log(`raw_data`)
+    console.log(raw_data)
+}
 
 //set data full raw data
 function setRequestData(raw_data) {
@@ -327,8 +368,6 @@ function createGroupData() {
         requestData.doc_no6 = document.getElementById('documentOther').checked === true ? document.getElementById('other').value : 'N'
         if (document.getElementById('typeReForm') != undefined) {
             requestData.subcategory = document.getElementById('typeReForm').value
-        } else {
-            requestData.subcategory = ''
         }
         if (document.getElementById('typeProduct') != undefined) {
             requestData.product_type = document.getElementById('typeProduct').value.trim()
@@ -345,16 +384,16 @@ function createGroupData() {
         }
         //
         if (document.getElementById('con_no1') != undefined) {
-            requestData.condition_no_1 = ''
+            requestData.condition_no_1 = document.getElementById('con_no1').value.trim()
         }
         if (document.getElementById('con_no2') != undefined) {
-            requestData.condition_no_2 = ''
+            requestData.condition_no_2 = document.getElementById('con_no2').value.trim()
         }
         if (document.getElementById('con_no3') != undefined) {
-            requestData.condition_no_3 = ''
+            requestData.condition_no_3 = document.getElementById('con_no3').value.trim()
         }
         if (document.getElementById('con_no4') != undefined) {
-            requestData.condition_no_4 = ''
+            requestData.condition_no_4 = document.getElementById('con_no4').value.trim()
         }
         requestData.image_name = ''
         requestData.total_image = totalFiles.length
@@ -384,10 +423,11 @@ function createGroupData() {
         }
         establishmentData.phone =  document.getElementById('wPhone').value.trim()
         establishmentData.fax =  document.getElementById('wFax').value.trim()
-        if(document.getElementById('typeWorkplace') != undefined){
-            establishmentData.grond =  document.getElementById('typeWorkplace').value.trim()
-        }
 
+        if(document.getElementById('wLocation') != undefined){
+            establishmentData.grond =  document.getElementById('wLocation').value.trim()
+        }
+        
         addressEstablishmentData.home_number =  document.getElementById('wPlaceId').value.trim()
         addressEstablishmentData.moo =  document.getElementById('wMoo').value.trim()
         addressEstablishmentData.trxk =  document.getElementById('wTrxk').value.trim()

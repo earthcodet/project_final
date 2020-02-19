@@ -17,7 +17,7 @@ class FileDAO {
                 };
             con.query(query, values, function (err, result) {
                 if (err) {
-                    console.log(err.code)
+                    console.log(err)
                 }
                 console.log(result)
                 // if (result.affectedRows === 1) {
@@ -42,7 +42,7 @@ class FileDAO {
                 };
             con.query(query, values, function (err, result) {
                 if (err) {
-                    console.log(err.code)
+                    console.log(err)
                 }
                 if (result.affectedRows === 1) {
                     return resolve(true)
@@ -58,7 +58,7 @@ class FileDAO {
             let query = `SELECT * FROM file WHERE File_name = '${id}'`
             con.query(query, function (err, result) {
                 if (err) {
-                    console.log(err.code)
+                    console.log(err)
                 }
                 if (result.length != 0 && result[0].File_data != null) {
                     return resolve(true)

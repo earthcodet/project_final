@@ -31,6 +31,19 @@ function insertPage() {
         imageWidth: 'auto',
         imageHeight: '100%',
         imageAlt: 'Custom image',
+        showLoaderOnConfirm: true,
+        preConfirm: function () {
+            return new Promise(function (resolve, reject) {
+                setTimeout(function () {
+                    if(preInsert()){
+                        insertRequest().then((data) => {
+                            setRequestDataReturn(data)
+                            resolve();
+                        })
+                    }
+                }, 1000);
+            });
+        }
     })
         .then((result) => {
             if (result.value) {
@@ -39,20 +52,6 @@ function insertPage() {
                     icon: "success",
                     confirmButtonColor: "#009688"
                 });
-                if(preInsert()){
-                    insertRequest().then((data) => {
-                        console.log(data)
-                    })
-                }
-                
-                // console.log(preInsert())
-                // data = true
-                // addNew = false
-                // disableMenuAll()
-                // enableMenu('addMenu')
-                // enableMenu('editMenu')
-                // enableMenu('deleteMenu')
-                // enableFunction()
             } else if (result.dismiss === Swal.DismissReason.cancel) {
                 // Swal.fire("บันทึกล้มเหลว");
             }

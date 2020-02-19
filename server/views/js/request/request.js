@@ -124,8 +124,9 @@ function inputRequired() {
     checkno20 ||
     checkno21 ||
     checkno28 ||
-    checkno35 ||
-    checkno36
+    checkno35 
+    // ||
+    // checkno36
   ) {
     return false;
   } else {

@@ -187,39 +187,6 @@ app.get('/search/personal/:id/:name/:surname', (req, res) => {
     res.json(data)
   })
 })
-app.post('/insert/requestss', (req, res) => {
-  let size = parseInt(req.body.maxSizeImage)
-  let formatInsertImage = []
-  let object = {
-    name: '',
-    type: '',
-    data: ''
-  }
-  for (let i = 1; i <= size; i++) {
-    let files
-    i === 1 ? files = req.files.files0 : ''
-    i === 2 ? files = req.files.files1 : ''
-    i === 3 ? files = req.files.files2 : ''
-    i === 4 ? files = req.files.files3 : ''
-    i === 5 ? files = req.files.files4 : ''
-    i === 6 ? files = req.files.files5 : ''
-    i === 7 ? files = req.files.files6 : ''
-    i === 8 ? files = req.files.files7 : ''
-    object.name = i
-    object.type = files.mimetype.slice(6, files.mimetype.length)
-    object.data = files.data
-    formatInsertImage.push(object)
-    object = {
-      name: '',
-      type: '',
-      data: ''
-    }
-  }
-  console.log(formatInsertImage)
-  webService.insertImageEstablishments(formatInsertImage, MASK).then((data) => {
-    console.log(data)
-  })
-})
 app.post('/insert/request', (req, res) => {
   
   var obj = JSON.parse(req.body.gropData);
@@ -252,6 +219,9 @@ app.post('/insert/request', (req, res) => {
     res.json(data);
   })
  
+})
+webService.updateLandEstablishment('E000005','').then((data) =>{
+  console.log(data)
 })
 //ทำให้ css กับ js ใช้ได้
 app.use(express.static(__dirname + '/views'));

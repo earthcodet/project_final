@@ -95,5 +95,39 @@ class EstablishmentDAO {
             })
         })
     }
+    updateUseLand(id , use_land) {
+        return new Promise((resolve, reject) => {
+            let value = `ESTABLISHMENT_IS_LAND_OWNED = ${use_land}`
+            let query = `UPDATE establishment SET ${value} WHERE ESTABLISHMENT_ID='${id}'`
+            con.query(query, function (err, result) {
+                if (err) {
+                    console.log(err)
+                    return resolve(err.code)
+                }
+                if (result.affectedRows === 1) {
+                    return resolve(true)
+                } else {
+                    return resolve(false)
+                }
+            })
+        })
+    }
+    updateGround(id , ground) {
+        return new Promise((resolve, reject) => {
+            let value = `ESTABLISHMENT_GROUND = ${ground}`
+            let query = `UPDATE establishment SET ${value} WHERE ESTABLISHMENT_ID='${id}'`
+            con.query(query, function (err, result) {
+                if (err) {
+                    console.log(err)
+                    return resolve(err.code)
+                }
+                if (result.affectedRows === 1) {
+                    return resolve(true)
+                } else {
+                    return resolve(false)
+                }
+            })
+        })
+    }
 }
 module.exports = EstablishmentDAO

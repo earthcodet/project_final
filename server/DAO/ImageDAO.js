@@ -19,7 +19,7 @@ class ImageDAO {
                 };
             con.query(query, values, function (err, result) {
                 if (err) {
-                    console.log(err.code)
+                    console.log(err)
                 }
                 return resolve(result)
             })
@@ -37,7 +37,7 @@ class ImageDAO {
                 }
             con.query(query, values, function (err, result) {
                 if (err) {
-                    console.log(err.code)
+                    console.log(err)
                 }
                 if (result.affectedRows === 1) {
                     return resolve(true)
@@ -53,7 +53,7 @@ class ImageDAO {
             let query = `SELECT * FROM image WHERE IMAGE_NAME = '${id}'`
             con.query(query, function (err, result) {
                 if (err) {
-                    console.log(err.code)
+                    console.log(err)
                 }
                 console.log(result)
                 if (result.length != 0 && result[0].IMAGE_DATA != null) {
@@ -75,7 +75,7 @@ class ImageDAO {
             }
             con.query(sql, [values], function (err, result) {
                 if (err) {
-                    console.log(err.code)
+                    console.log(err)
                 }
                 if (result != undefined || result != null) {
                     return resolve(true)
@@ -90,7 +90,7 @@ class ImageDAO {
             let query = "DELETE FROM `image_establishment` WHERE E_IMAGE_NAME LIKE " + "'%" + id + "%'"
             con.query(query, function (err, result) {
                 if (err) {
-                    console.log(err.code)
+                    console.log(err)
                 }
                 if (result != undefined || result != null) {
                     return resolve(true)
@@ -105,7 +105,7 @@ class ImageDAO {
             let query = `SELECT * FROM image_establishment WHERE E_IMAGE_NAME LIKE '%${id}%'`
             con.query(query, function (err, result) {
                 if (err) {
-                    console.log(err.code)
+                    console.log(err)
                 }
                 console.log(result)
                 for(let i = 0 ; i< result.length ; i++){
