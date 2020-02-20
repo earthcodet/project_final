@@ -3,6 +3,7 @@ let files
 let selectImageFile = 0
 let maxImageFile = 8
 let image_changed = false
+
 // function checkPhoneInput(tagId) {
 //     var text = document.getElementById(tagId).value
 //     text = text.replace(/(\d{3})(\d{7})/, "$1-$2");
@@ -52,6 +53,18 @@ function deleteImage() {
     totalFiles.splice(index, 1);
     document.getElementById('uploadFile').value = ''
     selectImageFile = selectImageFile - 1
+}
+function deleteImageAllRequest(){
+    // console.log(document.getElementById('outputImage').childElementCount)
+    // let imageLength = document.getElementById('outputImage').childElementCount
+    // for(let i = 0 ; i < imageLength ; i++){
+    //     document.querySelector("#outputImage").removeChild(document.querySelectorAll('#outputImage span')[i]);
+    // }
+    document.getElementById('outputImage').textContent = ''
+    totalFiles = []
+    document.getElementById('uploadFile').value = ''
+    selectImageFile = 0
+    selectImageFile = 0
 }
 
 const month = {

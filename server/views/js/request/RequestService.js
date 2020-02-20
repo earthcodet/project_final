@@ -1,58 +1,69 @@
 let newDocument = true
 let requestType = []
-function checkView() {
+function checkView(typeForm) {
     let requsetId = getUrlVars()
     console.log(requsetId.id)
+
     if (requsetId.id != undefined) {
         let requsetNo = requsetId.id.slice(0, 6)
         let requestYear = requsetId.id.slice(6, 10)
-        console.log(requsetNo)
-        console.log(requestYear)
-        getRequestData(requsetNo, requestYear).then((raw_data) => {
-            if (raw_data != '') {
-                console.log(`raw_data`)
-                console.log(raw_data)
-                setRequestData(raw_data)
-                setEstablishmentData(raw_data)
-                setAddressEstablishmentData(raw_data)
-                setAddressOwnerLandData(raw_data)
-                setLandData(raw_data)
-                setReferecneData(raw_data)
-                setTrianData(raw_data)
-                setOperatorAddressData(raw_data.gropDataOperator)
-                setOperatorData(raw_data.gropDataOperator)
-                if (raw_data.gropDataAssistant != undefined) {
-                    setassistantOperatorData(raw_data.gropDataAssistant)
-                }
-                console.log(`requestData`)
-                console.log(requestData)
-                console.log(`establishmentData`)
-                console.log(establishmentData)
-                console.log(`addressEstablishmentData`)
-                console.log(addressEstablishmentData)
-                console.log(`addressOwnerLandData`)
-                console.log(addressOwnerLandData)
-                console.log(`landData`)
-                console.log(landData)
-                console.log(`referecneData`)
-                console.log(referecneData)
-                console.log(`trianData`)
-                console.log(trianData)
-                console.log(`operatorAddressData`)
-                console.log(operatorAddressData)
-                console.log(`operatorData`)
-                console.log(operatorData)
-                console.log(`assistantOperatorData`)
-                console.log(assistantOperatorData)
-                setDataView(raw_data)
+        console.log(`typeForm ${typeForm}`)
+        if (typeForm != undefined) {
+            let sight = getSightFormType(typeForm)
+            let checkSight = requsetNo.slice(0, 1) === sight ? true : false
+            console.log(`sight ${sight}`)
+            console.log(`checkSight = ${checkSight} > ${requsetNo.slice(0, 1)} === ${sight} > ${requsetNo.slice(0, 1) === sight}`)
+           console.log(checkSight)
+            if (checkSight) {
+                getRequestData(requsetNo, requestYear).then((raw_data) => {
+                    console.log(raw_data)
+                    if (raw_data != '') {
+                        console.log(`raw_data`)
+                        console.log(raw_data)
+                        setRequestData(raw_data)
+                        setEstablishmentData(raw_data)
+                        setAddressEstablishmentData(raw_data)
+                        setAddressOwnerLandData(raw_data)
+                        setLandData(raw_data)
+                        setReferecneData(raw_data)
+                        setTrianData(raw_data)
+                        setOperatorAddressData(raw_data.gropDataOperator)
+                        setOperatorData(raw_data.gropDataOperator)
+                        imageDisplayFormDatabase = raw_data.IMAGE_REVIEW
+                        if (raw_data.gropDataAssistant != undefined) {
+                            setassistantOperatorData(raw_data.gropDataAssistant)
+                        }
+                        console.log(`requestData`)
+                        console.log(requestData)
+                        console.log(`establishmentData`)
+                        console.log(establishmentData)
+                        console.log(`addressEstablishmentData`)
+                        console.log(addressEstablishmentData)
+                        console.log(`addressOwnerLandData`)
+                        console.log(addressOwnerLandData)
+                        console.log(`landData`)
+                        console.log(landData)
+                        console.log(`referecneData`)
+                        console.log(referecneData)
+                        console.log(`trianData`)
+                        console.log(trianData)
+                        console.log(`operatorAddressData`)
+                        console.log(operatorAddressData)
+                        console.log(`operatorData`)
+                        console.log(operatorData)
+                        console.log(`assistantOperatorData`)
+                        console.log(assistantOperatorData)
+                        setDataView()
+                        changeStatusMenuData()
+                    }
+                })
             }
-        })
+        }
     }
 }
 // setDataView
-function setDataView(raw_data) {
-    console.log(raw_data.IMAGE_REVIEW)
-    createImage(raw_data.IMAGE_REVIEW)
+function setDataView() {
+    createImage(imageDisplayFormDatabase)
     document.getElementById('form_id').value = `${requestData.no}/${requestData.year}`
     document.getElementById('datepicker1').value = requestData.date_submission
     document.getElementById('typeReq').value = getRequestTypeValue(requestData.request_type_id)
@@ -189,11 +200,9 @@ function setDataView(raw_data) {
 
             if (landData.status_upload_file) {
                 document.getElementById('status_upload_file').style.display = ''
-            }else{
-                document.getElementById('status_upload_file').style.display = 'none' 
+            } else {
+                document.getElementById('status_upload_file').style.display = 'none'
             }
-            // document.getElementById('status_upload_file').value =
-
             document.getElementById('notuseOtherPlace').checked = false
             document.getElementById('useOtherPlace').checked = true
         }
@@ -753,14 +762,15 @@ function createGroupData() {
 
 // getAge
 function getAge(date) {
+    console.log(date)
     let now = new Date().toISOString().slice(0, 10) // 2020-02-16
     let year_now = parseInt(now.slice(0, 4)) + 543
     let month_now = parseInt(now.slice(5, 7))
     let day_now = parseInt(now.slice(8, 10))
-    // date "08-02-2563"
-    let day_b = parseInt(date.slice(0, 2))
-    let month_b = parseInt(date.slice(3, 5))
-    let year_b = parseInt(date.slice(6, 10))
+    // date "08-02-2563" 1998-04-22T17:00:00.000Z
+    let day_b = parseInt(date.slice(8, 9))
+    let month_b = parseInt(date.slice(5, 7))
+    let year_b = parseInt(date.slice(0, 4)) + 543
     let age
     if (month_b === month_now && day_b === day_now) {
         return age = year_now - year_b
@@ -854,7 +864,7 @@ function setRequsetType(type) {
     getRequestType(type).then((data_test) => {
         addRequestTypeToDatalist()
     })
-    checkView()
+    checkView(type)
 }
 function addRequestTypeToDatalist() {
     const list = document.getElementById('brow')
@@ -889,7 +899,7 @@ function getUrlVars() {
     return vars;
 }
 function createImage(image) {
-    console.log(image.length)
+    deleteImageAllRequest()
     for (let i = 0; i < image.length; i++) {
         console.log(image[i])
         var span = document.createElement('span');
@@ -908,4 +918,45 @@ function createImage(image) {
 
         document.getElementById('outputImage').insertBefore(span, null);
     }
+}
+
+//create print 
+function printRequest() {
+    //
+}
+
+//get sight
+function getSightFormType(type) {
+    let sightT = ''
+    switch (type) {
+        case 'ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ':
+            sightT = 'A'
+            break;
+        case 'ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ':
+            sightT = 'B'
+            break;
+        case 'ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร':
+            sightT = 'C'
+            break;
+        case 'ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร':
+            sightT = 'D'
+            break;
+        case 'หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร':
+            sightT = 'E'
+            break;
+        case 'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร':
+            sightT = 'F'
+            break;
+        case 'ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน':
+            sightT = 'G'
+            break;
+        case 'กิจการที่เป็นอันตรายต่อสุขภาพ':
+            sightT = 'H'
+            break;
+        default:
+            //กิจการฌาปณสถาน
+            sightT = 'I'
+            break;
+    }
+    return sightT
 }

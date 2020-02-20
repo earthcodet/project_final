@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title></title>
+    <title>Image</title>
 
 </head>
 <style>
@@ -64,50 +64,91 @@
             background: initial;
             page-break-after: always;
         }
+
         .hideWhenPrint {
             display: none;
         }
     }
+
+    .column {
+        float: left;
+        width: 50%;
+        height:  50%;
+        /* Should be removed. Only for demonstration */
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
 </style>
 <div class="hideWhenPrint">
     <br>
-    <button type="button" class="btn btn-outline-success btn-lg is-color" onclick="window.print()">พิมพ์</button>
+    <button type="button" class="btn btn-outline-success btn-lg is-color"
+        style="width: 100px;height: 30px;background-color: gray;color: white;cursor: pointer;"
+        onclick="window.print()">พิมพ์</button>
     <br>
 </div>
 
 <body style="text-align: center; overflow-x: hidden;">
     <div class="book">
-        <div class="page">
+        <div id='pageOne' class="page">
             <h3>แบบตรวจสถานประกอบการ สถานที่จำหน่ายอาหาร</h3>
-            <p>ประกอบกิจการประเภท 2 สถานที่จำหน่ายอาหาร พื่นที่เกิน 50 ตรม. แต่ไม่เกิน 100 ตรม.</p>
-            <p>นาย / นาง / นางสาว .............. </p>
-            <p>ที่อยูํ .................................................................. </p>
+            <p id='requestType'>ประกอบกิจการประเภท 2 สถานที่จำหน่ายอาหาร พื่นที่เกิน 50 ตรม. แต่ไม่เกิน 100 ตรม.</p>
+            <p id='nameOperator'>นาย / นาง / นางสาว .............. </p>
+            <p id='addressOperator'>ที่อยู่ .................................................................. </p>
             <br><br>
             <br>
-            <div>
-                <img src="../../img/P10.JPG" width="48%">
-                <img src="../../img/P10.JPG" width="48%">
-                <br><br>
-                <img src="../../img/P10.JPG" width="48%">
-                <img src="../../img/P10.JPG" width="48%">
+            <div class="row">
+                <div class="column">
+                    <img id='image_0' src="../../img/white.jpg"  height="280" width="300">
+                </div>
+                <div class="column">
+                    <img id='image_1' src="../../img/white.jpg" height="280" width="300">
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="row">
+                <div class="column">
+                    <img id='image_2' src="../../img/white.jpg" height="280" width="300">
+                </div>
+                <div class="column">
+                    <img id='image_3' src="../../img/white.jpg" height="280" width="300">
+                </div>
             </div>
         </div>
-        <div class="page">
+        <div id='pageTwo' style="display: none;" class="page">
             <h3>แบบตรวจสถานประกอบการ สถานที่จำหน่ายอาหาร</h3>
-            <p>ประกอบกิจการประเภท 2 สถานที่จำหน่ายอาหาร พื่นที่เกิน 50 ตรม. แต่ไม่เกิน 100 ตรม.</p>
-            <p>นาย / นาง / นางสาว .............. </p>
-            <p>ที่อยูํ .................................................................. </p>
+            <p id='requestType_2'>ประกอบกิจการประเภท 2 สถานที่จำหน่ายอาหาร พื่นที่เกิน 50 ตรม. แต่ไม่เกิน 100 ตรม.</p>
+            <p id='nameOperator_2'>นาย / นาง / นางสาว .............. </p>
+            <p id='addressOperator_2'>ที่อยู่ .................................................................. </p>
             <br><br>
             <br>
-            <div>
-                <img src="../../img/P10.JPG" width="48%">
-                <img src="../../img/P10.JPG" width="48%">
-                <br><br>
-                <img src="../../img/P10.JPG" width="48%">
-                <img src="../../img/P10.JPG" width="48%">
+            <div class="row">
+                <div class="column">
+                    <img id='image_4' src="../../img/white.jpg" height="280" width="300">
+                </div>
+                <div class="column">
+                    <img id='image_5' src="../../img/white.jpg" height="280" width="300">
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="row">
+                <div class="column">
+                    <img id='image_6' src="../../img/white.jpg" height="280" width="300">
+                </div>
+                <div class="column">
+                    <img id='image_7' src="../../img/white.jpg" height="280" width="300">
+                </div>
             </div>
         </div>
     </div>
 </body>
+<script src="../../node_modules/axios/dist/axios.min.js"></script>
+<script src="../../js/request/printImage.js"></script>
 
 </html>

@@ -158,3 +158,4 @@ let assistantOperatorData ={
     surname: '',
     personal_id: ''
 }
+let imageDisplayFormDatabase = []
