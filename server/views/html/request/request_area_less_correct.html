@@ -45,7 +45,7 @@
             <a href="request_public_sell.html">- ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
             <a href="request_public_hawk.html">- ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
             <a href="request_area_more_sell.html">- ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
-            <a href="request_area_more_correct.html">- ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</a>
+            <a href="request_area_more_correct.html">- ใบอนุญาตจัดตั้งสถานที่สะสมอาหาร</a>
             <a href="request_area_less_sell.html">- หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
             <a class="dropdown-active" href="request_area_less_correct.html">-
                 หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
@@ -60,7 +60,7 @@
             <a href="../renew/renew_public_sell.html">- คำขอต่อใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
             <a href="../renew/renew_public_hawk.html">- คำขอต่อใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
             <a href="../renew/renew_area_more_sell.html">- คำขอต่อใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
-            <a href="../renew/renew_area_more_correct.html">- คำขอต่อใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</a>
+            <a href="../renew/renew_area_more_correct.html">- คำขอต่อใบอนุญาตจัดตั้งสถานที่สะสมอาหาร</a>
             <a href="../renew/renew_area_less_sell.html">- คำขอต่อหนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
             <a href="../renew/renew_area_less_correct.html">- คำขอต่อหนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
             <a href="../renew/renew_market.html">- คำขอต่อใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
@@ -161,7 +161,7 @@
                         <br>
                         <a style="margin-left: 0.58vw;">เลขที่บ้าน <font color="red">*</font> :
                             <input type="text" id="home_id" style="width: 7%;"></a>
-                        <a>หมู่ที่ <font color="red">*</font> :
+                        <a>หมู่ที่ :
                             <input type="text" id="moo" style="width: 7%;"></a>
                         <a>ตรอก :
                             <input type="text" id="trxk" style="width: 13%;"></a>
@@ -202,7 +202,7 @@
                         <br>
                         <a>ตั้งอยู่เลขที่ <font color="red">*</font> :
                             <input type="text" id="wPlaceId" style="width: 7%;"></a>
-                        <a>หมู่ที่ <font color="red">*</font> :
+                        <a>หมู่ที่  :
                             <input type="int" id="wMoo" style="width: 7%;"></a>
                         <a>ตรอก:
                             <input type="text" id="wTrxk" style="width: 13%;"></a>
@@ -301,7 +301,7 @@
                             id="request_date_issued" disabled readonly>
 
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ใบอนญาตฉบับนี้สิ้นอายุวันที่ </font>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="request_date_date" disabled readonly>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="request_date_exp" disabled readonly>
                     </p>
                 </div>
                 <br>
@@ -337,7 +337,7 @@
                         <br>
                         <a style="margin-left: 5vw;">อยู่บ้านเลขที่ <font color="red">*</font> :
                             <input type="text" id="ownHomeId" style="width: 7%;"></a style="margin-left: 7.4vw;">
-                        <a>หมู่ที่ <font color="red">*</font> :
+                        <a>หมู่ที่  :
                             <input type="int" id="ownMoo" style="width: 7%;"></a>
                         <a>ตรอก :
                             <input type="int" id="ownTrxk" style="width: 10%;"></a>
@@ -356,6 +356,7 @@
                         <br>
                         <input style="margin-left:9vw;" type="file" id="uploadFilePdf" onchange="pdfFile(event)"
                             accept="application/pdf">
+                            <i id='status_upload_file'  class='fa fa-check' style="margin-left: 1vw;display: none;"> มีไฟล์อัพโหลดแล้ว</i>
                     </div>
                     <br><br>
                 </div><br>

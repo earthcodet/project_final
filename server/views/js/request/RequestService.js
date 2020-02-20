@@ -1,11 +1,236 @@
 let newDocument = true
 let requestType = []
+function checkView() {
+    let requsetId = getUrlVars()
+    console.log(requsetId.id)
+    if (requsetId.id != undefined) {
+        let requsetNo = requsetId.id.slice(0, 6)
+        let requestYear = requsetId.id.slice(6, 10)
+        console.log(requsetNo)
+        console.log(requestYear)
+        getRequestData(requsetNo, requestYear).then((raw_data) => {
+            if (raw_data != '') {
+                console.log(`raw_data`)
+                console.log(raw_data)
+                setRequestData(raw_data)
+                setEstablishmentData(raw_data)
+                setAddressEstablishmentData(raw_data)
+                setAddressOwnerLandData(raw_data)
+                setLandData(raw_data)
+                setReferecneData(raw_data)
+                setTrianData(raw_data)
+                setOperatorAddressData(raw_data.gropDataOperator)
+                setOperatorData(raw_data.gropDataOperator)
+                if (raw_data.gropDataAssistant != undefined) {
+                    setassistantOperatorData(raw_data.gropDataAssistant)
+                }
+                console.log(`requestData`)
+                console.log(requestData)
+                console.log(`establishmentData`)
+                console.log(establishmentData)
+                console.log(`addressEstablishmentData`)
+                console.log(addressEstablishmentData)
+                console.log(`addressOwnerLandData`)
+                console.log(addressOwnerLandData)
+                console.log(`landData`)
+                console.log(landData)
+                console.log(`referecneData`)
+                console.log(referecneData)
+                console.log(`trianData`)
+                console.log(trianData)
+                console.log(`operatorAddressData`)
+                console.log(operatorAddressData)
+                console.log(`operatorData`)
+                console.log(operatorData)
+                console.log(`assistantOperatorData`)
+                console.log(assistantOperatorData)
+                setDataView(raw_data)
+            }
+        })
+    }
+}
+// setDataView
+function setDataView(raw_data) {
+    console.log(raw_data.IMAGE_REVIEW)
+    createImage(raw_data.IMAGE_REVIEW)
+    document.getElementById('form_id').value = `${requestData.no}/${requestData.year}`
+    document.getElementById('datepicker1').value = requestData.date_submission
+    document.getElementById('typeReq').value = getRequestTypeValue(requestData.request_type_id)
+    document.getElementById("typeUser").value = operatorData.type
+    document.getElementById("id").value = operatorData.personal_id
+    document.getElementById("name").value = `${operatorData.title} ${operatorData.name} ${operatorData.surname}`
+    document.getElementById("documentName").value = `${operatorData.title} ${operatorData.name} ${operatorData.surname}`
+    document.getElementById("age").value = operatorData.birthday === '' ? '' : parseInt(getAge(operatorData.birthday))
+    document.getElementById("nationality").value = operatorData.nationality
+    document.getElementById("nationality").readOnly = operatorData.type === 'บุคคลธรรมดา' ? false : true
+    document.getElementById("nationality").disabled = operatorData.type != 'บุคคลธรรมดา' ? true : false
+    document.getElementById("race").value = operatorData.race
+    document.getElementById("race").readOnly = operatorData.type === 'บุคคลธรรมดา' ? false : true
+    document.getElementById("race").disabled = operatorData.type != 'บุคคลธรรมดา' ? true : false
+    document.getElementById("age").disabled = operatorData.type != 'บุคคลธรรมดา' ? true : false
+    document.getElementById("home_id").value = operatorAddressData.home_number
+    document.getElementById("moo").value = operatorAddressData.moo
+    document.getElementById("trxk").value = operatorAddressData.trxk
+    document.getElementById("sxy").value = operatorAddressData.sxy
+    document.getElementById("building").value = operatorAddressData.building
+    document.getElementById("road").value = operatorAddressData.road
+    let provinceId = parseInt(getProviceIdByName(operatorAddressData.province_name))
+    let amphurId = parseInt(getAmphureIdByName(operatorAddressData.amphur_name, provinceId))
+    let districtId = parseInt(getDistrictIdByName(operatorAddressData.district_name, amphurId))
+    document.getElementById(`province`).value = provinceId
+    amphurSelect(parseInt(provinceId))
+    districtSelect(parseInt(amphurId))
+    document.getElementById(`district`).value = amphurId
+    document.getElementById(`subdistrict`).value = districtId
+    document.getElementById("phone").value = operatorData.phone
+    document.getElementById("fax").value = operatorData.fax
+    document.getElementById('reference_title').value = referecneData.title
+    document.getElementById('reference_name').value = referecneData.name
+    document.getElementById('reference_surname').value = referecneData.surname
+    document.getElementById('reference_status').value = referecneData.status
+    document.getElementById('reference_phone').value = referecneData.phone
+
+    //Date request exp 
+    document.getElementById('request_date_issued').value = requestData.date_issued
+    document.getElementById('request_date_exp').value = requestData.date_expired
+
+    //Document
+    document.getElementById('documentId').checked = requestData.doc_no1 === 'N' ? false : true
+    document.getElementById('documenthHome').checked = requestData.doc_no2 === 'N' ? false : true
+    document.getElementById('documentLegalEntity').checked = requestData.doc_no3 === 'N' ? false : true
+    document.getElementById('documentSignature').checked = requestData.doc_no4 === 'N' ? false : true
+    document.getElementById('documentSJ4').checked = requestData.doc_no5 === 'N' ? false : true
+    document.getElementById('documentOther').checked = requestData.doc_no6 === 'N' ? false : true
+    document.getElementById('other').value = document.getElementById('documentOther').checked === true ? requestData.doc_no6 : ''
+
+    //ที่อยู่สถานประกอบการ
+    document.getElementById("wPlaceId").value = addressEstablishmentData.home_number
+    document.getElementById("wMoo").value = addressEstablishmentData.moo
+    document.getElementById("wTrxk").value = addressEstablishmentData.trxk
+    document.getElementById("wSxy").value = addressEstablishmentData.sxy
+    document.getElementById("wBuilding").value = addressEstablishmentData.building
+    document.getElementById("wRoad").value = addressEstablishmentData.road
+    let provinceIdE = parseInt(getProviceIdByName(addressEstablishmentData.province_name))
+    let amphurIdE = parseInt(getAmphureIdByName(addressEstablishmentData.amphur_name, provinceIdE))
+    let districtIdE = parseInt(getDistrictIdByName(addressEstablishmentData.district_name, amphurIdE))
+    document.getElementById(`wProvince`).value = provinceIdE
+    wamphurSelect(parseInt(provinceIdE))
+    wdistrictSelect(parseInt(amphurIdE))
+    document.getElementById(`wDistrict`).value = amphurIdE
+    document.getElementById(`wSubdistrict`).value = districtIdE
+    document.getElementById("wPhone").value = establishmentData.phone
+    document.getElementById("wFax").value = establishmentData.fax
+
+    document.getElementById('workplaceName').value = establishmentData.name
+
+    //เงิน
+    if (requestData.receipt_date != '') {
+        document.getElementById('bNum').value = requestData.rereceipt_order
+        document.getElementById('datepicker2').value = requestData.receipt_date
+        document.getElementById('bFee').value = requestData.receipt_fee
+        document.getElementById('bFine').value = requestData.receipt_fine
+    }
+
+    if (document.getElementById("person2_name") != undefined) {
+        document.getElementById("person2_name").value = `${assistantOperatorData.title} ${assistantOperatorData.name} ${assistantOperatorData.surname}`
+        document.getElementById("person2_id").value = assistantOperatorData.personal_id
+        document.getElementById('wLocation').value = establishmentData.grond
+
+
+        document.getElementById('typeReForm').value = requestData.subcategory
+        document.getElementById('typeProduct').value = requestData.product_type
+        document.getElementById('timeStart').value = requestData.sell_start
+        document.getElementById('timeEnd').value = requestData.sell_end
+
+
+    } else {
+        document.getElementById('typeWorkplace').value = establishmentData.type
+    }
+    if (document.getElementById('machinery' != undefined)) {
+        document.getElementById('machinery').value = requestData.machine_size
+        document.getElementById('area').value = requestData.area_size
+        document.getElementById('numPeople').value = requestData.worker
+    }
+    if (document.getElementById('con_no1') != undefined) {
+        document.getElementById('con_no1').value = requestData.condition_no_1
+        document.getElementById('con_no2').value = requestData.condition_no_2
+        document.getElementById('con_no3').value = requestData.condition_no_3
+        document.getElementById('con_no4').value = requestData.condition_no_4
+    }
+    //ใช้อาคารสถานที่ประกอบการของผู้อื่น
+    if (document.getElementById('useOtherPlace') != undefined) {
+        if (requestData.establishment_is_land_owned === '') {
+            document.getElementById('boxOwner').style.display = 'none'
+            document.getElementById('notuseOtherPlace').checked = true
+            document.getElementById('useOtherPlace').checked = false
+        } else {
+            document.getElementById('boxOwner').style.display = ''
+            document.getElementById('ownPrefix').value = landData.title
+            document.getElementById('ownName').value = landData.name
+            document.getElementById('ownSurname').value = landData.surname
+            //วันเกิด
+            document.getElementById('datepicker9').value = landData.birthday
+            document.getElementById('ownPhone').value = landData.phone
+
+            document.getElementById('ownHomeId').value = addressOwnerLandData.home_number
+            document.getElementById('ownMoo').value = addressOwnerLandData.moo
+            document.getElementById('ownTrxk').value = addressOwnerLandData.trxk
+            document.getElementById('ownSxy').value = addressOwnerLandData.sxy
+            document.getElementById('ownRoad').value = addressOwnerLandData.road
+
+            let provinceIdEL = parseInt(getProviceIdByName(addressEstablishmentData.province_name))
+            let amphurIdEL = parseInt(getAmphureIdByName(addressEstablishmentData.amphur_name, provinceIdEL))
+            let districtIdEL = parseInt(getDistrictIdByName(addressEstablishmentData.district_name, amphurIdEL))
+            document.getElementById(`ownerProvince`).value = provinceIdEL
+            onwerAmphurSelect(parseInt(provinceIdEL))
+            onwerDistrictSelect(parseInt(amphurIdEL))
+            document.getElementById(`ownerDistrict`).value = amphurIdEL
+            document.getElementById(`ownerSubdistrict`).value = districtIdEL
+
+            if (landData.status_upload_file) {
+                document.getElementById('status_upload_file').style.display = ''
+            }else{
+                document.getElementById('status_upload_file').style.display = 'none' 
+            }
+            // document.getElementById('status_upload_file').value =
+
+            document.getElementById('notuseOtherPlace').checked = false
+            document.getElementById('useOtherPlace').checked = true
+        }
+    }
+    //ใบอนุญาตจำหน่ายสุรา
+    if (document.getElementById('useSpirits') != undefined) {
+        if (requestData.sell_allow === 'N') {
+            document.getElementById('notuseSpirits').checked = true
+            document.getElementById('useSpirits').checked = false
+        } else {
+            document.getElementById('notuseSpirits').checked = false
+            document.getElementById('useSpirits').checked = true
+        }
+    }
+    //ใบอบรมผู้สัมผัสอาหาร
+    if (document.getElementById('foodTrain') != undefined) {
+        if (requestData.train_id === 'NO') {
+            document.getElementById('boxFood').style.display = 'none'
+            document.getElementById('foodNoTrain').checked = true
+            document.getElementById('foodTrain').checked = false
+        } else {
+            document.getElementById('boxFood').style.display = ''
+            document.getElementById('foodNoTrain').checked = false
+            document.getElementById('foodTrain').checked = true
+
+            document.getElementById('foodBy').value = trianData.issuse
+            document.getElementById('datepicker5').value = trianData.date_exp
+            document.getElementById('datepicker6').value = trianData.date_issued
+        }
+    }
+    // document.getElementById('typeReq').value = 
+
+}
 // set data form database 
 function setDataOperator(raw_data, type) {
     setOperatorData(raw_data)
     setOperatorAddressData(raw_data)
-    console.log(operatorData)
-    console.log(operatorAddressData)
     if (type === 'OPERATOR') {
         document.getElementById("typeUser").value = operatorData.type
         document.getElementById("id").value = operatorData.personal_id
@@ -26,8 +251,8 @@ function setDataOperator(raw_data, type) {
         document.getElementById("sxy").value = operatorAddressData.sxy
         document.getElementById("building").value = operatorAddressData.building
         document.getElementById("road").value = operatorAddressData.road
-        
-        
+
+
         let provinceId = parseInt(getProviceIdByName(operatorAddressData.province_name))
         let amphurId = parseInt(getAmphureIdByName(operatorAddressData.amphur_name, provinceId))
         let districtId = parseInt(getDistrictIdByName(operatorAddressData.district_name, amphurId))
@@ -55,16 +280,16 @@ function setDataOperator(raw_data, type) {
             document.getElementById("person2_id").value = assistantOperatorData.personal_id
     }
 }
-function checkformatReturn(value){
+function checkformatReturn(value) {
     let temp = ''
     value === null || value === 'NULL' ? temp = '' : temp = value
     return temp
 }
 //set data return form insert
-function setRequestDataReturn(raw_data){
+function setRequestDataReturn(raw_data) {
     requestData.no = raw_data.no
     requestData.year = raw_data.year
-    requestData.establishment_id = checkformatReturn(raw_data.establishment_is_land_owned) 
+    requestData.establishment_id = checkformatReturn(raw_data.establishment_is_land_owned)
     requestData.establishment_is_land_owned = checkformatReturn(raw_data.establishment_is_land_owned)
     requestData.establishment_address_id = checkformatReturn(raw_data.establishment_address_id)
     requestData.train_id = checkformatReturn(raw_data.train_id) === '' ? 'NO' : 'YES'
@@ -113,33 +338,35 @@ function setRequestData(raw_data) {
     requestData.establishment_address_id = raw_data.ESTABLISHMENT_ADDRESS_ID === null ? '' : raw_data.ESTABLISHMENT_ADDRESS_ID
     requestData.menu = raw_data.REQUEST_MENU
     requestData.date_submission = raw_data.REQUEST_DATE_SUBMISSION
-    requestData.date_approve = raw_data.REQUEST_DATE_APPROVE = null ? '' : raw_data.REQUEST_DATE_APPROVE
-    requestData.doc_no1 = raw_data.REQUEST_DOC_NO2
+    requestData.date_approve = raw_data.REQUEST_DATE_APPROVE === null ? '' : raw_data.REQUEST_DATE_APPROVE
+    requestData.reference_id = raw_data.REFERENCE_ID === null ? 'NO' : 'YES'
+    requestData.train_id = raw_data.TRAIN_ID === null ? 'NO' : 'YES'
+    requestData.doc_no1 = raw_data.REQUEST_DOC_NO1
     requestData.doc_no2 = raw_data.REQUEST_DOC_NO2
     requestData.doc_no3 = raw_data.REQUEST_DOC_NO3
     requestData.doc_no4 = raw_data.REQUEST_DOC_NO4
     requestData.doc_no5 = raw_data.REQUEST_DOC_NO5
     requestData.doc_no6 = raw_data.REQUEST_DOC_NO6
-    requestData.subcategory = raw_data.REQUEST_SUBCATEGORY = null ? '' : raw_data.REQUEST_SUBCATEGORY
-    requestData.product_type = raw_data.REQUEST_PRODUCT_TYPE = null ? '' : raw_data.REQUEST_PRODUCT_TYPE
-    requestData.sell_start = raw_data.REQUEST_SELL_START = null ? '' : raw_data.REQUEST_SELL_START
-    requestData.sell_end = raw_data.REQUEST_SELL_END = null ? '' : raw_data.REQUEST_SELL_END
+    requestData.subcategory = raw_data.REQUEST_SUBCATEGORY === null ? '' : raw_data.REQUEST_SUBCATEGORY
+    requestData.product_type = raw_data.REQUEST_PRODUCT_TYPE === null ? '' : raw_data.REQUEST_PRODUCT_TYPE
+    requestData.sell_start = raw_data.REQUEST_SELL_START === null ? '' : raw_data.REQUEST_SELL_START
+    requestData.sell_end = raw_data.REQUEST_SELL_END === null ? '' : raw_data.REQUEST_SELL_END
     requestData.sell_allow = raw_data.REQUEST_SELL_ALLOW
-    requestData.receipt_order = raw_data.REQUEST_RECEIPT_ORDER = null ? '' : raw_data.REQUEST_RECEIPT_ORDER
-    requestData.receipt_fine = raw_data.REQUEST_RECEIPT_FINE = null ? '' : raw_data.REQUEST_RECEIPT_FINE
-    requestData.receipt_fee = raw_data.REQUEST_RECEIPT_FEE = null ? '' : raw_data.REQUEST_RECEIPT_FEE
-    requestData.receipt_total = raw_data.REQUEST_RECEIPT_TOTAL = null ? '' : raw_data.REQUEST_RECEIPT_TOTAL
-    requestData.receipt_date = raw_data.REQUEST_RECEIPT_DATE = null ? '' : raw_data.REQUEST_RECEIPT_DATE
-    requestData.date_issued = raw_data.REQUEST_DATE_ISSUED = null ? '' : raw_data.REQUEST_DATE_ISSUED
-    requestData.date_expired = raw_data.REQUEST_DATE_EXPIRED = null ? '' : raw_data.REQUEST_DATE_EXPIRED
-    requestData.condition_no_1 = raw_data.REQUEST_CONDITION_NO_1 = null ? '' : raw_data.REQUEST_CONDITION_NO_1
-    requestData.condition_no_2 = raw_data.REQUEST_CONDITION_NO_2 = null ? '' : raw_data.REQUEST_CONDITION_NO_2
-    requestData.condition_no_3 = raw_data.REQUEST_CONDITION_NO_3 = null ? '' : raw_data.REQUEST_CONDITION_NO_3
-    requestData.condition_no_4 = raw_data.REQUEST_CONDITION_NO_4 = null ? '' : raw_data.REQUEST_CONDITION_NO_4
-    requestData.image_name = raw_data.REQUEST_IMAGE_NAME = null ? '' : raw_data.REQUEST_IMAGE_NAME
+    requestData.receipt_order = raw_data.REQUEST_RECEIPT_ORDER === null ? '' : raw_data.REQUEST_RECEIPT_ORDER
+    requestData.receipt_fine = raw_data.REQUEST_RECEIPT_FINE === null ? '' : raw_data.REQUEST_RECEIPT_FINE
+    requestData.receipt_fee = raw_data.REQUEST_RECEIPT_FEE === null ? '' : raw_data.REQUEST_RECEIPT_FEE
+    requestData.receipt_total = raw_data.REQUEST_RECEIPT_TOTAL === null ? '' : raw_data.REQUEST_RECEIPT_TOTAL
+    requestData.receipt_date = raw_data.REQUEST_RECEIPT_DATE === null ? '' : raw_data.REQUEST_RECEIPT_DATE
+    requestData.date_issued = raw_data.REQUEST_DATE_ISSUED === null ? '' : raw_data.REQUEST_DATE_ISSUED
+    requestData.date_expired = raw_data.REQUEST_DATE_EXPIRED === null ? '' : raw_data.REQUEST_DATE_EXPIRED
+    requestData.condition_no_1 = raw_data.REQUEST_CONDITION_NO_1 === null ? '' : raw_data.REQUEST_CONDITION_NO_1
+    requestData.condition_no_2 = raw_data.REQUEST_CONDITION_NO_2 === null ? '' : raw_data.REQUEST_CONDITION_NO_2
+    requestData.condition_no_3 = raw_data.REQUEST_CONDITION_NO_3 === null ? '' : raw_data.REQUEST_CONDITION_NO_3
+    requestData.condition_no_4 = raw_data.REQUEST_CONDITION_NO_4 === null ? '' : raw_data.REQUEST_CONDITION_NO_4
+    requestData.image_name = raw_data.REQUEST_IMAGE_NAME === null ? '' : raw_data.REQUEST_IMAGE_NAME
     requestData.total_image = raw_data.REQUEST_TOTAL_IMAGE
     requestData.status = raw_data.REQUEST_STATUS
-    requestData.delete_logic = raw_data.REQUEST_DELETE_LOGIC = null ? '' : raw_data.REQUEST_DELETE_LOGIC
+    requestData.delete_logic = raw_data.REQUEST_DELETE_LOGIC === null ? '' : raw_data.REQUEST_DELETE_LOGIC
     requestData.is_deleted = raw_data.REQUEST_IS_DELETED
     // requestData.last_update: '20-05-2563',
     // requestData.username: 'ADMIN'
@@ -149,8 +376,9 @@ function setEstablishmentData(raw_data) {
     establishmentData.id = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_ID
     establishmentData.address_id = raw_data.ESTABLISHMENT_DATA.ADDRESS_ID
     establishmentData.perosonal_id = raw_data.ESTABLISHMENT_DATA.PERSONAL_ID
-    establishmentData.type = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_TYPE
-    establishmentData.name = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_NAME
+    establishmentData.type = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_TYPE === null ? '' : raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_TYPE
+    establishmentData.name = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_NAME === null ? '' : raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_NAME
+    establishmentData.is_land_owned = raw_data.ESTABLISHMENT_IS_LAND_OWNED === null ? 'NO' : 'YES'
     establishmentData.machine_size = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_MACHINE_SIZE === null ? 0 : raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_MACHINE_SIZE
     establishmentData.area_size = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_AREA_SIZE === null ? 0 : raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_AREA_SIZE
     establishmentData.worker = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_WORKER === null ? 0 : raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_WORKER
@@ -186,7 +414,7 @@ function setAddressOwnerLandData(raw_data) {
 }
 function setLandData(raw_data) {
     //ADDRESS
-    if (raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_IS_LAND_OWNED != null) {
+    if (raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_IS_LAND_OWNED != undefined) {
         landData.id = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_IS_LAND_OWNED
         landData.address_id = raw_data.ESTABLISHMENT_DATA.LAND.ADDRESS_ID
         landData.title = raw_data.ESTABLISHMENT_DATA.LAND.LAND_TITLE
@@ -194,33 +422,34 @@ function setLandData(raw_data) {
         landData.surname = raw_data.ESTABLISHMENT_DATA.LAND.LAND_SURNAME
         landData.birthday = raw_data.ESTABLISHMENT_DATA.LAND.LAND_BIRTHDAY === null ? '' : raw_data.ESTABLISHMENT_DATA.LAND.LAND_BIRTHDAY
         landData.phone = raw_data.ESTABLISHMENT_DATA.LAND.LAND_PHONE
-    } else {
-        establishmentData.is_land_owned = 'NO'
+
+        if (raw_data.ESTABLISHMENT_DATA.LAND.UPLOADFILE != undefined) {
+            landData.status_upload_file = raw_data.ESTABLISHMENT_DATA.LAND.UPLOADFILE
+        } else {
+            landData.status_upload_file = false
+        }
+
     }
 
 }
 function setReferecneData(raw_data) {
-    if (raw_data.REFERENCE_ID != null) {
+    if (raw_data.REFERENCE_DATA != undefined) {
         referecneData.id = raw_data.REFERENCE_DATA.REFERENCE_ID
         referecneData.title = raw_data.REFERENCE_DATA.REFERENCE_TITLE
         referecneData.name = raw_data.REFERENCE_DATA.REFERENCE_NAME
         referecneData.surname = raw_data.REFERENCE_DATA.REFERENCE_SURNAME
         referecneData.status = raw_data.REFERENCE_DATA.REFERENCE_SURNAME
         referecneData.phone = raw_data.REFERENCE_DATA.REFERENCE_PHONE
-    } else {
-        requestData.reference_id = 'NO'
     }
 
 
 }
 function setTrianData(raw_data) {
-    if (raw_data.TRAIN_ID != null) {
+    if (raw_data.TRAIN_DATA != undefined) {
         trianData.id = raw_data.TRAIN_DATA.TRAIN_ID
         trianData.issuse = raw_data.TRAIN_DATA.TRAIN_ISSUED
         trianData.date_exp = raw_data.TRAIN_DATA.TRAIN_DATE_EXP
         trianData.date_issued = raw_data.TRAIN_DATA.TRAIN_DATE_ISSUED
-    } else {
-        requestData.train_id = 'YES'
     }
 }
 function setOperatorAddressData(raw_data) {
@@ -314,7 +543,7 @@ function createGroupData() {
             referecneData.phone = document.getElementById('reference_phone').value
         }
 
-        if(document.getElementById('foodTrain') != undefined){
+        if (document.getElementById('foodTrain') != undefined) {
             requestData.train_id = document.getElementById('foodTrain').checked === true ? 'YES' : 'NO'
             if (requestData.train_id === 'YES') {
                 trianData.issuse = document.getElementById('foodBy').value.trim()
@@ -322,7 +551,7 @@ function createGroupData() {
                 trianData.date_issued = document.getElementById('datepicker6').value
             }
         }
-        
+
         requestData.personal_id_assistant = assistantOperatorData.id != '' ? assistantOperatorData.id : ''
 
         requestData.image_is_changed = image_changed //ตัวแปรอยู่ใน utilities.js
@@ -401,39 +630,39 @@ function createGroupData() {
 
         //สถานประกอบการ
 
-        establishmentData.perosonal_id =  operatorData.id
-        if(document.getElementById('useOtherPlace') != undefined){
-            establishmentData.is_land_owned =  document.getElementById('useOtherPlace').checked === true ? 'YES' : 'NO'
-        }else{
+        establishmentData.perosonal_id = operatorData.id
+        if (document.getElementById('useOtherPlace') != undefined) {
+            establishmentData.is_land_owned = document.getElementById('useOtherPlace').checked === true ? 'YES' : 'NO'
+        } else {
             establishmentData.is_land_owned = 'NO'
         }
-        if(document.getElementById('typeWorkplace') != undefined){
-            establishmentData.type =  document.getElementById('typeWorkplace').value.trim()
+        if (document.getElementById('typeWorkplace') != undefined) {
+            establishmentData.type = document.getElementById('typeWorkplace').value.trim()
         }
-        
-        establishmentData.name =  document.getElementById('workplaceName').value.trim()
-        if(document.getElementById('machinery') != undefined){
-            establishmentData.machine_size =  document.getElementById('machinery').value.trim()
-        }
-        if(document.getElementById('area') != undefined){
-            establishmentData.area_size =  document.getElementById('area').value.trim()
-        }
-        if(document.getElementById('numPeople') != undefined){
-            establishmentData.worker =  document.getElementById('numPeople').value.trim()
-        }
-        establishmentData.phone =  document.getElementById('wPhone').value.trim()
-        establishmentData.fax =  document.getElementById('wFax').value.trim()
 
-        if(document.getElementById('wLocation') != undefined){
-            establishmentData.grond =  document.getElementById('wLocation').value.trim()
+        establishmentData.name = document.getElementById('workplaceName').value.trim()
+        if (document.getElementById('machinery') != undefined) {
+            establishmentData.machine_size = document.getElementById('machinery').value.trim()
         }
-        
-        addressEstablishmentData.home_number =  document.getElementById('wPlaceId').value.trim()
-        addressEstablishmentData.moo =  document.getElementById('wMoo').value.trim()
-        addressEstablishmentData.trxk =  document.getElementById('wTrxk').value.trim()
-        addressEstablishmentData.sxy =  document.getElementById('wSxy').value.trim()
-        addressEstablishmentData.building =  document.getElementById('wBuilding').value.trim()
-        addressEstablishmentData.road =  document.getElementById('wRoad').value.trim()
+        if (document.getElementById('area') != undefined) {
+            establishmentData.area_size = document.getElementById('area').value.trim()
+        }
+        if (document.getElementById('numPeople') != undefined) {
+            establishmentData.worker = document.getElementById('numPeople').value.trim()
+        }
+        establishmentData.phone = document.getElementById('wPhone').value.trim()
+        establishmentData.fax = document.getElementById('wFax').value.trim()
+
+        if (document.getElementById('wLocation') != undefined) {
+            establishmentData.grond = document.getElementById('wLocation').value.trim()
+        }
+
+        addressEstablishmentData.home_number = document.getElementById('wPlaceId').value.trim()
+        addressEstablishmentData.moo = document.getElementById('wMoo').value.trim()
+        addressEstablishmentData.trxk = document.getElementById('wTrxk').value.trim()
+        addressEstablishmentData.sxy = document.getElementById('wSxy').value.trim()
+        addressEstablishmentData.building = document.getElementById('wBuilding').value.trim()
+        addressEstablishmentData.road = document.getElementById('wRoad').value.trim()
 
         let provinceValue = parseInt(document.getElementById(`wProvince`).value);
         let amphurValue = parseInt(document.getElementById(`wDistrict`).value);
@@ -443,27 +672,27 @@ function createGroupData() {
         addressEstablishmentData.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
         addressEstablishmentData.province_name = province[provinceValue - 1].PROVINCE_NAME;
 
-        if(document.getElementById('ownPrefix') != undefined){
-            landData.title =  document.getElementById('ownPrefix').value.trim()
-            landData.name =  document.getElementById('ownName').value.trim()
-            landData.surname =  document.getElementById('ownSurname').value.trim()
-            landData.birthday =  document.getElementById('datepicker9').value.trim()
-            landData.phone =  document.getElementById('ownPhone').value.trim()
-            addressOwnerLandData.home_number =  document.getElementById('ownHomeId').value.trim()
-            addressOwnerLandData.moo =  document.getElementById('ownMoo').value.trim()
-            addressOwnerLandData.trxk =  document.getElementById('ownTrxk').value.trim()
-            addressOwnerLandData.sxy =  document.getElementById('ownSxy').value.trim()
-            addressOwnerLandData.road =  document.getElementById('ownRoad').value.trim()
-    
+        if (document.getElementById('ownPrefix') != undefined) {
+            landData.title = document.getElementById('ownPrefix').value.trim()
+            landData.name = document.getElementById('ownName').value.trim()
+            landData.surname = document.getElementById('ownSurname').value.trim()
+            landData.birthday = document.getElementById('datepicker9').value.trim()
+            landData.phone = document.getElementById('ownPhone').value.trim()
+            addressOwnerLandData.home_number = document.getElementById('ownHomeId').value.trim()
+            addressOwnerLandData.moo = document.getElementById('ownMoo').value.trim()
+            addressOwnerLandData.trxk = document.getElementById('ownTrxk').value.trim()
+            addressOwnerLandData.sxy = document.getElementById('ownSxy').value.trim()
+            addressOwnerLandData.road = document.getElementById('ownRoad').value.trim()
+
             let provinceValue = parseInt(document.getElementById(`ownerProvince`).value);
             let amphurValue = parseInt(document.getElementById(`ownerDistrict`).value);
             let districtValue = parseInt(document.getElementById(`ownerSubdistrict`).value);
-    
+
             addressOwnerLandData.district_name = district[districtValue - 1].DISTRICT_NAME;
             addressOwnerLandData.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
             addressOwnerLandData.province_name = province[provinceValue - 1].PROVINCE_NAME;
         }
-        
+
 
     } else {
         // มีข้อมูลแล้ว
@@ -583,11 +812,11 @@ function insertRequest() {
         console.log("insertToDatabase");
         var formData = new FormData();
         formData.append('files', files);
-       
-        for( var i = 0; i < totalFiles.length; i++ ){
+
+        for (var i = 0; i < totalFiles.length; i++) {
             let file = totalFiles[i];
             console.log(file);
-            formData.append('files'+i, file);
+            formData.append('files' + i, file);
         }
         formData.append("gropData", JSON.stringify(createArrayInsert()));
         axios.post("http://localhost:5000/insert/request", formData, {
@@ -601,8 +830,15 @@ function insertRequest() {
     });
 }
 
+function getRequestData(no, year) {
+    return new Promise((resolve, reject) => {
+        axios.get(`http://localhost:5000/get/request/${no}/${year}`).then((result) => {
+            return resolve(result.data);
+        })
+    })
+}
 //get request type 
-function getRequestType(type){
+function getRequestType(type) {
     return new Promise((resolve, reject) => {
         axios.get(`http://localhost:5000/get/requestType/${type}`).then((result) => {
             resolve(result.data);
@@ -614,31 +850,62 @@ function getRequestType(type){
     })
 }
 
-function setRequsetType(type){
-    getRequestType(type).then((data_test) =>{
+function setRequsetType(type) {
+    getRequestType(type).then((data_test) => {
         addRequestTypeToDatalist()
     })
+    checkView()
 }
-function addRequestTypeToDatalist(){
+function addRequestTypeToDatalist() {
     const list = document.getElementById('brow')
-    for(let i = 0 ; i < requestType.length ; i ++){
+    for (let i = 0; i < requestType.length; i++) {
         let option = document.createElement('option');
-        option.value = requestType[i].REQUEST_TYPE_NAME 
+        option.value = requestType[i].REQUEST_TYPE_NAME
         list.appendChild(option);
     }
 }
 
-function getRequestTypeId(type){
-    for(let i = 0 ; i < requestType.length; i++){
-        if(requestType[i].REQUEST_TYPE_NAME === type){
+function getRequestTypeId(type) {
+    for (let i = 0; i < requestType.length; i++) {
+        if (requestType[i].REQUEST_TYPE_NAME === type) {
             return requestType[i].REQUEST_TYPE_ID
         }
     }
 }
-function getRequestTypeValue(value){
-    for(let i = 0 ; i < requestType.length; i++){
-        if(requestType[i].REQUEST_TYPE_ID === value){
+function getRequestTypeValue(value) {
+    for (let i = 0; i < requestType.length; i++) {
+        if (requestType[i].REQUEST_TYPE_ID === value) {
             return requestType[i].REQUEST_TYPE_NAME
         }
+    }
+}
+
+//get requestId form url
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+        vars[key] = value;
+    });
+    return vars;
+}
+function createImage(image) {
+    console.log(image.length)
+    for (let i = 0; i < image.length; i++) {
+        console.log(image[i])
+        var span = document.createElement('span');
+        span.innerHTML =
+            [
+                `<div class="col" style="width: 25%; height: 100%; ">
+    <img 
+    width=100% 
+    height=85% 
+    src="`
+                , `data:image/${image[i].E_IMAGE_TYPE};base64,${image[i].E_IMAGE_DATA}`,
+                '" title="', escape(image[i].E_IMAGE_NAME), '"/>'
+                , "<br><button type='button' class='delete image'" +
+                "onclick='deleteImage()' >ลบรูปภาพนี้</button>", "</div>"
+            ].join('');
+
+        document.getElementById('outputImage').insertBefore(span, null);
     }
 }

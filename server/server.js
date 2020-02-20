@@ -81,10 +81,6 @@ router.get('/', redirectLogin, function (req, res) {
   res.sendFile(path.join(__dirname + '/views/html/utilities/index.html'));
 });
 
-
-
-
-
 app.use('/', router);
 app.get("/get/provice", (req, res) => {
   webService.getProvince().then(data => {
@@ -220,8 +216,11 @@ app.post('/insert/request', (req, res) => {
   })
  
 })
-webService.updateLandEstablishment('E000005','').then((data) =>{
-  console.log(data)
+
+app.get('/get/request/:no/:year', (req, res) => {
+  webService.getRequestByIdAndYear(req.params.no, req.params.year).then((data) => {
+    res.json(data)
+  })
 })
 //ทำให้ css กับ js ใช้ได้
 app.use(express.static(__dirname + '/views'));

@@ -107,7 +107,6 @@ class ImageDAO {
                 if (err) {
                     console.log(err)
                 }
-                console.log(result)
                 for(let i = 0 ; i< result.length ; i++){
                         result[i].E_IMAGE_DATA = Buffer.from(result[i].E_IMAGE_DATA, 'binary').toString('base64');
                 }

@@ -38,6 +38,7 @@ function insertPage() {
                     if(preInsert()){
                         insertRequest().then((data) => {
                             setRequestDataReturn(data)
+                            document.getElementById('form_id').value = `${requestData.no}/${requestData.year}`
                             resolve();
                         })
                     }
@@ -52,6 +53,11 @@ function insertPage() {
                     icon: "success",
                     confirmButtonColor: "#009688"
                 });
+                disableMenuAll()
+                enableMenu('addMenu')
+                enableMenu('editMenu')
+                enableMenu('deleteMenu')
+                enableFunction()
             } else if (result.dismiss === Swal.DismissReason.cancel) {
                 // Swal.fire("บันทึกล้มเหลว");
             }

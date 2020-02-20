@@ -99,9 +99,9 @@ function approvalPopup() {
         }
     });
     // กรณีใช้กับ input ต้องกำหนดส่วนนี้ด้วยเสมอ เพื่อปรับปีให้เป็น ค.ศ. ก่อนแสดงปฏิทิน
-    $('#datepicker5').keyup(function() {
-        formatDate(this.value , 'datepicker5')
-      });
+    $('#datepicker5').keyup(function () {
+        formatDate(this.value, 'datepicker5')
+    });
 }
 //ยกเลิก
 function canclePopup() {
@@ -281,9 +281,9 @@ function notApprovalPopup() {
             $input.val(fulldateTH);
         }
     });
-    $('#datepicker6').keyup(function() {
-        formatDate(this.value , 'datepicker6')
-      });
+    $('#datepicker6').keyup(function () {
+        formatDate(this.value, 'datepicker6')
+    });
 }
 //ชำระเงิน
 function payPopup() {
@@ -293,10 +293,6 @@ function payPopup() {
     <label class = 'topic' style='font-size:1.5vw'> ชำระเงิน </label> 
     <br>
     <br>
-        <a class='topic' style="margin-left: 0.65vw;"> ใบเสร็จเล่มที่ </a>
-        <input type='number' id="pay_book" class='tabOne' style="margin-left:1vw;width:8vw"></input><br>
-        <a id='pay_book_alert' class='tabTwo alert'  style='display:none'>ช่องนี้เว้นว่างไม่ได้</a>
-        <br>
         <a class='topic' style="margin-left: 3.7vw;"> เลขที่ </a>
         <input type='text' id="pay_order_no"class='tabOne' style="width:8vw; margin-left:1vw" maxlength="7"onkeyup='checkOrderNo(this.value, "pay_order_no")'</input>
         <br>
@@ -331,8 +327,6 @@ function payPopup() {
         closeOnCancel: false,
         showLoaderOnConfirm: true,
         preConfirm: function () {
-            let pay_book = document.getElementById('pay_book')
-            let pay_book_alert = document.getElementById('pay_book_alert')
 
             let pay_order_no = document.getElementById('pay_order_no')
             let pay_order_no_alert = document.getElementById('pay_order_no_alert')
@@ -347,24 +341,18 @@ function payPopup() {
             let datepicker7_alert = document.getElementById('datepicker7_alert')
 
             //เซตให้มันกลับเป็น style แบบเดิมก่อน
-            pay_book.classList.remove('alertInput')
             pay_order_no.classList.remove('alertInput')
             pay_fee.classList.remove('alertInput')
             pay_fine.classList.remove('alertInput')
             datepicker7.classList.remove('alertInput')
 
-            pay_book_alert.style.display = 'none'
             pay_order_no_alert.innerText = 'ช่องนี้เว้นว่างไม่ได้'
             pay_order_no_alert.style.display = 'none'
             pay_fee_alert.style.display = 'none'
             pay_fine_alert.style.display = 'none'
             datepicker7_alert.style.display = 'none'
 
-            if (pay_book.value.trim().length === 0 || pay_order_no.value.trim().length != 7 || pay_fee.value.trim().length === 0 || pay_fine.value.trim().length === 0 || datepicker7.value.trim().length === 0) {
-                if (pay_book.value.trim().length === 0) {
-                    pay_book.classList.add('alertInput')
-                    pay_book_alert.style.display = ''
-                }
+            if (pay_order_no.value.trim().length != 7 || pay_fee.value.trim().length === 0 || pay_fine.value.trim().length === 0 || datepicker7.value.trim().length === 0) {
                 if (pay_order_no.value.trim().length === 0) {
                     pay_order_no.classList.add('alertInput')
                     pay_order_no_alert.style.display = ''
@@ -421,9 +409,9 @@ function payPopup() {
         }
     });
     // กรณีใช้กับ input ต้องกำหนดส่วนนี้ด้วยเสมอ เพื่อปรับปีให้เป็น ค.ศ. ก่อนแสดงปฏิทิน
-    $('#datepicker7').keyup(function() {
-        formatDate(this.value , 'datepicker7')
-      });
+    $('#datepicker7').keyup(function () {
+        formatDate(this.value, 'datepicker7')
+    });
 }
 //ต่อใบอนุญาต
 function perPopup(menutype) {
@@ -433,10 +421,6 @@ function perPopup(menutype) {
     <label class = 'per_topic' style='font-size:1.5vw'> ต่อใบอนุญาติ เลขที่ A0001/2563 </label> 
     <br>
     <br>
-        <a class='topic' style="margin-left: 0.65vw;"> ใบเสร็จเล่มที่ </a>
-        <input type='number' id="per_pay_book" class='tabOne' style="margin-left:1vw;width:8vw"></input><br>
-        <a id='per_pay_book_alert' class='tabTwo alert' style='display:none'>ช่องนี้เว้นว่างไม่ได้</a>
-        <br>
         <a class='topic' style="margin-left: 3.7vw;"> เลขที่ </a>
         <input id="per_pay_order_no" class='tabOne' style="width:8vw;margin-left:1vw" maxlength="7" onkeyup='checkOrderNo(this.value, "per_pay_order_no")'></input><br>
         <a id='per_pay_order_no_alert' class='tabTwo alert' style='display:none'>ช่องนี้เว้นว่างไม่ได้</a>
@@ -471,8 +455,6 @@ function perPopup(menutype) {
         closeOnCancel: false,
         showLoaderOnConfirm: true,
         preConfirm: function () {
-            let per_pay_book = document.getElementById('per_pay_book')
-            let per_pay_book_alert = document.getElementById('per_pay_book_alert')
 
             let per_pay_order_no = document.getElementById('per_pay_order_no')
             let per_pay_order_no_alert = document.getElementById('per_pay_order_no_alert')
@@ -487,24 +469,18 @@ function perPopup(menutype) {
             let datepicker8_alert = document.getElementById('datepicker8_alert')
 
             //เซตให้มันกลับเป็น style แบบเดิมก่อน
-            per_pay_book.classList.remove('alertInput')
             per_pay_order_no.classList.remove('alertInput')
             per_pay_fee.classList.remove('alertInput')
             per_pay_fine.classList.remove('alertInput')
             datepicker8.classList.remove('alertInput')
 
-            per_pay_book_alert.style.display = 'none'
             per_pay_order_no_alert.style.display = 'none'
             per_pay_order_no_alert.innerText = 'ช่องนี้เว้นว่างไม่ได้'
             per_pay_fee_alert.style.display = 'none'
             per_pay_fine_alert.style.display = 'none'
             datepicker8_alert.style.display = 'none'
 
-            if (per_pay_book.value.trim().length === 0 || per_pay_order_no.value.trim().length != 7 || per_pay_fee.value.trim().length === 0 || per_pay_fine.value.trim().length === 0 || datepicker8.value.trim().length === 0) {
-                if (per_pay_book.value.trim().length === 0) {
-                    per_pay_book.classList.add('alertInput')
-                    per_pay_book_alert.style.display = ''
-                }
+            if (per_pay_order_no.value.trim().length != 7 || per_pay_fee.value.trim().length === 0 || per_pay_fine.value.trim().length === 0 || datepicker8.value.trim().length === 0) {
                 if (per_pay_order_no.value.trim().length === 0) {
                     per_pay_order_no.classList.add('alertInput')
                     per_pay_order_no_alert.style.display = ''
@@ -539,27 +515,10 @@ function perPopup(menutype) {
         }
     }).then((result) => {
         if (result.value) {
-            let html_commit = `
-        <div>
-            <a id='success_new_id'>เลขที่ใหม่ : A0001/2563</a><br>
-            <a id='success_date_issue'>วันที่เริ่มใบ : 25-05-2563 </a><br>
-            <a id='success_date_expired'>วันที่หมดอายุ : 25-05-2564 </a>
-        </div>
-        <br>
-        <br>
-        <button type="button"  onclick="printPer('${menutype}')" style='width:10% height:30%'> 
-        
-        <i class="fa fa-print"></i>
-        พิมพ์คำขอต่อ
-        
-        </button>
-        `
             Swal.fire({
-                html: html_commit,
+                html: "<h2>บันทึกสำเร็จ</h2>",
                 icon: "success",
-                showConfirmButton: false,
-                closeOnConfirm: false,
-                closeOnCancel: false
+                confirmButtonColor: "#009688"
             });
         } else if (result.dismiss === Swal.DismissReason.cancel) {
         }
@@ -578,19 +537,9 @@ function perPopup(menutype) {
         }
     });
     // กรณีใช้กับ input ต้องกำหนดส่วนนี้ด้วยเสมอ เพื่อปรับปีให้เป็น ค.ศ. ก่อนแสดงปฏิทิน
-    $('#datepicker8').keyup(function() {
-        formatDate(this.value , 'datepicker8')
-      });
-}
-function printPer(mymanu){
-    if(mymanu === 'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร' || mymanu === 'หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร'){
-        window.open('preview copy.html', '_blank');
-    }else if(mymanu === 'ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ' || mymanu === 'ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ') {
-        window.open('preview copy 2.html', '_blank');
-    }else{
-        window.open('preview copy 3.html', '_blank');
-    }
-    
+    $('#datepicker8').keyup(function () {
+        formatDate(this.value, 'datepicker8')
+    });
 }
 //โอนใบอนุญาติ
 function transferPopup() {
@@ -794,7 +743,8 @@ $(function () {
                 } else {
                     switch (key) {
                         case 'per':
-                            perPopup(type)
+                            // perPopup(type)
+                            toPerRequest(type)
                             break;
                         case 'transfer':
                             transferPopup()
