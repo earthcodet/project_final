@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="../../css/css2.css">
     <link href="../../css/fonts.css" rel="stylesheet">
 
-
     <!-- icon -->
     <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.css">
 </head>
@@ -74,7 +73,8 @@
         <button class="dropdown-btn select-active" id="adminna" style="display: block;"><b>ข้อมูลระบบ </b><i
                 class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
-            <a href="systemUser.html" class="dropdown-active">จัดการผู้ใช้งาน</a>
+            <a href="systemUser.html" >จัดการผู้ใช้งาน</a>
+            <a href="systemType.html" class="dropdown-active">จัดการประเภท</a>
         </div>
         <button class="dropdown-btn"><b>รายงาน </b><i class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
@@ -102,34 +102,84 @@
                 <div class="box">
                     <center>
                         <br>
-                        <label style="margin-left: 0px;">Username : </label><input type="text" style="width: 30%;">
-                        <br>
-                        <label style="margin-left: 5px;">Password : </label><input type="text" style="width: 30%;">
-                        <br>
-                        <label style="margin-left: 6px;">คำนำหน้า : 
-                            <select style="width: 30%;">
-                            <option>นาย</option>
-                            <option>นาง</option>
-                            <option>นางสาว</option>
-                        </select>
-                        <br>
-                        <label style="margin-left: 50px;">ชื่อ : </label><input type="text" style="width: 30%;">
-                        <br>
-                        <label style="margin-left: 14px;">นามสกุล : </label><input type="text" style="width: 30%;">
-                        <br>
-                        <label style="margin-left: 15px;">ตำแหน่ง : </label><input type="text" style="width: 30%;">
-                        <br>
-                        <label style="margin-left: 25px;">สถานะ : </label>
                         <select style="width: 30%;">
-                            <option>Admin</option>
-                            <option>User</option>
-                        </select>
+                            <option>ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</option>
+                            <option>ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</option>
+                            <option>ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</option>
+                            <option>ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</option>
+                            <option>หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</option>
+                            <option>หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</option>
+                            <option>ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</option>
+                            <option>กิจการที่เป็นอันตรายต่อสุขภาพ</option>
+                            <option>กิจการฌาปณสถาน</option>
+                        </select> <button>ค้นหา</button>&emsp;<button>เพิ่ม</button>
                         <br><br>
-                    <button style="width: 20%;">ยืนยัน</button>
-                        <br><br>
+                        <table id="requestTable30day" class="table cursor-pointer table-hover tableresult"
+                            style="width: 70%;" >
+                            <thead>
+                                <tr class="is-color">
+                                    <th>
+                                        <p>เมนู</p>
+                                    </th>
+                                    <th>
+                                        <p>ประเภท</p>
+                                    </th>
+                                    <th>
+                                        <p>จัดการ</p>
+                                    </th>
+                                </tr>
+                            </thead>
+                                <tr>
+                                    <td>กิจการที่เป็นอันตรายต่อสุขภาพ</td>
+                                    <td>1. ก. การเลี้ยงม้า โค กระบือ เกิน 10 ตัวขึ้นไป</td>
+                                    <td style="text-align: center;"><button>แก้ไข</button>&emsp;<button>ลบ</button></td>
+                                </tr>
+                                <tr>
+                                    <td>กิจการที่เป็นอันตรายต่อสุขภาพ</td>
+                                    <td>1. ข. การเลี้ยงมา โค กระบือ ไม่เกิน 10 ตัว</td>
+                                    <td style="text-align: center;"><button>แก้ไข</button>&emsp;<button>ลบ</button></td>
+                                </tr>
+                                <tr>
+                                    <td>กิจการที่เป็นอันตรายต่อสุขภาพ</td>
+                                    <td>2. ก. การเลี้ยงสุกรเกิน 50 ตัวขั้นไป</td>
+                                    <td style="text-align: center;"><button>แก้ไข</button>&emsp;<button>ลบ</button></td>
+                                </tr>
+                                <tr>
+                                    <td>กิจการที่เป็นอันตรายต่อสุขภาพ</td>
+                                    <td>2. ข. การเลี้ยงสุกรเกิน 20 ตัว แต่ไม่เกิน 50 ตัว</td>
+                                    <td style="text-align: center;"><button>แก้ไข</button>&emsp;<button>ลบ</button></td>
+                                </tr>
+                                <tr>
+                                    <td>กิจการที่เป็นอันตรายต่อสุขภาพ</td>
+                                    <td>2. ค. การเลี้ยงสุกรไม่เกิน 20 ตัว</td>
+                                    <td style="text-align: center;"><button>แก้ไข</button>&emsp;<button>ลบ</button></td>
+                                </tr>
+                                <tr>
+                                    <td>กิจการที่เป็นอันตรายต่อสุขภาพ</td>
+                                    <td>3. ก. การเลี้ยงแพะ แกะเกิน 50 ตัวขึ้นไป</td>
+                                    <td style="text-align: center;"><button>แก้ไข</button>&emsp;<button>ลบ</button></td>
+                                </tr>
+                                <tr>
+                                    <td>กิจการที่เป็นอันตรายต่อสุขภาพ</td>
+                                    <td>3. ข. การเลี้ยงแพะ แกะเกิน 20 ตัว แต่ไม่เกิน 50 ตัว</td>
+                                    <td style="text-align: center;"><button>แก้ไข</button>&emsp;<button>ลบ</button></td>
+                                </tr>
+                                <tr>
+                                    <td>กิจการที่เป็นอันตรายต่อสุขภาพ</td>
+                                    <td>3. ค. การเลี้ยงแพะ แกะไม่เกิน 20 ตัว</td>
+                                    <td style="text-align: center;"><button>แก้ไข</button>&emsp;<button>ลบ</button></td>
+                                </tr>
+                                <tr>
+                                    <td>กิจการที่เป็นอันตรายต่อสุขภาพ</td>
+                                    <td>4. ก. การเลี้ยงห่าน เป็ด ไก่ เกิน 50 ตัวขึ้นไป</td>
+                                    <td style="text-align: center;"><button>แก้ไข</button>&emsp;<button>ลบ</button></td>
+                                </tr>
+                        </table>
+                        <br>
                     </center>
+                    </div>
                 </div>
-            </div>
+                <br>
             </div>
         </fieldset>
     </form>
