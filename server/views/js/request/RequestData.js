@@ -11,7 +11,7 @@ let requestData = {
     staff_id_alderman: '',
     establishment_id: '',
     staff_id_money: '',
-    reference_id: 'YES',
+    reference_id: 'NO',
     train_id: 'NO',
     personal_id_assistant: '',
     staff_id_approve: '', 
@@ -104,6 +104,7 @@ let landData = {
     surname: '',
     birthday: "",
     phone: "",
+    status_upload_file:'',
 }
 let referecneData = {
     id: '',

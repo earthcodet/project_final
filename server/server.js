@@ -81,48 +81,6 @@ router.get('/', redirectLogin, function (req, res) {
   res.sendFile(path.join(__dirname + '/views/html/utilities/index.html'));
 });
 
-router.get('/request/request_public_sell/:Id', redirectLogin, function (req, res) {
-  res.sendFile(path.join(__dirname + '/views/html/request/request_public_sell.html'));
-});
-router.get('/request/request_public_hawk/:Id', redirectLogin, function (req, res) {
-  res.sendFile(path.join(__dirname + '/views/html/request/request_public_hawk.html'));
-});
-router.get('/request/request_area_more_sell/:Id', redirectLogin, function (req, res) {
-  res.sendFile(path.join(__dirname + '/views/html/request/request_area_more_sell.html'));
-});
-router.get('/request/request_area_more_correct/:Id', redirectLogin, function (req, res) {
-  res.sendFile(path.join(__dirname + '/views/html/request/request_area_more_correct.html'));
-});
-router.get('/request/request_area_less_sell/:Id', redirectLogin, function (req, res) {
-  res.sendFile(path.join(__dirname + '/views/html/request/request_area_less_sell.html'));
-});
-router.get('/request/request_area_less_correct/:Id', redirectLogin, function (req, res) {
-  res.sendFile(path.join(__dirname + '/views/html/request/request_area_less_correct.html'));
-});
-router.get('/request/request_market/:Id', redirectLogin, function (req, res) {
-  res.sendFile(path.join(__dirname + '/views/html/request/request_market.html'));
-});
-router.get('/request/request_health_danger/:Id', redirectLogin, function (req, res) {
-  res.sendFile(path.join(__dirname + '/views/html/request/request_health_danger'));
-});
-router.get('/request/request_crematory/:Id', redirectLogin, function (req, res) {
-  res.sendFile(path.join(__dirname + '/views/html/request/request_crematory'));
-});
-
-// app.get('/request/:requestId/:username', (req, res) => {
-//   webService.getUser(req.params.username, req.params.password).then((data) => {
-//     if (data.length != 0) {
-//       req.session.requset = req.params.username
-//       console.log('Username and Password correct')
-//       console.log(`username => ${req.session.username}`)
-//       res.redirect('/')
-//     } else {
-//       res.json(data)
-//     }
-//   })
-// })
-
-
 app.use('/', router);
 app.get("/get/provice", (req, res) => {
   webService.getProvince().then(data => {
@@ -258,8 +216,11 @@ app.post('/insert/request', (req, res) => {
   })
  
 })
-webService.updateLandEstablishment('E000005','').then((data) =>{
-  console.log(data)
+
+app.get('/get/request/:no/:year', (req, res) => {
+  webService.getRequestByIdAndYear(req.params.no, req.params.year).then((data) => {
+    res.json(data)
+  })
 })
 //ทำให้ css กับ js ใช้ได้
 app.use(express.static(__dirname + '/views'));

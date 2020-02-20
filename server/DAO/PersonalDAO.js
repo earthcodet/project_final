@@ -12,34 +12,44 @@ class PersonalDAO {
             let query = `SELECT MAX(PERSONAL_ID) As 'maxId' FROM personal`
             con.query(query, function (err, result) {
                 if (err) {
-                    console.log(err.code) 
+                    console.log(err.code)
                 }
                 return resolve(result)
             })
         })
     }
-    
-    getPersonalId(personalId){
+    getPersonalByPersonalId(personalId) {
+        return new Promise((resolve, reject) => {
+            let query = `SELECT * FROM personal WHERE PERSONAL_ID='${personalId}'`
+            con.query(query, function (err, result) {
+                if (err) {
+                    console.log(err)
+                }
+                return resolve(result)
+            })
+        })
+    }
+    getPersonalId(personalId) {
         return new Promise((resolve, reject) => {
             let query = `SELECT PERSONAL_PERSONAL_ID As pId FROM personal WHERE PERSONAL_PERSONAL_ID='${personalId}'`
             con.query(query, function (err, result) {
                 if (err) {
                     console.log(err.code)
                 }
-                if(result.length === 0){
+                if (result.length === 0) {
                     console.log(`DAO status => ${false}`)
                     return resolve(false)
-                }else{
+                } else {
                     console.log(`DAO status => ${true}`)
                     return resolve(true)
                 }
             })
         })
     }
-    insertPersonal(personal){
+    insertPersonal(personal) {
         personal.is_deleted = 'N'
         return new Promise((resolve, reject) => {
-            let value  = `'${personal.id}', '${personal.address_id}', ${personal.title}, `
+            let value = `'${personal.id}', '${personal.address_id}', ${personal.title}, `
             value = value + `'${personal.type}', '${personal.name}', ${personal.surname}, `
             value = value + `${personal.nationality}, ${personal.race}, ${personal.birthday}, `
             value = value + `'${personal.personal_id}', '${personal.card_issued}', ${personal.card_expipe}, `
@@ -56,9 +66,9 @@ class PersonalDAO {
             })
         })
     }
-    updatePersonal(personal){
+    updatePersonal(personal) {
         return new Promise((resolve, reject) => {
-            let value  = `PERSONAL_TITLE = ${personal.title},`
+            let value = `PERSONAL_TITLE = ${personal.title},`
             value = value + `PERSONAL_NAME='${personal.name}',PERSONAL_SURNAME=${personal.surname},`
             value = value + `PERSONAL_NATIONALITY=${personal.nationality},PERSONAL_RACE=${personal.race},`
             value = value + `PERSONAL_BIRTHDAY=${personal.birthday},`
@@ -73,17 +83,17 @@ class PersonalDAO {
                     console.log(err.code)
                     return resolve(err.code)
                 }
-                if(result.affectedRows === 1){
+                if (result.affectedRows === 1) {
                     return resolve(true)
-                }else{
+                } else {
                     return resolve(false)
                 }
             })
         })
     }
-    updateStatusPersonal(personal){
+    updateStatusPersonal(personal) {
         return new Promise((resolve, reject) => {
-            let value  = `PERSONAL_UPDATE='${personal.update}',`
+            let value = `PERSONAL_UPDATE='${personal.update}',`
             value = value + `PERSONAL_IS_DELETED='${personal.is_deleted}',`
             value = value + `USER_UPDATE='${personal.username}'`
             let query = `UPDATE personal SET ${value} WHERE PERSONAL_ID='${personal.id}'`
@@ -92,15 +102,15 @@ class PersonalDAO {
                     console.log(err.code)
                     return resolve(err.code)
                 }
-                if(result.affectedRows === 1){
+                if (result.affectedRows === 1) {
                     return resolve(true)
-                }else{
+                } else {
                     return resolve(false)
                 }
             })
         })
     }
-    getPersonal(id,name,surname){
+    getPersonal(id, name, surname) {
         return new Promise((resolve, reject) => {
             // let value = 'PERSONAL_TITLE,PERSONAL_NAME,PERSONAL_SURNAME,PERSONAL_PERSONAL_ID,ADDRESS_ID'
             let value = '*'
@@ -109,13 +119,13 @@ class PersonalDAO {
             con.query(query, function (err, result) {
                 if (err) {
                     console.log(err.code)
-                }else{
+                } else {
                     return resolve(result)
                 }
             })
         })
     }
-}   
+}
 
 
 module.exports = PersonalDAO

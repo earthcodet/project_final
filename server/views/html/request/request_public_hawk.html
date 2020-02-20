@@ -47,7 +47,7 @@
             <a href="request_public_hawk.html" class="dropdown-active">-
                 ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
             <a href="request_area_more_sell.html">- ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
-            <a href="request_area_more_correct.html">- ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</a>
+            <a href="request_area_more_correct.html">- ใบอนุญาตจัดตั้งสถานที่สะสมอาหาร</a>
             <a href="request_area_less_sell.html">- หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
             <a href="request_area_less_correct.html">- หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
             <a href="request_market.html">- ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
@@ -61,7 +61,7 @@
             <a href="../renew/renew_public_sell.html">- คำขอต่อใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
             <a href="../renew/renew_public_hawk.html">- คำขอต่อใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
             <a href="../renew/renew_area_more_sell.html">- คำขอต่อใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
-            <a href="../renew/renew_area_more_correct.html">- คำขอต่อใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</a>
+            <a href="../renew/renew_area_more_correct.html">- คำขอต่อใบอนุญาตจัดตั้งสถานที่สะสมอาหาร</a>
             <a href="../renew/renew_area_less_sell.html">- คำขอต่อหนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
             <a href="../renew/renew_area_less_correct.html">- คำขอต่อหนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
             <a href="../renew/renew_market.html">- คำขอต่อใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
@@ -119,7 +119,7 @@
                 <div class="box">
                     <h3 style="font-size: 3vh;">ข้อมูลสถานประกอบการ</h3>
                     <a style="margin-left: 0vw;">เลขที่คำขอ :
-                        <input type="text" style="width: 16%;" readonly></a>
+                        <input type="text" id= 'form_id' style="width: 16%;" readonly></a>
                     <a>วันที่ยื่นขอ <font color="red">*</font> :
                         <input type="text" id="datepicker1" style="width: 16%;"
                             onchange="document.getElementById('datepicker1').classList.remove('alertInput')"></a>
@@ -541,7 +541,7 @@
                         <p>5) &nbsp;ใบอนญาตฉบับนี้ออกให้เมื่อวันที่ <input type="text" id="request_date_issued" disabled
                                 readonly></p>
                         <p>6) &nbsp;ใบอนญาตฉบับนี้สิ้นอายุวันที่
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="request_date_date" disabled
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="request_date_exp" disabled
                                 readonly></p>
                     </a>
                     <br>

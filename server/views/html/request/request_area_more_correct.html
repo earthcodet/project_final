@@ -48,7 +48,7 @@
             <a href="request_public_sell.html">- ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
             <a href="request_public_hawk.html">- ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
             <a href="request_area_more_sell.html">- ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
-            <a href="request_area_more_correct.html" class="dropdown-active">- ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</a>
+            <a href="request_area_more_correct.html" class="dropdown-active">- ใบอนุญาตจัดตั้งสถานที่สะสมอาหาร</a>
             <a href="request_area_less_sell.html">- หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
             <a href="request_area_less_correct.html">- หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
             <a href="request_market.html">- ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
@@ -61,7 +61,7 @@
             <a href="../renew/renew_public_sell.html">- คำขอต่อใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
             <a href="../renew/renew_public_hawk.html">- คำขอต่อใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
             <a href="../renew/renew_area_more_sell.html">- คำขอต่อใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
-            <a href="../renew/renew_area_more_correct.html">- คำขอต่อใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</a>
+            <a href="../renew/renew_area_more_correct.html">- คำขอต่อใบอนุญาตจัดตั้งสถานที่สะสมอาหาร</a>
             <a href="../renew/renew_area_less_sell.html">- คำขอต่อหนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
             <a href="../renew/renew_area_less_correct.html">- คำขอต่อหนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
             <a href="../renew/renew_market.html">- คำขอต่อใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
@@ -104,7 +104,7 @@
         <fieldset disabled id="disable" style="border: 0;padding: 0;margin: 0;">
             <div class="main">
                 <header class="w3-top2">
-                    <h1 style="font-size:2.8vh;margin-left: 25px;padding: 2px;"> ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</h1>
+                    <h1 style="font-size:2.8vh;margin-left: 25px;padding: 2px;"> ใบอนุญาตจัดตั้งสถานที่สะสมอาหาร</h1>
                 </header>
                 <!-- ข้อมูลใบ -->
                 <div class="box">
@@ -320,7 +320,7 @@
                     type="text" id="request_date_issued" disabled readonly>
                     
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ใบอนญาตฉบับนี้สิ้นอายุวันที่
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="request_date_date" disabled readonly>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="request_date_exp" disabled readonly>
             </p>
             </div>
                 <br>
@@ -375,6 +375,7 @@
                         <br>
                         <input style="margin-left:9vw;" type="file" id="uploadFilePdf" onchange="pdfFile(event)"
                             accept="application/pdf">
+                            <i id='status_upload_file'  class='fa fa-check' style="margin-left: 1vw;display: none;"> มีไฟล์อัพโหลดแล้ว</i>
                     </div>
                     <br><br>
                 </div><br>
@@ -384,7 +385,7 @@
                     </h3>
                     <input type="radio" name="spirits" id="useSpirits" value="ออกใบอนุญาต" style="margin-left: 5vw;">
                     <a>ออกใบอนุญาต</a>&ensp;
-                    <input type="radio" name="spirits" id="useSpirits" value="ไม่ออกใบอนุญาต" checked>
+                    <input type="radio" name="spirits" id="notuseSpirits" value="ไม่ออกใบอนุญาต" checked>
                     <a>ไม่ออกใบอนุญาต</a>
                     <br><br>
                     <input style="margin-left: 5vw;" type="file" id="uploadFilePdf" onchange="uploadImage(event)"

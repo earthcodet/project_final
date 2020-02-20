@@ -591,6 +591,24 @@ class service {
             })
         })
     }
+    getPersonalById(id) {
+        return new Promise((resolve, reject) => {
+            PersonalDAOObj.getPersonalByPersonalId(id).then((result) => {
+                return resolve(result)
+            })
+        })
+    }
+    getPersonalAndAddressById(id) {
+        // เจอแบบ 100 % ID มาจากคำขอ
+        return new Promise((resolve, reject) => {
+            PersonalDAOObj.getPersonalByPersonalId(id).then((result) => {
+                this.getAddressByAddressId(result[0].ADDRESS_ID).then((address_data) => {
+                    result[0].AID = address_data[0]
+                    return resolve(result)
+                })
+            })
+        })
+    }
     searchOperator(id, name, surname) {
         return new Promise((resolve, reject) => {
             this.getPersonal(id, name, surname).then((data) => {
@@ -1029,7 +1047,7 @@ class service {
                     new_edata.id = establishmentData[0].ESTABLISHMENT_ID
                     new_edata.address_id = establishmentData[0].ADDRESS_ID
                     //use_land
-                    if(establishmentData[0].ESTABLISHMENT_GROUND != null && new_edata.grond != 'NULL'){
+                    if (establishmentData[0].ESTABLISHMENT_GROUND != null && new_edata.grond != 'NULL') {
                         EstablishmentDAOObj.updateGround(new_edata.id, new_edata.grond)
                     }
                     if (new_edata.is_land_owned != 'NULL') {
@@ -1068,14 +1086,12 @@ class service {
                         })
                     } else {
                         if (establishmentData[0].ESTABLISHMENT_IS_LAND_OWNED === null) {
-                            new_edata.is_land_owned =  null
+                            new_edata.is_land_owned = null
                             new_edata.land_used = null
                             new_edata.land_address_owner = null
                             return resolve(new_edata)
                         } else {
                             //establishmentData[0].ESTABLISHMENT_IS_LAND_OWNED != null
-                            console.log(`ww222===================@@@@+=========== ${new_edata.is_land_owned}`)
-
                             new_edata.is_land_owned = null
                             new_edata.land_used = null
                             new_edata.land_address_owner = null
@@ -1348,52 +1364,104 @@ class service {
         return new Promise((resolve, reject) => {
             RequestDAOObj.getRequestById(id, year).then((data) => {
                 if (data != undefined) {
-                    data.REQUEST_DATE_SUBMISSION = data.REQUEST_DATE_SUBMISSION != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_SUBMISSION.toISOString()) : data.REQUEST_DATE_SUBMISSION
-                    data.REQUEST_DATE_APPROVE = data.REQUEST_DATE_APPROVE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_APPROVE.toISOString()) : data.REQUEST_DATE_APPROVE
-                    data.REQUEST_RECEIPT_DATE = data.REQUEST_RECEIPT_DATE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_RECEIPT_DATE.toISOString()) : data.REQUEST_RECEIPT_DATE
-                    data.REQUEST_DATE_ISSUED = data.REQUEST_DATE_ISSUED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_ISSUED.toISOString()) : data.REQUEST_DATE_ISSUED
-                    data.REQUEST_DATE_EXPIRED = data.REQUEST_DATE_EXPIRED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_EXPIRED.toISOString()) : data.REQUEST_DATE_EXPIRED
-                    data.REQUEST_LAST_UPDATE = data.REQUEST_LAST_UPDATE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_LAST_UPDATE.toISOString()) : data.REQUEST_LAST_UPDATE
-                    this.getEstablishment(data.ESTABLISHMENT_ID).then((dataEstablishment) => {
-                        data.ESTABLISHMENT_DATA = dataEstablishment
-                        if (data.TRAIN_ID != null) {
-                            this.getTrainByTrainId(data.TRAIN_ID).then((dataTrain) => {
-                                data.TRAIN_DATA = dataTrain[0]
-                                if (data.REFERENCE_ID != null) {
-                                    this.getReferenceByReferenceId(data.REFERENCE_ID).then((dataReference) => {
-                                        data.REFERENCE_DATA = dataReference[0]
+                    this.getPersonalAndAddressById(data.PERSONAL_ID_OWNER).then((personal_operator_data) => {
+                        data.gropDataOperator = personal_operator_data[0]
+                        if (data.PERSONAL_ID_ASSISTANT != null) {
+                            this.getPersonalById(data.PERSONAL_ID_ASSISTANT).then((personal_assistant_data) => {
+                                data.gropDataAssistant = personal_assistant_data[0]
+                                data.REQUEST_DATE_SUBMISSION = data.REQUEST_DATE_SUBMISSION != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_SUBMISSION.toISOString()) : data.REQUEST_DATE_SUBMISSION
+                                data.REQUEST_DATE_APPROVE = data.REQUEST_DATE_APPROVE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_APPROVE.toISOString()) : data.REQUEST_DATE_APPROVE
+                                data.REQUEST_RECEIPT_DATE = data.REQUEST_RECEIPT_DATE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_RECEIPT_DATE.toISOString()) : data.REQUEST_RECEIPT_DATE
+                                data.REQUEST_DATE_ISSUED = data.REQUEST_DATE_ISSUED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_ISSUED.toISOString()) : data.REQUEST_DATE_ISSUED
+                                data.REQUEST_DATE_EXPIRED = data.REQUEST_DATE_EXPIRED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_EXPIRED.toISOString()) : data.REQUEST_DATE_EXPIRED
+                                data.REQUEST_LAST_UPDATE = data.REQUEST_LAST_UPDATE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_LAST_UPDATE.toISOString()) : data.REQUEST_LAST_UPDATE
+                                this.getEstablishment(data.ESTABLISHMENT_ID).then((dataEstablishment) => {
+                                    data.ESTABLISHMENT_DATA = dataEstablishment
+                                    if (data.TRAIN_ID != null) {
+                                        this.getTrainByTrainId(data.TRAIN_ID).then((dataTrain) => {
+                                            data.TRAIN_DATA = dataTrain[0]
+                                            if (data.REFERENCE_ID != null) {
+                                                this.getReferenceByReferenceId(data.REFERENCE_ID).then((dataReference) => {
+                                                    data.REFERENCE_DATA = dataReference[0]
+                                                    ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) => {
+                                                        data.IMAGE_REVIEW = imageDatas
+                                                        return resolve(data)
+                                                    })
+                                                })
+                                            } else {
+                                                ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) => {
+                                                    data.IMAGE_REVIEW = imageDatas
+                                                    return resolve(data)
+                                                })
+                                            }
+                                        })
+                                    } else {
+                                        if (data.REFERENCE_ID != null) {
+                                            this.getReferenceByReferenceId(data.REFERENCE_ID).then((dataReference) => {
+                                                data.REFERENCE_DATA = dataReference[0]
+                                                ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) => {
+                                                    data.IMAGE_REVIEW = imageDatas
+                                                    return resolve(data)
+                                                })
+                                            })
+                                        } else {
+                                            ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) => {
+                                                data.IMAGE_REVIEW = imageDatas
+                                                return resolve(data)
+                                            })
+                                        }
+                                    }
+                                })
+                            })
+                        } else {
+                            data.gropDataAssistant = undefined
+                            data.REQUEST_DATE_SUBMISSION = data.REQUEST_DATE_SUBMISSION != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_SUBMISSION.toISOString()) : data.REQUEST_DATE_SUBMISSION
+                            data.REQUEST_DATE_APPROVE = data.REQUEST_DATE_APPROVE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_APPROVE.toISOString()) : data.REQUEST_DATE_APPROVE
+                            data.REQUEST_RECEIPT_DATE = data.REQUEST_RECEIPT_DATE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_RECEIPT_DATE.toISOString()) : data.REQUEST_RECEIPT_DATE
+                            data.REQUEST_DATE_ISSUED = data.REQUEST_DATE_ISSUED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_ISSUED.toISOString()) : data.REQUEST_DATE_ISSUED
+                            data.REQUEST_DATE_EXPIRED = data.REQUEST_DATE_EXPIRED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_EXPIRED.toISOString()) : data.REQUEST_DATE_EXPIRED
+                            data.REQUEST_LAST_UPDATE = data.REQUEST_LAST_UPDATE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_LAST_UPDATE.toISOString()) : data.REQUEST_LAST_UPDATE
+                            this.getEstablishment(data.ESTABLISHMENT_ID).then((dataEstablishment) => {
+                                data.ESTABLISHMENT_DATA = dataEstablishment
+                                if (data.TRAIN_ID != null) {
+                                    this.getTrainByTrainId(data.TRAIN_ID).then((dataTrain) => {
+                                        data.TRAIN_DATA = dataTrain[0]
+                                        if (data.REFERENCE_ID != null) {
+                                            this.getReferenceByReferenceId(data.REFERENCE_ID).then((dataReference) => {
+                                                data.REFERENCE_DATA = dataReference[0]
+                                                ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) => {
+                                                    data.IMAGE_REVIEW = imageDatas
+                                                    return resolve(data)
+                                                })
+                                            })
+                                        } else {
+                                            ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) => {
+                                                data.IMAGE_REVIEW = imageDatas
+                                                return resolve(data)
+                                            })
+                                        }
+                                    })
+                                } else {
+                                    if (data.REFERENCE_ID != null) {
+                                        this.getReferenceByReferenceId(data.REFERENCE_ID).then((dataReference) => {
+                                            data.REFERENCE_DATA = dataReference[0]
+                                            ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) => {
+                                                data.IMAGE_REVIEW = imageDatas
+                                                return resolve(data)
+                                            })
+                                        })
+                                    } else {
                                         ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) => {
                                             data.IMAGE_REVIEW = imageDatas
                                             return resolve(data)
                                         })
-
-                                    })
-                                } else {
-                                    ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) => {
-                                        data.IMAGE_REVIEW = imageDatas
-                                        return resolve(data)
-                                    })
+                                    }
                                 }
                             })
-                        } else {
-                            if (data.REFERENCE_ID != null) {
-                                this.getReferenceByReferenceId(data.REFERENCE_ID).then((dataReference) => {
-                                    data.REFERENCE_DATA = dataReference[0]
-                                    ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) => {
-                                        data.IMAGE_REVIEW = imageDatas
-                                        return resolve(data)
-                                    })
-                                })
-                            } else {
-                                ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) => {
-                                    data.IMAGE_REVIEW = imageDatas
-                                    return resolve(data)
-                                })
-                            }
                         }
-
                     })
-
+                } else {
+                    return resolve(undefined)
                 }
 
             })

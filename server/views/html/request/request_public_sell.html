@@ -46,7 +46,7 @@
             <a href="request_public_sell.html" class="dropdown-active">- ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
             <a href="request_public_hawk.html">- ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
             <a href="request_area_more_sell.html">- ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
-            <a href="request_area_more_correct.html">- ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</a>
+            <a href="request_area_more_correct.html">- ใบอนุญาตจัดตั้งสถานที่สะสมอาหาร</a>
             <a href="request_area_less_sell.html">- หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
             <a href="request_area_less_correct.html">- หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
             <a href="request_market.html">- ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
@@ -60,7 +60,7 @@
             <a href="../renew/renew_public_sell.html">- คำขอต่อใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
             <a href="../renew/renew_public_hawk.html">- คำขอต่อใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
             <a href="../renew/renew_area_more_sell.html">- คำขอต่อใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
-            <a href="../renew/renew_area_more_correct.html">- คำขอต่อใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</a>
+            <a href="../renew/renew_area_more_correct.html">- คำขอต่อใบอนุญาตจัดตั้งสถานที่สะสมอาหาร</a>
             <a href="../renew/renew_area_less_sell.html">- คำขอต่อหนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
             <a href="../renew/renew_area_less_correct.html">- คำขอต่อหนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
             <a href="../renew/renew_market.html">- คำขอต่อใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
@@ -524,7 +524,7 @@
                         <a>5) &nbsp;ใบอนญาตฉบับนี้ออกให้เมื่อวันที่ <input type="text" id="request_date_issued" disabled
                                 readonly></a><br>
                         <a>6) &nbsp;ใบอนญาตฉบับนี้สิ้นอายุวันที่
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="request_date_date" disabled
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="request_date_exp" disabled
                                 readonly></a>
                     </a>
                     <br>
@@ -690,9 +690,7 @@
 <script>
      console.log('sadasd')
     setRequsetType('ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร')
-    //0, 30 MAX 50
-    console.log(window.location.href.toString().slice(22,26))
-    console.log(window.location.href.slice(50, window.location.href.toString().length))
+    checkView()
 </script>
 <!-- <script src="../../js/request/controlTest.js"></script> -->
 <!-- <script src="../../js/service/checkUserLogin.js"></script> -->
