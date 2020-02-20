@@ -393,31 +393,30 @@ function toRequest(value) {
     }
 }
 function toPerRequest(value){
-    let type = value.path[0].textContent
-    switch (type) {
+    switch (value) {
         case 'กิจการฌาปณสถาน':
-            window.location.href = '../request/request_crematory.html'
+            window.location.href = '../renew/renew_crematory.html'
             break;
         case 'กิจการที่เป็นอันตรายต่อสุขภาพ':
-            window.location.href = '../request/request_health_danger.html'
+            window.location.href = '../renew/renew_health_danger.html'
             break;
         case 'ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน':
-            window.location.href = '../request/request_market.html'
+            window.location.href = '../renew/renew_market.html'
             break;
         case 'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร':
-            window.location.href = '../request/request_area_less_correct.html'
+            window.location.href = '../renew/renew_area_less_correct.html'
             break;
         case 'หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร':
-            window.location.href = '../request/request_area_less_sell.html'
+            window.location.href = '../renew/renew_area_less_sell.html'
             break;
         case 'ใบอนุญาตจัดตั้งสถานที่สะสมอาหาร':
-            window.location.href = '../request/request_area_more_correct.html'
+            window.location.href = '../renew/renew_area_more_correct.html'
             break;
         case 'ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร':
             window.location.href = '../renew/renew_area_more_sell.html'
             break;
         case 'ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ':
-            window.location.href = '../request/request_public_hawk.html'
+            window.location.href = '../renew/renew_public_hawk.html'
             break;
         default:
             //ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ
