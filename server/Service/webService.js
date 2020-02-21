@@ -22,6 +22,8 @@ const RequestDAO = require('../DAO/RequestDAO')
 const RequestDAOObj = new RequestDAO()
 const TransferDAO = require('../DAO/TransferDAO')
 const TransferDAOObj = new TransferDAO()
+const PrintDAO = require('../DAO/PrintDAO')
+const PrintDAOObj = new PrintDAO()
 
 class service {
     getProvince() {
@@ -872,7 +874,7 @@ class service {
                 let temp = date.split('-')
                 let day = temp[0]
                 let month = temp[1]
-                let year = parseInt(temp[2]) > 2300 ? temp[2]- 543 : temp[2] 
+                let year = parseInt(temp[2]) > 2300 ? temp[2] - 543 : temp[2]
                 let format = `${year}-${month}-${day}` //2020-01-16
                 return format
             }
@@ -1358,6 +1360,17 @@ class service {
             }
 
             //return resolve(true)
+        })
+    }
+    getViewImageRequestByIdAndYear(id, year) {
+        return new Promise((resolve, reject) => {
+            PrintDAOObj.getViewImage(id, year).then((viewData_data) => {
+                ImageDAOObj.getImageEstablishmentByImage(viewData_data[0].REQUEST_IMAGE_NAME).then((imageDatas) => {
+                   console.log(imageDatas.length)
+                    viewData_data[0].IMAGE_REVIEW = imageDatas
+                    return resolve(viewData_data)
+                })
+            })
         })
     }
     getRequestByIdAndYear(id, year) {

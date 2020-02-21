@@ -227,6 +227,11 @@ app.get('/get/requestTypeById/:id', (req, res) => {
     res.json(data)
   })
 })
+app.get('/get/viewImage/:id/:year', (req, res) => {
+  webService.getViewImageRequestByIdAndYear(req.params.id,req.params.year).then((request_viewImage) =>{
+    res.json(request_viewImage)
+  })
+})
 //ทำให้ css กับ js ใช้ได้
 app.use(express.static(__dirname + '/views'));
 app.listen(PORT, () => {

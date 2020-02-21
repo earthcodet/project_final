@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Image</title>
-
+    <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.css">
 </head>
 <style>
     body {
@@ -73,7 +73,7 @@
     .column {
         float: left;
         width: 50%;
-        height:  50%;
+        height: 50%;
         /* Should be removed. Only for demonstration */
     }
 
@@ -84,69 +84,80 @@
         clear: both;
     }
 </style>
-<div class="hideWhenPrint">
-    <br>
-    <button type="button" class="btn btn-outline-success btn-lg is-color"
-        style="width: 100px;height: 30px;background-color: gray;color: white;cursor: pointer;"
-        onclick="window.print()">พิมพ์</button>
-    <br>
-</div>
-
-<body style="text-align: center; overflow-x: hidden;">
-    <div class="book">
-        <div id='pageOne' class="page">
-            <h3>แบบตรวจสถานประกอบการ สถานที่จำหน่ายอาหาร</h3>
-            <p id='requestType'>ประกอบกิจการประเภท 2 สถานที่จำหน่ายอาหาร พื่นที่เกิน 50 ตรม. แต่ไม่เกิน 100 ตรม.</p>
-            <p id='nameOperator'>นาย / นาง / นางสาว .............. </p>
-            <p id='addressOperator'>ที่อยู่ .................................................................. </p>
-            <br><br>
-            <br>
-            <div class="row">
-                <div class="column">
-                    <img id='image_0' src="../../img/white.jpg"  height="280" width="300">
-                </div>
-                <div class="column">
-                    <img id='image_1' src="../../img/white.jpg" height="280" width="300">
-                </div>
-            </div>
-            <br>
-            <br>
-            <div class="row">
-                <div class="column">
-                    <img id='image_2' src="../../img/white.jpg" height="280" width="300">
-                </div>
-                <div class="column">
-                    <img id='image_3' src="../../img/white.jpg" height="280" width="300">
-                </div>
-            </div>
-        </div>
-        <div id='pageTwo' style="display: none;" class="page">
-            <h3>แบบตรวจสถานประกอบการ สถานที่จำหน่ายอาหาร</h3>
-            <p id='requestType_2'>ประกอบกิจการประเภท 2 สถานที่จำหน่ายอาหาร พื่นที่เกิน 50 ตรม. แต่ไม่เกิน 100 ตรม.</p>
-            <p id='nameOperator_2'>นาย / นาง / นางสาว .............. </p>
-            <p id='addressOperator_2'>ที่อยู่ .................................................................. </p>
-            <br><br>
-            <br>
-            <div class="row">
-                <div class="column">
-                    <img id='image_4' src="../../img/white.jpg" height="280" width="300">
-                </div>
-                <div class="column">
-                    <img id='image_5' src="../../img/white.jpg" height="280" width="300">
-                </div>
-            </div>
-            <br>
-            <br>
-            <div class="row">
-                <div class="column">
-                    <img id='image_6' src="../../img/white.jpg" height="280" width="300">
-                </div>
-                <div class="column">
-                    <img id='image_7' src="../../img/white.jpg" height="280" width="300">
-                </div>
-            </div>
-        </div>
+<div id='box_no_1' style="display: none;">
+    <div class="hideWhenPrint">
+        <br>
+        <button type="button" class="btn btn-outline-success btn-lg is-color"
+            style="width: 100px;height: 30px;background-color: gray;color: white;cursor: pointer;"
+            onclick="window.print()">พิมพ์</button>
+        <br>
     </div>
+
+    <body style="text-align: center; overflow-x: hidden;">
+        <div class="book">
+            <div id='pageOne' class="page">
+                <h3>แบบตรวจสถานประกอบการ สถานที่จำหน่ายอาหาร</h3>
+                <p id='requestType'>ประกอบกิจการประเภท </p>
+                <p id='nameOperator'>นาย / นาง / นางสาว </p>
+                <p id='addressOperator'>ที่อยู่ </p>
+                <br><br>
+                <br>
+                <div class="row">
+                    <div class="column">
+                        <img id='image_0' src="../../img/white.jpg" height="280" width="300">
+                    </div>
+                    <div class="column">
+                        <img id='image_1' src="../../img/white.jpg" height="280" width="300">
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div class="row">
+                    <div class="column">
+                        <img id='image_2' src="../../img/white.jpg" height="280" width="300">
+                    </div>
+                    <div class="column">
+                        <img id='image_3' src="../../img/white.jpg" height="280" width="300">
+                    </div>
+                </div>
+            </div>
+            <div id='pageTwo' style="display: none;" class="page">
+                <h3>แบบตรวจสถานประกอบการ สถานที่จำหน่ายอาหาร</h3>
+                <p id='requestType_2'>ประกอบกิจการประเภท</p>
+                <p id='nameOperator_2'>นาย / นาง / นางสาว </p>
+                <p id='addressOperator_2'>ที่อยู่ </p>
+                <br><br>
+                <br>
+                <div class="row">
+                    <div class="column">
+                        <img id='image_4' src="../../img/white.jpg" height="280" width="300">
+                    </div>
+                    <div class="column">
+                        <img id='image_5' src="../../img/white.jpg" height="280" width="300">
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div class="row">
+                    <div class="column">
+                        <img id='image_6' src="../../img/white.jpg" height="280" width="300">
+                    </div>
+                    <div class="column">
+                        <img id='image_7' src="../../img/white.jpg" height="280" width="300">
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+<div id='box_no_2' style="margin-top:15vw ;">
+    <center>
+            <i class="fa fa-spinner fa-spin fa-3x fa-fw" ></i>
+          
+            <a style="font-size: 2vw;"> กำลังโหลดข้อมูล</a>
+        
+
+    </center>
+</div>
 </body>
 <script src="../../node_modules/axios/dist/axios.min.js"></script>
 <script src="../../js/request/printImage.js"></script>

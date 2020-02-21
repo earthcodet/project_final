@@ -15,28 +15,32 @@ function setImage() {
         }
     }
 }
-
+function showViewImage(){
+    document.getElementById('box_no_1').style.display = ''
+    document.getElementById('box_no_2').style.display = 'none'
+}
 function setDocumentTitle() {
     if (raw_data.IMAGE_REVIEW.length < 5) {
-        getRequestType(raw_data.REQUEST_TYPE_ID)
+        document.getElementById('requestType').innerText = `ประกอบกิจการประเภท ${raw_data.REQUEST_TYPE_NAME}`
         document.getElementById('pageTwo').style.display = 'none'
-        document.getElementById('nameOperator').innerText = getName(raw_data.gropDataOperator)
-        document.getElementById('addressOperator').innerText = getAddress(raw_data.gropDataOperator)
+        document.getElementById('nameOperator').innerText = getName(raw_data)
+        document.getElementById('addressOperator').innerText = getAddress(raw_data)
     } else {
-        getRequestType(raw_data.REQUEST_TYPE_ID)
-        document.getElementById('nameOperator').innerText = getName(raw_data.gropDataOperator)
-        document.getElementById('addressOperator').innerText = getAddress(raw_data.gropDataOperator)
-        document.getElementById('nameOperator_2').innerText = getName(raw_data.gropDataOperator)
-        document.getElementById('addressOperator_2').innerText = getAddress(raw_data.gropDataOperator)
+        document.getElementById('requestType').innerText = `ประกอบกิจการประเภท ${raw_data.REQUEST_TYPE_NAME}`
+        document.getElementById('requestType_2').innerText = `ประกอบกิจการประเภท ${raw_data.REQUEST_TYPE_NAME}`
+        document.getElementById('nameOperator').innerText = getName(raw_data)
+        document.getElementById('addressOperator').innerText = getAddress(raw_data)
+        document.getElementById('nameOperator_2').innerText = getName(raw_data)
+        document.getElementById('addressOperator_2').innerText = getAddress(raw_data)
         document.getElementById('pageTwo').style.display = ''
     }
 }
 function startForm() {
     getView().then((check_data) => {
-        console.log(raw_data)
         if(check_data) {
             setDocumentTitle()
             setImage()
+            showViewImage()
         }
     })
 }
@@ -70,34 +74,34 @@ function getAddress(data) {
         amphur_name: "",
         province_name: ""
     };
-    item.id = data.AID.ADDRESS_ID
-    item.home_number = data.AID.ADDRESS_HOME_NUMBER === null ? '-' : data.AID.ADDRESS_HOME_NUMBER
-    item.moo = data.AID.ADDRESS_MOO === null ? '-' : data.AID.ADDRESS_MOO
-    item.trxk = data.AID.ADDRESS_TRXK === null ? '-' : data.AID.ADDRESS_TRXK
-    item.sxy = data.AID.ADDRESS_SXY === null ? '-' : data.AID.ADDRESS_SXY
-    item.building = data.AID.ADDRESS_BUILDING === null ? '-' : data.AID.ADDRESS_BUILDING
-    item.road = data.AID.ADDRESS_ROAD === null ? '-' : data.AID.ADDRESS_ROAD
-    item.district_name = data.AID.DISTRICT_NAME
-    item.amphur_name = data.AID.AMPHUR_NAME
-    item.province_name = data.AID.PROVINCE_NAME
+    item.id = data.ADDRESS_ID
+    item.home_number = data.ADDRESS_HOME_NUMBER === null ? '-' : data.ADDRESS_HOME_NUMBER
+    item.moo = data.ADDRESS_MOO === null ? '-' : data.ADDRESS_MOO
+    item.trxk = data.ADDRESS_TRXK === null ? '-' : data.ADDRESS_TRXK
+    item.sxy = data.ADDRESS_SXY === null ? '-' : data.ADDRESS_SXY
+    item.building = data.ADDRESS_BUILDING === null ? '-' : data.ADDRESS_BUILDING
+    item.road = data.ADDRESS_ROAD === null ? '-' : data.ADDRESS_ROAD
+    item.district_name = data.DISTRICT_NAME
+    item.amphur_name = data.AMPHUR_NAME
+    item.province_name = data.PROVINCE_NAME
     return `ที่อยู่ บ้านเลขที่ ${item.home_number} หมู่ ${item.moo} ตรอก ${item.trxk} ซอย ${item.sxy} อาคาร ${item.building} ถนน ${item.road} ตำบล ${item.district_name} อำเภอ ${item.amphur_name} จังหวัด ${item.province_name}`
 }
 //ประกอบกิจการประเภท
-function getRequestType(id) {
-    getRequestDataById(id).then((request) => {
-        console.log(`work`)
-        let temp = `ประกอบกิจการประเภท ${request.REQUEST_TYPE_NAME}`
-        document.getElementById('requestType').innerText = temp
-        document.getElementById('requestType_2').innerText = temp
-    })
-}
-function getRequestDataById(id) {
-    return new Promise((resolve, reject) => {
-        axios.get(`http://localhost:5000/get/requestTypeById/${id}`).then((result) => {
-            return resolve(result.data);
-        })
-    })
-}
+// function getRequestType(id) {
+//     getRequestDataById(id).then((request) => {
+//         console.log(`work`)
+//         let temp = `ประกอบกิจการประเภท ${request.REQUEST_TYPE_NAME}`
+//         document.getElementById('requestType').innerText = temp
+//         document.getElementById('requestType_2').innerText = temp
+//     })
+// }
+// function getRequestDataById(id) {
+//     return new Promise((resolve, reject) => {
+//         axios.get(`http://localhost:5000/get/requestTypeById/${id}`).then((result) => {
+//             return resolve(result.data);
+//         })
+//     })
+// }
 
 
 function getView() {
@@ -107,8 +111,9 @@ function getView() {
         let requestYear = requsetId.id.slice(6, 10)
         return new Promise((resolve, reject) => {
             getRequestData(requsetNo, requestYear).then((data) => {
-                if (data != '') {
-                    raw_data = data
+                if (data.length != 0) {
+                    raw_data = data[0]
+                    
                     return resolve(true)
                 } else {
                     return resolve(false)
@@ -120,7 +125,7 @@ function getView() {
 
 function getRequestData(no, year) {
     return new Promise((resolve, reject) => {
-        axios.get(`http://localhost:5000/get/request/${no}/${year}`).then((result) => {
+        axios.get(`http://localhost:5000/get/viewImage/${no}/${year}`).then((result) => {
             return resolve(result.data);
         })
     })
