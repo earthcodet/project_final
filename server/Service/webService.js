@@ -419,7 +419,7 @@ class service {
             case 'ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร':
                 sightT = 'C'
                 break;
-            case 'ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร':
+            case 'ใบอนุญาตจัดตั้งสถานที่สะสมอาหาร':
                 sightT = 'D'
                 break;
             case 'หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร':
@@ -872,7 +872,7 @@ class service {
                 let temp = date.split('-')
                 let day = temp[0]
                 let month = temp[1]
-                let year = parseInt(temp[2]) - 543
+                let year = parseInt(temp[2]) > 2300 ? temp[2]- 543 : temp[2] 
                 let format = `${year}-${month}-${day}` //2020-01-16
                 return format
             }
@@ -1361,6 +1361,7 @@ class service {
         })
     }
     getRequestByIdAndYear(id, year) {
+        console.log(`getRequestByIdAndYear id = ${id}/${year}`)
         return new Promise((resolve, reject) => {
             RequestDAOObj.getRequestById(id, year).then((data) => {
                 if (data != undefined) {

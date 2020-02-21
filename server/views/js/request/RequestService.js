@@ -577,7 +577,7 @@ function createGroupData() {
                 requestData.menu = `ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร`
                 break;
             case 'request_area_more_correct.html':
-                requestData.menu = `ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร`
+                requestData.menu = `ใบอนุญาตจัดตั้งสถานที่สะสมอาหาร`
                 break;
             case 'request_area_less_sell.html':
                 requestData.menu = `หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร`
@@ -770,7 +770,7 @@ function getAge(date) {
     // date "08-02-2563" 1998-04-22T17:00:00.000Z
     let day_b = parseInt(date.slice(8, 9))
     let month_b = parseInt(date.slice(5, 7))
-    let year_b = parseInt(date.slice(0, 4)) + 543
+    let year_b = parseInt(date.slice(0, 4)) > 1800  && parseInt(date.slice(0, 4)) < 2200 ? parseInt(date.slice(0, 4)) + 543 : parseInt(date.slice(0, 4))
     let age
     if (month_b === month_now && day_b === day_now) {
         return age = year_now - year_b
@@ -938,7 +938,7 @@ function getSightFormType(type) {
         case 'ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร':
             sightT = 'C'
             break;
-        case 'ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร':
+        case 'ใบอนุญาตจัดตั้งสถานที่สะสมอาหาร':
             sightT = 'D'
             break;
         case 'หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร':
