@@ -1,5 +1,5 @@
 //รอ ไปแยก
-let files 
+let files = null
 let selectImageFile = 0
 let maxImageFile = 8
 let image_changed = false

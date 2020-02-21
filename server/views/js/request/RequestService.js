@@ -566,6 +566,8 @@ function createGroupData() {
         requestData.image_is_changed = image_changed //ตัวแปรอยู่ใน utilities.js
 
         let menu = window.location.href.toString().slice(35, window.location.href.toString().length)
+        menu = menu.replace(/[?&]+([^=&]+)=([^&]*)/gi, "");
+        console.log(`request.menu => ${menu}`)
         switch (menu) {
             case 'request_public_sell.html':
                 requestData.menu = `ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ`
@@ -928,6 +930,7 @@ function printRequest() {
 //get sight
 function getSightFormType(type) {
     let sightT = ''
+    console.log(`getSightFormType => ` + type)
     switch (type) {
         case 'ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ':
             sightT = 'A'

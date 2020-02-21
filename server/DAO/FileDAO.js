@@ -69,5 +69,21 @@ class FileDAO {
             })
         })
     }
+    getfileByid(id) {
+        return new Promise((resolve, reject) => {
+            let query = `SELECT * FROM file WHERE File_name = '${id}'`
+            con.query(query, function (err, result) {
+                if (err) {
+                    console.log(err)
+                }
+                if (result.length != 0 ) {
+                    return resolve(true)
+                } else {
+                    return resolve(false)
+                }
+
+            })
+        })
+    }
 }
 module.exports = FileDAO

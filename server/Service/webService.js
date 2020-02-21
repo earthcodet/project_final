@@ -1049,7 +1049,7 @@ class service {
                     new_edata.id = establishmentData[0].ESTABLISHMENT_ID
                     new_edata.address_id = establishmentData[0].ADDRESS_ID
                     //use_land
-                    if (establishmentData[0].ESTABLISHMENT_GROUND != null && new_edata.grond != 'NULL') {
+                    if (new_edata.grond != 'NULL') {
                         EstablishmentDAOObj.updateGround(new_edata.id, new_edata.grond)
                     }
                     if (new_edata.is_land_owned != 'NULL') {
@@ -1058,10 +1058,12 @@ class service {
                             new_edata.land_used = land_id.id
                             new_edata.land_address_owner = land_id.address
                             file.name = land_id.id
-                            if (land_id.uploadfile) {
-                                this.insertFile(file).then((resultFile) => {
-                                    if (resultFile) {
-                                        //NEW LAND 
+                            this.insertFile(file).then((resultFile) => {
+                                if (resultFile.status) {
+                                    //NEW LAND 
+                                    if(land.type === 'duplication' && new_edata.is_land_owned === `'${establishmentData[0].ESTABLISHMENT_ID}'`){
+                                        return resolve(new_edata)
+                                    }else{
                                         EstablishmentDAOObj.updateUseLand(establishmentData[0].ESTABLISHMENT_ID, new_edata.is_land_owned).then((data_update_success) => {
                                             if (data_update_success) {
                                                 return resolve(new_edata)
@@ -1071,20 +1073,8 @@ class service {
                                             }
                                         })
                                     }
-                                })
-                            } else {
-                                //LAND DUPLICATE
-                                EstablishmentDAOObj.updateUseLand(establishmentData[0].ESTABLISHMENT_ID, new_edata.is_land_owned).then((data_update_success) => {
-                                    if (data_update_success) {
-                                        return resolve(new_edata)
-                                    } else {
-                                        console.log('error update UseLand Establishment')
-                                        return resolve(new_edata)
-                                    }
-                                })
-                                return resolve(new_edata)
-                            }
-
+                                }
+                            })
                         })
                     } else {
                         if (establishmentData[0].ESTABLISHMENT_IS_LAND_OWNED === null) {
@@ -1118,7 +1108,7 @@ class service {
                                     new_edata.land_address_owner = land_id.address
                                     file.name = land_id.id
                                     this.insertFile(file).then((resultFile) => {
-                                        if (resultFile) {
+                                        if (resultFile.status) {
 
                                             this.loopInsertEstablishment(new_edata).then((result) => {
                                                 return resolve(result)
@@ -1180,8 +1170,7 @@ class service {
                 if (land_data != undefined) {
                     let object = {
                         'id': land_data.LAND_ID,
-                        'address': land_data.ADDRESS_ID,
-                        'uploadfile': false
+                        'address': land_data.ADDRESS_ID
                     }
                     return resolve(object)
                 } else {
@@ -1192,8 +1181,7 @@ class service {
                                 if (data.check) {
                                     let object = {
                                         'id': data.id,
-                                        'address': land.address_id,
-                                        'uploadfile': true
+                                        'address': land.address_id
                                     }
                                     return resolve(object)
                                 }
@@ -1206,9 +1194,25 @@ class service {
     }
     insertFile(file) {
         return new Promise((resolve, reject) => {
-            FileDAOObj.insert(file).then((fileResult) => {
-                if (fileResult) {
-                    return resolve(fileResult)
+            FileDAOObj.getfileByid(file.name).then((file_data) => {
+                if (file_data) {
+                    FileDAOObj.update(file).then((item) => {
+                        let object = {
+                            status : item,
+                            type : 'duplication'
+                        }
+                        return resolve(object)
+                    })
+                } else {
+                    FileDAOObj.insert(file).then((fileResult) => {
+                        if (fileResult) {
+                            let object = {
+                                status : fileResult,
+                                type : 'insert'
+                            }
+                            return resolve(object)
+                        }
+                    })
                 }
             })
         })
@@ -1366,7 +1370,7 @@ class service {
         return new Promise((resolve, reject) => {
             PrintDAOObj.getViewImage(id, year).then((viewData_data) => {
                 ImageDAOObj.getImageEstablishmentByImage(viewData_data[0].REQUEST_IMAGE_NAME).then((imageDatas) => {
-                   console.log(imageDatas.length)
+                    console.log(imageDatas.length)
                     viewData_data[0].IMAGE_REVIEW = imageDatas
                     return resolve(viewData_data)
                 })

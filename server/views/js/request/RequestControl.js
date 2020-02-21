@@ -41,6 +41,12 @@ function insertPage() {
                         insertRequest().then((data) => {
                             setRequestDataReturn(data)
                             document.getElementById('form_id').value = `${requestData.no}/${requestData.year}`
+                            document.getElementById('uploadFilePdf').value = ''
+                            if (files != null) {
+                                document.getElementById('status_upload_file').style.display = ''
+                            } else {
+                                document.getElementById('status_upload_file').style.display = 'none'
+                            }
                             resolve();
                         })
                     }

@@ -86,24 +86,6 @@ function getAddress(data) {
     item.province_name = data.PROVINCE_NAME
     return `ที่อยู่ บ้านเลขที่ ${item.home_number} หมู่ ${item.moo} ตรอก ${item.trxk} ซอย ${item.sxy} อาคาร ${item.building} ถนน ${item.road} ตำบล ${item.district_name} อำเภอ ${item.amphur_name} จังหวัด ${item.province_name}`
 }
-//ประกอบกิจการประเภท
-// function getRequestType(id) {
-//     getRequestDataById(id).then((request) => {
-//         console.log(`work`)
-//         let temp = `ประกอบกิจการประเภท ${request.REQUEST_TYPE_NAME}`
-//         document.getElementById('requestType').innerText = temp
-//         document.getElementById('requestType_2').innerText = temp
-//     })
-// }
-// function getRequestDataById(id) {
-//     return new Promise((resolve, reject) => {
-//         axios.get(`http://localhost:5000/get/requestTypeById/${id}`).then((result) => {
-//             return resolve(result.data);
-//         })
-//     })
-// }
-
-
 function getView() {
     let requsetId = getUrlVars()
     if (requsetId.id != undefined) {
@@ -122,7 +104,6 @@ function getView() {
         })
     }
 }
-
 function getRequestData(no, year) {
     return new Promise((resolve, reject) => {
         axios.get(`http://localhost:5000/get/viewImage/${no}/${year}`).then((result) => {
