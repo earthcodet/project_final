@@ -1,5 +1,14 @@
 let newDocument = true
 let requestType = []
+if (document.getElementById('machinery' != undefined)) {
+    document.getElementById('machinery').value = 0
+}
+if(document.getElementById('area') != undefined){
+    document.getElementById('area').value = 0
+}
+if(document.getElementById('numPeople') != undefined){
+    document.getElementById('numPeople').value = 0
+}
 function checkView(typeForm) {
     let requsetId = getUrlVars()
     console.log(requsetId.id)
@@ -158,9 +167,13 @@ function setDataView() {
         document.getElementById('typeWorkplace').value = establishmentData.type
     }
     if (document.getElementById('machinery' != undefined)) {
-        document.getElementById('machinery').value = requestData.machine_size
-        document.getElementById('area').value = requestData.area_size
-        document.getElementById('numPeople').value = requestData.worker
+        document.getElementById('machinery').value = establishmentData.machine_size
+    }
+    if(document.getElementById('area') != undefined){
+        document.getElementById('area').value = establishmentData.area_size
+    }
+    if(document.getElementById('numPeople') != undefined){
+        document.getElementById('numPeople').value = establishmentData.worker
     }
     if (document.getElementById('con_no1') != undefined) {
         document.getElementById('con_no1').value = requestData.condition_no_1
@@ -742,6 +755,7 @@ function createGroupData() {
             requestData.is_request_changed = true
         }
         if (establishmentData_change) {
+            console.log(establishmentData_change)
             setDataUpdate('establishmentData')
             establishmentData.is_establishment_changed = true
         }
@@ -766,8 +780,9 @@ function createGroupData() {
             setDataUpdate('addressOwnerLandData')
             addressOwnerLandData.is_address_owner_changed = true
         }
+
+        // reset Utilities.js
         file_is_uploaded = false
-        filesPdf = null
         image_changed = false
         
     }
@@ -839,37 +854,44 @@ function dataChange(type) {
             establishmentData.name != document.getElementById('workplaceName').value.trim() ||
             establishmentData.phone != document.getElementById('wPhone').value.trim() ||
             establishmentData.fax != document.getElementById('wFax').value.trim()) {
+                console.log(`1`)
             status_data_change = true
         } else {
             if (document.getElementById('typeWorkplace') != undefined) {
                 if (establishmentData.type != document.getElementById('typeWorkplace').value.trim()) {
                     status_data_change = true
+                    console.log(`2`)
                 }
             }
             if (document.getElementById('machinery') != undefined) {
                 if (establishmentData.machine_size != document.getElementById('machinery').value.trim()) {
                     status_data_change = true
+                    console.log(`3`)
                 }
             }
             if (document.getElementById('area') != undefined) {
-                if (establishmentData.area_size != document.getElementById('area').value.trim()) {
+                if (establishmentData.area_size != document.getElementById('area').value) {
                     status_data_change = true
+                    console.log(`4 establishmentData.area_size ${establishmentData.area_size} != document.getElementById('area').value ${document.getElementById('area').value}`)
                 }
             }
             if (document.getElementById('numPeople') != undefined) {
-                if (establishmentData.worker != document.getElementById('numPeople').value.trim()) {
+                if (establishmentData.worker != document.getElementById('numPeople').value) {
                     status_data_change = true
+                    console.log(`5 establishmentData.worker ${establishmentData.worker} and document.getElementById('numPeople').value ${document.getElementById('numPeople').value}`)
                 }
             }
             if (document.getElementById('wLocation') != undefined) {
-                if (establishmentData.grond != document.getElementById('wLocation').value.trim()) {
+                if (establishmentData.grond != document.getElementById('wLocation').value) {
                     status_data_change = true
+                    console.log(`6 establishmentData.grond ${establishmentData.grond} and document.getElementById('wLocation').value ${document.getElementById('wLocation').value}`)
                 }
             }
             if (document.getElementById('useOtherPlace') != undefined) {
                 let establishment_is_land_owned_t = document.getElementById('useOtherPlace').checked === true ? 'YES' : 'NO'
                 if (establishmentData.is_land_owned != establishment_is_land_owned_t) {
                     status_data_change = true
+                    console.log(`7 establishmentData.is_land_owned ${establishmentData.is_land_owned} === establishment_is_land_owned_t ${establishment_is_land_owned_t}`)
                 }
             }
         }
@@ -1137,14 +1159,15 @@ function createArrayInsert() {
         data: ''
     }
     let imageData = []
+    console.log(totalFiles)
     if (requestData.image_is_changed) {
+        console.log(`imageData`)
         for (let i = 0; i < totalFiles.length; i++) {
-            if (totalFiles[i].E_IMAGE_TYPE != undefined) {
-                object.data = totalFiles[i].E_IMAGE_DATA
+            console.log(i)
+            if(totalFiles[i].E_IMAGE_TYPE != undefined){
                 object.type = totalFiles[i].E_IMAGE_TYPE
             }
-            imageData.push(object)
-            
+            imageData.push(object) 
             object = {
                 name: '',
                 type: '',
@@ -1152,55 +1175,47 @@ function createArrayInsert() {
             }
         }
     }
-    arrayItem.push(imageData) // image 9
+   arrayItem.push(imageData) // image 9
+    console.log(imageData)
     return arrayItem
 }
 function insertRequest() {
     createGroupData()
     let item = createArrayInsert()
     console.log(item)
-
-    return new Promise((resolve, reject) => {
-        var formData = new FormData();
-        for (var i = 0; i < totalFiles.length; i++) {
-            console.log(totalFiles[i].E_IMAGE_DATA === undefined)
-            console.log(totalFiles[i])
-            if(totalFiles[i].E_IMAGE_DATA === undefined){
-                let file = totalFiles[i];
-                formData.append('files' + i, file);
-                console.log(formData)
-            } 
-        }
-        console.log('form Data')
-        console.log(formData)
-        // formData.append("gropData", JSON.stringify(createArrayInsert()));
-        // axios.post("http://localhost:5000/image/t", formData, {
-        //     headers: {
-        //         "Content-Type": "multipart/form-data"
-        //     }
-        // })
-        return resolve(true)
-    })
     return new Promise((resolve, reject) => {
         console.log("insertToDatabase");
         var formData = new FormData();
-        formData.append('files', filesPdf);
-
-        for (var i = 0; i < totalFiles.length; i++) {
-            if(totalFiles[i].E_IMAGE_DATA === undefined){
-                let file = totalFiles[i];
-                formData.append('files' + i, file);
-            } 
+        if(landData.file_upload_changed){
+            formData.append('files', filesPdf);
         }
-        formData.append("gropData", JSON.stringify(createArrayInsert()));
+       
+        
+        if (requestData.image_is_changed){
+                for (var i = 0; i < totalFiles.length; i++) {
+                    if(totalFiles[i].E_IMAGE_DATA === undefined){
+                        let image = totalFiles[i];
+                        formData.append('files' + i, image);
+                    } else{
+                        formData.append("files" + i,  base64toBlob(totalFiles[i].E_IMAGE_DATA_BASE64 , `image/${totalFiles[i].E_IMAGE_TYPE}`));
+                    }
+            }
+        }
+        formData.append("gropData", JSON.stringify(item));
+        filesPdf = null
+        // totalFiles = []
+        selectImageFile = 0
         axios.post("http://localhost:5000/insert/request", formData, {
             headers: {
                 "Content-Type": "multipart/form-data"
             }
         })
             .then(data => {
+                console.log(data.data)
                 return resolve(data.data);
             });
+           // return resolve(true);
+       
     });
 }
 function getRequestData(no, year) {
@@ -1252,6 +1267,7 @@ function getRequestTypeValue(value) {
         }
     }
 }
+
 
 //get requestId form url
 function getUrlVars() {
@@ -1326,5 +1342,27 @@ function getSightFormType(type) {
             break;
     }
     return sightT
+}
+
+//base64Toblob
+function base64toBlob(base64Data, contentType) {
+    contentType = contentType || '';
+    var sliceSize = 1024;
+    var byteCharacters = atob(base64Data);
+    var bytesLength = byteCharacters.length;
+    var slicesCount = Math.ceil(bytesLength / sliceSize);
+    var byteArrays = new Array(slicesCount);
+
+    for (var sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
+        var begin = sliceIndex * sliceSize;
+        var end = Math.min(begin + sliceSize, bytesLength);
+
+        var bytes = new Array(end - begin);
+        for (var offset = begin, i = 0; offset < end; ++i, ++offset) {
+            bytes[i] = byteCharacters[offset].charCodeAt(0);
+        }
+        byteArrays[sliceIndex] = new Uint8Array(bytes);
+    }
+    return new Blob(byteArrays, { type: contentType });
 }
 

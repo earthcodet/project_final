@@ -332,4 +332,10 @@ function resetRequestData() {
         personal_id: ''
     }
     imageDisplayFormDatabase = []
+
+    file_is_uploaded = false
+    filesPdf = null
+    image_changed = false
+    totalFiles = []
+    selectImageFile = 0
 }

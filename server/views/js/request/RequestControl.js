@@ -5,6 +5,7 @@ var data = false
 var deleteData = false
 var addNew = false
 function addPage() {
+    resetRequestData()
     addNew = true
     deleteData = false
     data = false
