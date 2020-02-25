@@ -100,18 +100,6 @@ class AddressDAO {
             })
         })
     }
-
-    testGetNewProvince(){
-        return new Promise((resolve, reject) => {
-            let query = `SELECT * FROM districts`
-            con.query(query, function (err, result) {
-                if (err) {
-                    console.log(err.code)
-                }
-                return resolve(result)
-            })
-        })
-    }
 }
 
 
