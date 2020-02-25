@@ -1,8 +1,11 @@
 //รอ ไปแยก
-let files = null
+let filesPdf = null
 let selectImageFile = 0
 let maxImageFile = 8
 let image_changed = false
+
+//  check ว่ามีการอัพโหลดไฟล์หรือเปล่า
+let file_is_uploaded = false
 
 // function checkPhoneInput(tagId) {
 //     var text = document.getElementById(tagId).value
@@ -18,6 +21,7 @@ function handleFileSelect(evt) {
         }
         if (selectImageFile < maxImageFile) {
             image_changed = true
+            console.log(`image_change ${image_changed}`)
             totalFiles.push(f)
             var reader = new FileReader();
             reader.onload = (function (theFile) {
@@ -45,9 +49,11 @@ function handleFileSelect(evt) {
     }
 }
 function pdfFile(evt) {
-    files = evt.target.files[0];
+    filesPdf = evt.target.files[0];
+    file_is_uploaded = true
 }
 function deleteImage() {
+    image_changed = true
     var index = Array.from(document.getElementById('outputImage').children).indexOf(event.target.parentNode.parentNode)
     document.querySelector("#outputImage").removeChild(document.querySelectorAll('#outputImage span')[index]);
     totalFiles.splice(index, 1);
@@ -55,11 +61,6 @@ function deleteImage() {
     selectImageFile = selectImageFile - 1
 }
 function deleteImageAllRequest(){
-    // console.log(document.getElementById('outputImage').childElementCount)
-    // let imageLength = document.getElementById('outputImage').childElementCount
-    // for(let i = 0 ; i < imageLength ; i++){
-    //     document.querySelector("#outputImage").removeChild(document.querySelectorAll('#outputImage span')[i]);
-    // }
     document.getElementById('outputImage').textContent = ''
     totalFiles = []
     document.getElementById('uploadFile').value = ''

@@ -6,13 +6,11 @@ function inputRequired() {
   let checkno10 = document.getElementById("home_id").value.trim().length === 0;
   let checkno11 = document.getElementById("province").value.trim().length === 0;
   let checkno12 = document.getElementById("district").value.trim().length === 0;
-  let checkno13 = document.getElementById("subdistrict").value.trim().length === 0;
   let checkno14 = document.getElementById("phone").value.trim().length === 0;
   let checkno15 = document.getElementById("wLocation").value.trim().length === 0;
   let checkno16 = document.getElementById("wPlaceId").value.trim().length === 0;
   let checkno18 = document.getElementById("wProvince").value.trim().length === 0;
   let checkno19 = document.getElementById("wDistrict").value.trim().length === 0;
-  let checkno20 = document.getElementById("wSubdistrict").value.trim().length === 0;
   let checkno21 = document.getElementById("wPhone").value.trim().length === 0;
   let checkno28 = document.getElementById("typeProduct").value.trim().length === 0;
   let checkno35 = document.getElementById("documentName").value.trim().length === 0;
@@ -24,13 +22,11 @@ function inputRequired() {
   if (checkno10) {document.getElementById("home_id").classList.add("alertInput");}
   if (checkno11) {document.getElementById("province").classList.add("alertInput");}
   if (checkno12) {document.getElementById("district").classList.add("alertInput");}
-  if (checkno13) {document.getElementById("subdistrict").classList.add("alertInput");}
   if (checkno14) {document.getElementById("phone").classList.add("alertInput");}
   if (checkno15) {document.getElementById("wLocation").classList.add("alertInput");}
   if (checkno16) {document.getElementById("wPlaceId").classList.add("alertInput");}
   if (checkno18) {document.getElementById("wProvince").classList.add("alertInput");}
   if (checkno19) {document.getElementById("wDistrict").classList.add("alertInput");}
-  if (checkno20) {document.getElementById("wSubdistrict").classList.add("alertInput");}
   if (checkno21) {document.getElementById("wPhone").classList.add("alertInput");}
   if (checkno28) {document.getElementById("typeProduct").classList.add("alertInput");}
   if (checkno35) {document.getElementById("documentName").classList.add("alertInput");}
@@ -43,13 +39,11 @@ function inputRequired() {
     checkno10 ||
     checkno11 ||
     checkno12 ||
-    checkno13 ||
     checkno14 ||
     checkno15 ||
     checkno16 || 
     checkno18 ||
     checkno19 ||
-    checkno20 ||
     checkno21 ||
     checkno28 ||
     checkno35 
@@ -68,13 +62,11 @@ function resetInputRequired() {
   document.getElementById("home_id").classList.remove("alertInput");
   document.getElementById("province").classList.remove("alertInput");
   document.getElementById("district").classList.remove("alertInput");
-  document.getElementById("subdistrict").classList.remove("alertInput");
   document.getElementById("phone").classList.remove("alertInput");
   document.getElementById("wLocation").classList.remove("alertInput");
   document.getElementById("wPlaceId").classList.remove("alertInput");
   document.getElementById("wProvince").classList.remove("alertInput");
   document.getElementById("wDistrict").classList.remove("alertInput");
-  document.getElementById("wSubdistrict").classList.remove("alertInput");
   document.getElementById("wPhone").classList.remove("alertInput");
   document.getElementById("typeProduct").classList.remove("alertInput");
   document.getElementById("documentName").classList.remove("alertInput");
@@ -90,12 +82,10 @@ function inputRequired2() {
   let checkno10 = document.getElementById("home_id").value.trim().length === 0;
   let checkno11 = document.getElementById("province").value.trim().length === 0;
   let checkno12 = document.getElementById("district").value.trim().length === 0;
-  let checkno13 = document.getElementById("subdistrict").value.trim().length === 0;
   let checkno14 = document.getElementById("phone").value.trim().length === 0;
   let checkno16 = document.getElementById("wPlaceId").value.trim().length === 0;
   let checkno18 = document.getElementById("wProvince").value.trim().length === 0;
   let checkno19 = document.getElementById("wDistrict").value.trim().length === 0;
-  let checkno20 = document.getElementById("wSubdistrict").value.trim().length === 0;
   let checkno21 = document.getElementById("wPhone").value.trim().length === 0;
 
   if (checkno2) {document.getElementById("datepicker1").classList.add("alertInput");}
@@ -105,12 +95,10 @@ function inputRequired2() {
   if (checkno10) {document.getElementById("home_id").classList.add("alertInput");}
   if (checkno11) {document.getElementById("province").classList.add("alertInput");}
   if (checkno12) {document.getElementById("district").classList.add("alertInput");}
-  if (checkno13) {document.getElementById("subdistrict").classList.add("alertInput");}
   if (checkno14) {document.getElementById("phone").classList.add("alertInput");}
   if (checkno16) {document.getElementById("wPlaceId").classList.add("alertInput");}
   if (checkno18) {document.getElementById("wProvince").classList.add("alertInput");}
   if (checkno19) {document.getElementById("wDistrict").classList.add("alertInput");}
-  if (checkno20) {document.getElementById("wSubdistrict").classList.add("alertInput");}
   if (checkno21) {document.getElementById("wPhone").classList.add("alertInput");}
 
   if (
@@ -121,7 +109,6 @@ function inputRequired2() {
     checkno10 ||
     checkno11 ||
     checkno12 ||
-    checkno13 ||
     checkno14 ||
     checkno16 ||
     checkno18 ||
@@ -142,12 +129,10 @@ function resetInputRequired2() {
   document.getElementById("home_id").classList.remove("alertInput");
   document.getElementById("province").classList.remove("alertInput");
   document.getElementById("district").classList.remove("alertInput");
-  document.getElementById("subdistrict").classList.remove("alertInput");
   document.getElementById("phone").classList.remove("alertInput");
   document.getElementById("wPlaceId").classList.remove("alertInput");
   document.getElementById("wProvince").classList.remove("alertInput");
   document.getElementById("wDistrict").classList.remove("alertInput");
-  document.getElementById("wSubdistrict").classList.remove("alertInput");
   document.getElementById("wPhone").classList.remove("alertInput");
   document.getElementById("ownName").classList.remove("alertInput");
   document.getElementById("ownSurname").classList.remove("alertInput");
@@ -155,7 +140,6 @@ function resetInputRequired2() {
   document.getElementById("ownHomeId").classList.remove("alertInput");
   document.getElementById("ownerProvince").classList.remove("alertInput");
   document.getElementById("ownerDistrict").classList.remove("alertInput");
-  document.getElementById("ownerSubdistrict").classList.remove("alertInput");
 }
 function foodRequired() {
   let checkfood1 = document.getElementById("foodBy").value.trim().length === 0;
@@ -189,8 +173,6 @@ function ownerRequire() {
     document.getElementById("ownerProvince").value.trim().length === 0;
   let owner7 =
     document.getElementById("ownerDistrict").value.trim().length === 0;
-  let owner8 =
-    document.getElementById("ownerSubdistrict").value.trim().length === 0;
 
   if (owner1) {
     document.getElementById("ownName").classList.add("alertInput");
@@ -210,9 +192,6 @@ function ownerRequire() {
   if (owner7) {
     document.getElementById("ownerDistrict").classList.add("alertInput");
   }
-  if (owner8) {
-    document.getElementById("ownerSubdistrict").classList.add("alertInput");
-  }
 
   if (
     owner1 ||
@@ -220,8 +199,7 @@ function ownerRequire() {
     owner3 ||
     owner4 ||
     owner6 ||
-    owner7 ||
-    owner8
+    owner7 
   ) {
     return false;
   } else {

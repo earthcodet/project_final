@@ -1718,6 +1718,15 @@ class service {
             })
         })
     }
+
+
+    testProvince(){
+        return new Promise((resolve, reject) => {
+            AddressDAOObj.testGetNewProvince().then((data) => {
+                return resolve(data)
+            })
+        })
+    }
 }
 
 module.exports = service
