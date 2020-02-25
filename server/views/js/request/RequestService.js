@@ -766,6 +766,10 @@ function createGroupData() {
             setDataUpdate('addressOwnerLandData')
             addressOwnerLandData.is_address_owner_changed = true
         }
+        file_is_uploaded = false
+        filesPdf = null
+        image_changed = false
+        
     }
 }
 function dataChange(type) {
@@ -914,7 +918,8 @@ function dataChange(type) {
                 landData.name != document.getElementById('ownName').value.trim() ||
                 landData.surname != document.getElementById('ownSurname').value.trim() ||
                 landData.birthday != document.getElementById('datepicker9').value.trim() ||
-                landData.phone != document.getElementById('ownPhone').value.trim()) {
+                landData.phone != document.getElementById('ownPhone').value.trim() ||
+                landData.file_upload_changed != file_is_uploaded ) {
                 status_data_change = true
             }
         }
@@ -1158,9 +1163,12 @@ function insertRequest() {
     return new Promise((resolve, reject) => {
         var formData = new FormData();
         for (var i = 0; i < totalFiles.length; i++) {
+            console.log(totalFiles[i].E_IMAGE_DATA === undefined)
+            console.log(totalFiles[i])
             if(totalFiles[i].E_IMAGE_DATA === undefined){
                 let file = totalFiles[i];
                 formData.append('files' + i, file);
+                console.log(formData)
             } 
         }
         console.log('form Data')

@@ -113,7 +113,6 @@ function inputRequired2() {
     checkno16 ||
     checkno18 ||
     checkno19 ||
-    checkno20 ||
     checkno21
   ) {
     return false;
