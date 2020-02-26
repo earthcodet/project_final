@@ -189,7 +189,7 @@
                     <a>อำเภอ <font color="red">*</font> :
                         <select id="district" style="width: 14%;"
                             onchange="document.getElementById('district').classList.remove('alertInput')"></select></a>
-                    <a>ตำบล <font color="red">*</font> :
+                    <a>ตำบล :
                         <select id="subdistrict" style="width: 13.5%;"
                             onchange="document.getElementById('subdistrict').classList.remove('alertInput')"></select></a>
                     <a>โทรศัพท์ <font color="red">*</font> :
@@ -206,9 +206,9 @@
                     <a>สถานที่ประกอบการ :
                         <input type="text" id="workplaceName" style="width: 37.5%"> (ถ้ามี)</a>
                     <a>พื้นที่ :
-                        <input type="int" id="area" style="width: 10%"> ตารางเมตร</a>
+                        <input type="number" id="area" style="width: 10%" value="0"> ตารางเมตร</a>
                     <a>จำนวนคนงาน :
-                        <input type="int" id="numPeople" style="width: 10%;"> คน</a>
+                        <input type="number" id="numPeople" style="width: 10%;" value="0"> คน</a>
                     <br>
                     <a style="margin-left: 2.2vw;">ประเภทกิจการ :
                         <input type="text" id="" style="width: 37.5%"> </a>&emsp;
@@ -238,7 +238,7 @@
                         <select id="wDistrict" style="width: 14%;"
                             onchange="document.getElementById('wDistrict').classList.remove('alertInput')"></a>
                     </select>
-                    <a>ตำบล <font color="red">*</font> :
+                    <a>ตำบล :
                         <select id="wSubdistrict" style="width: 13.5%;"
                             onchange="document.getElementById('wSubdistrict').classList.remove('alertInput')"></a>
                     </select>
@@ -254,8 +254,11 @@
                     <br>
                     <br>
                     <a>ใบอนุญาตฉบับจริง</a>&ensp;
-                    <a>เลขที่ :
-                        <input type="text" id="bNum" style="width: 10%;" disabled readonly></a>&ensp;
+                    <a>เลขที่ : RCPT 
+                        <input type="text" id="bNum" style="width: 10%;" disabled readonly
+                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                        maxlength="10"
+                        onkeyup='checkFormatMoneyId(this.value)'></a>&ensp;
                     <a>ออกให้เมื่อวันที่ :
                         <input type="text" id="datepicker2" id="" style="width: 12%;" disabled readonly></a>
                     <a>ค่าธรรมเนียม :
@@ -352,7 +355,7 @@
                             <select id="ownerProvince" style="width: 17.5%;"></select></a>
                         <a>อำเภอ <font color="red">*</font> :
                             <select id="ownerDistrict" style="width: 17.5%;"></select></a>
-                        <a>ตำบล <font color="red">*</font> :
+                        <a>ตำบล :
                             <select id="ownerSubdistrict" style="width: 17.5%;"></select></a>
                         <br>
                         <br>

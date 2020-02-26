@@ -1,5 +1,14 @@
 let newDocument = true
 let requestType = []
+if (document.getElementById('machinery' != undefined)) {
+    document.getElementById('machinery').value = 0
+}
+if(document.getElementById('area') != undefined){
+    document.getElementById('area').value = 0
+}
+if(document.getElementById('numPeople') != undefined){
+    document.getElementById('numPeople').value = 0
+}
 function checkView(typeForm) {
     let requsetId = getUrlVars()
     console.log(requsetId.id)
@@ -13,7 +22,7 @@ function checkView(typeForm) {
             let checkSight = requsetNo.slice(0, 1) === sight ? true : false
             console.log(`sight ${sight}`)
             console.log(`checkSight = ${checkSight} > ${requsetNo.slice(0, 1)} === ${sight} > ${requsetNo.slice(0, 1) === sight}`)
-           console.log(checkSight)
+            console.log(checkSight)
             if (checkSight) {
                 getRequestData(requsetNo, requestYear).then((raw_data) => {
                     console.log(raw_data)
@@ -44,7 +53,7 @@ function checkView(typeForm) {
                         console.log(`landData`)
                         console.log(landData)
                         console.log(`referecneData`)
-                        console.log(referecneData)
+                        console.log(referenceData)
                         console.log(`trianData`)
                         console.log(trianData)
                         console.log(`operatorAddressData`)
@@ -95,11 +104,11 @@ function setDataView() {
     document.getElementById(`subdistrict`).value = districtId
     document.getElementById("phone").value = operatorData.phone
     document.getElementById("fax").value = operatorData.fax
-    document.getElementById('reference_title').value = referecneData.title
-    document.getElementById('reference_name').value = referecneData.name
-    document.getElementById('reference_surname').value = referecneData.surname
-    document.getElementById('reference_status').value = referecneData.status
-    document.getElementById('reference_phone').value = referecneData.phone
+    document.getElementById('reference_title').value = referenceData.title
+    document.getElementById('reference_name').value = referenceData.name
+    document.getElementById('reference_surname').value = referenceData.surname
+    document.getElementById('reference_status').value = referenceData.status
+    document.getElementById('reference_phone').value = referenceData.phone
 
     //Date request exp 
     document.getElementById('request_date_issued').value = requestData.date_issued
@@ -158,9 +167,13 @@ function setDataView() {
         document.getElementById('typeWorkplace').value = establishmentData.type
     }
     if (document.getElementById('machinery' != undefined)) {
-        document.getElementById('machinery').value = requestData.machine_size
-        document.getElementById('area').value = requestData.area_size
-        document.getElementById('numPeople').value = requestData.worker
+        document.getElementById('machinery').value = establishmentData.machine_size
+    }
+    if(document.getElementById('area') != undefined){
+        document.getElementById('area').value = establishmentData.area_size
+    }
+    if(document.getElementById('numPeople') != undefined){
+        document.getElementById('numPeople').value = establishmentData.worker
     }
     if (document.getElementById('con_no1') != undefined) {
         document.getElementById('con_no1').value = requestData.condition_no_1
@@ -309,7 +322,7 @@ function setRequestDataReturn(raw_data) {
     landData.address_id = checkformatReturn(raw_data.land_address_establishment)
     addressOwnerLandData.id = checkformatReturn(raw_data.establishment_is_land_owned)
     trianData.id = checkformatReturn(raw_data.train_id)
-    referecneData.id = checkformatReturn(raw_data.reference_id)
+    referenceData.id = checkformatReturn(raw_data.reference_id)
     landData.id = requestData.establishment_is_land_owned
     addressEstablishmentData.id = establishmentData.address_id
     establishmentData.id = requestData.establishment_id
@@ -317,7 +330,7 @@ function setRequestDataReturn(raw_data) {
     console.log(`landData`)
     console.log(landData)
     console.log(`referecneData`)
-    console.log(referecneData)
+    console.log(referenceData)
     console.log(`trianData`)
     console.log(trianData)
     console.log(`establishmentData`)
@@ -443,12 +456,12 @@ function setLandData(raw_data) {
 }
 function setReferecneData(raw_data) {
     if (raw_data.REFERENCE_DATA != undefined) {
-        referecneData.id = raw_data.REFERENCE_DATA.REFERENCE_ID
-        referecneData.title = raw_data.REFERENCE_DATA.REFERENCE_TITLE
-        referecneData.name = raw_data.REFERENCE_DATA.REFERENCE_NAME
-        referecneData.surname = raw_data.REFERENCE_DATA.REFERENCE_SURNAME
-        referecneData.status = raw_data.REFERENCE_DATA.REFERENCE_SURNAME
-        referecneData.phone = raw_data.REFERENCE_DATA.REFERENCE_PHONE
+        referenceData.id = raw_data.REFERENCE_DATA.REFERENCE_ID
+        referenceData.title = raw_data.REFERENCE_DATA.REFERENCE_TITLE
+        referenceData.name = raw_data.REFERENCE_DATA.REFERENCE_NAME
+        referenceData.surname = raw_data.REFERENCE_DATA.REFERENCE_SURNAME
+        referenceData.status = raw_data.REFERENCE_DATA.REFERENCE_SURNAME
+        referenceData.phone = raw_data.REFERENCE_DATA.REFERENCE_PHONE
     }
 
 
@@ -499,6 +512,8 @@ function setassistantOperatorData(raw_data) {
 // set data change
 function createGroupData() {
     // set 
+    operatorData.is_personal_changed = false
+    operatorAddressData.is_address_changed = false
     if (operatorData.nationality != document.getElementById('nationality').value
         || operatorData.race != document.getElementById('race').value) {
 
@@ -534,7 +549,7 @@ function createGroupData() {
         operatorAddressData.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
         operatorAddressData.province_name = province[provinceValue - 1].PROVINCE_NAME;
     }
-    if (newDocument) {
+    if (requestData.no === '') {
         requestData.no = ''
         requestData.year = parseInt(new Date().toISOString().slice(0, 4)) + 543
         requestData.personal_id_owner = operatorData.id
@@ -545,11 +560,11 @@ function createGroupData() {
         // -- - - 
         requestData.reference_id = document.getElementById('reference_name').value.trim().length != 0 ? 'YES' : 'NO'
         if (requestData.reference_id === 'YES') {
-            referecneData.title = document.getElementById('reference_title').value.trim()
-            referecneData.name = document.getElementById('reference_name').value.trim()
-            referecneData.surname = document.getElementById('reference_surname').value.trim()
-            referecneData.status = document.getElementById('reference_status').value.trim()
-            referecneData.phone = document.getElementById('reference_phone').value
+            referenceData.title = document.getElementById('reference_title').value.trim()
+            referenceData.name = document.getElementById('reference_name').value.trim()
+            referenceData.surname = document.getElementById('reference_surname').value.trim()
+            referenceData.status = document.getElementById('reference_status').value.trim()
+            referenceData.phone = document.getElementById('reference_phone').value
         }
 
         if (document.getElementById('foodTrain') != undefined) {
@@ -706,61 +721,393 @@ function createGroupData() {
 
 
     } else {
-        // มีข้อมูลแล้ว
-        /*
         requestData.is_request_changed = false
-            requestData.no =   ''
-            requestData.year =   parseInt(new Date().toISOString().slice(0, 4)) + 543
-            requestData.personal_id_owner =   'P000001'
-            requestData.request_type_id =   15
-            requestData.staff_id_alderman =   'S0001'
-            requestData.establishment_id =   ''
-            requestData.staff_id_money =   'S0001'
-            requestData.reference_id =   'YES'
-            requestData.train_id =   'YES'
-            requestData.personal_id_assistant =   ''
-            requestData.staff_id_approve =   'S0001' // '' and '-' => 'NULL'
-            requestData.establishment_is_land_owned =   ''
-            requestData.establishment_address_id =   ''
-            requestData.image_is_changed =   false
-            requestData.menu =   'ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร'
-            requestData.date_submission =   '30-05-2563'
-            requestData.date_approve =   '30-05-2563'
-            requestData.doc_no1 =   'N'
-            requestData.doc_no2 =   'N'
-            requestData.doc_no3 =   'Y'
-            requestData.doc_no4 =   'Y'
-            requestData.doc_no5 =   'Y'
-            requestData.doc_no6 =   'Y'
-            requestData.subcategory =   ''
-            requestData.product_type =   ''
-            requestData.sell_start =   '13 =  48 =  00.000'
-            requestData.sell_end =   '13 =  48 =  00.000'
-            requestData.sell_allow =   'Y'
-            requestData.receipt_order =   '15-05-2562'
-            requestData.receipt_fine =   300
-            requestData.receipt_fee =   60.5
-            requestData.receipt_total =   ''
-            //
-            requestData.receipt_date =   '30-05-2563'
-            requestData.date_issued =   '30-05-2563'
-            requestData.date_expired =   '30-05-2563'
-            //
-            requestData.condition_no_1 =   ''
-            requestData.condition_no_2 =   ''
-            requestData.condition_no_3 =   ''
-            requestData.condition_no_4 =   ''
-            requestData.image_name =   ''
-            requestData.total_image =   0
-            requestData.status =   ''
-            requestData.delete_logic =   ''
-            requestData.is_deleted =   ''
-            requestData.last_update =   '20-05-2563'
-            requestData.username =   'ADMIN'
-            */
+        requestData.image_is_changed = false
+        establishmentData.is_establishment_changed = false
+        establishmentData.is_land_owned = false
+        landData.is_land_changed = false
+        landData.file_upload_changed = false
+        referenceData.is_reference_changed = false
+        trianData.is_trian_changed = false
+        operatorAddressData.is_address_changed = false
+        operatorData.is_personal_changed = false
+        assistantOperatorData.is_assistant_changed = false
+        addressOwnerLandData.is_address_owner_changed = false
+
+        let requestData_change = dataChange('requestData')
+        let establishmentData_change = dataChange('establishmentData')
+        let addressEstablishmentData_change = dataChange('addressEstablishmentData')
+        let trianData_change = dataChange('trianData')
+        let referenceData_change = dataChange('referenceData')
+        let landData_change = dataChange('landData')
+        let addressOwnerLandData_change = dataChange('addressOwnerLandData')
+        console.log(`
+        requestData_change   ${requestData_change}
+        establishmentData_change ${establishmentData_change}
+        addressEstablishmentData_change ${addressEstablishmentData_change}
+        trianData_change ${trianData_change}
+        referenceData_change ${referenceData_change}
+        landData_change ${landData_change}
+        addressOwnerLandData_change ${addressOwnerLandData_change}
+        `)
+        if (requestData_change) {
+            setDataUpdate('requestData')
+            requestData.is_request_changed = true
+        }
+        if (establishmentData_change) {
+            console.log(establishmentData_change)
+            setDataUpdate('establishmentData')
+            establishmentData.is_establishment_changed = true
+        }
+        if (addressEstablishmentData_change) {
+            setDataUpdate('addressEstablishmentData')
+            addressEstablishmentData.is_address_establishment_changed = true
+        }
+        if (trianData_change) {
+            setDataUpdate('trianData')
+            trianData.is_trian_changed = true
+        }
+        if (referenceData_change) {
+            setDataUpdate('referenceData')
+            referenceData.is_reference_changed = true
+        }
+        if (landData_change) {
+            setDataUpdate('landData')
+            landData.is_land_changed = true
+            landData.file_upload_changed = file_is_uploaded 
+        }
+        if (addressOwnerLandData_change) {
+            setDataUpdate('addressOwnerLandData')
+            addressOwnerLandData.is_address_owner_changed = true
+        }
+
+        // reset Utilities.js
+        file_is_uploaded = false
+        image_changed = false
+        
     }
 }
+function dataChange(type) {
+    let status_data_change = false
+    if (type === 'requestData') {
+        let referecne_id_t = document.getElementById('reference_name').value.trim().length != 0 ? 'YES' : 'NO'
+        let assistant_t = assistantOperatorData.id != '' ? assistantOperatorData.id : ''
+        let doc_no_1_t = document.getElementById('documentId').checked === true ? 'Y' : 'N'
+        let doc_no_2_t = document.getElementById('documenthHome').checked === true ? 'Y' : 'N'
+        let doc_no_3_t = document.getElementById('documentLegalEntity').checked === true ? 'Y' : 'N'
+        let doc_no_4_t = document.getElementById('documentSignature').checked === true ? 'Y' : 'N'
+        let doc_no_5_t = document.getElementById('documentSJ4').checked === true ? 'Y' : 'N'
+        let doc_no_6_t = document.getElementById('documentOther').checked === true ? document.getElementById('other').value : 'N'
+        let train_id_t = 'NO'
+        if (document.getElementById('foodTrain') != undefined) {
+            train_id_t = document.getElementById('foodTrain').checked === true ? 'YES' : 'NO'
+        }
+        let sell_allow_t = 'N'
+        if (document.getElementById('useSpirits') != undefined) {
+            sell_allow_t = document.getElementById('useSpirits').checked === true ? 'Y' : 'N'
+        }
 
+        console.log(`1check image = ${requestData.image_is_changed}`)
+        console.log(`2check image = ${image_changed}`)
+        if (requestData.image_is_changed != image_changed ||
+            requestData.request_type_id != getRequestTypeId(document.getElementById('typeReq').value.trim()) ||
+            requestData.reference_id != referecne_id_t ||
+            requestData.total_image != totalFiles.length ||
+            requestData.personal_id_assistant != assistant_t ||
+            requestData.date_submission != document.getElementById('datepicker1').value ||
+            requestData.doc_no1 != doc_no_1_t ||
+            requestData.doc_no2 != doc_no_2_t ||
+            requestData.doc_no3 != doc_no_3_t ||
+            requestData.doc_no4 != doc_no_4_t ||
+            requestData.doc_no5 != doc_no_5_t ||
+            requestData.doc_no6 != doc_no_6_t
+        ) {
+            status_data_change = true
+        } else {
+            if (document.getElementById('foodTrain') != undefined) {
+                if (requestData.train_id != train_id_t) {
+                    status_data_change = true
+                }
+            } if (document.getElementById('typeReForm') != undefined) {
+                if (requestData.subcategory != document.getElementById('typeReForm').value ||
+                    requestData.product_type != document.getElementById('typeProduct').value.trim() ||
+                    requestData.sell_start != document.getElementById('timeStart').value ||
+                    requestData.sell_end != document.getElementById('timeEnd').value) {
+                    status_data_change = true
+                }
+            } if (document.getElementById('useSpirits') != undefined) {
+                if (requestData.sell_allow != sell_allow_t) {
+                    status_data_change = true
+                }
+            } if (document.getElementById('con_no1') != undefined) {
+                if (requestData.condition_no_1 != document.getElementById('con_no1').value.trim() ||
+                    requestData.condition_no_2 != document.getElementById('con_no2').value.trim() ||
+                    requestData.condition_no_3 != document.getElementById('con_no3').value.trim() ||
+                    requestData.condition_no_4 != document.getElementById('con_no4').value.trim()) {
+                    status_data_change = true
+                }
+            }
+        }
+    }
+    if (type === 'establishmentData') {
+        if (establishmentData.perosonal_id != operatorData.id ||
+            establishmentData.name != document.getElementById('workplaceName').value.trim() ||
+            establishmentData.phone != document.getElementById('wPhone').value.trim() ||
+            establishmentData.fax != document.getElementById('wFax').value.trim()) {
+                console.log(`1`)
+            status_data_change = true
+        } else {
+            if (document.getElementById('typeWorkplace') != undefined) {
+                if (establishmentData.type != document.getElementById('typeWorkplace').value.trim()) {
+                    status_data_change = true
+                    console.log(`2`)
+                }
+            }
+            if (document.getElementById('machinery') != undefined) {
+                if (establishmentData.machine_size != document.getElementById('machinery').value.trim()) {
+                    status_data_change = true
+                    console.log(`3`)
+                }
+            }
+            if (document.getElementById('area') != undefined) {
+                if (establishmentData.area_size != document.getElementById('area').value) {
+                    status_data_change = true
+                    console.log(`4 establishmentData.area_size ${establishmentData.area_size} != document.getElementById('area').value ${document.getElementById('area').value}`)
+                }
+            }
+            if (document.getElementById('numPeople') != undefined) {
+                if (establishmentData.worker != document.getElementById('numPeople').value) {
+                    status_data_change = true
+                    console.log(`5 establishmentData.worker ${establishmentData.worker} and document.getElementById('numPeople').value ${document.getElementById('numPeople').value}`)
+                }
+            }
+            if (document.getElementById('wLocation') != undefined) {
+                if (establishmentData.grond != document.getElementById('wLocation').value) {
+                    status_data_change = true
+                    console.log(`6 establishmentData.grond ${establishmentData.grond} and document.getElementById('wLocation').value ${document.getElementById('wLocation').value}`)
+                }
+            }
+            if (document.getElementById('useOtherPlace') != undefined) {
+                let establishment_is_land_owned_t = document.getElementById('useOtherPlace').checked === true ? 'YES' : 'NO'
+                if (establishmentData.is_land_owned != establishment_is_land_owned_t) {
+                    status_data_change = true
+                    console.log(`7 establishmentData.is_land_owned ${establishmentData.is_land_owned} === establishment_is_land_owned_t ${establishment_is_land_owned_t}`)
+                }
+            }
+        }
+    }
+    if (type === 'addressEstablishmentData') {
+        let provinceValue = parseInt(document.getElementById(`wProvince`).value);
+        let amphurValue = parseInt(document.getElementById(`wDistrict`).value);
+        let districtValue = parseInt(document.getElementById(`wSubdistrict`).value);
+        let district_name_t = district[districtValue - 1].DISTRICT_NAME;
+        let amphur_name_t = amphur[amphurValue - 1].AMPHUR_NAME;
+        let province_name_t = province[provinceValue - 1].PROVINCE_NAME;
+
+        if (addressEstablishmentData.home_number != document.getElementById('wPlaceId').value.trim() ||
+            addressEstablishmentData.moo != document.getElementById('wMoo').value.trim() ||
+            addressEstablishmentData.trxk != document.getElementById('wTrxk').value.trim() ||
+            addressEstablishmentData.sxy != document.getElementById('wSxy').value.trim() ||
+            addressEstablishmentData.building != document.getElementById('wBuilding').value.trim() ||
+            addressEstablishmentData.road != document.getElementById('wRoad').value.trim() ||
+            addressEstablishmentData.district_name != district_name_t ||
+            addressEstablishmentData.amphur_name != amphur_name_t ||
+            addressEstablishmentData.province_name != province_name_t) {
+            status_data_change = true
+        }
+    }
+    if (type === 'trianData') {
+        if (document.getElementById('foodBy') != undefined) {
+            if (trianData.issuse != document.getElementById('foodBy').value.trim() ||
+                trianData.date_exp != document.getElementById('datepicker5').value ||
+                trianData.date_issued != document.getElementById('datepicker6').value) {
+                status_data_change = true
+            }
+        }
+    }
+    if (type === 'referenceData') {
+        if (referenceData.title != document.getElementById('reference_title').value.trim() ||
+            referenceData.name != document.getElementById('reference_name').value.trim() ||
+            referenceData.surname != document.getElementById('reference_surname').value.trim() ||
+            referenceData.status != document.getElementById('reference_status').value.trim() ||
+            referenceData.phone != document.getElementById('reference_phone').value) {
+            status_data_change = true
+        }
+    }
+    if (type === 'landData') {
+        if (document.getElementById('useOtherPlace') != undefined) {
+            if (landData.title != document.getElementById('ownPrefix').value.trim() ||
+                landData.name != document.getElementById('ownName').value.trim() ||
+                landData.surname != document.getElementById('ownSurname').value.trim() ||
+                landData.birthday != document.getElementById('datepicker9').value.trim() ||
+                landData.phone != document.getElementById('ownPhone').value.trim() ||
+                landData.file_upload_changed != file_is_uploaded ) {
+                status_data_change = true
+            }
+        }
+    }
+    if (type === 'addressOwnerLandData') {
+        if (document.getElementById('useOtherPlace') != undefined) {
+            let provinceValue = parseInt(document.getElementById(`ownerProvince`).value);
+            let amphurValue = parseInt(document.getElementById(`ownerDistrict`).value);
+            let districtValue = parseInt(document.getElementById(`ownerSubdistrict`).value);
+
+            let provinceValue_name_t = province[provinceValue - 1].PROVINCE_NAME
+            let amphurValue_name_t = amphur[amphurValue - 1].AMPHUR_NAME;
+            let districtValue_name_t = district[districtValue - 1].DISTRICT_NAME;
+
+            if (addressOwnerLandData.home_number != document.getElementById('ownHomeId').value.trim() ||
+                addressOwnerLandData.moo != document.getElementById('ownMoo').value.trim() ||
+                addressOwnerLandData.trxk != document.getElementById('ownTrxk').value.trim() ||
+                addressOwnerLandData.sxy != document.getElementById('ownSxy').value.trim() ||
+                addressOwnerLandData.road != document.getElementById('ownRoad').value.trim() ||
+                addressOwnerLandData.district_name != districtValue_name_t ||
+                addressOwnerLandData.amphur_name != amphurValue_name_t ||
+                addressOwnerLandData.province_name != provinceValue_name_t) {
+                status_data_change = true
+            }
+        }
+    }
+    return status_data_change
+}
+
+function setDataUpdate(type) {
+    if (type === 'requestData') {
+        requestData.personal_id_owner = operatorData.id
+        requestData.request_type_id = getRequestTypeId(document.getElementById('typeReq').value.trim())
+        requestData.reference_id = document.getElementById('reference_name').value.trim().length != 0 ? 'YES' : 'NO'
+
+        if (document.getElementById('foodTrain') != undefined) {
+            requestData.train_id = document.getElementById('foodTrain').checked === true ? 'YES' : 'NO'
+        }
+        requestData.personal_id_assistant = assistantOperatorData.id != '' ? assistantOperatorData.id : ''
+        requestData.image_is_changed = image_changed //ตัวแปรอยู่ใน utilities.js
+        requestData.date_submission = document.getElementById('datepicker1').value
+        requestData.doc_no1 = document.getElementById('documentId').checked === true ? 'Y' : 'N'
+        requestData.doc_no2 = document.getElementById('documenthHome').checked === true ? 'Y' : 'N'
+        requestData.doc_no3 = document.getElementById('documentLegalEntity').checked === true ? 'Y' : 'N'
+        requestData.doc_no4 = document.getElementById('documentSignature').checked === true ? 'Y' : 'N'
+        requestData.doc_no5 = document.getElementById('documentSJ4').checked === true ? 'Y' : 'N'
+        requestData.doc_no6 = document.getElementById('documentOther').checked === true ? document.getElementById('other').value : 'N'
+        if (document.getElementById('typeReForm') != undefined) {
+            requestData.subcategory = document.getElementById('typeReForm').value
+        }
+        if (document.getElementById('typeProduct') != undefined) {
+            requestData.product_type = document.getElementById('typeProduct').value.trim()
+        }
+        if (document.getElementById('timeStart') != undefined) {
+            requestData.sell_start = document.getElementById('timeStart').value
+        }
+        if (document.getElementById('timeEnd') != undefined) {
+            requestData.sell_end = document.getElementById('timeEnd').value
+        }
+
+        if (document.getElementById('useSpirits') != undefined) {
+            requestData.sell_allow = document.getElementById('useSpirits').checked === true ? 'Y' : 'N'
+        }
+        if (document.getElementById('con_no1') != undefined) {
+            requestData.condition_no_1 = document.getElementById('con_no1').value.trim()
+        }
+        if (document.getElementById('con_no2') != undefined) {
+            requestData.condition_no_2 = document.getElementById('con_no2').value.trim()
+        }
+        if (document.getElementById('con_no3') != undefined) {
+            requestData.condition_no_3 = document.getElementById('con_no3').value.trim()
+        }
+        if (document.getElementById('con_no4') != undefined) {
+            requestData.condition_no_4 = document.getElementById('con_no4').value.trim()
+        }
+        requestData.total_image = totalFiles.length
+    }
+    if (type === 'establishmentData') {
+        establishmentData.perosonal_id = operatorData.id
+        if (document.getElementById('useOtherPlace') != undefined) {
+            establishmentData.is_land_owned = document.getElementById('useOtherPlace').checked === true ? 'YES' : 'NO'
+        } else {
+            establishmentData.is_land_owned = 'NO'
+        }
+        if (document.getElementById('typeWorkplace') != undefined) {
+            establishmentData.type = document.getElementById('typeWorkplace').value.trim()
+        }
+
+        establishmentData.name = document.getElementById('workplaceName').value.trim()
+        if (document.getElementById('machinery') != undefined) {
+            establishmentData.machine_size = document.getElementById('machinery').value.trim()
+        }
+        if (document.getElementById('area') != undefined) {
+            establishmentData.area_size = document.getElementById('area').value.trim()
+        }
+        if (document.getElementById('numPeople') != undefined) {
+            establishmentData.worker = document.getElementById('numPeople').value.trim()
+        }
+        establishmentData.phone = document.getElementById('wPhone').value.trim()
+        establishmentData.fax = document.getElementById('wFax').value.trim()
+
+        if (document.getElementById('wLocation') != undefined) {
+            establishmentData.grond = document.getElementById('wLocation').value.trim()
+        }
+    }
+    if (type === 'addressEstablishmentData') {
+        addressEstablishmentData.home_number = document.getElementById('wPlaceId').value.trim()
+        addressEstablishmentData.moo = document.getElementById('wMoo').value.trim()
+        addressEstablishmentData.trxk = document.getElementById('wTrxk').value.trim()
+        addressEstablishmentData.sxy = document.getElementById('wSxy').value.trim()
+        addressEstablishmentData.building = document.getElementById('wBuilding').value.trim()
+        addressEstablishmentData.road = document.getElementById('wRoad').value.trim()
+
+        let provinceValue = parseInt(document.getElementById(`wProvince`).value);
+        let amphurValue = parseInt(document.getElementById(`wDistrict`).value);
+        let districtValue = parseInt(document.getElementById(`wSubdistrict`).value);
+
+        addressEstablishmentData.district_name = district[districtValue - 1].DISTRICT_NAME;
+        addressEstablishmentData.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
+        addressEstablishmentData.province_name = province[provinceValue - 1].PROVINCE_NAME;
+    }
+    if (type === 'trianData') {
+        if (document.getElementById('foodTrain') != undefined) {
+            if (requestData.train_id === 'YES') {
+                trianData.issuse = document.getElementById('foodBy').value.trim()
+                trianData.date_exp = document.getElementById('datepicker5').value
+                trianData.date_issued = document.getElementById('datepicker6').value
+            }
+        }
+    }
+    if (type === 'referenceData') {
+        if (requestData.reference_id === 'YES') {
+            referenceData.title = document.getElementById('reference_title').value.trim()
+            referenceData.name = document.getElementById('reference_name').value.trim()
+            referenceData.surname = document.getElementById('reference_surname').value.trim()
+            referenceData.status = document.getElementById('reference_status').value.trim()
+            referenceData.phone = document.getElementById('reference_phone').value
+        }
+    }
+    if (type === 'landData') {
+        if (document.getElementById('ownPrefix') != undefined) {
+            landData.title = document.getElementById('ownPrefix').value.trim()
+            landData.name = document.getElementById('ownName').value.trim()
+            landData.surname = document.getElementById('ownSurname').value.trim()
+            landData.birthday = document.getElementById('datepicker9').value.trim()
+            landData.phone = document.getElementById('ownPhone').value.trim()
+        }
+    }
+    if (type === 'addressOwnerLandData') {
+        if (document.getElementById('ownPrefix') != undefined) {
+            addressOwnerLandData.home_number = document.getElementById('ownHomeId').value.trim()
+            addressOwnerLandData.moo = document.getElementById('ownMoo').value.trim()
+            addressOwnerLandData.trxk = document.getElementById('ownTrxk').value.trim()
+            addressOwnerLandData.sxy = document.getElementById('ownSxy').value.trim()
+            addressOwnerLandData.road = document.getElementById('ownRoad').value.trim()
+
+            let provinceValue = parseInt(document.getElementById(`ownerProvince`).value);
+            let amphurValue = parseInt(document.getElementById(`ownerDistrict`).value);
+            let districtValue = parseInt(document.getElementById(`ownerSubdistrict`).value);
+
+            addressOwnerLandData.district_name = district[districtValue - 1].DISTRICT_NAME;
+            addressOwnerLandData.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
+            addressOwnerLandData.province_name = province[provinceValue - 1].PROVINCE_NAME;
+        }
+    }
+}
 
 // getAge
 function getAge(date) {
@@ -772,7 +1119,7 @@ function getAge(date) {
     // date "08-02-2563" 1998-04-22T17:00:00.000Z
     let day_b = parseInt(date.slice(8, 9))
     let month_b = parseInt(date.slice(5, 7))
-    let year_b = parseInt(date.slice(0, 4)) > 1800  && parseInt(date.slice(0, 4)) < 2200 ? parseInt(date.slice(0, 4)) + 543 : parseInt(date.slice(0, 4))
+    let year_b = parseInt(date.slice(0, 4)) > 1800 && parseInt(date.slice(0, 4)) < 2200 ? parseInt(date.slice(0, 4)) + 543 : parseInt(date.slice(0, 4))
     let age
     if (month_b === month_now && day_b === day_now) {
         return age = year_now - year_b
@@ -804,44 +1151,73 @@ function createArrayInsert() {
     arrayItem.push(landData) // land 4
     arrayItem.push(addressOwnerLandData) // addressOwner 5
     arrayItem.push(filePdf) // file 6
-    arrayItem.push(referecneData) // reference 7
+    arrayItem.push(referenceData) // reference 7
     arrayItem.push(trianData) // train 8
     let object = {
         name: '',
         type: '',
         data: ''
     }
-    let = imageData = []
-    for (let i = 0; i < totalFiles.length; i++) {
-        imageData.push(object)
+    let imageData = []
+    console.log(totalFiles)
+    if (requestData.image_is_changed) {
+        console.log(`imageData`)
+        for (let i = 0; i < totalFiles.length; i++) {
+            console.log(i)
+            if(totalFiles[i].E_IMAGE_TYPE != undefined){
+                object.type = totalFiles[i].E_IMAGE_TYPE
+            }
+            imageData.push(object) 
+            object = {
+                name: '',
+                type: '',
+                data: ''
+            }
+        }
     }
-    arrayItem.push(imageData) // image 9
+   arrayItem.push(imageData) // image 9
+    console.log(imageData)
     return arrayItem
 }
 function insertRequest() {
     createGroupData()
+    let item = createArrayInsert()
+    console.log(item)
     return new Promise((resolve, reject) => {
         console.log("insertToDatabase");
         var formData = new FormData();
-        formData.append('files', files);
-
-        for (var i = 0; i < totalFiles.length; i++) {
-            let file = totalFiles[i];
-            console.log(file);
-            formData.append('files' + i, file);
+        if(landData.file_upload_changed){
+            formData.append('files', filesPdf);
         }
-        formData.append("gropData", JSON.stringify(createArrayInsert()));
+       
+        
+        if (requestData.image_is_changed){
+                for (var i = 0; i < totalFiles.length; i++) {
+                    if(totalFiles[i].E_IMAGE_DATA === undefined){
+                        let image = totalFiles[i];
+                        formData.append('files' + i, image);
+                    } else{
+                        formData.append("files" + i,  base64toBlob(totalFiles[i].E_IMAGE_DATA_BASE64 , `image/${totalFiles[i].E_IMAGE_TYPE}`));
+                    }
+            }
+        }
+        formData.append("gropData", JSON.stringify(item));
+        filesPdf = null
+        // totalFiles = []
+        selectImageFile = 0
         axios.post("http://localhost:5000/insert/request", formData, {
             headers: {
                 "Content-Type": "multipart/form-data"
             }
         })
             .then(data => {
+                console.log(data.data)
                 return resolve(data.data);
             });
+           // return resolve(true);
+       
     });
 }
-
 function getRequestData(no, year) {
     return new Promise((resolve, reject) => {
         axios.get(`http://localhost:5000/get/request/${no}/${year}`).then((result) => {
@@ -892,6 +1268,7 @@ function getRequestTypeValue(value) {
     }
 }
 
+
 //get requestId form url
 function getUrlVars() {
     var vars = {};
@@ -902,6 +1279,8 @@ function getUrlVars() {
 }
 function createImage(image) {
     deleteImageAllRequest()
+    console.log(image)
+    totalFiles = image
     for (let i = 0; i < image.length; i++) {
         console.log(image[i])
         var span = document.createElement('span');
@@ -912,7 +1291,7 @@ function createImage(image) {
     width=100% 
     height=85% 
     src="`
-                , `data:image/${image[i].E_IMAGE_TYPE};base64,${image[i].E_IMAGE_DATA}`,
+                , `data:image/${image[i].E_IMAGE_TYPE};base64,${image[i].E_IMAGE_DATA_BASE64}`,
                 '" title="', escape(image[i].E_IMAGE_NAME), '"/>'
                 , "<br><button type='button' class='delete image'" +
                 "onclick='deleteImage()' >ลบรูปภาพนี้</button>", "</div>"
@@ -920,6 +1299,7 @@ function createImage(image) {
 
         document.getElementById('outputImage').insertBefore(span, null);
     }
+    console.log(totalFiles)
 }
 
 //create print 
@@ -963,3 +1343,26 @@ function getSightFormType(type) {
     }
     return sightT
 }
+
+//base64Toblob
+function base64toBlob(base64Data, contentType) {
+    contentType = contentType || '';
+    var sliceSize = 1024;
+    var byteCharacters = atob(base64Data);
+    var bytesLength = byteCharacters.length;
+    var slicesCount = Math.ceil(bytesLength / sliceSize);
+    var byteArrays = new Array(slicesCount);
+
+    for (var sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
+        var begin = sliceIndex * sliceSize;
+        var end = Math.min(begin + sliceSize, bytesLength);
+
+        var bytes = new Array(end - begin);
+        for (var offset = begin, i = 0; offset < end; ++i, ++offset) {
+            bytes[i] = byteCharacters[offset].charCodeAt(0);
+        }
+        byteArrays[sliceIndex] = new Uint8Array(bytes);
+    }
+    return new Blob(byteArrays, { type: contentType });
+}
+

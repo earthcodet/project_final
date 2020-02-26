@@ -191,7 +191,7 @@
                     <a>อำเภอ <font color="red">*</font> :
                         <select id="district" style="width: 14%;"
                             onchange="document.getElementById('district').classList.remove('alertInput')"></select></a>
-                    <a>ตำบล <font color="red">*</font> :
+                    <a>ตำบล :
                         <select id="subdistrict" style="width: 13.5%;"
                             onchange="document.getElementById('subdistrict').classList.remove('alertInput')"></select></a>
                     <a>โทรศัพท์ <font color="red">*</font> :
@@ -208,14 +208,14 @@
                     <a>ใช้ชื่อสถานที่ประกอบการว่า :
                         <input type="text" id="workplaceName" style="width: 37.5%"> (ถ้ามี)</a>
                     <a>พื้นที่ :
-                        <input type="int" id="area" style="width: 10%"> ตารางเมตร</a>
+                        <input type="number" id="area" style="width: 10%" value="0"> ตารางเมตร</a>
                     <a>จำนวนคนงาน :
-                        <input type="int" id="numPeople" style="width: 10%;"> คน</a>
+                        <input type="number" id="numPeople" style="width: 10%;" value="0"> คน</a>
                     <br>
                     <a style="margin-left: 2.2vw;">ประเภทกิจการ :
                         <input type="text" id="typeWorkplace" style="width: 37.5%"> </a>&emsp;
                     <a>ใช้เครื่องจักรขนาด :
-                        <input type="text" id="machinery" style="width: 8%;"> แรงม้า</a>
+                        <input type="number" id="machinery" style="width: 8%;" value="0"> แรงม้า</a>
                     <br>
                     <a>ตั้งอยู่เลขที่ <font color="red">*</font> :
                         <input type="text" id="wPlaceId" style="width: 7%;"
@@ -239,7 +239,7 @@
                     <a>อำเภอ <font color="red">*</font> :
                         <select id="wDistrict" style="width: 14%;"></a>
                     </select>
-                    <a>ตำบล <font color="red">*</font> :
+                    <a>ตำบล :
                         <select id="wSubdistrict" style="width: 13.5%;"></a>
                     </select>
                     <a>โทรศัพท์ <font color="red">*</font> :
@@ -253,15 +253,49 @@
                             maxlength="9" style="width: 13.2%;"></a>
                     <br>
                     <br>
-                    <a>ใบอนุญาตฉบับจริง</a>
-                    <a>เลขที่ :
-                        <input type="text" id="bNum" style="width: 10%;" disabled readonly></a>&ensp;
+                    <a>ใบอนุญาตฉบับจริง ปีที่ 1</a>
+                    <a>เลขที่ : RCPT 
+                        <input type="text" id="bNum" style="width: 10%;" disabled readonly
+                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                        maxlength="10"
+                        onkeyup='checkFormatMoneyId(this.value)'></a>&ensp;
                     <a>ออกให้เมื่อวันที่ :
-                        <input type="text" id="datepicker2" id="" style="width: 12%;" disabled readonly></a>
+                        <input type="text" id="datepicker2" id="" style="width: 12%;" disabled readonly
+                       </a>
                     <a>ค่าธรรมเนียม :
                         <input type="number" id="bFee" style="width: 12%;" disabled readonly></a>
                     <a>ค่าปรับ :
                         <input type="number" id="bFine" style="width: 12%;" disabled readonly></a>
+
+                    <br>
+                    <br>
+                    <a>ใบอนุญาตฉบับจริง ปีที่ 2</a>
+                    <a>เลขที่ : RCPT 
+                        <input type="text" id="bNumY2" style="width: 10%;" disabled readonly
+                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                        maxlength="10"
+                        onkeyup='checkFormatMoneyId(this.value)'></a>&ensp;
+                    <a>ออกให้เมื่อวันที่ :
+                        <input type="text" id="datepicker10" id="" style="width: 12%;" disabled readonly></a>
+                    <a>ค่าธรรมเนียม :
+                        <input type="number" id="bFeeY2" style="width: 12%;" disabled readonly></a>
+                    <a>ค่าปรับ :
+                        <input type="number" id="bFineY2" style="width: 12%;" disabled readonly></a>
+
+                    <br>
+                    <br>
+                    <a>ใบอนุญาตฉบับจริง ปีที่ 3</a>
+                    <a>เลขที่ : RCPT 
+                        <input type="text" id="bNumY3" style="width: 10%;" disabled readonly
+                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                        maxlength="10"
+                        onkeyup='checkFormatMoneyId(this.value)'></a>&ensp;
+                    <a>ออกให้เมื่อวันที่ :
+                        <input type="text" id="datepicker11" id="" style="width: 12%;" disabled readonly></a>
+                    <a>ค่าธรรมเนียม :
+                        <input type="number" id="bFeeY3" style="width: 12%;" disabled readonly></a>
+                    <a>ค่าปรับ :
+                        <input type="number" id="bFineY3" style="width: 12%;" disabled readonly></a>
 
                     <br>
                     <br>
@@ -368,7 +402,7 @@
                             <select id="ownerProvince" style="width: 17.5%;"></select></a>
                         <a>อำเภอ <font color="red">*</font> :
                             <select id="ownerDistrict" style="width: 17.5%;"></select></a>
-                        <a>ตำบล <font color="red">*</font> :
+                        <a>ตำบล :
                             <select id="ownerSubdistrict" style="width: 17.5%;"></select></a>
                         <br>
                         <br>
@@ -387,7 +421,7 @@
                     <input type="radio" name="spirits" id="notuseSpirits" value="ไม่ออกใบอนุญาต" checked>
                     <a>ไม่ออกใบอนุญาต</a>
                     <br><br>
-                    <input style="margin-left: 5vw;" type="file" id="uploadFilePdf" onchange="uploadImage(event)"
+                    <input style="margin-left: 5vw;" type="file" id="uploadFilePdfs" onchange="uploadImage(event)"
                         accept="application/pdf" multiple disabled>
                 </div><br>
                 <!-- สัมผัสอาหาร -->

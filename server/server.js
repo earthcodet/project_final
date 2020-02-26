@@ -147,7 +147,7 @@ app.get('/get/requestType/:type', (req, res) => {
   })
 })
 app.post('/insert/personal', (req, res) => {
-console.log(req.body.personal)
+  console.log(req.body.personal)
   var obj = JSON.parse(req.body.personal);
   console.log(req.files === null)
   console.log(req.files === undefined)
@@ -184,18 +184,16 @@ app.get('/search/personal/:id/:name/:surname', (req, res) => {
   })
 })
 app.post('/insert/request', (req, res) => {
-  
   var obj = JSON.parse(req.body.gropData);
-  if(req.files != null){
-    if(req.files.files != null){
+  if (req.files != null) {
+    if (req.files.files != null) {
       obj[6].data = req.files.files.data
-    }else{
+    } else {
       obj[6].data = null
     }
-  }else{
+  } else {
     obj[6].data = null
   }
- 
   for (let i = 0; i < obj[9].length; i++) {
     let image
     i === 0 ? image = req.files.files0 : ''
@@ -207,14 +205,23 @@ app.post('/insert/request', (req, res) => {
     i === 6 ? image = req.files.files6 : ''
     i === 7 ? image = req.files.files7 : ''
     // console.log(image)
-    obj[9][i].name = i+1
-    obj[9][i].type = image.mimetype.slice(6, image.mimetype.length)
-    obj[9][i].data = image.data
+    if(obj[9][i].type === ''){
+      obj[9][i].name = i + 1
+      obj[9][i].type = image.mimetype.slice(6, image.mimetype.length)
+      obj[9][i].data = image.data
+    }else{
+      obj[9][i].name = i + 1
+      obj[9][i].data = image.data
+    }
+    
   }
-  webService.InsertRequestStep(obj[0],obj[1],obj[2],obj[3],obj[4],obj[5],obj[6],obj[7],obj[8],req.session.username,obj[9]).then((data) => {
-    res.json(data);
-  })
- 
+  console.log(obj[6])
+  res.json(true)
+  
+  // webService.InsertRequestStep(obj[0], obj[1], obj[2], obj[3], obj[4], obj[5], obj[6], obj[7], obj[8], req.session.username, obj[9]).then((data) => {
+  //   res.json(data);
+  // })
+
 })
 
 app.get('/get/request/:no/:year', (req, res) => {
@@ -228,7 +235,7 @@ app.get('/get/requestTypeById/:id', (req, res) => {
   })
 })
 app.get('/get/viewImage/:id/:year', (req, res) => {
-  webService.getViewImageRequestByIdAndYear(req.params.id,req.params.year).then((request_viewImage) =>{
+  webService.getViewImageRequestByIdAndYear(req.params.id, req.params.year).then((request_viewImage) => {
     res.json(request_viewImage)
   })
 })

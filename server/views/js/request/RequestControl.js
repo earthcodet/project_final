@@ -5,6 +5,7 @@ var data = false
 var deleteData = false
 var addNew = false
 function addPage() {
+    resetRequestData()
     addNew = true
     deleteData = false
     data = false
@@ -37,16 +38,17 @@ function insertPage() {
         preConfirm: function () {
             return new Promise(function (resolve, reject) {
                 setTimeout(function () {
-                    if(preInsert()){
+                    if (preInsert()) {
                         insertRequest().then((data) => {
-                            setRequestDataReturn(data)
-                            document.getElementById('form_id').value = `${requestData.no}/${requestData.year}`
-                            document.getElementById('uploadFilePdf').value = ''
-                            if (files != null) {
-                                document.getElementById('status_upload_file').style.display = ''
-                            } else {
-                                document.getElementById('status_upload_file').style.display = 'none'
-                            }
+                            // setRequestDataReturn(data)
+                            // document.getElementById('form_id').value = `${requestData.no}/${requestData.year}`
+                            // document.getElementById('uploadFilePdf').value = ''
+                            // if (files != null) {
+                            //     document.getElementById('status_upload_file').style.display = ''
+                            // } else {
+                            //     document.getElementById('status_upload_file').style.display = 'none'
+                            // }
+                            //resetStatusChange()
                             resolve();
                         })
                     }
@@ -111,6 +113,8 @@ function printImg() {
 function editPage() {
     if (!deleteData) {
         addNew = true
+        image_changed = false
+        file = null
         disableMenuAll()
         enableMenu('saveMenu')
         disableFunction()
@@ -200,11 +204,11 @@ function deletePage() {
                         icon: "success",
                         confirmButtonColor: "#009688"
                     });
-                    if(document.getElementById('typeReForm') != undefined){
+                    if (document.getElementById('typeReForm') != undefined) {
                         resetInputRequired();
-                      }else{
+                    } else {
                         resetInputRequired2();
-                      }
+                    }
                     if (data === false) {
                         //resetInputUI()
                         addNew = false
@@ -214,7 +218,7 @@ function deletePage() {
                         //resetStyleIdDelete()
                         resetFunction()
                         //resetImageDefault()
-                    }else{
+                    } else {
                         //resetFunction()
                         setDataView()
                         disableMenuAll()
@@ -237,7 +241,7 @@ function restorePage() {
     enableMenu('editMenu')
     enableMenu('deleteMenu')
 }
-function changeStatusMenuData(){
+function changeStatusMenuData() {
     data = true
     addNew = false
     disableMenuAll()
@@ -270,7 +274,7 @@ function searchPersonal(typeSearch) {
             console.log('Searching')
             axios.get(`http://localhost:5000/search/personal/${id}/${name}/${surname}`).then((result) => {
                 if (result.data != 'Not found') {
-                    createResultSearch(result.data,typeSearch)
+                    createResultSearch(result.data, typeSearch)
                     errorSearch('', 'HIDE')
 
                     return resolve(result.data);
@@ -304,7 +308,7 @@ function errorSearch(texterror, action) {
         error.style.display = 'none'
     }
 }
-function createResultSearch(data,typeSearch) {
+function createResultSearch(data, typeSearch) {
     var tbl = document.getElementById("resultItems");
     if (tbl.getElementsByTagName("tbody")[0] != null || tbl.getElementsByTagName("tbody")[0] != undefined) {
         tbl.removeChild(tbl.getElementsByTagName("tbody")[0])
@@ -312,57 +316,57 @@ function createResultSearch(data,typeSearch) {
     var tblBody = document.createElement('tbody')
     for (var i = 0; i < data.length; i++) {
         // creates a table row
-            var row = document.createElement("tr");
-            //row index = this.rowIndex
-            row.onclick = function () { showItem(data[this.rowIndex - 1], typeSearch) }
-    
-            for (var j = 0; j < 4; j++) {
-                var cell = document.createElement("td");
-                if (j === 0) {
-                    var cellText = document.createTextNode(data[i].PERSONAL_NAME);
-                } else if (j === 1) {
-                    var cellText = document.createTextNode(data[i].PERSONAL_SURNAME);
-                } else if (j === 2) {
-                    let AddressText = ''
-                    AddressText = AddressText + `บ้านเลขที่ ${data[i].AID.ADDRESS_HOME_NUMBER} `
-                    AddressText = AddressText + `หมู่ ${data[i].AID.ADDRESS_MOO === null ? '-' : data[i].AID.ADDRESS_MOO} `
-                    AddressText = AddressText + `ตรอก ${data[i].AID.ADDRESS_TRXK === null ? '-' : data[i].AID.ADDRESS_TRXK} `
-                    AddressText = AddressText + `ซอย ${data[i].AID.ADDRESS_SXY === null ? '-' : data[i].AID.ADDRESS_SXY} `
-                    AddressText = AddressText + `อาคาร ${data[i].AID.ADDRESS_BUILDING === null ? '-' : data[i].AID.ADDRESS_BUILDING} `
-                    AddressText = AddressText + `ถนน ${data[i].AID.ADDRESS_ROAD === null ? '-' : data[i].AID.ADDRESS_ROAD} `
-                    AddressText = AddressText + `ตำบล ${data[i].AID.DISTRICT_NAME === null ? '-' : data[i].AID.DISTRICT_NAME} `
-                    AddressText = AddressText + `อำเภอ ${data[i].AID.AMPHUR_NAME === null ? '-' : data[i].AID.AMPHUR_NAME}`
-                    AddressText = AddressText + `จังหวัด ${data[i].AID.PROVINCE_NAME === null ? '-' : data[i].AID.PROVINCE_NAME}`
-                    var cellText = document.createTextNode(AddressText);
-                } else {
-                    var cellText = document.createTextNode(data[i].PERSONAL_PERSONAL_ID);
-                }
-    
-                cell.appendChild(cellText);
-                if( j === 3 && data[i].PERSONAL_IS_DELETED === 'Y'){
-                    cell.style.textDecoration = 'line-through'
-                }
-                
-                row.appendChild(cell);
+        var row = document.createElement("tr");
+        //row index = this.rowIndex
+        row.onclick = function () { showItem(data[this.rowIndex - 1], typeSearch) }
+
+        for (var j = 0; j < 4; j++) {
+            var cell = document.createElement("td");
+            if (j === 0) {
+                var cellText = document.createTextNode(data[i].PERSONAL_NAME);
+            } else if (j === 1) {
+                var cellText = document.createTextNode(data[i].PERSONAL_SURNAME);
+            } else if (j === 2) {
+                let AddressText = ''
+                AddressText = AddressText + `บ้านเลขที่ ${data[i].AID.ADDRESS_HOME_NUMBER} `
+                AddressText = AddressText + `หมู่ ${data[i].AID.ADDRESS_MOO === null ? '-' : data[i].AID.ADDRESS_MOO} `
+                AddressText = AddressText + `ตรอก ${data[i].AID.ADDRESS_TRXK === null ? '-' : data[i].AID.ADDRESS_TRXK} `
+                AddressText = AddressText + `ซอย ${data[i].AID.ADDRESS_SXY === null ? '-' : data[i].AID.ADDRESS_SXY} `
+                AddressText = AddressText + `อาคาร ${data[i].AID.ADDRESS_BUILDING === null ? '-' : data[i].AID.ADDRESS_BUILDING} `
+                AddressText = AddressText + `ถนน ${data[i].AID.ADDRESS_ROAD === null ? '-' : data[i].AID.ADDRESS_ROAD} `
+                AddressText = AddressText + `ตำบล ${data[i].AID.DISTRICT_NAME === null ? '-' : data[i].AID.DISTRICT_NAME} `
+                AddressText = AddressText + `อำเภอ ${data[i].AID.AMPHUR_NAME === null ? '-' : data[i].AID.AMPHUR_NAME}`
+                AddressText = AddressText + `จังหวัด ${data[i].AID.PROVINCE_NAME === null ? '-' : data[i].AID.PROVINCE_NAME}`
+                var cellText = document.createTextNode(AddressText);
+            } else {
+                var cellText = document.createTextNode(data[i].PERSONAL_PERSONAL_ID);
             }
-            tblBody.appendChild(row);
-        }   
-        
-    
+
+            cell.appendChild(cellText);
+            if (j === 3 && data[i].PERSONAL_IS_DELETED === 'Y') {
+                cell.style.textDecoration = 'line-through'
+            }
+
+            row.appendChild(cell);
+        }
+        tblBody.appendChild(row);
+    }
+
+
     tbl.appendChild(tblBody);
 }
-function runScript(e,type) {
+function runScript(e, type) {
     if (e.keyCode == 13) {
         searchPersonal(type)
         return false;
     }
 }
 function searchOparator(typeSearch) {
-        // new list ค่าใหม่   
-        search_name = ''
-        search_surname = ''
-        search_id = ''
-        let swal_html = `<div >
+    // new list ค่าใหม่   
+    search_name = ''
+    search_surname = ''
+    search_id = ''
+    let swal_html = `<div >
         <div class="display-center" onkeypress="return runScript(event,'${typeSearch}')">
                     <h5 style="font-size: 100%;">
                         ชื่อ :
@@ -395,28 +399,28 @@ function searchOparator(typeSearch) {
               </table>
         </div>
     </div>`
-        Swal.fire({
-            title: "ค้นหารายชื่อผู้ประกอบการ",
-            html: swal_html,
-            width: '80%',
-            customClass: 'swal-height',
-            showConfirmButton: false,
-            closeOnConfirm: false,
-            closeOnCancel: false
-        });
+    Swal.fire({
+        title: "ค้นหารายชื่อผู้ประกอบการ",
+        html: swal_html,
+        width: '80%',
+        customClass: 'swal-height',
+        showConfirmButton: false,
+        closeOnConfirm: false,
+        closeOnCancel: false
+    });
 }
 function showItem(arrayResult, type) {
     setDataOperator(arrayResult, type)
     Swal.close()
 }
 
-function printImg(no,year){
-    
-    if(data === true){
-        if(requestData.no != undefined && requestData.year != undefined){
-            if(requestData.no === ''){
+function printImg(no, year) {
+
+    if (data === true) {
+        if (requestData.no != undefined && requestData.year != undefined) {
+            if (requestData.no === '') {
                 window.open(`../utilities/viewImg.html`, '_blank');
-            }else{
+            } else {
                 window.open(`../utilities/viewImg.html?id=${requestData.no}${requestData.year}`, '_blank');
                 let requsetId = getUrlVars()
                 if (requsetId.id != undefined) {
@@ -426,9 +430,9 @@ function printImg(no,year){
                 }
             }
         }
-    }else{
+    } else {
         insertPage()
     }
-  
-              
+
+
 }
