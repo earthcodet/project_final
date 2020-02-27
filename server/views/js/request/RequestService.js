@@ -193,9 +193,9 @@ function setDataView() {
             document.getElementById('ownSxy').value = addressOwnerLandData.sxy
             document.getElementById('ownRoad').value = addressOwnerLandData.road
 
-            let provinceIdEL = parseInt(getProviceIdByName(addressEstablishmentData.province_name))
-            let amphurIdEL = parseInt(getAmphureIdByName(addressEstablishmentData.amphur_name, provinceIdEL))
-            let districtIdEL = parseInt(getDistrictIdByName(addressEstablishmentData.district_name, amphurIdEL))
+            let provinceIdEL = parseInt(getProviceIdByName(addressOwnerLandData.province_name))
+            let amphurIdEL = parseInt(getAmphureIdByName(addressOwnerLandData.amphur_name, provinceIdEL))
+            let districtIdEL = parseInt(getDistrictIdByName(addressOwnerLandData.district_name, amphurIdEL))
             document.getElementById(`ownerProvince`).value = provinceIdEL
             onwerAmphurSelect(parseInt(provinceIdEL))
             onwerDistrictSelect(parseInt(amphurIdEL))
@@ -743,7 +743,7 @@ function createGroupData() {
         let referenceData_change = dataChange('referenceData')
         let landData_change = dataChange('landData')
         let addressOwnerLandData_change = dataChange('addressOwnerLandData')
-        
+
         operatorData.is_personal_changed = true
         operatorAddressData.is_address_changed = true
 

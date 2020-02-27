@@ -1167,6 +1167,8 @@ class service {
         })
     }
     insertAddressOne(address) {
+        console.log('address+++  ')
+        console.log(address)
         return new Promise((resolve, reject) => {
             this.getNewId('ADDRESS').then((id) => {
                 address.id = id
@@ -1311,11 +1313,11 @@ class service {
             })
         })
     }
-    loopUpdateLand(land) {
+    loopUpdateLand(land, address) {
         return new Promise((resolve, reject) => {
             this.getNewId('LAND').then((id) => {
                 land.id = id
-                this.landUpdateStep(land).then((data) => {
+                this.landUpdateStep(land, address).then((data) => {
                     if (data.id != undefined) {
                         console.log('Update Land : complete')
                         return resolve(data)
@@ -1333,7 +1335,8 @@ class service {
                 if (land_data != undefined) {
                     let object = {
                         'id': land_data.LAND_ID,
-                        'address': land_data.ADDRESS_ID
+                        'address': land_data.ADDRESS_ID,
+                        'status_insert_address': true
                     }
                     land.id = land_data.LAND_ID
                     LandDAOObj.updateLand(land).then((train_update_status) => {
@@ -1342,14 +1345,20 @@ class service {
                         }
                     })
                 } else {
+                    console.log('address =cxcxlzkc;xlzc')
+                    address = this.formatInsert('ADDRESS', address)
+                    console.log(address)
                     this.insertAddressOne(address).then((addressResult) => {
+                        console.log(addressResult)
                         if (addressResult.check) {
                             land.address_id = addressResult.id
+                            land = this.formatInsert("LAND", land)
                             this.loopInsertLand(land).then((data) => {
                                 if (data.check) {
                                     let object = {
                                         'id': data.id,
-                                        'address': land.address_id
+                                        'address': land.address_id,
+                                        'status_insert_address': true
                                     }
                                     return resolve(object)
                                 }
@@ -1809,11 +1818,13 @@ class service {
                                                 if (Edata.is_land_owned === 'YES') {
                                                     if (land.is_land_changed) {
                                                         if (addressOwner.is_address_owner_changed) {
-                                                            this.updateAddress(addressOwner).then((data))
-                                                            this.loopUpdateLand(land).then((land_data_update) => {
+                                                            this.loopUpdateLand(land,addressOwner).then((land_data_update) => {
                                                                 item_return.land_id = land_data_update.id
                                                                 item_return.address_land_id = land_data_update.address
-
+                                                                if(land_data_update.address === addressOwner.id){
+                                                                    console.log('GGGGGGGGG  - 1')
+                                                                    this.updateAddress(this.formatInsert('ADDRESS',addressOwner))
+                                                                    }
                                                                 Edata.is_land_owned = land_data_update.id
                                                                 request.establishment_address_id = land_data_update.address
                                                                 request.establishment_is_land_owned = land_data_update.id
@@ -1829,7 +1840,7 @@ class service {
                                                                 EstablishmentDAOObj.update(new_edata)
                                                             })
                                                         } else {
-                                                            this.loopUpdateLand(land).then((land_data_update) => {
+                                                            this.loopUpdateLand(land,addressOwner).then((land_data_update) => {
                                                                 item_return.land_id = land_data_update.id
                                                                 item_return.address = land_data_update.address
 
@@ -1883,11 +1894,13 @@ class service {
                                             if (Edata.is_land_owned === 'YES') {
                                                 if (land.is_land_changed) {
                                                     if (addressOwner.is_address_owner_changed) {
-                                                        this.updateAddress(addressOwner).then((data))
-                                                        this.loopUpdateLand(land).then((land_data_update) => {
+                                                        this.loopUpdateLand(land,addressOwner).then((land_data_update) => {
                                                             item_return.land_id = land_data_update.id
                                                             item_return.address_land_id = land_data_update.address
-
+                                                            if(land_data_update.address === addressOwner.id){
+                                                                console.log('GGGGGGGGG  - 2')
+                                                                this.updateAddress(this.formatInsert('ADDRESS',addressOwner))
+                                                                }
                                                             Edata.is_land_owned = land_data_update.id
                                                             request.establishment_address_id = land_data_update.address
                                                             request.establishment_is_land_owned = land_data_update.id
@@ -1904,7 +1917,7 @@ class service {
                                                             EstablishmentDAOObj.update(new_edata)
                                                         })
                                                     } else {
-                                                        this.loopUpdateLand(land).then((land_data_update) => {
+                                                        this.loopUpdateLand(land,addressOwner).then((land_data_update) => {
                                                             item_return.land_id = land_data_update.id
                                                             item_return.address = land_data_update.address
 
@@ -1958,11 +1971,13 @@ class service {
                                         if (Edata.is_land_owned === 'YES') {
                                             if (land.is_land_changed) {
                                                 if (addressOwner.is_address_owner_changed) {
-                                                    this.updateAddress(addressOwner).then((data))
-                                                    this.loopUpdateLand(land).then((land_data_update) => {
+                                                    this.loopUpdateLand(land,addressOwner).then((land_data_update) => {
                                                         item_return.land_id = land_data_update.id
                                                         item_return.address_land_id = land_data_update.address
-
+                                                        if(land_data_update.address === addressOwner.id){
+                                                            console.log('GGGGGGGGG  - 3')
+                                                            this.updateAddress(this.formatInsert('ADDRESS',addressOwner))
+                                                            }
                                                         Edata.is_land_owned = land_data_update.id
                                                         request.establishment_address_id = land_data_update.address
                                                         request.establishment_is_land_owned = land_data_update.id
@@ -1979,7 +1994,7 @@ class service {
                                                         EstablishmentDAOObj.update(new_edata)
                                                     })
                                                 } else {
-                                                    this.loopUpdateLand(land).then((land_data_update) => {
+                                                    this.loopUpdateLand(land,addressOwner).then((land_data_update) => {
                                                         item_return.land_id = land_data_update.id
                                                         item_return.address = land_data_update.address
 
@@ -2049,11 +2064,13 @@ class service {
                                                 if (Edata.is_land_owned === 'YES') {
                                                     if (land.is_land_changed) {
                                                         if (addressOwner.is_address_owner_changed) {
-                                                            this.updateAddress(addressOwner).then((data))
-                                                            this.loopUpdateLand(land).then((land_data_update) => {
+                                                            this.loopUpdateLand(land,addressOwner).then((land_data_update) => {
                                                                 item_return.land_id = land_data_update.id
                                                                 item_return.address_land_id = land_data_update.address
-
+                                                                if(land_data_update.address === addressOwner.id){
+                                                                    console.log('GGGGGGGGG  - 4')
+                                                                    this.updateAddress(this.formatInsert('ADDRESS',addressOwner))
+                                                                    }
                                                                 Edata.is_land_owned = land_data_update.id
                                                                 request.establishment_address_id = land_data_update.address
                                                                 request.establishment_is_land_owned = land_data_update.id
@@ -2070,7 +2087,7 @@ class service {
                                                                 EstablishmentDAOObj.update(new_edata)
                                                             })
                                                         } else {
-                                                            this.loopUpdateLand(land).then((land_data_update) => {
+                                                            this.loopUpdateLand(land,addressOwner).then((land_data_update) => {
                                                                 item_return.land_id = land_data_update.id
                                                                 item_return.address = land_data_update.address
 
@@ -2117,11 +2134,13 @@ class service {
                                             if (Edata.is_land_owned === 'YES') {
                                                 if (land.is_land_changed) {
                                                     if (addressOwner.is_address_owner_changed) {
-                                                        this.updateAddress(addressOwner).then((data))
-                                                        this.loopUpdateLand(land).then((land_data_update) => {
+                                                        this.loopUpdateLand(land,addressOwner).then((land_data_update) => {
                                                             item_return.land_id = land_data_update.id
                                                             item_return.address_land_id = land_data_update.address
-
+                                                            if(land_data_update.address === addressOwner.id){
+                                                                console.log('GGGGGGGGG  - 5')
+                                                                this.updateAddress(this.formatInsert('ADDRESS',addressOwner))
+                                                                }
                                                             Edata.is_land_owned = land_data_update.id
                                                             request.establishment_address_id = land_data_update.address
                                                             request.establishment_is_land_owned = land_data_update.id
@@ -2138,7 +2157,7 @@ class service {
                                                             EstablishmentDAOObj.update(new_edata)
                                                         })
                                                     } else {
-                                                        this.loopUpdateLand(land).then((land_data_update) => {
+                                                        this.loopUpdateLand(land,addressOwner).then((land_data_update) => {
                                                             item_return.land_id = land_data_update.id
                                                             item_return.address = land_data_update.address
 
@@ -2192,11 +2211,13 @@ class service {
                                         if (Edata.is_land_owned === 'YES') {
                                             if (land.is_land_changed) {
                                                 if (addressOwner.is_address_owner_changed) {
-                                                    this.updateAddress(addressOwner).then((data))
-                                                    this.loopUpdateLand(land).then((land_data_update) => {
+                                                    this.loopUpdateLand(land,addressOwner).then((land_data_update) => {
                                                         item_return.land_id = land_data_update.id
                                                         item_return.address_land_id = land_data_update.address
-
+                                                        if(land_data_update.address === addressOwner.id){
+                                                            console.log('GGGGGGGGG  - 6')
+                                                            this.updateAddress(this.formatInsert('ADDRESS',addressOwner))
+                                                            }
                                                         Edata.is_land_owned = land_data_update.id
                                                         request.establishment_address_id = land_data_update.address
                                                         request.establishment_is_land_owned = land_data_update.id
@@ -2213,7 +2234,7 @@ class service {
                                                         EstablishmentDAOObj.update(new_edata)
                                                     })
                                                 } else {
-                                                    this.loopUpdateLand(land).then((land_data_update) => {
+                                                    this.loopUpdateLand(land,addressOwner).then((land_data_update) => {
                                                         item_return.land_id = land_data_update.id
                                                         item_return.address = land_data_update.address
 
@@ -2273,11 +2294,13 @@ class service {
                                 if (Edata.is_land_owned === 'YES') {
                                     if (land.is_land_changed) {
                                         if (addressOwner.is_address_owner_changed) {
-                                            this.updateAddress(addressOwner).then((data))
-                                            this.loopUpdateLand(land).then((land_data_update) => {
+                                            this.loopUpdateLand(land,addressOwner).then((land_data_update) => {
                                                 item_return.land_id = land_data_update.id
                                                 item_return.address_land_id = land_data_update.address
-    
+                                                if(land_data_update.address === addressOwner.id){
+                                                   console.log('GGGGGGGGG  - 7')
+                                                    this.updateAddress(this.formatInsert('ADDRESS',addressOwner))  
+                                                    }
                                                 Edata.is_land_owned = land_data_update.id
                                                 request.establishment_address_id = land_data_update.address
                                                 request.establishment_is_land_owned = land_data_update.id
@@ -2294,7 +2317,7 @@ class service {
                                                 EstablishmentDAOObj.update(new_edata)
                                             })
                                         } else {
-                                            this.loopUpdateLand(land).then((land_data_update) => {
+                                            this.loopUpdateLand(land,addressOwner).then((land_data_update) => {
                                                 item_return.land_id = land_data_update.id
                                                 item_return.address = land_data_update.address
     
@@ -2346,11 +2369,13 @@ class service {
                     if (Edata.is_land_owned === 'YES') {
                         if (land.is_land_changed) {
                             if (addressOwner.is_address_owner_changed) {
-                                this.updateAddress(addressOwner).then((data))
-                                this.loopUpdateLand(land).then((land_data_update) => {
+                                this.loopUpdateLand(land, addressOwner).then((land_data_update) => {
                                     item_return.land_id = land_data_update.id
                                     item_return.address_land_id = land_data_update.address
-
+                                    if(land_data_update.address === addressOwner.id && land_data_update.status_insert_address === false){
+                                        console.log('GGGGGGGGG  - 8')
+                                        this.updateAddress(this.formatInsert('ADDRESS',addressOwner))
+                                    }
                                     Edata.is_land_owned = land_data_update.id
                                     request.establishment_address_id = land_data_update.address
                                     request.establishment_is_land_owned = land_data_update.id
@@ -2367,7 +2392,7 @@ class service {
                                     EstablishmentDAOObj.update(new_edata)
                                 })
                             } else {
-                                this.loopUpdateLand(land).then((land_data_update) => {
+                                this.loopUpdateLand(land,addressOwner).then((land_data_update) => {
                                     item_return.land_id = land_data_update.id
                                     item_return.address = land_data_update.address
 
@@ -2399,11 +2424,15 @@ class service {
                     }
 
                 }
-                if (address.is_address_establishment_changed) {
+                if (address.is_address_establishment_changed ) {
+                    console.log('UPDATETETEAFEASDSADSCCZXCSDKALSKD:LASKD:LKASD:LKAS:LDK')
                     let newaddress = this.formatInsert('ADDRESS', address)
                     this.updateAddress(newaddress)
                 }
-
+                if(addressOwner.is_address_owner_changed && Edata.is_establishment_changed && land.is_land_changed === false){
+                    this.updateAddress(this.formatInsert('ADDRESS',addressOwner))
+                }
+                // && Edata.is_establishment_changed && land.is_land_changed === false
                 return resolve(item_return)
 
             })

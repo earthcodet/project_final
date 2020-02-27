@@ -59,9 +59,11 @@ class LandDAO {
             })
     }
     updateLand(land){
+        console.log('LNAD')
+        console.log(land)
         return new Promise((resolve, reject) => {
             let value  =`ADDRESS_ID='${land.address_id}', LAND_TITLE='${land.title}', LAND_NAME='${land.name}', LAND_SURNAME = '${land.surname}' , LAND_BIRTHDAY = ${land.birthday},LAND_PHONE ='${land.phone}'`
-            let query = `UPDATE land SET ${value} WHERE LAND_ID = '${train.id}'`
+            let query = `UPDATE land SET ${value} WHERE LAND_ID = '${land.id}'`
             con.query(query, function (err, result) {
                 if (err) {
                     console.log(err.code)

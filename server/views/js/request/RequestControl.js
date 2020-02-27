@@ -55,6 +55,7 @@ function insertPage() {
                                     document.getElementById('status_upload_file').style.display = 'none'
                                 }
                                 resetStatusChange()
+                                document.getElementById('uploadFilePdf').value = ''
                                 resolve();
                             }  
                         })

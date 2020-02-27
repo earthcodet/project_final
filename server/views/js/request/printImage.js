@@ -1,17 +1,18 @@
 let raw_data = {}
 function setImage() {
+    console.log(raw_data)
     for (let i = 0; i < 8; i++) {
         document.getElementById('image_' + i).src = `../../img/white.jpg`
     }
     if (raw_data.IMAGE_REVIEW.length < 5) {
         document.getElementById('pageTwo').style.display = 'none'
         for (let i = 0; i < raw_data.IMAGE_REVIEW.length; i++) {
-            document.getElementById('image_' + i).src = `data:image/${raw_data.IMAGE_REVIEW[i].E_IMAGE_TYPE};base64,${raw_data.IMAGE_REVIEW[i].E_IMAGE_DATA}`
+            document.getElementById('image_' + i).src = `data:image/${raw_data.IMAGE_REVIEW[i].E_IMAGE_TYPE};base64,${raw_data.IMAGE_REVIEW[i].E_IMAGE_DATA_BASE64}`
         }
     } else {
         document.getElementById('pageTwo').style.display = ''
         for (let i = 0; i < raw_data.IMAGE_REVIEW.length; i++) {
-            document.getElementById('image_' + i).src = `data:image/${raw_data.IMAGE_REVIEW[i].E_IMAGE_TYPE};base64,${raw_data.IMAGE_REVIEW[i].E_IMAGE_DATA}`
+            document.getElementById('image_' + i).src = `data:image/${raw_data.IMAGE_REVIEW[i].E_IMAGE_TYPE};base64,${raw_data.IMAGE_REVIEW[i].E_IMAGE_DATA_BASE64}`
         }
     }
 }
