@@ -562,23 +562,19 @@ class service {
                         if (data[i].PERSONAL_BIRTHDAY === null) {
                             data[i].PERSONAL_BIRTHDAY = undefined
                         } else {
-                            date = data[i].PERSONAL_BIRTHDAY.toISOString().slice(0, 10)
-                            data[i].PERSONAL_BIRTHDAY = this.formatDate('TO-DISPLAY', date)
+                            data[i].PERSONAL_BIRTHDAY = this.formatDate('TO-DISPLAY', data[i].PERSONAL_BIRTHDAY + '')
                         }
                         if (data[i].PERSONAL_CARD_ISSUED === null) {
                             data[i].PERSONAL_CARD_ISSUED = undefined
                         } else {
-                            date = data[i].PERSONAL_CARD_ISSUED.toISOString().slice(0, 10)
-                            data[i].PERSONAL_CARD_ISSUED = this.formatDate('TO-DISPLAY', date)
+                            data[i].PERSONAL_CARD_ISSUED = this.formatDate('TO-DISPLAY', data[i].PERSONAL_CARD_ISSUED + '')
                         }
                         if (data[i].PERSONAL_CARD_EXPIRE === null) {
                             data[i].PERSONAL_CARD_EXPIRE = undefined
                         } else {
-                            date = data[i].PERSONAL_CARD_EXPIRE.toISOString().slice(0, 10)
-                            data[i].PERSONAL_CARD_EXPIRE = this.formatDate('TO-DISPLAY', date)
+                            data[i].PERSONAL_CARD_EXPIRE = this.formatDate('TO-DISPLAY', data[i].PERSONAL_CARD_EXPIRE + '')
                         }
-                        date = data[i].PERSONAL_UPDATE.toISOString().slice(0, 10)
-                        data[i].PERSONAL_UPDATE = this.formatDate('TO-DISPLAY', date)
+                        data[i].PERSONAL_UPDATE = this.formatDate('TO-DISPLAY', data[i].PERSONAL_UPDATE + '')
 
                         //USER_UPDATE
 
@@ -694,6 +690,55 @@ class service {
             })
         })
     }
+    referenceUpdateStep(reference) {
+        return new Promise((resolve, reject) => {
+            ReferenceDAOObj.getReference(reference).then((referenceData) => {
+                if (referenceData.length != 0) {
+                    reference.id = referenceData[0].REFERENCE_ID
+                    ReferenceDAOObj.updateReference(reference).then((reference_update) => {
+                        return resolve(referenceData[0])
+                    })
+                } else {
+                    ReferenceDAOObj.insertReference(reference).then((data) => {
+                        if (data == 'true') {
+                            return resolve('true')
+                        } else {
+                            /* Duplicate Key : ER_DUP_ENTRY */
+                            return resolve('false')
+                        }
+                    })
+                }
+            })
+        })
+    }
+    loopUpdateReference(reference) {
+        return new Promise((resolve, reject) => {
+            this.getNewId('REFERENCE').then((id) => {
+                reference.id = id
+                this.referenceUpdateStep(reference).then((data) => {
+                    if (data.length != 0) {
+                        console.log(`Update : reference complete`)
+                        if (data === 'true') {
+                            let referenceResult = {
+                                REFERENCE_ID: id,
+                                REFERENCE_TITLE: reference.title,
+                                REFERENCE_NAME: reference.name,
+                                REFERENCE_SURNAME: reference.surname,
+                                REFERENCE_STATUS: reference.status,
+                                REFERENCE_PHONE: reference.phone
+                            }
+                            return resolve(referenceResult)
+                        } else {
+                            return resolve(data)
+                        }
+
+                    } else {
+                        this.loopUpdateReference(reference)
+                    }
+                })
+            })
+        })
+    }
     loopInsertReference(reference) {
         return new Promise((resolve, reject) => {
             this.getNewId('REFERENCE').then((id) => {
@@ -734,10 +779,62 @@ class service {
             TrainDAOObj.getTrian(id).then((trainData) => {
                 console.log(trainData[0] != undefined)
                 if (trainData[0] != undefined) {
-                    trainData[0].TRAIN_DATE_EXP = this.formatDate('TO-DISPLAY', trainData[0].TRAIN_DATE_EXP.toISOString().slice(0, 10))
-                    trainData[0].TRAIN_DATE_ISSUED = this.formatDate('TO-DISPLAY', trainData[0].TRAIN_DATE_ISSUED.toISOString().slice(0, 10))
+                    trainData[0].TRAIN_DATE_EXP = this.formatDate('TO-DISPLAY', trainData[0].TRAIN_DATE_EXP + '')
+                    trainData[0].TRAIN_DATE_ISSUED = this.formatDate('TO-DISPLAY', trainData[0].TRAIN_DATE_ISSUED + '')
                 }
                 return resolve(trainData)
+            })
+        })
+    }
+    loopUpdateTrain(train) {
+        //Mian InsertTrain
+        return new Promise((resolve, reject) => {
+            this.getNewId('TRIAN').then((id) => {
+                train.id = id
+                train.date_exp = this.formatDate('TO-INSERT', train.date_exp)
+                train.date_issued = this.formatDate('TO-INSERT', train.date_issued)
+                this.trainUpdateStep(train).then((data) => {
+                    if (data.length != 0) {
+                        console.log(`Insert : train complete`)
+                        if (data === 'true') {
+                            let trainResult = {
+                                TRAIN_ID: train.id,
+                                // MARK VVV
+                                // TRAIN_ISSUED: train.issuse,
+                                // TRAIN_DATE_EXP: this.formatDate('TO-DISPLAY', train.date_exp),
+                                // TRAIN_DATE_ISSUED: this.formatDate('TO-DISPLAY', train.date_issued)
+                            }
+                            return resolve(trainResult)
+                        } else {
+                            return resolve(data[0])
+                        }
+
+                    } else {
+                        this.loopUpdateTrain(train)
+                    }
+                })
+            })
+        })
+    }
+    trainUpdateStep(train) {
+        return new Promise((resolve, reject) => {
+            TrainDAOObj.getTrianDuplication(train).then((trainData) => {
+                if (trainData.length != 0) {
+                    train.id = trainData[0].TRAIN_ID
+                    TrainDAOObj.updateTrian(train).then((trainData_update) => {
+                        return resolve(trainData[0])
+                    })
+                } else {
+                    TrainDAOObj.insertTrian(train).then((data) => {
+                        if (data == 'true') {
+                            return resolve('true')
+                        } else {
+                            /* Duplicate Key : ER_DUP_ENTRY */
+                            console.log(`ERROR INSERT TRAIN : ${data}`)
+                            return resolve('false')
+                        }
+                    })
+                }
             })
         })
     }
@@ -745,8 +842,8 @@ class service {
         return new Promise((resolve, reject) => {
             TrainDAOObj.getTrianDuplication(train).then((trainData) => {
                 if (trainData.length != 0) {
-                    trainData[0].TRAIN_DATE_EXP = this.formatDate('TO-DISPLAY', trainData[0].TRAIN_DATE_EXP.toISOString().slice(0, 10))
-                    trainData[0].TRAIN_DATE_ISSUED = this.formatDate('TO-DISPLAY', trainData[0].TRAIN_DATE_ISSUED.toISOString().slice(0, 10))
+                    trainData[0].TRAIN_DATE_EXP = this.formatDate('TO-DISPLAY', trainData[0].TRAIN_DATE_EXP + '')
+                    trainData[0].TRAIN_DATE_ISSUED = this.formatDate('TO-DISPLAY', trainData[0].TRAIN_DATE_ISSUED + '')
                     return resolve(trainData[0])
                 } else {
                     TrainDAOObj.insertTrian(train).then((data) => {
@@ -775,9 +872,10 @@ class service {
                         if (data === 'true') {
                             let trainResult = {
                                 TRAIN_ID: train.id,
-                                TRAIN_ISSUED: train.issuse,
-                                TRAIN_DATE_EXP: this.formatDate('TO-DISPLAY', train.date_exp),
-                                TRAIN_DATE_ISSUED: this.formatDate('TO-DISPLAY', train.date_issued)
+                                // MASK VVV
+                                // TRAIN_ISSUED: train.issuse,
+                                // TRAIN_DATE_EXP: this.formatDate('TO-DISPLAY', train.date_exp),
+                                // TRAIN_DATE_ISSUED: this.formatDate('TO-DISPLAY', train.date_issued)
                             }
                             return resolve(trainResult)
                         } else {
@@ -883,14 +981,65 @@ class service {
         if (type === 'TO-DISPLAY') {
             //2020-05-29T17:00:00.000Z
             if (date != null) {
-                let realdate = date.substring(0, 10);
-                let temp = realdate.split('-')
-                let day = temp[2]
-                let month = temp[1]
-                let year = parseInt(temp[0]) + 543
+                //O
+                // let realdate = date.substring(0, 10);
+                // let temp = realdate.split('-')
+                // let day = temp[2]
+                // let month = temp[1]
+                // let year = parseInt(temp[0]) + 543
+                // let format = `${day}-${month}-${year}` //16-01-2563
+
+                // return format
+                // Wed Feb 05 2020 00:00:00 GMT+0700
+                let realdate = date.split(' ')
+                let day = realdate[2]
+                let month = realdate[1]
+                let year = parseInt(realdate[3]) + 543
+                switch (month) {
+                    case 'Jan':
+                        month = '01'
+                        break;
+                    case 'Feb':
+                        month = '02'
+                        break;
+                    case 'Mar':
+                        month = '03'
+                        break;
+                    case 'Apr':
+                        month = '04'
+                        break;
+                    case 'May':
+                        month = '05'
+                        break;
+                    case 'Jun':
+                        month = '06'
+                        break;
+                    case 'Jul':
+                        month = '07'
+                        break;
+                    case 'Aug':
+                        month = '08'
+                        break;
+                    case 'Sep':
+                        month = '09'
+                        break;
+                    case 'Oct':
+                        month = '010'
+                        break;
+                    case 'Nov':
+                        month = '11'
+                        break;
+                    default:
+                        //Dec
+                        month = '12'
+                        break;
+                }
                 let format = `${day}-${month}-${year}` //16-01-2563
                 return format
+
             }
+            console.log(`2 date`)
+            console.log(date)
             return date
         }
     }
@@ -917,89 +1066,88 @@ class service {
             })
         })
     }
-
     formatInsert(type, data) {
+        let new_data = data
         if (type === 'PERSONAL') {
-            data.surname = '' ? data.surname = 'NULL' : data.surname = `'${data.surname}'`
-            data.title === '' ? data.title = 'NULL' : data.title = `'${data.title}'`
-            data.phone === '' ? data.phone = '-' : data.phone = data.phone
-            data.nationality === '' || data.nationality === '-' ? data.nationality = 'NULL' : data.nationality = `'${data.nationality}'`
-            data.race === '' || data.race === '-' ? data.race = 'NULL' : data.race = data.race = `'${data.race}'`
-            data.birthday.length === 0 ? data.birthday = 'NULL' : data.birthday = data.birthday
-            data.card_expipe.length === 0 ? data.card_expipe = 'NULL' : data.card_expipe = data.card_expipe
-            data.fax === '' || data.fax === '-' ? data.fax = 'NULL' : data.fax = `'${data.fax}'`
-            data.surname === '' ? data.surname = 'NULL' : `'${data.surname}'`
-            return data
+            new_data.surname = '' ? new_data.surname = 'NULL' : new_data.surname = `'${new_data.surname}'`
+            new_data.title === '' ? new_data.title = 'NULL' : new_data.title = `'${new_data.title}'`
+            new_data.phone === '' ? new_data.phone = '-' : new_data.phone = new_data.phone
+            new_data.nationality === '' || new_data.nationality === '-' ? new_data.nationality = 'NULL' : new_data.nationality = `'${new_data.nationality}'`
+            new_data.race === '' || new_data.race === '-' ? new_data.race = 'NULL' : new_data.race = new_data.race = `'${new_data.race}'`
+            new_data.birthday.length === 0 ? new_data.birthday = 'NULL' : new_data.birthday = new_data.birthday
+            new_data.card_expipe.length === 0 ? new_data.card_expipe = 'NULL' : new_data.card_expipe = new_data.card_expipe
+            new_data.fax === '' || new_data.fax === '-' ? new_data.fax = 'NULL' : new_data.fax = `'${new_data.fax}'`
+            new_data.surname === '' ? new_data.surname = 'NULL' : `'${new_data.surname}'`
+            return new_data
         }
         if (type === 'ADDRESS') {
-            data.home_number === '' ? data.home_number = '-' : data.home_number = data.home_number
-            data.moo === '' || data.moo === '-' ? data.moo = 'NULL' : data.moo = `'${data.moo}'`
-            data.trxk === '' || data.trxk === '-' ? data.trxk = 'NULL' : data.trxk = `'${data.trxk}'`
-            data.sxy === '' || data.sxy === '-' ? data.sxy = 'NULL' : data.sxy = `'${data.sxy}'`
-            data.building === '' || data.building === '-' ? data.building = 'NULL' : data.building = `'${data.building}'`
-            data.road === '' || data.road === '-' ? data.road = 'NULL' : data.road = `'${data.road}'`
-            return data
+            new_data.home_number === '' ? new_data.home_number = '-' : new_data.home_number = new_data.home_number
+            new_data.moo === '' || new_data.moo === '-' ? new_data.moo = 'NULL' : new_data.moo = `'${new_data.moo}'`
+            new_data.trxk === '' || new_data.trxk === '-' ? new_data.trxk = 'NULL' : new_data.trxk = `'${new_data.trxk}'`
+            new_data.sxy === '' || new_data.sxy === '-' ? new_data.sxy = 'NULL' : new_data.sxy = `'${new_data.sxy}'`
+            new_data.building === '' || new_data.building === '-' ? new_data.building = 'NULL' : new_data.building = `'${new_data.building}'`
+            new_data.road === '' || new_data.road === '-' ? new_data.road = 'NULL' : new_data.road = `'${new_data.road}'`
+            return new_data
         }
-
         if (type === 'ESTABLISHMENT') {
-            data.reference_id = data.reference_id === '' ? 'NULL' : 'YES'
-            data.train_id = data.train_id === '' || data.train_id === 'NO' ? 'NULL' : 'YES'
-            data.is_land_owned === 'NO' ? data.is_land_owned = 'NULL' : data.is_land_owned = `'${data.is_land_owned}'`
-            data.type === '' ? data.type = 'NULL' : data.type = `'${data.type}'`
-            data.name === '' ? data.name = 'NULL' : data.name = `'${data.name}'`
+            new_data.reference_id = new_data.reference_id === '' ? 'NULL' : 'YES'
+            new_data.train_id = new_data.train_id === '' || new_data.train_id === 'NO' ? 'NULL' : 'YES'
+            new_data.is_land_owned === 'NO' ? new_data.is_land_owned = 'NULL' : new_data.is_land_owned = `'${new_data.is_land_owned}'`
+            new_data.type === '' ? new_data.type = 'NULL' : new_data.type = `'${new_data.type}'`
+            new_data.name === '' ? new_data.name = 'NULL' : new_data.name = `'${new_data.name}'`
 
-            data.machine_size === '' ? data.machine_size = 0 : ''
-            data.area_size === '' ? data.area_size = 0 : ''
-            data.worker === '' ? data.worker = 0 : ''
+            new_data.machine_size === '' ? new_data.machine_size = 0 : ''
+            new_data.area_size === '' ? new_data.area_size = 0 : ''
+            new_data.worker === '' ? new_data.worker = 0 : ''
 
-            data.fax === '' || data.fax === '-' ? data.fax = 'NULL' : data.fax = `'${data.fax}'`
-            data.grond === '' ? data.grond = 'NULL' : data.grond = `'${data.grond}'`
-            return data
+            new_data.fax === '' || new_data.fax === '-' ? new_data.fax = 'NULL' : new_data.fax = `'${new_data.fax}'`
+            new_data.grond === '' ? new_data.grond = 'NULL' : new_data.grond = `'${new_data.grond}'`
+            return new_data
         }
         if (type === 'LAND') {
-            data.birthday === '' ? data.birthday = 'NULL' : data.birthday = `'${this.formatDate("TO-INSERT", data.birthday)}'`
-            return data
+            new_data.birthday === '' ? new_data.birthday = 'NULL' : new_data.birthday = `'${this.formatDate("TO-INSERT", new_data.birthday)}'`
+            return new_data
         }
         if (type === 'REQUEST') {
             //Time Database 15:10:14
             //Time Web 13:48:00.000
             //Time  = time.slice(0,8)
-            data.staff_id_money = data.staff_id_money === '-' || data.staff_id_money === '' ? 'NULL' : `'${data.staff_id_money}'`
-            data.reference_id = data.reference_id === '-' || data.reference_id === '' || data.reference_id === 'NO' ? 'NULL' : `'${data.reference_id}'`
-            data.train_id = data.train_id === '-' || data.train_id === '' || data.train_id === 'NO' ? 'NULL' : `'${data.train_id}'`
-            data.personal_id_assistant = data.personal_id_assistant === '-' || data.personal_id_assistant === '' ? 'NULL' : `'${data.personal_id_assistant}'`
-            data.staff_id_approve = data.staff_id_approve === '-' || data.staff_id_approve === '' ? 'NULL' : `'${data.staff_id_approve}'`
-            data.date_submission = this.formatDate('TO-INSERT', data.date_submission)
-            data.date_approve = data.date_approve === '-' || data.date_approve === '' ? 'NULL' : `'${this.formatDate('TO-INSERT', data.date_approve)}'`
-            data.subcategory = data.subcategory === '-' || data.subcategory === '' ? 'NULL' : `'${data.subcategory}'`
-            data.product_type = data.product_type === '-' || data.product_type === '' ? 'NULL' : `'${data.product_type}'`
-            data.sell_start = data.sell_start === '-' || data.sell_start === '' ? 'NULL' : `'${this.formatTime(data.sell_start)}'`
-            data.sell_end = data.sell_end === '-' || data.sell_end === '' ? 'NULL' : `'${this.formatTime(data.sell_end)}'`
-            data.receipt_order = data.receipt_order === '-' || data.receipt_order === '' ? 'NULL' : `'${data.receipt_order}'`
+            new_data.staff_id_money = new_data.staff_id_money === '-' || new_data.staff_id_money === '' ? 'NULL' : `'${new_data.staff_id_money}'`
+            new_data.reference_id = new_data.reference_id === '-' || new_data.reference_id === '' || new_data.reference_id === 'NO' ? 'NULL' : `'${new_data.reference_id}'`
+            new_data.train_id = new_data.train_id === '-' || new_data.train_id === '' || new_data.train_id === 'NO' ? 'NULL' : `'${new_data.train_id}'`
+            new_data.personal_id_assistant = new_data.personal_id_assistant === '-' || new_data.personal_id_assistant === '' ? 'NULL' : `'${new_data.personal_id_assistant}'`
+            new_data.staff_id_approve = new_data.staff_id_approve === '-' || new_data.staff_id_approve === '' ? 'NULL' : `'${new_data.staff_id_approve}'`
+            new_data.date_submission = this.formatDate('TO-INSERT', new_data.date_submission)
+            new_data.date_approve = new_data.date_approve === '-' || new_data.date_approve === '' ? 'NULL' : `'${this.formatDate('TO-INSERT', new_data.date_approve)}'`
+            new_data.subcategory = new_data.subcategory === '-' || new_data.subcategory === '' ? 'NULL' : `'${new_data.subcategory}'`
+            new_data.product_type = new_data.product_type === '-' || new_data.product_type === '' ? 'NULL' : `'${new_data.product_type}'`
+            new_data.sell_start = new_data.sell_start === '-' || new_data.sell_start === '' ? 'NULL' : `'${this.formatTime(new_data.sell_start)}'`
+            new_data.sell_end = new_data.sell_end === '-' || new_data.sell_end === '' ? 'NULL' : `'${this.formatTime(new_data.sell_end)}'`
+            new_data.receipt_order = new_data.receipt_order === '-' || new_data.receipt_order === '' ? 'NULL' : `'${new_data.receipt_order}'`
 
-            if (data.receipt_fine != '' && data.receipt_fine != '-') {
-                if (data.receipt_fee != '' && data.receipt_fee != '-') {
-                    data.receipt_total = parseFloat(data.receipt_fine) + parseFloat(data.receipt_fee)
+            if (new_data.receipt_fine != '' && new_data.receipt_fine != '-') {
+                if (new_data.receipt_fee != '' && new_data.receipt_fee != '-') {
+                    new_data.receipt_total = parseFloat(new_data.receipt_fine) + parseFloat(new_data.receipt_fee)
                 } else {
-                    data.receipt_total = parseFloat(data.receipt_fine)
+                    new_data.receipt_total = parseFloat(new_data.receipt_fine)
                 }
             } else {
-                data.receipt_total = 0
+                new_data.receipt_total = 0
             }
-            data.receipt_fine = data.receipt_fine === '-' || data.receipt_fine === '' ? 'NULL' : data.receipt_fine
-            data.receipt_fee = data.receipt_fee === '-' || data.receipt_fee === '' ? 'NULL' : data.receipt_fee
-            data.receipt_date = data.receipt_date === '-' || data.receipt_date === '' ? 'NULL' : `'${this.formatDate('TO-INSERT', data.receipt_date)}'`
-            data.date_issued = data.date_issued === '-' || data.date_issued === '' ? 'NULL' : `'${this.formatDate('TO-INSERT', data.date_issued)}'`
-            data.date_expired = data.date_expired === '-' || data.date_expired === '' ? 'NULL' : `'${this.formatDate('TO-INSERT', data.date_expired)}'`
+            new_data.receipt_fine = new_data.receipt_fine === '-' || new_data.receipt_fine === '' ? 'NULL' : new_data.receipt_fine
+            new_data.receipt_fee = new_data.receipt_fee === '-' || new_data.receipt_fee === '' ? 'NULL' : new_data.receipt_fee
+            new_data.receipt_date = new_data.receipt_date === '-' || new_data.receipt_date === '' ? 'NULL' : `'${this.formatDate('TO-INSERT', new_data.receipt_date)}'`
+            new_data.date_issued = new_data.date_issued === '-' || new_data.date_issued === '' ? 'NULL' : `'${this.formatDate('TO-INSERT', new_data.date_issued)}'`
+            new_data.date_expired = new_data.date_expired === '-' || new_data.date_expired === '' ? 'NULL' : `'${this.formatDate('TO-INSERT', new_data.date_expired)}'`
 
-            data.condition_no_1 = data.condition_no_1 === '-' || data.condition_no_1 === '' ? 'NULL' : `'${data.condition_no_1}'`
-            data.condition_no_2 = data.condition_no_2 === '-' || data.condition_no_2 === '' ? 'NULL' : `'${data.condition_no_2}'`
-            data.condition_no_3 = data.condition_no_3 === '-' || data.condition_no_3 === '' ? 'NULL' : `'${data.condition_no_3}'`
-            data.condition_no_4 = data.condition_no_4 === '-' || data.condition_no_4 === '' ? 'NULL' : `'${data.condition_no_4}'`
+            new_data.condition_no_1 = new_data.condition_no_1 === '-' || new_data.condition_no_1 === '' ? 'NULL' : `'${new_data.condition_no_1}'`
+            new_data.condition_no_2 = new_data.condition_no_2 === '-' || new_data.condition_no_2 === '' ? 'NULL' : `'${new_data.condition_no_2}'`
+            new_data.condition_no_3 = new_data.condition_no_3 === '-' || new_data.condition_no_3 === '' ? 'NULL' : `'${new_data.condition_no_3}'`
+            new_data.condition_no_4 = new_data.condition_no_4 === '-' || new_data.condition_no_4 === '' ? 'NULL' : `'${new_data.condition_no_4}'`
 
-            data.image_name = data.image_name === '-' || data.image_name === '' ? 'NULL' : `'${data.image_name}'`
-            data.delete_logic = data.delete_logic === '-' || data.delete_logic === '' ? 'NULL' : `'${data.delete_logic}'`
-            return data
+            new_data.image_name = new_data.image_name === '-' || new_data.image_name === '' ? 'NULL' : `'${new_data.image_name}'`
+            new_data.delete_logic = new_data.delete_logic === '-' || new_data.delete_logic === '' ? 'NULL' : `'${new_data.delete_logic}'`
+            return new_data
         }
     }
     loopInsertEstablishment(Edata) {
@@ -1061,9 +1209,9 @@ class service {
                             this.insertFile(file).then((resultFile) => {
                                 if (resultFile.status) {
                                     //NEW LAND 
-                                    if(land.type === 'duplication' && new_edata.is_land_owned === `'${establishmentData[0].ESTABLISHMENT_ID}'`){
+                                    if (land.type === 'duplication' && new_edata.is_land_owned === `'${establishmentData[0].ESTABLISHMENT_ID}'`) {
                                         return resolve(new_edata)
-                                    }else{
+                                    } else {
                                         EstablishmentDAOObj.updateUseLand(establishmentData[0].ESTABLISHMENT_ID, new_edata.is_land_owned).then((data_update_success) => {
                                             if (data_update_success) {
                                                 return resolve(new_edata)
@@ -1137,7 +1285,7 @@ class service {
                         if (e_data.ESTABLISHMENT_IS_LAND_OWNED != null) {
                             LandDAOObj.get(e_data.ESTABLISHMENT_IS_LAND_OWNED).then((land_data) => {
                                 if (land_data.LAND_BIRTHDAY != null) {
-                                    land_data.LAND_BIRTHDAY = this.formatDate('TO-DISPLAY', land_data.LAND_BIRTHDAY.toISOString())
+                                    land_data.LAND_BIRTHDAY = this.formatDate('TO-DISPLAY', land_data.LAND_BIRTHDAY+'')
                                 } else {
                                     land_data.LAND_BIRTHDAY = ''
                                 }
@@ -1159,6 +1307,55 @@ class service {
                     })
                 } else {
                     return resolve(false)
+                }
+            })
+        })
+    }
+    loopUpdateLand(land) {
+        return new Promise((resolve, reject) => {
+            this.getNewId('LAND').then((id) => {
+                land.id = id
+                this.landUpdateStep(land).then((data) => {
+                    if (data.id != undefined) {
+                        console.log('Update Land : complete')
+                        return resolve(data)
+                    } else {
+                        this.loopUpdateLand(land)
+                    }
+                })
+            })
+        })
+    }
+    landUpdateStep(land, address) {
+        return new Promise((resolve, reject) => {
+            LandDAOObj.getDuplicate(land).then((land_data) => {
+                console.log(land_data)
+                if (land_data != undefined) {
+                    let object = {
+                        'id': land_data.LAND_ID,
+                        'address': land_data.ADDRESS_ID
+                    }
+                    land.id = land_data.LAND_ID
+                    LandDAOObj.updateLand(land).then((train_update_status) => {
+                        if (train_update_status) {
+                            return resolve(object)
+                        }
+                    })
+                } else {
+                    this.insertAddressOne(address).then((addressResult) => {
+                        if (addressResult.check) {
+                            land.address_id = addressResult.id
+                            this.loopInsertLand(land).then((data) => {
+                                if (data.check) {
+                                    let object = {
+                                        'id': data.id,
+                                        'address': land.address_id
+                                    }
+                                    return resolve(object)
+                                }
+                            })
+                        }
+                    })
                 }
             })
         })
@@ -1198,8 +1395,8 @@ class service {
                 if (file_data) {
                     FileDAOObj.update(file).then((item) => {
                         let object = {
-                            status : item,
-                            type : 'duplication'
+                            status: item,
+                            type: 'duplication'
                         }
                         return resolve(object)
                     })
@@ -1207,8 +1404,8 @@ class service {
                     FileDAOObj.insert(file).then((fileResult) => {
                         if (fileResult) {
                             let object = {
-                                status : fileResult,
-                                type : 'insert'
+                                status: fileResult,
+                                type: 'insert'
                             }
                             return resolve(object)
                         }
@@ -1377,6 +1574,7 @@ class service {
             })
         })
     }
+
     getRequestByIdAndYear(id, year) {
         console.log(`getRequestByIdAndYear id = ${id}/${year}`)
         return new Promise((resolve, reject) => {
@@ -1387,12 +1585,15 @@ class service {
                         if (data.PERSONAL_ID_ASSISTANT != null) {
                             this.getPersonalById(data.PERSONAL_ID_ASSISTANT).then((personal_assistant_data) => {
                                 data.gropDataAssistant = personal_assistant_data[0]
-                                data.REQUEST_DATE_SUBMISSION = data.REQUEST_DATE_SUBMISSION != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_SUBMISSION.toISOString()) : data.REQUEST_DATE_SUBMISSION
-                                data.REQUEST_DATE_APPROVE = data.REQUEST_DATE_APPROVE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_APPROVE.toISOString()) : data.REQUEST_DATE_APPROVE
-                                data.REQUEST_RECEIPT_DATE = data.REQUEST_RECEIPT_DATE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_RECEIPT_DATE.toISOString()) : data.REQUEST_RECEIPT_DATE
-                                data.REQUEST_DATE_ISSUED = data.REQUEST_DATE_ISSUED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_ISSUED.toISOString()) : data.REQUEST_DATE_ISSUED
-                                data.REQUEST_DATE_EXPIRED = data.REQUEST_DATE_EXPIRED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_EXPIRED.toISOString()) : data.REQUEST_DATE_EXPIRED
-                                data.REQUEST_LAST_UPDATE = data.REQUEST_LAST_UPDATE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_LAST_UPDATE.toISOString()) : data.REQUEST_LAST_UPDATE
+                                console.log(`B ${data.REQUEST_DATE_SUBMISSION.toISOString()}`)
+                                data.REQUEST_DATE_SUBMISSION = data.REQUEST_DATE_SUBMISSION != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_SUBMISSION + '') : data.REQUEST_DATE_SUBMISSION
+                                // this.test(data.REQUEST_DATE_SUBMISSION + '')
+                                console.log(`A ${typeof (data.REQUEST_DATE_SUBMISSION + '')}`)
+                                data.REQUEST_DATE_APPROVE = data.REQUEST_DATE_APPROVE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_APPROVE + '') : data.REQUEST_DATE_APPROVE
+                                data.REQUEST_RECEIPT_DATE = data.REQUEST_RECEIPT_DATE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_RECEIPT_DATE + '') : data.REQUEST_RECEIPT_DATE
+                                data.REQUEST_DATE_ISSUED = data.REQUEST_DATE_ISSUED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_ISSUED + '') : data.REQUEST_DATE_ISSUED
+                                data.REQUEST_DATE_EXPIRED = data.REQUEST_DATE_EXPIRED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_EXPIRED + '') : data.REQUEST_DATE_EXPIRED
+                                data.REQUEST_LAST_UPDATE = data.REQUEST_LAST_UPDATE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_LAST_UPDATE + '') : data.REQUEST_LAST_UPDATE
                                 this.getEstablishment(data.ESTABLISHMENT_ID).then((dataEstablishment) => {
                                     data.ESTABLISHMENT_DATA = dataEstablishment
                                     if (data.TRAIN_ID != null) {
@@ -1433,12 +1634,12 @@ class service {
                             })
                         } else {
                             data.gropDataAssistant = undefined
-                            data.REQUEST_DATE_SUBMISSION = data.REQUEST_DATE_SUBMISSION != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_SUBMISSION.toISOString()) : data.REQUEST_DATE_SUBMISSION
-                            data.REQUEST_DATE_APPROVE = data.REQUEST_DATE_APPROVE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_APPROVE.toISOString()) : data.REQUEST_DATE_APPROVE
-                            data.REQUEST_RECEIPT_DATE = data.REQUEST_RECEIPT_DATE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_RECEIPT_DATE.toISOString()) : data.REQUEST_RECEIPT_DATE
-                            data.REQUEST_DATE_ISSUED = data.REQUEST_DATE_ISSUED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_ISSUED.toISOString()) : data.REQUEST_DATE_ISSUED
-                            data.REQUEST_DATE_EXPIRED = data.REQUEST_DATE_EXPIRED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_EXPIRED.toISOString()) : data.REQUEST_DATE_EXPIRED
-                            data.REQUEST_LAST_UPDATE = data.REQUEST_LAST_UPDATE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_LAST_UPDATE.toISOString()) : data.REQUEST_LAST_UPDATE
+                            data.REQUEST_DATE_SUBMISSION = data.REQUEST_DATE_SUBMISSION != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_SUBMISSION + '') : data.REQUEST_DATE_SUBMISSION
+                            data.REQUEST_DATE_APPROVE = data.REQUEST_DATE_APPROVE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_APPROVE + '') : data.REQUEST_DATE_APPROVE
+                            data.REQUEST_RECEIPT_DATE = data.REQUEST_RECEIPT_DATE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_RECEIPT_DATE + '') : data.REQUEST_RECEIPT_DATE
+                            data.REQUEST_DATE_ISSUED = data.REQUEST_DATE_ISSUED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_ISSUED + '') : data.REQUEST_DATE_ISSUED
+                            data.REQUEST_DATE_EXPIRED = data.REQUEST_DATE_EXPIRED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_EXPIRED + '') : data.REQUEST_DATE_EXPIRED
+                            data.REQUEST_LAST_UPDATE = data.REQUEST_LAST_UPDATE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_LAST_UPDATE + '') : data.REQUEST_LAST_UPDATE
                             this.getEstablishment(data.ESTABLISHMENT_ID).then((dataEstablishment) => {
                                 data.ESTABLISHMENT_DATA = dataEstablishment
                                 if (data.TRAIN_ID != null) {
@@ -1508,9 +1709,8 @@ class service {
         })
     }
     updateRequest(request) {
-        let new_request = this.formatInsert('REQUEST', request)
         return new Promise((resolve, reject) => {
-            RequestDAOObj.update(new_request).then((data) => {
+            RequestDAOObj.update(this.formatInsert('REQUEST', request)).then((data) => {
                 if (data === `true`) {
                     return resolve(true)
                 } else {
@@ -1524,28 +1724,29 @@ class service {
             RequestDAOObj.getRequestByTpyeAndOwnerId(type, Owner).then((data) => {
                 if (data.length != 0) {
                     for (let i = 0; i < data.length; i++) {
-                        data[i].REQUEST_DATE_SUBMISSION = data[i].REQUEST_DATE_SUBMISSION != null ? this.formatDate("TO-DISPLAY", data[i].REQUEST_DATE_SUBMISSION.toISOString()) : data[i].REQUEST_DATE_SUBMISSION
-                        data[i].REQUEST_DATE_APPROVE = data[i].REQUEST_DATE_APPROVE != null ? this.formatDate("TO-DISPLAY", data[i].REQUEST_DATE_APPROVE.toISOString()) : data[i].REQUEST_DATE_APPROVE
-                        data[i].REQUEST_RECEIPT_DATE = data[i].REQUEST_RECEIPT_DATE != null ? this.formatDate("TO-DISPLAY", data[i].REQUEST_RECEIPT_DATE.toISOString()) : data[i].REQUEST_RECEIPT_DATE
-                        data[i].REQUEST_DATE_ISSUED = data[i].REQUEST_DATE_ISSUED != null ? this.formatDate("TO-DISPLAY", data[i].REQUEST_DATE_ISSUED.toISOString()) : data[i].REQUEST_DATE_ISSUED
-                        data[i].REQUEST_DATE_EXPIRED = data[i].REQUEST_DATE_EXPIRED != null ? this.formatDate("TO-DISPLAY", data[i].REQUEST_DATE_EXPIRED.toISOString()) : data[i].REQUEST_DATE_EXPIRED
-                        data[i].REQUEST_LAST_UPDATE = data[i].REQUEST_LAST_UPDATE != null ? this.formatDate("TO-DISPLAY", data[i].REQUEST_LAST_UPDATE.toISOString()) : data[i].REQUEST_LAST_UPDATE
+                        data[i].REQUEST_DATE_SUBMISSION = data[i].REQUEST_DATE_SUBMISSION != null ? this.formatDate("TO-DISPLAY", data[i].REQUEST_DATE_SUBMISSION + '') : data[i].REQUEST_DATE_SUBMISSION
+                        data[i].REQUEST_DATE_APPROVE = data[i].REQUEST_DATE_APPROVE != null ? this.formatDate("TO-DISPLAY", data[i].REQUEST_DATE_APPROVE + '') : data[i].REQUEST_DATE_APPROVE
+                        data[i].REQUEST_RECEIPT_DATE = data[i].REQUEST_RECEIPT_DATE != null ? this.formatDate("TO-DISPLAY", data[i].REQUEST_RECEIPT_DATE + '') : data[i].REQUEST_RECEIPT_DATE
+                        data[i].REQUEST_DATE_ISSUED = data[i].REQUEST_DATE_ISSUED != null ? this.formatDate("TO-DISPLAY", data[i].REQUEST_DATE_ISSUED + '') : data[i].REQUEST_DATE_ISSUED
+                        data[i].REQUEST_DATE_EXPIRED = data[i].REQUEST_DATE_EXPIRED != null ? this.formatDate("TO-DISPLAY", data[i].REQUEST_DATE_EXPIRED + '') : data[i].REQUEST_DATE_EXPIRED
+                        data[i].REQUEST_LAST_UPDATE = data[i].REQUEST_LAST_UPDATE != null ? this.formatDate("TO-DISPLAY", data[i].REQUEST_LAST_UPDATE + '') : data[i].REQUEST_LAST_UPDATE
                     }
                 }
                 return resolve(data)
             })
         })
     }
-
     InsertRequestStep(request, personal, Edata, address, land, addressOwner, file, reference, train, username, image) {
         //ets = Edata, address, land, addressOwner, file
         console.log(Edata)
         var datetime = new Date();
         let dateForUpdate = datetime.toISOString().slice(0, 10)
         request.last_update = dateForUpdate
+        request.user_update = username
         // console.log(personal)
 
         if (personal[0].is_personal_changed) {
+            request.personal_id_owner = personal[0].id
             var datetime = new Date();
             let dateForUpdate = datetime.toISOString().slice(0, 10)
             if (personal[0].birthday.length != 0) {
@@ -1575,31 +1776,667 @@ class service {
                 console.log(updateAddressStatus)
             })
         }
-        // if (request.no != '') {
-        //     //Update !!
-        //     return new Promise((resolve, reject) => {
-        //         Edata = this.formatInsert('ESTABLISHMENT', Edata)
-        //         address = this.formatInsert('ADDRESS', address)
-        //         addressOwner = this.formatInsert('ADDRESS', addressOwner)
-        //         land = this.formatInsert('LAND', land)
-        //         if (Edata.is_establishment_changed != true) {
-        //             EstablishmentDAOObj.update()
-        //         }
-        //     })
-        // } else {
-        //insert !!
-        return new Promise((resolve, reject) => {
-            console.log('InsertRequestStep : loading')
-            this.insertEstablishment(Edata, address, land, addressOwner, file).then((data) => {
-                request.establishment_id = data.id
-                request.land_address_establishment = data.address_id
-                request.establishment_is_land_owned = data.land_used === null || data.land_used === undefined ? 'NULL' : `'${data.land_used}'`
-                request.establishment_address_id = data.land_address_owner === null || data.land_address_owner === undefined ? 'NULL' : `'${data.land_address_owner}'`
-                request.status = 'wait'
-                if (request.reference_id === 'YES') {
-                    this.loopInsertReference(reference).then((result) => {
-                        request.reference_id = result.REFERENCE_ID
+        if (request.no != '') {
+            //Update !!
+            let item_return = {
+                train_id: '',
+                reference_id: '',
+                land_id: '',
+                address_land_id: ''
+            }
+            return new Promise((resolve, reject) => {
+                if (request.is_request_changed) {
+                    if (request.image_is_changed) {
+                        this.insertImageEstablishments(image, request.image_name)
+                    }
+                    if (request.reference_id === 'YES') {
+                        if (reference.is_reference_changed) {
+                            this.loopUpdateReference(reference).then((result) => {
+                                console.log('1.reference.is_reference_changed')
+                                console.log(result)
+                                request.reference_id = result.REFERENCE_ID
+                                item_return.reference_id = result.REFERENCE_ID
+                                if (request.train_id === 'YES') {
+                                    // มีสิทธิ์ เป็น Insert
+                                    if (train.is_trian_changed) {
+                                        this.loopUpdateTrain(train).then((result) => {
+                                            console.log('1.reference.is_reference_changed 2.train.is_trian_changed')
+                                            console.log(result)
+                                            request.train_id = result.TRAIN_ID
+                                            item_return.train_id = result.TRAIN_ID
+                                            //UPDATE 
+                                            if (Edata.is_establishment_changed) {
+                                                if (Edata.is_land_owned === 'YES') {
+                                                    if (land.is_land_changed) {
+                                                        if (addressOwner.is_address_owner_changed) {
+                                                            this.updateAddress(addressOwner).then((data))
+                                                            this.loopUpdateLand(land).then((land_data_update) => {
+                                                                item_return.land_id = land_data_update.id
+                                                                item_return.address_land_id = land_data_update.address
 
+                                                                Edata.is_land_owned = land_data_update.id
+                                                                request.establishment_address_id = land_data_update.address
+                                                                request.establishment_is_land_owned = land_data_update.id
+                                                                request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                                                request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                                this.updateRequest(request)
+
+                                                                if (land.file_upload_changed) {
+                                                                    file.name = item_return.land_id
+                                                                    this.insertFile(file)
+                                                                }
+                                                                let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                                                EstablishmentDAOObj.update(new_edata)
+                                                            })
+                                                        } else {
+                                                            this.loopUpdateLand(land).then((land_data_update) => {
+                                                                item_return.land_id = land_data_update.id
+                                                                item_return.address = land_data_update.address
+
+                                                                Edata.is_land_owned = land_data_update.id
+                                                                request.establishment_address_id = land_data_update.address
+                                                                request.establishment_is_land_owned = land_data_update.id
+                                                                request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                                                request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                                this.updateRequest(request)
+
+                                                                if (land.file_upload_changed) {
+                                                                    file.name = item_return.land_id
+                                                                    this.insertFile(file)
+                                                                }
+                                                                let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                                                EstablishmentDAOObj.update(new_edata)
+                                                            })
+                                                        }
+                                                    } else {
+                                                        Edata.is_land_owned = land.id
+                                                        let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                                        EstablishmentDAOObj.update(new_edata)
+                                                        request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                                        request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                        this.updateRequest(request)
+                                                    }
+                                                } else {
+                                                    let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                                    EstablishmentDAOObj.update(new_edata)
+                                                    request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                                    request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                    console.log('#1')
+                                                    this.updateRequest(request)
+                                                }
+
+                                            } else {
+                                                request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                                request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                console.log('#2')
+                                                this.updateRequest(request)
+                                            }
+
+                                        })
+                                    } else {
+                                        request.train_id = train.id
+                                        item_return.train_id = train.id
+                                        console.log('1.reference.is_reference_changed 2.train.is_trian_changed = false')
+                                        console.log(request.train_id)
+                                        //UPDATE
+                                        if (Edata.is_establishment_changed) {
+                                            if (Edata.is_land_owned === 'YES') {
+                                                if (land.is_land_changed) {
+                                                    if (addressOwner.is_address_owner_changed) {
+                                                        this.updateAddress(addressOwner).then((data))
+                                                        this.loopUpdateLand(land).then((land_data_update) => {
+                                                            item_return.land_id = land_data_update.id
+                                                            item_return.address_land_id = land_data_update.address
+
+                                                            Edata.is_land_owned = land_data_update.id
+                                                            request.establishment_address_id = land_data_update.address
+                                                            request.establishment_is_land_owned = land_data_update.id
+                                                            request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                                            request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                            console.log('#3')
+                                                            this.updateRequest(request)
+
+                                                            if (land.file_upload_changed) {
+                                                                file.name = item_return.land_id
+                                                                this.insertFile(file)
+                                                            }
+                                                            let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                                            EstablishmentDAOObj.update(new_edata)
+                                                        })
+                                                    } else {
+                                                        this.loopUpdateLand(land).then((land_data_update) => {
+                                                            item_return.land_id = land_data_update.id
+                                                            item_return.address = land_data_update.address
+
+                                                            Edata.is_land_owned = land_data_update.id
+                                                            request.establishment_address_id = land_data_update.address
+                                                            request.establishment_is_land_owned = land_data_update.id
+                                                            request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                                            request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                            console.log('#4')
+                                                            this.updateRequest(request)
+
+                                                            if (land.file_upload_changed) {
+                                                                file.name = item_return.land_id
+                                                                this.insertFile(file)
+                                                            }
+                                                            let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                                            EstablishmentDAOObj.update(new_edata)
+                                                        })
+                                                    }
+                                                } else {
+                                                    Edata.is_land_owned = land.id
+                                                    let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                                    EstablishmentDAOObj.update(new_edata)
+                                                    request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                                    request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                    console.log('#5')
+                                                    this.updateRequest(request)
+                                                }
+                                            } else {
+                                                let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                                EstablishmentDAOObj.update(new_edata)
+                                                request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                                request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                console.log('#6')
+                                                this.updateRequest(request)
+                                            }
+
+                                        } else {
+                                            request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                            request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                            console.log('#7')
+                                            this.updateRequest(request)
+                                        }
+                                    }
+                                } else {
+                                    request.train_id = train.id
+                                    item_return.train_id = train.id
+                                    console.log('1.reference.is_reference_changed 2.request.is_trian_changed === NO ')
+                                    console.log(request.reference_id)
+                                    if (Edata.is_establishment_changed) {
+                                        if (Edata.is_land_owned === 'YES') {
+                                            if (land.is_land_changed) {
+                                                if (addressOwner.is_address_owner_changed) {
+                                                    this.updateAddress(addressOwner).then((data))
+                                                    this.loopUpdateLand(land).then((land_data_update) => {
+                                                        item_return.land_id = land_data_update.id
+                                                        item_return.address_land_id = land_data_update.address
+
+                                                        Edata.is_land_owned = land_data_update.id
+                                                        request.establishment_address_id = land_data_update.address
+                                                        request.establishment_is_land_owned = land_data_update.id
+                                                        request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                                        request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                        console.log('#8')
+                                                        this.updateRequest(request)
+
+                                                        if (land.file_upload_changed) {
+                                                            file.name = item_return.land_id
+                                                            this.insertFile(file)
+                                                        }
+                                                        let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                                        EstablishmentDAOObj.update(new_edata)
+                                                    })
+                                                } else {
+                                                    this.loopUpdateLand(land).then((land_data_update) => {
+                                                        item_return.land_id = land_data_update.id
+                                                        item_return.address = land_data_update.address
+
+                                                        Edata.is_land_owned = land_data_update.id
+                                                        request.establishment_address_id = land_data_update.address
+                                                        request.establishment_is_land_owned = land_data_update.id
+                                                        request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                                        request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                        console.log('#9')
+                                                        this.updateRequest(request)
+
+                                                        if (land.file_upload_changed) {
+                                                            file.name = item_return.land_id
+                                                            this.insertFile(file)
+                                                        }
+                                                        let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                                        EstablishmentDAOObj.update(new_edata)
+                                                    })
+                                                }
+                                            } else {
+                                                Edata.is_land_owned = land.id
+                                                let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                                EstablishmentDAOObj.update(new_edata)
+                                                request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                                request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                console.log('#10')
+                                                this.updateRequest(request)
+                                            }
+                                        } else {
+                                            let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                            EstablishmentDAOObj.update(new_edata)
+                                            request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                            request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                            console.log('#11')
+                                            this.updateRequest(request)
+                                        }
+
+                                    } else {
+                                        request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                        request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                        console.log('#12')
+                                        this.updateRequest(request)
+                                    }
+                                }
+                            })
+                        } else {
+                            request.reference_id = reference.id
+                            item_return.reference_id = reference.id
+                        }
+                    }
+                    else if (request.train_id === 'YES') {
+                        if (train.is_trian_changed) {
+                            this.loopUpdateTrain(train).then((result) => {
+                                console.log('1.train.is_trian_changed')
+                                console.log(result)
+                                request.train_id = result.TRAIN_ID
+                                item_return.train_id = result.TRAIN_ID
+                                if (request.reference_id === 'YES') {
+                                    if (reference.is_reference_changed) {
+                                        this.loopUpdateReference(reference).then((result) => {
+                                            request.reference_id = result.REFERENCE_ID
+                                            item_return.reference_id = result.REFERENCE_ID
+                                            //UPDATE
+                                            console.log('1.train.is_trian_changed 2.reference.is_reference_changed')
+                                            console.log(result)
+                                            if (Edata.is_establishment_changed) {
+                                                if (Edata.is_land_owned === 'YES') {
+                                                    if (land.is_land_changed) {
+                                                        if (addressOwner.is_address_owner_changed) {
+                                                            this.updateAddress(addressOwner).then((data))
+                                                            this.loopUpdateLand(land).then((land_data_update) => {
+                                                                item_return.land_id = land_data_update.id
+                                                                item_return.address_land_id = land_data_update.address
+
+                                                                Edata.is_land_owned = land_data_update.id
+                                                                request.establishment_address_id = land_data_update.address
+                                                                request.establishment_is_land_owned = land_data_update.id
+                                                                request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                                                request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                                console.log('#13')
+                                                                this.updateRequest(request)
+
+                                                                if (land.file_upload_changed) {
+                                                                    file.name = item_return.land_id
+                                                                    this.insertFile(file)
+                                                                }
+                                                                let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                                                EstablishmentDAOObj.update(new_edata)
+                                                            })
+                                                        } else {
+                                                            this.loopUpdateLand(land).then((land_data_update) => {
+                                                                item_return.land_id = land_data_update.id
+                                                                item_return.address = land_data_update.address
+
+                                                                Edata.is_land_owned = land_data_update.id
+                                                                request.establishment_address_id = land_data_update.address
+                                                                request.establishment_is_land_owned = land_data_update.id
+                                                                request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                                                request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                                console.log('#14')
+                                                                this.updateRequest(request)
+
+                                                                if (land.file_upload_changed) {
+                                                                    file.name = item_return.land_id
+                                                                    this.insertFile(file)
+                                                                }
+                                                                let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                                                EstablishmentDAOObj.update(new_edata)
+                                                            })
+                                                        }
+
+                                                    } else {
+                                                        Edata.is_land_owned = land.id
+                                                        let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                                        EstablishmentDAOObj.update(new_edata)
+                                                    }
+                                                } else {
+                                                    let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                                    EstablishmentDAOObj.update(new_edata)
+                                                }
+
+                                            } else {
+                                                request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                                request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                console.log('#15')
+                                                this.updateRequest(request)
+                                            }
+                                        })
+                                    } else {
+                                        request.reference_id = reference.id
+                                        item_return.reference_id = reference.id
+                                        console.log('1.train.is_trian_changed 2.reference.is_reference_changed = false')
+                                        console.log(request.reference_id)
+                                        if (Edata.is_establishment_changed) {
+                                            if (Edata.is_land_owned === 'YES') {
+                                                if (land.is_land_changed) {
+                                                    if (addressOwner.is_address_owner_changed) {
+                                                        this.updateAddress(addressOwner).then((data))
+                                                        this.loopUpdateLand(land).then((land_data_update) => {
+                                                            item_return.land_id = land_data_update.id
+                                                            item_return.address_land_id = land_data_update.address
+
+                                                            Edata.is_land_owned = land_data_update.id
+                                                            request.establishment_address_id = land_data_update.address
+                                                            request.establishment_is_land_owned = land_data_update.id
+                                                            request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                                            request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                            console.log('#16')
+                                                            this.updateRequest(request)
+
+                                                            if (land.file_upload_changed) {
+                                                                file.name = item_return.land_id
+                                                                this.insertFile(file)
+                                                            }
+                                                            let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                                            EstablishmentDAOObj.update(new_edata)
+                                                        })
+                                                    } else {
+                                                        this.loopUpdateLand(land).then((land_data_update) => {
+                                                            item_return.land_id = land_data_update.id
+                                                            item_return.address = land_data_update.address
+
+                                                            Edata.is_land_owned = land_data_update.id
+                                                            request.establishment_address_id = land_data_update.address
+                                                            request.establishment_is_land_owned = land_data_update.id
+                                                            request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                                            request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                            console.log('#17')
+                                                            this.updateRequest(request)
+
+                                                            if (land.file_upload_changed) {
+                                                                file.name = item_return.land_id
+                                                                this.insertFile(file)
+                                                            }
+                                                            let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                                            EstablishmentDAOObj.update(new_edata)
+                                                        })
+                                                    }
+                                                } else {
+                                                    Edata.is_land_owned = land.id
+                                                    let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                                    EstablishmentDAOObj.update(new_edata)
+                                                    request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                                    request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                    console.log('#18')
+                                                    this.updateRequest(request)
+                                                }
+                                            } else {
+                                                let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                                EstablishmentDAOObj.update(new_edata)
+                                                request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                                request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                console.log('#19')
+                                                this.updateRequest(request)
+                                            }
+
+                                        } else {
+                                            request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                            request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                            console.log('#20')
+                                            this.updateRequest(request)
+                                        }
+                                    }
+                                } else {
+                                    request.reference_id = reference.id
+                                    item_return.reference_id = reference.id
+                                    console.log('1.train.is_trian_changed 2.request.reference_id === NO ')
+                                    console.log(request.train_id)
+                                    if (Edata.is_establishment_changed) {
+                                        if (Edata.is_land_owned === 'YES') {
+                                            if (land.is_land_changed) {
+                                                if (addressOwner.is_address_owner_changed) {
+                                                    this.updateAddress(addressOwner).then((data))
+                                                    this.loopUpdateLand(land).then((land_data_update) => {
+                                                        item_return.land_id = land_data_update.id
+                                                        item_return.address_land_id = land_data_update.address
+
+                                                        Edata.is_land_owned = land_data_update.id
+                                                        request.establishment_address_id = land_data_update.address
+                                                        request.establishment_is_land_owned = land_data_update.id
+                                                        request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                                        request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                        console.log('#21')
+                                                        this.updateRequest(request)
+
+                                                        if (land.file_upload_changed) {
+                                                            file.name = item_return.land_id
+                                                            this.insertFile(file)
+                                                        }
+                                                        let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                                        EstablishmentDAOObj.update(new_edata)
+                                                    })
+                                                } else {
+                                                    this.loopUpdateLand(land).then((land_data_update) => {
+                                                        item_return.land_id = land_data_update.id
+                                                        item_return.address = land_data_update.address
+
+                                                        Edata.is_land_owned = land_data_update.id
+                                                        request.establishment_address_id = land_data_update.address
+                                                        request.establishment_is_land_owned = land_data_update.id
+                                                        request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                                        request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                        console.log('#22')
+                                                        this.updateRequest(request)
+
+                                                        if (land.file_upload_changed) {
+                                                            file.name = item_return.land_id
+                                                            this.insertFile(file)
+                                                        }
+                                                        let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                                        EstablishmentDAOObj.update(new_edata)
+                                                    })
+                                                }
+                                            } else {
+                                                Edata.is_land_owned = land.id
+                                                let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                                EstablishmentDAOObj.update(new_edata)
+                                                request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                                request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                console.log('#23')
+                                                this.updateRequest(request)
+                                            }
+                                        } else {
+                                            let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                            EstablishmentDAOObj.update(new_edata)
+                                            request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                            request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                            console.log('#24')
+                                            this.updateRequest(request)
+                                        }
+
+                                    } else {
+                                        request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                        request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                        console.log('#25')
+                                        this.updateRequest(request)
+                                    }
+
+                                }
+                            })
+                        } else {
+                            request.train_id = train.id
+                            item_return.train_id = train.id
+                            //SET ID
+                        }
+                    }
+                    else {
+                        if (request.train_id != 'YES' && request.reference_id != 'YES') {
+                            //// Update request !!!!!!!!!!!  format Insert 
+                            if (Edata.is_establishment_changed) {
+                                if (Edata.is_land_owned === 'YES') {
+                                    if (land.is_land_changed) {
+                                        if (addressOwner.is_address_owner_changed) {
+                                            this.updateAddress(addressOwner).then((data))
+                                            this.loopUpdateLand(land).then((land_data_update) => {
+                                                item_return.land_id = land_data_update.id
+                                                item_return.address_land_id = land_data_update.address
+    
+                                                Edata.is_land_owned = land_data_update.id
+                                                request.establishment_address_id = land_data_update.address
+                                                request.establishment_is_land_owned = land_data_update.id
+                                                request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                                request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                console.log('#26')
+                                                this.updateRequest(request)
+    
+                                                if (land.file_upload_changed) {
+                                                    file.name = item_return.land_id
+                                                    this.insertFile(file)
+                                                }
+                                                let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                                EstablishmentDAOObj.update(new_edata)
+                                            })
+                                        } else {
+                                            this.loopUpdateLand(land).then((land_data_update) => {
+                                                item_return.land_id = land_data_update.id
+                                                item_return.address = land_data_update.address
+    
+                                                Edata.is_land_owned = land_data_update.id
+                                                request.establishment_address_id = land_data_update.address
+                                                request.establishment_is_land_owned = land_data_update.id
+                                                request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                                request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                console.log('#27')
+                                                this.updateRequest(request)
+    
+                                                if (land.file_upload_changed) {
+                                                    file.name = item_return.land_id
+                                                    this.insertFile(file)
+                                                }
+                                                let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                                EstablishmentDAOObj.update(new_edata)
+                                            })
+                                        }
+                                    } else {
+                                        Edata.is_land_owned = land.id
+                                        let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                        EstablishmentDAOObj.update(new_edata)
+                                        request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                        request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                        console.log('#28')
+                                        this.updateRequest(request)
+                                    }
+                                } else {
+                                    let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                    EstablishmentDAOObj.update(new_edata)
+                                    request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                    request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                    console.log('#29')
+                                    this.updateRequest(request)
+                                }
+    
+                            } else {
+                                request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                console.log('#30')
+                                this.updateRequest(request)
+                            }
+                        }
+                    }
+                  
+                }
+                if (Edata.is_establishment_changed && request.is_request_changed === false) {
+                    if (Edata.is_land_owned === 'YES') {
+                        if (land.is_land_changed) {
+                            if (addressOwner.is_address_owner_changed) {
+                                this.updateAddress(addressOwner).then((data))
+                                this.loopUpdateLand(land).then((land_data_update) => {
+                                    item_return.land_id = land_data_update.id
+                                    item_return.address_land_id = land_data_update.address
+
+                                    Edata.is_land_owned = land_data_update.id
+                                    request.establishment_address_id = land_data_update.address
+                                    request.establishment_is_land_owned = land_data_update.id
+                                    request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                    request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                    console.log('#31')
+                                    this.updateRequest(request)
+
+                                    if (land.file_upload_changed) {
+                                        file.name = item_return.land_id
+                                        this.insertFile(file)
+                                    }
+                                    let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                    EstablishmentDAOObj.update(new_edata)
+                                })
+                            } else {
+                                this.loopUpdateLand(land).then((land_data_update) => {
+                                    item_return.land_id = land_data_update.id
+                                    item_return.address = land_data_update.address
+
+                                    Edata.is_land_owned = land_data_update.id
+                                    request.establishment_address_id = land_data_update.address
+                                    request.establishment_is_land_owned = land_data_update.id
+                                    request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                    request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                    console.log('#32')
+                                    this.updateRequest(request)
+
+                                    if (land.file_upload_changed) {
+                                        file.name = item_return.land_id
+                                        this.insertFile(file)
+                                    }
+                                    let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                    EstablishmentDAOObj.update(new_edata)
+                                })
+                            }
+
+                        } else {
+                            Edata.is_land_owned = land.id
+                            let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                            EstablishmentDAOObj.update(new_edata)
+                        }
+                    } else {
+                        let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                        EstablishmentDAOObj.update(new_edata)
+                    }
+
+                }
+                if (address.is_address_establishment_changed) {
+                    let newaddress = this.formatInsert('ADDRESS', address)
+                    this.updateAddress(newaddress)
+                }
+
+                return resolve(item_return)
+
+            })
+        } else {
+            //insert !!
+            return new Promise((resolve, reject) => {
+                console.log('InsertRequestStep : loading')
+                this.insertEstablishment(Edata, address, land, addressOwner, file).then((data) => {
+                    request.establishment_id = data.id
+                    request.land_address_establishment = data.address_id
+                    request.establishment_is_land_owned = data.land_used === null || data.land_used === undefined ? 'NULL' : `'${data.land_used}'`
+                    request.establishment_address_id = data.land_address_owner === null || data.land_address_owner === undefined ? 'NULL' : `'${data.land_address_owner}'`
+                    request.status = 'wait'
+                    if (request.reference_id === 'YES') {
+                        this.loopInsertReference(reference).then((result) => {
+                            request.reference_id = result.REFERENCE_ID
+
+                            if (request.train_id === 'YES') {
+                                this.loopInsertTrain(train).then((trainData) => {
+                                    request.train_id = trainData.TRAIN_ID
+                                    let new_request = this.formatInsert('REQUEST', request)
+                                    this.loopInsertRequest(new_request, image).then((requestData) => {
+                                        return resolve(requestData)
+                                    })
+                                })
+                            } else {
+                                let new_request = this.formatInsert('REQUEST', request)
+                                this.loopInsertRequest(new_request, image).then((requestData) => {
+                                    return resolve(requestData)
+                                })
+                            }
+                        })
+                    } else {
                         if (request.train_id === 'YES') {
                             this.loopInsertTrain(train).then((trainData) => {
                                 request.train_id = trainData.TRAIN_ID
@@ -1614,27 +2451,10 @@ class service {
                                 return resolve(requestData)
                             })
                         }
-                    })
-                } else {
-                    if (request.train_id === 'YES') {
-                        this.loopInsertTrain(train).then((trainData) => {
-                            request.train_id = trainData.TRAIN_ID
-                            let new_request = this.formatInsert('REQUEST', request)
-                            this.loopInsertRequest(new_request, image).then((requestData) => {
-                                return resolve(requestData)
-                            })
-                        })
-                    } else {
-                        let new_request = this.formatInsert('REQUEST', request)
-                        this.loopInsertRequest(new_request, image).then((requestData) => {
-                            return resolve(requestData)
-                        })
                     }
-                }
-                //insertImageEstablishments(image, id)
+                })
             })
-        })
-        // }
+        }
     }
     loopInsertRequest(request, image) {
         return new Promise((resolve, reject) => {

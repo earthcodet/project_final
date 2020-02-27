@@ -4,6 +4,7 @@ let search_surname = ''
 var data = false
 var deleteData = false
 var addNew = false
+let personal_change = false
 function addPage() {
     resetRequestData()
     addNew = true
@@ -38,18 +39,24 @@ function insertPage() {
         preConfirm: function () {
             return new Promise(function (resolve, reject) {
                 setTimeout(function () {
-                    if (preInsert()) {
+                    if (preInsert() === true) {
                         insertRequest().then((data) => {
-                            // setRequestDataReturn(data)
-                            // document.getElementById('form_id').value = `${requestData.no}/${requestData.year}`
-                            // document.getElementById('uploadFilePdf').value = ''
-                            // if (files != null) {
-                            //     document.getElementById('status_upload_file').style.display = ''
-                            // } else {
-                            //     document.getElementById('status_upload_file').style.display = 'none'
-                            // }
-                            //resetStatusChange()
-                            resolve();
+                            if(data.land_id != undefined){
+                                setReferecneDataUpdateReturn(data)
+                                //location.reload()
+                                resolve();
+                            }else{
+                                setRequestDataReturn(data)
+                                document.getElementById('form_id').value = `${requestData.no}/${requestData.year}`
+                                document.getElementById('uploadFilePdf').value = ''
+                                if (files != null) {
+                                    document.getElementById('status_upload_file').style.display = ''
+                                } else {
+                                    document.getElementById('status_upload_file').style.display = 'none'
+                                }
+                                resetStatusChange()
+                                resolve();
+                            }  
                         })
                     }
                 }, 1000);
@@ -411,6 +418,7 @@ function searchOparator(typeSearch) {
 }
 function showItem(arrayResult, type) {
     setDataOperator(arrayResult, type)
+    personal_change = true
     Swal.close()
 }
 

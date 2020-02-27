@@ -204,24 +204,18 @@ app.post('/insert/request', (req, res) => {
     i === 5 ? image = req.files.files5 : ''
     i === 6 ? image = req.files.files6 : ''
     i === 7 ? image = req.files.files7 : ''
-    // console.log(image)
-    if(obj[9][i].type === ''){
+    if (obj[9][i].type === '') {
       obj[9][i].name = i + 1
       obj[9][i].type = image.mimetype.slice(6, image.mimetype.length)
       obj[9][i].data = image.data
-    }else{
+    } else {
       obj[9][i].name = i + 1
       obj[9][i].data = image.data
     }
-    
   }
-  console.log(obj[6])
-  res.json(true)
-  
-  // webService.InsertRequestStep(obj[0], obj[1], obj[2], obj[3], obj[4], obj[5], obj[6], obj[7], obj[8], req.session.username, obj[9]).then((data) => {
-  //   res.json(data);
-  // })
-
+  webService.InsertRequestStep(obj[0], obj[1], obj[2], obj[3], obj[4], obj[5], obj[6], obj[7], obj[8], req.session.username, obj[9]).then((data) => {
+    res.json(data);
+  })
 })
 
 app.get('/get/request/:no/:year', (req, res) => {
@@ -231,6 +225,7 @@ app.get('/get/request/:no/:year', (req, res) => {
 })
 app.get('/get/requestTypeById/:id', (req, res) => {
   webService.getRequestTypeById(req.params.id).then((data) => {
+    console.log(date.REQUEST_DATE_SUBMISSION)
     res.json(data)
   })
 })

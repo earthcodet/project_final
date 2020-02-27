@@ -34,7 +34,7 @@ class ReferenceDAO {
     }   
     updateReference(reference){
         return new Promise((resolve, reject) => {
-            let value  =`'${reference.title}', '${reference.name}', '${reference.surname}', '${reference.status}', '${reference.phone}'`
+            let value  =`REFERENCE_TITLE='${reference.title}', REFERENCE_NAME='${reference.name}', REFERENCE_SURNAME='${reference.surname}', REFERENCE_STATUS='${reference.status}', REFERENCE_PHONE='${reference.phone}'`
             let query = `UPDATE reference SET ${value} WHERE REFERENCE_ID = '${reference.id}'`
             con.query(query, function (err, result) {
                 if (err) {

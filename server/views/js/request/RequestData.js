@@ -51,7 +51,7 @@ let requestData = {
     delete_logic: '',
     is_deleted: '',
     last_update: '20-05-2563',
-    username: 'ADMIN'
+    user_update : 'ADMIN'
 
 }
 let establishmentData = {

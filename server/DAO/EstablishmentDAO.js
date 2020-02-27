@@ -76,15 +76,15 @@ class EstablishmentDAO {
         return new Promise((resolve, reject) => {
             console.log(em)
             let value = `ESTABLISHMENT_IS_LAND_OWNED = ${em.is_land_owned},`
-            value = value + `ESTABLISHMENT_TYPE='${em.type}',ESTABLISHMENT_NAME=${em.name},`
+            value = value + `ESTABLISHMENT_TYPE=${em.type},ESTABLISHMENT_NAME=${em.name},`
             value = value + `ESTABLISHMENT_MACHINE_SIZE=${em.machine_size},ESTABLISHMENT_AREA_SIZE=${em.area_size},`
             value = value + `ESTABLISHMENT_WORKER=${em.worker},`
             value = value + `ESTABLISHMENT_PHONE='${em.phone}',ESTABLISHMENT_FAX=${em.fax},`
-            value = value + `ESTABLISHMENT_GROUND='${em.grond}'`
+            value = value + `ESTABLISHMENT_GROUND=${em.grond}`
             let query = `UPDATE establishment SET ${value} WHERE ESTABLISHMENT_ID='${em.id}'`
             con.query(query, function (err, result) {
                 if (err) {
-                    console.log(err.code)
+                    console.log(err)
                     return resolve(err.code)
                 }
                 if (result.affectedRows === 1) {

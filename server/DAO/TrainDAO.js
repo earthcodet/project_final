@@ -51,5 +51,22 @@ class TrainDAO {
             })
         })
     }
+    updateTrian(train){
+        return new Promise((resolve, reject) => {
+            let value  =`TRAIN_ISSUED='${train.date_issued}', TRAIN_DATE_ISSUED='${train.issuse}', TRAIN_DATE_EXP='${train.date_exp}'`
+            let query = `UPDATE train SET ${value} WHERE TRAIN_ID = '${train.id}'`
+            con.query(query, function (err, result) {
+                if (err) {
+                    console.log(err.code)
+                    return resolve(err.code)
+                }
+                if(result.affectedRows === 1){
+                    return resolve(true)
+                }else{
+                    return resolve(false)
+                }
+            })
+        })
+    }
 }
 module.exports = TrainDAO

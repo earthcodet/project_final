@@ -1,14 +1,5 @@
 let newDocument = true
 let requestType = []
-if (document.getElementById('machinery' != undefined)) {
-    document.getElementById('machinery').value = 0
-}
-if(document.getElementById('area') != undefined){
-    document.getElementById('area').value = 0
-}
-if(document.getElementById('numPeople') != undefined){
-    document.getElementById('numPeople').value = 0
-}
 function checkView(typeForm) {
     let requsetId = getUrlVars()
     console.log(requsetId.id)
@@ -169,10 +160,10 @@ function setDataView() {
     if (document.getElementById('machinery' != undefined)) {
         document.getElementById('machinery').value = establishmentData.machine_size
     }
-    if(document.getElementById('area') != undefined){
+    if (document.getElementById('area') != undefined) {
         document.getElementById('area').value = establishmentData.area_size
     }
-    if(document.getElementById('numPeople') != undefined){
+    if (document.getElementById('numPeople') != undefined) {
         document.getElementById('numPeople').value = establishmentData.worker
     }
     if (document.getElementById('con_no1') != undefined) {
@@ -253,6 +244,8 @@ function setDataView() {
 function setDataOperator(raw_data, type) {
     setOperatorData(raw_data)
     setOperatorAddressData(raw_data)
+    operatorData.is_personal_changed = true
+    operatorAddressData.is_address_changed = true
     if (type === 'OPERATOR') {
         document.getElementById("typeUser").value = operatorData.type
         document.getElementById("id").value = operatorData.personal_id
@@ -306,6 +299,14 @@ function checkformatReturn(value) {
     let temp = ''
     value === null || value === 'NULL' ? temp = '' : temp = value
     return temp
+}
+//set data return form update
+function setReferecneDataUpdateReturn(raw_data) {
+    trianData.id = raw_data.train_id === '' ? trianData.id : raw_data.train_id
+    referenceData.id = raw_data.reference_id === '' ? referenceData.id : raw_data.reference_id
+    landData.id = raw_data.land_id === '' ? landData.id : raw_data.land_id
+    requestData.establishment_address_id = checkformatReturn(raw_data.land_id)
+    requestData.establishment_is_land_owned = checkformatReturn(raw_data.address_land_id)
 }
 //set data return form insert
 function setRequestDataReturn(raw_data) {
@@ -733,7 +734,8 @@ function createGroupData() {
         operatorData.is_personal_changed = false
         assistantOperatorData.is_assistant_changed = false
         addressOwnerLandData.is_address_owner_changed = false
-
+        operatorData.is_personal_changed = false
+        operatorAddressData.is_address_changed = false
         let requestData_change = dataChange('requestData')
         let establishmentData_change = dataChange('establishmentData')
         let addressEstablishmentData_change = dataChange('addressEstablishmentData')
@@ -741,15 +743,10 @@ function createGroupData() {
         let referenceData_change = dataChange('referenceData')
         let landData_change = dataChange('landData')
         let addressOwnerLandData_change = dataChange('addressOwnerLandData')
-        console.log(`
-        requestData_change   ${requestData_change}
-        establishmentData_change ${establishmentData_change}
-        addressEstablishmentData_change ${addressEstablishmentData_change}
-        trianData_change ${trianData_change}
-        referenceData_change ${referenceData_change}
-        landData_change ${landData_change}
-        addressOwnerLandData_change ${addressOwnerLandData_change}
-        `)
+        
+        operatorData.is_personal_changed = true
+        operatorAddressData.is_address_changed = true
+
         if (requestData_change) {
             setDataUpdate('requestData')
             requestData.is_request_changed = true
@@ -774,7 +771,7 @@ function createGroupData() {
         if (landData_change) {
             setDataUpdate('landData')
             landData.is_land_changed = true
-            landData.file_upload_changed = file_is_uploaded 
+            landData.file_upload_changed = file_is_uploaded
         }
         if (addressOwnerLandData_change) {
             setDataUpdate('addressOwnerLandData')
@@ -784,12 +781,14 @@ function createGroupData() {
         // reset Utilities.js
         file_is_uploaded = false
         image_changed = false
-        
+        //requestControl
+        personal_change = false
     }
 }
 function dataChange(type) {
     let status_data_change = false
     if (type === 'requestData') {
+
         let referecne_id_t = document.getElementById('reference_name').value.trim().length != 0 ? 'YES' : 'NO'
         let assistant_t = assistantOperatorData.id != '' ? assistantOperatorData.id : ''
         let doc_no_1_t = document.getElementById('documentId').checked === true ? 'Y' : 'N'
@@ -820,7 +819,8 @@ function dataChange(type) {
             requestData.doc_no3 != doc_no_3_t ||
             requestData.doc_no4 != doc_no_4_t ||
             requestData.doc_no5 != doc_no_5_t ||
-            requestData.doc_no6 != doc_no_6_t
+            requestData.doc_no6 != doc_no_6_t ||
+            personal_change != false
         ) {
             status_data_change = true
         } else {
@@ -847,6 +847,20 @@ function dataChange(type) {
                     status_data_change = true
                 }
             }
+            if (document.getElementById('foodBy') != undefined) {
+                if (trianData.issuse != document.getElementById('foodBy').value.trim() ||
+                    trianData.date_exp != document.getElementById('datepicker5').value ||
+                    trianData.date_issued != document.getElementById('datepicker6').value) {
+                    status_data_change = true
+                }
+            }
+            if (referenceData.title != document.getElementById('reference_title').value.trim() ||
+                referenceData.name != document.getElementById('reference_name').value.trim() ||
+                referenceData.surname != document.getElementById('reference_surname').value.trim() ||
+                referenceData.status != document.getElementById('reference_status').value.trim() ||
+                referenceData.phone != document.getElementById('reference_phone').value) {
+                status_data_change = true
+            }
         }
     }
     if (type === 'establishmentData') {
@@ -854,7 +868,7 @@ function dataChange(type) {
             establishmentData.name != document.getElementById('workplaceName').value.trim() ||
             establishmentData.phone != document.getElementById('wPhone').value.trim() ||
             establishmentData.fax != document.getElementById('wFax').value.trim()) {
-                console.log(`1`)
+            console.log(`1`)
             status_data_change = true
         } else {
             if (document.getElementById('typeWorkplace') != undefined) {
@@ -941,7 +955,7 @@ function dataChange(type) {
                 landData.surname != document.getElementById('ownSurname').value.trim() ||
                 landData.birthday != document.getElementById('datepicker9').value.trim() ||
                 landData.phone != document.getElementById('ownPhone').value.trim() ||
-                landData.file_upload_changed != file_is_uploaded ) {
+                landData.file_upload_changed != file_is_uploaded) {
                 status_data_change = true
             }
         }
@@ -972,6 +986,7 @@ function dataChange(type) {
 }
 
 function setDataUpdate(type) {
+  
     if (type === 'requestData') {
         requestData.personal_id_owner = operatorData.id
         requestData.request_type_id = getRequestTypeId(document.getElementById('typeReq').value.trim())
@@ -1116,11 +1131,19 @@ function getAge(date) {
     let year_now = parseInt(now.slice(0, 4)) + 543
     let month_now = parseInt(now.slice(5, 7))
     let day_now = parseInt(now.slice(8, 10))
-    // date "08-02-2563" 1998-04-22T17:00:00.000Z
+    // date "08-02-2563" OR 1998-04-22T17:00:00.000Z
+    console.log(`date ${date}`)
     let day_b = parseInt(date.slice(8, 9))
     let month_b = parseInt(date.slice(5, 7))
     let year_b = parseInt(date.slice(0, 4)) > 1800 && parseInt(date.slice(0, 4)) < 2200 ? parseInt(date.slice(0, 4)) + 543 : parseInt(date.slice(0, 4))
     let age
+    if (year_b < 100) {
+        day_b = parseInt(date.slice(0, 2))
+        month_b = parseInt(date.slice(3, 5))
+        year_b = parseInt(date.slice(6, 10)) > 1800 && parseInt(date.slice(6, 10)) < 2200 ? parseInt(date.slice(6, 10)) + 543 : parseInt(date.slice(6, 10))
+    }
+    console.log(`year_b ${year_b}`)
+    console.log(`year_now ${year_now}`)
     if (month_b === month_now && day_b === day_now) {
         return age = year_now - year_b
     } else if (month_now === month_b) {
@@ -1164,10 +1187,10 @@ function createArrayInsert() {
         console.log(`imageData`)
         for (let i = 0; i < totalFiles.length; i++) {
             console.log(i)
-            if(totalFiles[i].E_IMAGE_TYPE != undefined){
+            if (totalFiles[i].E_IMAGE_TYPE != undefined) {
                 object.type = totalFiles[i].E_IMAGE_TYPE
             }
-            imageData.push(object) 
+            imageData.push(object)
             object = {
                 name: '',
                 type: '',
@@ -1175,7 +1198,7 @@ function createArrayInsert() {
             }
         }
     }
-   arrayItem.push(imageData) // image 9
+    arrayItem.push(imageData) // image 9
     console.log(imageData)
     return arrayItem
 }
@@ -1186,19 +1209,19 @@ function insertRequest() {
     return new Promise((resolve, reject) => {
         console.log("insertToDatabase");
         var formData = new FormData();
-        if(landData.file_upload_changed){
+        if (landData.file_upload_changed) {
             formData.append('files', filesPdf);
         }
-       
-        
-        if (requestData.image_is_changed){
-                for (var i = 0; i < totalFiles.length; i++) {
-                    if(totalFiles[i].E_IMAGE_DATA === undefined){
-                        let image = totalFiles[i];
-                        formData.append('files' + i, image);
-                    } else{
-                        formData.append("files" + i,  base64toBlob(totalFiles[i].E_IMAGE_DATA_BASE64 , `image/${totalFiles[i].E_IMAGE_TYPE}`));
-                    }
+
+
+        if (requestData.image_is_changed) {
+            for (var i = 0; i < totalFiles.length; i++) {
+                if (totalFiles[i].E_IMAGE_DATA === undefined) {
+                    let image = totalFiles[i];
+                    formData.append('files' + i, image);
+                } else {
+                    formData.append("files" + i, base64toBlob(totalFiles[i].E_IMAGE_DATA_BASE64, `image/${totalFiles[i].E_IMAGE_TYPE}`));
+                }
             }
         }
         formData.append("gropData", JSON.stringify(item));
@@ -1214,8 +1237,8 @@ function insertRequest() {
                 console.log(data.data)
                 return resolve(data.data);
             });
-           // return resolve(true);
-       
+        // return resolve(true);
+
     });
 }
 function getRequestData(no, year) {

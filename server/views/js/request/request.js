@@ -218,15 +218,21 @@ function preInsert() {
   let check_food = false
   if (document.getElementById("foodTrain") != undefined) {
     check_food = document.getElementById("foodTrain").checked;
-    check_input_food = foodRequired();
+    if(check_food){
+      check_input_food = foodRequired();
+      check_input = check_input_food === true ? true : false
+    }  
   }
   let check_input_owner = false
   let check_owner = false
   if (document.getElementById('useOtherPlace') != undefined) {
     check_owner = document.getElementById("useOtherPlace").checked;
-    check_input_owner = ownerRequire();
+    if(check_owner){
+      check_input_owner = ownerRequire();
+      check_input = check_input_owner === true ? true : false
+    }
   }
-
+ 
   if (check_input) {
     if (check_food) {
       if (check_input_food) {
@@ -285,7 +291,6 @@ function preInsert() {
         });
       }
     }
-
     if (check_owner) {
       if (check_input_owner) {
         if (check_food) {

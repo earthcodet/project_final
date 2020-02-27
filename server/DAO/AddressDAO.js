@@ -74,7 +74,7 @@ class AddressDAO {
             con.query(query, function (err, result) {
                 if (err) {
                     console.log(`DAO message : updateAddress error ${err.code}`)
-                    console.log(err.code)
+                    console.log(err)
                 }
                 if(result.affectedRows === 1){
                     return resolve(true)
@@ -94,7 +94,7 @@ class AddressDAO {
             let query = `SELECT MAX(ADDRESS_ID) As 'maxId' FROM address`
             con.query(query, function (err, result) {
                 if (err) {
-                    console.log(err.code)
+                    console.log(err)
                 }
                 return resolve(result)
             })
