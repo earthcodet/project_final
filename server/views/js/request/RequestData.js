@@ -51,7 +51,7 @@ let requestData = {
     delete_logic: '',
     is_deleted: '',
     last_update: '20-05-2563',
-    user_update : 'ADMIN'
+    user_update: 'ADMIN'
 
 }
 let establishmentData = {
@@ -338,4 +338,6 @@ function resetRequestData() {
     image_changed = false
     totalFiles = []
     selectImageFile = 0
+    maxImageFile = 8
+    document.getElementById('outputImage').innerHTML = ''
 }
