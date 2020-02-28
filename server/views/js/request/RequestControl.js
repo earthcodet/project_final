@@ -82,42 +82,7 @@ function insertPage() {
             }
         });
 }
-function printImg() {
-    Swal.fire({
-        title: "สำนักงานเทศบาล",
-        html: "ต้องการบันทึกหรือไม่",
-        showCancelButton: true,
-        width: '20%',
-        confirmButtonColor: "#009688",
-        confirmButtonText: "ใช่",
-        cancelButtonText: "ไม่ใช่",
-        cancelButtonColor: '#dc3545',
-        closeOnConfirm: false,
-        closeOnCancel: false,
-        icon: 'info'
-    })
-        .then((result) => {
-            if (result.value) {
-                Swal.fire({
-                    html: "บันทึกสำเร็จ",
-                    icon: "success",
-                    confirmButtonColor: "#009688"
-                }).then((result1) => {
-                    data = true
-                    disableMenuAll()
-                    enableMenu('addMenu')
-                    enableMenu('editMenu')
-                    enableMenu('deleteMenu')
-                    enableFunction()
-                    window.open('../utilities/viewImg.html', 'popup', 'width=1100,height=570');
-                })
 
-            } else if (result.dismiss === Swal.DismissReason.cancel) {
-                // Swal.fire("บันทึกล้มเหลว");
-            }
-        });
-
-}
 function editPage() {
     if (!deleteData) {
         addNew = true
@@ -430,12 +395,17 @@ function printImg(no, year) {
             if (requestData.no === '') {
                 window.open(`../utilities/viewImg.html`, '_blank');
             } else {
-                window.open(`../utilities/viewImg.html?id=${requestData.no}${requestData.year}`, '_blank');
+                
                 let requsetId = getUrlVars()
                 if (requsetId.id != undefined) {
                     let requsetNo = requsetId.id.slice(0, 6)
                     let requestYear = requsetId.id.slice(6, 10)
                     window.open(`../utilities/viewImg.html?id=${requsetNo}${requestYear}`, '_blank');
+                }else{
+                    if(requestData.no != ''){
+                        window.open(`../utilities/viewImg.html?id=${requestData.no}${requestData.year}`, '_blank');
+                    }
+                    
                 }
             }
         }

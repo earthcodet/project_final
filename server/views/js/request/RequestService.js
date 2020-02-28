@@ -157,7 +157,7 @@ function setDataView() {
     } else {
         document.getElementById('typeWorkplace').value = establishmentData.type
     }
-    if (document.getElementById('machinery' != undefined)) {
+    if (document.getElementById('machinery') != undefined) {
         document.getElementById('machinery').value = establishmentData.machine_size
     }
     if (document.getElementById('area') != undefined) {
@@ -461,7 +461,7 @@ function setReferecneData(raw_data) {
         referenceData.title = raw_data.REFERENCE_DATA.REFERENCE_TITLE
         referenceData.name = raw_data.REFERENCE_DATA.REFERENCE_NAME
         referenceData.surname = raw_data.REFERENCE_DATA.REFERENCE_SURNAME
-        referenceData.status = raw_data.REFERENCE_DATA.REFERENCE_SURNAME
+        referenceData.status = raw_data.REFERENCE_DATA.REFERENCE_STATUS
         referenceData.phone = raw_data.REFERENCE_DATA.REFERENCE_PHONE
     }
 
@@ -902,7 +902,12 @@ function dataChange(type) {
                 }
             }
             if (document.getElementById('useOtherPlace') != undefined) {
-                let establishment_is_land_owned_t = document.getElementById('useOtherPlace').checked === true ? 'YES' : 'NO'
+                console.log(establishmentData)
+                console.log(establishmentData.is_land_owned ) 
+                let establishment_is_land_owned_t = document.getElementById('useOtherPlace').checked === true ? true : false
+                console.log(establishmentData.is_land_owned ) 
+                console.log(establishment_is_land_owned_t) 
+                console.log(establishmentData.is_land_owned != establishment_is_land_owned_t)
                 if (establishmentData.is_land_owned != establishment_is_land_owned_t) {
                     status_data_change = true
                     console.log(`7 establishmentData.is_land_owned ${establishmentData.is_land_owned} === establishment_is_land_owned_t ${establishment_is_land_owned_t}`)
@@ -950,35 +955,40 @@ function dataChange(type) {
     }
     if (type === 'landData') {
         if (document.getElementById('useOtherPlace') != undefined) {
-            if (landData.title != document.getElementById('ownPrefix').value.trim() ||
-                landData.name != document.getElementById('ownName').value.trim() ||
-                landData.surname != document.getElementById('ownSurname').value.trim() ||
-                landData.birthday != document.getElementById('datepicker9').value.trim() ||
-                landData.phone != document.getElementById('ownPhone').value.trim() ||
-                landData.file_upload_changed != file_is_uploaded) {
-                status_data_change = true
+            if (document.getElementById('useOtherPlace').checked === true) {
+                if (landData.title != document.getElementById('ownPrefix').value.trim() ||
+                    landData.name != document.getElementById('ownName').value.trim() ||
+                    landData.surname != document.getElementById('ownSurname').value.trim() ||
+                    landData.birthday != document.getElementById('datepicker9').value.trim() ||
+                    landData.phone != document.getElementById('ownPhone').value.trim() ||
+                    landData.file_upload_changed != file_is_uploaded
+                ) {
+                    status_data_change = true
+                }
             }
         }
     }
     if (type === 'addressOwnerLandData') {
         if (document.getElementById('useOtherPlace') != undefined) {
-            let provinceValue = parseInt(document.getElementById(`ownerProvince`).value);
-            let amphurValue = parseInt(document.getElementById(`ownerDistrict`).value);
-            let districtValue = parseInt(document.getElementById(`ownerSubdistrict`).value);
+            if (document.getElementById('useOtherPlace').checked === true) {
+                let provinceValue = parseInt(document.getElementById(`ownerProvince`).value);
+                let amphurValue = parseInt(document.getElementById(`ownerDistrict`).value);
+                let districtValue = parseInt(document.getElementById(`ownerSubdistrict`).value);
 
-            let provinceValue_name_t = province[provinceValue - 1].PROVINCE_NAME
-            let amphurValue_name_t = amphur[amphurValue - 1].AMPHUR_NAME;
-            let districtValue_name_t = district[districtValue - 1].DISTRICT_NAME;
+                let provinceValue_name_t = province[provinceValue - 1].PROVINCE_NAME
+                let amphurValue_name_t = amphur[amphurValue - 1].AMPHUR_NAME;
+                let districtValue_name_t = district[districtValue - 1].DISTRICT_NAME;
 
-            if (addressOwnerLandData.home_number != document.getElementById('ownHomeId').value.trim() ||
-                addressOwnerLandData.moo != document.getElementById('ownMoo').value.trim() ||
-                addressOwnerLandData.trxk != document.getElementById('ownTrxk').value.trim() ||
-                addressOwnerLandData.sxy != document.getElementById('ownSxy').value.trim() ||
-                addressOwnerLandData.road != document.getElementById('ownRoad').value.trim() ||
-                addressOwnerLandData.district_name != districtValue_name_t ||
-                addressOwnerLandData.amphur_name != amphurValue_name_t ||
-                addressOwnerLandData.province_name != provinceValue_name_t) {
-                status_data_change = true
+                if (addressOwnerLandData.home_number != document.getElementById('ownHomeId').value.trim() ||
+                    addressOwnerLandData.moo != document.getElementById('ownMoo').value.trim() ||
+                    addressOwnerLandData.trxk != document.getElementById('ownTrxk').value.trim() ||
+                    addressOwnerLandData.sxy != document.getElementById('ownSxy').value.trim() ||
+                    addressOwnerLandData.road != document.getElementById('ownRoad').value.trim() ||
+                    addressOwnerLandData.district_name != districtValue_name_t ||
+                    addressOwnerLandData.amphur_name != amphurValue_name_t ||
+                    addressOwnerLandData.province_name != provinceValue_name_t) {
+                    status_data_change = true
+                }
             }
         }
     }
@@ -986,7 +996,7 @@ function dataChange(type) {
 }
 
 function setDataUpdate(type) {
-  
+
     if (type === 'requestData') {
         requestData.personal_id_owner = operatorData.id
         requestData.request_type_id = getRequestTypeId(document.getElementById('typeReq').value.trim())
