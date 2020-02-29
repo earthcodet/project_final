@@ -743,7 +743,7 @@ function createGroupData() {
         let referenceData_change = dataChange('referenceData')
         let landData_change = dataChange('landData')
         let addressOwnerLandData_change = dataChange('addressOwnerLandData')
-
+        
         operatorData.is_personal_changed = true
         operatorAddressData.is_address_changed = true
 
