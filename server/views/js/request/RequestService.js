@@ -301,7 +301,7 @@ function checkformatReturn(value) {
     return temp
 }
 //set data return form update
-function setReferecneDataUpdateReturn(raw_data) {
+function setRequestDataUpdateReturn(raw_data) {
     trianData.id = raw_data.train_id === '' ? trianData.id : raw_data.train_id
     referenceData.id = raw_data.reference_id === '' ? referenceData.id : raw_data.reference_id
     landData.id = raw_data.land_id === '' ? landData.id : raw_data.land_id

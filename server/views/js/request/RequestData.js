@@ -23,10 +23,10 @@ let requestData = {
     date_approve: '',
     doc_no1: 'N',
     doc_no2: 'N',
-    doc_no3: 'Y',
-    doc_no4: 'Y',
-    doc_no5: 'Y',
-    doc_no6: 'Y',
+    doc_no3: 'N',
+    doc_no4: 'N',
+    doc_no5: 'N',
+    doc_no6: 'N',
     subcategory: '',
     product_type: '',
     sell_start: '',
@@ -50,8 +50,8 @@ let requestData = {
     status: '',
     delete_logic: '',
     is_deleted: '',
-    last_update: '20-05-2563',
-    user_update: 'ADMIN'
+    last_update: '',
+    user_update: ''
 
 }
 let establishmentData = {
@@ -192,10 +192,10 @@ function resetRequestData() {
         date_approve: '',
         doc_no1: 'N',
         doc_no2: 'N',
-        doc_no3: 'Y',
-        doc_no4: 'Y',
-        doc_no5: 'Y',
-        doc_no6: 'Y',
+        doc_no3: 'N',
+        doc_no4: 'N',
+        doc_no5: 'N',
+        doc_no6: 'N',
         subcategory: '',
         product_type: '',
         sell_start: '',
@@ -219,8 +219,8 @@ function resetRequestData() {
         status: '',
         delete_logic: '',
         is_deleted: '',
-        last_update: '20-05-2563',
-        username: 'ADMIN'
+        last_update: '',
+        username: ''
 
     }
     establishmentData = {
@@ -340,4 +340,20 @@ function resetRequestData() {
     selectImageFile = 0
     maxImageFile = 8
     document.getElementById('outputImage').innerHTML = ''
+
+    // use land 
+    if (document.getElementById('notuseOtherPlace') != undefined) {
+        document.getElementById('notuseOtherPlace').check = true
+        document.getElementById('boxOwner').style.display = 'none'
+    }
+    // food
+    if (document.getElementById('foodNoTrain') != undefined) {
+        document.getElementById('foodNoTrain').check = true
+        document.getElementById('boxFood').style.display = 'none'
+    }
+    // sura
+    if (document.getElementById('notuseSpirits') != undefined) {
+        document.getElementById('notuseSpirits').check = true
+    }
+
 }

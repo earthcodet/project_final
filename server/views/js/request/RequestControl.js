@@ -42,20 +42,21 @@ function insertPage() {
                     if (preInsert() === true) {
                         insertRequest().then((data) => {
                             if(data.land_id != undefined){
-                                setReferecneDataUpdateReturn(data)
-                                //location.reload()
+                                setRequestDataUpdateReturn(data)
                                 resolve();
                             }else{
                                 setRequestDataReturn(data)
                                 document.getElementById('form_id').value = `${requestData.no}/${requestData.year}`
-                                document.getElementById('uploadFilePdf').value = ''
-                                if (files != null) {
-                                    document.getElementById('status_upload_file').style.display = ''
-                                } else {
-                                    document.getElementById('status_upload_file').style.display = 'none'
+                                if(document.getElementById('uploadFilePdf') != undefined){
+                                    document.getElementById('uploadFilePdf').value = ''
                                 }
-                                resetStatusChange()
-                                document.getElementById('uploadFilePdf').value = ''
+                                if( document.getElementById('status_upload_file') != undefined){
+                                    if (filesPdf != null) {
+                                        document.getElementById('status_upload_file').style.display = ''
+                                    } else {
+                                        document.getElementById('status_upload_file').style.display = 'none'
+                                    }
+                                } 
                                 resolve();
                             }  
                         })
