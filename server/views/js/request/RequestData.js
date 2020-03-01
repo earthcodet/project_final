@@ -65,6 +65,7 @@ let requestData = {
     image_name: '',
     total_image: 0,
     status: '',
+    status_before:'',
     delete_logic: '',
     is_deleted: '',
     last_update: '',
@@ -182,7 +183,17 @@ let assistantOperatorData = {
 }
 let imageDisplayFormDatabase = []
 
-
+function deleteAssistant(){
+    assistantOperatorData = {
+        is_assistant_changed: false,
+        id: '',
+        title: '',
+        name: '',
+        surname: '',
+        personal_id: ''
+    }
+    requestData.personal_id_assistant = ''
+}
 function resetRequestData() {
     filePdf = {
         name: '',

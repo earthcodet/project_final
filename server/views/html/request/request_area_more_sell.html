@@ -255,7 +255,7 @@
                     <br>
                     <br>
                     <a>ใบอนุญาตฉบับจริง</a>&ensp;
-                    <a>เลขที่ : RCPT 
+                    <a>เลขที่ : RCPT - 
                         <input type="text" id="bNum" style="width: 10%;" disabled 
                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                         maxlength="10"
@@ -481,7 +481,10 @@
                         <div class="col" style="width: 33.33%;">
                             <a>
                                 ลงชื่อ 
-                                <input  id="documentName2" name="" disabled readonly>
+                                <input list='list_staff_money' id="documentName2" name="" disabled>
+                                <datalist id="list_staff_money">
+                                </datalist>
+                                </input>
                                 <br>
                                 <p class="text-center">ผู้รับเงิน</p>
                             </a>
