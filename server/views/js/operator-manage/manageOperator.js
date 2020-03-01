@@ -10,7 +10,6 @@ let inAddress = {
     amphur_name: "",
     province_name: ""
 };
-
 let inPersonal = {
     id: "",
     address_id: "",
@@ -27,14 +26,13 @@ let inPersonal = {
     phone: "",
     fax: ''
 };
-
-// สำหรับ ค้นหาเพื่อไม่ให้ใช้คำค้นหาเดิมเพื่อค้นหา
 let tSearchName = ''
 let tSearchSurname = ''
 let tSearchId = ''
-
 let tempPersonal = {}
 let _operatorData = {}
+let now_status = 'active'
+
 function resetParameter() {
     arrInsert = [];
     inPersonal = {
@@ -67,13 +65,13 @@ function resetParameter() {
     };
 }
 function setDataUI(data) {
-    // document.getElementById('company-id').disabled = true
-    // document.getElementById('id').disabled = true
-    // document.getElementById('typeUser').value = data.PERSONAL_TYPE
-    // document.getElementById('typeUser').disabled = true
-
-
     if (data.PERSONAL_TYPE === 'บุคคลธรรมดา') {
+        document.getElementById('title_shot_personal_id').innerText = 'เลขประจำตัว : '
+        let title_shot_item = data.PERSONAL_TITLE === undefined || data.PERSONAL_TITLE === null ? '' : data.PERSONAL_TITLE
+        let name_shot_item = data.PERSONAL_NAME
+        let surname_shot_item = data.PERSONAL_SURNAME === undefined || data.PERSONAL_SURNAME === null ? '' : data.PERSONAL_SURNAME
+        document.getElementById('shot_name').value = `${title_shot_item} ${name_shot_item} ${surname_shot_item}`
+        document.getElementById('shot_personal_id').value = data.PERSONAL_PERSONAL_ID
         //address
         document.getElementById('homeId').value = data.AID.ADDRESS_HOME_NUMBER
         document.getElementById('moo').value = data.AID.ADDRESS_MOO === undefined || data.AID.ADDRESS_MOO === null ? '' : data.AID.ADDRESS_MOO
@@ -96,13 +94,11 @@ function setDataUI(data) {
 
         //แสดงค่าจังหวัดที่มาจาก ฐานข้อมูล (อำเภอ , ตำบล) ตาม id
         document.getElementById(`district`).value = amphurId
-        if(districtId === '' || districtId === undefined){
+        if (districtId === '' || districtId === undefined) {
             document.getElementById(`subdistrict`).innerHTML = ''
-        }else{
+        } else {
             document.getElementById(`subdistrict`).value = districtId
         }
-        
-
         //prsonal 
         document.getElementById('title').value = data.PERSONAL_TITLE === undefined || data.PERSONAL_TITLE === null ? '' : data.PERSONAL_TITLE
         document.getElementById('nameUser').value = data.PERSONAL_NAME
@@ -110,7 +106,7 @@ function setDataUI(data) {
         document.getElementById('nationality').value = data.PERSONAL_NATIONALITY === undefined || data.PERSONAL_NATIONALITY === null ? '' : data.PERSONAL_NATIONALITY
         document.getElementById('race').value = data.PERSONAL_RACE === undefined || data.PERSONAL_RACE === null ? '' : data.PERSONAL_RACE
         document.getElementById('datepicker3').value = data.PERSONAL_BIRTHDAY === undefined || data.PERSONAL_BIRTHDAY === null ? '' : data.PERSONAL_BIRTHDAY
-        
+
         document.getElementById('id').value = data.PERSONAL_PERSONAL_ID
         document.getElementById('datepicker1').value = data.PERSONAL_CARD_ISSUED
         document.getElementById('datepicker2').value = data.PERSONAL_CARD_EXPIRE === undefined || data.PERSONAL_CARD_EXPIRE === null ? '' : data.PERSONAL_CARD_EXPIRE
@@ -122,14 +118,21 @@ function setDataUI(data) {
         if (data.image != undefined) {
             console.log(data.image)
             let img = document.getElementById('operatorImage')
+            let img_shot = document.getElementById('operatorImage_shot')
             if (data.image.IMAGE_DATA != null && data.image.IMAGE_DATA != undefined) {
                 img.src = `data:image/${data.image.IMAGE_TYPE};base64,` + data.image.IMAGE_DATA
+                img_shot.src = `data:image/${data.image.IMAGE_TYPE};base64,` + data.image.IMAGE_DATA
             } else {
                 img.src = `../../img/userProfile.png`
+                img_shot.src = `../../img/userProfile.png`
             }
-             
+
         }
     } else {
+        document.getElementById('title_shot_personal_id').innerText = 'เลขทะเบียน : '
+        document.getElementById('operatorImage_shot').src = '../../img/town.png'
+        document.getElementById('shot_name').value = data.PERSONAL_NAME
+        document.getElementById('shot_personal_id').value = data.PERSONAL_PERSONAL_ID
 
         document.getElementById('company-nameUser').value = data.PERSONAL_NAME
         document.getElementById('company-id').value = data.PERSONAL_PERSONAL_ID
@@ -158,15 +161,12 @@ function setDataUI(data) {
 
         //แสดงค่าจังหวัดที่มาจาก ฐานข้อมูล (อำเภอ , ตำบล) ตาม id
         document.getElementById(`wDistrict`).value = amphurId
-        if(districtId === '' || districtId === undefined){
+        if (districtId === '' || districtId === undefined) {
             document.getElementById(`wSubdistrict`).innerHTML = ''
-        }else{
+        } else {
             document.getElementById(`wSubdistrict`).value = districtId
         }
-       
-
         document.getElementById('company-last-update').value = data.PERSONAL_UPDATE
-
     }
 }
 function changeOption(value) {
@@ -186,7 +186,6 @@ function changeOption(value) {
 
     }
 }
-
 function resetStyleIdDelete() {
     var id = document.getElementById('id')
     if (id != undefined || id != null) {
@@ -197,7 +196,6 @@ function resetStyleIdDelete() {
         company_id.style.textDecoration = ''
     }
 }
-
 function resetImageDefault() {
     document.getElementById('uploadFile').value = ''
     var img = document.getElementById('operatorImage')
@@ -268,22 +266,22 @@ function searchPersonal() {
     }
 
 }
-function onClickRadio(){
-    if(document.getElementById('datepicker2').disabled === true){
-     document.getElementById('datepicker2').disabled = false 
-     document.getElementById('life-id').checked = false
-    }else{
-     document.getElementById('datepicker2').disabled = true 
-     document.getElementById('life-id').checked = true
-     document.getElementById('datepicker2').value = ''
+function onClickRadio() {
+    if (document.getElementById('datepicker2').disabled === true) {
+        document.getElementById('datepicker2').disabled = false
+        document.getElementById('life-id').checked = false
+    } else {
+        document.getElementById('datepicker2').disabled = true
+        document.getElementById('life-id').checked = true
+        document.getElementById('datepicker2').value = ''
     }
- }
- function radioLife(){
-     document.getElementById('datepicker2').value = ''
-     document.getElementById('datepicker2').disabled = true 
-     document.getElementById('life-id').checked = true
-     document.getElementById('datepicker2').value = ''
- }
+}
+function radioLife() {
+    document.getElementById('datepicker2').value = ''
+    document.getElementById('datepicker2').disabled = true
+    document.getElementById('life-id').checked = true
+    document.getElementById('datepicker2').value = ''
+}
 function errorSearch(texterror, action) {
     let error = document.getElementById('error_search')
     error.classList.toggle('animation')
@@ -311,7 +309,7 @@ function getImageByPeronalId(type, id) {
     })
 }
 function showItem(dataOperator) {
-    document.getElementById('datepicker2').disabled = false 
+    document.getElementById('datepicker2').disabled = false
     document.getElementById('life-id').checked = false
     document.getElementById('datepicker2').value = ''
     tempPersonal = dataOperator
@@ -335,13 +333,12 @@ function showItem(dataOperator) {
 
     if (dataOperator.PERSONAL_IS_DELETED === 'Y') {
         setIdDelete(dataOperator.PERSONAL_TYPE) // ทำให้ id เป็นขีด
-        
+
     } else {
         resetStyleIdDelete()    //เอา style ลบออก
     }
     Swal.close()
 }
-
 function createResultSearch(data) {
     var tbl = document.getElementById("resultItems");
     if (tbl.getElementsByTagName("tbody")[0] != null || tbl.getElementsByTagName("tbody")[0] != undefined) {
@@ -377,7 +374,7 @@ function createResultSearch(data) {
             }
 
             cell.appendChild(cellText);
-            if( j === 3 && data[i].PERSONAL_IS_DELETED === 'Y'){
+            if (j === 3 && data[i].PERSONAL_IS_DELETED === 'Y') {
                 cell.style.textDecoration = 'line-through'
             }
             row.appendChild(cell);
@@ -393,10 +390,10 @@ function runScript(e) {
     }
 }
 function searchOparator() {
-        tSearchName = ''
-        tSearchSurname = ''
-        tSearchId = ''
-        var swal_html = `<div >
+    tSearchName = ''
+    tSearchSurname = ''
+    tSearchId = ''
+    var swal_html = `<div >
         <div class="display-center" onkeypress="return runScript(event)">
                     <h5 style="font-size: 100%;">
                         ชื่อ :
@@ -430,17 +427,38 @@ function searchOparator() {
         </div>
     </div>`
 
-        Swal.fire({
-            title: "ค้นหารายชื่อผู้ประกอบการ",
-            html: swal_html,
-            width: '80%',
-            customClass: 'swal-height',
-            showConfirmButton: false,
-            closeOnConfirm: false,
-            closeOnCancel: false
-        });
+    Swal.fire({
+        title: "ค้นหารายชื่อผู้ประกอบการ",
+        html: swal_html,
+        width: '80%',
+        customClass: 'swal-height',
+        showConfirmButton: false,
+        closeOnConfirm: false,
+        closeOnCancel: false
+    });
+}
+function changeStatusNow(status) {
+    now_status = status
+}
+//swicth display data
+function swicthDisplay(){
+   let check = document.getElementById('shot_detail_data').style.display === 'none'
+   if(check){
+    document.getElementById('shot_detail_data').style.display = ''
+    document.getElementById('full_detail_data').style.display = 'none'
+    document.getElementById('show_item').style.display = ''
+    document.getElementById('hide_item').style.display = 'none'
+   }else{
+    document.getElementById('shot_detail_data').style.display = 'none'
+    document.getElementById('full_detail_data').style.display = ''
+    document.getElementById('show_item').style.display = 'none'
+    document.getElementById('hide_item').style.display = ''
+   }
+}
+// table get
+function getRequestByPersonalIdAndRequestStatus(personal_id, request_status) {
+
 }
 
 
-  
 

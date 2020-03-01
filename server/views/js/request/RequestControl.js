@@ -414,3 +414,6 @@ function printImg(no, year) {
 
 
 }
+function printDocument() {
+  
+}
