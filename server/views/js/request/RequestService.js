@@ -73,6 +73,7 @@ function checkFormatMoneyId(value) {
 }
 // setDataView
 function setDataView() {
+    document.getElementById('documentName2').disabled = true
     createImage(imageDisplayFormDatabase)
     console.log('requestData.status ' + requestData.status)
     if (requestData.status === 'approval' || requestData.status === 'active') {
@@ -124,7 +125,10 @@ function setDataView() {
         document.getElementById('datepicker2').disabled = false
         document.getElementById('bFee').disabled = false
         document.getElementById('bFine').disabled = false
-
+      
+        document.getElementById('documentName2').disabled = false
+        document.getElementById('list_staff_money').innerHTML = ''
+        displayUserMoney()
     }
 
 
@@ -155,8 +159,13 @@ function setDataView() {
     document.getElementById(`province`).value = provinceId
     amphurSelect(parseInt(provinceId))
     districtSelect(parseInt(amphurId))
+    
     document.getElementById(`district`).value = amphurId
-    document.getElementById(`subdistrict`).value = districtId
+    if(districtId ===  undefined || districtId === ''){
+        document.getElementById(`subdistrict`).innerHTML = ''
+    }else{
+        document.getElementById(`subdistrict`).value = districtId 
+    }
     document.getElementById("phone").value = operatorData.phone
     document.getElementById("fax").value = operatorData.fax
     document.getElementById('reference_title').value = referenceData.title
@@ -192,7 +201,11 @@ function setDataView() {
     wamphurSelect(parseInt(provinceIdE))
     wdistrictSelect(parseInt(amphurIdE))
     document.getElementById(`wDistrict`).value = amphurIdE
-    document.getElementById(`wSubdistrict`).value = districtIdE
+    if(districtIdE === undefined || districtIdE ===  ''){
+        document.getElementById(`wSubdistrict`).innerHTML = ''
+    }else{
+        document.getElementById(`wSubdistrict`).value = districtIdE
+    }
     document.getElementById("wPhone").value = establishmentData.phone
     document.getElementById("wFax").value = establishmentData.fax
 
@@ -269,8 +282,11 @@ function setDataView() {
             onwerAmphurSelect(parseInt(provinceIdEL))
             onwerDistrictSelect(parseInt(amphurIdEL))
             document.getElementById(`ownerDistrict`).value = amphurIdEL
-            document.getElementById(`ownerSubdistrict`).value = districtIdEL
-
+            if(districtIdEL === '' || districtIdEL === undefined){
+                document.getElementById(`ownerSubdistrict`).innerHTML = ''
+            }else{
+                document.getElementById(`ownerSubdistrict`).value = districtIdEL 
+            }
             if (landData.status_upload_file) {
                 document.getElementById('status_upload_file').style.display = ''
             } else {
@@ -348,8 +364,11 @@ function setDataOperator(raw_data, type) {
 
         //แสดงค่าจังหวัดที่มาจาก ฐานข้อมูล (อำเภอ , ตำบล) ตาม id
         document.getElementById(`district`).value = amphurId
-        document.getElementById(`subdistrict`).value = districtId
-
+        if(districtId === undefined || districtId === ''){
+            document.getElementById(`subdistrict`).innerHTML = ''
+        }else{
+            document.getElementById(`subdistrict`).value = districtId
+        }
         document.getElementById("phone").value = operatorData.phone
         document.getElementById("fax").value = operatorData.fax
 
@@ -635,7 +654,7 @@ function createGroupData() {
         let amphurValue = parseInt(document.getElementById(`district`).value);
         let districtValue = parseInt(document.getElementById(`subdistrict`).value);
 
-        operatorAddressData.district_name = district[districtValue - 1].DISTRICT_NAME;
+        operatorAddressData.district_name = district[districtValue - 1] === undefined ? '' :district[districtValue - 1].DISTRICT_NAME;
         operatorAddressData.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
         operatorAddressData.province_name = province[provinceValue - 1].PROVINCE_NAME;
     }
@@ -784,7 +803,7 @@ function createGroupData() {
         let amphurValue = parseInt(document.getElementById(`wDistrict`).value);
         let districtValue = parseInt(document.getElementById(`wSubdistrict`).value);
 
-        addressEstablishmentData.district_name = district[districtValue - 1].DISTRICT_NAME;
+        addressEstablishmentData.district_name = district[districtValue - 1] === undefined ? '' : district[districtValue - 1].DISTRICT_NAME;
         addressEstablishmentData.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
         addressEstablishmentData.province_name = province[provinceValue - 1].PROVINCE_NAME;
 
@@ -804,7 +823,7 @@ function createGroupData() {
             let amphurValue = parseInt(document.getElementById(`ownerDistrict`).value);
             let districtValue = parseInt(document.getElementById(`ownerSubdistrict`).value);
 
-            addressOwnerLandData.district_name = district[districtValue - 1].DISTRICT_NAME;
+            addressOwnerLandData.district_name = district[districtValue - 1] === undefined ? '' : district[districtValue - 1].DISTRICT_NAME;
             addressOwnerLandData.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
             addressOwnerLandData.province_name = province[provinceValue - 1].PROVINCE_NAME;
         }
@@ -840,7 +859,7 @@ function createGroupData() {
             setDataUpdate('requestData')
             requestData.is_request_changed = true
             if (requestData.status === 'approval') {
-                status_before = 'active'
+                requestData.status_before = 'approval'
                 requestData.status = 'active'
             }
 
@@ -1055,7 +1074,7 @@ function dataChange(type) {
         let provinceValue = parseInt(document.getElementById(`wProvince`).value);
         let amphurValue = parseInt(document.getElementById(`wDistrict`).value);
         let districtValue = parseInt(document.getElementById(`wSubdistrict`).value);
-        let district_name_t = district[districtValue - 1].DISTRICT_NAME;
+        let district_name_t = district[districtValue - 1] === undefined ? '' : district[districtValue - 1].DISTRICT_NAME ;
         let amphur_name_t = amphur[amphurValue - 1].AMPHUR_NAME;
         let province_name_t = province[provinceValue - 1].PROVINCE_NAME;
 
@@ -1113,7 +1132,7 @@ function dataChange(type) {
 
                 let provinceValue_name_t = province[provinceValue - 1].PROVINCE_NAME
                 let amphurValue_name_t = amphur[amphurValue - 1].AMPHUR_NAME;
-                let districtValue_name_t = district[districtValue - 1].DISTRICT_NAME;
+                let districtValue_name_t = district[districtValue - 1] === undefined ? '' : district[districtValue - 1].DISTRICT_NAME;
 
                 if (addressOwnerLandData.home_number != document.getElementById('ownHomeId').value.trim() ||
                     addressOwnerLandData.moo != document.getElementById('ownMoo').value.trim() ||
@@ -1260,7 +1279,7 @@ function setDataUpdate(type) {
         let amphurValue = parseInt(document.getElementById(`wDistrict`).value);
         let districtValue = parseInt(document.getElementById(`wSubdistrict`).value);
 
-        addressEstablishmentData.district_name = district[districtValue - 1].DISTRICT_NAME;
+        addressEstablishmentData.district_name = district[districtValue - 1] === undefined ? '' : district[districtValue - 1].DISTRICT_NAME;
         addressEstablishmentData.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
         addressEstablishmentData.province_name = province[provinceValue - 1].PROVINCE_NAME;
     }
@@ -1303,7 +1322,7 @@ function setDataUpdate(type) {
             let amphurValue = parseInt(document.getElementById(`ownerDistrict`).value);
             let districtValue = parseInt(document.getElementById(`ownerSubdistrict`).value);
 
-            addressOwnerLandData.district_name = district[districtValue - 1].DISTRICT_NAME;
+            addressOwnerLandData.district_name = district[districtValue - 1] === undefined ? '' : district[districtValue - 1].DISTRICT_NAME;
             addressOwnerLandData.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
             addressOwnerLandData.province_name = province[provinceValue - 1].PROVINCE_NAME;
         }
@@ -1432,6 +1451,33 @@ function getRequestData(no, year) {
         axios.get(`http://localhost:5000/get/request/${no}/${year}`).then((result) => {
             return resolve(result.data);
         })
+    })
+}
+//get staff money 
+function getUserMoney() {
+    return new Promise((resolve, reject) => {
+        axios.get(`http://localhost:5000/get/user/money`).then((result) => {
+            return resolve(result.data);
+        })
+    })
+}
+function setLisetUserMoneyToUi(list_user) {
+    if (list_user.length != 0) {
+        const list = document.getElementById('list_staff_money')
+        requestData.staff_id_money = list_user[0].USER_ID
+        document.getElementById('documentName2').value = `${list_user[0].USER_TITLE} ${list_user[0].USER_NAME} ${list_user[0].USER_SURNAME}`
+        for (let i = 0; i < list_user.length; i++) {
+            let option = document.createElement('option');
+            let item = list_user[i]
+            option.value = `${item.USER_TITLE} ${item.USER_NAME} ${item.USER_SURNAME}`
+            option.innerText = list_user[i].USER_ID
+            list.appendChild(option);
+        }
+    }
+}
+function displayUserMoney(){
+    getUserMoney().then((list_user) =>{
+        setLisetUserMoneyToUi(list_user)
     })
 }
 //get request type 

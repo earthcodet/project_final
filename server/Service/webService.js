@@ -4,8 +4,8 @@ const ImageDAO = require('../DAO/ImageDAO')
 const ImageDAOObj = new ImageDAO()
 const AddressDAO = require('../DAO/AddressDAO')
 const AddressDAOObj = new AddressDAO()
-const LoginDAO = require('../DAO/UserDAO')
-const LoginDAOObj = new LoginDAO()
+const UserDAO = require('../DAO/UserDAO')
+const UserDAOObj = new UserDAO()
 const ReferenceDAO = require('../DAO/ReferenceDAO')
 const ReferenceDAOObj = new ReferenceDAO()
 const TrainDAO = require('../DAO/TrainDAO')
@@ -26,6 +26,13 @@ const PrintDAO = require('../DAO/PrintDAO')
 const PrintDAOObj = new PrintDAO()
 
 class service {
+    getStaffMoney(){
+        return new Promise((resolve, reject) => {
+            UserDAOObj.getStaffMoney().then((data) => {
+                return resolve(data)
+            })
+        })
+    }
     getProvince() {
         return new Promise((resolve, reject) => {
             AddressDAOObj.getProvince().then((data) => {
@@ -444,6 +451,21 @@ class service {
         return sightT
     }
     getNewId(type, menu) {
+        if (type === 'USER'){
+            return new Promise((resolve, reject) => {
+                UserDAOObj.getMaxIdUser().then((data) => {
+                    if (data[0].maxId === null) {
+                        console.log('getNewId : S0001')
+                        return resolve("S0001")
+                    } else {
+                        this.newId(data[0].maxId, 'USER').then((userId) => {
+                            console.log('getNewId : ' + userId)
+                            return resolve(userId)
+                        })
+                    }
+                })
+            })  
+        }
         if (type === 'PERSONAL') {
             return new Promise((resolve, reject) => {
                 PersonalDAOObj.getMaxIdProsonal().then((data) => {
@@ -1185,6 +1207,12 @@ class service {
 
             new_data.image_name = new_data.image_name === '-' || new_data.image_name === '' ? 'NULL' : `'${new_data.image_name}'`
             new_data.delete_logic = new_data.delete_logic === '-' || new_data.delete_logic === '' ? 'NULL' : `'${new_data.delete_logic}'`
+            return new_data
+        }
+        if (type === 'USER'){
+            new_data.username = new_data.username === '' || new_data.username === '-' ? 'NULL' : `'${new_data.username}'`
+            new_data.password = new_data.password === '' || new_data.password === '-' ? 'NULL' : `'${new_data.password}'`
+            new_data.is_default = new_data.is_default === '' || new_data.is_default === '-' ? 'NULL' : `'${new_data.is_default}'`
             return new_data
         }
     }
@@ -2734,7 +2762,7 @@ class service {
 
     getUser(username, password) {
         return new Promise((resolve, reject) => {
-            LoginDAOObj.getUser(username, password).then((data) => {
+            UserDAOObj.getUser(username, password).then((data) => {
                 return resolve(data)
             })
         })

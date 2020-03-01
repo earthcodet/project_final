@@ -116,7 +116,12 @@ function setDataUI(data) {
 
         //แสดงค่าจังหวัดที่มาจาก ฐานข้อมูล (อำเภอ , ตำบล) ตาม id
         document.getElementById(`district`).value = amphurId
-        document.getElementById(`subdistrict`).value = districtId
+        if(districtId  === '' || districtId === undefined){
+            document.getElementById(`subdistrict`).innerHTML = ''
+        }else{
+            document.getElementById(`subdistrict`).value = districtId
+        }
+       
 
         //prsonal 
         document.getElementById('title').value = data.PERSONAL_TITLE === undefined || data.PERSONAL_TITLE === null ? '' : data.PERSONAL_TITLE
@@ -176,7 +181,11 @@ function setDataUI(data) {
 
         //แสดงค่าจังหวัดที่มาจาก ฐานข้อมูล (อำเภอ , ตำบล) ตาม id
         document.getElementById(`wDistrict`).value = amphurId
-        document.getElementById(`wSubdistrict`).value = districtId
+        if(districtId === '' || districtId === undefined){
+            document.getElementById(`wSubdistrict`).innerHTML = ''
+        }else{
+            document.getElementById(`wSubdistrict`).value = districtId
+        }
 
         document.getElementById('company-last-update').value = data.PERSONAL_UPDATE
 
@@ -296,7 +305,7 @@ function preInsert() {
                         let districtValue = parseInt(
                             document.getElementById(`subdistrict`).value
                         );
-                        inAddress.district_name = district[districtValue - 1].DISTRICT_NAME;
+                        inAddress.district_name = district[districtValue - 1] === undefined ? '' :  district[districtValue - 1].DISTRICT_NAME;
                         inAddress.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
                         inAddress.province_name = province[provinceValue - 1].PROVINCE_NAME;
                         //personal
@@ -342,7 +351,7 @@ function preInsert() {
                         let provinceValue = parseInt(document.getElementById(`wProvince`).value);
                         let amphurValue = parseInt(document.getElementById(`wDistrict`).value);
                         let districtValue = parseInt(document.getElementById(`wSubdistrict`).value);
-                        inAddress.district_name = district[districtValue - 1].DISTRICT_NAME;
+                        inAddress.district_name = district[districtValue - 1] === undefined ? '': district[districtValue - 1].DISTRICT_NAME;
                         inAddress.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
                         inAddress.province_name = province[provinceValue - 1].PROVINCE_NAME;
                         //personal
