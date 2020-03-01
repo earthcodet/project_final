@@ -1,5 +1,7 @@
 let newDocument = true
 let requestType = []
+let userMoney = ''
+let userAlderman = ''
 function checkView(typeForm) {
     let requsetId = getUrlVars()
     console.log(requsetId.id)
@@ -74,6 +76,7 @@ function checkFormatMoneyId(value) {
 // setDataView
 function setDataView() {
     document.getElementById('documentName2').disabled = true
+    document.getElementById('documentName3').disabled = true
     createImage(imageDisplayFormDatabase)
     console.log('requestData.status ' + requestData.status)
     if (requestData.status === 'approval' || requestData.status === 'active') {
@@ -127,8 +130,10 @@ function setDataView() {
         document.getElementById('bFine').disabled = false
       
         document.getElementById('documentName2').disabled = false
-        document.getElementById('list_staff_money').innerHTML = ''
+        document.getElementById('documentName2').innerHTML = ''
         displayUserMoney()
+
+        document.getElementById('documentName3').disabled = false
     }
 
 
@@ -933,7 +938,9 @@ function dataChange(type) {
             requestData.doc_no4 != doc_no_4_t ||
             requestData.doc_no5 != doc_no_5_t ||
             requestData.doc_no6 != doc_no_6_t ||
-            personal_change != false
+            personal_change != false  ||
+            requestData.staff_id_alderman != userAlderman ||
+            requestData.staff_id_money != userMoney 
         ) {
             status_data_change = true
         } else {
@@ -1236,6 +1243,8 @@ function setDataUpdate(type) {
         requestData.receipt_fine = fine_y_1
         requestData.receipt_fee = fee_y_1
         requestData.receipt_date = date_y_1
+        requestData.staff_id_money = userMoney
+        requestData.staff_id_alderman = userAlderman
 
         requestData.total_image = totalFiles.length
     }
@@ -1453,6 +1462,43 @@ function getRequestData(no, year) {
         })
     })
 }
+
+function getPresident() {
+    return new Promise((resolve, reject) => {
+        axios.get(`http://localhost:5000/get/user/president`).then((result) => {
+            return resolve(result.data);
+        })
+    })
+}
+
+function setLisetUserAlderManToUi(list_user) {
+    console.log(list_user)
+    if (list_user.length != 0) {
+        userAlderman = list_user[0].USER_ID
+        requestData.staff_id_money = list_user[0].USER_ID
+
+        document.getElementById('position').value = list_user[0].USER_POSITION
+        for (let i = 0; i < list_user.length; i++) {
+            var select = document.getElementById("documentName3");
+            var option = document.createElement("option");
+            let item = list_user[i]
+            option.text = `${item.USER_TITLE} ${item.USER_NAME} ${item.USER_SURNAME}`
+            option.value = list_user[i];
+    
+            select.onchange = function () { changePositionAlderman(value) };
+            select.add(option);
+        }
+    }
+}
+function changePositionAlderman(value){
+    userAlderman = value.USER_ID
+    document.getElementById('position').value = value.USER_POSITION
+}
+function displayUserAlderman(){
+    getPresident().then((list_user) =>{
+        setLisetUserAlderManToUi(list_user)
+    })
+}
 //get staff money 
 function getUserMoney() {
     return new Promise((resolve, reject) => {
@@ -1462,16 +1508,17 @@ function getUserMoney() {
     })
 }
 function setLisetUserMoneyToUi(list_user) {
+    console.log(list_user)
     if (list_user.length != 0) {
-        const list = document.getElementById('list_staff_money')
-        requestData.staff_id_money = list_user[0].USER_ID
-        document.getElementById('documentName2').value = `${list_user[0].USER_TITLE} ${list_user[0].USER_NAME} ${list_user[0].USER_SURNAME}`
         for (let i = 0; i < list_user.length; i++) {
-            let option = document.createElement('option');
+            var select = document.getElementById("documentName2");
+            var option = document.createElement("option");
             let item = list_user[i]
-            option.value = `${item.USER_TITLE} ${item.USER_NAME} ${item.USER_SURNAME}`
-            option.innerText = list_user[i].USER_ID
-            list.appendChild(option);
+            option.text = `${item.USER_TITLE} ${item.USER_NAME} ${item.USER_SURNAME}`
+            option.value = list_user[i].USER_ID;
+    
+            select.onchange = function () { userMoney = this.value};
+            select.add(option);
         }
     }
 }
@@ -1484,7 +1531,6 @@ function displayUserMoney(){
 function getRequestType(type) {
     return new Promise((resolve, reject) => {
         axios.get(`http://localhost:5000/get/requestType/${type}`).then((result) => {
-            resolve(result.data);
             for (let i = 0; i < result.data.length; i++) {
                 requestType.push(result.data[i])
             }
@@ -1498,6 +1544,7 @@ function setRequsetType(type) {
         addRequestTypeToDatalist()
     })
     checkView(type)
+    displayUserAlderman()
 }
 function addRequestTypeToDatalist() {
     const list = document.getElementById('brow')

@@ -234,8 +234,15 @@ app.get('/get/viewImage/:id/:year', (req, res) => {
     res.json(request_viewImage)
   })
 })
-app.get('/get/user/money', (req, res) => {
-  webService.getStaffMoney().then((data) => {
+app.get('/get/user/:type', (req, res) => {
+  let type_name = req.params.type
+  if(type_name === 'money'){
+    type_name = 'การเงิน'
+  }
+  if(type_name === 'president'){
+    type_name = 'นายก'
+  }
+  webService.getStaffฺByType(type_name).then((data) => {
     res.json(data)
   })
 })

@@ -26,9 +26,9 @@ const PrintDAO = require('../DAO/PrintDAO')
 const PrintDAOObj = new PrintDAO()
 
 class service {
-    getStaffMoney(){
+    getStaffฺByType(type){
         return new Promise((resolve, reject) => {
-            UserDAOObj.getStaffMoney().then((data) => {
+            UserDAOObj.getStaffฺByType(type).then((data) => {
                 return resolve(data)
             })
         })

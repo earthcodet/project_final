@@ -41,24 +41,24 @@ function insertPage() {
                 setTimeout(function () {
                     if (preInsert() === true) {
                         insertRequest().then((data) => {
-                            if(data.land_id != undefined){
+                            if (data.land_id != undefined) {
                                 setRequestDataUpdateReturn(data)
                                 resolve();
-                            }else{
+                            } else {
                                 setRequestDataReturn(data)
                                 document.getElementById('form_id').value = `${requestData.no}/${requestData.year}`
-                                if(document.getElementById('uploadFilePdf') != undefined){
+                                if (document.getElementById('uploadFilePdf') != undefined) {
                                     document.getElementById('uploadFilePdf').value = ''
                                 }
-                                if( document.getElementById('status_upload_file') != undefined){
+                                if (document.getElementById('status_upload_file') != undefined) {
                                     if (filesPdf != null) {
                                         document.getElementById('status_upload_file').style.display = ''
                                     } else {
                                         document.getElementById('status_upload_file').style.display = 'none'
                                     }
-                                } 
+                                }
                                 resolve();
-                            }  
+                            }
                         })
                     }
                 }, 1000);
@@ -396,17 +396,15 @@ function printImg(no, year) {
             if (requestData.no === '') {
                 window.open(`../utilities/viewImg.html`, '_blank');
             } else {
-                
-                let requsetId = getUrlVars()
-                if (requsetId.id != undefined) {
-                    let requsetNo = requsetId.id.slice(0, 6)
-                    let requestYear = requsetId.id.slice(6, 10)
-                    window.open(`../utilities/viewImg.html?id=${requsetNo}${requestYear}`, '_blank');
-                }else{
-                    if(requestData.no != ''){
-                        window.open(`../utilities/viewImg.html?id=${requestData.no}${requestData.year}`, '_blank');
+                if (requestData.no != '') {
+                    window.open(`../utilities/viewImg.html?id=${requestData.no}${requestData.year}`, '_blank');
+                } else {
+                    let requsetId = getUrlVars()
+                    if (requsetId.id != undefined) {
+                        let requsetNo = requsetId.id.slice(0, 6)
+                        let requestYear = requsetId.id.slice(6, 10)
+                        window.open(`../utilities/viewImg.html?id=${requsetNo}${requestYear}`, '_blank');
                     }
-                    
                 }
             }
         }
