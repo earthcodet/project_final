@@ -17,7 +17,9 @@ function addPage() {
     if (id != null) {
         id.style.textDecoration = ''
     }
+    let temp_position = document.getElementById('position').value
     resetFunction()
+    document.getElementById('position').value = temp_position
 }
 function insertPage() {
     Swal.fire({

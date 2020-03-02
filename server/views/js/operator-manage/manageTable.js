@@ -65,19 +65,20 @@ function approvalPopup() {
                     setTimeout(function () {
                         inRequest.staff_id_approve = document.getElementById('app_name').value
                         inRequest.date_approve = document.getElementById('datepicker5').value
+                        inRequest.status_before = inRequest.status
                         inRequest.status = 'approval'
-                        updateRequest().then((data) =>{
-                            if(data){
+                        updateRequest().then((data) => {
+                            if (data) {
                                 resolve();
-                            }else{
+                            } else {
                                 Swal.fire({
                                     html: "<h2>เกิดข้อผิดพลาด</h2>",
                                     icon: "error",
                                     confirmButtonColor: "#009688"
-                                });  
+                                });
                             }
                         })
-                    }),1000;
+                    }), 1000;
                 })
             }
         }
@@ -110,7 +111,7 @@ function approvalPopup() {
     $('#datepicker5').keyup(function () {
         formatDate(this.value, 'datepicker5')
     });
-    displayUserInformation()
+    displayUserInformation('app_name')
 }
 //ยกเลิก
 function canclePopup() {
@@ -157,7 +158,20 @@ function canclePopup() {
             } else {
                 return new Promise(function (resolve, reject) {
                     setTimeout(function () {
-                        resolve();
+                        inRequest.status_before = inRequest.status
+                        inRequest.status = 'cancel'
+                        inRequest.delete_logic = document.getElementById('cancleTextPopup').value
+                        updateRequest().then((data) => {
+                            if (data) {
+                                resolve();
+                            } else {
+                                Swal.fire({
+                                    html: "<h2>เกิดข้อผิดพลาด</h2>",
+                                    icon: "error",
+                                    confirmButtonColor: "#009688"
+                                });
+                            }
+                        })
                     }, 1000);
                 });
             }
@@ -169,30 +183,17 @@ function canclePopup() {
                 icon: "success",
                 confirmButtonColor: "#009688"
             });
+            displayTableRequest()
         } else if (result.dismiss === Swal.DismissReason.cancel) {
         }
     });
 }
-
 //ไม่อนุมัติ
 function notApprovalPopup() {
     let html_display = `
 <div style = 'text-align:left; display:block' >
 <br>
-    <label class = 'topic' > ชื่อผู้อนุญาต </label> 
-    <br>
-    <input list='list-name' id="not_app_name" class='tabOne' style="width:95%" maxlength="150" >
-        <datalist id="list-name">
-            <option value="นาง น้ำส้ม ซีบีอี"></option>
-            <option value="นาย บัว สีน้ำเงิน"></option>
-        </datalist>
-    </input>
-    <br> 
-    <div class='center'>
-        <label id='not_app_name_alert' class='alert tabOne' style='display:none' >ช่องนี้เว้นว่างไม่ได้</label>
-    </div>
-    <br>
-    <label class = 'topic' > เหตุผลที่ยกเลิก </label> 
+    <label class = 'topic' > เหตุผลที่ไม่อนุมัติ </label> 
     <br>
     <br>
     <textarea id='non_cancle_Text' class='tabOne' row='10' style='width:95%;' ></textarea>
@@ -201,10 +202,6 @@ function notApprovalPopup() {
         <label id='non_cancle_alert' class='alert tabOne' style='display:none' >ช่องนี้เว้นว่างไม่ได้</label>
     </div>
     <br>
-    <label>วันที่อนุญาต</label>
-    <br>
-    <input type="text" id="datepicker6" placeholder=""  class='tabOne' style="width: 95%" maxlength="10">
-    <br> 
     <div class='center'>
         <label id='datepicker6_alert' class='alert tabOne' style='display:none' >ช่องนี้เว้นว่างไม่ได้</label>
     </div>
@@ -225,44 +222,38 @@ function notApprovalPopup() {
         closeOnCancel: false,
         showLoaderOnConfirm: true,
         preConfirm: function () {
-            let not_app_name_text = document.getElementById('not_app_name')
-            let not_app_name_alert = document.getElementById('not_app_name_alert')
-
             let non_cancle_Text = document.getElementById('non_cancle_Text')
             let non_cancle_alert = document.getElementById('non_cancle_alert')
 
-            let datepicker6 = document.getElementById('datepicker6')
-            let datepicker6_alert = document.getElementById('datepicker6_alert')
-
             //เซตให้มันกลับเป็น style แบบเดิมก่อน
-            not_app_name_text.classList.remove('alertInput')
-            datepicker6.classList.remove('alertInput')
             non_cancle_Text.classList.remove('alertInput')
-            not_app_name_alert.style.display = 'none'
             non_cancle_alert.style.display = 'none'
-            datepicker6_alert.style.display = 'none'
 
-            if (not_app_name_text.value.trim().length === 0 || non_cancle_Text.value.trim().length === 0 || datepicker6.value.trim().length === 0) {
-                if (not_app_name_text.value.trim().length === 0) {
-                    not_app_name_text.classList.add('alertInput')
-                    not_app_name_alert.style.display = ''
-                }
+            if (non_cancle_Text.value.trim().length === 0) {
                 if (non_cancle_Text.value.trim().length === 0) {
                     non_cancle_Text.classList.add('alertInput')
                     non_cancle_alert.style.display = ''
                 }
-                if (datepicker6.value.trim().length === 0) {
-                    datepicker6.classList.add('alertInput')
-                    datepicker6_alert.style.display = ''
-                }
-
                 Swal.showValidationMessage(
                     `ข้อมูลไม่ครบ`
                 )
             } else {
                 return new Promise(function (resolve, reject) {
                     setTimeout(function () {
-                        resolve();
+                        inRequest.delete_logic = document.getElementById('non_cancle_Text').value
+                        inRequest.status_before = inRequest.status
+                        inRequest.status = 'cancel'
+                        updateRequest().then((data) => {
+                            if (data) {
+                                resolve();
+                            } else {
+                                Swal.fire({
+                                    html: "<h2>เกิดข้อผิดพลาด</h2>",
+                                    icon: "error",
+                                    confirmButtonColor: "#009688"
+                                });
+                            }
+                        })
                     }, 1000);
                 });
             }
@@ -274,6 +265,7 @@ function notApprovalPopup() {
                 icon: "success",
                 confirmButtonColor: "#009688"
             });
+            displayTableRequest()
         } else if (result.dismiss === Swal.DismissReason.cancel) {
         }
     });
@@ -303,7 +295,7 @@ function payPopup() {
     <br>
     <br>
         <a class='topic' style="margin-left: 3.7vw;"> เลขที่ </a>
-        <input type='text' id="pay_order_no"class='tabOne' style="width:8vw; margin-left:1vw" maxlength="7"onkeyup='checkOrderNo(this.value, "pay_order_no")'</input>
+        <input type='text' id="pay_order_no"class='tabOne' style="width:8vw; margin-left:1vw" maxlength="10"onkeyup='checkOrderNo(this.value, "pay_order_no")'</input>
         <br>
         <a id='pay_order_no_alert' class='tabTwo alert'  style='display:none'>ช่องนี้เว้นว่างไม่ได้</a>
         <br>
@@ -361,15 +353,15 @@ function payPopup() {
             pay_fine_alert.style.display = 'none'
             datepicker7_alert.style.display = 'none'
 
-            if (pay_order_no.value.trim().length != 7 || pay_fee.value.trim().length === 0 || pay_fine.value.trim().length === 0 || datepicker7.value.trim().length === 0) {
+            if (pay_order_no.value.trim().length != 10 || pay_fee.value.trim().length === 0 || pay_fine.value.trim().length === 0 || datepicker7.value.trim().length === 0) {
                 if (pay_order_no.value.trim().length === 0) {
                     pay_order_no.classList.add('alertInput')
                     pay_order_no_alert.style.display = ''
                 }
-                if (pay_order_no.value.trim().length != 7 && pay_order_no.value.trim().length > 0) {
+                if (pay_order_no.value.trim().length != 10 && pay_order_no.value.trim().length > 0) {
                     pay_order_no.classList.add('alertInput')
                     pay_order_no_alert.style.display = ''
-                    pay_order_no_alert.innerText = 'รูปแบบเลขที่ไม่ถูกต้อง ตัวอย่าง 01/2563'
+                    pay_order_no_alert.innerText = 'รูปแบบเลขที่ไม่ถูกต้อง ตัวอย่าง 0000001/63'
                 }
                 if (pay_fee.value.trim().length === 0) {
                     pay_fee.classList.add('alertInput')
@@ -389,7 +381,70 @@ function payPopup() {
             } else {
                 return new Promise(function (resolve, reject) {
                     setTimeout(function () {
-                        resolve();
+                        if (inRequest.date_expired != '') {
+                            let temp = inRequest.date_expired.split('-')
+                            let year = parseInt(temp[2])
+                            let year_now = parseInt(new Date().toISOString().slice(0, 10).split('-')[0])
+                            if (year - year_now === 3) {
+                                inRequest.receipt_date = document.getElementById('datepicker7').value
+                                inRequest.receipt_fine = document.getElementById('pay_fine').value
+                                inRequest.receipt_fee = document.getElementById('pay_fee').value
+                                let receipt_id = document.getElementById('pay_order_no').value
+                                inRequest.receipt_order = receipt_id.slice(0, 7)
+                                inRequest.receipt_order_year = receipt_id.slice(8, 10)
+                                inRequest.status_before = inRequest.status
+                                inRequest.status = 'active'
+                            } else if (year - year_now === 2) {
+                                inRequest.receipt_date_year_2 = document.getElementById('datepicker7').value
+                                inRequest.receipt_fine_year_2 = document.getElementById('pay_fine').value
+                                inRequest.receipt_fee_year_2 = document.getElementById('pay_fee').value
+                                let receipt_id = document.getElementById('pay_order_no').value
+                                inRequest.receipt_order_year_2 = receipt_id.slice(0, 7)
+                                inRequest.receipt_order_year_year_2 = receipt_id.slice(8, 10)
+                                inRequest.status_before = inRequest.status
+                                inRequest.status = 'active'
+                            } else {
+                                inRequest.receipt_date_year_3 = document.getElementById('datepicker7').value
+                                inRequest.receipt_fine_year_3 = document.getElementById('pay_fine').value
+                                inRequest.receipt_fee_year_3 = document.getElementById('pay_fee').value
+                                let receipt_id = document.getElementById('pay_order_no').value
+                                inRequest.receipt_order_year_3 = receipt_id.slice(0, 7)
+                                inRequest.receipt_order_year_year_3 = receipt_id.slice(8, 10)
+                                inRequest.status_before = inRequest.status
+                                inRequest.status = 'active'
+                            }
+                            updateRequest().then((data) => {
+                                if (data) {
+                                    resolve();
+                                } else {
+                                    Swal.fire({
+                                        html: "<h2>เกิดข้อผิดพลาด</h2>",
+                                        icon: "error",
+                                        confirmButtonColor: "#009688"
+                                    });
+                                }
+                            })
+                        } else {
+                            inRequest.receipt_date = document.getElementById('datepicker7').value
+                            inRequest.receipt_fine = document.getElementById('pay_fine').value
+                            inRequest.receipt_fee = document.getElementById('pay_fee').value
+                            let receipt_id = document.getElementById('pay_order_no').value
+                            inRequest.receipt_order = receipt_id.slice(0, 7)
+                            inRequest.receipt_order_year = receipt_id.slice(8, 10)
+                            inRequest.status_before = inRequest.status
+                            inRequest.status = 'active'
+                            updateRequest().then((data) => {
+                                if (data) {
+                                    resolve();
+                                } else {
+                                    Swal.fire({
+                                        html: "<h2>เกิดข้อผิดพลาด</h2>",
+                                        icon: "error",
+                                        confirmButtonColor: "#009688"
+                                    });
+                                }
+                            })
+                        }
                     }, 1000);
                 });
             }
@@ -401,6 +456,7 @@ function payPopup() {
                 icon: "success",
                 confirmButtonColor: "#009688"
             });
+            displayTableRequest()
         } else if (result.dismiss === Swal.DismissReason.cancel) {
         }
     });
@@ -420,134 +476,6 @@ function payPopup() {
     // กรณีใช้กับ input ต้องกำหนดส่วนนี้ด้วยเสมอ เพื่อปรับปีให้เป็น ค.ศ. ก่อนแสดงปฏิทิน
     $('#datepicker7').keyup(function () {
         formatDate(this.value, 'datepicker7')
-    });
-}
-//ต่อใบอนุญาต
-function perPopup(menutype) {
-    let html_display = `
-<div >
-<br>
-    <label class = 'per_topic' style='font-size:1.5vw'> ต่อใบอนุญาติ เลขที่ A0001/2563 </label> 
-    <br>
-    <br>
-        <a class='topic' style="margin-left: 3.7vw;"> เลขที่ </a>
-        <input id="per_pay_order_no" class='tabOne' style="width:8vw;margin-left:1vw" maxlength="7" onkeyup='checkOrderNo(this.value, "per_pay_order_no")'></input><br>
-        <a id='per_pay_order_no_alert' class='tabTwo alert' style='display:none'>ช่องนี้เว้นว่างไม่ได้</a>
-        <br>
-        <a class='topic' style="margin-left: 0.5vw;"> ค่าธรรมเนียม </a>
-        <input type='number' id="per_pay_fee" class='tabOne' style="margin-left:1vw;width:8vw" maxlength="5"></input><br>
-        <a id='per_pay_fee_alert' class='tabTwo alert' style='display:none'>ช่องนี้เว้นว่างไม่ได้</a>
-        <br>
-        <a class='topic' style="margin-left: 3vw;"> ค่าปรับ </a>
-        <input type='number' id="per_pay_fine" class='tabOne' style="margin-left:1vw;width:8vw" maxlength="5"></input><br>
-        <a id='per_pay_fine_alert' class='tabTwo alert' style='display:none'>ช่องนี้เว้นว่างไม่ได้</a>
-        <br>
-        <a class='topic' style="margin-left: 0.3vw;"> ออกให้เมื่อวันที่ </a>
-        <input type='text' id="datepicker8" class='tabOne' style="margin-left:0.5vw;width:8vw" maxlength="10"  ></input><br>
-        <a id='datepicker8_alert' class='tabTwo alert' style='display:none'>ช่องนี้เว้นว่างไม่ได้</a>
-        <br>
-        <br>
-</div>
-`
-    Swal.fire({
-        html: html_display,
-        width: '35%',
-        customClass: 'swal-height',
-        showCancelButton: true,
-        showConfirmButton: true,
-        confirmButtonText: "ใช่",
-
-        cancelButtonText: "ไม่ใช่",
-        confirmButtonColor: "#009688",
-        cancelButtonColor: '#dc3545',
-        closeOnConfirm: false,
-        closeOnCancel: false,
-        showLoaderOnConfirm: true,
-        preConfirm: function () {
-
-            let per_pay_order_no = document.getElementById('per_pay_order_no')
-            let per_pay_order_no_alert = document.getElementById('per_pay_order_no_alert')
-
-            let per_pay_fee = document.getElementById('per_pay_fee')
-            let per_pay_fee_alert = document.getElementById('per_pay_fee_alert')
-
-            let per_pay_fine = document.getElementById('per_pay_fine')
-            let per_pay_fine_alert = document.getElementById('per_pay_fine_alert')
-
-            let datepicker8 = document.getElementById('datepicker8')
-            let datepicker8_alert = document.getElementById('datepicker8_alert')
-
-            //เซตให้มันกลับเป็น style แบบเดิมก่อน
-            per_pay_order_no.classList.remove('alertInput')
-            per_pay_fee.classList.remove('alertInput')
-            per_pay_fine.classList.remove('alertInput')
-            datepicker8.classList.remove('alertInput')
-
-            per_pay_order_no_alert.style.display = 'none'
-            per_pay_order_no_alert.innerText = 'ช่องนี้เว้นว่างไม่ได้'
-            per_pay_fee_alert.style.display = 'none'
-            per_pay_fine_alert.style.display = 'none'
-            datepicker8_alert.style.display = 'none'
-
-            if (per_pay_order_no.value.trim().length != 7 || per_pay_fee.value.trim().length === 0 || per_pay_fine.value.trim().length === 0 || datepicker8.value.trim().length === 0) {
-                if (per_pay_order_no.value.trim().length === 0) {
-                    per_pay_order_no.classList.add('alertInput')
-                    per_pay_order_no_alert.style.display = ''
-                }
-                if (per_pay_order_no.value.trim().length != 7 && per_pay_order_no.value.trim().length > 0) {
-                    per_pay_order_no.classList.add('alertInput')
-                    per_pay_order_no_alert.style.display = ''
-                    per_pay_order_no_alert.innerText = 'รูปแบบเลขที่ไม่ถูกต้อง ตัวอย่าง 01/2563'
-                }
-                if (per_pay_fee.value.trim().length === 0) {
-                    per_pay_fee.classList.add('alertInput')
-                    per_pay_fee_alert.style.display = ''
-                }
-                if (per_pay_fine.value.trim().length === 0) {
-                    per_pay_fine.classList.add('alertInput')
-                    per_pay_fine_alert.style.display = ''
-                }
-                if (datepicker8.value.trim().length === 0) {
-                    datepicker8.classList.add('alertInput')
-                    datepicker8_alert.style.display = ''
-                }
-                Swal.showValidationMessage(
-                    `ข้อมูลไม่ครบ`
-                )
-            } else {
-                return new Promise(function (resolve, reject) {
-                    setTimeout(function () {
-                        resolve();
-                    }, 1000);
-                });
-            }
-        }
-    }).then((result) => {
-        if (result.value) {
-            Swal.fire({
-                html: "<h2>บันทึกสำเร็จ</h2>",
-                icon: "success",
-                confirmButtonColor: "#009688"
-            });
-        } else if (result.dismiss === Swal.DismissReason.cancel) {
-        }
-    });
-    // กรณีใช้แบบ input
-    $("#datepicker8").datetimepicker({
-        timepicker: false,
-        format: "d-m-Y", // กำหนดรูปแบบวันที่ ที่ใช้ เป็น 00-00-0000
-        lang: "th", // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
-        onSelectDate: function (dp, $input) {
-            var yearT = new Date(dp).getFullYear();
-            var yearTH = yearT + 543;
-            var fulldate = $input.val();
-            var fulldateTH = fulldate.replace(yearT, yearTH);
-            $input.val(fulldateTH);
-        }
-    });
-    // กรณีใช้กับ input ต้องกำหนดส่วนนี้ด้วยเสมอ เพื่อปรับปีให้เป็น ค.ศ. ก่อนแสดงปฏิทิน
-    $('#datepicker8').keyup(function () {
-        formatDate(this.value, 'datepicker8')
     });
 }
 //โอนใบอนุญาติ
@@ -605,7 +533,18 @@ function cancelStatus() {
         preConfirm: function () {
             return new Promise(function (resolve, reject) {
                 setTimeout(function () {
-                    resolve();
+                    inRequest.status = inRequest.status_before
+                    updateRequest().then((data) => {
+                        if (data) {
+                            resolve();
+                        } else {
+                            Swal.fire({
+                                html: "<h2>เกิดข้อผิดพลาด</h2>",
+                                icon: "error",
+                                confirmButtonColor: "#009688"
+                            });
+                        }
+                    })
                 }, 1000);
             });
         }
@@ -732,7 +671,7 @@ $(function () {
             if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
                 statusDelete()
             } else {
-                toRequest(type,id)
+                toRequest(type, id)
             }
         },
         items: {
@@ -742,45 +681,46 @@ $(function () {
     });
     //ปกติ
     $.contextMenu({
-            selector: '.active-menu',
-            autoHide: true,
-            callback: function (key, options) {
-                let type = this[0].cells[1].innerText.trim()
-                let id = this[0].cells[2].innerText.trim()
-                let indexData = this[0].rowIndex -1
+        selector: '.active-menu',
+        autoHide: true,
+        callback: function (key, options) {
+            let type = this[0].cells[1].innerText.trim()
+            let id = this[0].cells[2].innerText.trim()
+            let indexData = this[0].rowIndex - 2
+            console.log(this)
             setDataItem(requestDataList[indexData])
-                if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
-                    statusDelete()
-                } else {
-                    switch (key) {
-                        case 'per':
-                            // perPopup(type)
-                            toPerRequest(type)
-                            break;
-                        case 'transfer':
-                            transferPopup()
-                            break;
-                        case 'add':
-                            addPopup(type)
-                            break;
-                        case 'detail':
-                            toRequest(type, id)
-                            break;
-                        default:
-                            canclePopup()
-                            break;
-                    }
+            if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
+                statusDelete()
+            } else {
+                switch (key) {
+                    case 'per':
+                        // perPopup(type)
+                        toPerRequest(type)
+                        break;
+                    case 'transfer':
+                        transferPopup()
+                        break;
+                    case 'add':
+                        addPopup(type)
+                        break;
+                    case 'detail':
+                        toRequest(type, id)
+                        break;
+                    default:
+                        canclePopup()
+                        break;
                 }
-            },
-            items: {
-                "per": { name: "ต่อใบอนุญาต" },
-                "transfer": { name: "โอนใบอนุญาต" },
-                "add": { name: "เพิ่มใบอนุญาต" },
-                "detail": { name: "ดูรายละเอียด" },
-                "delete": { name: "ยกเลิก" }
-
             }
-        });
+        },
+        items: {
+            "per": { name: "ต่อใบอนุญาต" },
+            "transfer": { name: "โอนใบอนุญาต" },
+            "add": { name: "เพิ่มใบอนุญาต" },
+            "detail": { name: "ดูรายละเอียด" },
+            "delete": { name: "ยกเลิก" }
+
+        }
+    });
     //อนุมัติ
     $.contextMenu({
         selector: '.approval-menu',
@@ -788,7 +728,7 @@ $(function () {
         callback: function (key, options) {
             let type = this[0].cells[1].innerText.trim()
             let id = this[0].cells[2].innerText.trim()
-            let indexData = this[0].rowIndex -1
+            let indexData = this[0].rowIndex - 2
             setDataItem(requestDataList[indexData])
             if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
                 statusDelete()
@@ -804,7 +744,7 @@ $(function () {
                         cancelStatus()
                         break;
                     default:
-                        toRequest(type,id)
+                        toRequest(type, id)
                         break;
                 }
             }
@@ -825,11 +765,11 @@ $(function () {
         callback: function (key, options) {
             let type = this[0].cells[1].innerText.trim()
             let id = this[0].cells[2].innerText.trim()
-            
+
             if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
                 statusDelete()
             } else {
-                toRequest(type,id)
+                toRequest(type, id)
             }
         },
         items: {
@@ -845,13 +785,13 @@ $(function () {
         callback: function (key, options) {
             let type = this[0].cells[1].innerText.trim()
             let id = this[0].cells[2].innerText.trim()
-            let indexData = this[0].rowIndex -1
+            let indexData = this[0].rowIndex - 1
             setDataItem(requestDataList[indexData])
             if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
                 statusDelete()
             } else {
                 if (key === 'detail') {
-                    toRequest(type,id)
+                    toRequest(type, id)
                 }
                 if (key === 'delete') {
                     canclePopup(type)
@@ -873,7 +813,7 @@ $(function () {
         callback: function (key, options) {
             let type = this[0].cells[1].innerText.trim()
             let id = this[0].cells[2].innerText.trim()
-            let indexData = this[0].rowIndex -1
+            let indexData = this[0].rowIndex - 1
             console.log(indexData)
             setDataItem(requestDataList[indexData])
             if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
@@ -890,7 +830,7 @@ $(function () {
                         canclePopup()
                         break;
                     default:
-                        toRequest(type,id)
+                        toRequest(type, id)
                         break;
                 }
             }
@@ -914,7 +854,7 @@ $(function () {
             if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
                 statusDelete()
             } else {
-                toRequest(type,id)
+                toRequest(type, id)
             }
         },
         items: {
@@ -927,7 +867,7 @@ $(function () {
 });
 function updateRequest() {
     return new Promise((resolve, reject) => {
-        axios.post(`http://localhost:5000/update/request/status`,{'requestData':inRequest}).then((result) => {
+        axios.post(`http://localhost:5000/update/request/status`, { 'requestData': inRequest }).then((result) => {
             return resolve(result.data);
         })
     })
@@ -939,24 +879,24 @@ function getUserInformation() {
         })
     })
 }
-function setLisetUserInformationToUi(list_user) {
+function setLisetUserInformationToUi(list_user, id) {
     if (list_user.length != 0) {
-        document.getElementById("app_name").innerHTML = ''
+        document.getElementById(id).innerHTML = ''
         for (let i = 0; i < list_user.length; i++) {
             var select = document.getElementById("app_name");
             var option = document.createElement("option");
             let item = list_user[i]
             option.text = `${item.USER_TITLE} ${item.USER_NAME} ${item.USER_SURNAME}`
             option.value = list_user[i].USER_ID;
-    
-            select.onchange = function () { userMoney = this.value};
+
+            select.onchange = function () { userMoney = this.value };
             select.add(option);
         }
     }
 }
-function displayUserInformation(){
-    getUserInformation().then((list_user) =>{
+function displayUserInformation(id) {
+    getUserInformation().then((list_user) => {
         console.log(`'get'`)
-        setLisetUserInformationToUi(list_user)
+        setLisetUserInformationToUi(list_user, id)
     })
 }

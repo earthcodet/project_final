@@ -113,7 +113,7 @@ function setDataView() {
             document.getElementById('bFeeY3').disabled = false
             document.getElementById('bFineY3').disabled = false
         }
-
+        console.log(`${requestData.receipt_order}/${requestData.receipt_order_year}`)
         if (requestData.receipt_order === '') {
             document.getElementById('bNum').value = ``
         } else {
@@ -215,14 +215,6 @@ function setDataView() {
     document.getElementById("wFax").value = establishmentData.fax
 
     document.getElementById('workplaceName').value = establishmentData.name
-
-    //เงิน
-    if (requestData.receipt_date != '') {
-        document.getElementById('bNum').value = requestData.rereceipt_order
-        document.getElementById('datepicker2').value = requestData.receipt_date
-        document.getElementById('bFee').value = requestData.receipt_fee
-        document.getElementById('bFine').value = requestData.receipt_fine
-    }
 
     if (document.getElementById("person2_name") != undefined) {
         document.getElementById("person2_name").value = `${assistantOperatorData.title} ${assistantOperatorData.name} ${assistantOperatorData.surname}`

@@ -214,19 +214,14 @@ function formatPhone(value) {
 // format oderId //
 function checkOrderNo(value, id) {
     let tempCheck = value.split("")
-    // format_example = 00/2563  length = 7
+    // format_example = 0000007/63  length = 10
     let formatCheck = ''
     for (let i = 0; i < tempCheck.length; i++) {
 
-        if (i === 2) {
-            if (tempCheck[2] === '/') {
-                formatCheck = formatCheck + tempCheck[2]
-                //     console.log(value.slice(0, value.length-1))
-                // document.getElementById(id).value = value.slice(0, value.length-1) + '/'
-            } else {
-                formatCheck = formatCheck + '/'
+        if (i === 7) {
+            if (tempCheck[7] === '/') {
+                formatCheck = formatCheck + tempCheck[i]
             }
-
         } else {
             if (!isNaN(tempCheck[i])) {
                 formatCheck = formatCheck + tempCheck[i]
