@@ -246,6 +246,13 @@ app.get('/get/user/:type', (req, res) => {
     res.json(data)
   })
 })
+app.get('/get/request/owner/:personal_id/:type', (req, res) => {
+  let type_type = req.params.type
+  let type_id = req.params.personal_id
+  webService.getRequestByTpyeAndOwnerId(type_type, type_id).then((data) => {
+    res.json(data)
+  })
+})
 //ทำให้ css กับ js ใช้ได้
 app.use(express.static(__dirname + '/views'));
 app.listen(PORT, () => {

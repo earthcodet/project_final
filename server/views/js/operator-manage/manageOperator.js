@@ -32,7 +32,7 @@ let tSearchId = ''
 let tempPersonal = {}
 let _operatorData = {}
 let now_status = 'active'
-
+let now_personal = ''
 function resetParameter() {
     arrInsert = [];
     inPersonal = {
@@ -315,6 +315,8 @@ function showItem(dataOperator) {
     tempPersonal = dataOperator
     resetParameter()
     resetStyleIdDelete()
+    now_personal = dataOperator.PERSONAL_ID
+    displayTableRequest()
     changeOption(dataOperator.PERSONAL_TYPE.trim())
     if (dataOperator.PERSONAL_TYPE === 'บุคคลธรรมดา') {
         getImageByPeronalId(dataOperator.PERSONAL_TYPE, dataOperator.PERSONAL_ID).then((result) => {
@@ -440,25 +442,106 @@ function searchOparator() {
 function changeStatusNow(status) {
     now_status = status
 }
+function onClickStatustab(status, event, id) {
+    now_status = status
+    if (now_status != '' && now_personal != '') {
+        displayTableRequest()
+    }
+    openCity(event, id)
+}
 //swicth display data
-function swicthDisplay(){
-   let check = document.getElementById('shot_detail_data').style.display === 'none'
-   if(check){
-    document.getElementById('shot_detail_data').style.display = ''
-    document.getElementById('full_detail_data').style.display = 'none'
-    document.getElementById('show_item').style.display = ''
-    document.getElementById('hide_item').style.display = 'none'
-   }else{
-    document.getElementById('shot_detail_data').style.display = 'none'
-    document.getElementById('full_detail_data').style.display = ''
-    document.getElementById('show_item').style.display = 'none'
-    document.getElementById('hide_item').style.display = ''
-   }
+function swicthDisplay() {
+    let check = document.getElementById('shot_detail_data').style.display === 'none'
+    if (check) {
+        document.getElementById('shot_detail_data').style.display = ''
+        document.getElementById('full_detail_data').style.display = 'none'
+        document.getElementById('show_item').style.display = ''
+        document.getElementById('hide_item').style.display = 'none'
+    } else {
+        document.getElementById('shot_detail_data').style.display = 'none'
+        document.getElementById('full_detail_data').style.display = ''
+        document.getElementById('show_item').style.display = 'none'
+        document.getElementById('hide_item').style.display = ''
+    }
 }
 // table get
 function getRequestByPersonalIdAndRequestStatus(personal_id, request_status) {
 
 }
 
+function getRequestByPersonalIdAndStatus(personal_id) {
+    return new Promise((resolve, reject) => {
+        axios.get(`http://localhost:5000/get/request/owner/${personal_id}/${now_status}`).then((result) => {
+            console.log(result.data)
+            resolve(result.data);
+        })
+    })
+}
+function displayTableRequest() {
+    getRequestByPersonalIdAndStatus(now_personal)
+}
 
+function createTableRequest() {
+    var tbl = document.getElementById(getTableIdTableByStatus(now_status));
+    if (tbl.getElementsByTagName("tbody")[0] != null || tbl.getElementsByTagName("tbody")[0] != undefined) {
+        tbl.removeChild(tbl.getElementsByTagName("tbody")[0])
+    }
+    var tblBody = document.createElement('tbody')
+    // style="height: 17vw;  text-align: center;"
+    tblBody.style.height = '17vw'
+    tblBody.style.textAlign = 'center'
+    for (var i = 0; i < data.length; i++) {
+        // creates a table row
+        var row = document.createElement("tr");
+        //row index = this.rowIndex
+        row.onclick = function () { showItem(data[this.rowIndex - 1]) }
 
+        for (var j = 0; j < 4; j++) {
+            var cell = document.createElement("td");
+            if (j === 0) {
+                var cellText = document.createTextNode(data[i].PERSONAL_NAME);
+            } else if (j === 1) {
+                var cellText = document.createTextNode(data[i].PERSONAL_SURNAME);
+            } else if (j === 2) {
+                let AddressText = ''
+                AddressText = AddressText + `บ้านเลขที่ ${data[i].AID.ADDRESS_HOME_NUMBER} `
+                AddressText = AddressText + `หมู่ ${data[i].AID.ADDRESS_MOO === null ? '-' : data[i].AID.ADDRESS_MOO} `
+                AddressText = AddressText + `ตรอก ${data[i].AID.ADDRESS_TRXK === null ? '-' : data[i].AID.ADDRESS_TRXK} `
+                AddressText = AddressText + `ซอย ${data[i].AID.ADDRESS_SXY === null ? '-' : data[i].AID.ADDRESS_SXY} `
+                AddressText = AddressText + `อาคาร ${data[i].AID.ADDRESS_BUILDING === null ? '-' : data[i].AID.ADDRESS_BUILDING} `
+                AddressText = AddressText + `ถนน ${data[i].AID.ADDRESS_ROAD === null ? '-' : data[i].AID.ADDRESS_ROAD} `
+                AddressText = AddressText + `ตำบล ${data[i].AID.DISTRICT_NAME === null ? '-' : data[i].AID.DISTRICT_NAME} `
+                AddressText = AddressText + `อำเภอ ${data[i].AID.AMPHUR_NAME === null ? '-' : data[i].AID.AMPHUR_NAME}`
+                AddressText = AddressText + `จังหวัด ${data[i].AID.PROVINCE_NAME === null ? '-' : data[i].AID.PROVINCE_NAME}`
+                var cellText = document.createTextNode(AddressText);
+            } else {
+                var cellText = document.createTextNode(data[i].PERSONAL_PERSONAL_ID);
+            }
+
+            cell.appendChild(cellText);
+            if (j === 3 && data[i].PERSONAL_IS_DELETED === 'Y') {
+                cell.style.textDecoration = 'line-through'
+            }
+            row.appendChild(cell);
+        }
+        tblBody.appendChild(row);
+    }
+    tbl.appendChild(tblBody);
+}
+
+function getTableIdTableByStatus(status) {
+    switch (status) {
+        case 'wait':
+            return 'wait_table'
+        case 'approval':
+            return 'approval_table'
+        case 'active':
+            return 'active_table'
+        case 'transfer':
+            return 'transfer_table'
+        case 'expire':
+            return 'date_exp_table'
+        default: //cancel
+            return 'cancel_table'
+    }
+}
