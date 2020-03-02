@@ -26,7 +26,7 @@ const PrintDAO = require('../DAO/PrintDAO')
 const PrintDAOObj = new PrintDAO()
 
 class service {
-    getStaffฺByType(type){
+    getStaffฺByType(type) {
         return new Promise((resolve, reject) => {
             UserDAOObj.getStaffฺByType(type).then((data) => {
                 return resolve(data)
@@ -451,7 +451,7 @@ class service {
         return sightT
     }
     getNewId(type, menu) {
-        if (type === 'USER'){
+        if (type === 'USER') {
             return new Promise((resolve, reject) => {
                 UserDAOObj.getMaxIdUser().then((data) => {
                     if (data[0].maxId === null) {
@@ -464,7 +464,7 @@ class service {
                         })
                     }
                 })
-            })  
+            })
         }
         if (type === 'PERSONAL') {
             return new Promise((resolve, reject) => {
@@ -1145,10 +1145,10 @@ class service {
             new_data.product_type = new_data.product_type === '-' || new_data.product_type === '' ? 'NULL' : `'${new_data.product_type}'`
             new_data.sell_start = new_data.sell_start === '-' || new_data.sell_start === '' ? 'NULL' : `'${this.formatTime(new_data.sell_start)}'`
             new_data.sell_end = new_data.sell_end === '-' || new_data.sell_end === '' ? 'NULL' : `'${this.formatTime(new_data.sell_end)}'`
-            
+
 
             //Year No 1
-            new_data.receipt_order = new_data.receipt_order === '-' || new_data.receipt_order === '' ? 'NULL' :  new_data.receipt_order
+            new_data.receipt_order = new_data.receipt_order === '-' || new_data.receipt_order === '' ? 'NULL' : new_data.receipt_order
             new_data.receipt_order_year = new_data.receipt_order_year === '' || new_data.receipt_order_year === '-' ? 'NULL' : new_data.receipt_order_year
             if (new_data.receipt_fine != '' && new_data.receipt_fine != '-') {
                 if (new_data.receipt_fee != '' && new_data.receipt_fee != '-') {
@@ -1162,9 +1162,9 @@ class service {
             new_data.receipt_fine = new_data.receipt_fine === '-' || new_data.receipt_fine === '' ? 'NULL' : new_data.receipt_fine
             new_data.receipt_fee = new_data.receipt_fee === '-' || new_data.receipt_fee === '' ? 'NULL' : new_data.receipt_fee
             new_data.receipt_date = new_data.receipt_date === '-' || new_data.receipt_date === '' ? 'NULL' : `'${this.formatDate('TO-INSERT', new_data.receipt_date)}'`
-            
+
             //Year No 2
-            new_data.receipt_order_year_2 = new_data.receipt_order_year_2 === '-' || new_data.receipt_order_year_2 === '' ? 'NULL' :  new_data.receipt_order_year_2
+            new_data.receipt_order_year_2 = new_data.receipt_order_year_2 === '-' || new_data.receipt_order_year_2 === '' ? 'NULL' : new_data.receipt_order_year_2
             new_data.receipt_order_year_year_2 = new_data.receipt_order_year_year_2 === '' || new_data.receipt_order_year_year_2 === '-' ? 'NULL' : new_data.receipt_order_year_year_2
             if (new_data.receipt_fine_year_2 != '' && new_data.receipt_fine_year_2 != '-') {
                 if (new_data.receipt_fee_year_2 != '' && new_data.receipt_fee_year_2 != '-') {
@@ -1178,7 +1178,7 @@ class service {
             new_data.receipt_fine_year_2 = new_data.receipt_fine_year_2 === '-' || new_data.receipt_fine_year_2 === '' ? 'NULL' : new_data.receipt_fine_year_2
             new_data.receipt_fee_year_2 = new_data.receipt_fee_year_2 === '-' || new_data.receipt_fee_year_2 === '' ? 'NULL' : new_data.receipt_fee_year_2
             new_data.receipt_date_year_2 = new_data.receipt_date_year_2 === '-' || new_data.receipt_date_year_2 === '' ? 'NULL' : `'${this.formatDate('TO-INSERT', new_data.receipt_date_year_2)}'`
-            
+
             //Year No 3
             new_data.receipt_order_year_3 = new_data.receipt_order_year_3 === '-' || new_data.receipt_order_year_3 === '' ? 'NULL' : new_data.receipt_order_year_3
             new_data.receipt_order_year_year_3 = new_data.receipt_order_year_year_3 === '' || new_data.receipt_order_year_year_3 === '-' ? 'NULL' : new_data.receipt_order_year_year_3
@@ -1194,9 +1194,9 @@ class service {
             new_data.receipt_fine_year_3 = new_data.receipt_fine_year_3 === '-' || new_data.receipt_fine_year_3 === '' ? 'NULL' : new_data.receipt_fine_year_3
             new_data.receipt_fee_year_3 = new_data.receipt_fee_year_3 === '-' || new_data.receipt_fee_year_3 === '' ? 'NULL' : new_data.receipt_fee_year_3
             new_data.receipt_date_year_3 = new_data.receipt_date_year_3 === '-' || new_data.receipt_date_year_3 === '' ? 'NULL' : `'${this.formatDate('TO-INSERT', new_data.receipt_date_year_3)}'`
-            
-            
-            
+
+
+
             new_data.date_issued = new_data.date_issued === '-' || new_data.date_issued === '' ? 'NULL' : `'${this.formatDate('TO-INSERT', new_data.date_issued)}'`
             new_data.date_expired = new_data.date_expired === '-' || new_data.date_expired === '' ? 'NULL' : `'${this.formatDate('TO-INSERT', new_data.date_expired)}'`
 
@@ -1209,10 +1209,103 @@ class service {
             new_data.delete_logic = new_data.delete_logic === '-' || new_data.delete_logic === '' ? 'NULL' : `'${new_data.delete_logic}'`
             return new_data
         }
-        if (type === 'USER'){
+        if (type === 'USER') {
             new_data.username = new_data.username === '' || new_data.username === '-' ? 'NULL' : `'${new_data.username}'`
             new_data.password = new_data.password === '' || new_data.password === '-' ? 'NULL' : `'${new_data.password}'`
             new_data.is_default = new_data.is_default === '' || new_data.is_default === '-' ? 'NULL' : `'${new_data.is_default}'`
+            return new_data
+        }
+        if (type === 'REQUEST_UPDATE_STATUS') {
+            let item = new_data.date_approve
+            new_data.date_approve = item === '' ? 'NULL' : `'${this.formatDate('TO-INSERT', item)}'`
+
+            item = new_data.staff_id_approve
+            new_data.staff_id_approve = item === '' ? 'NULL' : `'${item}'`
+
+            item = new_data.receipt_order
+            new_data.receipt_order = item === '' ? 'NULL' : item
+
+            item = new_data.receipt_order_year
+            new_data.receipt_order_year = item === '' ? 'NULL' : item
+
+            if (new_data.receipt_fine != '' && new_data.receipt_fine != '-') {
+                if (new_data.receipt_fee != '' && new_data.receipt_fee != '-') {
+                    new_data.receipt_total = parseFloat(new_data.receipt_fine) + parseFloat(new_data.receipt_fee)
+                } else {
+                    new_data.receipt_total = parseFloat(new_data.receipt_fine)
+                }
+            } else {
+                new_data.receipt_total = 0
+            }
+            item = new_data.receipt_fine
+            new_data.receipt_fine = item === '' ? 'NULL' : item
+
+            item = new_data.receipt_fee
+            new_data.receipt_fee = item === '' ? 'NULL' : item
+
+            item = new_data.receipt_date
+            new_data.receipt_date = item === '' ? 'NULL' : `'${this.formatDate('TO-INSERT', item)}'`
+
+            item = new_data.receipt_order_year_2
+            new_data.receipt_order_year_2 = item === '' ? 'NULL' : item
+
+            item = new_data.receipt_order_year_year_2
+            new_data.receipt_order_year_year_2 = item === '' ? 'NULL' : item
+
+            if (new_data.receipt_fine_year_2 != '' && new_data.receipt_fine_year_2 != '-') {
+                if (new_data.receipt_fee_year_2 != '' && new_data.receipt_fee_year_2 != '-') {
+                    new_data.receipt_total_year_2 = parseFloat(new_data.receipt_fine_year_2) + parseFloat(new_data.receipt_fee_year_2)
+                } else {
+                    new_data.receipt_total_year_2 = parseFloat(new_data.receipt_fine_year_2)
+                }
+            } else {
+                new_data.receipt_total_year_2 = 0
+            }
+            item = new_data.receipt_fine_year_2
+            new_data.receipt_fine_year_2 = item === '' ? 'NULL' : item
+
+            item = new_data.receipt_fee_year_2
+            new_data.receipt_fee_year_2 = item === '' ? 'NULL' : item
+
+            item = new_data.receipt_date_year_2
+            new_data.receipt_date_year_2 = item = item === '' ? 'NULL' : `'${this.formatDate('TO-INSERT', item)}'`
+
+            item = new_data.receipt_order_year_3
+            new_data.receipt_order_year_3 = item === '' ? 'NULL' : item
+
+            item = new_data.receipt_order_year_year_3
+            new_data.receipt_order_year_year_3 = item === '' ? 'NULL' : item
+
+            if (new_data.receipt_fine_year_3 != '' && new_data.receipt_fine_year_3 != '-') {
+                if (new_data.receipt_fee_year_3 != '' && new_data.receipt_fee_year_3 != '-') {
+                    new_data.receipt_total_year_3 = parseFloat(new_data.receipt_fine_year_3) + parseFloat(new_data.receipt_fee_year_3)
+                } else {
+                    new_data.receipt_total_year_3 = parseFloat(new_data.receipt_fine_year_3)
+                }
+            } else {
+                new_data.receipt_total_year_3 = 0
+            }
+
+            item = new_data.receipt_fine_year_3
+            new_data.receipt_fine_year_3 = item === '' ? 'NULL' : item
+
+            item = new_data.receipt_fee_year_3
+            new_data.receipt_fee_year_3 = item === '' ? 'NULL' : item
+
+            item = new_data.receipt_date_year_3
+            new_data.receipt_date_year_3 = item === '' ? 'NULL' : `'${this.formatDate('TO-INSERT', item)}'`
+
+            item = new_data.staff_id_money
+            new_data.staff_id_money = item === '' ? 'NULL' : `'${item}'`
+
+            item = new_data.date_issued
+            new_data.date_issued = item === '' ? 'NULL' : `'${this.formatDate('TO-INSERT', item)}'`
+
+            item = new_data.date_expired
+            new_data.date_expired = item === '' ? 'NULL' : `'${this.formatDate('TO-INSERT', item)}'`
+
+            item = new_data.delete_logic
+            new_data.delete_logic = item === '' ? 'NULL' : `'${item}'`
             return new_data
         }
     }
@@ -1533,6 +1626,17 @@ class service {
             })
         })
     }
+    updatePersonalRequest(personal) {
+        return new Promise((resolve, reject) => {
+            PersonalDAOObj.updatePersonalRequest(personal).then((data) => {
+                if (data) {
+                    return resolve(true)
+                } else {
+                    return resolve(false)
+                }
+            })
+        })
+    }
     updateImage(image) {
         return new Promise((resolve, reject) => {
             ImageDAOObj.updateImage(image).then((data) => {
@@ -1761,9 +1865,15 @@ class service {
             })
         })
     }
-    updateRequestStatus(status, id, year) {
+    updateRequestStatus(request, username) {
+        console.log(`update <><><><><><><>`)
+        var datetime = new Date();
+        let dateForUpdate = datetime.toISOString().slice(0, 10)
+        request.last_update = dateForUpdate
+        request.user_update = username
+        let new_request = this.formatInsert('REQUEST_UPDATE_STATUS', request)
         return new Promise((resolve, reject) => {
-            RequestDAOObj.updateStatus(status, id, year).then((data) => {
+            RequestDAOObj.updateStatus(new_request).then((data) => {
                 if (data === `true`) {
                     return resolve(true)
                 } else {
@@ -1798,6 +1908,7 @@ class service {
         })
     }
     getRequestByTpyeAndOwnerId(type, Owner) {
+        console.log('get')
         return new Promise((resolve, reject) => {
             RequestDAOObj.getRequestByTpyeAndOwnerId(type, Owner).then((data) => {
                 if (data.length != 0) {
@@ -1843,7 +1954,7 @@ class service {
             personal[0].username = username
             let newpersonal = this.formatInsert('PERSONAL', personal[0])
             console.log(`InsertRequestStep : Update Personal`)
-            this.updatePersonal(newpersonal).then((updatePersonalStatus) => {
+            this.updatePersonalRequest(newpersonal).then((updatePersonalStatus) => {
                 //update
                 console.log(updatePersonalStatus)
             })

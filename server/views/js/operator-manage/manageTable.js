@@ -6,12 +6,8 @@ function approvalPopup() {
     <br>
     <label class = 'topic' > ชื่อผู้อนุญาต <label class='alert''>*</label> </label> 
     <br>
-    <input list='list-name' id="app_name" class='tabOne' style="width:95%" maxlength="150" >
-        <datalist id="list-name">
-            <option value="นาง น้ำส้ม ซีบีอี"></option>
-            <option value="นาย บัว สีน้ำเงิน"></option>
-        </datalist>
-    </input>
+    <select id="app_name" class='tabOne' style="width:95%" maxlength="150" >
+    </select>
     <br> 
     <div class='center'>
         <label id='app_name_alert' class='alert tabOne' style='display:none'>ช่องนี้เว้นว่างไม่ได้</label>
@@ -56,12 +52,10 @@ function approvalPopup() {
                 if (date_text.value.trim().length === 0) {
                     date_text.classList.add('alertInput')
                     datepicker5_alert.style.display = ''
-                    console.log('date')
                 }
                 if (app_name_text.value.trim().length === 0) {
                     app_name_text.classList.add('alertInput')
                     app_name_alert.style.display = ''
-                    console.log('app_name_text')
                 }
                 Swal.showValidationMessage(
                     `ข้อมูลไม่ครบ`
@@ -69,9 +63,22 @@ function approvalPopup() {
             } else {
                 return new Promise(function (resolve, reject) {
                     setTimeout(function () {
-                        resolve();
-                    })
-                });
+                        inRequest.staff_id_approve = document.getElementById('app_name').value
+                        inRequest.date_approve = document.getElementById('datepicker5').value
+                        inRequest.status = 'approval'
+                        updateRequest().then((data) =>{
+                            if(data){
+                                resolve();
+                            }else{
+                                Swal.fire({
+                                    html: "<h2>เกิดข้อผิดพลาด</h2>",
+                                    icon: "error",
+                                    confirmButtonColor: "#009688"
+                                });  
+                            }
+                        })
+                    }),1000;
+                })
             }
         }
 
@@ -82,6 +89,7 @@ function approvalPopup() {
                 icon: "success",
                 confirmButtonColor: "#009688"
             });
+            displayTableRequest()
         } else if (result.dismiss === Swal.DismissReason.cancel) {
         }
     });
@@ -102,6 +110,7 @@ function approvalPopup() {
     $('#datepicker5').keyup(function () {
         formatDate(this.value, 'datepicker5')
     });
+    displayUserInformation()
 }
 //ยกเลิก
 function canclePopup() {
@@ -719,10 +728,11 @@ $(function () {
 
         callback: function (key, options) {
             let type = this[0].cells[1].innerText.trim()
+            let id = this[0].cells[2].innerText.trim()
             if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
                 statusDelete()
             } else {
-                toRequest(type)
+                toRequest(type,id)
             }
         },
         items: {
@@ -731,13 +741,14 @@ $(function () {
         autoHide: true
     });
     //ปกติ
-    $.contextMenu(
-        {
-            selector: '.available-menu',
+    $.contextMenu({
+            selector: '.active-menu',
             autoHide: true,
             callback: function (key, options) {
                 let type = this[0].cells[1].innerText.trim()
-                let indexData = this[0].rowIndex
+                let id = this[0].cells[2].innerText.trim()
+                let indexData = this[0].rowIndex -1
+            setDataItem(requestDataList[indexData])
                 if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
                     statusDelete()
                 } else {
@@ -753,7 +764,7 @@ $(function () {
                             addPopup(type)
                             break;
                         case 'detail':
-                            toRequest(type)
+                            toRequest(type, id)
                             break;
                         default:
                             canclePopup()
@@ -776,7 +787,9 @@ $(function () {
 
         callback: function (key, options) {
             let type = this[0].cells[1].innerText.trim()
-            let indexData = this[0].rowIndex
+            let id = this[0].cells[2].innerText.trim()
+            let indexData = this[0].rowIndex -1
+            setDataItem(requestDataList[indexData])
             if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
                 statusDelete()
             } else {
@@ -791,7 +804,7 @@ $(function () {
                         cancelStatus()
                         break;
                     default:
-                        toRequest(type)
+                        toRequest(type,id)
                         break;
                 }
             }
@@ -811,10 +824,12 @@ $(function () {
 
         callback: function (key, options) {
             let type = this[0].cells[1].innerText.trim()
+            let id = this[0].cells[2].innerText.trim()
+            
             if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
                 statusDelete()
             } else {
-                toRequest(type)
+                toRequest(type,id)
             }
         },
         items: {
@@ -829,11 +844,14 @@ $(function () {
 
         callback: function (key, options) {
             let type = this[0].cells[1].innerText.trim()
+            let id = this[0].cells[2].innerText.trim()
+            let indexData = this[0].rowIndex -1
+            setDataItem(requestDataList[indexData])
             if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
                 statusDelete()
             } else {
                 if (key === 'detail') {
-                    toRequest(type)
+                    toRequest(type,id)
                 }
                 if (key === 'delete') {
                     canclePopup(type)
@@ -854,7 +872,10 @@ $(function () {
 
         callback: function (key, options) {
             let type = this[0].cells[1].innerText.trim()
-            let indexData = this[0].rowIndex
+            let id = this[0].cells[2].innerText.trim()
+            let indexData = this[0].rowIndex -1
+            console.log(indexData)
+            setDataItem(requestDataList[indexData])
             if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
                 statusDelete()
             } else {
@@ -869,7 +890,7 @@ $(function () {
                         canclePopup()
                         break;
                     default:
-                        toRequest(type)
+                        toRequest(type,id)
                         break;
                 }
             }
@@ -888,11 +909,12 @@ $(function () {
         selector: '.expire-menu',
 
         callback: function (key, options) {
+            let id = this[0].cells[2].innerText.trim()
             let type = this[0].cells[1].innerText.trim()
             if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
                 statusDelete()
             } else {
-                toRequest(type)
+                toRequest(type,id)
             }
         },
         items: {
@@ -903,3 +925,38 @@ $(function () {
     });
 
 });
+function updateRequest() {
+    return new Promise((resolve, reject) => {
+        axios.post(`http://localhost:5000/update/request/status`,{'requestData':inRequest}).then((result) => {
+            return resolve(result.data);
+        })
+    })
+}
+function getUserInformation() {
+    return new Promise((resolve, reject) => {
+        axios.get(`http://localhost:5000/get/user/information`).then((result) => {
+            return resolve(result.data);
+        })
+    })
+}
+function setLisetUserInformationToUi(list_user) {
+    if (list_user.length != 0) {
+        document.getElementById("app_name").innerHTML = ''
+        for (let i = 0; i < list_user.length; i++) {
+            var select = document.getElementById("app_name");
+            var option = document.createElement("option");
+            let item = list_user[i]
+            option.text = `${item.USER_TITLE} ${item.USER_NAME} ${item.USER_SURNAME}`
+            option.value = list_user[i].USER_ID;
+    
+            select.onchange = function () { userMoney = this.value};
+            select.add(option);
+        }
+    }
+}
+function displayUserInformation(){
+    getUserInformation().then((list_user) =>{
+        console.log(`'get'`)
+        setLisetUserInformationToUi(list_user)
+    })
+}

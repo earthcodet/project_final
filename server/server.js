@@ -242,7 +242,10 @@ app.get('/get/user/:type', (req, res) => {
   if(type_name === 'president'){
     type_name = 'นายก'
   }
-  webService.getStaffฺByType(type_name).then((data) => {
+  if(type_name === 'information'){
+    type_name = 'ทะเบียน'
+  }
+    webService.getStaffฺByType(type_name).then((data) => {
     res.json(data)
   })
 })
@@ -251,6 +254,12 @@ app.get('/get/request/owner/:personal_id/:type', (req, res) => {
   let type_id = req.params.personal_id
   webService.getRequestByTpyeAndOwnerId(type_type, type_id).then((data) => {
     res.json(data)
+  })
+})
+app.post('/update/request/status', (req, res) => {
+  var obj = req.body.requestData
+  webService.updateRequestStatus(obj, req.session.username).then((data) => {
+    res.json(data);
   })
 })
 //ทำให้ css กับ js ใช้ได้

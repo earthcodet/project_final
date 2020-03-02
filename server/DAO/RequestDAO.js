@@ -67,6 +67,8 @@ class RequestDAO {
         }) 
     }
     getRequestByTpyeAndOwnerId(type,Owner){
+        console.log(type)
+        console.log(Owner)
         return new Promise((resolve, reject) => {  
             let query = `SELECT * FROM request WHERE REQUEST_STATUS='${type}' AND PERSONAL_ID_OWNER='${Owner}'`
             con.query(query, function (err, result) {
@@ -114,14 +116,31 @@ class RequestDAO {
             })
         })
     }
-    updateStatus(status,id,year){
+    updateStatus(request){
         return new Promise((resolve, reject) => {
-            let column = `REQUEST_STATUS='${status}'`
+            let column = `REQUEST_STATUS='${request.status}',REQUEST_STATUS_BEFORE ='${request.status_before}',`
+            column = column + `REQUEST_LAST_UPDATE='${request.last_update}',REQUEST_USER_UPDATE='${request.user_update}',`
+            column = column + `REQUEST_DATE_APPROVE=${request.date_approve}, STAFF_ID_APPROVE = ${request.staff_id_approve},`
+             //year 1
+             column = column + `REQUEST_RECEIPT_ORDER=${request.receipt_order },REQUEST_RECEIPT_ORDER_YEAR =${request.receipt_order_year}, `
+             column = column + `REQUEST_RECEIPT_FINE=${request.receipt_fine }, REQUEST_RECEIPT_FEE=${request.receipt_fee}, `
+             column = column + `REQUEST_RECEIPT_TOTAL=${request.receipt_total}, REQUEST_RECEIPT_DATE=${request.receipt_date }, `
+             //year 2 
+             column = column + `REQUEST_RECEIPT_ORDER_YEAR_2=${request.receipt_order_year_2 },REQUEST_RECEIPT_ORDER_YEAR_YEAR_2 =${request.receipt_order_year_year_2}, `
+             column = column + `REQUEST_RECEIPT_FINE_YEAR_2=${request.receipt_fine_year_2 }, REQUEST_RECEIPT_FEE_YEAR_2=${request.receipt_fee_year_2}, `
+             column = column + `REQUEST_RECEIPT_TOTAL_YEAR_2=${request.receipt_total_year_2}, REQUEST_RECEIPT_DATE_YEAR_2=${request.receipt_date_year_2 }, `
+             //year 3
+             column = column + `REQUEST_RECEIPT_ORDER_YEAR_3=${request.receipt_order_year_3 },REQUEST_RECEIPT_ORDER_YEAR_YEAR_3 =${request.receipt_order_year_year_3}, `
+             column = column + `REQUEST_RECEIPT_FINE_YEAR_3=${request.receipt_fine_year_3 }, REQUEST_RECEIPT_FEE_YEAR_3=${request.receipt_fee_year_3}, `
+             column = column + `REQUEST_RECEIPT_TOTAL_YEAR_3=${request.receipt_total_year_3}, REQUEST_RECEIPT_DATE_YEAR_3=${request.receipt_date_year_3 },`
+ 
+            column = column + `STAFF_ID_MONEY=${request.staff_id_money},REQUEST_DATE_ISSUED=${request.date_issued},REQUEST_DATE_EXPIRED=${request.date_expired},`
+            column = column + `REQUEST_DELETE_LOGIC =${request.delete_logic},REQUEST_IS_DELETED='${request.is_deleted}'`
           
-            let query = `UPDATE request SET ${column} WHERE REQUEST_NO='${id}' AND REQUEST_YEAR='${year}'`
+            let query = `UPDATE request SET ${column} WHERE REQUEST_NO='${request.no}' AND REQUEST_YEAR='${request.year}'`
             con.query(query, function (err, result) {
                 if (err) {
-                    console.log(err.code) 
+                    console.log(err) 
                     return resolve(err.code)
                 }
                 return resolve(`true`)

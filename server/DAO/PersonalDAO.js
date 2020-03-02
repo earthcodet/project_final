@@ -91,6 +91,28 @@ class PersonalDAO {
             })
         })
     }
+    updatePersonalRequest(personal) {
+        return new Promise((resolve, reject) => {
+            let value = `PERSONAL_TITLE = ${personal.title},`
+            value = value + `PERSONAL_NAME='${personal.name}',PERSONAL_SURNAME=${personal.surname},`
+            value = value + `PERSONAL_NATIONALITY=${personal.nationality},PERSONAL_RACE=${personal.race},`
+            value = value + `PERSONAL_PHONE='${personal.phone}',PERSONAL_FAX=${personal.fax},`
+            value = value + `PERSONAL_UPDATE='${personal.update}',`
+            value = value + `USER_UPDATE='${personal.username}'`
+            let query = `UPDATE personal SET ${value} WHERE PERSONAL_ID='${personal.id}'`
+            con.query(query, function (err, result) {
+                if (err) {
+                    console.log(err.code)
+                    return resolve(err.code)
+                }
+                if (result.affectedRows === 1) {
+                    return resolve(true)
+                } else {
+                    return resolve(false)
+                }
+            })
+        })
+    }
     updateStatusPersonal(personal) {
         return new Promise((resolve, reject) => {
             let value = `PERSONAL_UPDATE='${personal.update}',`

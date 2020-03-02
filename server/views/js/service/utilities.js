@@ -95,7 +95,7 @@ function sortTable(n, id, type) {
             shouldSwitch = false;
             x = rows[i].getElementsByTagName("TD")[n];
             y = rows[i + 1].getElementsByTagName("TD")[n];
-            if (type === "date") {
+            if (type === "date" && x != '-') {
                 var tempdateX = x.innerHTML.split(' ')
                 var tempdateY = y.innerHTML.split(' ')
                 var dayX, dayY, monthX, monthY, yearX, yearY
@@ -128,7 +128,7 @@ function sortTable(n, id, type) {
                         break;
                     }
                 }
-            } else if (type === "dateExp") {
+            } else if (type === "dateExp" && x != '-') {
                 var tempX = x.innerHTML.split(' ')
                 var tempY = y.innerHTML.split(' ')
                 var dateX, dateY
@@ -366,7 +366,9 @@ function disFood() {
 }
 
 // move to request page by type
-function toRequest(value) {
+function toRequest(value,id) {
+    id = id.split('/')
+    id = id[0]+id[1]
     let type = ''
 
     if (value.path != undefined) {
@@ -377,32 +379,32 @@ function toRequest(value) {
 
     switch (type) {
         case 'กิจการฌาปณสถาน':
-            window.location.href = '../request/request_crematory.html'
+            window.open('../request/request_crematory.html?id='+id, '_blank');
             break;
         case 'กิจการที่เป็นอันตรายต่อสุขภาพ':
-            window.location.href = '../request/request_health_danger.html'
+            window.open('../request/request_health_danger.html?id='+id, '_blank');
             break;
         case 'ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน':
-            window.location.href = '../request/request_market.html'
+            window.open('../request/request_market.html?id='+id, '_blank');
             break;
         case 'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร':
-            window.location.href = '../request/request_area_less_correct.html'
+            window.open('../request/request_area_less_correct.html?id='+id, '_blank');
             break;
         case 'หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร':
-            window.location.href = '../request/request_area_less_sell.html'
+            window.open('../request/request_area_less_sell.html?id='+id, '_blank');
             break;
         case 'ใบอนุญาตจัดตั้งสถานที่สะสมอาหาร':
-            window.location.href = '../request/request_area_more_correct.html'
+            window.open('../request/request_area_more_correct.html?id='+id, '_blank');
             break;
         case 'ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร':
-            window.location.href = '../request/request_area_more_sell.html'
+            window.open('../request/request_area_more_sell.html?id='+id, '_blank');
             break;
         case 'ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ':
-            window.location.href = '../renew/renew_public_hawk.html'
+            window.open('../request/request_public_hawk.html?id='+id, '_blank');
             break;
         default:
             //ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ
-            window.location.href = '../request/request_public_sell.html'
+            window.open('../request/request_public_sell.html?id='+id, '_blank');
             break;
     }
 }

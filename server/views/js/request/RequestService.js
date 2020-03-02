@@ -76,7 +76,7 @@ function checkFormatMoneyId(value) {
 // setDataView
 function setDataView() {
     document.getElementById('documentName2').disabled = true
-    document.getElementById('documentName3').disabled = true
+    
     createImage(imageDisplayFormDatabase)
     console.log('requestData.status ' + requestData.status)
     if (requestData.status === 'approval' || requestData.status === 'active') {
@@ -133,7 +133,7 @@ function setDataView() {
         document.getElementById('documentName2').innerHTML = ''
         displayUserMoney()
 
-        document.getElementById('documentName3').disabled = false
+        
     }
 
 
@@ -1540,6 +1540,7 @@ function getRequestType(type) {
 }
 
 function setRequsetType(type) {
+    document.getElementById('documentName3').disabled = false
     getRequestType(type).then((data_test) => {
         addRequestTypeToDatalist()
     })

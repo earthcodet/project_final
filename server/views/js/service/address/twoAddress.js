@@ -207,7 +207,7 @@ function getProviceIdByName(province_name) {
     }
 }
 
-function getAmphureIdByName(amphur_name,province_id) {
+function getAmphureIdByName(amphur_name, province_id) {
     // console.log(amphur)
     console.log(`A -> amphur_name = ${amphur_name} and provine_id = ${province_id}`)
     for (let i = 0; i < amphur.length; i++) {
@@ -216,11 +216,12 @@ function getAmphureIdByName(amphur_name,province_id) {
     }
 }
 
-function getDistrictIdByName(district_name,amphur_id) {
+function getDistrictIdByName(district_name, amphur_id) {
     console.log(`D -> district_name = ${district_name} and amphur_id = ${amphur_id}`)
     for (let i = 0; i < district.length; i++) {
-        if (district[i].DISTRICT_NAME === district_name && district[i].AMPHUR_ID === amphur_id)
+        if (district[i].DISTRICT_NAME === district_name && district[i].AMPHUR_ID === amphur_id) {
             return district[i].DISTRICT_ID
+        }
     }
 }
 

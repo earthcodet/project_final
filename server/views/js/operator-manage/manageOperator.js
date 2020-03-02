@@ -10,6 +10,7 @@ let inAddress = {
     amphur_name: "",
     province_name: ""
 };
+let requestDataList = []
 let inPersonal = {
     id: "",
     address_id: "",
@@ -33,6 +34,53 @@ let tempPersonal = {}
 let _operatorData = {}
 let now_status = 'active'
 let now_personal = ''
+let inRequest = {
+    status: '',
+    status_before: '',
+    last_update: '',
+    user_update: '',
+    date_approve: '',
+    staff_id_approve: '',
+    receipt_order: '',
+    receipt_order_year: '',
+    receipt_fine: '',
+    receipt_fee: '',
+    receipt_total: '',
+    receipt_date: '',
+    receipt_order_year_2: '',
+    receipt_order_year_year_2: '',
+    receipt_fine_year_2: '',
+    receipt_fee_year_2: '',
+    receipt_total_year_2: '',
+    receipt_date_year_2: '',
+    receipt_order_year_3: '',
+    receipt_order_year_year_3: '',
+    receipt_fine_year_3: '',
+    receipt_fee_year_3: '',
+    receipt_total_year_3: '',
+    receipt_date_year_3: '',
+    staff_id_money: '',
+    date_issued: '',
+    date_expired: '',
+    delete_logic: '',
+    is_deleted: '',
+    no: '',
+    year: '',
+}
+const numToMonth = {
+    1: 'มกราคม',
+    2: 'กุมภาพันธ์',
+    3: 'เดือนมีนาคม',
+    4: 'เมษายน',
+    5: 'พฤษภาคม',
+    6: 'มิถุนายน',
+    7: 'กรกฎาคม',
+    8: 'สิงหาคม',
+    9: 'กันยายน',
+    10: 'ตุลาคม',
+    11: 'พฤศจิกายน',
+    12: 'ธันวาคม'
+}
 function resetParameter() {
     arrInsert = [];
     inPersonal = {
@@ -97,8 +145,10 @@ function setDataUI(data) {
         if (districtId === '' || districtId === undefined) {
             document.getElementById(`subdistrict`).innerHTML = ''
         } else {
-            document.getElementById(`subdistrict`).value = districtId
+            // document.getElementById(`subdistrict`).value = districtId
         }
+        console.log(document.getElementById(`subdistrict`))
+        // document.getElementById(`subdistrict`).value = districtId
         //prsonal 
         document.getElementById('title').value = data.PERSONAL_TITLE === undefined || data.PERSONAL_TITLE === null ? '' : data.PERSONAL_TITLE
         document.getElementById('nameUser').value = data.PERSONAL_NAME
@@ -464,24 +514,22 @@ function swicthDisplay() {
         document.getElementById('hide_item').style.display = ''
     }
 }
-// table get
-function getRequestByPersonalIdAndRequestStatus(personal_id, request_status) {
-
-}
-
 function getRequestByPersonalIdAndStatus(personal_id) {
     return new Promise((resolve, reject) => {
         axios.get(`http://localhost:5000/get/request/owner/${personal_id}/${now_status}`).then((result) => {
-            console.log(result.data)
+            requestDataList = result.data
             resolve(result.data);
         })
     })
 }
 function displayTableRequest() {
-    getRequestByPersonalIdAndStatus(now_personal)
+    getRequestByPersonalIdAndStatus(now_personal).then((data) => {
+        console.log(requestDataList)
+        createTableRequest(data)
+    })
 }
-
 function createTableRequest(data) {
+    console.log(data)
     var tbl = document.getElementById(getTableIdTableByStatus(now_status));
     if (tbl.getElementsByTagName("tbody")[0] != null || tbl.getElementsByTagName("tbody")[0] != undefined) {
         tbl.removeChild(tbl.getElementsByTagName("tbody")[0])
@@ -493,31 +541,81 @@ function createTableRequest(data) {
     for (var i = 0; i < data.length; i++) {
         // creates a table row
         var row = document.createElement("tr");
+        row.oncontextmenu = 'markList(this)'
+        row.onmouseover = "resetActiveRightClick()"
+        row.classList.add(now_status + '-menu')
         //row index = this.rowIndex
         // row.onclick = function () { showItem(data[this.rowIndex - 1]) }
 
-        for (var j = 0; j < 5; j++) {
+        for (var j = 0; j < 6; j++) {
+            console.log(j)
             var cell = document.createElement("td");
             if (j === 0) {
-                var cellText = document.createTextNode(data[i].PERSONAL_NAME);
+                //year
+                let temp_date = data[i].REQUEST_DATE_SUBMISSION + ''
+                //02-01-2563
+                let temp_array = temp_date.split('-')
+                let year = temp_array[2].trim()
+                var cellText = document.createTextNode(year);
             } else if (j === 1) {
-                var cellText = document.createTextNode(data[i].PERSONAL_SURNAME);
+                //menu
+                var cellText = document.createTextNode(data[i].REQUEST_MENU);
             } else if (j === 2) {
-                var cellText = document.createTextNode(AddressText);
-            } if(j === 3){
+                //order
+                var cellText = document.createTextNode(`${data[i].REQUEST_NO}/${data[i].REQUEST_YEAR}`);
+            } else if (j === 3) {
+                if (data[i].REQUEST_DATE_ISSUED != null && data[i].REQUEST_DATE_ISSUED != '') {
+                    let temp_date = data[i].REQUEST_DATE_ISSUED + ''
+                    //02-01-2563
+                    let temp_array = temp_date.split('-')
+                    let temp_montn = parseInt(temp_date[1])
+                    let text = `${temp_array[0]} ${numToMonth[temp_montn]} ${temp_array[2]}`
+                    var cellText = document.createTextNode(text);
+                } else {
+                    var cellText = document.createTextNode('-');
+                }
+            } else if (j === 4) {
+                //end date
+                if (data[i].REQUEST_DATE_EXPIRED != null && data[i].REQUEST_DATE_EXPIRED != '') {
+                    let temp_date = data[i].REQUEST_DATE_EXPIRED + ''
+                    //02-01-2563
+                    let temp_array = temp_date.split('-')
+                    let temp_montn = parseInt(temp_date[1])
 
-            }else {
-                var cellText = document.createTextNode(data[i].PERSONAL_PERSONAL_ID);
+                    let text = `${temp_array[0]} ${numToMonth[temp_montn]} ${temp_array[2]}`
+                    var cellText = document.createTextNode(text);
+                } else {
+                    var cellText = document.createTextNode('-');
+                }
+            } else {
+                // date exp count
+                if (data[i].REQUEST_DATE_EXPIRED != null) {
+                    let now_date = new Date().toISOString().slice(0, 10).split('-')
+                    let year_now = parseInt(now_date[0]) + 543
+                    now_date = `${now_date[1]}-${now_date[2]}-${year_now}`
+
+                    let exp_date = data[i].REQUEST_DATE_EXPIRED.split('-')
+                    exp_date = `${exp_date[1]}-${exp_date[0]}-${exp_date[2]}`
+                    var daysBetween = (Date.parse(exp_date) - Date.parse(now_date)) / (24 * 3600 * 1000);
+                    let text = ''
+                    if (daysBetween < 0) {
+                        text = 'หมดอายุ'
+                    } else {
+                        text = daysBetween + ' วัน'
+                    }
+
+                    var cellText = document.createTextNode(text);
+                } else {
+                    var cellText = document.createTextNode('-');
+                }
+                console.log(cellText)
             }
-
             cell.appendChild(cellText);
-            if (j === 3 && data[i].PERSONAL_IS_DELETED === 'Y') {
-                cell.style.textDecoration = 'line-through'
-            }
             row.appendChild(cell);
         }
         tblBody.appendChild(row);
     }
+    console.log(tblBody)
     tbl.appendChild(tblBody);
 }
 
@@ -536,4 +634,41 @@ function getTableIdTableByStatus(status) {
         default: //cancel
             return 'cancel_table'
     }
+}
+function setDataItem(data){
+    inRequest.status = checkNullReturn(data.REQUEST_STATUS)
+    inRequest.status_before= checkNullReturn(data.REQUEST_STATUS_BEFORE)
+    inRequest.last_update = checkNullReturn(data.REQUEST_LAST_UPDATE)
+    inRequest.user_update = checkNullReturn(data.REQUEST_USER_UPDATE)
+    inRequest.date_approve = checkNullReturn(data.REQUEST_DATE_APPROVE)
+    inRequest.staff_id_approve = checkNullReturn(data.STAFF_ID_APPROVE)
+    inRequest.receipt_order = checkNullReturn(data.REQUEST_RECEIPT_ORDER)
+    inRequest.receipt_order_year = checkNullReturn(data.REQUEST_RECEIPT_ORDER_YEAR)
+    inRequest.receipt_fine = checkNullReturn(data.REQUEST_RECEIPT_FINE)
+    inRequest.receipt_fee = checkNullReturn(data.REQUEST_RECEIPT_FEE)
+    inRequest.receipt_total = checkNullReturn(data.REQUEST_RECEIPT_TOTAL)
+    inRequest.receipt_date = checkNullReturn(data.REQUEST_RECEIPT_DATE)
+    inRequest.receipt_order_year_2 = checkNullReturn(data.REQUEST_RECEIPT_ORDER_YEAR_2)
+    inRequest.receipt_order_year_year_2 = checkNullReturn(data.REQUEST_RECEIPT_ORDER_YEAR_YEAR_2)
+    inRequest.receipt_fine_year_2 = checkNullReturn(data.REQUEST_RECEIPT_FINE_YEAR_2)
+    inRequest.receipt_fee_year_2 = checkNullReturn(data.REQUEST_RECEIPT_FEE_YEAR_2)
+    inRequest.receipt_total_year_2 = checkNullReturn(data.REQUEST_RECEIPT_TOTAL_YEAR_2)
+    inRequest.receipt_date_year_2 = checkNullReturn(data.REQUEST_RECEIPT_DATE_YEAR_2)
+    inRequest.receipt_order_year_3 = checkNullReturn(data.REQUEST_RECEIPT_ORDER_YEAR_3)
+    inRequest.receipt_order_year_year_3 = checkNullReturn(data.REQUEST_RECEIPT_ORDER_YEAR_YEAR_3)
+    inRequest.receipt_fine_year_3 = checkNullReturn(data.REQUEST_RECEIPT_FINE_YEAR_3)
+    inRequest.receipt_fee_year_3 = checkNullReturn(data.REQUEST_RECEIPT_FEE_YEAR_3)
+    inRequest.receipt_total_year_3 = checkNullReturn(data.REQUEST_RECEIPT_TOTAL_YEAR_3)
+    inRequest.receipt_date_year_3 = checkNullReturn(data.REQUEST_RECEIPT_DATE_YEAR_3)
+    inRequest.staff_id_money = checkNullReturn(data.STAFF_ID_MONEY)
+    inRequest.date_issued = checkNullReturn(data.REQUEST_DATE_ISSUED)
+    inRequest.date_expired = checkNullReturn(data.REQUEST_DATE_EXPIRED)
+    inRequest.delete_logic = checkNullReturn(data.REQUEST_DELETE_LOGIC)
+    inRequest.is_deleted = checkNullReturn(data.REQUEST_IS_DELETED)
+    inRequest.no = checkNullReturn(data.REQUEST_NO)
+    inRequest.year = checkNullReturn(data.REQUEST_YEAR)
+}
+function checkNullReturn(item){
+    let temp = item === null ? '': item
+    return temp
 }
