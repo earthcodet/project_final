@@ -481,7 +481,7 @@ function displayTableRequest() {
     getRequestByPersonalIdAndStatus(now_personal)
 }
 
-function createTableRequest() {
+function createTableRequest(data) {
     var tbl = document.getElementById(getTableIdTableByStatus(now_status));
     if (tbl.getElementsByTagName("tbody")[0] != null || tbl.getElementsByTagName("tbody")[0] != undefined) {
         tbl.removeChild(tbl.getElementsByTagName("tbody")[0])
@@ -494,27 +494,19 @@ function createTableRequest() {
         // creates a table row
         var row = document.createElement("tr");
         //row index = this.rowIndex
-        row.onclick = function () { showItem(data[this.rowIndex - 1]) }
+        // row.onclick = function () { showItem(data[this.rowIndex - 1]) }
 
-        for (var j = 0; j < 4; j++) {
+        for (var j = 0; j < 5; j++) {
             var cell = document.createElement("td");
             if (j === 0) {
                 var cellText = document.createTextNode(data[i].PERSONAL_NAME);
             } else if (j === 1) {
                 var cellText = document.createTextNode(data[i].PERSONAL_SURNAME);
             } else if (j === 2) {
-                let AddressText = ''
-                AddressText = AddressText + `บ้านเลขที่ ${data[i].AID.ADDRESS_HOME_NUMBER} `
-                AddressText = AddressText + `หมู่ ${data[i].AID.ADDRESS_MOO === null ? '-' : data[i].AID.ADDRESS_MOO} `
-                AddressText = AddressText + `ตรอก ${data[i].AID.ADDRESS_TRXK === null ? '-' : data[i].AID.ADDRESS_TRXK} `
-                AddressText = AddressText + `ซอย ${data[i].AID.ADDRESS_SXY === null ? '-' : data[i].AID.ADDRESS_SXY} `
-                AddressText = AddressText + `อาคาร ${data[i].AID.ADDRESS_BUILDING === null ? '-' : data[i].AID.ADDRESS_BUILDING} `
-                AddressText = AddressText + `ถนน ${data[i].AID.ADDRESS_ROAD === null ? '-' : data[i].AID.ADDRESS_ROAD} `
-                AddressText = AddressText + `ตำบล ${data[i].AID.DISTRICT_NAME === null ? '-' : data[i].AID.DISTRICT_NAME} `
-                AddressText = AddressText + `อำเภอ ${data[i].AID.AMPHUR_NAME === null ? '-' : data[i].AID.AMPHUR_NAME}`
-                AddressText = AddressText + `จังหวัด ${data[i].AID.PROVINCE_NAME === null ? '-' : data[i].AID.PROVINCE_NAME}`
                 var cellText = document.createTextNode(AddressText);
-            } else {
+            } if(j === 3){
+
+            }else {
                 var cellText = document.createTextNode(data[i].PERSONAL_PERSONAL_ID);
             }
 
