@@ -444,3 +444,29 @@ function isEmpty(arg) {
     }
     return true;
 }
+
+function getDateExp(type,date){
+    let date_return = {
+        date_issuse:'',
+        date_exp:''
+    }
+    date_return.date_issuse = date+''
+    //25-05-2563
+    date = date.split('-')
+    let day = parseInt(date[0])
+    let month = parseInt(date[1])
+    let year = parseInt(date[2])
+    if(type === 'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร' || type === 'หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร'){
+        // 3 year - 1 day
+        date_return.date_exp = `${day-1}-${month}-${year+3}`
+        return date_return
+    }else if(type === 'ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ' || type === 'ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ'){
+        //31 Dec Year +1
+        date_return.date_exp = `31-12-${year+1}`
+        return date_return
+    }else{
+        // 1 Year - 1 day
+        date_return.date_exp = `${day-1}-${month}-${year+1}`
+        return date_return
+    }
+}

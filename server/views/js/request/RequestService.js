@@ -87,21 +87,31 @@ function setDataView() {
             } else {
                 document.getElementById('bNumY2').value = `${requestData.receipt_order_year_2}/${requestData.receipt_order_year_year_2}`
             }
-            document.getElementById('datepicker10').value = requestData.receipt_date_year_2
-
-            document.getElementById('bFeeY2').value = requestData.receipt_fee_year_2 === 0 ? '' : requestData.receipt_fee_year_2
-            document.getElementById('bFineY2').value = requestData.receipt_fine_year_2 === 0 ? '' : requestData.receipt_fine_year_2
+            if(requestData.receipt_date_year_2 === ''){
+                document.getElementById('datepicker10').value = requestData.receipt_date_year_2
+                document.getElementById('bFeeY2').value = requestData.receipt_fee_year_2 === 0 ? '' : requestData.receipt_fee_year_2
+                document.getElementById('bFineY2').value = requestData.receipt_fine_year_2 === 0 ? '' : requestData.receipt_fine_year_2
+            }else{
+                document.getElementById('datepicker10').value = requestData.receipt_date_year_2
+            document.getElementById('bFeeY2').value = requestData.receipt_fee_year_2
+            document.getElementById('bFineY2').value = requestData.receipt_fine_year_2
+            }
+            
 
             if (requestData.receipt_order_year_3 === '') {
                 document.getElementById('bNumY3').value = ``
             } else {
                 document.getElementById('bNumY3').value = `${requestData.receipt_order_year_3}/${requestData.receipt_order_year_year_3}`
             }
-
-            document.getElementById('datepicker11').value = requestData.receipt_date_year_3
-
-            document.getElementById('bFeeY3').value = requestData.receipt_fee_year_3 === 0 ? '' : requestData.receipt_fee_year_3
-            document.getElementById('bFineY3').value = requestData.receipt_fine_year_3 === 0 ? '' : requestData.receipt_fine_year_3
+            if(requestData.receipt_date_year_3 === ''){
+                document.getElementById('datepicker11').value = requestData.receipt_date_year_3
+                document.getElementById('bFeeY3').value = requestData.receipt_fee_year_3 === 0 ? '' : requestData.receipt_fee_year_3
+                document.getElementById('bFineY3').value = requestData.receipt_fine_year_3 === 0 ? '' : requestData.receipt_fine_year_3  
+            }else{
+                document.getElementById('datepicker11').value = requestData.receipt_date_year_3
+                document.getElementById('bFeeY3').value = requestData.receipt_fee_year_3 
+                document.getElementById('bFineY3').value = requestData.receipt_fine_year_3 
+            }
             //cancle disable false
             document.getElementById('bNumY2').disabled = false
             document.getElementById('bFeeY2').disabled = false
@@ -119,9 +129,16 @@ function setDataView() {
         } else {
             document.getElementById('bNum').value = `${requestData.receipt_order}/${requestData.receipt_order_year}`
         }
-        document.getElementById('datepicker2').value = requestData.receipt_date
-        document.getElementById('bFee').value = requestData.receipt_fee === 0 ? '' : requestData.receipt_fee
-        document.getElementById('bFine').value = requestData.receipt_fine === 0 ? '' : requestData.receipt_fine
+        if(requestData.receipt_date === ''){
+            document.getElementById('datepicker2').value = requestData.receipt_date
+            document.getElementById('bFee').value = requestData.receipt_fee === 0 ? '' : requestData.receipt_fee
+            document.getElementById('bFine').value = requestData.receipt_fine === 0 ? '' : requestData.receipt_fine
+        }else{
+            document.getElementById('datepicker2').value = requestData.receipt_date
+            document.getElementById('bFee').value = requestData.receipt_fee 
+            document.getElementById('bFine').value = requestData.receipt_fine 
+        }
+       
 
         //cancle disable false
         document.getElementById('bNum').disabled = false

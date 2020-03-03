@@ -66,6 +66,7 @@ let inRequest = {
     is_deleted: '',
     no: '',
     year: '',
+    menu:''
 }
 const numToMonth = {
     1: 'มกราคม',
@@ -669,6 +670,7 @@ function setDataItem(data) {
     inRequest.is_deleted = checkNullReturn(data.REQUEST_IS_DELETED)
     inRequest.no = checkNullReturn(data.REQUEST_NO)
     inRequest.year = checkNullReturn(data.REQUEST_YEAR)
+    inRequest.menu = data.REQUEST_MENU
 }
 function checkNullReturn(item) {
     let temp = item === null ? '' : item

@@ -381,6 +381,10 @@ function payPopup() {
                 return new Promise(function (resolve, reject) {
                     setTimeout(function () {
                         if (inRequest.date_expired != '') {
+                            let object = getDateExp(inRequest.menu,document.getElementById('datepicker7').value )
+                            inRequest.date_expired = object.date_exp
+                            inRequest.date_issued = object.date_issuse
+                            
                             let temp = inRequest.date_expired.split('-')
                             let year = parseInt(temp[2])
                             let year_now = parseInt(new Date().toISOString().slice(0, 10).split('-')[0])
@@ -432,6 +436,9 @@ function payPopup() {
                             inRequest.receipt_order_year = receipt_id.slice(8, 10)
                             inRequest.status_before = inRequest.status
                             inRequest.status = 'active'
+                            let object = getDateExp(inRequest.menu,document.getElementById('datepicker7').value )
+                            inRequest.date_expired = object.date_exp
+                            inRequest.date_issued = object.date_issuse
                             updateRequest().then((data) => {
                                 if (data) {
                                     resolve();
