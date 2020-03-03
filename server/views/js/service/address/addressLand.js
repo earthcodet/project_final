@@ -136,9 +136,4 @@ function openLand() {
     // landAmphurSelect(1)
     onwerDistrictSelect(addressAmphurLand[0].AMPHUR_ID)
     // landDistrictSelect(buiddingAmphurLand[0].AMPHUR_ID)
-
-
-
-
-
 }

@@ -1,4 +1,3 @@
-// window.open('../../report/report_summary', '_blank');
 //อนุญาต
 function approvalPopup() {
     let html_display = `
@@ -534,6 +533,8 @@ function cancelStatus() {
             return new Promise(function (resolve, reject) {
                 setTimeout(function () {
                     inRequest.status = inRequest.status_before
+                    inRequest.date_issued = ''
+                    inRequest.date_expired = ''
                     updateRequest().then((data) => {
                         if (data) {
                             resolve();
@@ -552,8 +553,10 @@ function cancelStatus() {
         if (result.value) {
             Swal.fire({
                 title: 'ยกเลิกสำเร็จ',
-                icon: 'success'
+                icon: 'success', 
+                confirmButtonColor: "#009688"
             })
+            displayTableRequest()
         } else if (result.dismiss === Swal.DismissReason.cancel) {
         }
     });
@@ -686,7 +689,8 @@ $(function () {
         callback: function (key, options) {
             let type = this[0].cells[1].innerText.trim()
             let id = this[0].cells[2].innerText.trim()
-            let indexData = this[0].rowIndex - 2
+            let indexData = this[0].rowIndex - 1
+            console.log(`this`)
             console.log(this)
             setDataItem(requestDataList[indexData])
             if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
@@ -706,6 +710,12 @@ $(function () {
                     case 'detail':
                         toRequest(type, id)
                         break;
+                    case 'cancle_status':
+                        cancelStatus()
+                        break;
+                    case 'stop':
+                        viewPageReport(inPersonal.id, `${requestData.no}${requestData.year}`)
+                        break;
                     default:
                         canclePopup()
                         break;
@@ -717,6 +727,8 @@ $(function () {
             "transfer": { name: "โอนใบอนุญาต" },
             "add": { name: "เพิ่มใบอนุญาต" },
             "detail": { name: "ดูรายละเอียด" },
+            "cancle_status": { name: "ยกเลิกสถานะ" },
+            "stop": { name: "พักใบอนุญาต" },
             "delete": { name: "ยกเลิก" }
 
         }
@@ -728,7 +740,7 @@ $(function () {
         callback: function (key, options) {
             let type = this[0].cells[1].innerText.trim()
             let id = this[0].cells[2].innerText.trim()
-            let indexData = this[0].rowIndex - 2
+            let indexData = this[0].rowIndex - 1
             setDataItem(requestDataList[indexData])
             if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
                 statusDelete()

@@ -207,6 +207,7 @@ function setDataView() {
     wamphurSelect(parseInt(provinceIdE))
     wdistrictSelect(parseInt(amphurIdE))
     document.getElementById(`wDistrict`).value = amphurIdE
+    console.log(`districtIdE ${districtIdE === undefined || districtIdE ===  ''}   ${districtIdE}`)
     if(districtIdE === undefined || districtIdE ===  ''){
         document.getElementById(`wSubdistrict`).innerHTML = ''
     }else{
@@ -653,6 +654,7 @@ function createGroupData() {
         let districtValue = parseInt(document.getElementById(`subdistrict`).value);
 
         operatorAddressData.district_name = district[districtValue - 1] === undefined ? '' :district[districtValue - 1].DISTRICT_NAME;
+        console.log(operatorAddressData.district_name)
         operatorAddressData.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
         operatorAddressData.province_name = province[provinceValue - 1].PROVINCE_NAME;
     }
@@ -1149,7 +1151,6 @@ function dataChange(type) {
     }
     return status_data_change
 }
-
 function setDataUpdate(type) {
 
     if (type === 'requestData') {
@@ -1280,7 +1281,7 @@ function setDataUpdate(type) {
         let provinceValue = parseInt(document.getElementById(`wProvince`).value);
         let amphurValue = parseInt(document.getElementById(`wDistrict`).value);
         let districtValue = parseInt(document.getElementById(`wSubdistrict`).value);
-
+        console.log(`dis no = `+districtValue)
         addressEstablishmentData.district_name = district[districtValue - 1] === undefined ? '' : district[districtValue - 1].DISTRICT_NAME;
         addressEstablishmentData.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
         addressEstablishmentData.province_name = province[provinceValue - 1].PROVINCE_NAME;
@@ -1533,12 +1534,14 @@ function getRequestType(type) {
 }
 
 function setRequsetType(type) {
-    document.getElementById('documentName3').disabled = false
-    getRequestType(type).then((data_test) => {
-        addRequestTypeToDatalist()
+    runForm().then((data) =>{
+        document.getElementById('documentName3').disabled = false
+        getRequestType(type).then((data_test) => {
+            addRequestTypeToDatalist()
+        })
+        checkView(type)
+        displayUserAlderman()
     })
-    checkView(type)
-    displayUserAlderman()
 }
 function addRequestTypeToDatalist() {
     const list = document.getElementById('brow')

@@ -678,7 +678,7 @@ function checkNullReturn(item) {
 function openPageReport() {
     window.open('../utilities/petition.html?id=' + inPersonal.id, '_blank');
 }
-function viewPageReport(id) {
+function viewPageReport(id,id_request) {
     id = id.getElementsByTagName("TD")[0].textContent
-    window.open('../utilities/petition.html?id='+id, '_blank');
+    window.open('../utilities/petition.html?id='+id+'?r_id='+id_request, '_blank');
 }

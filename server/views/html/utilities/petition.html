@@ -81,7 +81,7 @@
         <button class="dropdown-btn  "><b>ข้อมูลส่วนกลาง </b><i class="fa fa-caret-down"></i></button>
         <div class="dropdown-container ">
             <a href="../central/operator.html">- ข้อมูลผู้ประกอบการ</a>
-            <a href="../central/02.html" >- ข้อมูลการจดใบอนุญาต</a>
+            <a href="../central/02.html">- ข้อมูลการจดใบอนุญาต</a>
             <a href="../central/03.html">- โอนใบอนุญาต</a>
         </div>
         <button class="dropdown-btn select-active"><b>งานร้องเรียน </b><i class="fa fa-caret-down"></i></button>
@@ -129,32 +129,51 @@
                     <button type="button" class="fa fa-search" style="margin-left: 1vw;">
                     </button>
                     <br>
-                    <a style="margin-left: 5vw;">ประเภทเรื่องร้องเรียน : </a>
-                    <input type="radio" name="petition" style="margin-left: 3vw;">
-                    <a> สุขลักษณะด้านอาหาร </a>    
-                    <input type="radio" name="petition" style="margin-left: 3vw;">
-                    <a> กลิ่น </a>
-                    <input type="radio" name="petition" style="margin-left: 3vw;">
-                    <a> สารเคมี </a>
-                    <br>
-                    <input type="radio" name="petition" style="margin-left: 17.2vw;">
-                    <a> ขยะมูลฝอย/สิ่งปฏิกูล </a>
-                    <input type="radio" name="petition" style="margin-left: 3.15vw;">
-                    <a> เสียงดัง </a>
-                    <input type="radio" name="petition" style="margin-left: 1.88vw;">
-                    <a> แสง รังสี </a>
-                    <br>
-                    <input type="radio" name="petition" style="margin-left: 17.2vw;">
-                    <a> ควัน เถ้า เขม่า ฝุ่นละออง</a>
-                    <input type="radio" name="petition" style="margin-left: 1.9vw;">
-                    <a> อื่นๆ </a>
-                    <input type="text" style="margin-left: 3vw; width: 35%;">
-                    <br>
-                    <a style="margin-left: 5vw;">การดำเนินการ : </a>
-                    <input type="radio" name="petition" style="margin-left: 1vw;">
-                    <a> อยู่ระหว่างดำเนินการ </a><br>
-                    <input type="radio" name="petition" style="margin-left: 12.3vw;">
-                    <a> ดำเนินการเรียบร้อย </a>
+                    <div class="tab" style="height: 3.5vw;width: 85%; margin-left: 5vw;">
+
+                        <button type="button" class="tablinks" id='button_block_1'
+                            onclick="openCity(event, 'block_no1'); "
+                            style="height: 100%;"><a>บันทึกร้องเรียน</a></button>
+                        <button type="button" class="tablinks" id='button_block_2'
+                            onclick="openCity(event, 'block_no2');" style="height: 100%;"><a>พักใบอนุญาติ</a></button>
+                    </div>
+                    <div id='block_no1' class="tabcontent" style='width: 85%; margin-left: 5vw;'>
+                        <br>
+                        <a style="margin-left: 5vw;">ประเภทเรื่องร้องเรียน : </a>
+                        <input type="radio" name="petition" style="margin-left: 3vw;">
+                        <a> สุขลักษณะด้านอาหาร </a>
+                        <input type="radio" name="petition" style="margin-left: 3vw;">
+                        <a> กลิ่น </a>
+                        <input type="radio" name="petition" style="margin-left: 3vw;">
+                        <a> สารเคมี </a>
+                        <br>
+                        <input type="radio" name="petition" style="margin-left: 17.2vw;">
+                        <a> ขยะมูลฝอย/สิ่งปฏิกูล </a>
+                        <input type="radio" name="petition" style="margin-left: 3.15vw;">
+                        <a> เสียงดัง </a>
+                        <input type="radio" name="petition" style="margin-left: 1.88vw;">
+                        <a> แสง รังสี </a>
+                        <br>
+                        <input type="radio" name="petition" style="margin-left: 17.2vw;">
+                        <a> ควัน เถ้า เขม่า ฝุ่นละออง</a>
+                        <input type="radio" name="petition" style="margin-left: 1.9vw;">
+                        <a> อื่นๆ </a>
+                        <input type="text" style="margin-left: 3vw; width: 35%;">
+                        <br>
+                        <a style="margin-left: 5vw;">การดำเนินการ : </a>
+                        <input type="radio" name="petition" style="margin-left: 1vw;">
+                        <a> อยู่ระหว่างดำเนินการ </a><br>
+                        <input type="radio" name="petition" style="margin-left: 12.3vw;">
+                        <a> ดำเนินการเรียบร้อย </a>
+                    </div>
+                    <div id='block_no2' class="tabcontent" style='width: 85%; margin-left: 5vw;'>
+                        <a style="margin-left: 6.8vw;">เลขที่ใบอนุญาตที่ต้องการยกเลิก : </a>
+                        <input type="text" id="" style="width: 20vw;" disabled value="A0001/2563">
+                        <br>
+                        <a style="margin-left: 1vw;">โดยขอหยุดประกอบกิจการชั่วคราวระหว่างวันที่ : </a><input type="text" id="datepicker4">
+                        <a style="margin-left: 1vw;">ถึงวันที่ : </a><input type="text" id="datepicker3">
+                        <br>
+                    </div>
                     <br><br>
                     <a style="margin-left: 5vw;"> ภาพถ่ายเหตุการร้องเรียน </a>
                     <button type="button" class="button" style="height: 2.7vw;">
@@ -163,7 +182,8 @@
                     </button>
                     <br>
                     <br>
-                    <div id='outputImage' style="height: 40vh; overflow-y:auto; border: 0.3vh solid black;">
+                    <div id='outputImage'
+                        style="height: 40vh; overflow-y:auto; border: 0.3vh solid black;width: 95%; margin-left: 2vw;">
                     </div>
                 </div>
             </div>
@@ -183,6 +203,7 @@
 <script src="../../js/service/sideMenu.js"></script>
 
 <!-- right click  -->
+<script> document.getElementById('button_block_2').click()</script>
 <script src="../../js/service/clickRight/jquery.contextMenu.js"></script>
 <script src="../../js/service/clickRight/jquery.ui.position.min.js"></script>
 

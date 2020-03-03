@@ -172,22 +172,25 @@ function createSelectProvice(data) {
 
 //ฟังชันเริ่มต้น
 function runForm() {
-    getProvice().then((data) => {
-        createSelectProvice(data)
-        wcreateSelectProvice(data)
+    return new Promise((resolve, reject) => {
+        getProvice().then((data) => {
+            createSelectProvice(data)
+            wcreateSelectProvice(data)
 
-        getAmphur().then((data) => {
-            amphurSelect(1)
-            wamphurSelect(1)
-            getDistrict().then((districtTemp) => {
-                districtSelect(addressAmphur[0].AMPHUR_ID)
-                wdistrictSelect(buiddingAmphur[0].AMPHUR_ID)
+            getAmphur().then((data) => {
+                amphurSelect(1)
+                wamphurSelect(1)
+                getDistrict().then((districtTemp) => {
+                    districtSelect(addressAmphur[0].AMPHUR_ID)
+                    wdistrictSelect(buiddingAmphur[0].AMPHUR_ID)
+                    return resolve(true)
+                })
             })
         })
-
     })
-
+  
 }
+
 
 function newAddress() {
 
@@ -224,6 +227,3 @@ function getDistrictIdByName(district_name, amphur_id) {
         }
     }
 }
-
-
-runForm()
