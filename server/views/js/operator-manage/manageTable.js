@@ -672,23 +672,25 @@ function markList(event) {
 }
 
 $(function () {
-    $.contextMenu({
-        selector: '.detail-menu',
+    // $.contextMenu({
+    //     selector: '.report-menu',
 
-        callback: function (key, options) {
-            let type = this[0].cells[1].innerText.trim()
-            let id = this[0].cells[2].innerText.trim()
-            if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
-                statusDelete()
-            } else {
-                toRequest(type, id)
-            }
-        },
-        items: {
-            "detail": { name: "ดูรายละเอียด" }
-        },
-        autoHide: true
-    });
+    //     callback: function (key, options) {
+    //         let type = this[0].cells[1].innerText.trim()
+    //         let id = this[0].cells[2].innerText.trim()
+    //         let indexData = this[0].rowIndex - 1
+    //         console.log(`type ${type} id ${id} indexData ${indexData}`)
+    //         if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
+    //             statusDelete()
+    //         } else {
+    //             toRequest(type, id)
+    //         }
+    //     },
+    //     items: {
+    //         "detail": { name: "ดูรายละเอียด" }
+    //     },
+    //     autoHide: true
+    // });
     //ปกติ
     $.contextMenu({
         selector: '.active-menu',
@@ -721,7 +723,7 @@ $(function () {
                         cancelStatus()
                         break;
                     case 'stop':
-                        viewPageReport(inPersonal.id, `${requestData.no}${requestData.year}`)
+                        viewPageReport(undefined,inPersonal.id, `${inRequest.no}${inRequest.year}`)
                         break;
                     default:
                         canclePopup()

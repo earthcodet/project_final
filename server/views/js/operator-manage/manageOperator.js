@@ -682,7 +682,12 @@ function checkNullReturn(item) {
 function openPageReport() {
     window.open('../utilities/petition.html?id=' + inPersonal.id, '_blank');
 }
-function viewPageReport(id,id_request) {
-    id = id.getElementsByTagName("TD")[0].textContent
-    window.open('../utilities/petition.html?id='+id+'?r_id='+id_request, '_blank');
+function viewPageReport(id,id_menu,id_request) {
+    if(id === undefined){
+        id = `''`
+        window.open('../utilities/petition.html?id='+id_menu+'?r_id='+id_request, '_blank');
+    }else{
+        id = id.getElementsByTagName("TD")[0].textContent
+        window.open('../utilities/petition.html?id='+id, '_blank');
+    }
 }

@@ -31,15 +31,15 @@
 <body>
     <!-- เมนูด้านบน -->
     <div class="w3-top icon-bar">
-        <a id="addMenu" class="exit  disableds"><i class="fa fa-plus-square">
+        <a id="addMenu" class="exit  "><i class="fa fa-plus-square" onclick="addPage()">
                 <span>เพิ่ม</span></i></a>
-        <a id="editMenu" class="exit disableds"><i class="fa fa-pencil-alt">
+        <a id="editMenu" class="exit disableds"><i class="fa fa-pencil-alt" onclick="editPage()">
                 <span>แก้ไข</span></i></a>
-        <a id="saveMenu" class="exit disableds"><i class="fa fa-save">
+        <a id="saveMenu" class="exit disableds"><i class="fa fa-save" onclick="insertPage()">
                 <span>บันทึก</span></i></a>
-        <a id="restoreMenu" class="exit disableds"><i class="fa fa-reply">
+        <a id="restoreMenu" class="exit disableds"><i class="fa fa-reply" onclick="restorePage()">
                 <span>เรียกคืน</span></i></a>
-        <a id="deleteMenu" class="exit disableds"><i class="fa fa-times">
+        <a id="deleteMenu" class="exit disableds"><i class="fa fa-times" onclick="deletePage()">
                 <span>ยกเลิก</span></i></a>
         <!-- <a><i class="fa fa-search"> ค้นหา</i></a> -->
         <a id="exitMenu" onclick="exitPage()" class="exit" style="float: right;width: 17%;"><i
@@ -113,7 +113,7 @@
     </div>
     <!-- เนื้อหา -->
     <form id="form">
-        <fieldset style="border: 0;padding: 0;margin: 0;">
+        <fieldset disabled id="disable" style="border: 0;padding: 0;margin: 0;">
             <div class="main">
                 <header class="w3-top2">
                     <h1 style="font-size:2.8vh;margin-left: 25px;padding: 2px;"> บันทึกเรื่องร้องเรียน</h1>
@@ -129,15 +129,17 @@
                     <button type="button" class="fa fa-search" style="margin-left: 1vw;">
                     </button>
                     <br>
+                    <br>
                     <div class="tab" style="height: 3.5vw;width: 85%; margin-left: 5vw;">
 
-                        <button type="button" class="tablinks" id='button_block_1'
+                        <button type="button" class="tablinks" id='button_block_1'disabled
                             onclick="openCity(event, 'block_no1'); "
                             style="height: 100%;"><a>บันทึกร้องเรียน</a></button>
-                        <button type="button" class="tablinks" id='button_block_2'
-                            onclick="openCity(event, 'block_no2');" style="height: 100%;"><a>พักใบอนุญาติ</a></button>
+                        <button type="button" class="tablinks" id='button_block_2' disabled
+                            onclick="openCity(event, 'block_no2');" style="height: 100%; display: none;"><a>พักใบอนุญาติ</a></button>
                     </div>
-                    <div id='block_no1' class="tabcontent" style='width: 85%; margin-left: 5vw;'>
+                    
+                    <div id='block_no1' style='width: 85%; margin-left: 5vw;'>
                         <br>
                         <a style="margin-left: 5vw;">ประเภทเรื่องร้องเรียน : </a>
                         <input type="radio" name="petition" style="margin-left: 3vw;">
@@ -166,23 +168,25 @@
                         <input type="radio" name="petition" style="margin-left: 12.3vw;">
                         <a> ดำเนินการเรียบร้อย </a>
                     </div>
-                    <div id='block_no2' class="tabcontent" style='width: 85%; margin-left: 5vw;'>
+                    <div id='block_no2' style='width: 85%; margin-left: 5vw;display: none'>
                         <a style="margin-left: 6.8vw;">เลขที่ใบอนุญาตที่ต้องการยกเลิก : </a>
-                        <input type="text" id="" style="width: 20vw;" disabled value="A0001/2563">
+                        <input type="text" id="request_id_report" style="width: 20vw;" disabled value="">
                         <br>
                         <a style="margin-left: 1vw;">โดยขอหยุดประกอบกิจการชั่วคราวระหว่างวันที่ : </a><input type="text" id="datepicker4">
                         <a style="margin-left: 1vw;">ถึงวันที่ : </a><input type="text" id="datepicker3">
                         <br>
                     </div>
                     <br><br>
+                    <input type="file" id="uploadFile" style="display: none;" onchange="handleImageSelect(event)"
+                            accept="image/*" multiple>
                     <a style="margin-left: 5vw;"> ภาพถ่ายเหตุการร้องเรียน </a>
-                    <button type="button" class="button" style="height: 2.7vw;">
+                    <button type="button" class="button" style="height: 2.7vw;" onclick="document.getElementById('uploadFile').click()">
                         <a><i class="fa fa-upload"></i>
                             อัพโหลดภาพ</a>
                     </button>
                     <br>
                     <br>
-                    <div id='outputImage'
+                    <div id='outputImage_report'
                         style="height: 40vh; overflow-y:auto; border: 0.3vh solid black;width: 95%; margin-left: 2vw;">
                     </div>
                 </div>
@@ -203,8 +207,13 @@
 <script src="../../js/service/sideMenu.js"></script>
 
 <!-- right click  -->
-<script> document.getElementById('button_block_2').click()</script>
+<script> document.getElementById('button_block_1').click()</script>
 <script src="../../js/service/clickRight/jquery.contextMenu.js"></script>
 <script src="../../js/service/clickRight/jquery.ui.position.min.js"></script>
 
+<script src="../../js/petition/petition.js"></script>
+<script src="../../js/petition/petition_control.js"></script>
+<script>
+    startForm()
+</script>
 </html>
