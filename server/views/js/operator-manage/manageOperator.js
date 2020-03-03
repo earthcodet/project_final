@@ -71,7 +71,7 @@ let inRequest = {
 const numToMonth = {
     1: 'มกราคม',
     2: 'กุมภาพันธ์',
-    3: 'เดือนมีนาคม',
+    3: 'มีนาคม',
     4: 'เมษายน',
     5: 'พฤษภาคม',
     6: 'มิถุนายน',
@@ -572,7 +572,7 @@ function createTableRequest(data) {
                     //02-01-2563
                     let temp_array = temp_date.split('-')
                     let temp_montn = parseInt(temp_date[1])
-                    let text = `${temp_array[0]} ${numToMonth[temp_montn]} ${temp_array[2]}`
+                    let text = `${parseInt(temp_array[0])} ${numToMonth[temp_montn]} ${temp_array[2]}`
                     var cellText = document.createTextNode(text);
                 } else {
                     var cellText = document.createTextNode('-');
@@ -585,7 +585,7 @@ function createTableRequest(data) {
                     let temp_array = temp_date.split('-')
                     let temp_montn = parseInt(temp_date[1])
 
-                    let text = `${temp_array[0]} ${numToMonth[temp_montn]} ${temp_array[2]}`
+                    let text = `${parseInt(temp_array[0])} ${numToMonth[temp_montn]} ${temp_array[2]}`
                     var cellText = document.createTextNode(text);
                 } else {
                     var cellText = document.createTextNode('-');
@@ -599,7 +599,9 @@ function createTableRequest(data) {
 
                     let exp_date = data[i].REQUEST_DATE_EXPIRED.split('-')
                     exp_date = `${exp_date[1]}-${exp_date[0]}-${exp_date[2]}`
-                    var daysBetween = (Date.parse(exp_date) - Date.parse(now_date)) / (24 * 3600 * 1000);
+                    console.log(`exp_date  ${exp_date}`) 
+                    console.log(`now_date  ${now_date}`) 
+                    var daysBetween = (Date.parse(exp_date) - Date.parse(now_date)) / (24 * 3600 * 1000);       
                     let text = ''
                     if (daysBetween < 0) {
                         text = 'หมดอายุ'
