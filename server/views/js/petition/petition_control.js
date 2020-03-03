@@ -12,8 +12,22 @@ function addPage() {
     disableFunction()
     disableMenuAll()
     enableMenu('saveMenu')
+    let temp_value = document.getElementById('request_id_report').value
     resetFunction()
-    document.getElementById('block_no1').style.display = ''
+   document.getElementById('request_id_report').value = temp_value
+    if(document.getElementById('block_no1').style.display === 'none'){
+        document.getElementById('block_no1').style.display = 'none'
+        document.getElementById('button_block_1').style.display = 'none'
+        document.getElementById('block_no2').style.display = ''
+        document.getElementById('button_block_2').style.display = ''
+    }else{
+        document.getElementById('block_no1').style.display = ''
+        document.getElementById('button_block_1').style.display = ''
+        document.getElementById('block_no2').style.display = 'none'
+        document.getElementById('button_block_2').style.display = 'none'
+    }
+    
+
 }
 function insertPage() {
     Swal.fire({

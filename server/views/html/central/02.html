@@ -386,25 +386,73 @@
                         <option value="กิจการฌาปณสถาน">กิจการฌาปณสถาน</option>
                     </datalist>
                     <button type="button" class="fa fa-search" style="margin-left: 1vw;"></button></a>
-                    <button type="button" id='report_open' style="float: right;border-radius: 0.3vw;"class='fa fa-file' onclick="openPageReport()" disabled> ร้องเรียน</button>
-                <div class="tab" style="height: 3.5vw;width: 100%;" >
+                <button type="button" id='report_open' style="float: right;border-radius: 0.3vw;" class='fa fa-file'
+                    onclick="openPageReport()" disabled> ร้องเรียน</button>
+                <div class="tab" style="height: 3.5vw;width: 100%;">
 
-                    <button type="button" class="tablinks"
-                        onclick="onClickStatustab('wait',event, 'wait'); " style="height: 100%;"><a>รออนุมัติ</a></button>
-                    <button type="button" class="tablinks"
-                        onclick="onClickStatustab('approval',event, 'approval');" style="height: 100%;"><a>อนุมัติ</a></button>
+                    <button type="button" class="tablinks" onclick="onClickStatustab('wait',event, 'wait'); "
+                        style="height: 100%;"><a>รออนุมัติ</a></button>
+                    <button type="button" class="tablinks" onclick="onClickStatustab('approval',event, 'approval');"
+                        style="height: 100%;"><a>อนุมัติ</a></button>
 
                     <button id="defaultOpen" type="button" class="tablinks" style="height: 100%;"
                         onclick="onClickStatustab('active',event, 'available');"><a>ปกติ</a>
-                        </button>
-                        <button type="button" class="tablinks"
-                            onclick="onClickStatustab('transfer', event, 'transfer')" style="height: 100%;"><a>โอน</a></button>
-                        <button type="button" class="tablinks"
-                            onclick="onClickStatustab('expire', event, 'expire')" style="height: 100%;"><a>หมดอายุ</a></button>
-                        <button type="button" class="tablinks"
-                            onclick="onClickStatustab('cancel', event, 'cancel')" style="height: 100%;"><a>ยกเลิก</a></button>
-                        <button type="button" class="tablinks"
-                            onclick="onClickStatustab('report', event, 'report')" style="height: 100%;"><a>ร้องเรียน</a></button>
+                    </button>
+                    <button type="button" class="tablinks" onclick="onClickStatustab('transfer', event, 'transfer')"
+                        style="height: 100%;"><a>โอน</a></button>
+                    <button type="button" class="tablinks" onclick="onClickStatustab('expire', event, 'expire')"
+                        style="height: 100%;"><a>หมดอายุ</a></button>
+                    <button type="button" class="tablinks" onclick="onClickStatustab('cancel', event, 'cancel')"
+                        style="height: 100%;"><a>ยกเลิก</a></button>
+                    <button type="button" class="tablinks" onclick="onClickStatustab('report', event, 'report')"
+                        style="height: 100%;"><a>ร้องเรียน</a></button>
+                    <button type="button" class="tablinks" onclick="onClickStatustab('ban', event, 'ban')"
+                        style="height: 100%;"><a>พักใบอนุญาต</a></button>
+                </div>
+                <!-- พักใบอนุญาต -->
+                <div id="ban" class="tabcontent">
+                    <div style="font-size: 1.7vh;">
+                        <br>
+                        <a>ประวัติร้องเรียน</a>
+                        <br><br>
+                        <table id="ban_table" class="table cursor-pointer table-hover tableresult">
+                            <thead>
+                                <tr class="is-color">
+                                    <th onclick="sortTable(0,'ban_table','')">
+                                        <p>เลขที่คำสั่ง <i class="fa fa-sort "></i></p>
+                                    </th>
+                                    <th onclick="sortTable(1,'ban_table','')">
+                                        <p>เลขที่ใบอนุญาต <i class="fa fa-sort "></i></p>
+                                    </th>
+                                    <th onclick="sortTable(2,'ban_table','date')">
+                                        <p>วันที่เริ่มพัก <i class="fa fa-sort "></i>
+                                        </p>
+                                    </th>
+                                    <th onclick="sortTable(3,'ban_table','date')">
+                                        <p>วันที่พักสุดท้าย <i class="fa fa-sort "></i>
+                                        </p>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody style="text-align: center;height: 17vw;">
+                                <tr onclick="viewPageReport(this)">
+                                    <td>824</td>
+                                    <td>A00001/2563</td>
+                                    <td>13 มกราคม 2563</td>
+                                    <td>30 มกราคม 2563</td>
+                                </tr>
+                                <tr onclick="viewPageReport(this)">
+                                    <td>718</td>
+                                    <td>C00001/2563</td>
+                                    <td>13 มีนาคม 2563</td>
+                                    <td>30 มกราคม 2564</td>
+                                </tr>
+                            </tbody>
+                            <table>
+                            </table>
+                        </table>
+                    </div>
+
                 </div>
                 <!-- ร้องเรียน -->
                 <div id="report" class="tabcontent">
@@ -428,7 +476,7 @@
                                 </tr>
                             </thead>
                             <tbody style="text-align: center;height: 17vw;">
-                                <tr onclick="viewPageReport(this)" >
+                                <tr onclick="viewPageReport(this)">
                                     <td>104</td>
                                     <td>ขยะมูลฝอย/สิ่งปฏิกูล</td>
                                     <td>13 มกราคม 2563</td>
@@ -440,11 +488,10 @@
                                 </tr>
                             </tbody>
                             <table>
-                              
-
                             </table>
                         </table>
                     </div>
+
                 </div>
                 <!-- ปกติ -->
                 <div id="available" class="tabcontent">
@@ -832,4 +879,5 @@
 <script>
     runForm()
 </script>
+
 </html>
