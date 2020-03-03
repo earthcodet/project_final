@@ -1558,6 +1558,9 @@ class service {
         })
     }
     insertFile(file) {
+        console.log('--INSERT FILE--')
+        console.log(file)
+        console.log('--INSERT FILE--')
         return new Promise((resolve, reject) => {
             FileDAOObj.getfileByid(file.name).then((file_data) => {
                 if (file_data) {
@@ -2010,9 +2013,11 @@ class service {
                                                                 request.establishment_is_land_owned = land_data_update.id
                                                                 request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                                 request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                                console.log('7_update_request')
                                                                 this.updateRequest(request)
-
+                                                                console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                                 if (land.file_upload_changed) {
+                                                                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
                                                                     file.name = item_return.land_id
                                                                     this.insertFile(file)
                                                                 }
@@ -2029,9 +2034,11 @@ class service {
                                                                 request.establishment_is_land_owned = land_data_update.id
                                                                 request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                                 request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                                console.log('8_update_request')
                                                                 this.updateRequest(request)
-
+                                                                console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                                 if (land.file_upload_changed) {
+                                                                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
                                                                     file.name = item_return.land_id
                                                                     this.insertFile(file)
                                                                 }
@@ -2045,6 +2052,7 @@ class service {
                                                         EstablishmentDAOObj.update(new_edata)
                                                         request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                         request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                        console.log('9_update_request')
                                                         this.updateRequest(request)
                                                     }
                                                 } else {
@@ -2088,8 +2096,9 @@ class service {
                                                             request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                             console.log('#3')
                                                             this.updateRequest(request)
-
+                                                            console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                             if (land.file_upload_changed) {
+                                                                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
                                                                 file.name = item_return.land_id
                                                                 this.insertFile(file)
                                                             }
@@ -2108,8 +2117,9 @@ class service {
                                                             request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                             console.log('#4')
                                                             this.updateRequest(request)
-
+                                                            console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                             if (land.file_upload_changed) {
+                                                                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
                                                                 file.name = item_return.land_id
                                                                 this.insertFile(file)
                                                             }
@@ -2164,8 +2174,9 @@ class service {
                                                         request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                         console.log('#8')
                                                         this.updateRequest(request)
-
+                                                        console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                         if (land.file_upload_changed) {
+                                                                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
                                                             file.name = item_return.land_id
                                                             this.insertFile(file)
                                                         }
@@ -2184,8 +2195,9 @@ class service {
                                                         request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                         console.log('#9')
                                                         this.updateRequest(request)
-
+                                                        console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                         if (land.file_upload_changed) {
+                                                                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
                                                             file.name = item_return.land_id
                                                             this.insertFile(file)
                                                         }
@@ -2265,8 +2277,9 @@ class service {
                                                             request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                             console.log('#14')
                                                             this.updateRequest(request)
-
+                                                            console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                             if (land.file_upload_changed) {
+                                                                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
                                                                 file.name = item_return.land_id
                                                                 this.insertFile(file)
                                                             }
@@ -2301,14 +2314,150 @@ class service {
                                 } else {
                                     request.train_id = train.id
                                     item_return.train_id = train.id
-                                    request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
-                                    request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
-                                    this.updateRequest(request)
+                                    if (Edata.is_establishment_changed) {
+                                        if (Edata.is_land_owned === 'YES') {
+                                            if (land.is_land_changed) {
+                                                if (addressOwner.is_address_owner_changed) {
+                                                    this.loopUpdateLand(land, addressOwner).then((land_data_update) => {
+                                                        item_return.land_id = land_data_update.id
+                                                        item_return.address_land_id = land_data_update.address
+                                                        if (land_data_update.address === addressOwner.id) {
+                                                            console.log('GGGGGGGGG  - 4')
+                                                            this.updateAddress(this.formatInsert('ADDRESS', addressOwner))
+                                                        }
+                                                        Edata.is_land_owned = land_data_update.id
+                                                        request.establishment_address_id = land_data_update.address
+                                                        request.establishment_is_land_owned = land_data_update.id
+                                                        request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                                        request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                        console.log('#13')
+                                                        this.updateRequest(request)
+
+                                                        if (land.file_upload_changed) {
+                                                            file.name = item_return.land_id
+                                                            this.insertFile(file)
+                                                        }
+                                                        let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                                        EstablishmentDAOObj.update(new_edata)
+                                                    })
+                                                } else {
+                                                    this.loopUpdateLand(land, addressOwner).then((land_data_update) => {
+                                                        item_return.land_id = land_data_update.id
+                                                        item_return.address = land_data_update.address
+
+                                                        Edata.is_land_owned = land_data_update.id
+                                                        request.establishment_address_id = land_data_update.address
+                                                        request.establishment_is_land_owned = land_data_update.id
+                                                        request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                                        request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                        console.log('#14')
+                                                        this.updateRequest(request)
+                                                        console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
+                                                        if (land.file_upload_changed) {
+                                                                console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
+                                                            file.name = item_return.land_id
+                                                            this.insertFile(file)
+                                                        }
+                                                        let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                                        EstablishmentDAOObj.update(new_edata)
+                                                    })
+                                                }
+                                            } else {
+                                                Edata.is_land_owned = land.id
+                                                let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                                EstablishmentDAOObj.update(new_edata)
+                                                request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                                request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                console.log('#15')
+                                                this.updateRequest(request)
+                                            }
+                                        } else {
+                                            let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                            EstablishmentDAOObj.update(new_edata)
+                                            request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                            request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                            console.log('#15')
+                                            this.updateRequest(request)
+                                        }
+                                    } else {
+                                        request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                        request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                        console.log('#15')
+                                        this.updateRequest(request)
+                                    }
                                 }
                             } else {
-                                request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
-                                request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
-                                this.updateRequest(request)
+                                if (Edata.is_establishment_changed) {
+                                    if (Edata.is_land_owned === 'YES') {
+                                        if (land.is_land_changed) {
+                                            if (addressOwner.is_address_owner_changed) {
+                                                this.loopUpdateLand(land, addressOwner).then((land_data_update) => {
+                                                    item_return.land_id = land_data_update.id
+                                                    item_return.address_land_id = land_data_update.address
+                                                    if (land_data_update.address === addressOwner.id) {
+                                                        console.log('GGGGGGGGG  - 4')
+                                                        this.updateAddress(this.formatInsert('ADDRESS', addressOwner))
+                                                    }
+                                                    Edata.is_land_owned = land_data_update.id
+                                                    request.establishment_address_id = land_data_update.address
+                                                    request.establishment_is_land_owned = land_data_update.id
+                                                    request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                                    request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                    console.log('#13')
+                                                    this.updateRequest(request)
+
+                                                    if (land.file_upload_changed) {
+                                                        file.name = item_return.land_id
+                                                        this.insertFile(file)
+                                                    }
+                                                    let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                                    EstablishmentDAOObj.update(new_edata)
+                                                })
+                                            } else {
+                                                this.loopUpdateLand(land, addressOwner).then((land_data_update) => {
+                                                    item_return.land_id = land_data_update.id
+                                                    item_return.address = land_data_update.address
+
+                                                    Edata.is_land_owned = land_data_update.id
+                                                    request.establishment_address_id = land_data_update.address
+                                                    request.establishment_is_land_owned = land_data_update.id
+                                                    request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                                    request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                    console.log('#14')
+                                                    this.updateRequest(request)
+                                                    console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
+                                                    if (land.file_upload_changed) {
+                                                            console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
+                                                        file.name = item_return.land_id
+                                                        this.insertFile(file)
+                                                    }
+                                                    let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                                    EstablishmentDAOObj.update(new_edata)
+                                                })
+                                            }
+                                        } else {
+                                            Edata.is_land_owned = land.id
+                                            let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                            EstablishmentDAOObj.update(new_edata)
+                                            request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                            request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                            console.log('#15')
+                                            this.updateRequest(request)
+                                        }
+                                    } else {
+                                        let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                        EstablishmentDAOObj.update(new_edata)
+                                        request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                        request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                        console.log('#15')
+                                        this.updateRequest(request)
+                                    }
+                                } else {
+                                    request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                    request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                    console.log('#15')
+                                    this.updateRequest(request)
+                                }
                             }
                         }
                     }
@@ -2345,8 +2494,9 @@ class service {
                                                                 request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                                 console.log('#13')
                                                                 this.updateRequest(request)
-
+                                                                console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                                 if (land.file_upload_changed) {
+                                                                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
                                                                     file.name = item_return.land_id
                                                                     this.insertFile(file)
                                                                 }
@@ -2365,8 +2515,9 @@ class service {
                                                                 request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                                 console.log('#14')
                                                                 this.updateRequest(request)
-
+                                                                console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                                 if (land.file_upload_changed) {
+                                                                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
                                                                     file.name = item_return.land_id
                                                                     this.insertFile(file)
                                                                 }
@@ -2415,8 +2566,9 @@ class service {
                                                             request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                             console.log('#16')
                                                             this.updateRequest(request)
-
+                                                            console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                             if (land.file_upload_changed) {
+                                                                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
                                                                 file.name = item_return.land_id
                                                                 this.insertFile(file)
                                                             }
@@ -2435,8 +2587,9 @@ class service {
                                                             request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                             console.log('#17')
                                                             this.updateRequest(request)
-
+                                                            console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                             if (land.file_upload_changed) {
+                                                                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
                                                                 file.name = item_return.land_id
                                                                 this.insertFile(file)
                                                             }
@@ -2490,8 +2643,9 @@ class service {
                                                         request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                         console.log('#21')
                                                         this.updateRequest(request)
-
+                                                        console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                         if (land.file_upload_changed) {
+                                                                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
                                                             file.name = item_return.land_id
                                                             this.insertFile(file)
                                                         }
@@ -2510,8 +2664,9 @@ class service {
                                                         request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                         console.log('#22')
                                                         this.updateRequest(request)
-
+                                                        console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                         if (land.file_upload_changed) {
+                                                                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
                                                             file.name = item_return.land_id
                                                             this.insertFile(file)
                                                         }
@@ -2572,9 +2727,11 @@ class service {
                                                             request.establishment_is_land_owned = land_data_update.id
                                                             request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                             request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                            console.log('1_update_request')
                                                             this.updateRequest(request)
-
+                                                            console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                             if (land.file_upload_changed) {
+                                                                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
                                                                 file.name = item_return.land_id
                                                                 this.insertFile(file)
                                                             }
@@ -2591,9 +2748,11 @@ class service {
                                                             request.establishment_is_land_owned = land_data_update.id
                                                             request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                             request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                            console.log('2_update_request')
                                                             this.updateRequest(request)
-
+                                                            console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                             if (land.file_upload_changed) {
+                                                                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
                                                                 file.name = item_return.land_id
                                                                 this.insertFile(file)
                                                             }
@@ -2607,6 +2766,7 @@ class service {
                                                     EstablishmentDAOObj.update(new_edata)
                                                     request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                     request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                    console.log('3_update_request')
                                                     this.updateRequest(request)
                                                 }
                                             } else {
@@ -2621,24 +2781,162 @@ class service {
                                         } else {
                                             request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                             request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                            console.log('4_update_request')
                                             this.updateRequest(request)
                                         }
                                     })
                                 } else {
                                     request.reference_id = reference.id
                                     item_return.reference_id = reference.id
-                                    request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
-                                    request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
-                                    this.updateRequest(request)
+                                    if (Edata.is_establishment_changed) {
+                                        if (Edata.is_land_owned === 'YES') {
+                                            if (land.is_land_changed) {
+                                                if (addressOwner.is_address_owner_changed) {
+                                                    this.loopUpdateLand(land, addressOwner).then((land_data_update) => {
+                                                        item_return.land_id = land_data_update.id
+                                                        item_return.address_land_id = land_data_update.address
+                                                        if (land_data_update.address === addressOwner.id) {
+                                                            console.log('GGGGGGGGG  - 4')
+                                                            this.updateAddress(this.formatInsert('ADDRESS', addressOwner))
+                                                        }
+                                                        Edata.is_land_owned = land_data_update.id
+                                                        request.establishment_address_id = land_data_update.address
+                                                        request.establishment_is_land_owned = land_data_update.id
+                                                        request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                                        request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                        console.log('#13')
+                                                        this.updateRequest(request)
+
+                                                        if (land.file_upload_changed) {
+                                                            file.name = item_return.land_id
+                                                            this.insertFile(file)
+                                                        }
+                                                        let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                                        EstablishmentDAOObj.update(new_edata)
+                                                    })
+                                                } else {
+                                                    this.loopUpdateLand(land, addressOwner).then((land_data_update) => {
+                                                        item_return.land_id = land_data_update.id
+                                                        item_return.address = land_data_update.address
+
+                                                        Edata.is_land_owned = land_data_update.id
+                                                        request.establishment_address_id = land_data_update.address
+                                                        request.establishment_is_land_owned = land_data_update.id
+                                                        request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                                        request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                        console.log('#14')
+                                                        this.updateRequest(request)
+                                                        console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
+                                                        if (land.file_upload_changed) {
+                                                                console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
+                                                            file.name = item_return.land_id
+                                                            this.insertFile(file)
+                                                        }
+                                                        let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                                        EstablishmentDAOObj.update(new_edata)
+                                                    })
+                                                }
+                                            } else {
+                                                Edata.is_land_owned = land.id
+                                                let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                                EstablishmentDAOObj.update(new_edata)
+                                                request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                                request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                console.log('#15')
+                                                this.updateRequest(request)
+                                            }
+                                        } else {
+                                            let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                            EstablishmentDAOObj.update(new_edata)
+                                            request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                            request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                            console.log('#15')
+                                            this.updateRequest(request)
+                                        }
+                                    } else {
+                                        request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                        request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                        console.log('#15')
+                                        this.updateRequest(request)
+                                    }
                                 }
                             } else {
-                                request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
-                                request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
-                                this.updateRequest(request)
+                                if (Edata.is_establishment_changed) {
+                                    if (Edata.is_land_owned === 'YES') {
+                                        if (land.is_land_changed) {
+                                            if (addressOwner.is_address_owner_changed) {
+                                                this.loopUpdateLand(land, addressOwner).then((land_data_update) => {
+                                                    item_return.land_id = land_data_update.id
+                                                    item_return.address_land_id = land_data_update.address
+                                                    if (land_data_update.address === addressOwner.id) {
+                                                        console.log('GGGGGGGGG  - 1')
+                                                        this.updateAddress(this.formatInsert('ADDRESS', addressOwner))
+                                                    }
+                                                    Edata.is_land_owned = land_data_update.id
+                                                    request.establishment_address_id = land_data_update.address
+                                                    request.establishment_is_land_owned = land_data_update.id
+                                                    request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                                    request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                    console.log('1_update_request')
+                                                    this.updateRequest(request)
+                                                    console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
+                                                    if (land.file_upload_changed) {
+                                                            console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
+                                                        file.name = item_return.land_id
+                                                        this.insertFile(file)
+                                                    }
+                                                    let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                                    EstablishmentDAOObj.update(new_edata)
+                                                })
+                                            } else {
+                                                this.loopUpdateLand(land, addressOwner).then((land_data_update) => {
+                                                    item_return.land_id = land_data_update.id
+                                                    item_return.address = land_data_update.address
+
+                                                    Edata.is_land_owned = land_data_update.id
+                                                    request.establishment_address_id = land_data_update.address
+                                                    request.establishment_is_land_owned = land_data_update.id
+                                                    request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                                    request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                    console.log('2_update_request')
+                                                    this.updateRequest(request)
+                                                    console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
+                                                    if (land.file_upload_changed) {
+                                                            console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
+                                                        file.name = item_return.land_id
+                                                        this.insertFile(file)
+                                                    }
+                                                    let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                                    EstablishmentDAOObj.update(new_edata)
+                                                })
+                                            }
+                                        } else {
+                                            Edata.is_land_owned = land.id
+                                            let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                            EstablishmentDAOObj.update(new_edata)
+                                            request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                            request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                            console.log('3_update_request')
+                                            this.updateRequest(request)
+                                        }
+                                    } else {
+                                        let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                        EstablishmentDAOObj.update(new_edata)
+                                        request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                        request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                        console.log('#1')
+                                        this.updateRequest(request)
+                                    }
+
+                                } else {
+                                    request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
+                                    request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                    console.log('4_update_request')
+                                    this.updateRequest(request)
+                                }
                             }
                         }
-                    }
-                    else {
+                    }else {
                         if (request.train_id != 'YES' && request.reference_id != 'YES') {
                             //// Update request !!!!!!!!!!!  format Insert 
                             if (Edata.is_establishment_changed) {
@@ -2659,8 +2957,9 @@ class service {
                                                 request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                 console.log('#26')
                                                 this.updateRequest(request)
-
+                                                console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                 if (land.file_upload_changed) {
+                                                                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
                                                     file.name = item_return.land_id
                                                     this.insertFile(file)
                                                 }
@@ -2679,8 +2978,9 @@ class service {
                                                 request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                 console.log('#27')
                                                 this.updateRequest(request)
-
+                                                console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                 if (land.file_upload_changed) {
+                                                                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
                                                     file.name = item_return.land_id
                                                     this.insertFile(file)
                                                 }
@@ -2734,8 +3034,9 @@ class service {
                                     request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                     console.log('#31')
                                     this.updateRequest(request)
-
+                                    console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                     if (land.file_upload_changed) {
+                                                                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
                                         file.name = item_return.land_id
                                         this.insertFile(file)
                                     }
@@ -2754,8 +3055,9 @@ class service {
                                     request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                     console.log('#32')
                                     this.updateRequest(request)
-
+                                    console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                     if (land.file_upload_changed) {
+                                                                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
                                         file.name = item_return.land_id
                                         this.insertFile(file)
                                     }

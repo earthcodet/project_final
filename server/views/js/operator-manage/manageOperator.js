@@ -113,6 +113,8 @@ function resetParameter() {
     };
 }
 function setDataUI(data) {
+    inPersonal.id = data.PERSONAL_ID
+    document.getElementById('report_open').disabled = false
     if (data.PERSONAL_TYPE === 'บุคคลธรรมดา') {
         document.getElementById('title_shot_personal_id').innerText = 'เลขประจำตัว : '
         let title_shot_item = data.PERSONAL_TITLE === undefined || data.PERSONAL_TITLE === null ? '' : data.PERSONAL_TITLE
@@ -635,9 +637,9 @@ function getTableIdTableByStatus(status) {
             return 'cancel_table'
     }
 }
-function setDataItem(data){
+function setDataItem(data) {
     inRequest.status = checkNullReturn(data.REQUEST_STATUS)
-    inRequest.status_before= checkNullReturn(data.REQUEST_STATUS_BEFORE)
+    inRequest.status_before = checkNullReturn(data.REQUEST_STATUS_BEFORE)
     inRequest.last_update = checkNullReturn(data.REQUEST_LAST_UPDATE)
     inRequest.user_update = checkNullReturn(data.REQUEST_USER_UPDATE)
     inRequest.date_approve = checkNullReturn(data.REQUEST_DATE_APPROVE)
@@ -668,7 +670,15 @@ function setDataItem(data){
     inRequest.no = checkNullReturn(data.REQUEST_NO)
     inRequest.year = checkNullReturn(data.REQUEST_YEAR)
 }
-function checkNullReturn(item){
-    let temp = item === null ? '': item
+function checkNullReturn(item) {
+    let temp = item === null ? '' : item
     return temp
+}
+
+function openPageReport() {
+    window.open('../utilities/petition.html?id=' + inPersonal.id, '_blank');
+}
+function viewPageReport(id) {
+    id = id.getElementsByTagName("TD")[0].textContent
+    window.open('../utilities/petition.html?id='+id, '_blank');
 }

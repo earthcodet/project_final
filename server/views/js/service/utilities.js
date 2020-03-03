@@ -86,6 +86,7 @@ const month = {
 function sortTable(n, id, type) {
     var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
     table = document.getElementById(id);
+    
     switching = true;
     dir = "asc";
     while (switching) {
@@ -93,6 +94,7 @@ function sortTable(n, id, type) {
         rows = table.rows;
         for (i = 1; i < (rows.length - 1); i++) {
             shouldSwitch = false;
+            console.log(table.rows[i])
             x = rows[i].getElementsByTagName("TD")[n];
             y = rows[i + 1].getElementsByTagName("TD")[n];
             if (type === "date" && x != '-') {
@@ -403,35 +405,35 @@ function toRequest(value,id) {
             break;
     }
 }
-function toPerRequest(value){
+function toPerRequest(value,id){
     switch (value) {
         case 'กิจการฌาปณสถาน':
-            window.location.href = '../renew/renew_crematory.html'
+            window.open('../renew/renew_crematory.html'+'?id='+id, '_blank');
             break;
         case 'กิจการที่เป็นอันตรายต่อสุขภาพ':
-            window.location.href = '../renew/renew_health_danger.html'
+            window.open('../renew/renew_health_danger.html'+'?id='+id, '_blank');
             break;
         case 'ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน':
-            window.location.href = '../renew/renew_market.html'
+            window.open('../renew/renew_market.html'+'?id='+id, '_blank');
             break;
         case 'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร':
-            window.location.href = '../renew/renew_area_less_correct.html'
+            window.open('../renew/renew_area_less_correct.html'+'?id='+id, '_blank');
             break;
         case 'หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร':
-            window.location.href = '../renew/renew_area_less_sell.html'
+            window.open('../renew/renew_area_less_sell.html'+'?id='+id, '_blank');
             break;
         case 'ใบอนุญาตจัดตั้งสถานที่สะสมอาหาร':
-            window.location.href = '../renew/renew_area_more_correct.html'
+            window.open('../renew/renew_area_more_correct.html'+'?id='+id, '_blank');
             break;
         case 'ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร':
-            window.location.href = '../renew/renew_area_more_sell.html'
+            window.open('../renew/renew_area_more_sell.html'+'?id='+id, '_blank');
             break;
         case 'ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ':
-            window.location.href = '../renew/renew_public_hawk.html'
+            window.open('../renew/renew_public_hawk.html'+'?id='+id, '_blank');
             break;
         default:
             //ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ
-            window.location.href = '../renew/renew_public_sell.html'
+            window.open('../renew/renew_public_sell.html'+'?id='+id, '_blank');
             break;
     }
 }

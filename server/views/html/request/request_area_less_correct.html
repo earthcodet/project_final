@@ -74,8 +74,8 @@
         </div>
         <button class="dropdown-btn"><b>งานร้องเรียน </b><i class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
-            <a href="#">- บันทึกเรื่องร้องเรียน</a>
-            <a href="#">- บันทึกคำร้อง</a>
+            <a href="../utilities/petition.html">- บันทึกเรื่องร้องเรียน</a>
+            <!-- <a href="#">- บันทึกคำร้อง</a> -->
         </div>
         <button class="dropdown-btn" id="adminna" style="display: none;"><b>ข้อมูลระบบ </b><i
                 class="fa fa-caret-down"></i></button>
@@ -427,7 +427,14 @@
                             <h5><i class="fa fa-upload"></i>
                                 อัพโหลดภาพ</h5>
                         </button>
-
+                        <button id='print_new_doc' type="button" class="button" style='margin-left: 5vw; display: none;' onclick="printDocument()">
+                            <h5><i class="fa fa-print"></i>
+                                พิมพ์ใบอนุญาติ</h5>
+                        </button>
+                        <button id='print_renew_doc' type="button" class="button" style='margin-left: 5vw; display: none;' onclick="printDocumentRenew()">
+                            <h5><i class="fa fa-print"></i>
+                                พิมพ์ใบขอต่ออนุญาติ</h5>
+                        </button>
                         <button type="button" class="button" style="float: right;" onclick="printImg()">
                             <h5><i class="fa fa-print"></i>
                                 พิมพ์รูปภาพ</h5>

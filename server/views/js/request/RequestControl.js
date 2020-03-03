@@ -20,6 +20,7 @@ function addPage() {
     let temp_position = document.getElementById('position').value
     resetFunction()
     document.getElementById('position').value = temp_position
+    document.getElementById('print_new_doc').style.display = 'none'
 }
 function insertPage() {
     Swal.fire({
@@ -417,5 +418,38 @@ function printImg(no, year) {
 
 }
 function printDocument() {
-  
+    if (requestData.no != undefined && requestData.year != undefined) {
+        if (requestData.no === '') {
+            window.open(getFormPrint(requestData.menu)+`?id=${requestData.no}${requestData.year}`, '_blank');
+        } else {
+            if (requestData.no != '') {
+                window.open(getFormPrint(requestData.menu)+`?id=${requestData.no}${requestData.year}`, '_blank');
+            } else {
+                let requsetId = getUrlVars()
+                if (requsetId.id != undefined) {
+                    let requsetNo = requsetId.id.slice(0, 6)
+                    let requestYear = requsetId.id.slice(6, 10)
+                    window.open(getFormPrint(requestData.menu)+`?id=${requsetNo}${requestYear}`, '_blank');
+                }
+            }
+        }
+    }
+}
+function getFormPrint(menu) {
+    switch (menu) {
+        case 'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร':
+            return '../view/view_area_less_correct.html'
+        case 'หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร':
+            return '../view/view_area_less_sell.html'
+        case 'กิจการที่เป็นอันตรายต่อสุขภาพ':
+            return '../view/view_health_dander.html'
+        case 'ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน':
+            return '../view/view_market.html'
+        case 'ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ':
+            return '../view/view_public.html'
+        case 'ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ':
+            return '../view/view_public.html'
+        default:
+            return '../view/view_area_more_correct.html'
+    }
 }

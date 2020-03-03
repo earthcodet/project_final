@@ -87,8 +87,7 @@
         </div>
         <button class="dropdown-btn"><b>งานร้องเรียน </b><i class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
-            <a href="#">- บันทึกเรื่องร้องเรียน</a>
-            <a href="#">- บันทึกคำร้อง</a>
+            <a href="../utilities/petition.html">- บันทึกเรื่องร้องเรียน</a>
         </div>
         <button class="dropdown-btn" id="adminna" style="display: none;"><b>ข้อมูลระบบ </b><i
                 class="fa fa-caret-down"></i></button>
@@ -119,11 +118,10 @@
                 <header class="w3-top2">
                     <h1 style="font-size:2.8vh;margin-left: 25px;padding: 2px;"> ผู้ประกอบการ</h1>
                     <button type='button' onclick="swicthDisplay()"
-                            style="position: absolute; bottom:0.5vw;right: 1vw; width: 3vw; "
-                            >
-                            <i id='show_item' class="fa fa-angle-double-down"></i>
-                            <i id='hide_item' class="fa fa-angle-double-up" style="display: none;"></i>
-                        </button>
+                        style="position: absolute; bottom:0.5vw;right: 1vw; width: 3vw; ">
+                        <i id='show_item' class="fa fa-angle-double-down"></i>
+                        <i id='hide_item' class="fa fa-angle-double-up" style="display: none;"></i>
+                    </button>
                 </header>
                 <a>
                     <div id='full_detail_data' class="box notification" style="display: none;">
@@ -361,455 +359,449 @@
         <br>
         <div class="box">
             <a>
-            <p class="font">ประวัติการออกใบอนุญาต</p>
-            <a>ปีงบประมาณ : <input type="text"
-                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                    maxlength="4"></a>
-            <a>ประเภทใบอนุญาต :
-                <input list="brow" id="" name="" style="width: 30%;">
-                <datalist id="brow">
-                    <option value="ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ">
-                        ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ
-                    </option>
-                    <option value="ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ">
-                        ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ
-                    </option>
-                    <option value="ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร">ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร
-                    </option>
-                    <option value="ใบอนุญาตจัดตั้งสถานที่สะสมอาหาร">ใบอนุญาตจัดตั้งสถานที่สะสมอาหาร
-                    </option>
-                    <option value="หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร">
-                        หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</option>
-                    <option value="หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร">
-                        หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</option>
-                    <option value="ใบอนุญาติให้ใช้สถานที่เป็นตลาดเอกชน">ใบอนุญาติให้ใช้สถานที่เป็นตลาดเอกชน
-                    </option>
-                    <option value="กิจการที่เป็นอันตรายต่อสุขภาพ">กิจการที่เป็นอันตรายต่อสุขภาพ</option>
-                    <option value="กิจการฌาปณสถาน">กิจการฌาปณสถาน</option>
-                </datalist>
-                <button type="button" class="fa fa-search" style="margin-left: 1vw;"></button></a>
-            <div class="tab" style="">
+                <p class="font">ประวัติการออกใบอนุญาต</p>
+                <a>ปีงบประมาณ : <input type="text"
+                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                        maxlength="4"></a>
+                <a>ประเภทใบอนุญาต :
+                    <input list="brow" id="" name="" style="width: 30%;">
+                    <datalist id="brow">
+                        <option value="ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ">
+                            ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ
+                        </option>
+                        <option value="ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ">
+                            ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ
+                        </option>
+                        <option value="ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร">ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร
+                        </option>
+                        <option value="ใบอนุญาตจัดตั้งสถานที่สะสมอาหาร">ใบอนุญาตจัดตั้งสถานที่สะสมอาหาร
+                        </option>
+                        <option value="หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร">
+                            หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</option>
+                        <option value="หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร">
+                            หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</option>
+                        <option value="ใบอนุญาติให้ใช้สถานที่เป็นตลาดเอกชน">ใบอนุญาติให้ใช้สถานที่เป็นตลาดเอกชน
+                        </option>
+                        <option value="กิจการที่เป็นอันตรายต่อสุขภาพ">กิจการที่เป็นอันตรายต่อสุขภาพ</option>
+                        <option value="กิจการฌาปณสถาน">กิจการฌาปณสถาน</option>
+                    </datalist>
+                    <button type="button" class="fa fa-search" style="margin-left: 1vw;"></button></a>
+                    <button type="button" id='report_open' style="float: right;border-radius: 0.3vw;"class='fa fa-file' onclick="openPageReport()" disabled> ร้องเรียน</button>
+                <div class="tab" style="height: 3.5vw;width: 100%;" >
 
-                <button type="button" class="tablinks" onclick="onClickStatustab('wait',event, 'wait'); "><a>รออนุมัติ</a></button>
-                <button type="button" class="tablinks" onclick="onClickStatustab('approval',event, 'approval');"><a>อนุมัติ</a></button>
+                    <button type="button" class="tablinks"
+                        onclick="onClickStatustab('wait',event, 'wait'); " style="height: 100%;"><a>รออนุมัติ</a></button>
+                    <button type="button" class="tablinks"
+                        onclick="onClickStatustab('approval',event, 'approval');" style="height: 100%;"><a>อนุมัติ</a></button>
 
-                <button id="defaultOpen" type="button" class="tablinks" onclick="onClickStatustab('active',event, 'available');"><a>ปกติ</a>
-                    </buttonid="defaultOpen">
-                    <button type="button" class="tablinks" onclick="onClickStatustab('transfer', event, 'transfer')"><a>โอน</a></button>
-                    <button type="button" class="tablinks" onclick="onClickStatustab('expire', event, 'expire')"><a>หมดอายุ</a></button>
-                    <button type="button" class="tablinks" onclick="onClickStatustab('cancel', event, 'cancel')"><a>ยกเลิก</a></button>
-            </div>
-            <!-- ปกติ -->
-            <div id="available" class="tabcontent">
-                <div style="font-size: 1.7vh;">
-                    <br>
-                    <a>ประวัติใบอนุญาต</a>
-                    <br><br>
-                    <table id="active_table" class="table cursor-pointer table-hover tableresult">
-                        <thead>
-                            <tr class="is-color">
+                    <button id="defaultOpen" type="button" class="tablinks" style="height: 100%;"
+                        onclick="onClickStatustab('active',event, 'available');"><a>ปกติ</a>
+                        </button>
+                        <button type="button" class="tablinks"
+                            onclick="onClickStatustab('transfer', event, 'transfer')" style="height: 100%;"><a>โอน</a></button>
+                        <button type="button" class="tablinks"
+                            onclick="onClickStatustab('expire', event, 'expire')" style="height: 100%;"><a>หมดอายุ</a></button>
+                        <button type="button" class="tablinks"
+                            onclick="onClickStatustab('cancel', event, 'cancel')" style="height: 100%;"><a>ยกเลิก</a></button>
+                        <button type="button" class="tablinks"
+                            onclick="onClickStatustab('report', event, 'report')" style="height: 100%;"><a>ร้องเรียน</a></button>
+                </div>
+                <!-- ร้องเรียน -->
+                <div id="report" class="tabcontent">
+                    <div style="font-size: 1.7vh;">
+                        <br>
+                        <a>ประวัติร้องเรียน</a>
+                        <br><br>
+                        <table id="report_table" class="table cursor-pointer table-hover tableresult">
+                            <thead>
+                                <tr class="is-color">
+                                    <th onclick="sortTable(0,'report_table','')">
+                                        <p>เลขที่คำสั่ง <i class="fa fa-sort "></i></p>
+                                    </th>
+                                    <th onclick="sortTable(1,'report_table','')">
+                                        <p>ประเภทเรื่องร้องเรียน <i class="fa fa-sort "></i></p>
+                                    </th>
+                                    <th onclick="sortTable(2,'report_table','')">
+                                        <p>วันที่ยื่น <i class="fa fa-sort "></i>
+                                        </p>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody style="text-align: center;height: 17vw;">
+                                <tr onclick="viewPageReport(this)">
+                                    <td>104</td>
+                                    <td>ขยะมูลฝอย/สิ่งปฏิกูล</td>
+                                    <td>13 มกราคม 2563</td>
+                                </tr>
+                                <tr>
+                                    <td>384</td>
+                                    <td>เสียงดัง</td>
+                                    <td>25 มกราคม 2563</td>
+                                </tr>
+                            </tbody>
+                            <table>
+                              
+
+                            </table>
+                        </table>
+                    </div>
+                </div>
+                <!-- ปกติ -->
+                <div id="available" class="tabcontent">
+                    <div style="font-size: 1.7vh;">
+                        <br>
+                        <a>ประวัติใบอนุญาต</a>
+                        <br><br>
+                        <table id="active_table" class="table cursor-pointer table-hover tableresult">
+                            <thead>
                                 <tr class="is-color">
                                     <th onclick="sortTable(0,'active_table','')">
                                         <p>ปีงบประมาณ <i class="fa fa-sort "></i></p>
                                     </th>
-                                    <th onclick="sortTable(1,'active_table'),''">
+                                    <th onclick="sortTable(1,'active_table','')">
                                         <p>ประเภทใบอนุญาต <i class="fa fa-sort "></i></p>
                                     </th>
-                                    <th onclick="sortTable(2,'active_table'),''">
+                                    <th onclick="sortTable(2,'active_table','')">
                                         <p>เลขที่ <i class="fa fa-sort "></i>
                                         </p>
                                     </th>
-                                    <th onclick="sortTable(3,'active_table'),'date'">
+                                    <th onclick="sortTable(3,'active_table','date')">
                                         <p>วันที่เริ่ม <i class="fa fa-sort "></i></p>
                                     </th>
-                                    <th onclick="sortTable(4,'active_table'),'date'">
+                                    <th onclick="sortTable(4,'active_table','date')">
                                         <p>วันที่หมดอายุ <i class="fa fa-sort "></i></p>
                                     </th>
-                                    <th onclick="sortTable(5,'active_table'),'dateExp'">
-                                        <p>สถานะ <i class="fa fa-sort "></i></p>
-                                    </th>
-                                </tr>
-                            </tr>
-                        </thead>
-                        
-                    </table>
-                    <br>
-                    <a>ประวัติผู้ช่วย</a>
-                    <br><br>
-                    <div style="font-size: 1.7vh;">
-                        <table id="requestTable03" class="table cursor-pointer table-hover tableresult">
-                            <thead>
-                                <tr
-                                    style="height:auto; background-color: rgba(40, 131, 250, 0.876); color: rgb(255, 255, 255);">
-                                    <th onclick="sortTable(0,'requestTable03','')">
-                                        <p>ปีงบประมาณ <i class="fa fa-sort "></i></p>
-                                    </th>
-                                    <th onclick="sortTable(1,'requestTable03','')">
-                                        <p>ประเภทใบอนุญาต <i class="fa fa-sort "></i></p>
-                                    </th>
-                                    <th onclick="sortTable(2,'requestTable03','')">
-                                        <p>เล่ม <i class="fa fa-sort "></i>
-                                        </p>
-                                    </th>
-                                    <th onclick="sortTable(3,'requestTable03','')">
-                                        <p>เลขที่ <i class="fa fa-sort "></i></p>
-                                    </th>
-                                    <th onclick="sortTable(4,'requestTable03','date')">
-                                        <p>วันที่หมดอายุ <i class="fa fa-sort "></i></p>
-                                    </th>
-                                    <th onclick="sortTable(5,'requestTable03','')">
-                                        <p>เจ้าของสถานประกอบการ <i class="fa fa-sort "></i></p>
-                                    </th>
-                                    <th onclick="sortTable(6,'requestTable03','dateExp')">
+                                    <th onclick="sortTable(5,'active_table','dateExp')">
                                         <p>สถานะ <i class="fa fa-sort "></i></p>
                                     </th>
                                 </tr>
                             </thead>
+
                         </table>
+                        <br>
+                        <a>ประวัติผู้ช่วย</a>
+                        <br><br>
+                        <div style="font-size: 1.7vh;">
+                            <table id="active_assistant_table" class="table cursor-pointer table-hover tableresult">
+                                <thead>
+                                    <tr
+                                        style="height:auto; background-color: rgba(40, 131, 250, 0.876); color: rgb(255, 255, 255);">
+                                        <th onclick="sortTable(0,'active_assistant_table','')">
+                                            <p>ปีงบประมาณ <i class="fa fa-sort "></i></p>
+                                        </th>
+                                        <th onclick="sortTable(1,'active_assistant_table','')">
+                                            <p>ประเภทใบอนุญาต <i class="fa fa-sort "></i></p>
+                                        </th>
+                                        <th onclick="sortTable(2,'active_assistant_table','')">
+                                            <p>เลขที่ <i class="fa fa-sort "></i></p>
+                                        </th>
+                                        <th onclick="sortTable(3,'active_assistant_table','date')">
+                                            <p>วันที่หมดอายุ <i class="fa fa-sort "></i></p>
+                                        </th>
+                                        <th onclick="sortTable(4,'active_assistant_table','')">
+                                            <p>เจ้าของใบอนุญาต <i class="fa fa-sort "></i></p>
+                                        </th>
+                                        <th onclick="sortTable(5,'active_assistant_table','dateExp')">
+                                            <p>สถานะ <i class="fa fa-sort "></i></p>
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- อนุมัติ -->
-            <div id="approval" class="tabcontent">
-                <div style="font-size: 1.7vh;">
-                    <br>
-                    <a>ประวัติใบอนุญาต</a>
-                    <br><br>
-                    <table id="approval_table" class="table cursor-pointer table-hover tableresult">
-                        <thead>
-                            <tr class="is-color">
+                <!-- อนุมัติ -->
+                <div id="approval" class="tabcontent">
+                    <div style="font-size: 1.7vh;">
+                        <br>
+                        <a>ประวัติใบอนุญาต</a>
+                        <br><br>
+                        <table id="approval_table" class="table cursor-pointer table-hover tableresult">
+                            <thead>
                                 <tr class="is-color">
                                     <th onclick="sortTable(0,'approval_table','')">
                                         <p>ปีงบประมาณ <i class="fa fa-sort "></i></p>
                                     </th>
-                                    <th onclick="sortTable(1,'approval_table'),''">
+                                    <th onclick="sortTable(1,'approval_table','')">
                                         <p>ประเภทใบอนุญาต <i class="fa fa-sort "></i></p>
                                     </th>
-                                    <th onclick="sortTable(2,'approval_table'),''">
+                                    <th onclick="sortTable(2,'approval_table','')">
                                         <p>เลขที่ <i class="fa fa-sort "></i>
                                         </p>
                                     </th>
-                                    <th onclick="sortTable(3,'approval_table'),'date'">
+                                    <th onclick="sortTable(3,'approval_table','date')">
                                         <p>วันที่เริ่ม <i class="fa fa-sort "></i></p>
                                     </th>
-                                    <th onclick="sortTable(4,'approval_table'),'date'">
+                                    <th onclick="sortTable(4,'approval_table','date')">
                                         <p>วันที่หมดอายุ <i class="fa fa-sort "></i></p>
                                     </th>
-                                    <th onclick="sortTable(5,'approval_table'),'dateExp'">
-                                        <p>สถานะ <i class="fa fa-sort "></i></p>
-                                    </th>
-                                </tr>
-                            </tr>
-                        </thead>
-                        
-                    </table>
-                    <br>
-                    <a>ประวัติผู้ช่วย</a>
-                    <br><br>
-                    <div style="font-size: 1.7vh;">
-                        <table id="requestTable03" class="table cursor-pointer table-hover tableresult">
-                            <thead>
-                                <tr class=""
-                                    style="height:auto; background-color: rgba(40, 131, 250, 0.876); color: rgb(255, 255, 255);">
-                                    <th onclick="sortTable(0,'requestTable03','')">
-                                        <p>ปีงบประมาณ <i class="fa fa-sort "></i></p>
-                                    </th>
-                                    <th onclick="sortTable(1,'requestTable03','')">
-                                        <p>ประเภทใบอนุญาต <i class="fa fa-sort "></i></p>
-                                    </th>
-                                    <th onclick="sortTable(2,'requestTable03','')">
-                                        <p>เล่ม <i class="fa fa-sort "></i>
-                                        </p>
-                                    </th>
-                                    <th onclick="sortTable(3,'requestTable03','')">
-                                        <p>เลขที่ <i class="fa fa-sort "></i></p>
-                                    </th>
-                                    <th onclick="sortTable(4,'requestTable03','date')">
-                                        <p>วันที่หมดอายุ <i class="fa fa-sort "></i></p>
-                                    </th>
-                                    <th onclick="sortTable(5,'requestTable03','')">
-                                        <p>เจ้าของสถานประกอบการ <i class="fa fa-sort "></i></p>
-                                    </th>
-                                    <th onclick="sortTable(6,'requestTable03','dateExp')">
+                                    <th onclick="sortTable(5,'approval_table','dateExp')">
                                         <p>สถานะ <i class="fa fa-sort "></i></p>
                                     </th>
                                 </tr>
                             </thead>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <!-- โอน -->
-            <div id="transfer" class="tabcontent">
-                <div style="font-size: 1.7vh;">
-                    <br>
-                    <a>ประวัติใบอนุญาต</a>
-                    <br><br>
-                    <table id="transfer_table" class="table cursor-pointer table-hover tableresult">
-                        <thead>
-                            <tr class="is-color">
-                                <th onclick="sortTable(0,'transfer_table','')">
-                                    <p>ปีงบประมาณ <i class="fa fa-sort "></i></p>
-                                </th>
-                                <th onclick="sortTable(1,'transfer_table'),''">
-                                    <p>ประเภทใบอนุญาต <i class="fa fa-sort "></i></p>
-                                </th>
-                                <th onclick="sortTable(2,'transfer_table'),''">
-                                    <p>เลขที่ <i class="fa fa-sort "></i>
-                                    </p>
-                                </th>
-                                <th onclick="sortTable(3,'transfer_table'),'date'">
-                                    <p>วันที่เริ่ม <i class="fa fa-sort "></i></p>
-                                </th>
-                                <th onclick="sortTable(4,'transfer_table'),'date'">
-                                    <p>วันที่หมดอายุ <i class="fa fa-sort "></i></p>
-                                </th>
-                                <th onclick="sortTable(5,'transfer_table'),'dateExp'">
-                                    <p>สถานะ <i class="fa fa-sort "></i></p>
-                                </th>
-                            </tr>
-                        </thead>
-                        
-                    </table>
-                    <br>
-                    <a>ประวัติผู้ช่วย</a>
-                    <br><br>
-                    <div style="font-size: 1.7vh;">
-                        <table id="requestTable" class="table cursor-pointer table-hover tableresult">
-                            <thead>
-                                <tr class=""
-                                    style="height:auto; background-color: rgba(40, 131, 250, 0.876); color: rgb(255, 255, 255);">
-                                    <th onclick="sortTable(0,'requestTable','')">
-                                        <p>ปีงบประมาณ <i class="fa fa-sort "></i></p>
-                                    </th>
-                                    <th onclick="sortTable(1,'requestTable'),''">
-                                        <p>ประเภทใบอนุญาต <i class="fa fa-sort "></i></p>
-                                    </th>
-                                    <th onclick="sortTable(2,'requestTable'),''">
-                                        <p>เล่ม <i class="fa fa-sort "></i>
-                                        </p>
-                                    </th>
-                                    <th onclick="sortTable(4,'requestTable'),'date'">
-                                        <p>เลขที่ <i class="fa fa-sort "></i></p>
-                                    </th>
-                                    <th onclick="sortTable(3,'requestTable'),''">
-                                        <p>วันที่หมดอายุ <i class="fa fa-sort "></i></p>
-                                    </th>
-                                    <th onclick="sortTable(3,'requestTable'),''">
-                                        <p>เจ้าของสถานประกอบการ <i class="fa fa-sort "></i></p>
-                                    </th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <!-- หมดอายุ -->
-            <div id="expire" class="tabcontent">
-                <div style="font-size: 1.7vh;">
-                    <br>
-                    <a>ประวัติใบอนุญาต</a>
-                    <br><br>
-                    <table id="date_exp_table" class="table cursor-pointer table-hover tableresult">
-                        <thead>
-                            <tr class="is-color">
-                                <th onclick="sortTable(0,'date_exp_table','')">
-                                    <p>ปีงบประมาณ <i class="fa fa-sort "></i></p>
-                                </th>
-                                <th onclick="sortTable(1,'date_exp_table'),''">
-                                    <p>ประเภทใบอนุญาต <i class="fa fa-sort "></i></p>
-                                </th>
-                                <th onclick="sortTable(2,'date_exp_table'),''">
-                                    <p>เลขที่ <i class="fa fa-sort "></i>
-                                    </p>
-                                </th>
-                                <th onclick="sortTable(3,'date_exp_table'),'date'">
-                                    <p>วันที่เริ่ม <i class="fa fa-sort "></i></p>
-                                </th>
-                                <th onclick="sortTable(4,'date_exp_table'),'date'">
-                                    <p>วันที่หมดอายุ <i class="fa fa-sort "></i></p>
-                                </th>
-                                <th onclick="sortTable(5,'date_exp_table'),'dateExp'">
-                                    <p>สถานะ <i class="fa fa-sort "></i></p>
-                                </th>
-                            </tr>
-                        </thead>
-                        
-                    </table>
-                    <br>
-                    <a>ประวัติผู้ช่วย</a>
-                    <br><br>
-                    <div style="font-size: 1.7vh;">
-                        <table id="requestTable" class="table cursor-pointer table-hover tableresult">
-                            <thead>
-                                <tr class=""
-                                    style="height:auto; background-color: rgba(40, 131, 250, 0.876); color: rgb(255, 255, 255);">
-                                    <th onclick="sortTable(0,'requestTable','')">
-                                        <p>ปีงบประมาณ <i class="fa fa-sort "></i></p>
-                                    </th>
-                                    <th onclick="sortTable(1,'requestTable'),''">
-                                        <p>ประเภทใบอนุญาต <i class="fa fa-sort "></i></p>
-                                    </th>
-                                    <th onclick="sortTable(2,'requestTable'),''">
-                                        <p>เล่ม <i class="fa fa-sort "></i>
-                                        </p>
-                                    </th>
-                                    <th onclick="sortTable(4,'requestTable'),'date'">
-                                        <p>เลขที่ <i class="fa fa-sort "></i></p>
-                                    </th>
-                                    <th onclick="sortTable(3,'requestTable'),''">
-                                        <p>วันที่หมดอายุ <i class="fa fa-sort "></i></p>
-                                    </th>
-                                    <th onclick="sortTable(3,'requestTable'),''">
-                                        <p>เจ้าของสถานประกอบการ <i class="fa fa-sort "></i></p>
-                                    </th>
-                                    <th onclick="sortTable(4,'requestTable'),'date'">
-                                        <p>สถานะ <i class="fa fa-sort "></i></p>
-                                    </th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <!-- รออนุมัติ -->
-            <div id="wait" class="tabcontent">
-                <div style="font-size: 1.7vh;">
-                    <br>
-                    <a>ประวัติใบอนุญาต</a>
-                    <br><br>
-                    <table id="wait_table" class="table cursor-pointer table-hover tableresult">
-                        <thead>
-                            <tr class="is-color">
-                                <th onclick="sortTable(0,'wait_table','')">
-                                    <p>ปีงบประมาณ <i class="fa fa-sort "></i></p>
-                                </th>
-                                <th onclick="sortTable(1,'wait_table'),''">
-                                    <p>ประเภทใบอนุญาต <i class="fa fa-sort "></i></p>
-                                </th>
-                                <th onclick="sortTable(2,'wait_table'),''">
-                                    <p>เลขที่ <i class="fa fa-sort "></i>
-                                    </p>
-                                </th>
-                                <th onclick="sortTable(3,'wait_table'),'date'">
-                                    <p>วันที่เริ่ม <i class="fa fa-sort "></i></p>
-                                </th>
-                                <th onclick="sortTable(4,'wait_table'),'date'">
-                                    <p>วันที่หมดอายุ <i class="fa fa-sort "></i></p>
-                                </th>
-                                <th onclick="sortTable(5,'wait_table'),'dateExp'">
-                                    <p>สถานะ <i class="fa fa-sort "></i></p>
-                                </th>
-                            </tr>
-                        </thead>
-                        
-                    </table>
-                    <br>
-                    <a>ประวัติผู้ช่วย</a>
-                    <br><br>
-                    <div style="font-size: 1.7vh;">
-                        <table id="requestTable" class="table cursor-pointer table-hover tableresult">
-                            <thead>
-                                <tr class=""
-                                    style="height:auto; background-color: rgba(40, 131, 250, 0.876); color: rgb(255, 255, 255);">
-                                    <th onclick="sortTable(0,'requestTable','')">
-                                        <p>ปีงบประมาณ <i class="fa fa-sort "></i></p>
-                                    </th>
-                                    <th onclick="sortTable(1,'requestTable'),''">
-                                        <p>ประเภทใบอนุญาต <i class="fa fa-sort "></i></p>
-                                    </th>
-                                    <th onclick="sortTable(2,'requestTable'),''">
-                                        <p>เล่ม <i class="fa fa-sort "></i>
-                                        </p>
-                                    </th>
-                                    <th onclick="sortTable(4,'requestTable'),'date'">
-                                        <p>เลขที่ <i class="fa fa-sort "></i></p>
-                                    </th>
-                                    <th onclick="sortTable(3,'requestTable'),''">
-                                        <p>วันที่หมดอายุ <i class="fa fa-sort "></i></p>
-                                    </th>
-                                    <th onclick="sortTable(3,'requestTable'),''">
-                                        <p>เจ้าของสถานประกอบการ <i class="fa fa-sort "></i></p>
-                                    </th>
-                                    <th onclick="sortTable(4,'requestTable'),'date'">
-                                        <p>สถานะ <i class="fa fa-sort "></i></p>
-                                    </th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <!-- ยกเลิก -->
-            <div id="cancel" class="tabcontent">
-                <div style="font-size: 1.7vh;">
-                    <br>
-                    <a>ประวัติใบอนุญาต</a>
-                    <br><br>
-                    <table id="cancel_table" class="table cursor-pointer table-hover tableresult">
-                        <thead>
-                            <tr class="is-color">
-                                <th onclick="sortTable(0,'cancel_table','')">
-                                    <p>ปีงบประมาณ <i class="fa fa-sort "></i></p>
-                                </th>
-                                <th onclick="sortTable(1,'cancel_table'),''">
-                                    <p>ประเภทใบอนุญาต <i class="fa fa-sort "></i></p>
-                                </th>
-                                <th onclick="sortTable(2,'cancel_table'),''">
-                                    <p>เลขที่ <i class="fa fa-sort "></i>
-                                    </p>
-                                </th>
-                                <th onclick="sortTable(3,'cancel_table'),'date'">
-                                    <p>วันที่เริ่ม <i class="fa fa-sort "></i></p>
-                                </th>
-                                <th onclick="sortTable(4,'cancel_table'),'date'">
-                                    <p>วันที่หมดอายุ <i class="fa fa-sort "></i></p>
-                                </th>
-                                <th onclick="sortTable(5,'cancel_table'),'dateExp'">
-                                    <p>สถานะ <i class="fa fa-sort "></i></p>
-                                </th>
-                            </tr>
-                        </thead>
-                        
-                    </table>
-                    <br>
 
-                    <a>ประวัติผู้ช่วย</a>
-                    <br><br>
+                        </table>
+                        <br>
+                        <a>ประวัติผู้ช่วย</a>
+                        <br><br>
+                        <div style="font-size: 1.7vh;">
+                            <table id="approval_assistant_table" class="table cursor-pointer table-hover tableresult">
+                                <thead>
+                                    <tr class=""
+                                        style="height:auto; background-color: rgba(40, 131, 250, 0.876); color: rgb(255, 255, 255);">
+                                        <th onclick="sortTable(0,'approval_assistant_table','')">
+                                            <p>ปีงบประมาณ <i class="fa fa-sort "></i></p>
+                                        </th>
+                                        <th onclick="sortTable(1,'approval_assistant_table','')">
+                                            <p>ประเภทใบอนุญาต <i class="fa fa-sort "></i></p>
+                                        </th>
+                                        <th onclick="sortTable(2,'approval_assistant_table','')">
+                                            <p>เลขที่ <i class="fa fa-sort "></i></p>
+                                        </th>
+                                        <th onclick="sortTable(3,'approval_assistant_table','date')">
+                                            <p>วันที่หมดอายุ <i class="fa fa-sort "></i></p>
+                                        </th>
+                                        <th onclick="sortTable(4,'approval_assistant_table','')">
+                                            <p>เจ้าของใบอนุญาต <i class="fa fa-sort "></i></p>
+                                        </th>
+                                        <th onclick="sortTable(5,'approval_assistant_table','dateExp')">
+                                            <p>สถานะ <i class="fa fa-sort "></i></p>
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- โอน -->
+                <div id="transfer" class="tabcontent">
                     <div style="font-size: 1.7vh;">
-                        <table id="requestTable" class="table cursor-pointer table-hover tableresult">
+                        <br>
+                        <a>ประวัติใบอนุญาต</a>
+                        <br><br>
+                        <table id="transfer_table" class="table cursor-pointer table-hover tableresult">
                             <thead>
-                                <tr class=""
-                                    style="height:auto; background-color: rgba(40, 131, 250, 0.876); color: rgb(255, 255, 255);">
-                                    <th onclick="sortTable(0,'requestTable','')">
+                                <tr class="is-color">
+                                    <th onclick="sortTable(0,'transfer_table','')">
                                         <p>ปีงบประมาณ <i class="fa fa-sort "></i></p>
                                     </th>
-                                    <th onclick="sortTable(1,'requestTable'),''">
+                                    <th onclick="sortTable(1,'transfer_table','')">
                                         <p>ประเภทใบอนุญาต <i class="fa fa-sort "></i></p>
                                     </th>
-                                    <th onclick="sortTable(2,'requestTable'),''">
-                                        <p>เล่ม <i class="fa fa-sort "></i>
+                                    <th onclick="sortTable(2,'transfer_table','')">
+                                        <p>เลขที่ <i class="fa fa-sort "></i>
                                         </p>
                                     </th>
-                                    <th onclick="sortTable(4,'requestTable'),'date'">
-                                        <p>เลขที่ <i class="fa fa-sort "></i></p>
+                                    <th onclick="sortTable(3,'transfer_table','date')">
+                                        <p>วันที่เริ่ม <i class="fa fa-sort "></i></p>
                                     </th>
-                                    <th onclick="sortTable(3,'requestTable'),''">
+                                    <th onclick="sortTable(4,'transfer_table','date')">
                                         <p>วันที่หมดอายุ <i class="fa fa-sort "></i></p>
                                     </th>
-                                    <th onclick="sortTable(3,'requestTable'),''">
-                                        <p>เจ้าของสถานประกอบการ <i class="fa fa-sort "></i></p>
-                                    </th>
-                                    <th onclick="sortTable(4,'requestTable'),'date'">
+                                    <th onclick="sortTable(5,'transfer_table','dateExp')">
                                         <p>สถานะ <i class="fa fa-sort "></i></p>
                                     </th>
                                 </tr>
                             </thead>
+
                         </table>
                     </div>
                 </div>
-            </div>
-        </a>
+                <!-- หมดอายุ -->
+                <div id="expire" class="tabcontent">
+                    <div style="font-size: 1.7vh;">
+                        <br>
+                        <a>ประวัติใบอนุญาต</a>
+                        <br><br>
+                        <table id="date_exp_table" class="table cursor-pointer table-hover tableresult">
+                            <thead>
+                                <tr class="is-color">
+                                    <th onclick="sortTable(0,'date_exp_table','')">
+                                        <p>ปีงบประมาณ <i class="fa fa-sort "></i></p>
+                                    </th>
+                                    <th onclick="sortTable(1,'date_exp_table','')">
+                                        <p>ประเภทใบอนุญาต <i class="fa fa-sort "></i></p>
+                                    </th>
+                                    <th onclick="sortTable(2,'date_exp_table','')">
+                                        <p>เลขที่ <i class="fa fa-sort "></i>
+                                        </p>
+                                    </th>
+                                    <th onclick="sortTable(3,'date_exp_table','date')">
+                                        <p>วันที่เริ่ม <i class="fa fa-sort "></i></p>
+                                    </th>
+                                    <th onclick="sortTable(4,'date_exp_table','date')">
+                                        <p>วันที่หมดอายุ <i class="fa fa-sort "></i></p>
+                                    </th>
+                                    <th onclick="sortTable(5,'date_exp_table','dateExp')">
+                                        <p>สถานะ <i class="fa fa-sort "></i></p>
+                                    </th>
+                                </tr>
+                            </thead>
+
+                        </table>
+                        <br>
+                        <a>ประวัติผู้ช่วย</a>
+                        <br><br>
+                        <div style="font-size: 1.7vh;">
+                            <table id="expire_assistant_table" class="table cursor-pointer table-hover tableresult">
+                                <thead>
+                                    <tr class=""
+                                        style="height:auto; background-color: rgba(40, 131, 250, 0.876); color: rgb(255, 255, 255);">
+                                        <th onclick="sortTable(0,'expire_assistant_table','')">
+                                            <p>ปีงบประมาณ <i class="fa fa-sort "></i></p>
+                                        </th>
+                                        <th onclick="sortTable(1,'expire_assistant_table','')">
+                                            <p>ประเภทใบอนุญาต <i class="fa fa-sort "></i></p>
+                                        </th>
+                                        <th onclick="sortTable(2,'expire_assistant_table','date')">
+                                            <p>เลขที่ <i class="fa fa-sort "></i></p>
+                                        </th>
+                                        <th onclick="sortTable(3,'expire_assistant_table','')">
+                                            <p>วันที่หมดอายุ <i class="fa fa-sort "></i></p>
+                                        </th>
+                                        <th onclick="sortTable(4,'expire_assistant_table','')">
+                                            <p>เจ้าของใบอนุญาต <i class="fa fa-sort "></i></p>
+                                        </th>
+                                        <th onclick="sortTable(5,'expire_assistant_table','date')">
+                                            <p>สถานะ <i class="fa fa-sort "></i></p>
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- รออนุมัติ -->
+                <div id="wait" class="tabcontent">
+                    <div style="font-size: 1.7vh;">
+                        <br>
+                        <a>ประวัติใบอนุญาต</a>
+                        <br><br>
+                        <table id="wait_table" class="table cursor-pointer table-hover tableresult">
+                            <thead>
+                                <tr class="is-color">
+                                    <th onclick="sortTable(0,'wait_table','')">
+                                        <p>ปีงบประมาณ <i class="fa fa-sort "></i></p>
+                                    </th>
+                                    <th onclick="sortTable(1,'wait_table','')">
+                                        <p>ประเภทใบอนุญาต <i class="fa fa-sort "></i></p>
+                                    </th>
+                                    <th onclick="sortTable(2,'wait_table','')">
+                                        <p>เลขที่ <i class="fa fa-sort "></i>
+                                        </p>
+                                    </th>
+                                    <th onclick="sortTable(3,'wait_table','date')">
+                                        <p>วันที่เริ่ม <i class="fa fa-sort "></i></p>
+                                    </th>
+                                    <th onclick="sortTable(4,'wait_table','date')">
+                                        <p>วันที่หมดอายุ <i class="fa fa-sort "></i></p>
+                                    </th>
+                                    <th onclick="sortTable(5,'wait_table','dateExp')">
+                                        <p>สถานะ <i class="fa fa-sort "></i></p>
+                                    </th>
+                                </tr>
+                            </thead>
+
+                        </table>
+                        <br>
+                        <a>ประวัติผู้ช่วย</a>
+                        <br><br>
+                        <div style="font-size: 1.7vh;">
+                            <table id="wait_assistant_table" class="table cursor-pointer table-hover tableresult">
+                                <thead>
+                                    <tr class=""
+                                        style="height:auto; background-color: rgba(40, 131, 250, 0.876); color: rgb(255, 255, 255);">
+                                        <th onclick="sortTable(0,'wait_assistant_table','')">
+                                            <p>ปีงบประมาณ <i class="fa fa-sort "></i></p>
+                                        </th>
+                                        <th onclick="sortTable(1,'wait_assistant_table','')">
+                                            <p>ประเภทใบอนุญาต <i class="fa fa-sort "></i></p>
+                                        </th>
+                                        <th onclick="sortTable(2,'wait_assistant_table','date')">
+                                            <p>เลขที่ <i class="fa fa-sort "></i></p>
+                                        </th>
+                                        <th onclick="sortTable(3,'wait_assistant_table','')">
+                                            <p>วันที่หมดอายุ <i class="fa fa-sort "></i></p>
+                                        </th>
+                                        <th onclick="sortTable(4,'wait_assistant_table','')">
+                                            <p>เจ้าของใบอนุญาต <i class="fa fa-sort "></i></p>
+                                        </th>
+                                        <th onclick="sortTable(5,'wait_assistant_table','date')">
+                                            <p>สถานะ <i class="fa fa-sort "></i></p>
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- ยกเลิก -->
+                <div id="cancel" class="tabcontent">
+                    <div style="font-size: 1.7vh;">
+                        <br>
+                        <a>ประวัติใบอนุญาต</a>
+                        <br><br>
+                        <table id="cancel_table" class="table cursor-pointer table-hover tableresult">
+                            <thead>
+                                <tr class="is-color">
+                                    <th onclick="sortTable(0,'cancel_table','')">
+                                        <p>ปีงบประมาณ <i class="fa fa-sort "></i></p>
+                                    </th>
+                                    <th onclick="sortTable(1,'cancel_table','')">
+                                        <p>ประเภทใบอนุญาต <i class="fa fa-sort "></i></p>
+                                    </th>
+                                    <th onclick="sortTable(2,'cancel_table','')">
+                                        <p>เลขที่ <i class="fa fa-sort "></i>
+                                        </p>
+                                    </th>
+                                    <th onclick="sortTable(3,'cancel_table','date')">
+                                        <p>วันที่เริ่ม <i class="fa fa-sort "></i></p>
+                                    </th>
+                                    <th onclick="sortTable(4,'cancel_table','date')">
+                                        <p>วันที่หมดอายุ <i class="fa fa-sort "></i></p>
+                                    </th>
+                                    <th onclick="sortTable(5,'cancel_table','dateExp')">
+                                        <p>สถานะ <i class="fa fa-sort "></i></p>
+                                    </th>
+                                </tr>
+                            </thead>
+
+                        </table>
+                        <br>
+
+                        <a>ประวัติผู้ช่วย</a>
+                        <br><br>
+                        <div style="font-size: 1.7vh;">
+                            <table id="cancel_assistant_table" class="table cursor-pointer table-hover tableresult">
+                                <thead>
+                                    <tr class=""
+                                        style="height:auto; background-color: rgba(40, 131, 250, 0.876); color: rgb(255, 255, 255);">
+                                        <th onclick="sortTable(0,'cancel_assistant_table')">
+                                            <p>ปีงบประมาณ <i class="fa fa-sort "></i></p>
+                                        </th>
+                                        <th onclick="sortTable(1,'cancel_assistant_table')">
+                                            <p>ประเภทใบอนุญาต <i class="fa fa-sort "></i></p>
+                                        </th>
+                                        <th onclick="sortTable(2,'cancel_assistant_table','date')">
+                                            <p>เลขที่ <i class="fa fa-sort "></i></p>
+                                        </th>
+                                        <th onclick="sortTable(3,'cancel_assistant_table')">
+                                            <p>วันที่หมดอายุ <i class="fa fa-sort "></i></p>
+                                        </th>
+                                        <th onclick="sortTable(4,'cancel_assistant_table')">
+                                            <p>เจ้าของใบอนุญาต <i class="fa fa-sort "></i></p>
+                                        </th>
+                                        <th onclick="sortTable(5,'cancel_assistant_table','date')">
+                                            <p>สถานะ <i class="fa fa-sort "></i></p>
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </a>
         </div>
         </a>
         </a>

@@ -76,7 +76,7 @@ function checkFormatMoneyId(value) {
 // setDataView
 function setDataView() {
     document.getElementById('documentName2').disabled = true
-    
+    document.getElementById('print_new_doc').style.display = 'none'
     createImage(imageDisplayFormDatabase)
     console.log('requestData.status ' + requestData.status)
     if (requestData.status === 'approval' || requestData.status === 'active') {
@@ -133,6 +133,7 @@ function setDataView() {
         document.getElementById('documentName2').innerHTML = ''
         displayUserMoney()
 
+        document.getElementById('print_new_doc').style.display = ''
         
     }
 

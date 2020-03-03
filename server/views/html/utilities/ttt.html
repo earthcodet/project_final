@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>บันทึกเรื่องร้องเรียน</title>
+    <title>บันทึกคำร้อง</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -42,6 +42,7 @@
         <a id="deleteMenu" class="exit disableds"><i class="fa fa-times">
                 <span>ยกเลิก</span></i></a>
         <!-- <a><i class="fa fa-search"> ค้นหา</i></a> -->
+        <a id='searchMenu' class="exit" onclick="searchOparator()"><i class="fa fa-search"> <span>ค้นหา</span></i></a>
         <a id="exitMenu" onclick="exitPage()" class="exit" style="float: right;width: 17%;"><i
                 class="fa fa-sign-out-alt">
                 <span>ออกจากระบบ</span></i></a>
@@ -87,7 +88,7 @@
         <button class="dropdown-btn select-active"><b>งานร้องเรียน </b><i class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
             <a href="petition.html" class='dropdown-active '>- บันทึกเรื่องร้องเรียน</a>
-            <!-- <a href="#">- บันทึกคำร้อง</a> -->
+            <a href="#">- บันทึกคำร้อง</a>
         </div>
         <button class="dropdown-btn" id="adminna" style="display: none;"><b>ข้อมูลระบบ </b><i
                 class="fa fa-caret-down"></i></button>
@@ -123,15 +124,11 @@
                     <input type="text" style="margin-left: 1vw;">
                     <a style="margin-left: 1vw;">วันที่ยืนคำร้อง : </a>
                     <input type="text" id="datepicker2" style="margin-left: 1vw;">
-                    <br>
-                    <a style="margin-left: 5vw;">บุคคลที่ต้องการร้องเรียน : </a>
-                    <input type="text" id="" style="margin-left: 1vw;width: 20vw;" disabled value="นาย ประปอง ปะแป้ง">
-                    <button type="button" class="fa fa-search" style="margin-left: 1vw;">
-                    </button>
+                    
                     <br>
                     <a style="margin-left: 5vw;">ประเภทเรื่องร้องเรียน : </a>
                     <input type="radio" name="petition" style="margin-left: 3vw;">
-                    <a> สุขลักษณะด้านอาหาร </a>    
+                    <a> สุขลักษณะด้านอาหาร </a>
                     <input type="radio" name="petition" style="margin-left: 3vw;">
                     <a> กลิ่น </a>
                     <input type="radio" name="petition" style="margin-left: 3vw;">
@@ -149,6 +146,8 @@
                     <input type="radio" name="petition" style="margin-left: 1.9vw;">
                     <a> อื่นๆ </a>
                     <input type="text" style="margin-left: 3vw; width: 35%;">
+                    <br>
+                    <a style="margin-left: 5vw;">เรื่องที่ต้องการร้องเรียน</a> <input type="text" style="margin-left: 1vw;width: 35vw;">
                     <br>
                     <a style="margin-left: 5vw;">การดำเนินการ : </a>
                     <input type="radio" name="petition" style="margin-left: 1vw;">
