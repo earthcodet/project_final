@@ -210,12 +210,16 @@
                 <input type="text" id="datepicker3" placeholder="" style="width: 11vw;" maxlength="10" readonly
                     onchange="document.getElementById('datepicker3').classList.remove('alertInput')">
 
-                <a id='phoneTopic' style="margin-left: 0.1vw;">โทรศัพท์ <font color="red">*</font> :</a>
-                <input type="text" style="width: 10.8vw" id="phone"
-                    oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
-                    maxlength="10" onchange="document.getElementById('phone').classList.remove('alertInput')"
-                    onkeyup="checkPhone(this.value,'phone')">
-                <a style="margin-left: 1.3vw;">โทรสาร :</a>
+                    <a id='phoneTopic' style="margin-left: 0.1vw;">โทรศัพท์ <font color="red">*</font> :</a>
+                    <input type="text" style="width: 6.5vw" id="phone"
+                        oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
+                        maxlength="10" onchange="document.getElementById('phone').classList.remove('alertInput')"
+                        onkeyup="checkPhone(this.value,'phone','phone_more')">
+                    <a style="margin-left: .1vw;">ต่อ</a>
+                    <input type="text" id="phone_more" style="width: 4vw"
+                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="4">
+                   
+                <a style="margin-left: .2vw;">โทรสาร :</a>
                 <input type="text" id="fax" style="width: 11vw"
                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="9"
                     placeholder="-">
@@ -271,12 +275,17 @@
                     <br>
                     <!-- row4 -->
                     <a style="margin-left: 3.05vw;">โทรศัพท์ <font color="red">*</font> :</a>
-                    <input type="text" style="width: 11vw" id="company-phone"
+                    <input type="text" style="width: 6.5vw" id="company-phone"
                         oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
                         maxlength="10"
                         onchange="document.getElementById('company-phone').classList.remove('alertInput')"
-                        onkeyup="checkPhone(this.value,'company-phone')">
-                    <a style="margin-left: 1.2vw;">โทรสาร :</a>
+                        onkeyup="checkPhone(this.value,'company-phone', 'company-phone-more')"
+                        >
+                        <a style="margin-left: .5vw;">ต่อ :</a>
+                    <input type="text" id="company-phone-more" style="width: 4vw"
+                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                        maxlength="4">
+                    <a style="margin-left: .2vw;">โทรสาร :</a>
                     <input type="text" id="company-fax" style="width: 11vw"
                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                         maxlength="9" placeholder="-">

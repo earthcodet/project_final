@@ -164,7 +164,25 @@ function setDataUI(data) {
         document.getElementById('datepicker1').value = data.PERSONAL_CARD_ISSUED
         document.getElementById('datepicker2').value = data.PERSONAL_CARD_EXPIRE === undefined || data.PERSONAL_CARD_EXPIRE === null ? '' : data.PERSONAL_CARD_EXPIRE
         data.PERSONAL_CARD_EXPIRE === undefined ? radioLife() : ''
-        document.getElementById('phone').value = data.PERSONAL_PHONE
+        data.PERSONAL_CARD_EXPIRE === undefined ? radioLife() : ''
+        let phone_t = data.PERSONAL_PHONE.split('/')
+        document.getElementById('phone_more').disabled = false
+        if (phone_t[1] != '') {
+            document.getElementById('phone').value = phone_t[0]
+            // document.getElementById('phone_more').disabled = false
+            document.getElementById('phone_more').value = phone_t[1]
+        } else {
+            document.getElementById('phone').value = phone_t[0]
+            // document.getElementById('phone_more').disabled = true
+            document.getElementById('phone_more').value = phone_t[1]
+        }
+        console.log(`phone_t`)
+        console.log(phone_t)
+        if(phone_t[0] === '-') {
+            document.getElementById('phone_more').disabled = true
+        }else{
+            document.getElementById('phone_more').disabled = false
+        }
         document.getElementById('fax').value = data.PERSONAL_FAX === undefined || data.PERSONAL_FAX === null ? '' : data.PERSONAL_FAX
         document.getElementById('last-update').value = data.PERSONAL_UPDATE
 
@@ -190,7 +208,24 @@ function setDataUI(data) {
         document.getElementById('company-nameUser').value = data.PERSONAL_NAME
         document.getElementById('company-id').value = data.PERSONAL_PERSONAL_ID
         document.getElementById('datepicker4').value = data.PERSONAL_CARD_ISSUED
-        document.getElementById('company-phone').value = data.PERSONAL_PHONE
+        let phone_t = data.PERSONAL_PHONE.split('/')
+        console.log(`phone_t`)
+        console.log(phone_t)
+        document.getElementById('company-phone-more').disabled = false
+        if (phone_t[1] != '') {
+            document.getElementById('company-phone').value = phone_t[0]
+            document.getElementById('company-phone-more').disabled = false
+            document.getElementById('company-phone-more').value = phone_t[1]
+        } else {
+            document.getElementById('company-phone').value = phone_t[0]
+            document.getElementById('company-phone-more').disabled = true
+            document.getElementById('company-phone-more').value = phone_t[1]
+        }
+        if(phone_t[0] === '-') {
+            document.getElementById('company-phone-more').disabled = true
+        }else{
+            document.getElementById('company-phone-more').disabled = false
+        }
         document.getElementById('company-fax').value = data.PERSONAL_FAX === undefined || data.PERSONAL_FAX === null ? '' : data.PERSONAL_FAX
 
         document.getElementById('company-homeId').value = data.AID.ADDRESS_HOME_NUMBER
@@ -623,7 +658,6 @@ function createTableRequest(data) {
     console.log(tblBody)
     tbl.appendChild(tblBody);
 }
-
 function getTableIdTableByStatus(status) {
     switch (status) {
         case 'wait':
@@ -678,7 +712,6 @@ function checkNullReturn(item) {
     let temp = item === null ? '' : item
     return temp
 }
-
 function openPageReport() {
     window.open('../utilities/petition.html?id=' + inPersonal.id, '_blank');
 }
