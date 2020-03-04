@@ -8,6 +8,7 @@ let newAdd = false
 let base64ImageSelect = ''
 let imageSelectype = ''
 let textChange = ''
+let  _deleteImage = false
 let iconAlert = ''
 let inAddress = {
     id: "",
@@ -45,6 +46,8 @@ let inImage = {
 };
 
 function resetParameter() {
+    base64ImageSelect =''
+    _deleteImage = false
     arrInsert = [];
     inPersonal = {
         id: "",
@@ -142,10 +145,12 @@ function setDataUI(data) {
         if (data.image != undefined) {
             console.log(data.image)
             let img = document.getElementById('operatorImage')
-            if (data.image.IMAGE_DATA != null && data.image.IMAGE_DATA != undefined) {
+            if (data.image.IMAGE_DATA != null && data.image.IMAGE_DATA != undefined && data.image.IMAGE_DATA != '') {
                 img.src = `data:image/${data.image.IMAGE_TYPE};base64,` + data.image.IMAGE_DATA
+                base64ImageSelect = data.image.IMAGE_DATA
             } else {
                 img.src = `../../img/userProfile.png`
+                base64ImageSelect = ''
             }
             inImage.name = data.PERSONAL_ID
             inImage.type = data.image.IMAGE_TYPE
@@ -327,7 +332,7 @@ function preInsert() {
                         console.log(`preinsert === ${_isImageChange}`)
                         console.log(`_isImageChange ${_isImageChange} === false (${_isImageChange === false}) 
                         && newAdd ${newAdd} === false (${newAdd === false})`)
-                        if (_isImageChange === false && newAdd === false) {
+                        if (_isImageChange === false && newAdd === false && fileImage === null) {
                             inImage.name = 'NO_UPlOAD'
                             arrInsert.push(inImage);
                         } else {
@@ -608,6 +613,7 @@ function deleteImageOne() {
     fileImage = null;
     inImage.type = null;
     _isImageChange = true;
+    _deleteImage = true
     console.log(`deleteImageOne === ${_isImageChange}`)
     inImage.data = null
     document.getElementById("uploadFile").value = "";
@@ -620,6 +626,7 @@ function buttonImage() {
 function insertToDatabase() {
     return new Promise((resolve, reject) => {
         let tempimage = arrInsert[2].data
+        arrInsert[2].data = null
         console.log("insertToDatabase");
         var formData = new FormData();
         formData.append("image", fileImage);

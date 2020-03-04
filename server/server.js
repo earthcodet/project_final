@@ -147,9 +147,9 @@ app.get('/get/requestType/:type', (req, res) => {
   })
 })
 app.post('/insert/personal', (req, res) => {
-  console.log(req.body.personal)
-  var obj = JSON.parse(req.body.personal);
-  console.log(req.files === null)
+  try {
+    var obj = JSON.parse(req.body.personal);
+    console.log(req.files === null)
   console.log(req.files === undefined)
   if (req.files != null) {
     var datafile = req.files.image.data
@@ -161,6 +161,12 @@ app.post('/insert/personal', (req, res) => {
     console.log(`server : function InsertPersonalStep return = ${data}`)
     res.json(data)
   })
+  }
+  catch(error) {
+    console.error(error);
+  }
+  
+  
 })
 app.post('/update/status/delete', (req, res) => {
   webService.updateStatusDelete(req.body.personal, req.session.username).then((data) => {

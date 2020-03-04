@@ -110,6 +110,7 @@ function insertPage() {
 
                             tempData.PERSONAL_ID = insert.pid
                             tempData.AID.ADDRESS_ID = insert.aid
+                            console.log(inImage)
                             if (inPersonal.type === 'บุคคลธรรมดา' && inImage.name != 'NO_UPlOAD') {
                                 let imageTemp = {
                                     'IMAGE_NAME': insert.pid,
@@ -118,15 +119,30 @@ function insertPage() {
                                 }
                                 tempData.image = imageTemp
                             }
+                            if(inPersonal.type === 'บุคคลธรรมดา' && inImage.name === 'NO_UPlOAD'){
+                                console.log(`insert.pid`)
+                                console.log(insert.pid)
+                                let imageTemp = {
+                                    'IMAGE_NAME': insert.pid === undefined ? inPersonal.id : insert.pid,
+                                    'IMAGE_TYPE': inImage.type,
+                                    'IMAGE_DATA': base64ImageSelect
+                                }
+                                inImage.name = insert.pid === undefined ? inPersonal.id : insert.pid
+                                tempData.image = imageTemp
+                            }
+                            arrInsert = []
+                            inImage.data = base64ImageSelect
+                            base64ImageSelect = ''
                             console.log(tempData)
                             console.log('insert // Update return')
                             console.log(insert)
                             console.log(insert.length)
+                            _deleteImage = false
                             if (insert.length != 0) {
                                 resolve();
                             }
                         })
-                    }, 1000);
+                    }, 100);
                 });
             }
         }).then((result) => {
@@ -260,7 +276,7 @@ function deletePage() {
                                 resolve();
                             }
                         })
-                    }, 1000);
+                    }, 100);
                 })
             }
         })
@@ -330,6 +346,14 @@ function deletePage() {
                         resetFunction()
                         setDataUI(tempData)
                         disableMenuAll()
+                        
+                        //  let imageTemp = {
+                        //             'IMAGE_NAME': inPersonal.id,
+                        //             'IMAGE_TYPE': inImage.type,
+                        //             'IMAGE_DATA': base64ImageSelect
+                        //         }
+                        //         tempData.image = imageTemp
+                        // console.log(imageTemp)
                         addNew = false
                         enableMenu('addMenu')
                         enableMenu('editMenu')
@@ -602,7 +626,7 @@ function restorePage() {
                             resolve();
                         }
                     })
-                }, 1000);
+                }, 100);
             })
         }
     }).then((result) => {
@@ -614,6 +638,7 @@ function restorePage() {
             });
             resetStyleIdDelete()
             deleteData = false
+            data = true
             disableMenuAll()
             enableMenu('addMenu')
             enableMenu('editMenu')
