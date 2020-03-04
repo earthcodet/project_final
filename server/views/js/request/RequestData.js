@@ -378,7 +378,10 @@ function resetRequestData() {
     totalFiles = []
     selectImageFile = 0
     maxImageFile = 8
-    document.getElementById('outputImage').innerHTML = ''
+    if(document.getElementById('outputImage') != undefined){
+      document.getElementById('outputImage').innerHTML = ''  
+    }
+    
 
     // use land 
     if (document.getElementById('notuseOtherPlace') != undefined) {

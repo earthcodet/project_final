@@ -78,7 +78,8 @@
             <a href="../utilities/petition.html">- บันทึกเรื่องร้องเรียน</a>
             <!-- <a href="#">- บันทึกคำร้อง</a> -->
         </div>
-        <button class="dropdown-btn" id="adminna" style="display: none;"><b>ข้อมูลระบบ </b><i class="fa fa-caret-down"></i></button>
+        <button class="dropdown-btn" id="adminna" style="display: none;"><b>ข้อมูลระบบ </b><i
+                class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
             <a href="#"></a>
         </div>
@@ -119,11 +120,12 @@
                             onchange="document.getElementById('typeReq').classList.remove('alertInput')">
                         <datalist id="brow">
                             <option value="" hidden>เลือก...</option>
-                            
+
                         </datalist>
                         </input></a>
                     <a>เขียนที่ :
-                        <input type="text" id="place" value="เทศบาลเมืองแสนสุข" style="width:16%;" disabled readonly></a>
+                        <input type="text" id="place" value="เทศบาลเมืองแสนสุข" style="width:16%;" disabled
+                            readonly></a>
                     <br>
 
                     <a style="margin-left: 1.4vw;">ข้าพเจ้า <font color="red">*</font> :
@@ -140,12 +142,12 @@
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                             maxlength="13" onkeyup="checkId(this.value, 'PERSON') 
                                     document.getElementById('id').classList.remove('alertInput')"></a>
-                    <a>อายุ  :
+                    <a>อายุ :
                         <input type="text" id="age" readonly
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                             maxlength="3" style="width: 7%;"
                             onchange="document.getElementById('age').classList.remove('alertInput')"></a>
-                    <a>สัญชาติ  :
+                    <a>สัญชาติ :
                         <input class="drop" list="nationality1" id="nationality" name="" style="width: 7%;" readonly
                             onkeyup="document.getElementById('nationality').classList.remove('alertInput')"
                             onchange="document.getElementById('nationality').classList.remove('alertInput')">
@@ -156,7 +158,7 @@
                             <option value="อเมริกัน"></option>
                         </datalist>
                         </input></a>
-                    <a>เชื้อชาติ  :
+                    <a>เชื้อชาติ :
                         <input list="nationality2" id="race" name="" style="width: 7%;" readonly
                             onkeyup="document.getElementById('race').classList.remove('alertInput')"
                             onchange="document.getElementById('race').classList.remove('alertInput')">
@@ -193,13 +195,17 @@
                         <select id="subdistrict" style="width: 13.5%;"
                             onchange="document.getElementById('subdistrict').classList.remove('alertInput')"></select></a>
                     <a>โทรศัพท์ <font color="red">*</font> :
-                        <input type="text" id="phone" style="width: 12%;"
-                        oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
+                        <input type="text" id="phone" style="width: 6.5vw"
+                            oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
                             maxlength="10" onchange="document.getElementById('phone').classList.remove('alertInput')"
-                            onkeyup="checkPhone(this.value,'phone')"></a>
+                            onkeyup="checkPhone(this.value,'phone','phone_more')"></a>
+                    <a style="margin-left: .1vw;">ต่อ</a>
+                    <input type="text" id="phone_more" style="width: 4vw"
+                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                        maxlength="4">
                     <a>โทรสาร :
                         <input type="text" id="fax"
-                        oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
+                            oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
                             maxlength="9" style="width: 13.2%;"></a>
                     <br>
                     <br>
@@ -244,10 +250,14 @@
                             onchange="document.getElementById('wSubdistrict').classList.remove('alertInput')"></a>
                     </select>
                     <a>โทรศัพท์ <font color="red">*</font> :
-                        <input type="text" id="wPhone" style="width: 12%;"
+                        <input type="text" id="wPhone" style="width: 6.5vw"
                             oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
                             maxlength="10" onchange="document.getElementById('wPhone').classList.remove('alertInput')"
-                            onkeyup="checkPhone(this.value,'wPhone')"></a>
+                            onkeyup="checkPhone(this.value,'wPhone','wPhone_more')"></a>
+                    <a style="margin-left: .1vw;">ต่อ</a>
+                    <input type="text" id="wPhone_more" style="width: 4vw"
+                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                        maxlength="4">
                     <a>โทรสาร :
                         <input type="text" id="wFax"
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
@@ -255,17 +265,16 @@
                     <br>
                     <br>
                     <a>ใบอนุญาตฉบับจริง</a>&ensp;
-                    <a>เลขที่ : RCPT - 
-                        <input type="text" id="bNum" style="width: 10%;" disabled 
-                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                        maxlength="10"
-                        onkeyup='checkFormatMoneyId(this.value)'></a>&ensp;
+                    <a>เลขที่ : RCPT -
+                        <input type="text" id="bNum" style="width: 10%;" disabled
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            maxlength="10" onkeyup='checkFormatMoneyId(this.value)'></a>&ensp;
                     <a>ออกให้เมื่อวันที่ :
-                        <input type="text" id="datepicker2" id="" style="width: 12%;" disabled ></a>
+                        <input type="text" id="datepicker2" id="" style="width: 12%;" disabled></a>
                     <a>ค่าธรรมเนียม :
-                        <input type="number" id="bFee" style="width: 12%;" value="0" disabled ></a>
+                        <input type="number" id="bFee" style="width: 12%;" value="0" disabled></a>
                     <a>ค่าปรับ :
-                        <input type="number" id="bFine" style="width: 12%;"value="0"  disabled ></a>
+                        <input type="number" id="bFine" style="width: 12%;" value="0" disabled></a>
 
                     <br>
                     <br>
@@ -293,14 +302,18 @@
                     <a>สถานะ</a>
                     <input id="reference_status" name="" style="width: 10%;" maxlength="30">
                     <a>เบอร์โทร</a>
-                    <input id="reference_phone" name="" style="width: 15%;" maxlength="10"
+                    <input id="reference_phone" name="" style="width: 6.5vw;" maxlength="10"
+                        oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
+                        onkeyup="checkPhone(this.value, 'reference_phone','reference_phone_more')">
+                    <a style="margin-left: .1vw;">ต่อ</a>
+                    <input type="text" id="reference_phone_more" style="width: 4vw"
                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                        onkeyup="checkPhone(this.value, 'reference_phone')">
+                        maxlength="4">
                     <br>
                     <br>
                 </div>
                 <br>
-               
+
                 <!-- พิมพ์ -->
                 <div class="box">
                     <br>
@@ -311,24 +324,24 @@
                     <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <a>2. </a><input type="text" id='con_no2' style="width: 50%;" maxlength="280">
                     <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a>3. </a><input type="text" id='con_no3'style="width: 50%;" maxlength="280">
+                    <a>3. </a><input type="text" id='con_no3' style="width: 50%;" maxlength="280">
                     <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <a>4. </a><input type="text" id='con_no4' style="width: 50%;" maxlength="280">
                     <br><br>
                 </div>
                 <br>
-               <!-- วันที่หมดอายุ -->
-               <div class="box">
-                <p class="font">&nbsp;&nbsp;&nbsp;&nbsp;ใบอนญาตฉบับนี้ออกให้เมื่อวันที่ <input
-                    type="text" id="request_date_issued" disabled readonly>
-                    
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ใบอนญาตฉบับนี้สิ้นอายุวันที่
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="request_date_exp" disabled readonly>
-            </p>
-            </div>
+                <!-- วันที่หมดอายุ -->
+                <div class="box">
+                    <p class="font">&nbsp;&nbsp;&nbsp;&nbsp;ใบอนญาตฉบับนี้ออกให้เมื่อวันที่ <input type="text"
+                            id="request_date_issued" disabled readonly>
+
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ใบอนญาตฉบับนี้สิ้นอายุวันที่
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="request_date_exp" disabled readonly>
+                    </p>
+                </div>
                 <br>
-                 <!-- ข้อมูลเจ้าของ -->
-                 <div class="box" id="Demo">
+                <!-- ข้อมูลเจ้าของ -->
+                <div class="box" id="Demo">
                     <h3 style="font-size: 2.8vh;">ใช้อาคารสถานที่ประกอบการของผู้อื่น <font color="red">*</font>
                     </h3>
                     <input type="radio" name="owner" id="useOtherPlace" onClick="show_owner(this.value);" value="1"
@@ -350,12 +363,15 @@
                         <a>นามสกุล <font color="red">*</font> :
                             <input type="text" id="ownSurname" style="width: 13%;"></a>
                         <a>วันเกิด :
-                            <input type="text" id="datepicker9" style="width: 10%;"> </a>:
+                            <input type="text" id="datepicker9" style="width: 10%;"> </a>
                         <a>โทรศัพท์ <font color="red">*</font> :
-                            <input type="text" id="ownPhone" style="width: 13%;"
+                            <input type="text" id="ownPhone" style="width: 6.5vw"
                                 oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
-                                onkeyup="checkPhone(this.value,'ownPhone')"
-                                maxlength="10"></a>
+                                onkeyup="checkPhone(this.value,'ownPhone','ownPhone_more')" maxlength="10"></a>
+                        <a style="margin-left: .1vw;">ต่อ</a>
+                        <input type="text" id="ownPhone_more" style="width: 4vw"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            maxlength="4">
                         <br>
                         <a style="margin-left: 5vw;">อยู่บ้านเลขที่ <font color="red">*</font> :
                             <input type="text" id="ownHomeId" style="width: 7%;"></a style="margin-left: 7.4vw;">
@@ -378,7 +394,8 @@
                         <br>
                         <input style="margin-left:9vw;" type="file" id="uploadFilePdf" onchange="pdfFile(event)"
                             accept="application/pdf">
-                            <i id='status_upload_file'  class='fa fa-check' style="margin-left: 1vw;display: none;"> มีไฟล์อัพโหลดแล้ว</i>
+                        <i id='status_upload_file' class='fa fa-check' style="margin-left: 1vw;display: none;">
+                            มีไฟล์อัพโหลดแล้ว</i>
                     </div>
                     <br><br>
                 </div><br>
@@ -406,11 +423,13 @@
                             <h5><i class="fa fa-upload"></i>
                                 อัพโหลดภาพ</h5>
                         </button>
-                        <button id='print_new_doc' type="button" class="button" style='margin-left: 5vw; display: none;' onclick="printDocument()">
+                        <button id='print_new_doc' type="button" class="button" style='margin-left: 5vw; display: none;'
+                            onclick="printDocument()">
                             <h5><i class="fa fa-print"></i>
                                 พิมพ์ใบอนุญาติ</h5>
                         </button>
-                        <button id='print_renew_doc' type="button" class="button" style='margin-left: 5vw; display: none;' onclick="printDocumentRenew()">
+                        <button id='print_renew_doc' type="button" class="button"
+                            style='margin-left: 5vw; display: none;' onclick="printDocumentRenew()">
                             <h5><i class="fa fa-print"></i>
                                 พิมพ์ใบขอต่ออนุญาติ</h5>
                         </button>
@@ -460,15 +479,15 @@
                                 <br>
                                 (ลงชื่อ)
                                 <!-- <input type="text" id="documentName" /> -->
-                                <input  id="documentName" name="" disabled readonly>
+                                <input id="documentName" name="" disabled readonly>
                                 </input>
                                 ผู้ขอรับใบอนุญาต
                             </a>
                         </div>
                         <div class="col" style="width: 33.33%;">
                             <a>
-                                ลงชื่อ  
-                                <select id="documentName2" name=""  style="width: 18vw;" disabled></select>
+                                ลงชื่อ
+                                <select id="documentName2" name="" style="width: 18vw;" disabled></select>
                                 <br>
                                 <p class="text-center">ผู้รับเงิน</p>
                             </a>

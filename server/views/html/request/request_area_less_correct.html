@@ -183,7 +183,12 @@
                         <a>โทรศัพท์ <font color="red">*</font> :
                             <input type="text" id="phone"
                                 oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
-                                maxlength="10" style="width: 12%;"></a>
+                                maxlength="10" style="width: 6.5vw;"
+                                onkeyup="checkPhone(this.value,'phone','phone_more')"></a>
+                        <a style="margin-left: .1vw;">ต่อ</a>
+                        <input type="text" id="phone_more" style="width: 4vw"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            maxlength="4">
                         <a>โทรสาร :
                             <input type="text" id="fax"
                                 oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
@@ -228,9 +233,13 @@
                         <a>โทรศัพท์ <font color="red">*</font> :
                             <input type="text" id="wPhone"
                                 oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
-                                maxlength="10" style="width: 12%;"
+                                maxlength="10" style="width: 6.5vw;"
                                 onchange="document.getElementById('wPhone').classList.remove('alertInput')"
-                                onkeyup="checkPhone(this.value,'wPhone')"></a>
+                                onkeyup="checkPhone(this.value,'wPhone','wPhone_more')"></a>
+                        <a style="margin-left: .1vw;">ต่อ</a>
+                        <input type="text" id="wPhone_more" style="width: 4vw"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            maxlength="4">
                         <a>โทรสาร :
                             <input type="text" id="wFax"
                                 oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
@@ -238,51 +247,47 @@
                         <br>
                         <br>
                         <a>ใบอนุญาตฉบับจริง ปีที่ 1</a>
-                        <a>เลขที่ : RCPT - 
-                            <input type="text" id="bNum" style="width: 10%;" disabled 
-                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                            maxlength="10"
-                            onkeyup='checkFormatMoneyId(this.value)'></a>&ensp;
+                        <a>เลขที่ : RCPT -
+                            <input type="text" id="bNum" style="width: 10%;" disabled
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                maxlength="10" onkeyup='checkFormatMoneyId(this.value)'></a>&ensp;
                         <a>ออกให้เมื่อวันที่ :
-                            <input type="text" id="datepicker2" id="" style="width: 12%;" disabled 
-                           </a>
-                        <a>ค่าธรรมเนียม :
-                            <input type="number" id="bFee" style="width: 12%;" value="0" disabled ></a>
-                        <a>ค่าปรับ :
-                            <input type="number" id="bFine" style="width: 12%;" value="0" disabled ></a>
-    
-                        <br>
-                        <br>
-                        <a>ใบอนุญาตฉบับจริง ปีที่ 2</a>
-                        <a>เลขที่ : RCPT - 
-                            <input type="text" id="bNumY2" style="width: 10%;" disabled 
-                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                            maxlength="10"
-                            onkeyup='checkFormatMoneyId(this.value)'></a>&ensp;
-                        <a>ออกให้เมื่อวันที่ :
-                            <input type="text" id="datepicker10" id="" style="width: 12%;" disabled ></a>
-                        <a>ค่าธรรมเนียม :
-                            <input type="number" id="bFeeY2" style="width: 12%;" value="0" disabled ></a>
-                        <a>ค่าปรับ :
-                            <input type="number" id="bFineY2" style="width: 12%;" value="0" disabled ></a>
-    
-                        <br>
-                        <br>
-                        <a>ใบอนุญาตฉบับจริง ปีที่ 3</a>
-                        <a>เลขที่ : RCPT - 
-                            <input type="text" id="bNumY3" style="width: 10%;" disabled 
-                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                            maxlength="10"
-                            onkeyup='checkFormatMoneyId(this.value)'></a>&ensp;
-                        <a>ออกให้เมื่อวันที่ :
-                            <input type="text" id="datepicker11" id="" style="width: 12%;" disabled ></a>
-                        <a>ค่าธรรมเนียม :
-                            <input type="number" id="bFeeY3" style="width: 12%;" value="0" disabled ></a>
-                        <a>ค่าปรับ :
-                            <input type="number" id="bFineY3" style="width: 12%;" value="0" disabled ></a>
-    
-                        <br>
-                        <br>
+                            <input type="text" id="datepicker2" id="" style="width: 12%;" disabled </a>
+                            <a>ค่าธรรมเนียม :
+                                <input type="number" id="bFee" style="width: 12%;" value="0" disabled></a>
+                            <a>ค่าปรับ :
+                                <input type="number" id="bFine" style="width: 12%;" value="0" disabled></a>
+
+                            <br>
+                            <br>
+                            <a>ใบอนุญาตฉบับจริง ปีที่ 2</a>
+                            <a>เลขที่ : RCPT -
+                                <input type="text" id="bNumY2" style="width: 10%;" disabled
+                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                    maxlength="10" onkeyup='checkFormatMoneyId(this.value)'></a>&ensp;
+                            <a>ออกให้เมื่อวันที่ :
+                                <input type="text" id="datepicker10" id="" style="width: 12%;" disabled></a>
+                            <a>ค่าธรรมเนียม :
+                                <input type="number" id="bFeeY2" style="width: 12%;" value="0" disabled></a>
+                            <a>ค่าปรับ :
+                                <input type="number" id="bFineY2" style="width: 12%;" value="0" disabled></a>
+
+                            <br>
+                            <br>
+                            <a>ใบอนุญาตฉบับจริง ปีที่ 3</a>
+                            <a>เลขที่ : RCPT -
+                                <input type="text" id="bNumY3" style="width: 10%;" disabled
+                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                    maxlength="10" onkeyup='checkFormatMoneyId(this.value)'></a>&ensp;
+                            <a>ออกให้เมื่อวันที่ :
+                                <input type="text" id="datepicker11" id="" style="width: 12%;" disabled></a>
+                            <a>ค่าธรรมเนียม :
+                                <input type="number" id="bFeeY3" style="width: 12%;" value="0" disabled></a>
+                            <a>ค่าปรับ :
+                                <input type="number" id="bFineY3" style="width: 12%;" value="0" disabled></a>
+
+                            <br>
+                            <br>
                 </div>
                 <br>
                 <!-- บุคคลอ้างอิง -->
@@ -307,9 +312,13 @@
                     <a>สถานะ</a>
                     <input id="reference_status" name="" style="width: 10%;" maxlength="30">
                     <a>เบอร์โทร</a>
-                    <input id="reference_phone" name="" style="width: 15%;" maxlength="10"
+                    <input id="reference_phone" name="" style="width: 6.5vw;" maxlength="10"
+                        oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
+                        onkeyup="checkPhone(this.value, 'reference_phone','reference_phone_more')">
+                    <a style="margin-left: .1vw;">ต่อ</a>
+                    <input type="text" id="reference_phone_more" style="width: 4vw"
                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                        onkeyup="checkPhone(this.value, 'reference_phone')">
+                        maxlength="4">
                     <br>
                     <br>
                 </div>
@@ -364,11 +373,15 @@
                         <a>นามสกุล <font color="red">*</font> :
                             <input type="text" id="ownSurname" style="width: 13%;"></a>
                         <a>วันเกิด :
-                            <input type="text" id="datepicker9" style="width: 10%;"> </a>:
+                            <input type="text" id="datepicker9" style="width: 10%;"> </a>
                         <a>โทรศัพท์ <font color="red">*</font> :
-                            <input type="text" id="ownPhone" style="width: 13%;"
+                            <input type="text" id="ownPhone" style="width: 6.5vw;"
                                 oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
-                                onkeyup="checkPhone(this.value,'ownPhone')" maxlength="10"></a>
+                                onkeyup="checkPhone(this.value,'ownPhone','ownPhone_more')" maxlength="10"></a>
+                        <a style="margin-left: .1vw;">ต่อ</a>
+                        <input type="text" id="ownPhone_more" style="width: 4vw"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            maxlength="4">
                         <br>
                         <a style="margin-left: 5vw;">อยู่บ้านเลขที่ <font color="red">*</font> :
                             <input type="text" id="ownHomeId" style="width: 7%;"></a style="margin-left: 7.4vw;">
@@ -388,14 +401,6 @@
                         <a>ตำบล :
                             <select id="ownerSubdistrict" style="width: 17.5%;"></select></a>
                         <br>
-                        <br>
-                        <input type="radio" id="land_use_upload_file" name='uploadFiles' style="margin-left: 7.4vw;">
-                        <a>ต้องการอัพโหลดไฟล์</a>
-                        </input>
-                        <input type="radio" id="land_not_use_upload_file" name='uploadFiles'
-                            onclick="document.getElementById('uploadFilePdf').disable" checked>
-                        <a>ไม่ต้องการอัพโหลดไฟล์</a>
-                        </input>
                         <br>
                         <input style="margin-left:9vw;" type="file" id="uploadFilePdf" onchange="pdfFile(event)"
                             accept="application/pdf">
@@ -427,11 +432,13 @@
                             <h5><i class="fa fa-upload"></i>
                                 อัพโหลดภาพ</h5>
                         </button>
-                        <button id='print_new_doc' type="button" class="button" style='margin-left: 5vw; display: none;' onclick="printDocument()">
+                        <button id='print_new_doc' type="button" class="button" style='margin-left: 5vw; display: none;'
+                            onclick="printDocument()">
                             <h5><i class="fa fa-print"></i>
                                 พิมพ์ใบอนุญาติ</h5>
                         </button>
-                        <button id='print_renew_doc' type="button" class="button" style='margin-left: 5vw; display: none;' onclick="printDocumentRenew()">
+                        <button id='print_renew_doc' type="button" class="button"
+                            style='margin-left: 5vw; display: none;' onclick="printDocumentRenew()">
                             <h5><i class="fa fa-print"></i>
                                 พิมพ์ใบขอต่ออนุญาติ</h5>
                         </button>
