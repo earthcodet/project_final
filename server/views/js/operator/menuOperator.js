@@ -46,6 +46,8 @@ function addPage() {
     inImage.data = null
     textChange = ''
     iconAlert = ''
+    document.getElementById('phone_more').disabled = false
+    document.getElementById('company-phone-more').disabled = false
 }
 
 function insertPage() {

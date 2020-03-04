@@ -8,7 +8,7 @@ let newAdd = false
 let base64ImageSelect = ''
 let imageSelectype = ''
 let textChange = ''
-let  _deleteImage = false
+let _deleteImage = false
 let iconAlert = ''
 let inAddress = {
     id: "",
@@ -46,7 +46,7 @@ let inImage = {
 };
 
 function resetParameter() {
-    base64ImageSelect =''
+    base64ImageSelect = ''
     _deleteImage = false
     arrInsert = [];
     inPersonal = {
@@ -77,7 +77,7 @@ function resetParameter() {
         amphur_name: "",
         province_name: ""
     };
-    document.getElementById('datepicker2').disabled = false 
+    document.getElementById('datepicker2').disabled = false
     document.getElementById('life-id').checked = false
     document.getElementById('datepicker2').value = ''
 }
@@ -119,12 +119,12 @@ function setDataUI(data) {
 
         //แสดงค่าจังหวัดที่มาจาก ฐานข้อมูล (อำเภอ , ตำบล) ตาม id
         document.getElementById(`district`).value = amphurId
-        if(districtId  === '' || districtId === undefined){
+        if (districtId === '' || districtId === undefined) {
             document.getElementById(`subdistrict`).innerHTML = ''
-        }else{
+        } else {
             document.getElementById(`subdistrict`).value = districtId
         }
-       
+
 
         //prsonal 
         document.getElementById('title').value = data.PERSONAL_TITLE === undefined || data.PERSONAL_TITLE === null ? '' : data.PERSONAL_TITLE
@@ -138,7 +138,24 @@ function setDataUI(data) {
         //radioLife()
         document.getElementById('datepicker2').value = data.PERSONAL_CARD_EXPIRE === undefined || data.PERSONAL_CARD_EXPIRE === null ? '' : data.PERSONAL_CARD_EXPIRE
         data.PERSONAL_CARD_EXPIRE === undefined ? radioLife() : ''
-        document.getElementById('phone').value = data.PERSONAL_PHONE
+        let phone_t = data.PERSONAL_PHONE.split('/')
+        document.getElementById('phone_more').disabled = false
+        if (phone_t[1] != '') {
+            document.getElementById('phone').value = phone_t[0]
+            // document.getElementById('phone_more').disabled = false
+            document.getElementById('phone_more').value = phone_t[1]
+        } else {
+            document.getElementById('phone').value = phone_t[0]
+            // document.getElementById('phone_more').disabled = true
+            document.getElementById('phone_more').value = phone_t[1]
+        }
+        console.log(`phone_t`)
+        console.log(phone_t)
+        if(phone_t[0] === '-') {
+            document.getElementById('phone_more').disabled = true
+        }else{
+            document.getElementById('phone_more').disabled = false
+        }
         document.getElementById('fax').value = data.PERSONAL_FAX === undefined || data.PERSONAL_FAX === null ? '' : data.PERSONAL_FAX
         document.getElementById('last-update').value = data.PERSONAL_UPDATE
 
@@ -155,16 +172,32 @@ function setDataUI(data) {
             inImage.name = data.PERSONAL_ID
             inImage.type = data.image.IMAGE_TYPE
             inImage.data = data.image.IMAGE_DATA
-             
+
         }
     } else {
         inImage.name = 'NO_UPlOAD'
         document.getElementById('company-nameUser').value = data.PERSONAL_NAME
         document.getElementById('company-id').value = data.PERSONAL_PERSONAL_ID
         document.getElementById('datepicker4').value = data.PERSONAL_CARD_ISSUED
-        document.getElementById('company-phone').value = data.PERSONAL_PHONE
+        let phone_t = data.PERSONAL_PHONE.split('/')
+        console.log(`phone_t`)
+        console.log(phone_t)
+        document.getElementById('company-phone-more').disabled = false
+        if (phone_t[1] != '') {
+            document.getElementById('company-phone').value = phone_t[0]
+            document.getElementById('company-phone-more').disabled = false
+            document.getElementById('company-phone-more').value = phone_t[1]
+        } else {
+            document.getElementById('company-phone').value = phone_t[0]
+            document.getElementById('company-phone-more').disabled = true
+            document.getElementById('company-phone-more').value = phone_t[1]
+        }
+        if(phone_t[0] === '-') {
+            document.getElementById('company-phone-more').disabled = true
+        }else{
+            document.getElementById('company-phone-more').disabled = false
+        }
         document.getElementById('company-fax').value = data.PERSONAL_FAX === undefined || data.PERSONAL_FAX === null ? '' : data.PERSONAL_FAX
-
         document.getElementById('company-homeId').value = data.AID.ADDRESS_HOME_NUMBER
         document.getElementById('company-moo').value = data.AID.ADDRESS_MOO === undefined || data.AID.ADDRESS_MOO === null ? '' : data.AID.ADDRESS_MOO
         document.getElementById('company-trxk').value = data.AID.ADDRESS_TRXK === undefined || data.AID.ADDRESS_TRXK === null ? '' : data.AID.ADDRESS_TRXK
@@ -186,9 +219,9 @@ function setDataUI(data) {
 
         //แสดงค่าจังหวัดที่มาจาก ฐานข้อมูล (อำเภอ , ตำบล) ตาม id
         document.getElementById(`wDistrict`).value = amphurId
-        if(districtId === '' || districtId === undefined){
+        if (districtId === '' || districtId === undefined) {
             document.getElementById(`wSubdistrict`).innerHTML = ''
-        }else{
+        } else {
             document.getElementById(`wSubdistrict`).value = districtId
         }
 
@@ -269,19 +302,19 @@ function resetInputRequired() {
     document.getElementById('datepicker4').classList.remove('alertInput')
     document.getElementById('company-phone').classList.remove('alertInput')
 }
-function onClickRadio(){
-   if(document.getElementById('datepicker2').disabled === true){
-    document.getElementById('datepicker2').disabled = false 
-    document.getElementById('life-id').checked = false
-   }else{
-    document.getElementById('datepicker2').disabled = true 
-    document.getElementById('life-id').checked = true
-    document.getElementById('datepicker2').value = ''
-   }
+function onClickRadio() {
+    if (document.getElementById('datepicker2').disabled === true) {
+        document.getElementById('datepicker2').disabled = false
+        document.getElementById('life-id').checked = false
+    } else {
+        document.getElementById('datepicker2').disabled = true
+        document.getElementById('life-id').checked = true
+        document.getElementById('datepicker2').value = ''
+    }
 }
-function radioLife(){
+function radioLife() {
     document.getElementById('datepicker2').value = ''
-    document.getElementById('datepicker2').disabled = true 
+    document.getElementById('datepicker2').disabled = true
     document.getElementById('life-id').checked = true
     document.getElementById('datepicker2').value = ''
 }
@@ -310,7 +343,7 @@ function preInsert() {
                         let districtValue = parseInt(
                             document.getElementById(`subdistrict`).value
                         );
-                        inAddress.district_name = district[districtValue - 1] === undefined ? '' :  district[districtValue - 1].DISTRICT_NAME;
+                        inAddress.district_name = district[districtValue - 1] === undefined ? '' : district[districtValue - 1].DISTRICT_NAME;
                         inAddress.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
                         inAddress.province_name = province[provinceValue - 1].PROVINCE_NAME;
                         //personal
@@ -324,8 +357,9 @@ function preInsert() {
                         inPersonal.personal_id = document.getElementById("id").value;
                         inPersonal.card_issued = document.getElementById("datepicker1").value;
                         inPersonal.card_expipe = document.getElementById("datepicker2").value;
-
-                        inPersonal.phone = document.getElementById("phone").value;
+                        
+                        let format_phone_t = `${document.getElementById("phone").value}/${document.getElementById("phone_more").value}`
+                        inPersonal.phone = format_phone_t;
                         inPersonal.fax = document.getElementById("fax").value;
                         arrInsert.push(inPersonal);
                         arrInsert.push(inAddress);
@@ -345,8 +379,8 @@ function preInsert() {
                     } else {
                         console.log(`preinsert นิติบุคคล`)
                         // นิติบุคคล
-                        let ch  = document.getElementById('company-homeId')
-                        inAddress.home_number = ch.value === null ||  ch.value.trim().length === 0 || ch.value === undefined ? '-' : ch.value
+                        let ch = document.getElementById('company-homeId')
+                        inAddress.home_number = ch.value === null || ch.value.trim().length === 0 || ch.value === undefined ? '-' : ch.value
                         inAddress.moo = document.getElementById('company-moo').value
                         inAddress.trxk = document.getElementById('company-trxk').value
                         inAddress.sxy = document.getElementById('company-sxy').value
@@ -356,7 +390,7 @@ function preInsert() {
                         let provinceValue = parseInt(document.getElementById(`wProvince`).value);
                         let amphurValue = parseInt(document.getElementById(`wDistrict`).value);
                         let districtValue = parseInt(document.getElementById(`wSubdistrict`).value);
-                        inAddress.district_name = district[districtValue - 1] === undefined ? '': district[districtValue - 1].DISTRICT_NAME;
+                        inAddress.district_name = district[districtValue - 1] === undefined ? '' : district[districtValue - 1].DISTRICT_NAME;
                         inAddress.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
                         inAddress.province_name = province[provinceValue - 1].PROVINCE_NAME;
                         //personal
@@ -366,7 +400,8 @@ function preInsert() {
                         inPersonal.personal_id = document.getElementById("company-id").value;
                         inPersonal.card_issued = document.getElementById("datepicker4").value;
 
-                        inPersonal.phone = document.getElementById("company-phone").value;
+                        let format_phone_t = `${document.getElementById("company-phone").value}/${document.getElementById("company-phone-more").value}`
+                        inPersonal.phone = format_phone_t;
                         inPersonal.fax = document.getElementById("company-fax").value;
                         inImage.name = 'NO_UPlOAD'
                         arrInsert.push(inPersonal);
@@ -443,8 +478,8 @@ function checkId(value, type) {
     }
     if (value.length === 13) {
         if (type === 'PERSONAL') {
-            console.log(`Tid =`+_isIdCheckPersonal)
-            console.log(`Qid =`+value)
+            console.log(`Tid =` + _isIdCheckPersonal)
+            console.log(`Qid =` + value)
             if (_isIdCheckPersonal != value) {
                 let tcp = value.split('')
                 console.log(tcp)
@@ -455,8 +490,8 @@ function checkId(value, type) {
                 console.log(sum_no1)
                 let sum_no2 = (11 - sum_no1) % 10
                 let checkIdIndex13 = parseInt(tcp[12]) === sum_no2
-                console.log(`parseInt(tcp[12])`+parseInt(tcp[12]))
-                console.log(`sum_no2`+sum_no1)
+                console.log(`parseInt(tcp[12])` + parseInt(tcp[12]))
+                console.log(`sum_no2` + sum_no1)
                 _isIdCheckPersonal = value
                 if (checkIdIndex13) {
                     duplicateId(value).then(data => {
@@ -630,7 +665,7 @@ function insertToDatabase() {
         console.log("insertToDatabase");
         var formData = new FormData();
         formData.append("image", fileImage);
-        if(arrInsert[2].name === 'NO_UPlOAD'){
+        if (arrInsert[2].name === 'NO_UPlOAD') {
             arrInsert[2].data = null
         }
         formData.append("personal", JSON.stringify(arrInsert));
@@ -641,7 +676,7 @@ function insertToDatabase() {
             }
         })
             .then(data => {
-                if(arrInsert[2].name === 'NO_UPlOAD'){
+                if (arrInsert[2].name === 'NO_UPlOAD') {
                     arrInsert[2].data = tempimage
                 }
                 return resolve(data.data);

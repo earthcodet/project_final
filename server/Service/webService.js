@@ -1093,7 +1093,7 @@ class service {
         if (type === 'PERSONAL') {
             new_data.surname = '' ? new_data.surname = 'NULL' : new_data.surname = `'${new_data.surname}'`
             new_data.title === '' ? new_data.title = 'NULL' : new_data.title = `'${new_data.title}'`
-            new_data.phone === '' ? new_data.phone = '-' : new_data.phone = new_data.phone
+            new_data.phone === '/' ? new_data.phone = '-/' : new_data.phone = new_data.phone
             new_data.nationality === '' || new_data.nationality === '-' ? new_data.nationality = 'NULL' : new_data.nationality = `'${new_data.nationality}'`
             new_data.race === '' || new_data.race === '-' ? new_data.race = 'NULL' : new_data.race = new_data.race = `'${new_data.race}'`
             new_data.birthday.length === 0 ? new_data.birthday = 'NULL' : new_data.birthday = new_data.birthday
