@@ -6,7 +6,6 @@ var con = mysql.createConnection({
     database: "web_database",
     timeout: 0
 })
-con.timeout = 0;
 class TransferDAO {
     insert(land){
         return new Promise((resolve, reject) => {

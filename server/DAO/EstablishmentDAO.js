@@ -6,7 +6,7 @@ var con = mysql.createConnection({
     database: "web_database",
     timeout: 0
 })
-con.timeout = 0;
+//con.timeout = 0;
 class EstablishmentDAO {
     getMaxId() {
         return new Promise((resolve, reject) => {
