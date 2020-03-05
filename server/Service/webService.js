@@ -33,6 +33,13 @@ class service {
             })
         })
     }
+    getStaffฺById(userId) {
+        return new Promise((resolve, reject) => {
+            UserDAOObj.getUserByUserId(userId).then((data) => {
+                return resolve(data)
+            })
+        })
+    }
     getProvince() {
         return new Promise((resolve, reject) => {
             AddressDAOObj.getProvince().then((data) => {
@@ -1148,8 +1155,6 @@ class service {
 
 
             //Year No 1
-            new_data.receipt_order = new_data.receipt_order === '-' || new_data.receipt_order === '' ? 'NULL' : new_data.receipt_order
-            new_data.receipt_order_year = new_data.receipt_order_year === '' || new_data.receipt_order_year === '-' ? 'NULL' : new_data.receipt_order_year
             if (new_data.receipt_fine != '' && new_data.receipt_fine != '-') {
                 if (new_data.receipt_fee != '' && new_data.receipt_fee != '-') {
                     new_data.receipt_total = parseFloat(new_data.receipt_fine) + parseFloat(new_data.receipt_fee)
@@ -1164,8 +1169,6 @@ class service {
             new_data.receipt_date = new_data.receipt_date === '-' || new_data.receipt_date === '' ? 'NULL' : `'${this.formatDate('TO-INSERT', new_data.receipt_date)}'`
 
             //Year No 2
-            new_data.receipt_order_year_2 = new_data.receipt_order_year_2 === '-' || new_data.receipt_order_year_2 === '' ? 'NULL' : new_data.receipt_order_year_2
-            new_data.receipt_order_year_year_2 = new_data.receipt_order_year_year_2 === '' || new_data.receipt_order_year_year_2 === '-' ? 'NULL' : new_data.receipt_order_year_year_2
             if (new_data.receipt_fine_year_2 != '' && new_data.receipt_fine_year_2 != '-') {
                 if (new_data.receipt_fee_year_2 != '' && new_data.receipt_fee_year_2 != '-') {
                     new_data.receipt_total_year_2 = parseFloat(new_data.receipt_fine_year_2) + parseFloat(new_data.receipt_fee_year_2)
@@ -1180,8 +1183,6 @@ class service {
             new_data.receipt_date_year_2 = new_data.receipt_date_year_2 === '-' || new_data.receipt_date_year_2 === '' ? 'NULL' : `'${this.formatDate('TO-INSERT', new_data.receipt_date_year_2)}'`
 
             //Year No 3
-            new_data.receipt_order_year_3 = new_data.receipt_order_year_3 === '-' || new_data.receipt_order_year_3 === '' ? 'NULL' : new_data.receipt_order_year_3
-            new_data.receipt_order_year_year_3 = new_data.receipt_order_year_year_3 === '' || new_data.receipt_order_year_year_3 === '-' ? 'NULL' : new_data.receipt_order_year_year_3
             if (new_data.receipt_fine_year_3 != '' && new_data.receipt_fine_year_3 != '-') {
                 if (new_data.receipt_fee_year_3 != '' && new_data.receipt_fee_year_3 != '-') {
                     new_data.receipt_total_year_3 = parseFloat(new_data.receipt_fine_year_3) + parseFloat(new_data.receipt_fee_year_3)

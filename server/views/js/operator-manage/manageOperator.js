@@ -41,20 +41,14 @@ let inRequest = {
     user_update: '',
     date_approve: '',
     staff_id_approve: '',
-    receipt_order: '',
-    receipt_order_year: '',
     receipt_fine: '',
     receipt_fee: '',
     receipt_total: '',
     receipt_date: '',
-    receipt_order_year_2: '',
-    receipt_order_year_year_2: '',
     receipt_fine_year_2: '',
     receipt_fee_year_2: '',
     receipt_total_year_2: '',
     receipt_date_year_2: '',
-    receipt_order_year_3: '',
-    receipt_order_year_year_3: '',
     receipt_fine_year_3: '',
     receipt_fee_year_3: '',
     receipt_total_year_3: '',
@@ -681,20 +675,14 @@ function setDataItem(data) {
     inRequest.user_update = checkNullReturn(data.REQUEST_USER_UPDATE)
     inRequest.date_approve = checkNullReturn(data.REQUEST_DATE_APPROVE)
     inRequest.staff_id_approve = checkNullReturn(data.STAFF_ID_APPROVE)
-    inRequest.receipt_order = checkNullReturn(data.REQUEST_RECEIPT_ORDER)
-    inRequest.receipt_order_year = checkNullReturn(data.REQUEST_RECEIPT_ORDER_YEAR)
     inRequest.receipt_fine = checkNullReturn(data.REQUEST_RECEIPT_FINE)
     inRequest.receipt_fee = checkNullReturn(data.REQUEST_RECEIPT_FEE)
     inRequest.receipt_total = checkNullReturn(data.REQUEST_RECEIPT_TOTAL)
     inRequest.receipt_date = checkNullReturn(data.REQUEST_RECEIPT_DATE)
-    inRequest.receipt_order_year_2 = checkNullReturn(data.REQUEST_RECEIPT_ORDER_YEAR_2)
-    inRequest.receipt_order_year_year_2 = checkNullReturn(data.REQUEST_RECEIPT_ORDER_YEAR_YEAR_2)
     inRequest.receipt_fine_year_2 = checkNullReturn(data.REQUEST_RECEIPT_FINE_YEAR_2)
     inRequest.receipt_fee_year_2 = checkNullReturn(data.REQUEST_RECEIPT_FEE_YEAR_2)
     inRequest.receipt_total_year_2 = checkNullReturn(data.REQUEST_RECEIPT_TOTAL_YEAR_2)
     inRequest.receipt_date_year_2 = checkNullReturn(data.REQUEST_RECEIPT_DATE_YEAR_2)
-    inRequest.receipt_order_year_3 = checkNullReturn(data.REQUEST_RECEIPT_ORDER_YEAR_3)
-    inRequest.receipt_order_year_year_3 = checkNullReturn(data.REQUEST_RECEIPT_ORDER_YEAR_YEAR_3)
     inRequest.receipt_fine_year_3 = checkNullReturn(data.REQUEST_RECEIPT_FINE_YEAR_3)
     inRequest.receipt_fee_year_3 = checkNullReturn(data.REQUEST_RECEIPT_FEE_YEAR_3)
     inRequest.receipt_total_year_3 = checkNullReturn(data.REQUEST_RECEIPT_TOTAL_YEAR_3)

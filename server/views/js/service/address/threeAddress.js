@@ -58,6 +58,7 @@ function getDistrict() {
     })
 }
 function removeAlloption(id) {
+    console.log(`removeAlloption id = ${id}`)
     var select = document.getElementById(id);
     var length = select.options.length;
     for (i = 0, c = 0; i < length; i++) {
@@ -246,7 +247,7 @@ function runForm() {
                     districtSelect(addressAmphur[0].AMPHUR_ID)
                     wdistrictSelect(buiddingAmphur[0].AMPHUR_ID)
                     odistrictSelect(ownAmphur[0].AMPHUR_ID)
-                     return resolve(true)
+                    return resolve(true)
                 })
             })
         })
@@ -292,4 +293,11 @@ function getDistrictIdByName(district_name, amphur_id) {
     }
 }
 
-
+function resetAddressThreeAddress() {
+    amphurSelect(1)
+    wamphurSelect(1)
+    oamphurSelect(1)
+    districtSelect(addressAmphur[0].AMPHUR_ID)
+    wdistrictSelect(buiddingAmphur[0].AMPHUR_ID)
+    odistrictSelect(ownAmphur[0].AMPHUR_ID)
+}

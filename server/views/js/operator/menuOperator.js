@@ -19,6 +19,7 @@ function addPage() {
     // window.onbeforeunload = function() {
     //     return 'You have unsaved changes!';
     // }
+    resetTwoAddress()
     addNew = true
     deleteData = false
     data = false

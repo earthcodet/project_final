@@ -209,10 +209,14 @@ function preInsert() {
   let check_input = false
   if(document.getElementById('typeReForm') != undefined){
     resetInputRequired();
+    console.log('input Required')
     check_input= inputRequired();
+   
   }else{
     resetInputRequired2();
+    console.log('input Required 2')
     check_input= inputRequired2();
+    
   }
   let check_input_food = false
   let check_food = false
@@ -220,7 +224,11 @@ function preInsert() {
     check_food = document.getElementById("foodTrain").checked;
     if(check_food){
       check_input_food = foodRequired();
-      check_input = check_input_food === true ? true : false
+      if(check_input === true && check_input_food === true){
+        check_input = true
+      }else{
+        check_input = false
+      }
     }  
   }
   let check_input_owner = false
@@ -229,10 +237,15 @@ function preInsert() {
     check_owner = document.getElementById("useOtherPlace").checked;
     if(check_owner){
       check_input_owner = ownerRequire();
-      check_input = check_input_owner === true ? true : false
+      if(check_input === true && check_input_owner === true){
+        check_input = true
+      }else{
+        check_input = false
+      }
     }
   }
- 
+ console.log(`check_input`)
+ console.log(check_input)
   if (check_input) {
     if (check_food) {
       if (check_input_food) {
@@ -290,8 +303,7 @@ function preInsert() {
           icon: "error"
         });
       }
-    }
-    if (check_owner) {
+    }if (check_owner) {
       if (check_input_owner) {
         if (check_food) {
           if (check_input_food) {
@@ -362,6 +374,7 @@ function preInsert() {
         });
         document.getElementById("typeReq").classList.add("alertInput");
       }
+      return false
     }
 
   } else {

@@ -17,10 +17,18 @@ function addPage() {
     if (id != null) {
         id.style.textDecoration = ''
     }
-    let temp_position = document.getElementById('position').value
     resetFunction()
-    document.getElementById('position').value = temp_position
     document.getElementById('print_new_doc').style.display = 'none'
+    if(document.getElementById('ownerDistrict') != undefined){
+        resetAddressThreeAddress()
+    }else{
+        resetTwoAddress()
+    }
+    document.getElementById('documentName3').innerHTML = ''
+    document.getElementById('position').value = ''
+    setLisetUserAlderManToUi(alderman_list)
+    
+    
 }
 function insertPage() {
     Swal.fire({

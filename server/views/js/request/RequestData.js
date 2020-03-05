@@ -1,3 +1,5 @@
+let alderman_list = []
+let size_money_list = []
 let filePdf = {
     name: '',
     data: ''
@@ -33,22 +35,16 @@ let requestData = {
     sell_end: '',
     sell_allow: 'N',
     //Money Y1
-    receipt_order: '',
-    receipt_order_year: '',
     receipt_fine: 0,
     receipt_fee: 0,
     receipt_total: 0,
     receipt_date: '',
     //Money Y2
-    receipt_order_year_2: '',
-    receipt_order_year_year_2: '',
     receipt_fine_year_2: 0,
     receipt_fee_year_2: 0,
     receipt_total_year_2: 0,
     receipt_date_year_2: '',
     //Money Y3
-    receipt_order_year_3: '',
-    receipt_order_year_year_3: '',
     receipt_fine_year_3: 0,
     receipt_fee_year_3: 0,
     receipt_total_year_3: 0,
@@ -230,18 +226,12 @@ function resetRequestData() {
         sell_end: '',
         sell_allow: 'N',
         //Money Y1
-        receipt_order: '',
-        receipt_fine: 0,
         receipt_fee: 0,
         receipt_total: 0,
         //Money Y2
-        receipt_order_year_2: '',
-        receipt_fine_year_2: 0,
         receipt_fee_year_2: 0,
         receipt_total_year_2: 0,
         //Money Y3
-        receipt_order_year_3: '',
-        receipt_fine_year_3: 0,
         receipt_fee_year_3: 0,
         receipt_total_year_3: 0,
         //

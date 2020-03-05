@@ -75,18 +75,12 @@ function checkFormatMoneyId(value) {
 }
 // setDataView
 function setDataView() {
-    document.getElementById('documentName2').disabled = true
+    document.getElementById('documentName2').readOnly = true
     document.getElementById('print_new_doc').style.display = 'none'
     createImage(imageDisplayFormDatabase)
     console.log('requestData.status ' + requestData.status)
     if (requestData.status === 'approval' || requestData.status === 'active') {
         if (document.getElementById('bFeeY2') != undefined) {
-            // area_less .html
-            if (requestData.receipt_order_year_2 === '') {
-                document.getElementById('bNumY2').value = ``
-            } else {
-                document.getElementById('bNumY2').value = `${requestData.receipt_order_year_2}/${requestData.receipt_order_year_year_2}`
-            }
             if(requestData.receipt_date_year_2 === ''){
                 document.getElementById('datepicker10').value = requestData.receipt_date_year_2
                 document.getElementById('bFeeY2').value = requestData.receipt_fee_year_2 === 0 ? '' : requestData.receipt_fee_year_2
@@ -97,12 +91,6 @@ function setDataView() {
             document.getElementById('bFineY2').value = requestData.receipt_fine_year_2
             }
             
-
-            if (requestData.receipt_order_year_3 === '') {
-                document.getElementById('bNumY3').value = ``
-            } else {
-                document.getElementById('bNumY3').value = `${requestData.receipt_order_year_3}/${requestData.receipt_order_year_year_3}`
-            }
             if(requestData.receipt_date_year_3 === ''){
                 document.getElementById('datepicker11').value = requestData.receipt_date_year_3
                 document.getElementById('bFeeY3').value = requestData.receipt_fee_year_3 === 0 ? '' : requestData.receipt_fee_year_3
@@ -113,21 +101,13 @@ function setDataView() {
                 document.getElementById('bFineY3').value = requestData.receipt_fine_year_3 
             }
             //cancle disable false
-            document.getElementById('bNumY2').disabled = false
-            document.getElementById('bFeeY2').disabled = false
-            document.getElementById('bFee').disabled = false
-            document.getElementById('bFineY2').disabled = false
+            // document.getElementById('bFeeY2').disabled = false
+            // document.getElementById('bFee').disabled = false
+            // document.getElementById('bFineY2').disabled = false
 
-            document.getElementById('bNumY3').disabled = false
-            document.getElementById('datepicker11').disabled = false
-            document.getElementById('bFeeY3').disabled = false
-            document.getElementById('bFineY3').disabled = false
-        }
-        console.log(`${requestData.receipt_order}/${requestData.receipt_order_year}`)
-        if (requestData.receipt_order === '') {
-            document.getElementById('bNum').value = ``
-        } else {
-            document.getElementById('bNum').value = `${requestData.receipt_order}/${requestData.receipt_order_year}`
+            // document.getElementById('datepicker11').disabled = false
+            // document.getElementById('bFeeY3').disabled = false
+            // document.getElementById('bFineY3').disabled = false
         }
         if(requestData.receipt_date === ''){
             document.getElementById('datepicker2').value = requestData.receipt_date
@@ -141,14 +121,29 @@ function setDataView() {
        
 
         //cancle disable false
-        document.getElementById('bNum').disabled = false
-        document.getElementById('datepicker2').disabled = false
-        document.getElementById('bFee').disabled = false
-        document.getElementById('bFine').disabled = false
+        // document.getElementById('datepicker2').disabled = false
+        // document.getElementById('bFee').disabled = false
+        // document.getElementById('bFine').disabled = false
       
-        document.getElementById('documentName2').disabled = false
-        document.getElementById('documentName2').innerHTML = ''
-        displayUserMoney()
+        // document.getElementById('documentName2').disabled = false
+       
+        
+        console.log('requestData.staff_id_money')
+        console.log(requestData.staff_id_money)
+        console.log(requestData.staff_id_money === '')
+        
+
+        if(requestData.staff_id_money === ''){
+            resetOptionitem('documentName2',size_money_list)
+            console.log(document.getElementById('documentName2'))
+        }else{
+            displayUserMoney(requestData.staff_id_money)
+        }
+
+        console.log(requestData.staff_id_alderman)
+        console.log(documentName3)
+        document.getElementById('documentName3').value = requestData.staff_id_alderman
+        document.getElementById('position').value = getPositionById(requestData.staff_id_alderman)
 
         document.getElementById('print_new_doc').style.display = ''
         
@@ -189,13 +184,31 @@ function setDataView() {
     }else{
         document.getElementById(`subdistrict`).value = districtId 
     }
-    document.getElementById("phone").value = operatorData.phone
+    let cut_phone = operatorData.phone.split('/')
+    if(cut_phone[1] === '' ){
+        document.getElementById("phone").value = cut_phone[0]
+        document.getElementById('phone_more').value = ''
+        document.getElementById('phone_more').disabled = true
+    }else{
+        document.getElementById("phone").value = cut_phone[0]
+        document.getElementById('phone_more').disabled = false
+        document.getElementById('phone_more').value = cut_phone[1]
+    }
     document.getElementById("fax").value = operatorData.fax
     document.getElementById('reference_title').value = referenceData.title
     document.getElementById('reference_name').value = referenceData.name
     document.getElementById('reference_surname').value = referenceData.surname
     document.getElementById('reference_status').value = referenceData.status
-    document.getElementById('reference_phone').value = referenceData.phone
+    let cut_phone_no2 = referenceData.phone.split('/')
+    if(cut_phone_no2[1] === '' ){
+        document.getElementById("reference_phone").value = cut_phone_no2[0]
+        document.getElementById('reference_phone_more').value = ''
+        document.getElementById('reference_phone_more').disabled = true
+    }else{
+        document.getElementById("reference_phone").value = cut_phone_no2[0]
+        document.getElementById('reference_phone_more').disabled = false
+        document.getElementById('reference_phone_more').value = cut_phone_no2[1]
+    }
 
     //Date request exp 
     document.getElementById('request_date_issued').value = requestData.date_issued
@@ -230,7 +243,16 @@ function setDataView() {
     }else{
         document.getElementById(`wSubdistrict`).value = districtIdE
     }
-    document.getElementById("wPhone").value = establishmentData.phone
+    let cut_phone_no3 = establishmentData.phone.split('/')
+    if(cut_phone_no3[1] === '' ){
+        document.getElementById("wPhone").value = cut_phone_no3[0]
+        document.getElementById('wPhone_more').value = ''
+        document.getElementById('wPhone_more').disabled = true
+    }else{
+        document.getElementById("wPhone").value = cut_phone_no3[0]
+        document.getElementById('wPhone_more').disabled = false
+        document.getElementById('wPhone_more').value = cut_phone_no3[1]
+    }
     document.getElementById("wFax").value = establishmentData.fax
 
     document.getElementById('workplaceName').value = establishmentData.name
@@ -283,8 +305,16 @@ function setDataView() {
             document.getElementById('ownSurname').value = landData.surname
             //วันเกิด
             document.getElementById('datepicker9').value = landData.birthday
-            document.getElementById('ownPhone').value = landData.phone
-
+            let cut_phone_no4 = landData.phone.split('/')
+            if(cut_phone_no4[1] === '' ){
+                document.getElementById("ownPhone").value = cut_phone_no4[0]
+                document.getElementById('ownPhone_more').value = ''
+                document.getElementById('ownPhone_more').disabled = true
+            }else{
+                document.getElementById("ownPhone").value = cut_phone_no4[0]
+                document.getElementById('ownPhone_more').disabled = false
+                document.getElementById('ownPhone_more').value = cut_phone_no4[1]
+            }
             document.getElementById('ownHomeId').value = addressOwnerLandData.home_number
             document.getElementById('ownMoo').value = addressOwnerLandData.moo
             document.getElementById('ownTrxk').value = addressOwnerLandData.trxk
@@ -385,7 +415,16 @@ function setDataOperator(raw_data, type) {
         }else{
             document.getElementById(`subdistrict`).value = districtId
         }
-        document.getElementById("phone").value = operatorData.phone
+        let cut_phone_no5 = operatorData.phone.split('/')
+            if(cut_phone_no5[1] === '' ){
+                document.getElementById("phone").value = cut_phone_no5[0]
+                document.getElementById('phone_more').value = ''
+                document.getElementById('phone_more').disabled = true
+            }else{
+                document.getElementById("phone").value = cut_phone_no5[0]
+                document.getElementById('phone_more').disabled = false
+                document.getElementById('phone_more').value = cut_phone_no5[1]
+            }
         document.getElementById("fax").value = operatorData.fax
 
 
@@ -480,22 +519,16 @@ function setRequestData(raw_data) {
     requestData.sell_end = raw_data.REQUEST_SELL_END === null ? '' : raw_data.REQUEST_SELL_END
     requestData.sell_allow = raw_data.REQUEST_SELL_ALLOW
     //year 1
-    requestData.receipt_order = raw_data.REQUEST_RECEIPT_ORDER === null ? '' : raw_data.REQUEST_RECEIPT_ORDER
-    requestData.receipt_order_year = raw_data.REQUEST_RECEIPT_ORDER_YEAR === null ? '' : raw_data.REQUEST_RECEIPT_ORDER_YEAR
     requestData.receipt_fine = raw_data.REQUEST_RECEIPT_FINE === null ? '' : raw_data.REQUEST_RECEIPT_FINE
     requestData.receipt_fee = raw_data.REQUEST_RECEIPT_FEE === null ? '' : raw_data.REQUEST_RECEIPT_FEE
     requestData.receipt_total = raw_data.REQUEST_RECEIPT_TOTAL === null ? '' : raw_data.REQUEST_RECEIPT_TOTAL
     requestData.receipt_date = raw_data.REQUEST_RECEIPT_DATE === null ? '' : raw_data.REQUEST_RECEIPT_DATE
     //year 2
-    requestData.receipt_order_year_2 = raw_data.REQUEST_RECEIPT_ORDER_YEAR_2 === null ? '' : raw_data.REQUEST_RECEIPT_ORDER_YEAR_2
-    requestData.receipt_order_year_year_2 = raw_data.REQUEST_RECEIPT_ORDER_YEAR_YEAR_2 === null ? '' : raw_data.REQUEST_RECEIPT_ORDER_YEAR_YEAR_2
     requestData.receipt_fine_year_2 = raw_data.REQUEST_RECEIPT_FINE_YEAR_2 === null ? '' : raw_data.REQUEST_RECEIPT_FINE_YEAR_2
     requestData.receipt_fee_year_2 = raw_data.REQUEST_RECEIPT_FEE_YEAR_2 === null ? '' : raw_data.REQUEST_RECEIPT_FEE_YEAR_2
     requestData.receipt_total_year_2 = raw_data.REQUEST_RECEIPT_TOTAL_YEAR_2 === null ? '' : raw_data.REQUEST_RECEIPT_TOTAL_YEAR_2
     requestData.receipt_date_year_2 = raw_data.REQUEST_RECEIPT_DATE_YEAR_2 === null ? '' : raw_data.REQUEST_RECEIPT_DATE_YEAR_2
     //year 3
-    requestData.receipt_order_year_3 = raw_data.REQUEST_RECEIPT_ORDER_YEAR_3 === null ? '' : raw_data.REQUEST_RECEIPT_ORDER_YEAR_3
-    requestData.receipt_order_year_year_3 = raw_data.REQUEST_RECEIPT_ORDER_YEAR_YEAR_3 === null ? '' : raw_data.REQUEST_RECEIPT_ORDER_YEAR_YEAR_3
     requestData.receipt_fine_year_3 = raw_data.REQUEST_RECEIPT_FINE_YEAR_3 === null ? '' : raw_data.REQUEST_RECEIPT_FINE_YEAR_3
     requestData.receipt_fee_year_3 = raw_data.REQUEST_RECEIPT_FEE_YEAR_3 === null ? '' : raw_data.REQUEST_RECEIPT_FEE_YEAR_3
     requestData.receipt_total_year_3 = raw_data.REQUEST_RECEIPT_TOTAL_YEAR_3 === null ? '' : raw_data.REQUEST_RECEIPT_TOTAL_YEAR_3
@@ -690,7 +723,7 @@ function createGroupData() {
             referenceData.name = document.getElementById('reference_name').value.trim()
             referenceData.surname = document.getElementById('reference_surname').value.trim()
             referenceData.status = document.getElementById('reference_status').value.trim()
-            referenceData.phone = document.getElementById('reference_phone').value
+            referenceData.phone = `${document.getElementById('reference_phone').value.trim()}/${document.getElementById('reference_phone_more').value.trim()}`
         }
 
         if (document.getElementById('foodTrain') != undefined) {
@@ -802,7 +835,8 @@ function createGroupData() {
         if (document.getElementById('numPeople') != undefined) {
             establishmentData.worker = document.getElementById('numPeople').value.trim()
         }
-        establishmentData.phone = document.getElementById('wPhone').value.trim()
+        let wPhone_t = `${document.getElementById('wPhone').value.trim()}/${document.getElementById('wPhone_more').value.trim()}`
+        establishmentData.phone = wPhone_t
         establishmentData.fax = document.getElementById('wFax').value.trim()
 
         if (document.getElementById('wLocation') != undefined) {
@@ -829,7 +863,8 @@ function createGroupData() {
             landData.name = document.getElementById('ownName').value.trim()
             landData.surname = document.getElementById('ownSurname').value.trim()
             landData.birthday = document.getElementById('datepicker9').value.trim()
-            landData.phone = document.getElementById('ownPhone').value.trim()
+            let ownPhone_more = `${document.getElementById('ownPhone').value.trim()}/${document.getElementById('ownPhone_more').value.trim()}`
+            landData.phone = ownPhone_more
             addressOwnerLandData.home_number = document.getElementById('ownHomeId').value.trim()
             addressOwnerLandData.moo = document.getElementById('ownMoo').value.trim()
             addressOwnerLandData.trxk = document.getElementById('ownTrxk').value.trim()
@@ -993,43 +1028,27 @@ function dataChange(type) {
                 referenceData.phone != document.getElementById('reference_phone').value) {
                 status_data_change = true
             }
-            if (document.getElementById('bNumY2') != undefined) {
-                let num_y_2 = document.getElementById('bNumY2').value.trim()
-                let num_y_2_no = num_y_2.slice(0, 7)
-                let num_y_2_year = num_y_2.slice(8, 10)
+            if (document.getElementById('bFeeY2') != undefined) {
                 let date_y_2 = document.getElementById('datepicker10').value.trim()
                 let fee_y_2 = document.getElementById('bFeeY2').value === '' ? 0 : document.getElementById('bFeeY2').value
                 let fine_y_2 = document.getElementById('bFineY2').value === '' ? 0 : document.getElementById('bFineY2').value
-
-                let num_y_3 = document.getElementById('bNumY3').value.trim()
-                let num_y_3_no = num_y_3.slice(0, 7)
-                let num_y_3_year = num_y_3.slice(8, 10)
                 let date_y_3 = document.getElementById('datepicker11').value.trim()
                 let fee_y_3 = document.getElementById('bFeeY3').value === '' ? 0 : document.getElementById('bFeeY3').value
                 let fine_y_3 = document.getElementById('bFineY3').value === '' ? 0 : document.getElementById('bFineY3').value
-                if (requestData.receipt_order_year_2 == num_y_2_no ||
-                    requestData.receipt_order_year_year_2 == num_y_2_year ||
-                    requestData.receipt_fine_year_2 == fee_y_2 ||
+                if (requestData.receipt_fine_year_2 == fee_y_2 ||
                     requestData.receipt_fee_year_2 == fine_y_2 ||
                     requestData.receipt_date_year_2 === date_y_2 ||
-                    requestData.receipt_order_year_3 == num_y_3_no ||
-                    requestData.receipt_order_year_year_3 == num_y_3_year ||
                     requestData.receipt_fine_year_3 == fine_y_3 ||
                     requestData.receipt_fee_year_3 == fee_y_3 ||
                     requestData.receipt_date_year_3 === date_y_3) {
                     status_data_change = true
                 }
             }
-            let num_y_1 = document.getElementById('bNum').value.trim()
-            let num_y_1_no = num_y_1.slice(0, 7)
-            let num_y_1_year = num_y_1.slice(8, 10)
             let date_y_1 = document.getElementById('datepicker2').value.trim()
             let fee_y_1 = document.getElementById('bFee').value === 0 ? 0 : document.getElementById('bFee').value
             let fine_y_1 = document.getElementById('bFine').value === 0 ? 0 : document.getElementById('bFine').value
 
-            if (requestData.receipt_order == num_y_1_no ||
-                requestData.receipt_order_year == num_y_1_year ||
-                requestData.receipt_fine == fine_y_1 ||
+            if (requestData.receipt_fine == fine_y_1 ||
                 requestData.receipt_fee == fee_y_1 ||
                 requestData.receipt_date === date_y_1) {
                 status_data_change = true
@@ -1040,7 +1059,7 @@ function dataChange(type) {
     if (type === 'establishmentData') {
         if (establishmentData.perosonal_id != operatorData.id ||
             establishmentData.name != document.getElementById('workplaceName').value.trim() ||
-            establishmentData.phone != document.getElementById('wPhone').value.trim() ||
+            establishmentData.phone != `${document.getElementById('wPhone').value.trim()}/${document.getElementById('wPhone_more').value.trim()}` ||
             establishmentData.fax != document.getElementById('wFax').value.trim()) {
             console.log(`1`)
             status_data_change = true
@@ -1123,7 +1142,7 @@ function dataChange(type) {
             referenceData.name != document.getElementById('reference_name').value.trim() ||
             referenceData.surname != document.getElementById('reference_surname').value.trim() ||
             referenceData.status != document.getElementById('reference_status').value.trim() ||
-            referenceData.phone != document.getElementById('reference_phone').value) {
+            referenceData.phone != `${document.getElementById('reference_phone').value}/${document.getElementById('reference_phone_more').value}`) {
             status_data_change = true
         }
     }
@@ -1134,7 +1153,7 @@ function dataChange(type) {
                     landData.name != document.getElementById('ownName').value.trim() ||
                     landData.surname != document.getElementById('ownSurname').value.trim() ||
                     landData.birthday != document.getElementById('datepicker9').value.trim() ||
-                    landData.phone != document.getElementById('ownPhone').value.trim() ||
+                    landData.phone != `${document.getElementById('ownPhone').value.trim()}/${document.getElementById('ownPhone_more').value.trim()}` ||
                     landData.file_upload_changed != file_is_uploaded
                 ) {
                     status_data_change = true
@@ -1215,47 +1234,32 @@ function setDataUpdate(type) {
         if (document.getElementById('con_no4') != undefined) {
             requestData.condition_no_4 = document.getElementById('con_no4').value.trim()
         }
-        if (document.getElementById('bFeeY2') != undefined) {
-            let num_y_2 = document.getElementById('bNumY2').value.trim()
-            let num_y_2_no = num_y_2.slice(0, 7)
-            let num_y_2_year = num_y_2.slice(8, 10)
-            let date_y_2 = document.getElementById('datepicker10').value.trim()
-            let fee_y_2 = document.getElementById('bFeeY2').value === '' ? 0 : document.getElementById('bFeeY2').value
-            let fine_y_2 = document.getElementById('bFineY2').value === '' ? 0 : document.getElementById('bFineY2').value
+        // if (document.getElementById('bFeeY2') != undefined) {
+        //     let date_y_2 = document.getElementById('datepicker10').value.trim()
+        //     let fee_y_2 = document.getElementById('bFeeY2').value === '' ? 0 : document.getElementById('bFeeY2').value
+        //     let fine_y_2 = document.getElementById('bFineY2').value === '' ? 0 : document.getElementById('bFineY2').value
 
-            let num_y_3 = document.getElementById('bNumY3').value.trim()
-            let num_y_3_no = num_y_3.slice(0, 7)
-            let num_y_3_year = num_y_3.slice(8, 10)
-            let date_y_3 = document.getElementById('datepicker11').value.trim()
-            let fee_y_3 = document.getElementById('bFeeY3').value === '' ? 0 : document.getElementById('bFeeY3').value
-            let fine_y_3 = document.getElementById('bFineY3').value === '' ? 0 : document.getElementById('bFineY3').value
+        //     let date_y_3 = document.getElementById('datepicker11').value.trim()
+        //     let fee_y_3 = document.getElementById('bFeeY3').value === '' ? 0 : document.getElementById('bFeeY3').value
+        //     let fine_y_3 = document.getElementById('bFineY3').value === '' ? 0 : document.getElementById('bFineY3').value
 
-            requestData.receipt_order_year_2 = num_y_2_no
-            requestData.receipt_order_year_year_2 = num_y_2_year
-            requestData.receipt_fine_year_2 = fee_y_2
-            requestData.receipt_fee_year_2 = fine_y_2
-            requestData.receipt_date_year_2 = date_y_2
+        //     requestData.receipt_fine_year_2 = fee_y_2
+        //     requestData.receipt_fee_year_2 = fine_y_2
+        //     requestData.receipt_date_year_2 = date_y_2
 
-            requestData.receipt_order_year_3 = num_y_3_no
-            requestData.receipt_order_year_year_3 = num_y_3_year
-            requestData.receipt_fine_year_3 = fine_y_3
-            requestData.receipt_fee_year_3 = fee_y_3
-            requestData.receipt_date_year_3 = date_y_3
-        }
-        let num_y_1 = document.getElementById('bNum').value.trim()
-        let num_y_1_no = num_y_1.slice(0, 7)
-        let num_y_1_year = num_y_1.slice(8, 10)
-        let date_y_1 = document.getElementById('datepicker2').value.trim()
-        let fee_y_1 = document.getElementById('bFee').value === 0 ? 0 : document.getElementById('bFee').value
-        let fine_y_1 = document.getElementById('bFine').value === 0 ? 0 : document.getElementById('bFine').value
-
-        requestData.receipt_order = num_y_1_no
-        requestData.receipt_order_year = num_y_1_year
-        requestData.receipt_fine = fine_y_1
-        requestData.receipt_fee = fee_y_1
-        requestData.receipt_date = date_y_1
-        requestData.staff_id_money = userMoney
-        requestData.staff_id_alderman = userAlderman
+        //     requestData.receipt_fine_year_3 = fine_y_3
+        //     requestData.receipt_fee_year_3 = fee_y_3
+        //     requestData.receipt_date_year_3 = date_y_3
+        // }
+        // let date_y_1 = document.getElementById('datepicker2').value.trim()
+        // let fee_y_1 = document.getElementById('bFee').value === 0 ? 0 : document.getElementById('bFee').value
+        // let fine_y_1 = document.getElementById('bFine').value === 0 ? 0 : document.getElementById('bFine').value
+        
+        // requestData.receipt_fine = fine_y_1
+        // requestData.receipt_fee = fee_y_1
+        // requestData.receipt_date = date_y_1
+        // requestData.staff_id_money = userMoney
+        // requestData.staff_id_alderman = userAlderman
 
         requestData.total_image = totalFiles.length
     }
@@ -1280,7 +1284,7 @@ function setDataUpdate(type) {
         if (document.getElementById('numPeople') != undefined) {
             establishmentData.worker = document.getElementById('numPeople').value.trim()
         }
-        establishmentData.phone = document.getElementById('wPhone').value.trim()
+        establishmentData.phone = `${document.getElementById('wPhone').value.trim()}/${document.getElementById('wPhone_more').value.trim()}`
         establishmentData.fax = document.getElementById('wFax').value.trim()
 
         if (document.getElementById('wLocation') != undefined) {
@@ -1318,7 +1322,7 @@ function setDataUpdate(type) {
             referenceData.name = document.getElementById('reference_name').value.trim()
             referenceData.surname = document.getElementById('reference_surname').value.trim()
             referenceData.status = document.getElementById('reference_status').value.trim()
-            referenceData.phone = document.getElementById('reference_phone').value
+            referenceData.phone = `${document.getElementById('reference_phone').value}/${document.getElementById('reference_phone_more').value}`
         }
     }
     if (type === 'landData') {
@@ -1327,7 +1331,7 @@ function setDataUpdate(type) {
             landData.name = document.getElementById('ownName').value.trim()
             landData.surname = document.getElementById('ownSurname').value.trim()
             landData.birthday = document.getElementById('datepicker9').value.trim()
-            landData.phone = document.getElementById('ownPhone').value.trim()
+            landData.phone = `${document.getElementById('ownPhone').value.trim()}/${document.getElementById('ownPhone_more').value.trim()}`
         }
     }
     if (type === 'addressOwnerLandData') {
@@ -1475,8 +1479,12 @@ function getRequestData(no, year) {
 }
 
 function getPresident() {
+    alderman_list = []
     return new Promise((resolve, reject) => {
         axios.get(`http://localhost:5000/get/user/president`).then((result) => {
+            for (let i = 0; i < result.data.length; i++) {
+                alderman_list.push(result.data[i])
+            }
             return resolve(result.data);
         })
     })
@@ -1486,16 +1494,15 @@ function setLisetUserAlderManToUi(list_user) {
     console.log(list_user)
     if (list_user.length != 0) {
         userAlderman = list_user[0].USER_ID
-        requestData.staff_id_money = list_user[0].USER_ID
-
+        requestData.staff_id_alderman = list_user[0].USER_ID
         document.getElementById('position').value = list_user[0].USER_POSITION
+
         for (let i = 0; i < list_user.length; i++) {
             var select = document.getElementById("documentName3");
             var option = document.createElement("option");
             let item = list_user[i]
             option.text = `${item.USER_TITLE} ${item.USER_NAME} ${item.USER_SURNAME}`
-            option.value = list_user[i];
-    
+            option.value = list_user[i].USER_ID;
             select.onchange = function () { changePositionAlderman(value) };
             select.add(option);
         }
@@ -1511,9 +1518,10 @@ function displayUserAlderman(){
     })
 }
 //get staff money 
-function getUserMoney() {
+function getUserMoney(id) {
     return new Promise((resolve, reject) => {
-        axios.get(`http://localhost:5000/get/user/money`).then((result) => {
+        axios.get(`http://localhost:5000/get/user/id/${id}`).then((result) => {
+            size_money_list = result.data.length
             return resolve(result.data);
         })
     })
@@ -1522,19 +1530,20 @@ function setLisetUserMoneyToUi(list_user) {
     console.log(list_user)
     if (list_user.length != 0) {
         for (let i = 0; i < list_user.length; i++) {
-            var select = document.getElementById("documentName2");
-            var option = document.createElement("option");
-            let item = list_user[i]
-            option.text = `${item.USER_TITLE} ${item.USER_NAME} ${item.USER_SURNAME}`
-            option.value = list_user[i].USER_ID;
-    
-            select.onchange = function () { userMoney = this.value};
-            select.add(option);
+                var select = document.getElementById("documentName2");
+                var option = document.createElement("option");
+                let item = list_user[i]
+                option.text = `${item.USER_TITLE} ${item.USER_NAME} ${item.USER_SURNAME}`
+                option.value = list_user[i].USER_ID;
+        
+                select.onchange = function () { userMoney = this.value};
+                select.add(option);
+            
         }
     }
 }
-function displayUserMoney(){
-    getUserMoney().then((list_user) =>{
+function displayUserMoney(id){
+    getUserMoney(id).then((list_user) =>{
         setLisetUserMoneyToUi(list_user)
     })
 }
@@ -1682,3 +1691,19 @@ function base64toBlob(base64Data, contentType) {
     return new Blob(byteArrays, { type: contentType });
 }
 
+function resetOptionitem(id,length) {
+    console.log(`resetOptionitem ${id}`)
+    var select = document.getElementById(id);
+    console.log(`length ${length}`)
+    for (i = 0, c = 0; i < length; i++) {
+        select.options[c] = null;
+        console.log(`select.options[${c}] ${select.options[c]}`)
+    }
+}
+function getPositionById(id){
+    for(let i = 0 ; i < alderman_list.length;i++){
+        if(id === alderman_list[i].USER_ID){
+            return alderman_list[i].USER_POSITION
+        }
+    }
+}

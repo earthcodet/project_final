@@ -88,22 +88,19 @@ class RequestDAO {
             column = column + `STAFF_ID_MONEY=${request.staff_id_money}, REFERENCE_ID=${request.reference_id}, TRAIN_ID=${request.train_id}, PERSONAL_ID_ASSISTANT=${request.personal_id_assistant }, STAFF_ID_APPROVE=${request.staff_id_approve }, REQUEST_MENU='${request.menu }', `
             column = column + `REQUEST_DATE_SUBMISSION='${request.date_submission }', REQUEST_DATE_APPROVE=${request.date_approve }, REQUEST_DOC_NO1='${request.doc_no1}', REQUEST_DOC_NO2='${request.doc_no2}', REQUEST_DOC_NO3='${request.doc_no3}', `
             column = column + `REQUEST_DOC_NO4='${request.doc_no4}', REQUEST_DOC_NO5='${request.doc_no5}', REQUEST_DOC_NO6='${request.doc_no6}', REQUEST_SUBCATEGORY=${request.subcategory}, REQUEST_PRODUCT_TYPE=${request.product_type },` 
-            column = column + `REQUEST_SELL_START=${request.sell_start }, REQUEST_SELL_END=${request.sell_end}, REQUEST_SELL_ALLOW='${request.sell_allow}', REQUEST_RECEIPT_ORDER=${request.receipt_order },REQUEST_RECEIPT_ORDER_YEAR =${request.receipt_order_year}, REQUEST_RECEIPT_FINE=${request.receipt_fine }, `
+            column = column + `REQUEST_SELL_START=${request.sell_start }, REQUEST_SELL_END=${request.sell_end}, REQUEST_SELL_ALLOW='${request.sell_allow}', REQUEST_RECEIPT_FINE=${request.receipt_fine }, `
             column = column + `REQUEST_RECEIPT_FEE=${request.receipt_fee}, REQUEST_RECEIPT_TOTAL=${request.receipt_total}, REQUEST_RECEIPT_DATE=${request.receipt_date }, REQUEST_DATE_ISSUED=${request.date_issued }, REQUEST_DATE_EXPIRED=${request.date_expired }, `
             column = column + `REQUEST_CONDITION_NO_1=${request.condition_no_1}, REQUEST_CONDITION_NO_2=${request.condition_no_2}, REQUEST_CONDITION_NO_3=${request.condition_no_3}, REQUEST_CONDITION_NO_4=${request.condition_no_4}, `
             column = column + `REQUEST_IMAGE_NAME=${request.image_name }, REQUEST_TOTAL_IMAGE='${request.total_image }', REQUEST_STATUS='${request.status }', REQUEST_DELETE_LOGIC=${request.delete_logic }, REQUEST_IS_DELETED='${request.is_deleted }', `
             column = column + `REQUEST_LAST_UPDATE='${request.last_update }', REQUEST_USER_UPDATE='${request.user_update }' , `
             column = column + `REQUEST_STATUS_BEFORE='${request.status_before}', REQUEST_STATUS='${request.status}', `
             //year 1
-            column = column + `REQUEST_RECEIPT_ORDER=${request.receipt_order },REQUEST_RECEIPT_ORDER_YEAR =${request.receipt_order_year}, `
             column = column + `REQUEST_RECEIPT_FINE=${request.receipt_fine }, REQUEST_RECEIPT_FEE=${request.receipt_fee}, `
             column = column + `REQUEST_RECEIPT_TOTAL=${request.receipt_total}, REQUEST_RECEIPT_DATE=${request.receipt_date }, `
             //year 2 
-            column = column + `REQUEST_RECEIPT_ORDER_YEAR_2=${request.receipt_order_year_2 },REQUEST_RECEIPT_ORDER_YEAR_YEAR_2 =${request.receipt_order_year_year_2}, `
             column = column + `REQUEST_RECEIPT_FINE_YEAR_2=${request.receipt_fine_year_2 }, REQUEST_RECEIPT_FEE_YEAR_2=${request.receipt_fee_year_2}, `
             column = column + `REQUEST_RECEIPT_TOTAL_YEAR_2=${request.receipt_total_year_2}, REQUEST_RECEIPT_DATE_YEAR_2=${request.receipt_date_year_2 }, `
             //year 3
-            column = column + `REQUEST_RECEIPT_ORDER_YEAR_3=${request.receipt_order_year_3 },REQUEST_RECEIPT_ORDER_YEAR_YEAR_3 =${request.receipt_order_year_year_3}, `
             column = column + `REQUEST_RECEIPT_FINE_YEAR_3=${request.receipt_fine_year_3 }, REQUEST_RECEIPT_FEE_YEAR_3=${request.receipt_fee_year_3}, `
             column = column + `REQUEST_RECEIPT_TOTAL_YEAR_3=${request.receipt_total_year_3}, REQUEST_RECEIPT_DATE_YEAR_3=${request.receipt_date_year_3 }`
 
@@ -123,15 +120,12 @@ class RequestDAO {
             column = column + `REQUEST_LAST_UPDATE='${request.last_update}',REQUEST_USER_UPDATE='${request.user_update}',`
             column = column + `REQUEST_DATE_APPROVE=${request.date_approve}, STAFF_ID_APPROVE = ${request.staff_id_approve},`
              //year 1
-             column = column + `REQUEST_RECEIPT_ORDER=${request.receipt_order },REQUEST_RECEIPT_ORDER_YEAR =${request.receipt_order_year}, `
              column = column + `REQUEST_RECEIPT_FINE=${request.receipt_fine }, REQUEST_RECEIPT_FEE=${request.receipt_fee}, `
              column = column + `REQUEST_RECEIPT_TOTAL=${request.receipt_total}, REQUEST_RECEIPT_DATE=${request.receipt_date }, `
              //year 2 
-             column = column + `REQUEST_RECEIPT_ORDER_YEAR_2=${request.receipt_order_year_2 },REQUEST_RECEIPT_ORDER_YEAR_YEAR_2 =${request.receipt_order_year_year_2}, `
              column = column + `REQUEST_RECEIPT_FINE_YEAR_2=${request.receipt_fine_year_2 }, REQUEST_RECEIPT_FEE_YEAR_2=${request.receipt_fee_year_2}, `
              column = column + `REQUEST_RECEIPT_TOTAL_YEAR_2=${request.receipt_total_year_2}, REQUEST_RECEIPT_DATE_YEAR_2=${request.receipt_date_year_2 }, `
              //year 3
-             column = column + `REQUEST_RECEIPT_ORDER_YEAR_3=${request.receipt_order_year_3 },REQUEST_RECEIPT_ORDER_YEAR_YEAR_3 =${request.receipt_order_year_year_3}, `
              column = column + `REQUEST_RECEIPT_FINE_YEAR_3=${request.receipt_fine_year_3 }, REQUEST_RECEIPT_FEE_YEAR_3=${request.receipt_fee_year_3}, `
              column = column + `REQUEST_RECEIPT_TOTAL_YEAR_3=${request.receipt_total_year_3}, REQUEST_RECEIPT_DATE_YEAR_3=${request.receipt_date_year_3 },`
  

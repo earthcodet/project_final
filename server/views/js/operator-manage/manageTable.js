@@ -293,11 +293,6 @@ function payPopup() {
     <label class = 'topic' style='font-size:1.5vw'> ชำระเงิน </label> 
     <br>
     <br>
-        <a class='topic' style="margin-left: 3.7vw;"> เลขที่ </a>
-        <input type='text' id="pay_order_no"class='tabOne' style="width:8vw; margin-left:1vw" maxlength="10"onkeyup='checkOrderNo(this.value, "pay_order_no")'</input>
-        <br>
-        <a id='pay_order_no_alert' class='tabTwo alert'  style='display:none'>ช่องนี้เว้นว่างไม่ได้</a>
-        <br>
         <a class='topic' style="margin-left: 0.5vw;"> ค่าธรรมเนียม </a>
         <input type='number' id="pay_fee" class='tabOne' style="margin-left:1vw;width:8vw" maxlength="5"></input><br>
         <a id='pay_fee_alert' class='tabTwo alert'  style='display:none'>ช่องนี้เว้นว่างไม่ได้</a>
@@ -327,10 +322,6 @@ function payPopup() {
         closeOnCancel: false,
         showLoaderOnConfirm: true,
         preConfirm: function () {
-
-            let pay_order_no = document.getElementById('pay_order_no')
-            let pay_order_no_alert = document.getElementById('pay_order_no_alert')
-
             let pay_fee = document.getElementById('pay_fee')
             let pay_fee_alert = document.getElementById('pay_fee_alert')
 
@@ -341,27 +332,15 @@ function payPopup() {
             let datepicker7_alert = document.getElementById('datepicker7_alert')
 
             //เซตให้มันกลับเป็น style แบบเดิมก่อน
-            pay_order_no.classList.remove('alertInput')
             pay_fee.classList.remove('alertInput')
             pay_fine.classList.remove('alertInput')
             datepicker7.classList.remove('alertInput')
 
-            pay_order_no_alert.innerText = 'ช่องนี้เว้นว่างไม่ได้'
-            pay_order_no_alert.style.display = 'none'
             pay_fee_alert.style.display = 'none'
             pay_fine_alert.style.display = 'none'
             datepicker7_alert.style.display = 'none'
 
-            if (pay_order_no.value.trim().length != 10 || pay_fee.value.trim().length === 0 || pay_fine.value.trim().length === 0 || datepicker7.value.trim().length === 0) {
-                if (pay_order_no.value.trim().length === 0) {
-                    pay_order_no.classList.add('alertInput')
-                    pay_order_no_alert.style.display = ''
-                }
-                if (pay_order_no.value.trim().length != 10 && pay_order_no.value.trim().length > 0) {
-                    pay_order_no.classList.add('alertInput')
-                    pay_order_no_alert.style.display = ''
-                    pay_order_no_alert.innerText = 'รูปแบบเลขที่ไม่ถูกต้อง ตัวอย่าง 0000001/63'
-                }
+            if (pay_fee.value.trim().length === 0 || pay_fine.value.trim().length === 0 || datepicker7.value.trim().length === 0) {
                 if (pay_fee.value.trim().length === 0) {
                     pay_fee.classList.add('alertInput')
                     pay_fee_alert.style.display = ''
@@ -392,27 +371,18 @@ function payPopup() {
                                 inRequest.receipt_date = document.getElementById('datepicker7').value
                                 inRequest.receipt_fine = document.getElementById('pay_fine').value
                                 inRequest.receipt_fee = document.getElementById('pay_fee').value
-                                let receipt_id = document.getElementById('pay_order_no').value
-                                inRequest.receipt_order = receipt_id.slice(0, 7)
-                                inRequest.receipt_order_year = receipt_id.slice(8, 10)
                                 inRequest.status_before = inRequest.status
                                 inRequest.status = 'active'
                             } else if (year - year_now === 2) {
                                 inRequest.receipt_date_year_2 = document.getElementById('datepicker7').value
                                 inRequest.receipt_fine_year_2 = document.getElementById('pay_fine').value
                                 inRequest.receipt_fee_year_2 = document.getElementById('pay_fee').value
-                                let receipt_id = document.getElementById('pay_order_no').value
-                                inRequest.receipt_order_year_2 = receipt_id.slice(0, 7)
-                                inRequest.receipt_order_year_year_2 = receipt_id.slice(8, 10)
                                 inRequest.status_before = inRequest.status
                                 inRequest.status = 'active'
                             } else {
                                 inRequest.receipt_date_year_3 = document.getElementById('datepicker7').value
                                 inRequest.receipt_fine_year_3 = document.getElementById('pay_fine').value
                                 inRequest.receipt_fee_year_3 = document.getElementById('pay_fee').value
-                                let receipt_id = document.getElementById('pay_order_no').value
-                                inRequest.receipt_order_year_3 = receipt_id.slice(0, 7)
-                                inRequest.receipt_order_year_year_3 = receipt_id.slice(8, 10)
                                 inRequest.status_before = inRequest.status
                                 inRequest.status = 'active'
                             }
@@ -431,9 +401,6 @@ function payPopup() {
                             inRequest.receipt_date = document.getElementById('datepicker7').value
                             inRequest.receipt_fine = document.getElementById('pay_fine').value
                             inRequest.receipt_fee = document.getElementById('pay_fee').value
-                            let receipt_id = document.getElementById('pay_order_no').value
-                            inRequest.receipt_order = receipt_id.slice(0, 7)
-                            inRequest.receipt_order_year = receipt_id.slice(8, 10)
                             inRequest.status_before = inRequest.status
                             inRequest.status = 'active'
                             let object = getDateExp(inRequest.menu,document.getElementById('datepicker7').value )

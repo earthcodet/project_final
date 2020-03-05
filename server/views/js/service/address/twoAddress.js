@@ -188,7 +188,7 @@ function runForm() {
             })
         })
     })
-  
+
 }
 
 
@@ -226,4 +226,11 @@ function getDistrictIdByName(district_name, amphur_id) {
             return district[i].DISTRICT_ID
         }
     }
+}
+
+function resetTwoAddress() {
+    amphurSelect(1)
+    wamphurSelect(1)
+    districtSelect(addressAmphur[0].AMPHUR_ID)
+    wdistrictSelect(buiddingAmphur[0].AMPHUR_ID)
 }
