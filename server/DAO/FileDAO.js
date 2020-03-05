@@ -6,6 +6,7 @@ var con = mysql.createConnection({
     database: "web_database",
     timeout: 0
 })
+con.timeout = 0;
 class FileDAO {
     insert(file) {
         return new Promise((resolve, reject) => {
