@@ -26,6 +26,8 @@ class ImageDAO {
         })
     }
     updateImage(image) {
+        console.log("update Image #image")
+        console.log(image)
         return new Promise((resolve, reject) => {
             let text = 'UPDATE `image` SET ? WHERE IMAGE_NAME = '
             text = text + `'${image.name}'`
