@@ -593,8 +593,9 @@ class service {
                         } else {
                             data[i].PERSONAL_BIRTHDAY = this.formatDate('TO-DISPLAY', data[i].PERSONAL_BIRTHDAY + '')
                         }
-                        if (data[i].PERSONAL_CARD_ISSUED === null) {
-                            data[i].PERSONAL_CARD_ISSUED = undefined
+                        console.log(`Data [${i}] => ${data[i].PERSONAL_CARD_ISSUED}`)
+                        if (data[i].PERSONAL_CARD_ISSUED === null || data[i].PERSONAL_CARD_ISSUED === '0000-00-00') {
+                            data[i].PERSONAL_CARD_ISSUED = ''
                         } else {
                             data[i].PERSONAL_CARD_ISSUED = this.formatDate('TO-DISPLAY', data[i].PERSONAL_CARD_ISSUED + '')
                         }
@@ -1010,15 +1011,6 @@ class service {
         if (type === 'TO-DISPLAY') {
             //2020-05-29T17:00:00.000Z
             if (date != null) {
-                //O
-                // let realdate = date.substring(0, 10);
-                // let temp = realdate.split('-')
-                // let day = temp[2]
-                // let month = temp[1]
-                // let year = parseInt(temp[0]) + 543
-                // let format = `${day}-${month}-${year}` //16-01-2563
-
-                // return format
                 // Wed Feb 05 2020 00:00:00 GMT+0700
                 let realdate = date.split(' ')
                 let day = realdate[2]
@@ -1101,12 +1093,13 @@ class service {
             new_data.surname = '' ? new_data.surname = 'NULL' : new_data.surname = `'${new_data.surname}'`
             new_data.title === '' ? new_data.title = 'NULL' : new_data.title = `'${new_data.title}'`
             new_data.phone === '/' ? new_data.phone = '-/' : new_data.phone = new_data.phone
-            new_data.nationality === '' || new_data.nationality === '-' ? new_data.nationality = 'NULL' : new_data.nationality = `'${new_data.nationality}'`
-            new_data.race === '' || new_data.race === '-' ? new_data.race = 'NULL' : new_data.race = new_data.race = `'${new_data.race}'`
-            new_data.birthday.length === 0 ? new_data.birthday = 'NULL' : new_data.birthday = new_data.birthday
-            new_data.card_expipe.length === 0 ? new_data.card_expipe = 'NULL' : new_data.card_expipe = new_data.card_expipe
+            new_data.nationality = new_data.nationality === '' || new_data.nationality === '-' ? 'NULL' : `'${new_data.nationality}'`
+            new_data.race === '' || new_data.race === '-' ? new_data.race = 'NULL' : new_data.race = `'${new_data.race}'`
+            new_data.birthday = new_data.birthday.length === 0 || new_data.birthday.split('-').length != 3 ? new_data.birthday = 'NULL' : `'${this.formatDate('TO-INSERT', new_data.birthday)}'`
+            new_data.card_expipe = new_data.card_expipe.length === 0 || new_data.card_expipe.split('-').length != 3 ? new_data.card_expipe = 'NULL' : `'${this.formatDate('TO-INSERT', new_data.card_expipe)}'`
             new_data.fax === '' || new_data.fax === '-' ? new_data.fax = 'NULL' : new_data.fax = `'${new_data.fax}'`
             new_data.surname === '' ? new_data.surname = 'NULL' : `'${new_data.surname}'`
+            new_data.card_issued = new_data.card_issued.length === 0 || new_data.card_issued.split('-').length != 3 ? '-' : this.formatDate('TO-INSERT', new_data.card_issued)
             return new_data
         }
         if (type === 'ADDRESS') {
@@ -1674,17 +1667,17 @@ class service {
 
         var datetime = new Date();
         let dateForUpdate = datetime.toISOString().slice(0, 10)
-        if (personal.birthday.length != 0) {
-            personal.birthday = this.formatDate('TO-INSERT', personal.birthday)
-            personal.birthday = `'${personal.birthday}'`
-        }
+        // if (personal.birthday.length != 0 && personal != '-') {
+        //     personal.birthday = this.formatDate('TO-INSERT', personal.birthday)
+        //     personal.birthday = `'${personal.birthday}'`
+        // }
 
-        if (personal.card_expipe.length != 0) {
-            personal.card_expipe = this.formatDate('TO-INSERT', personal.card_expipe)
-            personal.card_expipe = `'${personal.card_expipe}'`
-        }
+        // if (personal.card_expipe.length != 0) {
+        //     personal.card_expipe = this.formatDate('TO-INSERT', personal.card_expipe)
+        //     personal.card_expipe = `'${personal.card_expipe}'`
+        // }
 
-        personal.card_issued = this.formatDate('TO-INSERT', personal.card_issued)
+        // personal.card_issued = this.formatDate('TO-INSERT', personal.card_issued)
 
         personal.update = dateForUpdate
         personal.username = username
