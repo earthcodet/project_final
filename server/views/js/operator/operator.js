@@ -132,11 +132,11 @@ function setDataUI(data) {
         document.getElementById('surnameUser').value = data.PERSONAL_SURNAME === undefined || data.PERSONAL_SURNAME === null ? '' : data.PERSONAL_SURNAME
         document.getElementById('nationality').value = data.PERSONAL_NATIONALITY === undefined || data.PERSONAL_NATIONALITY === null ? '' : data.PERSONAL_NATIONALITY
         document.getElementById('race').value = data.PERSONAL_RACE === undefined || data.PERSONAL_RACE === null ? '' : data.PERSONAL_RACE
-        document.getElementById('datepicker3').value = data.PERSONAL_BIRTHDAY === undefined || data.PERSONAL_BIRTHDAY === null ? '' : data.PERSONAL_BIRTHDAY
+        document.getElementById('datepicker3').value = data.PERSONAL_BIRTHDAY === undefined || data.PERSONAL_BIRTHDAY === null ? '-' : data.PERSONAL_BIRTHDAY
         document.getElementById('id').value = data.PERSONAL_PERSONAL_ID
-        document.getElementById('datepicker1').value = data.PERSONAL_CARD_ISSUED
+        document.getElementById('datepicker1').value = data.PERSONAL_CARD_ISSUED === undefined ? '-' : data.PERSONAL_CARD_ISSUED
         //radioLife()
-        document.getElementById('datepicker2').value = data.PERSONAL_CARD_EXPIRE === undefined || data.PERSONAL_CARD_EXPIRE === null ? '' : data.PERSONAL_CARD_EXPIRE
+        document.getElementById('datepicker2').value = data.PERSONAL_CARD_EXPIRE === undefined || data.PERSONAL_CARD_EXPIRE === null ? '-' : data.PERSONAL_CARD_EXPIRE
         data.PERSONAL_CARD_EXPIRE === undefined ? radioLife() : ''
         let phone_t = data.PERSONAL_PHONE.split('/')
         document.getElementById('phone_more').disabled = false
@@ -178,7 +178,7 @@ function setDataUI(data) {
         inImage.name = 'NO_UPlOAD'
         document.getElementById('company-nameUser').value = data.PERSONAL_NAME
         document.getElementById('company-id').value = data.PERSONAL_PERSONAL_ID
-        document.getElementById('datepicker4').value = data.PERSONAL_CARD_ISSUED
+        document.getElementById('datepicker4').value = data.PERSONAL_CARD_ISSUED === undefined ? '-' : data.PERSONAL_CARD_ISSUED
         let phone_t = data.PERSONAL_PHONE.split('/')
         console.log(`phone_t`)
         console.log(phone_t)

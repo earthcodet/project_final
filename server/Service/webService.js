@@ -595,7 +595,7 @@ class service {
                         }
                         console.log(`Data [${i}] => ${data[i].PERSONAL_CARD_ISSUED}`)
                         if (data[i].PERSONAL_CARD_ISSUED === null || data[i].PERSONAL_CARD_ISSUED === '0000-00-00') {
-                            data[i].PERSONAL_CARD_ISSUED = ''
+                            data[i].PERSONAL_CARD_ISSUED = undefined
                         } else {
                             data[i].PERSONAL_CARD_ISSUED = this.formatDate('TO-DISPLAY', data[i].PERSONAL_CARD_ISSUED + '')
                         }
