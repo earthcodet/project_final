@@ -83,6 +83,9 @@ class RequestDAO {
     }
     //UPDATE personal SET ${value} WHERE PERSONAL_ID='${personal.id}'\
     update(request){
+        console.log(`-------- DATABASE -------`)
+        console.log(request)
+        console.log(`-------- DATABASE -------`)
         return new Promise((resolve, reject) => {
             let column = `PERSONAL_ID_OWNER='${request.personal_id_owner}', REQUEST_TYPE_ID='${request.request_type_id}', STAFF_ID_ALDERMAN='${request.staff_id_alderman}', ESTABLISHMENT_ID='${request.establishment_id}', `
             column = column + `STAFF_ID_MONEY=${request.staff_id_money}, REFERENCE_ID=${request.reference_id}, TRAIN_ID=${request.train_id}, PERSONAL_ID_ASSISTANT=${request.personal_id_assistant }, STAFF_ID_APPROVE=${request.staff_id_approve }, REQUEST_MENU='${request.menu }', `

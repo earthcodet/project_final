@@ -61,11 +61,13 @@ function deleteImage() {
     selectImageFile = selectImageFile - 1
 }
 function deleteImageAllRequest() {
-    document.getElementById('outputImage').textContent = ''
-    totalFiles = []
-    document.getElementById('uploadFile').value = ''
-    selectImageFile = 0
-    selectImageFile = 0
+    if(document.getElementById('outputImage') != undefined){
+        document.getElementById('outputImage').textContent = ''
+        totalFiles = []
+        document.getElementById('uploadFile').value = ''
+        selectImageFile = 0
+        selectImageFile = 0
+    }
 }
 
 const month = {

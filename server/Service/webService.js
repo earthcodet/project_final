@@ -1099,7 +1099,7 @@ class service {
             new_data.card_expipe = new_data.card_expipe.length === 0 || new_data.card_expipe.split('-').length != 3 ? new_data.card_expipe = 'NULL' : `'${this.formatDate('TO-INSERT', new_data.card_expipe)}'`
             new_data.fax === '' || new_data.fax === '-' ? new_data.fax = 'NULL' : new_data.fax = `'${new_data.fax}'`
             new_data.surname === '' ? new_data.surname = 'NULL' : `'${new_data.surname}'`
-            new_data.card_issued = new_data.card_issued.length === 0 || new_data.card_issued.split('-').length != 3 ? '-' : this.formatDate('TO-INSERT', new_data.card_issued)
+            new_data.card_issued =new_data.card_issued === undefined || (new_data.card_issued != undefined ? new_data.card_issued.length === 0 : false)|| new_data.card_issued.split('-').length != 3 ? '-' : this.formatDate('TO-INSERT', new_data.card_issued)
             return new_data
         }
         if (type === 'ADDRESS') {
@@ -1185,9 +1185,10 @@ class service {
             } else {
                 new_data.receipt_total_year_3 = 0
             }
-            new_data.receipt_fine_year_3 = new_data.receipt_fine_year_3 === '-' || new_data.receipt_fine_year_3 === '' ? 'NULL' : new_data.receipt_fine_year_3
-            new_data.receipt_fee_year_3 = new_data.receipt_fee_year_3 === '-' || new_data.receipt_fee_year_3 === '' ? 'NULL' : new_data.receipt_fee_year_3
-            new_data.receipt_date_year_3 = new_data.receipt_date_year_3 === '-' || new_data.receipt_date_year_3 === '' ? 'NULL' : `'${this.formatDate('TO-INSERT', new_data.receipt_date_year_3)}'`
+            console.log(` new_data.receipt_fine_year_3 ${ new_data.receipt_fine_year_3}`)
+            new_data.receipt_fine_year_3 = new_data.receipt_fine_year_3 === '-' || new_data.receipt_fine_year_3 === '' || new_data.receipt_fine_year_3 === undefined ? 'NULL' : new_data.receipt_fine_year_3
+            new_data.receipt_fee_year_3 = new_data.receipt_fee_year_3 === '-' || new_data.receipt_fee_year_3 === '' || new_data.receipt_fee_year_3 === undefined ? 'NULL' : new_data.receipt_fee_year_3
+            new_data.receipt_date_year_3 = new_data.receipt_date_year_3 === '-' || new_data.receipt_date_year_3 === '' || new_data.receipt_date_year_3 === undefined ? 'NULL' : `'${this.formatDate('TO-INSERT', new_data.receipt_date_year_3)}'`
 
 
 
@@ -1201,6 +1202,9 @@ class service {
 
             new_data.image_name = new_data.image_name === '-' || new_data.image_name === '' ? 'NULL' : `'${new_data.image_name}'`
             new_data.delete_logic = new_data.delete_logic === '-' || new_data.delete_logic === '' ? 'NULL' : `'${new_data.delete_logic}'`
+            console.log('$$$$$$$$$$$$$$ --- format Insert -- $$$$$$$$$$$$$$$$')
+            console.log(new_data)
+            console.log('$$$$$$$$$$$$$$ --- format Insert -- $$$$$$$$$$$$$$$$')
             return new_data
         }
         if (type === 'USER') {
@@ -1893,6 +1897,7 @@ class service {
     updateRequest(request) {
         console.log('---- Request Update ----')
         console.log(request)
+        request.image_name = `${request.no}/${request.year}`
         console.log('E---- Request Update ----')
         return new Promise((resolve, reject) => {
             RequestDAOObj.update(this.formatInsert('REQUEST', request)).then((data) => {

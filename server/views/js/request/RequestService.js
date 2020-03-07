@@ -76,7 +76,9 @@ function checkFormatMoneyId(value) {
 // setDataView
 function setDataView() {
     document.getElementById('documentName2').readOnly = true
-    document.getElementById('print_new_doc').style.display = 'none'
+    if(document.getElementById('print_new_doc') != undefined){
+        document.getElementById('print_new_doc').style.display = 'none'
+    }
     createImage(imageDisplayFormDatabase)
     console.log('requestData.status ' + requestData.status)
     if (requestData.status === 'approval' || requestData.status === 'active') {
@@ -144,8 +146,9 @@ function setDataView() {
         console.log(documentName3)
         document.getElementById('documentName3').value = requestData.staff_id_alderman
         document.getElementById('position').value = getPositionById(requestData.staff_id_alderman)
-
-        document.getElementById('print_new_doc').style.display = ''
+        if(document.getElementById('print_new_doc') != undefined){
+            document.getElementById('print_new_doc').style.display = ''
+        }
 
     }
 
@@ -655,7 +658,7 @@ function setOperatorData(raw_data) {
     operatorData.race = raw_data.PERSONAL_RACE === null ? '' : raw_data.PERSONAL_RACE
     operatorData.birthday = raw_data.PERSONAL_BIRTHDAY === null || raw_data.PERSONAL_BIRTHDAY === undefined ? '-' : raw_data.PERSONAL_BIRTHDAY
     operatorData.personal_id = raw_data.PERSONAL_PERSONAL_ID
-    operatorData.card_issued = raw_data.PERSONAL_CARD_ISSUED === '0000-00-00' ? '-' : raw_data.PERSONAL_CARD_ISSUED
+    operatorData.card_issued = raw_data.PERSONAL_CARD_ISSUED === '0000-00-00' || raw_data.PERSONAL_CARD_ISSUED === undefined ? '-' : raw_data.PERSONAL_CARD_ISSUED
     operatorData.card_expipe = raw_data.PERSONAL_CARD_EXPIRE === undefined || raw_data.PERSONAL_CARD_EXPIRE === null ? '-' : raw_data.PERSONAL_CARD_EXPIRE
     operatorData.phone = raw_data.PERSONAL_PHONE
     operatorData.fax = raw_data.PERSONAL_FAX === null ? '' : raw_data.PERSONAL_FAX
