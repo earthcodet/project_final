@@ -81,24 +81,24 @@ function setDataView() {
     console.log('requestData.status ' + requestData.status)
     if (requestData.status === 'approval' || requestData.status === 'active') {
         if (document.getElementById('bFeeY2') != undefined) {
-            if(requestData.receipt_date_year_2 === ''){
+            if (requestData.receipt_date_year_2 === '') {
                 document.getElementById('datepicker10').value = requestData.receipt_date_year_2
                 document.getElementById('bFeeY2').value = requestData.receipt_fee_year_2 === 0 ? '' : requestData.receipt_fee_year_2
                 document.getElementById('bFineY2').value = requestData.receipt_fine_year_2 === 0 ? '' : requestData.receipt_fine_year_2
-            }else{
+            } else {
                 document.getElementById('datepicker10').value = requestData.receipt_date_year_2
-            document.getElementById('bFeeY2').value = requestData.receipt_fee_year_2
-            document.getElementById('bFineY2').value = requestData.receipt_fine_year_2
+                document.getElementById('bFeeY2').value = requestData.receipt_fee_year_2
+                document.getElementById('bFineY2').value = requestData.receipt_fine_year_2
             }
-            
-            if(requestData.receipt_date_year_3 === ''){
+
+            if (requestData.receipt_date_year_3 === '') {
                 document.getElementById('datepicker11').value = requestData.receipt_date_year_3
                 document.getElementById('bFeeY3').value = requestData.receipt_fee_year_3 === 0 ? '' : requestData.receipt_fee_year_3
-                document.getElementById('bFineY3').value = requestData.receipt_fine_year_3 === 0 ? '' : requestData.receipt_fine_year_3  
-            }else{
+                document.getElementById('bFineY3').value = requestData.receipt_fine_year_3 === 0 ? '' : requestData.receipt_fine_year_3
+            } else {
                 document.getElementById('datepicker11').value = requestData.receipt_date_year_3
-                document.getElementById('bFeeY3').value = requestData.receipt_fee_year_3 
-                document.getElementById('bFineY3').value = requestData.receipt_fine_year_3 
+                document.getElementById('bFeeY3').value = requestData.receipt_fee_year_3
+                document.getElementById('bFineY3').value = requestData.receipt_fine_year_3
             }
             //cancle disable false
             // document.getElementById('bFeeY2').disabled = false
@@ -109,34 +109,34 @@ function setDataView() {
             // document.getElementById('bFeeY3').disabled = false
             // document.getElementById('bFineY3').disabled = false
         }
-        if(requestData.receipt_date === ''){
+        if (requestData.receipt_date === '') {
             document.getElementById('datepicker2').value = requestData.receipt_date
             document.getElementById('bFee').value = requestData.receipt_fee === 0 ? '' : requestData.receipt_fee
             document.getElementById('bFine').value = requestData.receipt_fine === 0 ? '' : requestData.receipt_fine
-        }else{
+        } else {
             document.getElementById('datepicker2').value = requestData.receipt_date
-            document.getElementById('bFee').value = requestData.receipt_fee 
-            document.getElementById('bFine').value = requestData.receipt_fine 
+            document.getElementById('bFee').value = requestData.receipt_fee
+            document.getElementById('bFine').value = requestData.receipt_fine
         }
-       
+
 
         //cancle disable false
         // document.getElementById('datepicker2').disabled = false
         // document.getElementById('bFee').disabled = false
         // document.getElementById('bFine').disabled = false
-      
+
         // document.getElementById('documentName2').disabled = false
-       
-        
+
+
         console.log('requestData.staff_id_money')
         console.log(requestData.staff_id_money)
         console.log(requestData.staff_id_money === '')
-        
 
-        if(requestData.staff_id_money === ''){
-            resetOptionitem('documentName2',size_money_list)
+
+        if (requestData.staff_id_money === '') {
+            resetOptionitem('documentName2', size_money_list)
             console.log(document.getElementById('documentName2'))
-        }else{
+        } else {
             displayUserMoney(requestData.staff_id_money)
         }
 
@@ -146,7 +146,7 @@ function setDataView() {
         document.getElementById('position').value = getPositionById(requestData.staff_id_alderman)
 
         document.getElementById('print_new_doc').style.display = ''
-        
+
     }
 
 
@@ -157,7 +157,7 @@ function setDataView() {
     document.getElementById("id").value = operatorData.personal_id
     document.getElementById("name").value = `${operatorData.title} ${operatorData.name} ${operatorData.surname}`
     document.getElementById("documentName").value = `${operatorData.title} ${operatorData.name} ${operatorData.surname}`
-    document.getElementById("age").value = operatorData.birthday === '' ? '' : parseInt(getAge(operatorData.birthday))
+    document.getElementById("age").value = operatorData.birthday === '-' ? '-' : parseInt(getAge(operatorData.birthday))
     document.getElementById("nationality").value = operatorData.nationality
     document.getElementById("nationality").readOnly = operatorData.type === 'บุคคลธรรมดา' ? false : true
     document.getElementById("nationality").disabled = operatorData.type != 'บุคคลธรรมดา' ? true : false
@@ -177,19 +177,19 @@ function setDataView() {
     document.getElementById(`province`).value = provinceId
     amphurSelect(parseInt(provinceId))
     districtSelect(parseInt(amphurId))
-    
+
     document.getElementById(`district`).value = amphurId
-    if(districtId ===  undefined || districtId === ''){
+    if (districtId === undefined || districtId === '') {
         document.getElementById(`subdistrict`).innerHTML = ''
-    }else{
-        document.getElementById(`subdistrict`).value = districtId 
+    } else {
+        document.getElementById(`subdistrict`).value = districtId
     }
     let cut_phone = operatorData.phone.split('/')
-    if(cut_phone[1] === '' ){
+    if (cut_phone[1] === '') {
         document.getElementById("phone").value = cut_phone[0]
         document.getElementById('phone_more').value = ''
         document.getElementById('phone_more').disabled = true
-    }else{
+    } else {
         document.getElementById("phone").value = cut_phone[0]
         document.getElementById('phone_more').disabled = false
         document.getElementById('phone_more').value = cut_phone[1]
@@ -200,11 +200,11 @@ function setDataView() {
     document.getElementById('reference_surname').value = referenceData.surname
     document.getElementById('reference_status').value = referenceData.status
     let cut_phone_no2 = referenceData.phone.split('/')
-    if(cut_phone_no2[1] === '' ){
+    if (cut_phone_no2[1] === '') {
         document.getElementById("reference_phone").value = cut_phone_no2[0]
         document.getElementById('reference_phone_more').value = ''
         document.getElementById('reference_phone_more').disabled = true
-    }else{
+    } else {
         document.getElementById("reference_phone").value = cut_phone_no2[0]
         document.getElementById('reference_phone_more').disabled = false
         document.getElementById('reference_phone_more').value = cut_phone_no2[1]
@@ -237,18 +237,18 @@ function setDataView() {
     wamphurSelect(parseInt(provinceIdE))
     wdistrictSelect(parseInt(amphurIdE))
     document.getElementById(`wDistrict`).value = amphurIdE
-    console.log(`districtIdE ${districtIdE === undefined || districtIdE ===  ''}   ${districtIdE}`)
-    if(districtIdE === undefined || districtIdE ===  ''){
+    console.log(`districtIdE ${districtIdE === undefined || districtIdE === ''}   ${districtIdE}`)
+    if (districtIdE === undefined || districtIdE === '') {
         document.getElementById(`wSubdistrict`).innerHTML = ''
-    }else{
+    } else {
         document.getElementById(`wSubdistrict`).value = districtIdE
     }
     let cut_phone_no3 = establishmentData.phone.split('/')
-    if(cut_phone_no3[1] === '' ){
+    if (cut_phone_no3[1] === '') {
         document.getElementById("wPhone").value = cut_phone_no3[0]
         document.getElementById('wPhone_more').value = ''
         document.getElementById('wPhone_more').disabled = true
-    }else{
+    } else {
         document.getElementById("wPhone").value = cut_phone_no3[0]
         document.getElementById('wPhone_more').disabled = false
         document.getElementById('wPhone_more').value = cut_phone_no3[1]
@@ -306,11 +306,11 @@ function setDataView() {
             //วันเกิด
             document.getElementById('datepicker9').value = landData.birthday
             let cut_phone_no4 = landData.phone.split('/')
-            if(cut_phone_no4[1] === '' ){
+            if (cut_phone_no4[1] === '') {
                 document.getElementById("ownPhone").value = cut_phone_no4[0]
                 document.getElementById('ownPhone_more').value = ''
                 document.getElementById('ownPhone_more').disabled = true
-            }else{
+            } else {
                 document.getElementById("ownPhone").value = cut_phone_no4[0]
                 document.getElementById('ownPhone_more').disabled = false
                 document.getElementById('ownPhone_more').value = cut_phone_no4[1]
@@ -328,10 +328,10 @@ function setDataView() {
             onwerAmphurSelect(parseInt(provinceIdEL))
             onwerDistrictSelect(parseInt(amphurIdEL))
             document.getElementById(`ownerDistrict`).value = amphurIdEL
-            if(districtIdEL === '' || districtIdEL === undefined){
+            if (districtIdEL === '' || districtIdEL === undefined) {
                 document.getElementById(`ownerSubdistrict`).innerHTML = ''
-            }else{
-                document.getElementById(`ownerSubdistrict`).value = districtIdEL 
+            } else {
+                document.getElementById(`ownerSubdistrict`).value = districtIdEL
             }
             if (landData.status_upload_file) {
                 document.getElementById('status_upload_file').style.display = ''
@@ -380,7 +380,7 @@ function setDataOperator(raw_data, type) {
         document.getElementById("id").value = operatorData.personal_id
         document.getElementById("name").value = `${operatorData.title} ${operatorData.name} ${operatorData.surname}`
         document.getElementById("documentName").value = `${operatorData.title} ${operatorData.name} ${operatorData.surname}`
-        document.getElementById("age").value = operatorData.birthday === '' ? '' : parseInt(getAge(operatorData.birthday))
+        document.getElementById("age").value = operatorData.birthday === '-' ? '-' : parseInt(getAge(operatorData.birthday))
         document.getElementById("nationality").value = operatorData.nationality
         document.getElementById("nationality").readOnly = operatorData.type === 'บุคคลธรรมดา' ? false : true
         document.getElementById("nationality").disabled = operatorData.type != 'บุคคลธรรมดา' ? true : false
@@ -410,21 +410,21 @@ function setDataOperator(raw_data, type) {
 
         //แสดงค่าจังหวัดที่มาจาก ฐานข้อมูล (อำเภอ , ตำบล) ตาม id
         document.getElementById(`district`).value = amphurId
-        if(districtId === undefined || districtId === ''){
+        if (districtId === undefined || districtId === '') {
             document.getElementById(`subdistrict`).innerHTML = ''
-        }else{
+        } else {
             document.getElementById(`subdistrict`).value = districtId
         }
         let cut_phone_no5 = operatorData.phone.split('/')
-            if(cut_phone_no5[1] === '' ){
-                document.getElementById("phone").value = cut_phone_no5[0]
-                document.getElementById('phone_more').value = ''
-                document.getElementById('phone_more').disabled = true
-            }else{
-                document.getElementById("phone").value = cut_phone_no5[0]
-                document.getElementById('phone_more').disabled = false
-                document.getElementById('phone_more').value = cut_phone_no5[1]
-            }
+        if (cut_phone_no5[1] === '') {
+            document.getElementById("phone").value = cut_phone_no5[0]
+            document.getElementById('phone_more').value = ''
+            document.getElementById('phone_more').disabled = true
+        } else {
+            document.getElementById("phone").value = cut_phone_no5[0]
+            document.getElementById('phone_more').disabled = false
+            document.getElementById('phone_more').value = cut_phone_no5[1]
+        }
         document.getElementById("fax").value = operatorData.fax
 
 
@@ -653,10 +653,10 @@ function setOperatorData(raw_data) {
     operatorData.surname = raw_data.PERSONAL_SURNAME === null || raw_data.PERSONAL_SURNAME === undefined ? '' : raw_data.PERSONAL_SURNAME
     operatorData.nationality = raw_data.PERSONAL_NATIONALITY === null ? '' : raw_data.PERSONAL_NATIONALITY
     operatorData.race = raw_data.PERSONAL_RACE === null ? '' : raw_data.PERSONAL_RACE
-    operatorData.birthday = raw_data.PERSONAL_BIRTHDAY === null || raw_data.PERSONAL_BIRTHDAY === undefined ? '' : raw_data.PERSONAL_BIRTHDAY
+    operatorData.birthday = raw_data.PERSONAL_BIRTHDAY === null || raw_data.PERSONAL_BIRTHDAY === undefined ? '-' : raw_data.PERSONAL_BIRTHDAY
     operatorData.personal_id = raw_data.PERSONAL_PERSONAL_ID
-    operatorData.card_issued = raw_data.PERSONAL_CARD_ISSUED
-    operatorData.card_expipe = raw_data.PERSONAL_CARD_EXPIRE === undefined || raw_data.PERSONAL_CARD_EXPIRE === null ? '' : raw_data.PERSONAL_CARD_EXPIRE
+    operatorData.card_issued = raw_data.PERSONAL_CARD_ISSUED === '0000-00-00' ? '-' : raw_data.PERSONAL_CARD_ISSUED
+    operatorData.card_expipe = raw_data.PERSONAL_CARD_EXPIRE === undefined || raw_data.PERSONAL_CARD_EXPIRE === null ? '-' : raw_data.PERSONAL_CARD_EXPIRE
     operatorData.phone = raw_data.PERSONAL_PHONE
     operatorData.fax = raw_data.PERSONAL_FAX === null ? '' : raw_data.PERSONAL_FAX
 }
@@ -703,7 +703,7 @@ function createGroupData() {
         let amphurValue = parseInt(document.getElementById(`district`).value);
         let districtValue = parseInt(document.getElementById(`subdistrict`).value);
 
-        operatorAddressData.district_name = district[districtValue - 1] === undefined ? '' :district[districtValue - 1].DISTRICT_NAME;
+        operatorAddressData.district_name = district[districtValue - 1] === undefined ? '' : district[districtValue - 1].DISTRICT_NAME;
         console.log(operatorAddressData.district_name)
         operatorAddressData.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
         operatorAddressData.province_name = province[provinceValue - 1].PROVINCE_NAME;
@@ -985,9 +985,9 @@ function dataChange(type) {
             requestData.doc_no4 != doc_no_4_t ||
             requestData.doc_no5 != doc_no_5_t ||
             requestData.doc_no6 != doc_no_6_t ||
-            personal_change != false  ||
+            personal_change != false ||
             requestData.staff_id_alderman != userAlderman ||
-            requestData.staff_id_money != userMoney 
+            requestData.staff_id_money != userMoney
         ) {
             status_data_change = true
         } else {
@@ -1112,7 +1112,7 @@ function dataChange(type) {
         let provinceValue = parseInt(document.getElementById(`wProvince`).value);
         let amphurValue = parseInt(document.getElementById(`wDistrict`).value);
         let districtValue = parseInt(document.getElementById(`wSubdistrict`).value);
-        let district_name_t = district[districtValue - 1] === undefined ? '' : district[districtValue - 1].DISTRICT_NAME ;
+        let district_name_t = district[districtValue - 1] === undefined ? '' : district[districtValue - 1].DISTRICT_NAME;
         let amphur_name_t = amphur[amphurValue - 1].AMPHUR_NAME;
         let province_name_t = province[provinceValue - 1].PROVINCE_NAME;
 
@@ -1254,7 +1254,7 @@ function setDataUpdate(type) {
         // let date_y_1 = document.getElementById('datepicker2').value.trim()
         // let fee_y_1 = document.getElementById('bFee').value === 0 ? 0 : document.getElementById('bFee').value
         // let fine_y_1 = document.getElementById('bFine').value === 0 ? 0 : document.getElementById('bFine').value
-        
+
         // requestData.receipt_fine = fine_y_1
         // requestData.receipt_fee = fee_y_1
         // requestData.receipt_date = date_y_1
@@ -1302,7 +1302,7 @@ function setDataUpdate(type) {
         let provinceValue = parseInt(document.getElementById(`wProvince`).value);
         let amphurValue = parseInt(document.getElementById(`wDistrict`).value);
         let districtValue = parseInt(document.getElementById(`wSubdistrict`).value);
-        console.log(`dis no = `+districtValue)
+        console.log(`dis no = ` + districtValue)
         addressEstablishmentData.district_name = district[districtValue - 1] === undefined ? '' : district[districtValue - 1].DISTRICT_NAME;
         addressEstablishmentData.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
         addressEstablishmentData.province_name = province[provinceValue - 1].PROVINCE_NAME;
@@ -1355,37 +1355,37 @@ function setDataUpdate(type) {
 
 // getAge
 function getAge(date) {
-    console.log(date)
-    let now = new Date().toISOString().slice(0, 10) // 2020-02-16
-    let year_now = parseInt(now.slice(0, 4)) + 543
-    let month_now = parseInt(now.slice(5, 7))
-    let day_now = parseInt(now.slice(8, 10))
-    // date "08-02-2563" OR 1998-04-22T17:00:00.000Z
-    console.log(`date ${date}`)
-    let day_b = parseInt(date.slice(8, 9))
-    let month_b = parseInt(date.slice(5, 7))
-    let year_b = parseInt(date.slice(0, 4)) > 1800 && parseInt(date.slice(0, 4)) < 2200 ? parseInt(date.slice(0, 4)) + 543 : parseInt(date.slice(0, 4))
-    let age
-    if (year_b < 100) {
-        day_b = parseInt(date.slice(0, 2))
-        month_b = parseInt(date.slice(3, 5))
-        year_b = parseInt(date.slice(6, 10)) > 1800 && parseInt(date.slice(6, 10)) < 2200 ? parseInt(date.slice(6, 10)) + 543 : parseInt(date.slice(6, 10))
-    }
-    console.log(`year_b ${year_b}`)
-    console.log(`year_now ${year_now}`)
-    if (month_b === month_now && day_b === day_now) {
-        return age = year_now - year_b
-    } else if (month_now === month_b) {
-        if (day_now > day_b) {
+        let now = new Date().toISOString().slice(0, 10) // 2020-02-16
+        let year_now = parseInt(now.slice(0, 4)) + 543
+        let month_now = parseInt(now.slice(5, 7))
+        let day_now = parseInt(now.slice(8, 10))
+        // date "08-02-2563" OR 1998-04-22T17:00:00.000Z
+        console.log(`date ${date}`)
+        let day_b = parseInt(date.slice(8, 9))
+        let month_b = parseInt(date.slice(5, 7))
+        let year_b = parseInt(date.slice(0, 4)) > 1800 && parseInt(date.slice(0, 4)) < 2200 ? parseInt(date.slice(0, 4)) + 543 : parseInt(date.slice(0, 4))
+        let age
+        if (year_b < 100) {
+            day_b = parseInt(date.slice(0, 2))
+            month_b = parseInt(date.slice(3, 5))
+            year_b = parseInt(date.slice(6, 10)) > 1800 && parseInt(date.slice(6, 10)) < 2200 ? parseInt(date.slice(6, 10)) + 543 : parseInt(date.slice(6, 10))
+        }
+        console.log(`year_b ${year_b}`)
+        console.log(`year_now ${year_now}`)
+        if (month_b === month_now && day_b === day_now) {
+            return age = year_now - year_b
+        } else if (month_now === month_b) {
+            if (day_now > day_b) {
+                return age = year_now - year_b
+            } else {
+                return age = year_now - year_b - 1
+            }
+        } else if (month_now > month_b) {
             return age = year_now - year_b
         } else {
             return age = year_now - year_b - 1
         }
-    } else if (month_now > month_b) {
-        return age = year_now - year_b
-    } else {
-        return age = year_now - year_b - 1
-    }
+    
 }
 //prepare InsertData
 function createArrayInsert() {
@@ -1508,12 +1508,12 @@ function setLisetUserAlderManToUi(list_user) {
         }
     }
 }
-function changePositionAlderman(value){
+function changePositionAlderman(value) {
     userAlderman = value.USER_ID
     document.getElementById('position').value = value.USER_POSITION
 }
-function displayUserAlderman(){
-    getPresident().then((list_user) =>{
+function displayUserAlderman() {
+    getPresident().then((list_user) => {
         setLisetUserAlderManToUi(list_user)
     })
 }
@@ -1530,20 +1530,20 @@ function setLisetUserMoneyToUi(list_user) {
     console.log(list_user)
     if (list_user.length != 0) {
         for (let i = 0; i < list_user.length; i++) {
-                var select = document.getElementById("documentName2");
-                var option = document.createElement("option");
-                let item = list_user[i]
-                option.text = `${item.USER_TITLE} ${item.USER_NAME} ${item.USER_SURNAME}`
-                option.value = list_user[i].USER_ID;
-        
-                select.onchange = function () { userMoney = this.value};
-                select.add(option);
-            
+            var select = document.getElementById("documentName2");
+            var option = document.createElement("option");
+            let item = list_user[i]
+            option.text = `${item.USER_TITLE} ${item.USER_NAME} ${item.USER_SURNAME}`
+            option.value = list_user[i].USER_ID;
+
+            select.onchange = function () { userMoney = this.value };
+            select.add(option);
+
         }
     }
 }
-function displayUserMoney(id){
-    getUserMoney(id).then((list_user) =>{
+function displayUserMoney(id) {
+    getUserMoney(id).then((list_user) => {
         setLisetUserMoneyToUi(list_user)
     })
 }
@@ -1560,7 +1560,7 @@ function getRequestType(type) {
 }
 
 function setRequsetType(type) {
-    runForm().then((data) =>{
+    runForm().then((data) => {
         document.getElementById('documentName3').disabled = false
         getRequestType(type).then((data_test) => {
             addRequestTypeToDatalist()
@@ -1691,7 +1691,7 @@ function base64toBlob(base64Data, contentType) {
     return new Blob(byteArrays, { type: contentType });
 }
 
-function resetOptionitem(id,length) {
+function resetOptionitem(id, length) {
     console.log(`resetOptionitem ${id}`)
     var select = document.getElementById(id);
     console.log(`length ${length}`)
@@ -1700,9 +1700,9 @@ function resetOptionitem(id,length) {
         console.log(`select.options[${c}] ${select.options[c]}`)
     }
 }
-function getPositionById(id){
-    for(let i = 0 ; i < alderman_list.length;i++){
-        if(id === alderman_list[i].USER_ID){
+function getPositionById(id) {
+    for (let i = 0; i < alderman_list.length; i++) {
+        if (id === alderman_list[i].USER_ID) {
             return alderman_list[i].USER_POSITION
         }
     }

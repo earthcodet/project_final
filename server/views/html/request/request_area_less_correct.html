@@ -139,7 +139,7 @@
                                 maxlength="13" style="width: 13%;"></a>
                         <a>อายุ :
                             <input type="text" id="age" readonly
-                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
                                 maxlength="3" style="width: 7%;"></a>
                         <a>สัญชาติ :
                             <input class="drop" list="nationality1" id="nationality" name="" style="width: 7%;"

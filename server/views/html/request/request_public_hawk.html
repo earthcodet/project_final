@@ -151,7 +151,7 @@
                                     document.getElementById('id').classList.remove('alertInput')"></a>
                     <a>อายุ :
                         <input type="text" id="age" readonly
-                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
                             maxlength="3" style="width: 7%;"
                             onchange="document.getElementById('age').classList.remove('alertInput')"></a>
                     <a>สัญชาติ :
