@@ -695,6 +695,7 @@ function setDataItem(data) {
     inRequest.no = checkNullReturn(data.REQUEST_NO)
     inRequest.year = checkNullReturn(data.REQUEST_YEAR)
     inRequest.menu = data.REQUEST_MENU
+    inRequest.establishment_id = data.ESTABLISHMENT_ID
 }
 function checkNullReturn(item) {
     let temp = item === null ? '' : item

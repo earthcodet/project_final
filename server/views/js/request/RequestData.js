@@ -254,6 +254,7 @@ function resetRequestData() {
         delete_logic: '',
         is_deleted: '',
         last_update: '',
+        status_before:'wait',
         username: ''
 
     }

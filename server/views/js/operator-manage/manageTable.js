@@ -110,7 +110,7 @@ function approvalPopup() {
     $('#datepicker5').keyup(function () {
         formatDate(this.value, 'datepicker5')
     });
-    displayUserInformation('app_name')
+    displayUserInformation('app_name','information')
 }
 //ยกเลิก
 function canclePopup() {
@@ -293,19 +293,23 @@ function payPopup() {
     <label class = 'topic' style='font-size:1.5vw'> ชำระเงิน </label> 
     <br>
     <br>
-        <a class='topic' style="margin-left: 0.5vw;"> ค่าธรรมเนียม </a>
+        <a class='topic' style="margin-left: 0.5vw;"> ค่าธรรมเนียม  <font color="red">*</font></a>
         <input type='number' id="pay_fee" class='tabOne' style="margin-left:1vw;width:8vw" maxlength="5"></input><br>
         <a id='pay_fee_alert' class='tabTwo alert'  style='display:none'>ช่องนี้เว้นว่างไม่ได้</a>
         <br>
-        <a class='topic' style="margin-left: 3vw;"> ค่าปรับ </a>
+        <a class='topic' style="margin-left: 3vw;"> ค่าปรับ  <font color="red">*</font></a>
         <input type='number' id="pay_fine" class='tabOne' style="margin-left:1vw;width:8vw" maxlength="5"></input><br>
         <a id='pay_fine_alert' class='tabTwo alert'  style='display:none'>ช่องนี้เว้นว่างไม่ได้</a>
         <br>
-        <a class='topic' style="margin-left: 0.3vw;"> ออกให้เมื่อวันที่ </a>
+        <a class='topic' style="margin-left: 0.3vw;"> ออกให้เมื่อวันที่ <font color="red">*</font></a>
         <input type='text' id="datepicker7" class='tabOne' style="margin-left:0.5vw;width:8vw" maxlength="10" ></input><br>
         <a id='datepicker7_alert' class='tabTwo alert'  style='display:none'>ช่องนี้เว้นว่างไม่ได้</a>
         <br>
+        <a class='topic' style="margin-left: 0.3vw;"> ชื่อพนักงานผู้รับเงิน <font color="red">*</font></a>
+        <select id="app_name_money" class='tabOne' style="margin-left:0.5vw;width:  14vw   " ; maxlength="150" ></select>
+        <br>
         <br>    
+      
 </div>
 `
     Swal.fire({
@@ -359,6 +363,7 @@ function payPopup() {
             } else {
                 return new Promise(function (resolve, reject) {
                     setTimeout(function () {
+                        inRequest.staff_id_money = document.getElementById('app_name_money').value
                         if (inRequest.date_expired != '') {
                             let object = getDateExp(inRequest.menu,document.getElementById('datepicker7').value )
                             inRequest.date_expired = object.date_exp
@@ -450,8 +455,9 @@ function payPopup() {
     $('#datepicker7').keyup(function () {
         formatDate(this.value, 'datepicker7')
     });
+    displayUserInformation('app_name_money','money')
 }
-//โอนใบอนุญาติ
+//โอนใบอนุญาติ *
 function transferPopup() {
     Swal.fire({
         title: 'ต้องการโอนใบอนุญาตหรือไม่',
@@ -484,7 +490,7 @@ function transferPopup() {
         }
     });
 }
-//ยกเลิกสถานะ
+//ยกเลิกสถานะ 
 function cancelStatus() {
     Swal.fire({
         title: 'ต้องการยกเลิกใบอนุญาตหรือไม่',
@@ -860,9 +866,9 @@ function updateRequest() {
         })
     })
 }
-function getUserInformation() {
+function getUserInformation(type) {
     return new Promise((resolve, reject) => {
-        axios.get(`http://localhost:5000/get/user/information`).then((result) => {
+        axios.get(`http://localhost:5000/get/user/${type}`).then((result) => {
             return resolve(result.data);
         })
     })
@@ -871,7 +877,7 @@ function setLisetUserInformationToUi(list_user, id) {
     if (list_user.length != 0) {
         document.getElementById(id).innerHTML = ''
         for (let i = 0; i < list_user.length; i++) {
-            var select = document.getElementById("app_name");
+            var select = document.getElementById(id);
             var option = document.createElement("option");
             let item = list_user[i]
             option.text = `${item.USER_TITLE} ${item.USER_NAME} ${item.USER_SURNAME}`
@@ -882,8 +888,8 @@ function setLisetUserInformationToUi(list_user, id) {
         }
     }
 }
-function displayUserInformation(id) {
-    getUserInformation().then((list_user) => {
+function displayUserInformation(id,type) {
+    getUserInformation(type).then((list_user) => {
         console.log(`'get'`)
         setLisetUserInformationToUi(list_user, id)
     })
