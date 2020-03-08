@@ -174,7 +174,7 @@ app.post('/update/status/delete', (req, res) => {
     res.json(data)
   })
 })
-app.get('/search/personal/:id/:name/:surname', (req, res) => {
+app.get('/search/personal/:id/:name/:surname/all', (req, res) => {
   if (req.params.id === 'none') {
     req.params.id = ''
   }
@@ -185,6 +185,22 @@ app.get('/search/personal/:id/:name/:surname', (req, res) => {
     req.params.surname = ''
   }
   webService.searchOperator(req.params.id, req.params.name, req.params.surname).then((data) => {
+    console.log(`servar : function searchOperator return = ${data}`)
+    res.json(data)
+  })
+})
+
+app.get('/search/personal/:id/:name/:surname/', (req, res) => {
+  if (req.params.id === 'none') {
+    req.params.id = ''
+  }
+  if (req.params.name === 'none') {
+    req.params.name = ''
+  }
+  if (req.params.surname === 'none') {
+    req.params.surname = ''
+  }
+  webService.searchOperatorDisplay(req.params.id, req.params.name, req.params.surname).then((data) => {
     console.log(`servar : function searchOperator return = ${data}`)
     res.json(data)
   })

@@ -148,6 +148,21 @@ class PersonalDAO {
             })
         })
     }
+    getPersonalStatusN(id, name, surname) {
+        return new Promise((resolve, reject) => {
+            // let value = 'PERSONAL_TITLE,PERSONAL_NAME,PERSONAL_SURNAME,PERSONAL_PERSONAL_ID,ADDRESS_ID'
+            let value = '*'
+            let condition = `PERSONAL_PERSONAL_ID LIKE '%${id}%' AND PERSONAL_NAME LIKE '%${name}%' AND PERSONAL_SURNAME LIKE '%${surname}%' AND PERSONAL_IS_DELETED = 'N'`
+            let query = `SELECT ${value} FROM personal WHERE ${condition}`
+            con.query(query, function (err, result) {
+                if (err) {
+                    console.log(err.code)
+                } else {
+                    return resolve(result)
+                }
+            })
+        })
+    }
 }
 
 

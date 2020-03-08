@@ -277,6 +277,10 @@ function resetStyleIdDelete() {
     if (company_id != undefined || company_id != null) {
         company_id.style.textDecoration = ''
     }
+    var shot_id = document.getElementById('shot_personal_id')
+    if (shot_id != undefined || shot_id != null) {
+        shot_id.style.textDecoration = ''
+    }
 }
 function resetImageDefault() {
     document.getElementById('uploadFile').value = ''
@@ -304,6 +308,12 @@ function setIdDelete(type) {
             }
         }
     }
+    var shot_id = document.getElementById('shot_personal_id')
+    if (shot_id.style.textDecoration === '') {
+        shot_id.style.textDecoration = 'line-through'
+    } else {
+        shot_id.style.textDecoration = ''
+    }
 }
 function searchPersonal() {
     let id = document.getElementById('popSearchId').value.trim()
@@ -327,7 +337,7 @@ function searchPersonal() {
             tSearchId = id
             tSearchSurname = surname
             console.log('Searching')
-            axios.get(`http://localhost:5000/search/personal/${id}/${name}/${surname}`).then((result) => {
+            axios.get(`http://localhost:5000/search/personal/${id}/${name}/${surname}/all`).then((result) => {
                 if (result.data != 'Not found') {
                     createResultSearch(result.data)
                     errorSearch('', 'HIDE')

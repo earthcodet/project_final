@@ -543,7 +543,7 @@ function cancelStatus() {
         }
     });
 }
-//เพิ่มใบอนุญาต
+//เพิ่มใบอนุญาต *
 function addPopup(type_menu) {
     console.log(event)
     let html_display = `
@@ -623,7 +623,8 @@ function statusDelete() {
         html: 'ผู้ประกอบการนี้อยู่ในสถานะยกเลิก',
         width: '30%',
         customClass: 'swal-height',
-        icon: 'warning'
+        icon: 'warning', 
+        confirmButtonColor: "#009688"
     })
 }
 let controlPage = {
@@ -792,17 +793,12 @@ $(function () {
                 if (key === 'cancel-status') {
                     cancelStatus()
                 }
-                if (key === 'delete') {
-                    canclePopup(type)
-                }
             }
 
         },
         items: {
             "detail": { name: "ดูรายละเอียด" },
-            "cancel-status": { name: "ยกเลิกสถานะ" },
-            "delete": { name: "ยกเลิก" }
-
+            "cancel-status": { name: "ยกเลิกสถานะ" }
         },
         autoHide: true
     });

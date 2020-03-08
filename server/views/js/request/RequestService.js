@@ -56,7 +56,7 @@ function checkView(typeForm) {
                         console.log(`assistantOperatorData`)
                         console.log(assistantOperatorData)
                         setDataView()
-                        changeStatusMenuData(requestData.status) // RequestControl.js < switch menu to data === true
+                        
 
                     }
                 })
@@ -381,6 +381,8 @@ function setDataView() {
             document.getElementById('datepicker6').value = trianData.date_issued
         }
     }
+    
+    changeStatusMenuData(requestData.status) // RequestControl.js < switch menu to data === true
 }
 // set data form database 
 function setDataOperator(raw_data, type) {
@@ -566,30 +568,34 @@ function setRequestData(raw_data) {
 
 }
 function setEstablishmentData(raw_data) {
-    establishmentData.id = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_ID
-    establishmentData.address_id = raw_data.ESTABLISHMENT_DATA.ADDRESS_ID
-    establishmentData.perosonal_id = raw_data.ESTABLISHMENT_DATA.PERSONAL_ID
-    establishmentData.type = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_TYPE === null ? '' : raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_TYPE
-    establishmentData.name = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_NAME === null ? '' : raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_NAME
-    establishmentData.is_land_owned = raw_data.ESTABLISHMENT_IS_LAND_OWNED === null ? 'NO' : 'YES'
-    establishmentData.machine_size = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_MACHINE_SIZE === null ? 0 : raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_MACHINE_SIZE
-    establishmentData.area_size = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_AREA_SIZE === null ? 0 : raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_AREA_SIZE
-    establishmentData.worker = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_WORKER === null ? 0 : raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_WORKER
-    establishmentData.phone = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_PHONE
-    establishmentData.fax = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_FAX === null ? '' : raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_FAX
-    establishmentData.grond = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_GROUND === null ? '' : raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_GROUND
+    if(raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_ID != undefined){
+        establishmentData.id = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_ID
+        establishmentData.address_id = raw_data.ESTABLISHMENT_DATA.ADDRESS_ID
+        establishmentData.perosonal_id = raw_data.ESTABLISHMENT_DATA.PERSONAL_ID
+        establishmentData.type = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_TYPE === null ? '' : raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_TYPE
+        establishmentData.name = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_NAME === null ? '' : raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_NAME
+        establishmentData.is_land_owned = raw_data.ESTABLISHMENT_IS_LAND_OWNED === null ? 'NO' : 'YES'
+        establishmentData.machine_size = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_MACHINE_SIZE === null ? 0 : raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_MACHINE_SIZE
+        establishmentData.area_size = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_AREA_SIZE === null ? 0 : raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_AREA_SIZE
+        establishmentData.worker = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_WORKER === null ? 0 : raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_WORKER
+        establishmentData.phone = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_PHONE
+        establishmentData.fax = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_FAX === null ? '' : raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_FAX
+        establishmentData.grond = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_GROUND === null ? '' : raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_GROUND
+    }
 }
 function setAddressEstablishmentData(raw_data) {
-    addressEstablishmentData.id = raw_data.ESTABLISHMENT_DATA.ADDRESS.ADDRESS_ID
-    addressEstablishmentData.home_number = raw_data.ESTABLISHMENT_DATA.ADDRESS.ADDRESS_HOME_NUMBER
-    addressEstablishmentData.moo = raw_data.ESTABLISHMENT_DATA.ADDRESS.ADDRESS_MOO === null ? '' : raw_data.ESTABLISHMENT_DATA.ADDRESS.ADDRESS_MOO
-    addressEstablishmentData.trxk = raw_data.ESTABLISHMENT_DATA.ADDRESS.ADDRESS_TRXK === null ? '' : raw_data.ESTABLISHMENT_DATA.ADDRESS.ADDRESS_TRXK
-    addressEstablishmentData.sxy = raw_data.ESTABLISHMENT_DATA.ADDRESS.ADDRESS_SXY === null ? '' : raw_data.ESTABLISHMENT_DATA.ADDRESS.ADDRESS_SXY
-    addressEstablishmentData.building = raw_data.ESTABLISHMENT_DATA.ADDRESS.ADDRESS_BUILDING === null ? '' : raw_data.ESTABLISHMENT_DATA.ADDRESS.ADDRESS_BUILDING
-    addressEstablishmentData.road = raw_data.ESTABLISHMENT_DATA.ADDRESS.ADDRESS_ROAD === null ? '' : raw_data.ESTABLISHMENT_DATA.ADDRESS.ADDRESS_ROAD
-    addressEstablishmentData.district_name = raw_data.ESTABLISHMENT_DATA.ADDRESS.DISTRICT_NAME
-    addressEstablishmentData.amphur_name = raw_data.ESTABLISHMENT_DATA.ADDRESS.AMPHUR_NAME
-    addressEstablishmentData.province_name = raw_data.ESTABLISHMENT_DATA.ADDRESS.PROVINCE_NAME
+    if(raw_data.ESTABLISHMENT_DATA.ADDRESS != undefined){
+        addressEstablishmentData.id = raw_data.ESTABLISHMENT_DATA.ADDRESS.ADDRESS_ID
+        addressEstablishmentData.home_number = raw_data.ESTABLISHMENT_DATA.ADDRESS.ADDRESS_HOME_NUMBER
+        addressEstablishmentData.moo = raw_data.ESTABLISHMENT_DATA.ADDRESS.ADDRESS_MOO === null ? '' : raw_data.ESTABLISHMENT_DATA.ADDRESS.ADDRESS_MOO
+        addressEstablishmentData.trxk = raw_data.ESTABLISHMENT_DATA.ADDRESS.ADDRESS_TRXK === null ? '' : raw_data.ESTABLISHMENT_DATA.ADDRESS.ADDRESS_TRXK
+        addressEstablishmentData.sxy = raw_data.ESTABLISHMENT_DATA.ADDRESS.ADDRESS_SXY === null ? '' : raw_data.ESTABLISHMENT_DATA.ADDRESS.ADDRESS_SXY
+        addressEstablishmentData.building = raw_data.ESTABLISHMENT_DATA.ADDRESS.ADDRESS_BUILDING === null ? '' : raw_data.ESTABLISHMENT_DATA.ADDRESS.ADDRESS_BUILDING
+        addressEstablishmentData.road = raw_data.ESTABLISHMENT_DATA.ADDRESS.ADDRESS_ROAD === null ? '' : raw_data.ESTABLISHMENT_DATA.ADDRESS.ADDRESS_ROAD
+        addressEstablishmentData.district_name = raw_data.ESTABLISHMENT_DATA.ADDRESS.DISTRICT_NAME
+        addressEstablishmentData.amphur_name = raw_data.ESTABLISHMENT_DATA.ADDRESS.AMPHUR_NAME
+        addressEstablishmentData.province_name = raw_data.ESTABLISHMENT_DATA.ADDRESS.PROVINCE_NAME
+    }
 }
 function setAddressOwnerLandData(raw_data) {
     if (raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_IS_LAND_OWNED != null) {

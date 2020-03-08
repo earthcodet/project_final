@@ -399,7 +399,7 @@ function searchPersonal() {
             tSearchId = id
             tSearchSurname = surname
             console.log('Searching')
-            axios.get(`http://localhost:5000/search/personal/${id}/${name}/${surname}`).then((result) => {
+            axios.get(`http://localhost:5000/search/personal/${id}/${name}/${surname}/all`).then((result) => {
                 if (result.data != 'Not found') {
                     createResultSearch(result.data)
                     errorSearch('', 'HIDE')

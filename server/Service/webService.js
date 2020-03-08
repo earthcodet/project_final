@@ -619,6 +619,43 @@ class service {
             })
         })
     }
+    getPersonalDisplay(id, name, surname) {
+        return new Promise((resolve, reject) => {
+            PersonalDAOObj.getPersonalStatusN(id, name, surname).then((data) => {
+                let date = '0000-00-00'
+                if (data.length != 0) {
+                    for (let i = 0; i < data.length; i++) {
+                        if (data[i].PERSONAL_BIRTHDAY === null) {
+                            data[i].PERSONAL_BIRTHDAY = undefined
+                        } else {
+                            data[i].PERSONAL_BIRTHDAY = this.formatDate('TO-DISPLAY', data[i].PERSONAL_BIRTHDAY + '')
+                        }
+                        console.log(`Data [${i}] => ${data[i].PERSONAL_CARD_ISSUED}`)
+                        if (data[i].PERSONAL_CARD_ISSUED === null || data[i].PERSONAL_CARD_ISSUED === '0000-00-00') {
+                            data[i].PERSONAL_CARD_ISSUED = undefined
+                        } else {
+                            data[i].PERSONAL_CARD_ISSUED = this.formatDate('TO-DISPLAY', data[i].PERSONAL_CARD_ISSUED + '')
+                        }
+                        if (data[i].PERSONAL_CARD_EXPIRE === null) {
+                            data[i].PERSONAL_CARD_EXPIRE = undefined
+                        } else {
+                            data[i].PERSONAL_CARD_EXPIRE = this.formatDate('TO-DISPLAY', data[i].PERSONAL_CARD_EXPIRE + '')
+                        }
+                        data[i].PERSONAL_UPDATE = this.formatDate('TO-DISPLAY', data[i].PERSONAL_UPDATE + '')
+
+                        //USER_UPDATE
+
+                        if (i == data.length - 1) {
+                            return resolve(data)
+                        }
+                    }
+                } else {
+                    return resolve('Not found')
+                }
+
+            })
+        })
+    }
     getPersonalById(id) {
         return new Promise((resolve, reject) => {
             PersonalDAOObj.getPersonalByPersonalId(id).then((result) => {
@@ -640,6 +677,26 @@ class service {
     searchOperator(id, name, surname) {
         return new Promise((resolve, reject) => {
             this.getPersonal(id, name, surname).then((data) => {
+                console.log('searchOpator : complete')
+                if (data != 'Not found') {
+                    for (let i = 0; i < data.length; i++) {
+                        this.getAddressByAddressId(data[i].ADDRESS_ID).then((result) => {
+                            data[i].AID = result[0]
+                            if (i === data.length - 1) {
+                                return resolve(data)
+                            }
+                        })
+                    }
+                } else {
+                    return resolve(`Not found`)
+                }
+
+            })
+        })
+    }
+    searchOperatorDisplay(id, name, surname) {
+        return new Promise((resolve, reject) => {
+            this.getPersonalDisplay(id, name, surname).then((data) => {
                 console.log('searchOpator : complete')
                 if (data != 'Not found') {
                     for (let i = 0; i < data.length; i++) {
