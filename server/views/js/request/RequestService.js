@@ -17,6 +17,7 @@ function checkView(typeForm) {
             console.log(checkSight)
             if (checkSight) {
                 getRequestData(requsetNo, requestYear).then((raw_data) => {
+                    displayUserAlderman()
                     console.log(raw_data)
                     if (raw_data != '') {
                         console.log(`raw_data`)
@@ -278,7 +279,9 @@ function setDataView() {
 
 
     } else {
-        document.getElementById('typeWorkplace').value = establishmentData.type
+        if(document.getElementById('typeWorkplace') != undefined){
+            document.getElementById('typeWorkplace').value = establishmentData.type
+        }
     }
     if (document.getElementById('machinery') != undefined) {
         document.getElementById('machinery').value = establishmentData.machine_size

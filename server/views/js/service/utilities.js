@@ -69,7 +69,20 @@ function deleteImageAllRequest() {
         selectImageFile = 0
     }
 }
-
+function inputNumberOnly(value, id){
+    console.log(`This is inputNumberOnly ${value} ${id}`)
+    let temp_value = ''
+    let temp_value_array = value.split('')
+    console.log(temp_value_array)
+    for(let i = 0 ; i < temp_value_array.length; i++){
+        console.log(`!isNaN(temp_value_array[${i}]) =>(${temp_value_array[i]}) {${!isNaN(temp_value_array[i])}}`)
+        if(!isNaN(temp_value_array[i])){
+            console.log('item '+i+'   ')
+            temp_value = temp_value + temp_value_array[i]
+        }
+    }
+    document.getElementById(id).value = temp_value
+}
 const month = {
     'มกราคม': 1,
     'กุมภาพันธ์': 2,

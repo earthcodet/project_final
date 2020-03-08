@@ -294,11 +294,13 @@ function payPopup() {
     <br>
     <br>
         <a class='topic' style="margin-left: 0.5vw;"> ค่าธรรมเนียม  <font color="red">*</font></a>
-        <input type='number' id="pay_fee" class='tabOne' style="margin-left:1vw;width:8vw" maxlength="5"></input><br>
+        <input type='text' id="pay_fee" class='tabOne' style="margin-left:1vw;width:8vw" maxlength="5"
+        onkeyup="inputNumberOnly(this.value, 'pay_fee')"></input><br>
         <a id='pay_fee_alert' class='tabTwo alert'  style='display:none'>ช่องนี้เว้นว่างไม่ได้</a>
         <br>
         <a class='topic' style="margin-left: 3vw;"> ค่าปรับ  <font color="red">*</font></a>
-        <input type='number' id="pay_fine" class='tabOne' style="margin-left:1vw;width:8vw" maxlength="5"></input><br>
+        <input type='text' id="pay_fine" class='tabOne' style="margin-left:1vw;width:8vw" maxlength="5"
+        onkeyup="inputNumberOnly(this.value, 'pay_fine')"></input><br>
         <a id='pay_fine_alert' class='tabTwo alert'  style='display:none'>ช่องนี้เว้นว่างไม่ได้</a>
         <br>
         <a class='topic' style="margin-left: 0.3vw;"> ออกให้เมื่อวันที่ <font color="red">*</font></a>
