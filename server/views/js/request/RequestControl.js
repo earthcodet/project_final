@@ -27,7 +27,7 @@ function addPage() {
     document.getElementById('documentName3').innerHTML = ''
     document.getElementById('position').value = ''
     setLisetUserAlderManToUi(alderman_list)
-
+    document.getElementById('delete_request').style.display = 'none'
 
 }
 function insertPage() {

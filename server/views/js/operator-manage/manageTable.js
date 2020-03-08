@@ -77,7 +77,7 @@ function approvalPopup() {
                                 });
                             }
                         })
-                    }), 1000;
+                    }), 100;
                 })
             }
         }
@@ -171,7 +171,7 @@ function canclePopup() {
                                 });
                             }
                         })
-                    }, 1000);
+                    }, 100  );
                 });
             }
         }
@@ -253,7 +253,7 @@ function notApprovalPopup() {
                                 });
                             }
                         })
-                    }, 1000);
+                    }, 100);
                 });
             }
         }
@@ -425,7 +425,7 @@ function payPopup() {
                                 }
                             })
                         }
-                    }, 1000);
+                    }, 100);
                 });
             }
         }
@@ -482,7 +482,7 @@ function transferPopup() {
             return new Promise(function (resolve, reject) {
                 setTimeout(function () {
                     resolve();
-                }, 1000);
+                }, 100);
             });
         }
     }).then((result) => {
@@ -528,7 +528,7 @@ function cancelStatus() {
                             });
                         }
                     })
-                }, 1000);
+                }, 100);
             });
         }
     }).then((result) => {
@@ -592,7 +592,7 @@ function addPopup(type_menu) {
             return new Promise(function (resolve, reject) {
                 setTimeout(function () {
                     resolve();
-                }, 1000);
+                }, 100);
             });
         }
     }).then((result) => {
@@ -789,6 +789,9 @@ $(function () {
                 if (key === 'detail') {
                     toRequest(type, id)
                 }
+                if (key === 'cancel-status') {
+                    cancelStatus()
+                }
                 if (key === 'delete') {
                     canclePopup(type)
                 }
@@ -797,6 +800,7 @@ $(function () {
         },
         items: {
             "detail": { name: "ดูรายละเอียด" },
+            "cancel-status": { name: "ยกเลิกสถานะ" },
             "delete": { name: "ยกเลิก" }
 
         },

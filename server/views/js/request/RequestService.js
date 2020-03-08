@@ -153,6 +153,13 @@ function setDataView() {
 
     }
 
+    if(requestData.status === 'cancel'){
+        document.getElementById('delete_request').style.display = ''
+        document.getElementById('delete_date').value = requestData.last_update
+        document.getElementById('delete_detail').value = requestData.delete_logic
+    }else{
+        document.getElementById('delete_request').style.display = 'none'
+    }
 
     document.getElementById('form_id').value = `${requestData.no}/${requestData.year}`
     document.getElementById('datepicker1').value = requestData.date_submission
@@ -554,7 +561,7 @@ function setRequestData(raw_data) {
     requestData.delete_logic = raw_data.REQUEST_DELETE_LOGIC === null ? '' : raw_data.REQUEST_DELETE_LOGIC
     requestData.is_deleted = raw_data.REQUEST_IS_DELETED
 
-    // requestData.last_update: '20-05-2563',
+    requestData.last_update = raw_data.REQUEST_LAST_UPDATE
     // requestData.username: 'ADMIN'
 
 }

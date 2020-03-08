@@ -168,7 +168,6 @@ let operatorData = {
     phone: "",
     fax: ''
 };
-
 let assistantOperatorData = {
     is_assistant_changed: false,
     id: '',
@@ -255,7 +254,7 @@ function resetRequestData() {
         is_deleted: '',
         last_update: '',
         status_before:'wait',
-        username: ''
+        user_update: ''
 
     }
     establishmentData = {
