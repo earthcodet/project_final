@@ -56,7 +56,7 @@ function checkView(typeForm) {
                         console.log(`assistantOperatorData`)
                         console.log(assistantOperatorData)
                         setDataView()
-                        changeStatusMenuData() // RequestControl.js < switch menu to data === true
+                        changeStatusMenuData(requestData.status) // RequestControl.js < switch menu to data === true
 
                     }
                 })

@@ -19,16 +19,16 @@ function addPage() {
     }
     resetFunction()
     document.getElementById('print_new_doc').style.display = 'none'
-    if(document.getElementById('ownerDistrict') != undefined){
+    if (document.getElementById('ownerDistrict') != undefined) {
         resetAddressThreeAddress()
-    }else{
+    } else {
         resetTwoAddress()
     }
     document.getElementById('documentName3').innerHTML = ''
     document.getElementById('position').value = ''
     setLisetUserAlderManToUi(alderman_list)
-    
-    
+
+
 }
 function insertPage() {
     Swal.fire({
@@ -226,15 +226,22 @@ function restorePage() {
     enableMenu('editMenu')
     enableMenu('deleteMenu')
 }
-function changeStatusMenuData() {
-    data = true
-    addNew = false
-    disableMenuAll()
-    enableMenu('addMenu')
-    enableMenu('editMenu')
-    enableMenu('deleteMenu')
-    enableFunction()
-
+function changeStatusMenuData(status) {
+    if (status === 'wait' || status === 'approval' || status === 'active') {
+        data = true
+        addNew = false
+        disableMenuAll()
+        enableMenu('addMenu')
+        enableMenu('editMenu')
+        enableMenu('deleteMenu')
+        enableFunction()
+    } else {
+        data = true
+        addNew = false
+        disableMenuAll()
+        enableMenu('addMenu')
+        enableFunction()
+    }
 }
 //Search Operator 
 function searchPersonal(typeSearch) {
@@ -428,16 +435,16 @@ function printImg(no, year) {
 function printDocument() {
     if (requestData.no != undefined && requestData.year != undefined) {
         if (requestData.no === '') {
-            window.open(getFormPrint(requestData.menu)+`?id=${requestData.no}${requestData.year}`, '_blank');
+            window.open(getFormPrint(requestData.menu) + `?id=${requestData.no}${requestData.year}`, '_blank');
         } else {
             if (requestData.no != '') {
-                window.open(getFormPrint(requestData.menu)+`?id=${requestData.no}${requestData.year}`, '_blank');
+                window.open(getFormPrint(requestData.menu) + `?id=${requestData.no}${requestData.year}`, '_blank');
             } else {
                 let requsetId = getUrlVars()
                 if (requsetId.id != undefined) {
                     let requsetNo = requsetId.id.slice(0, 6)
                     let requestYear = requsetId.id.slice(6, 10)
-                    window.open(getFormPrint(requestData.menu)+`?id=${requsetNo}${requestYear}`, '_blank');
+                    window.open(getFormPrint(requestData.menu) + `?id=${requsetNo}${requestYear}`, '_blank');
                 }
             }
         }
