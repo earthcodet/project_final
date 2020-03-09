@@ -57,15 +57,28 @@ class EstablishmentDAO {
         address.sxy === '' || address.sxy === 'NULL' ? values = values +`AND address.ADDRESS_SXY IS NULL ` : values = values +`AND address.ADDRESS_SXY = ${address.sxy} `
         address.building === '' || address.building === 'NULL' ? values = values +`AND address.ADDRESS_BUILDING IS NULL ` : values = values +`AND address.ADDRESS_BUILDING = ${address.building} `
         address.road === '' || address.road === 'NULL' ? values = values +`AND address.ADDRESS_ROAD IS NULL ` : values = values +`AND address.ADDRESS_ROAD = ${address.road} `
-        values = values + `AND address.DISTRICT_NAME = '${address.district_name}' `
-        values = values + `AND address.AMPHUR_NAME = '${address.amphur_name}' `
-        values = values + `AND address.PROVINCE_NAME = '${address.province_name}'`
+        values = values + ` AND address.DISTRICT_NAME = '${address.district_name}' `
+        values = values + ` AND address.AMPHUR_NAME = '${address.amphur_name}' `
+        values = values + ` AND address.PROVINCE_NAME = '${address.province_name}'`
+        em.type === '' || em.type === 'NULL' ? values = values + ` AND establishment.ESTABLISHMENT_TYPE IS NULL` : values = values + ` AND establishment.ESTABLISHMENT_TYPE = ${em.type}`
+        
+        values = values + ` AND establishment.ESTABLISHMENT_MACHINE_SIZE = ${em.machine_size} `
+        values = values + ` AND establishment.ESTABLISHMENT_AREA_SIZE = ${em.area_size} `
+        values = values + ` AND establishment.ESTABLISHMENT_WORKER = ${em.worker} `
+        values = values + ` AND establishment.ESTABLISHMENT_PHONE = '${em.phone}' `
+        
+        em.fax === '' || em.fax === 'NULL' ? values = values + ` AND establishment.ESTABLISHMENT_FAX IS NULL` : values = values + ` AND establishment.ESTABLISHMENT_FAX = ${em.fax}`
+        em.grond === '' || em.grond === 'NULL' ? values = values + ` AND establishment.ESTABLISHMENT_GROUND IS NULL` : values = values + ` AND establishment.ESTABLISHMENT_GROUND = ${em.grond}`
+
+        em.subcategory === '' || em.subcategory === 'NULL' ? values = values + ` AND request.REQUEST_SUBCATEGORY IS NULL` : values = values + ` AND request.REQUEST_SUBCATEGORY = ${em.subcategory}`
+        em.product_type === '' || em.product_type === 'NULL' ? values = values + ` AND request.REQUEST_PRODUCT_TYPE IS NULL` : values = values + ` AND request.REQUEST_PRODUCT_TYPE = ${em.product_type}`
+
         console.log(values)
         return new Promise((resolve, reject) => {
-            let query = `SELECT * FROM establishment JOIN address ON establishment.ADDRESS_ID = address.ADDRESS_ID WHERE ${values}`
+            let query = `SELECT * FROM establishment JOIN address ON establishment.ADDRESS_ID = address.ADDRESS_ID JOIN request ON establishment.ESTABLISHMENT_ID = request.ESTABLISHMENT_ID WHERE ${values}`
             con.query(query, function (err, result) {
                 if (err) {
-                    console.log(err.code)
+                    console.log(err)
                     return resolve(err)
                 }
                 console.log(result)

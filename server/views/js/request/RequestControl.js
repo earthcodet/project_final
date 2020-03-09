@@ -4,12 +4,14 @@ let search_surname = ''
 var data = false
 var deleteData = false
 var addNew = false
+var new_document = false
 let personal_change = false
 function addPage() {
     resetStyleIdDeleteRequest()
     resetRequestData()
     personal_change = false
     addNew = true
+    new_document = true
     deleteData = false
     data = false
     disableFunction()
@@ -84,13 +86,30 @@ function insertPage() {
                     html: "บันทึกสำเร็จ",
                     icon: "success",
                     confirmButtonColor: "#009688"
-                });
+                }).then((result) => {
+                        disableMenuAll()
+                        if (window.location.href.split('?').length === 1) {
+                            disableMenuAll()
+                            location.replace(window.location.href + '?id=' + requestData.no + '' + requestData.year)
+                        }
+                        else if (new_document === true) {
+                            let temp_html = window.location.href.split('?')
+                            location.replace(temp_html[0] + '?id=' + requestData.no + '' + requestData.year)
+                        }else{
+                            data = true
+                            enableMenu('addMenu')
+                            enableMenu('editMenu')
+                            enableMenu('deleteMenu')
+                            enableFunction()
+                        }
+                })
                 data = true
                 disableMenuAll()
                 enableMenu('addMenu')
                 enableMenu('editMenu')
                 enableMenu('deleteMenu')
                 enableFunction()
+
             } else if (result.dismiss === Swal.DismissReason.cancel) {
                 // Swal.fire("บันทึกล้มเหลว");
             }
@@ -136,13 +155,13 @@ function deletePage() {
                 return new Promise(function (resolve, reject) {
                     setTimeout(function () {
                         //function ใน operator 
-                        changeStatusDeleteRequest('Y').then((statusDelete) =>{
-                            let temp_status = requestData.is_deleted 
+                        changeStatusDeleteRequest('Y').then((statusDelete) => {
+                            let temp_status = requestData.is_deleted
                             requestData.is_deleted = 'Y'
-                            if(statusDelete){
+                            if (statusDelete) {
                                 resolve();
-                            }else{
-                                requestData.is_deleted = temp_status  
+                            } else {
+                                requestData.is_deleted = temp_status
                                 Swal.fire({
                                     html: "เกิดข้อผิดพลาดกับระบบ",
                                     icon: "error",
@@ -244,13 +263,13 @@ function restorePage() {
             return new Promise(function (resolve, reject) {
                 setTimeout(function () {
                     //function ใน operator 
-                    changeStatusDeleteRequest('N').then((statusDelete) =>{
-                        let temp_status = requestData.is_deleted 
+                    changeStatusDeleteRequest('N').then((statusDelete) => {
+                        let temp_status = requestData.is_deleted
                         requestData.is_deleted = 'N'
-                        if(statusDelete){
+                        if (statusDelete) {
                             resolve();
-                        }else{
-                            requestData.is_deleted = temp_status  
+                        } else {
+                            requestData.is_deleted = temp_status
                             Swal.fire({
                                 html: "เกิดข้อผิดพลาดกับระบบ",
                                 icon: "error",
@@ -279,10 +298,10 @@ function restorePage() {
             // Swal.fire("บันทึกล้มเหลว");
         }
     });
-   
+
 }
-function changeStatusMenuData(status,status_delete) {
-    if(status_delete === 'Y'){
+function changeStatusMenuData(status, status_delete) {
+    if (status_delete === 'Y') {
         if (status === 'wait' || status === 'approval' || status === 'active') {
             data = true
             addNew = false
@@ -308,7 +327,7 @@ function changeStatusMenuData(status,status_delete) {
             }
         }
         enableMenu('restoreMenu')
-    }else{
+    } else {
         if (status === 'wait' || status === 'approval' || status === 'active') {
             data = true
             addNew = false
@@ -334,7 +353,7 @@ function changeStatusMenuData(status,status_delete) {
             }
         }
     }
-   
+
 }
 function changeStatusDeleteRequest(status) {
     let requestDataDelete = {}
@@ -575,19 +594,19 @@ function getFormPrint(menu) {
             return '../view/view_area_more_correct.html'
     }
 }
-function resetStyleIdDeleteRequest(){
+function resetStyleIdDeleteRequest() {
     var id = document.getElementById('form_id')
     if (id != undefined || id != null) {
         id.style.textDecoration = ''
     }
 }
-function setIdDeleteRequest (status){
+function setIdDeleteRequest(status) {
     var id = document.getElementById('form_id')
-        if (id != null) {
-            if (status === 'Y') {
-                id.style.textDecoration = 'line-through'
-            } else {
-                id.style.textDecoration = ''
-            }
+    if (id != null) {
+        if (status === 'Y') {
+            id.style.textDecoration = 'line-through'
+        } else {
+            id.style.textDecoration = ''
         }
+    }
 }

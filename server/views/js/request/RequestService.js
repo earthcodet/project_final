@@ -590,6 +590,8 @@ function setRequestDataUpdateReturn(raw_data) {
     landData.id = raw_data.land_id === '' ? landData.id : raw_data.land_id
     requestData.establishment_address_id = checkformatReturn(raw_data.land_id)
     requestData.establishment_is_land_owned = checkformatReturn(raw_data.address_land_id)
+    establishmentData.id    = checkformatReturn(raw_data.establishment_id)
+    requestData.establishment_id = checkformatReturn(raw_data.establishment_id)
 }
 //set data return form insert
 function setRequestDataReturn(raw_data) {

@@ -667,12 +667,12 @@ class service {
         // เจอแบบ 100 % ID มาจากคำขอ
         return new Promise((resolve, reject) => {
             PersonalDAOObj.getPersonalByPersonalId(id).then((result) => {
-                if(result[0] != undefined){
+                if (result[0] != undefined) {
                     this.getAddressByAddressId(result[0].ADDRESS_ID).then((address_data) => {
                         result[0].AID = address_data[0]
                         return resolve(result)
                     })
-                }else{
+                } else {
                     return resolve(false)
                 }
             })
@@ -1405,13 +1405,67 @@ class service {
             })
         })
     }
-    insertEstablishment(Edata, address, land, addressOwner, file) {
+    insertEstablishment(Edata, address, land, addressOwner, file, menu) {
         //Main personal set 
         let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
         let new_address = this.formatInsert('ADDRESS', address)
         let new_addressOwner = this.formatInsert('ADDRESS', addressOwner)
         let new_land = this.formatInsert('LAND', land)
         return new Promise((resolve, reject) => {
+            EstablishmentDAOObj.getDuplication(Edata, address).then((establishmentData) => {
+                if (establishmentData.length != 0) {
+                    new_edata.id = establishmentData[0].ESTABLISHMENT_ID
+                    new_edata.address_id = establishmentData[0].ADDRESS_ID
+                    //use_land
+                    if (new_edata.grond != 'NULL') {
+                        EstablishmentDAOObj.updateGround(new_edata.id, new_edata.grond)
+                    }
+                    if (new_edata.is_land_owned != 'NULL') {
+                        this.insertLand(new_land, new_addressOwner).then((land_id) => {
+                            new_edata.is_land_owned = `'${land_id.id}'`
+                            new_edata.land_used = land_id.id
+                            new_edata.land_address_owner = land_id.address
+                            file.name = land_id.id
+                            this.insertFile(file).then((resultFile) => {
+                                if (resultFile.status) {
+                                    //NEW LAND 
+                                    if (land.type === 'duplication' && new_edata.is_land_owned === `'${establishmentData[0].ESTABLISHMENT_ID}'`) {
+                                        return resolve(new_edata)
+                                    } else {
+                                        EstablishmentDAOObj.updateUseLand(establishmentData[0].ESTABLISHMENT_ID, new_edata.is_land_owned).then((data_update_success) => {
+                                            if (data_update_success) {
+                                                return resolve(new_edata)
+                                            } else {
+                                                console.log('error update UseLand Establishment')
+                                                return resolve(new_edata)
+                                            }
+                                        })
+                                    }
+                                }
+                            })
+                        })
+                    } else {
+                        if (establishmentData[0].ESTABLISHMENT_IS_LAND_OWNED === null) {
+                            new_edata.is_land_owned = null
+                            new_edata.land_used = null
+                            new_edata.land_address_owner = null
+                            return resolve(new_edata)
+                        } else {
+                            //establishmentData[0].ESTABLISHMENT_IS_LAND_OWNED != null
+                            new_edata.is_land_owned = null
+                            new_edata.land_used = null
+                            new_edata.land_address_owner = null
+                            EstablishmentDAOObj.updateUseLand(establishmentData[0].ESTABLISHMENT_ID, new_edata.is_land_owned).then((data_update_success) => {
+                                if (data_update_success) {
+                                    return resolve(new_edata)
+                                } else {
+                                    console.log('error update UseLand Establishment')
+                                    return resolve(new_edata)
+                                }
+                            })
+                        }
+                    }
+                } else {
                     this.insertAddressOne(new_address).then((resultaddress) => {
                         if (resultaddress.check) {
                             new_edata.address_id = resultaddress.id
@@ -1437,6 +1491,10 @@ class service {
                             }
                         }
                     })
+                }
+            })
+
+
         })
     }
     getEstablishment(id) {
@@ -1897,13 +1955,13 @@ class service {
             })
         })
     }
-    updateRequestStatusDelete(request,user) {
+    updateRequestStatusDelete(request, user) {
         let object = {
-            username : user,
-            status : request.status,
-            id : request.id,
-            year : request.year,
-            last_update : ''
+            username: user,
+            status: request.status,
+            id: request.id,
+            year: request.year,
+            last_update: ''
         }
         var datetime = new Date();
         let dateForUpdate = datetime.toISOString().slice(0, 10)
@@ -1969,7 +2027,7 @@ class service {
             })
         })
     }
-    
+
     InsertRequestStep(request, personal, Edata, address, land, addressOwner, file, reference, train, username, image) {
         //ets = Edata, address, land, addressOwner, file
         console.log(Edata)
@@ -3135,7 +3193,9 @@ class service {
             //insert !!
             return new Promise((resolve, reject) => {
                 console.log('InsertRequestStep : loading')
-                this.insertEstablishment(Edata, address, land, addressOwner, file).then((data) => {
+                Edata.subcategory = request.subcategory === '' ? 'NULL' : `'${request.subcategory}'`
+                Edata.product_type = request.product_type === '' ? 'NULL' : `'${request.product_type}'`
+                this.insertEstablishment(Edata, address, land, addressOwner, file, request.menu).then((data) => {
                     request.establishment_id = data.id
                     request.land_address_establishment = data.address_id
                     request.establishment_is_land_owned = data.land_used === null || data.land_used === undefined ? 'NULL' : `'${data.land_used}'`
