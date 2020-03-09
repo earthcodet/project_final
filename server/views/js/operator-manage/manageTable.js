@@ -110,7 +110,7 @@ function approvalPopup() {
     $('#datepicker5').keyup(function () {
         formatDate(this.value, 'datepicker5')
     });
-    displayUserInformation('app_name','information')
+    displayUserInformation('app_name', 'information')
 }
 //ยกเลิก
 function canclePopup() {
@@ -157,9 +157,9 @@ function canclePopup() {
             } else {
                 return new Promise(function (resolve, reject) {
                     setTimeout(function () {
+                        inRequest.delete_logic = document.getElementById('cancleTextPopup').value
                         inRequest.status_before = inRequest.status
                         inRequest.status = 'cancel'
-                        inRequest.delete_logic = document.getElementById('cancleTextPopup').value
                         updateRequest().then((data) => {
                             if (data) {
                                 resolve();
@@ -171,7 +171,7 @@ function canclePopup() {
                                 });
                             }
                         })
-                    }, 100  );
+                    }, 100);
                 });
             }
         }
@@ -367,10 +367,10 @@ function payPopup() {
                     setTimeout(function () {
                         inRequest.staff_id_money = document.getElementById('app_name_money').value
                         if (inRequest.date_expired != '') {
-                            let object = getDateExp(inRequest.menu,document.getElementById('datepicker7').value )
+                            let object = getDateExp(inRequest.menu, document.getElementById('datepicker7').value)
                             inRequest.date_expired = object.date_exp
                             inRequest.date_issued = object.date_issuse
-                            
+
                             let temp = inRequest.date_expired.split('-')
                             let year = parseInt(temp[2])
                             let year_now = parseInt(new Date().toISOString().slice(0, 10).split('-')[0])
@@ -410,7 +410,7 @@ function payPopup() {
                             inRequest.receipt_fee = document.getElementById('pay_fee').value
                             inRequest.status_before = inRequest.status
                             inRequest.status = 'active'
-                            let object = getDateExp(inRequest.menu,document.getElementById('datepicker7').value )
+                            let object = getDateExp(inRequest.menu, document.getElementById('datepicker7').value)
                             inRequest.date_expired = object.date_exp
                             inRequest.date_issued = object.date_issuse
                             updateRequest().then((data) => {
@@ -457,7 +457,7 @@ function payPopup() {
     $('#datepicker7').keyup(function () {
         formatDate(this.value, 'datepicker7')
     });
-    displayUserInformation('app_name_money','money')
+    displayUserInformation('app_name_money', 'money')
 }
 //โอนใบอนุญาติ *
 function transferPopup() {
@@ -535,7 +535,7 @@ function cancelStatus() {
         if (result.value) {
             Swal.fire({
                 title: 'ยกเลิกสำเร็จ',
-                icon: 'success', 
+                icon: 'success',
                 confirmButtonColor: "#009688"
             })
             displayTableRequest()
@@ -543,23 +543,23 @@ function cancelStatus() {
         }
     });
 }
-//เพิ่มใบอนุญาต *
-function addPopup(type_menu) {
+//เพิ่มใบอนุญาต 
+function addPopup() {
     console.log(event)
     let html_display = `
     <div style = 'text-align:left; display:block;margin-left:2vw' >
     <br>
     <a class = 'topics'  > เพิ่มใบอนุญาต  </a> 
     <br>
-    <a class = 'topics tabOne' style='font-size:1.3vw'> สถานประกอบการ : E000001  </a> 
+    <a class = 'topics tabOne' style='font-size:1.3vw'> สถานประกอบการ : ${inRequest.establishment_id}  </a> 
     <br>
-    <a class = 'topics tabOne' style='font-size:1.3vw'> ชื่อสถานประกอบการ : ร้านขายน้ำอ้อย  </a> 
+    <a class = 'topics tabOne' style='font-size:1.3vw'> ชื่อสถานประกอบการ : ${inRequest.establishment_name}  </a> 
     <br>
     <br>    
     <a class = 'topics '>ประเภทที่ต้องการเพิ่มใบอนุญาต </a> 
     <br>
     
-    <select id="add_name" class='tabOne' style="width:85%" maxlength="150" >
+    <select id="add_type_menu" class='tabOne' style="width:85%" maxlength="150" >
             <option value="ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ">ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</option>
             <option value="ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ">ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</option>
             <option value="ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร">ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</option>
@@ -588,7 +588,6 @@ function addPopup(type_menu) {
         closeOnCancel: false,
         showLoaderOnConfirm: true,
         preConfirm: function () {
-
             return new Promise(function (resolve, reject) {
                 setTimeout(function () {
                     resolve();
@@ -597,22 +596,8 @@ function addPopup(type_menu) {
         }
     }).then((result) => {
         if (result.value) {
-            let attr = document.getElementById('add_name').value
-            if (attr === type_menu) {
-                Swal.fire({
-                    title: 'มีใบอนุญาตฉบับนี้แล้ว',
-                    width: '35%',
-                    customClass: 'swal-height',
-                    showConfirmButton: true,
-                    confirmButtonText: "ตกลง",
-                    confirmButtonColor: "#009688",
-                    closeOnConfirm: false,
-                    icon: "error"
-                })
-            } else {
-                toRequest(attr)
-                console.log(`page -->`)
-            }
+            let type = document.getElementById('add_type_menu').value
+            toRequestAdd(type,inPersonal.id,inRequest.establishment_id)
         } else if (result.dismiss === Swal.DismissReason.cancel) {
         }
     });
@@ -623,7 +608,7 @@ function statusDelete() {
         html: 'ผู้ประกอบการนี้อยู่ในสถานะยกเลิก',
         width: '30%',
         customClass: 'swal-height',
-        icon: 'warning', 
+        icon: 'warning',
         confirmButtonColor: "#009688"
     })
 }
@@ -648,25 +633,6 @@ function markList(event) {
 }
 
 $(function () {
-    // $.contextMenu({
-    //     selector: '.report-menu',
-
-    //     callback: function (key, options) {
-    //         let type = this[0].cells[1].innerText.trim()
-    //         let id = this[0].cells[2].innerText.trim()
-    //         let indexData = this[0].rowIndex - 1
-    //         console.log(`type ${type} id ${id} indexData ${indexData}`)
-    //         if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
-    //             statusDelete()
-    //         } else {
-    //             toRequest(type, id)
-    //         }
-    //     },
-    //     items: {
-    //         "detail": { name: "ดูรายละเอียด" }
-    //     },
-    //     autoHide: true
-    // });
     //ปกติ
     $.contextMenu({
         selector: '.active-menu',
@@ -684,13 +650,13 @@ $(function () {
                 switch (key) {
                     case 'per':
                         // perPopup(type)
-                        toPerRequest(type)
+                        toPerRequest(type,id)
                         break;
                     case 'transfer':
                         transferPopup()
                         break;
                     case 'add':
-                        addPopup(type)
+                        addPopup()
                         break;
                     case 'detail':
                         toRequest(type, id)
@@ -699,7 +665,7 @@ $(function () {
                         cancelStatus()
                         break;
                     case 'stop':
-                        viewPageReport(undefined,inPersonal.id, `${inRequest.no}${inRequest.year}`)
+                        viewPageReport(undefined, inPersonal.id, `${inRequest.no}${inRequest.year}`)
                         break;
                     default:
                         canclePopup()
@@ -859,7 +825,6 @@ $(function () {
         },
         autoHide: true
     });
-
 });
 function updateRequest() {
     return new Promise((resolve, reject) => {
@@ -890,7 +855,7 @@ function setLisetUserInformationToUi(list_user, id) {
         }
     }
 }
-function displayUserInformation(id,type) {
+function displayUserInformation(id, type) {
     getUserInformation(type).then((list_user) => {
         console.log(`'get'`)
         setLisetUserInformationToUi(list_user, id)

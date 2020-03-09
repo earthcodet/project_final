@@ -71,7 +71,19 @@ class RequestDAO {
         console.log(type)
         console.log(Owner)
         return new Promise((resolve, reject) => {  
-            let query = `SELECT * FROM request WHERE REQUEST_STATUS='${type}' AND PERSONAL_ID_OWNER='${Owner}'`
+            let query = `SELECT * FROM request JOIN establishment ON request.ESTABLISHMENT_ID = establishment.ESTABLISHMENT_ID WHERE REQUEST_STATUS='${type}' AND PERSONAL_ID_OWNER='${Owner}'`
+            con.query(query, function (err, result) {
+                if (err) {
+                    console.log(err.code) 
+                    return resolve(err.code)
+                }
+                return resolve(result)
+            })
+        }) 
+    }
+    getRequestByTpyeAndOwnerIdAssistant(type,Owner){
+        return new Promise((resolve, reject) => {  
+            let query = `SELECT * FROM request WHERE REQUEST_STATUS='${type}' AND PERSONAL_ID_ASSISTANT='${Owner}'`
             con.query(query, function (err, result) {
                 if (err) {
                     console.log(err.code) 

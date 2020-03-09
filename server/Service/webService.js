@@ -667,10 +667,14 @@ class service {
         // เจอแบบ 100 % ID มาจากคำขอ
         return new Promise((resolve, reject) => {
             PersonalDAOObj.getPersonalByPersonalId(id).then((result) => {
-                this.getAddressByAddressId(result[0].ADDRESS_ID).then((address_data) => {
-                    result[0].AID = address_data[0]
-                    return resolve(result)
-                })
+                if(result[0] != undefined){
+                    this.getAddressByAddressId(result[0].ADDRESS_ID).then((address_data) => {
+                        result[0].AID = address_data[0]
+                        return resolve(result)
+                    })
+                }else{
+                    return resolve(false)
+                }
             })
         })
     }
@@ -1156,7 +1160,7 @@ class service {
             new_data.card_expipe = new_data.card_expipe.length === 0 || new_data.card_expipe.split('-').length != 3 ? new_data.card_expipe = 'NULL' : `'${this.formatDate('TO-INSERT', new_data.card_expipe)}'`
             new_data.fax === '' || new_data.fax === '-' ? new_data.fax = 'NULL' : new_data.fax = `'${new_data.fax}'`
             new_data.surname === '' ? new_data.surname = 'NULL' : `'${new_data.surname}'`
-            new_data.card_issued =new_data.card_issued === undefined || (new_data.card_issued != undefined ? new_data.card_issued.length === 0 : false)|| new_data.card_issued.split('-').length != 3 ? '-' : this.formatDate('TO-INSERT', new_data.card_issued)
+            new_data.card_issued = new_data.card_issued === undefined || (new_data.card_issued != undefined ? new_data.card_issued.length === 0 : false) || new_data.card_issued.split('-').length != 3 ? '-' : this.formatDate('TO-INSERT', new_data.card_issued)
             return new_data
         }
         if (type === 'ADDRESS') {
@@ -1242,7 +1246,7 @@ class service {
             } else {
                 new_data.receipt_total_year_3 = 0
             }
-            console.log(` new_data.receipt_fine_year_3 ${ new_data.receipt_fine_year_3}`)
+            console.log(` new_data.receipt_fine_year_3 ${new_data.receipt_fine_year_3}`)
             new_data.receipt_fine_year_3 = new_data.receipt_fine_year_3 === '-' || new_data.receipt_fine_year_3 === '' || new_data.receipt_fine_year_3 === undefined ? 'NULL' : new_data.receipt_fine_year_3
             new_data.receipt_fee_year_3 = new_data.receipt_fee_year_3 === '-' || new_data.receipt_fee_year_3 === '' || new_data.receipt_fee_year_3 === undefined ? 'NULL' : new_data.receipt_fee_year_3
             new_data.receipt_date_year_3 = new_data.receipt_date_year_3 === '-' || new_data.receipt_date_year_3 === '' || new_data.receipt_date_year_3 === undefined ? 'NULL' : `'${this.formatDate('TO-INSERT', new_data.receipt_date_year_3)}'`
@@ -1811,7 +1815,18 @@ class service {
             })
         })
     }
-
+    getRequestProfileByPIDAndEID(p_id, e_id) {
+        let temp_array_return = []
+        return new Promise((resolve, reject) => {
+            this.getPersonalAndAddressById(p_id).then((personal_operator_data) => {
+                temp_array_return.push(personal_operator_data[0])
+                this.getEstablishment(e_id).then((dataEstablishment) => {
+                    temp_array_return.push(dataEstablishment)
+                    return resolve(temp_array_return)
+                })
+            })
+        })
+    }
     getRequestByIdAndYear(id, year) {
         console.log(`getRequestByIdAndYear id = ${id}/${year}`)
         return new Promise((resolve, reject) => {
@@ -1924,7 +1939,6 @@ class service {
         })
     }
     updateRequestStatus(request, username) {
-        console.log(`update <><><><><><><>`)
         var datetime = new Date();
         let dateForUpdate = datetime.toISOString().slice(0, 10)
         request.last_update = dateForUpdate
@@ -1984,6 +1998,25 @@ class service {
             })
         })
     }
+    getRequestByTpyeAndOwnerIdAssistant(type, Owner) {
+        console.log('get')
+        return new Promise((resolve, reject) => {
+            RequestDAOObj.getRequestByTpyeAndOwnerIdAssistant(type, Owner).then((data) => {
+                if (data.length != 0) {
+                    for (let i = 0; i < data.length; i++) {
+                        data[i].REQUEST_DATE_SUBMISSION = data[i].REQUEST_DATE_SUBMISSION != null ? this.formatDate("TO-DISPLAY", data[i].REQUEST_DATE_SUBMISSION + '') : data[i].REQUEST_DATE_SUBMISSION
+                        data[i].REQUEST_DATE_APPROVE = data[i].REQUEST_DATE_APPROVE != null ? this.formatDate("TO-DISPLAY", data[i].REQUEST_DATE_APPROVE + '') : data[i].REQUEST_DATE_APPROVE
+                        data[i].REQUEST_RECEIPT_DATE = data[i].REQUEST_RECEIPT_DATE != null ? this.formatDate("TO-DISPLAY", data[i].REQUEST_RECEIPT_DATE + '') : data[i].REQUEST_RECEIPT_DATE
+                        data[i].REQUEST_DATE_ISSUED = data[i].REQUEST_DATE_ISSUED != null ? this.formatDate("TO-DISPLAY", data[i].REQUEST_DATE_ISSUED + '') : data[i].REQUEST_DATE_ISSUED
+                        data[i].REQUEST_DATE_EXPIRED = data[i].REQUEST_DATE_EXPIRED != null ? this.formatDate("TO-DISPLAY", data[i].REQUEST_DATE_EXPIRED + '') : data[i].REQUEST_DATE_EXPIRED
+                        data[i].REQUEST_LAST_UPDATE = data[i].REQUEST_LAST_UPDATE != null ? this.formatDate("TO-DISPLAY", data[i].REQUEST_LAST_UPDATE + '') : data[i].REQUEST_LAST_UPDATE
+                    }
+                }
+                return resolve(data)
+            })
+        })
+    }
+    
     InsertRequestStep(request, personal, Edata, address, land, addressOwner, file, reference, train, username, image) {
         //ets = Edata, address, land, addressOwner, file
         console.log(Edata)
@@ -2154,7 +2187,7 @@ class service {
                                                             this.updateRequest(request)
                                                             console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                             if (land.file_upload_changed) {
-                                                                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
+                                                                console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
                                                                 file.name = item_return.land_id
                                                                 this.insertFile(file)
                                                             }
@@ -2175,7 +2208,7 @@ class service {
                                                             this.updateRequest(request)
                                                             console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                             if (land.file_upload_changed) {
-                                                                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
+                                                                console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
                                                                 file.name = item_return.land_id
                                                                 this.insertFile(file)
                                                             }
@@ -2232,7 +2265,7 @@ class service {
                                                         this.updateRequest(request)
                                                         console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                         if (land.file_upload_changed) {
-                                                                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
+                                                            console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
                                                             file.name = item_return.land_id
                                                             this.insertFile(file)
                                                         }
@@ -2253,7 +2286,7 @@ class service {
                                                         this.updateRequest(request)
                                                         console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                         if (land.file_upload_changed) {
-                                                                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
+                                                            console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
                                                             file.name = item_return.land_id
                                                             this.insertFile(file)
                                                         }
@@ -2335,7 +2368,7 @@ class service {
                                                             this.updateRequest(request)
                                                             console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                             if (land.file_upload_changed) {
-                                                                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
+                                                                console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
                                                                 file.name = item_return.land_id
                                                                 this.insertFile(file)
                                                             }
@@ -2410,7 +2443,7 @@ class service {
                                                         this.updateRequest(request)
                                                         console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                         if (land.file_upload_changed) {
-                                                                console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
+                                                            console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
                                                             file.name = item_return.land_id
                                                             this.insertFile(file)
                                                         }
@@ -2483,7 +2516,7 @@ class service {
                                                     this.updateRequest(request)
                                                     console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                     if (land.file_upload_changed) {
-                                                            console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
+                                                        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
                                                         file.name = item_return.land_id
                                                         this.insertFile(file)
                                                     }
@@ -2624,7 +2657,7 @@ class service {
                                                             this.updateRequest(request)
                                                             console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                             if (land.file_upload_changed) {
-                                                                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
+                                                                console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
                                                                 file.name = item_return.land_id
                                                                 this.insertFile(file)
                                                             }
@@ -2645,7 +2678,7 @@ class service {
                                                             this.updateRequest(request)
                                                             console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                             if (land.file_upload_changed) {
-                                                                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
+                                                                console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
                                                                 file.name = item_return.land_id
                                                                 this.insertFile(file)
                                                             }
@@ -2701,7 +2734,7 @@ class service {
                                                         this.updateRequest(request)
                                                         console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                         if (land.file_upload_changed) {
-                                                                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
+                                                            console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
                                                             file.name = item_return.land_id
                                                             this.insertFile(file)
                                                         }
@@ -2722,7 +2755,7 @@ class service {
                                                         this.updateRequest(request)
                                                         console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                         if (land.file_upload_changed) {
-                                                                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
+                                                            console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
                                                             file.name = item_return.land_id
                                                             this.insertFile(file)
                                                         }
@@ -2787,7 +2820,7 @@ class service {
                                                             this.updateRequest(request)
                                                             console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                             if (land.file_upload_changed) {
-                                                                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
+                                                                console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
                                                                 file.name = item_return.land_id
                                                                 this.insertFile(file)
                                                             }
@@ -2808,7 +2841,7 @@ class service {
                                                             this.updateRequest(request)
                                                             console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                             if (land.file_upload_changed) {
-                                                                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
+                                                                console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
                                                                 file.name = item_return.land_id
                                                                 this.insertFile(file)
                                                             }
@@ -2884,7 +2917,7 @@ class service {
                                                         this.updateRequest(request)
                                                         console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                         if (land.file_upload_changed) {
-                                                                console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
+                                                            console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
                                                             file.name = item_return.land_id
                                                             this.insertFile(file)
                                                         }
@@ -2937,7 +2970,7 @@ class service {
                                                     this.updateRequest(request)
                                                     console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                     if (land.file_upload_changed) {
-                                                            console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
+                                                        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
                                                         file.name = item_return.land_id
                                                         this.insertFile(file)
                                                     }
@@ -2958,7 +2991,7 @@ class service {
                                                     this.updateRequest(request)
                                                     console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                     if (land.file_upload_changed) {
-                                                            console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
+                                                        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
                                                         file.name = item_return.land_id
                                                         this.insertFile(file)
                                                     }
@@ -2992,7 +3025,7 @@ class service {
                                 }
                             }
                         }
-                    }else {
+                    } else {
                         if (request.train_id != 'YES' && request.reference_id != 'YES') {
                             //// Update request !!!!!!!!!!!  format Insert 
                             if (Edata.is_establishment_changed) {
@@ -3015,7 +3048,7 @@ class service {
                                                 this.updateRequest(request)
                                                 console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                 if (land.file_upload_changed) {
-                                                                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
+                                                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
                                                     file.name = item_return.land_id
                                                     this.insertFile(file)
                                                 }
@@ -3036,7 +3069,7 @@ class service {
                                                 this.updateRequest(request)
                                                 console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                 if (land.file_upload_changed) {
-                                                                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
+                                                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
                                                     file.name = item_return.land_id
                                                     this.insertFile(file)
                                                 }
@@ -3092,7 +3125,7 @@ class service {
                                     this.updateRequest(request)
                                     console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                     if (land.file_upload_changed) {
-                                                                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
+                                        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
                                         file.name = item_return.land_id
                                         this.insertFile(file)
                                     }
@@ -3113,7 +3146,7 @@ class service {
                                     this.updateRequest(request)
                                     console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                     if (land.file_upload_changed) {
-                                                                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
+                                        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
                                         file.name = item_return.land_id
                                         this.insertFile(file)
                                     }

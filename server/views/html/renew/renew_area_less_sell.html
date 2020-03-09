@@ -12,25 +12,28 @@
     <link rel="stylesheet" href="../../css/css2.css">
     <link href="../../css/fonts.css" rel="stylesheet">
 
-   <!-- เรียกไลบารี่สร้างปฎิทิน  -->
-   <script src="../../js/service/jquery/jquery-3.4.1.min.js"></script>
-   <script src="../../js/service/date/datetimepicker.full.js"></script>
-   <script src="../../js/service/date/dateth.js"></script>
-   <link rel="stylesheet" href="../../css/date.css">
+    <!-- เรียกไลบารี่สร้างปฎิทิน  -->
+    <script src="../../js/service/jquery/jquery-3.4.1.min.js"></script>
+    <script src="../../js/service/date/datetimepicker.full.js"></script>
+    <script src="../../js/service/date/dateth.js"></script>
+    <link rel="stylesheet" href="../../css/date.css">
 </head>
 
 <body>
     <!-- เมนูด้านบน -->
     <div class="w3-top icon-bar">
         <a id="addMenu" class="exit " onclick="addTEST()"><i class="fa fa-plus-square"><span> เพิ่ม</span></i></a>
-        <a id="editMenu" onclick="editTEST()" class="exit disableds"><i class="fa fa-pencil-alt"><span> แก้ไข</span></i></a>
-        <a id="saveMenu" onclick="insertTEST()" class="exit disableds"><i class="fa fa-save"><span> บันทึก</span></i></a>
-        <a id="restoreMenu" onclick="restoreTEST()" class="exit disableds"><i class="fa fa-reply"><span> เรียกคืน</span></i></a>
-        <a id="deleteMenu" onclick="deleteTEST()" class="exit disableds"><i class="fa fa-times"><span> ยกเลิก</span></i></a>
-        <!-- <a><i class="fa fa-search"> ค้นหา</i></a> -->
+        <a id="editMenu" onclick="editTEST()" class="exit disableds"><i class="fa fa-pencil-alt"><span>
+                    แก้ไข</span></i></a>
+        <a id="saveMenu" onclick="insertTEST()" class="exit disableds"><i class="fa fa-save"><span>
+                    บันทึก</span></i></a>
+        <a id="restoreMenu" onclick="restoreTEST()" class="exit disableds"><i class="fa fa-reply"><span>
+                    เรียกคืน</span></i></a>
+        <a id="deleteMenu" onclick="deleteTEST()" class="exit disableds"><i class="fa fa-times"><span>
+                    ยกเลิก</span></i></a>
         <a id="exitMenu" onclick="exitTEST()" class="exit" style="float: right;width: 17%;"><i
                 class="fa fa-sign-out-alt">
-               <span> ออกจากระบบ</span></i></a>
+                <span> ออกจากระบบ</span></i></a>
     </div>
     <!-- เมนูด้านข้าง -->
     <div class="sidenav">
@@ -61,11 +64,13 @@
                 คำขอต่อใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
             <a href="renew_area_more_sell.html">- คำขอต่อใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
             <a href="renew_area_more_correct.html">- คำขอต่อใบอนุญาตจัดตั้งสถานที่สะสมอาหาร</a>
-            <a href="renew_area_less_sell.html" class="dropdown-active">- คำขอต่อหนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
+            <a href="renew_area_less_sell.html" class="dropdown-active">-
+                คำขอต่อหนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
             <a href="renew_area_less_correct.html">- คำขอต่อหนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
             <a href="renew_market.html">- คำขอต่อใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
             <a href="renew_health_danger.html">- คำขอต่อกิจการที่เป็นอันตรายต่อสุขภาพ</a>
-        </div>  
+            <a href="renew_crematory.html">- คำขอต่อกิจการฌาปณสถาน</a>
+        </div>
         <button class="dropdown-btn"><b>ข้อมูลส่วนกลาง </b><i class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
             <a href="../central/operator.html">- ข้อมูลผู้ประกอบการ</a>
@@ -76,7 +81,8 @@
         <div class="dropdown-container">
             <a href="../utilities/petition.html">- บันทึกเรื่องร้องเรียน</a>
         </div>
-        <button class="dropdown-btn" id="adminna" style="display: none;"><b>ข้อมูลระบบ </b><i class="fa fa-caret-down"></i></button>
+        <button class="dropdown-btn" id="adminna" style="display: none;"><b>ข้อมูลระบบ </b><i
+                class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
             <a href="#"></a>
         </div>
@@ -102,7 +108,8 @@
         <fieldset disabled id="disable" style="border: 0;padding: 0;margin: 0;">
             <div class="main">
                 <header class="w3-top2">
-                    <h1 style="font-size:2.8vh;margin-left: 25px;padding: 2px;"> คำขอต่อหนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</h1>
+                    <h1 style="font-size:2.8vh;margin-left: 25px;padding: 2px;">
+                        คำขอต่อหนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</h1>
                 </header>
                 <!-- ข้อมูลใบ -->
                 <div class="box">
@@ -112,7 +119,7 @@
                     <a>วันที่ยื่นขอ :
                         <input type="text" id="datepicker1" style="width: 16%;"></a>
                     <a>ประเภทคำขอ :
-                        <input list="brow" id="" name="" style="width: 19%;" class="drop">
+                        <input list="brow" id="typeReq" name="" style="width: 19%;" class="drop">
                         <datalist id="brow">
                             <option value="" hidden>เลือก...</option>
                             <option
@@ -131,9 +138,7 @@
                             <option value="บุคคลธรรมดา">บุคคลธรรมดา</option>
                             <option value="นิติบุคคล">นิติบุคคล</option>
                         </select>
-                        <input type="text" id="name" style="width: 16.5%;">
-                        <button type="button" class="fa fa-search" style="border-radius: 5px;"
-                            onclick="testSearchOparator()"></button></a>
+                        <input type="text" id="name" style="width: 16.5%;"></a>
                     <a>เลขประจำตัว :
                         <input type="text" id="id"
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
@@ -183,7 +188,12 @@
                     <a>โทรศัพท์ :
                         <input type="text" id="phone"
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                            maxlength="10" style="width: 12%;"></a>
+                            maxlength="10" style="width: 6.5vw;"
+                            onkeyup="checkPhone(this.value,'phone','phone_more')"></a>
+                    <a style="margin-left: .1vw;">ต่อ</a>
+                    <input type="text" id="phone_more" style="width: 4vw"
+                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                        maxlength="4">
                     <a>โทรสาร :
                         <input type="text" id="fax"
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
@@ -198,9 +208,9 @@
                         <input type="int" id="numPeople" style="width: 10%;"> คน</a>
                     <br>
                     <a style="margin-left: 2.2vw;">ประเภทกิจการ :
-                        <input type="text" id="" style="width: 37.5%"> </a>&emsp;
+                        <input type="text" id="typeWorkplace" style="width: 37.5%"> </a>&emsp;
                     <a>ใช้เครื่องจักรขนาด :
-                        <input type="text" id="" style="width: 8%;"> แรงม้า</a>
+                        <input type="text" id="machinery" style="width: 8%;"> แรงม้า</a>
                     <br>
                     <a>ตั้งอยู่เลขที่ :
                         <input type="text" id="wHomeId" style="width: 7%;"></a>
@@ -228,7 +238,12 @@
                     <a>โทรศัพท์ :
                         <input type="text" id="wPhone"
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                            maxlength="10" style="width: 12%;"></a>
+                            maxlength="10" style="width: 6.5vw"
+                            onkeyup="checkPhone(this.value,'wPhone','wPhone_more')"></a>
+                    <a style="margin-left: .1vw;">ต่อ</a>
+                    <input type="text" id="wPhone_more" style="width: 4vw"
+                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                        maxlength="4">
                     <a>โทรสาร :
                         <input type="text" id="wFax"
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
@@ -236,16 +251,16 @@
                     <br>
                     <br>
                     <a>ใบอนุญาตฉบับจริง
-                        เล่มที่ :
-                        <input type="text" id="" style="width: 5%;"></a>&ensp;
-                    <a>เลขที่ :
-                        <input type="text" id="" style="width: 10%;"></a>&ensp;
                     <a>ออกให้เมื่อวันที่ :
-                        <input type="text" id="datepicker2" id="" style="width: 12%;"></a>
+                        <input type="text" id="datepicker2" style="width: 12%;"></a>
                     <a>ค่าธรรมเนียม :
-                        <input type="number" id="" style="width: 12%;"></a>
+                        <input type="text" id="renew_fee" style="width: 12%;"
+                        maxlength="8"
+                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></a>
                     <a>ค่าปรับ :
-                        <input type="number" id="" style="width: 12%;"></a>
+                        <input type="text" id="renew_fine" style="width: 12%;"
+                        maxlength="8"
+                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></a>
 
                     <br>
                     <br>
@@ -254,7 +269,7 @@
                 <!-- อนุญาต -->
                 <div class="box">
                     <br>
-                    
+
                     <input type="radio" name="confirm" id="confirm" onClick="show_confirm(this.value);" value="2">
                     <a> ยืนยันคำขอต่ออายุ </a>
                     <button type="button" style="position: absolute;right: 10%;">พิมพ์ใบขอต่ออนุญาต</button>
@@ -304,14 +319,16 @@
                     <div class="row" style="text-align: center;">
                         <div class="col" style="width: 33.33%;">
                             <a>
+                                <br>
                                 (ลงชื่อ)
-                                <input type="text" id="documentName" />
+                                <input type="text" id="documentName" disabled />
                                 ผู้ขอรับใบอนุญาต
                             </a>
                         </div>
                         <div class="col" style="width: 33.33%;">
                             <a>
-                                ลงชื่อ <input type="text" id="" />
+                                ลงชื่อ 
+                                <select id="documentName2" name="" style="width: 18vw;" disabled ></select>
                                 <br>
                                 <p class="text-center">ผู้รับเงิน</p>
                             </a>
@@ -319,10 +336,10 @@
                         <div class="col" style="width: 33.33%;">
                             <a>
                                 &emsp;ลงชื่อ
-                                <input type="text" id="" readonly disabled>
+                                <select id="documentName3" name="" style="width: 18vw;" disabled></select>
                                 <br>
                                 ตำแหน่ง
-                                <input type="text" id="" readonly disabled>
+                                <input type="text" id="position"  disabled>
                                 <br>
                                 เจ้าพนักงานท้องถิ่น
                             </a>
@@ -330,7 +347,7 @@
                     </div>
 
                 </div><br>
-               
+
             </div>
 
         </fieldset>
@@ -339,11 +356,12 @@
 
 </body>
 <script src="../../node_modules/axios/dist/axios.min.js"></script>
-<script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>   
+<script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
 <script src="../../js/service/utilities.js"></script>
 
 <script src="../../js/service/sideMenu.js"></script>
 <script src="../../js/request/controlTest.js"></script>
 
 <!-- <script src="../../js/service/checkUserLogin.js"></script> -->
+
 </html>

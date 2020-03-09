@@ -245,6 +245,12 @@ app.get('/get/request/:no/:year', (req, res) => {
     res.json(data)
   })
 })
+app.get('/get/request/profile/:p_id/:e_id', (req, res) => {
+  webService.getRequestProfileByPIDAndEID(req.params.p_id, req.params.e_id).then((data) => {
+    res.json(data)
+  })
+})
+
 app.get('/get/requestTypeById/:id', (req, res) => {
   webService.getRequestTypeById(req.params.id).then((data) => {
     console.log(date.REQUEST_DATE_SUBMISSION)
@@ -283,6 +289,14 @@ app.get('/get/request/owner/:personal_id/:type', (req, res) => {
     res.json(data)
   })
 })
+app.get('/get/request/owner/:personal_id/:type/assistant', (req, res) => {
+  let type_type = req.params.type
+  let type_id = req.params.personal_id
+  webService.getRequestByTpyeAndOwnerIdAssistant(type_type, type_id).then((data) => {
+    res.json(data)
+  })
+})
+
 app.post('/update/request/status', (req, res) => {
   var obj = req.body.requestData
   webService.updateRequestStatus(obj, req.session.username).then((data) => {

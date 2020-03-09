@@ -60,7 +60,9 @@ let inRequest = {
     is_deleted: '',
     no: '',
     year: '',
-    menu:''
+    menu: '',
+    establishment_id: '',
+    establishment_name: ''
 }
 const numToMonth = {
     1: 'มกราคม',
@@ -172,9 +174,9 @@ function setDataUI(data) {
         }
         console.log(`phone_t`)
         console.log(phone_t)
-        if(phone_t[0] === '-') {
+        if (phone_t[0] === '-') {
             document.getElementById('phone_more').disabled = true
-        }else{
+        } else {
             document.getElementById('phone_more').disabled = false
         }
         document.getElementById('fax').value = data.PERSONAL_FAX === undefined || data.PERSONAL_FAX === null ? '' : data.PERSONAL_FAX
@@ -215,9 +217,9 @@ function setDataUI(data) {
             document.getElementById('company-phone-more').disabled = true
             document.getElementById('company-phone-more').value = phone_t[1]
         }
-        if(phone_t[0] === '-') {
+        if (phone_t[0] === '-') {
             document.getElementById('company-phone-more').disabled = true
-        }else{
+        } else {
             document.getElementById('company-phone-more').disabled = false
         }
         document.getElementById('company-fax').value = data.PERSONAL_FAX === undefined || data.PERSONAL_FAX === null ? '' : data.PERSONAL_FAX
@@ -409,6 +411,7 @@ function showItem(dataOperator) {
     resetStyleIdDelete()
     now_personal = dataOperator.PERSONAL_ID
     displayTableRequest()
+    displayTableRequestAssistant()
     changeOption(dataOperator.PERSONAL_TYPE.trim())
     if (dataOperator.PERSONAL_TYPE === 'บุคคลธรรมดา') {
         getImageByPeronalId(dataOperator.PERSONAL_TYPE, dataOperator.PERSONAL_ID).then((result) => {
@@ -538,6 +541,7 @@ function onClickStatustab(status, event, id) {
     now_status = status
     if (now_status != '' && now_personal != '') {
         displayTableRequest()
+        displayTableRequestAssistant()
     }
     openCity(event, id)
 }
@@ -564,11 +568,125 @@ function getRequestByPersonalIdAndStatus(personal_id) {
         })
     })
 }
+function getRequestByPersonalIdAndStatusAssistant(personal_id) {
+    return new Promise((resolve, reject) => {
+        axios.get(`http://localhost:5000/get/request/owner/${personal_id}/${now_status}/assistant`).then((result) => {
+            resolve(result.data);
+        })
+    })
+}
 function displayTableRequest() {
     getRequestByPersonalIdAndStatus(now_personal).then((data) => {
         console.log(requestDataList)
         createTableRequest(data)
     })
+}
+function displayTableRequestAssistant(){
+    if(now_status != 'transfer'){
+        getRequestByPersonalIdAndStatusAssistant(now_personal).then((data) => {
+            console.log(requestDataList)
+            createTableRequestAssistant(data)
+        })
+    }
+}
+function createTableRequestAssistant(data) {
+    console.log(data)
+    if(now_status != 'transfer'){
+        var tbl = document.getElementById(now_status+'_assistant_table');
+        if (tbl.getElementsByTagName("tbody")[0] != null || tbl.getElementsByTagName("tbody")[0] != undefined) {
+            tbl.removeChild(tbl.getElementsByTagName("tbody")[0])
+        }
+        var tblBody = document.createElement('tbody')
+        // style="height: 17vw;  text-align: center;"
+        tblBody.style.height = '17vw'
+        tblBody.style.textAlign = 'center'
+        for (var i = 0; i < data.length; i++) {
+            // creates a table row
+            var row = document.createElement("tr");
+            row.oncontextmenu = 'markList(this)'
+            row.onmouseover = "resetActiveRightClick()"
+            row.classList.add('expire-menu')
+            //row index = this.rowIndex
+            // row.onclick = function () { showItem(data[this.rowIndex - 1]) }
+    
+            for (var j = 0; j < 6; j++) {
+                console.log(j)
+                var cell = document.createElement("td");
+                if (j === 0) {
+                    //year
+                    let temp_date = data[i].REQUEST_DATE_SUBMISSION + ''
+                    //02-01-2563
+                    let temp_array = temp_date.split('-')
+                    let year = temp_array[2].trim()
+                    var cellText = document.createTextNode(year);
+                } else if (j === 1) {
+                    //menu
+                    var cellText = document.createTextNode(data[i].REQUEST_MENU);
+                } else if (j === 2) {
+                    //order
+                    var cellText = document.createTextNode(`${data[i].REQUEST_NO}/${data[i].REQUEST_YEAR}`);
+                } else if (j === 3) {
+                    if (data[i].REQUEST_DATE_ISSUED != null && data[i].REQUEST_DATE_ISSUED != '') {
+                        let temp_date = data[i].REQUEST_DATE_ISSUED + ''
+                        //02-01-2563
+                        let temp_array = temp_date.split('-')
+                        let temp_montn = parseInt(temp_array[1])
+                        let text = `${parseInt(temp_array[0])} ${numToMonth[temp_montn]} ${temp_array[2]}`
+                        var cellText = document.createTextNode(text);
+                    } else {
+                        var cellText = document.createTextNode('-');
+                    }
+                } else if (j === 4) {
+                    //end date
+                    if (data[i].REQUEST_DATE_EXPIRED != null && data[i].REQUEST_DATE_EXPIRED != '') {
+                        let temp_date = data[i].REQUEST_DATE_EXPIRED + ''
+                        //02-01-2563
+                        let temp_array = temp_date.split('-')
+                        let temp_montn = parseInt(temp_array[1])
+    
+                        let text = `${parseInt(temp_array[0])} ${numToMonth[temp_montn]} ${temp_array[2]}`
+                        var cellText = document.createTextNode(text);
+                    } else {
+                        var cellText = document.createTextNode('-');
+                    }
+                } else {
+                    // date exp count
+                    if (now_status === 'expire') {
+                        var cellText = document.createTextNode('หมดอายุแล้ว');
+                    } else if (now_status === 'cancel') {
+                        var cellText = document.createTextNode('ยกเลิกแล้ว');
+                    } else {
+                        if (data[i].REQUEST_DATE_EXPIRED != null) {
+                            let now_date = new Date().toISOString().slice(0, 10).split('-')
+                            let year_now = parseInt(now_date[0]) + 543
+                            now_date = `${now_date[1]}-${now_date[2]}-${year_now}`
+    
+                            let exp_date = data[i].REQUEST_DATE_EXPIRED.split('-')
+                            exp_date = `${exp_date[1]}-${exp_date[0]}-${exp_date[2]}`
+                            console.log(`exp_date  ${exp_date}`)
+                            console.log(`now_date  ${now_date}`)
+                            var daysBetween = (Date.parse(exp_date) - Date.parse(now_date)) / (24 * 3600 * 1000);
+                            let text = ''
+                            if (daysBetween < 0) {
+                                text = 'หมดอายุ'
+                            } else {
+                                text = daysBetween + ' วัน'
+                            }
+    
+                            var cellText = document.createTextNode(text);
+                        } else {
+                            var cellText = document.createTextNode('-');
+                        }
+                    }
+                }
+                cell.appendChild(cellText);
+                row.appendChild(cell);
+            }
+            tblBody.appendChild(row);
+        }
+        console.log(tblBody)
+        tbl.appendChild(tblBody);
+    }
 }
 function createTableRequest(data) {
     console.log(data)
@@ -610,7 +728,7 @@ function createTableRequest(data) {
                     let temp_date = data[i].REQUEST_DATE_ISSUED + ''
                     //02-01-2563
                     let temp_array = temp_date.split('-')
-                    let temp_montn = parseInt(temp_date[1])
+                    let temp_montn = parseInt(temp_array[1])
                     let text = `${parseInt(temp_array[0])} ${numToMonth[temp_montn]} ${temp_array[2]}`
                     var cellText = document.createTextNode(text);
                 } else {
@@ -622,7 +740,7 @@ function createTableRequest(data) {
                     let temp_date = data[i].REQUEST_DATE_EXPIRED + ''
                     //02-01-2563
                     let temp_array = temp_date.split('-')
-                    let temp_montn = parseInt(temp_date[1])
+                    let temp_montn = parseInt(temp_array[1])
 
                     let text = `${parseInt(temp_array[0])} ${numToMonth[temp_montn]} ${temp_array[2]}`
                     var cellText = document.createTextNode(text);
@@ -631,28 +749,33 @@ function createTableRequest(data) {
                 }
             } else {
                 // date exp count
-                if (data[i].REQUEST_DATE_EXPIRED != null) {
-                    let now_date = new Date().toISOString().slice(0, 10).split('-')
-                    let year_now = parseInt(now_date[0]) + 543
-                    now_date = `${now_date[1]}-${now_date[2]}-${year_now}`
-
-                    let exp_date = data[i].REQUEST_DATE_EXPIRED.split('-')
-                    exp_date = `${exp_date[1]}-${exp_date[0]}-${exp_date[2]}`
-                    console.log(`exp_date  ${exp_date}`) 
-                    console.log(`now_date  ${now_date}`) 
-                    var daysBetween = (Date.parse(exp_date) - Date.parse(now_date)) / (24 * 3600 * 1000);       
-                    let text = ''
-                    if (daysBetween < 0) {
-                        text = 'หมดอายุ'
-                    } else {
-                        text = daysBetween + ' วัน'
-                    }
-
-                    var cellText = document.createTextNode(text);
+                if (now_status === 'expire') {
+                    var cellText = document.createTextNode('หมดอายุแล้ว');
+                } else if (now_status === 'cancel') {
+                    var cellText = document.createTextNode('ยกเลิกแล้ว');
                 } else {
-                    var cellText = document.createTextNode('-');
+                    if (data[i].REQUEST_DATE_EXPIRED != null) {
+                        let now_date = new Date().toISOString().slice(0, 10).split('-')
+                        let year_now = parseInt(now_date[0]) + 543
+                        now_date = `${now_date[1]}-${now_date[2]}-${year_now}`
+
+                        let exp_date = data[i].REQUEST_DATE_EXPIRED.split('-')
+                        exp_date = `${exp_date[1]}-${exp_date[0]}-${exp_date[2]}`
+                        console.log(`exp_date  ${exp_date}`)
+                        console.log(`now_date  ${now_date}`)
+                        var daysBetween = (Date.parse(exp_date) - Date.parse(now_date)) / (24 * 3600 * 1000);
+                        let text = ''
+                        if (daysBetween < 0) {
+                            text = 'หมดอายุ'
+                        } else {
+                            text = daysBetween + ' วัน'
+                        }
+
+                        var cellText = document.createTextNode(text);
+                    } else {
+                        var cellText = document.createTextNode('-');
+                    }
                 }
-                console.log(cellText)
             }
             cell.appendChild(cellText);
             row.appendChild(cell);
@@ -706,6 +829,7 @@ function setDataItem(data) {
     inRequest.year = checkNullReturn(data.REQUEST_YEAR)
     inRequest.menu = data.REQUEST_MENU
     inRequest.establishment_id = data.ESTABLISHMENT_ID
+    inRequest.establishment_name = data.ESTABLISHMENT_NAME === null || data.ESTABLISHMENT_NAME === undefined ? 'ไม่มีชื่อร้าน' : data.ESTABLISHMENT_NAME
 }
 function checkNullReturn(item) {
     let temp = item === null ? '' : item
@@ -714,12 +838,12 @@ function checkNullReturn(item) {
 function openPageReport() {
     window.open('../utilities/petition.html?id=' + inPersonal.id, '_blank');
 }
-function viewPageReport(id,id_menu,id_request) {
-    if(id === undefined){
+function viewPageReport(id, id_menu, id_request) {
+    if (id === undefined) {
         id = `''`
-        window.open('../utilities/petition.html?id='+id_menu+'?r_id='+id_request, '_blank');
-    }else{
+        window.open('../utilities/petition.html?id=' + id_menu + '?r_id=' + id_request, '_blank');
+    } else {
         id = id.getElementsByTagName("TD")[0].textContent
-        window.open('../utilities/petition.html?id='+id, '_blank');
+        window.open('../utilities/petition.html?id=' + id, '_blank');
     }
 }

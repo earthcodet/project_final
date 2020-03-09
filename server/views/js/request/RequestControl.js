@@ -236,11 +236,20 @@ function changeStatusMenuData(status) {
         enableMenu('deleteMenu')
         enableFunction()
     } else {
-        data = true
-        addNew = false
-        disableMenuAll()
-        enableMenu('addMenu')
-        enableFunction()
+        if(status === ''){
+            addNew = true
+            deleteData = false
+            data = false
+            disableFunction()
+            disableMenuAll()
+            enableMenu('saveMenu')
+        }else{
+            data = true
+            addNew = false
+            disableMenuAll()
+            enableMenu('addMenu')
+            enableFunction()
+        } 
     }
 }
 //Search Operator 

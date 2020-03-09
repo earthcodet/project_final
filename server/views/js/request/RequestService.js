@@ -3,11 +3,11 @@ let requestType = []
 let userMoney = ''
 let userAlderman = ''
 function checkView(typeForm) {
-    let requsetId = getUrlVars()
-    console.log(requsetId.id)
-    if (requsetId.id != undefined) {
-        let requsetNo = requsetId.id.slice(0, 6)
-        let requestYear = requsetId.id.slice(6, 10)
+    let requestId = getUrlVars()
+    console.log(requestId)
+    if (requestId.id != undefined) {
+        let requsetNo = requestId.id.slice(0, 6)
+        let requestYear = requestId.id.slice(6, 10)
         console.log(`typeForm ${typeForm}`)
         if (typeForm != undefined) {
             let sight = getSightFormType(typeForm)
@@ -17,7 +17,7 @@ function checkView(typeForm) {
             console.log(checkSight)
             if (checkSight) {
                 getRequestData(requsetNo, requestYear).then((raw_data) => {
-                    displayUserAlderman()
+                    //displayUserAlderman()
                     console.log(raw_data)
                     if (raw_data != '') {
                         console.log(`raw_data`)
@@ -56,11 +56,32 @@ function checkView(typeForm) {
                         console.log(`assistantOperatorData`)
                         console.log(assistantOperatorData)
                         setDataView()
-                        
+
 
                     }
                 })
             }
+        }
+    }
+    if (requestId.p_id != undefined && requestId.e_id != undefined) {
+        if (requestId.p_id.length === 7 && requestId.e_id.length === 7) {
+            getPersonalDataAndEstablishment(requestId.p_id, requestId.e_id).then((raw_data) => {
+               // displayUserAlderman()
+                if (raw_data[0] != false && raw_data[1] != false) {
+                    setOperatorData(raw_data[0])
+                    setOperatorAddressData(raw_data[0])
+                    let temp = {
+                        ESTABLISHMENT_DATA:raw_data[1]
+                    }
+                    setEstablishmentData(temp)
+                    let temp_address = {
+                        ESTABLISHMENT_DATA : raw_data[1]
+                        
+                    }
+                    setAddressEstablishmentData(temp_address)
+                    setDataProfile()
+                }
+            })
         }
     }
 }
@@ -74,10 +95,111 @@ function deletePersonalTwo() {
 function checkFormatMoneyId(value) {
     return value
 }
+function setDataProfile() {
+    document.getElementById('documentName2').readOnly = true
+    if (document.getElementById('print_new_doc') != undefined) {
+        document.getElementById('print_new_doc').style.display = 'none'
+    }
+    document.getElementById("typeUser").value = operatorData.type
+    document.getElementById("id").value = operatorData.personal_id
+    document.getElementById("name").value = `${operatorData.title} ${operatorData.name} ${operatorData.surname}`
+    document.getElementById("documentName").value = `${operatorData.title} ${operatorData.name} ${operatorData.surname}`
+    document.getElementById("age").value = operatorData.birthday === '-' ? '-' : parseInt(getAge(operatorData.birthday))
+    document.getElementById("nationality").value = operatorData.nationality
+    document.getElementById("nationality").readOnly = operatorData.type === 'บุคคลธรรมดา' ? false : true
+    document.getElementById("nationality").disabled = operatorData.type != 'บุคคลธรรมดา' ? true : false
+    document.getElementById("race").value = operatorData.race
+    document.getElementById("race").readOnly = operatorData.type === 'บุคคลธรรมดา' ? false : true
+    document.getElementById("race").disabled = operatorData.type != 'บุคคลธรรมดา' ? true : false
+    document.getElementById("age").disabled = operatorData.type != 'บุคคลธรรมดา' ? true : false
+    document.getElementById("home_id").value = operatorAddressData.home_number
+    document.getElementById("moo").value = operatorAddressData.moo
+    document.getElementById("trxk").value = operatorAddressData.trxk
+    document.getElementById("sxy").value = operatorAddressData.sxy
+    document.getElementById("building").value = operatorAddressData.building
+    document.getElementById("road").value = operatorAddressData.road
+    let provinceId = parseInt(getProviceIdByName(operatorAddressData.province_name))
+    let amphurId = parseInt(getAmphureIdByName(operatorAddressData.amphur_name, provinceId))
+    let districtId = parseInt(getDistrictIdByName(operatorAddressData.district_name, amphurId))
+    document.getElementById(`province`).value = provinceId
+    amphurSelect(parseInt(provinceId))
+    districtSelect(parseInt(amphurId))
+
+    document.getElementById(`district`).value = amphurId
+    if (districtId === undefined || districtId === '') {
+        document.getElementById(`subdistrict`).innerHTML = ''
+    } else {
+        document.getElementById(`subdistrict`).value = districtId
+    }
+    let cut_phone = operatorData.phone.split('/')
+    if (cut_phone[1] === '') {
+        document.getElementById("phone").value = cut_phone[0]
+        document.getElementById('phone_more').value = ''
+        document.getElementById('phone_more').disabled = false
+    } else {
+        document.getElementById("phone").value = cut_phone[0]
+        document.getElementById('phone_more').disabled = false
+        document.getElementById('phone_more').value = cut_phone[1]
+    }
+    document.getElementById("fax").value = operatorData.fax
+    //ที่อยู่สถานประกอบการ
+    document.getElementById("wPlaceId").value = addressEstablishmentData.home_number
+    document.getElementById("wMoo").value = addressEstablishmentData.moo
+    document.getElementById("wTrxk").value = addressEstablishmentData.trxk
+    document.getElementById("wSxy").value = addressEstablishmentData.sxy
+    document.getElementById("wBuilding").value = addressEstablishmentData.building
+    document.getElementById("wRoad").value = addressEstablishmentData.road
+    let provinceIdE = parseInt(getProviceIdByName(addressEstablishmentData.province_name))
+    let amphurIdE = parseInt(getAmphureIdByName(addressEstablishmentData.amphur_name, provinceIdE))
+    let districtIdE = parseInt(getDistrictIdByName(addressEstablishmentData.district_name, amphurIdE))
+    document.getElementById(`wProvince`).value = provinceIdE
+    wamphurSelect(parseInt(provinceIdE))
+    wdistrictSelect(parseInt(amphurIdE))
+    document.getElementById(`wDistrict`).value = amphurIdE
+    console.log(`districtIdE ${districtIdE === undefined || districtIdE === ''}   ${districtIdE}`)
+    if (districtIdE === undefined || districtIdE === '') {
+        document.getElementById(`wSubdistrict`).innerHTML = ''
+    } else {
+        document.getElementById(`wSubdistrict`).value = districtIdE
+    }
+    let cut_phone_no3 = establishmentData.phone.split('/')
+    if (cut_phone_no3[1] === '') {
+        document.getElementById("wPhone").value = cut_phone_no3[0]
+        document.getElementById('wPhone_more').value = ''
+        document.getElementById('wPhone_more').disabled = false
+    } else {
+        document.getElementById("wPhone").value = cut_phone_no3[0]
+        document.getElementById('wPhone_more').disabled = false
+        document.getElementById('wPhone_more').value = cut_phone_no3[1]
+    }
+    document.getElementById("wFax").value = establishmentData.fax
+
+    document.getElementById('workplaceName').value = establishmentData.name
+
+    if (document.getElementById("wLocation") != undefined) {
+        document.getElementById('wLocation').value = establishmentData.grond
+
+    } else {
+        if (document.getElementById('typeWorkplace') != undefined) {
+            document.getElementById('typeWorkplace').value = establishmentData.type
+        }
+    }
+    if (document.getElementById('machinery') != undefined) {
+        document.getElementById('machinery').value = establishmentData.machine_size
+    }
+    if (document.getElementById('area') != undefined) {
+        document.getElementById('area').value = establishmentData.area_size
+    }
+    if (document.getElementById('numPeople') != undefined) {
+        document.getElementById('numPeople').value = establishmentData.worker
+    }
+
+    changeStatusMenuData(requestData.status) // RequestControl.js < switch menu to data === true
+}
 // setDataView
 function setDataView() {
     document.getElementById('documentName2').readOnly = true
-    if(document.getElementById('print_new_doc') != undefined){
+    if (document.getElementById('print_new_doc') != undefined) {
         document.getElementById('print_new_doc').style.display = 'none'
     }
     createImage(imageDisplayFormDatabase)
@@ -147,17 +269,17 @@ function setDataView() {
         console.log(documentName3)
         document.getElementById('documentName3').value = requestData.staff_id_alderman
         document.getElementById('position').value = getPositionById(requestData.staff_id_alderman)
-        if(document.getElementById('print_new_doc') != undefined){
+        if (document.getElementById('print_new_doc') != undefined) {
             document.getElementById('print_new_doc').style.display = ''
         }
 
     }
 
-    if(requestData.status === 'cancel'){
+    if (requestData.status === 'cancel') {
         document.getElementById('delete_request').style.display = ''
         document.getElementById('delete_date').value = requestData.last_update
         document.getElementById('delete_detail').value = requestData.delete_logic
-    }else{
+    } else {
         document.getElementById('delete_request').style.display = 'none'
     }
 
@@ -199,7 +321,7 @@ function setDataView() {
     if (cut_phone[1] === '') {
         document.getElementById("phone").value = cut_phone[0]
         document.getElementById('phone_more').value = ''
-        document.getElementById('phone_more').disabled = true
+        document.getElementById('phone_more').disabled = false
     } else {
         document.getElementById("phone").value = cut_phone[0]
         document.getElementById('phone_more').disabled = false
@@ -214,7 +336,7 @@ function setDataView() {
     if (cut_phone_no2[1] === '') {
         document.getElementById("reference_phone").value = cut_phone_no2[0]
         document.getElementById('reference_phone_more').value = ''
-        document.getElementById('reference_phone_more').disabled = true
+        document.getElementById('reference_phone_more').disabled = false
     } else {
         document.getElementById("reference_phone").value = cut_phone_no2[0]
         document.getElementById('reference_phone_more').disabled = false
@@ -258,7 +380,7 @@ function setDataView() {
     if (cut_phone_no3[1] === '') {
         document.getElementById("wPhone").value = cut_phone_no3[0]
         document.getElementById('wPhone_more').value = ''
-        document.getElementById('wPhone_more').disabled = true
+        document.getElementById('wPhone_more').disabled = false
     } else {
         document.getElementById("wPhone").value = cut_phone_no3[0]
         document.getElementById('wPhone_more').disabled = false
@@ -286,7 +408,7 @@ function setDataView() {
 
 
     } else {
-        if(document.getElementById('typeWorkplace') != undefined){
+        if (document.getElementById('typeWorkplace') != undefined) {
             document.getElementById('typeWorkplace').value = establishmentData.type
         }
     }
@@ -322,7 +444,7 @@ function setDataView() {
             if (cut_phone_no4[1] === '') {
                 document.getElementById("ownPhone").value = cut_phone_no4[0]
                 document.getElementById('ownPhone_more').value = ''
-                document.getElementById('ownPhone_more').disabled = true
+                document.getElementById('ownPhone_more').disabled = false
             } else {
                 document.getElementById("ownPhone").value = cut_phone_no4[0]
                 document.getElementById('ownPhone_more').disabled = false
@@ -381,7 +503,7 @@ function setDataView() {
             document.getElementById('datepicker6').value = trianData.date_issued
         }
     }
-    
+
     changeStatusMenuData(requestData.status) // RequestControl.js < switch menu to data === true
 }
 // set data form database 
@@ -434,7 +556,7 @@ function setDataOperator(raw_data, type) {
         if (cut_phone_no5[1] === '') {
             document.getElementById("phone").value = cut_phone_no5[0]
             document.getElementById('phone_more').value = ''
-            document.getElementById('phone_more').disabled = true
+            document.getElementById('phone_more').disabled = false
         } else {
             document.getElementById("phone").value = cut_phone_no5[0]
             document.getElementById('phone_more').disabled = false
@@ -568,7 +690,7 @@ function setRequestData(raw_data) {
 
 }
 function setEstablishmentData(raw_data) {
-    if(raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_ID != undefined){
+    if (raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_ID != undefined) {
         establishmentData.id = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_ID
         establishmentData.address_id = raw_data.ESTABLISHMENT_DATA.ADDRESS_ID
         establishmentData.perosonal_id = raw_data.ESTABLISHMENT_DATA.PERSONAL_ID
@@ -584,7 +706,7 @@ function setEstablishmentData(raw_data) {
     }
 }
 function setAddressEstablishmentData(raw_data) {
-    if(raw_data.ESTABLISHMENT_DATA.ADDRESS != undefined){
+    if (raw_data.ESTABLISHMENT_DATA.ADDRESS != undefined) {
         addressEstablishmentData.id = raw_data.ESTABLISHMENT_DATA.ADDRESS.ADDRESS_ID
         addressEstablishmentData.home_number = raw_data.ESTABLISHMENT_DATA.ADDRESS.ADDRESS_HOME_NUMBER
         addressEstablishmentData.moo = raw_data.ESTABLISHMENT_DATA.ADDRESS.ADDRESS_MOO === null ? '' : raw_data.ESTABLISHMENT_DATA.ADDRESS.ADDRESS_MOO
@@ -1374,37 +1496,37 @@ function setDataUpdate(type) {
 
 // getAge
 function getAge(date) {
-        let now = new Date().toISOString().slice(0, 10) // 2020-02-16
-        let year_now = parseInt(now.slice(0, 4)) + 543
-        let month_now = parseInt(now.slice(5, 7))
-        let day_now = parseInt(now.slice(8, 10))
-        // date "08-02-2563" OR 1998-04-22T17:00:00.000Z
-        console.log(`date ${date}`)
-        let day_b = parseInt(date.slice(8, 9))
-        let month_b = parseInt(date.slice(5, 7))
-        let year_b = parseInt(date.slice(0, 4)) > 1800 && parseInt(date.slice(0, 4)) < 2200 ? parseInt(date.slice(0, 4)) + 543 : parseInt(date.slice(0, 4))
-        let age
-        if (year_b < 100) {
-            day_b = parseInt(date.slice(0, 2))
-            month_b = parseInt(date.slice(3, 5))
-            year_b = parseInt(date.slice(6, 10)) > 1800 && parseInt(date.slice(6, 10)) < 2200 ? parseInt(date.slice(6, 10)) + 543 : parseInt(date.slice(6, 10))
-        }
-        console.log(`year_b ${year_b}`)
-        console.log(`year_now ${year_now}`)
-        if (month_b === month_now && day_b === day_now) {
-            return age = year_now - year_b
-        } else if (month_now === month_b) {
-            if (day_now > day_b) {
-                return age = year_now - year_b
-            } else {
-                return age = year_now - year_b - 1
-            }
-        } else if (month_now > month_b) {
+    let now = new Date().toISOString().slice(0, 10) // 2020-02-16
+    let year_now = parseInt(now.slice(0, 4)) + 543
+    let month_now = parseInt(now.slice(5, 7))
+    let day_now = parseInt(now.slice(8, 10))
+    // date "08-02-2563" OR 1998-04-22T17:00:00.000Z
+    console.log(`date ${date}`)
+    let day_b = parseInt(date.slice(8, 9))
+    let month_b = parseInt(date.slice(5, 7))
+    let year_b = parseInt(date.slice(0, 4)) > 1800 && parseInt(date.slice(0, 4)) < 2200 ? parseInt(date.slice(0, 4)) + 543 : parseInt(date.slice(0, 4))
+    let age
+    if (year_b < 100) {
+        day_b = parseInt(date.slice(0, 2))
+        month_b = parseInt(date.slice(3, 5))
+        year_b = parseInt(date.slice(6, 10)) > 1800 && parseInt(date.slice(6, 10)) < 2200 ? parseInt(date.slice(6, 10)) + 543 : parseInt(date.slice(6, 10))
+    }
+    console.log(`year_b ${year_b}`)
+    console.log(`year_now ${year_now}`)
+    if (month_b === month_now && day_b === day_now) {
+        return age = year_now - year_b
+    } else if (month_now === month_b) {
+        if (day_now > day_b) {
             return age = year_now - year_b
         } else {
             return age = year_now - year_b - 1
         }
-    
+    } else if (month_now > month_b) {
+        return age = year_now - year_b
+    } else {
+        return age = year_now - year_b - 1
+    }
+
 }
 //prepare InsertData
 function createArrayInsert() {
@@ -1496,7 +1618,13 @@ function getRequestData(no, year) {
         })
     })
 }
-
+function getPersonalDataAndEstablishment(p_id, e_id) {
+    return new Promise((resolve, reject) => {
+        axios.get(`http://localhost:5000/get/request/profile/${p_id}/${e_id}`).then((result) => {
+            return resolve(result.data);
+        })
+    })
+}
 function getPresident() {
     alderman_list = []
     return new Promise((resolve, reject) => {

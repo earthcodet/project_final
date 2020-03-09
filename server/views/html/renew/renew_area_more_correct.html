@@ -10,25 +10,28 @@
     <link rel="stylesheet" href="../../css/css2.css">
     <link href="../../css/fonts.css" rel="stylesheet">
 
-   <!-- เรียกไลบารี่สร้างปฎิทิน  -->
-   <script src="../../js/service/jquery/jquery-3.4.1.min.js"></script>
-   <script src="../../js/service/date/datetimepicker.full.js"></script>
-   <script src="../../js/service/date/dateth.js"></script>
-   <link rel="stylesheet" href="../../css/date.css">
+    <!-- เรียกไลบารี่สร้างปฎิทิน  -->
+    <script src="../../js/service/jquery/jquery-3.4.1.min.js"></script>
+    <script src="../../js/service/date/datetimepicker.full.js"></script>
+    <script src="../../js/service/date/dateth.js"></script>
+    <link rel="stylesheet" href="../../css/date.css">
 </head>
 
 <body>
     <!-- เมนูด้านบน -->
     <div class="w3-top icon-bar">
         <a id="addMenu" class="exit " onclick="addTEST()"><i class="fa fa-plus-square"><span> เพิ่ม</span></i></a>
-        <a id="editMenu" onclick="editTEST()" class="exit disableds"><i class="fa fa-pencil-alt"><span> แก้ไข</span></i></a>
-        <a id="saveMenu" onclick="insertTEST()" class="exit disableds"><i class="fa fa-save"><span> บันทึก</span></i></a>
-        <a id="restoreMenu" onclick="restoreTEST()" class="exit disableds"><i class="fa fa-reply"><span> เรียกคืน</span></i></a>
-        <a id="deleteMenu" onclick="deleteTEST()" class="exit disableds"><i class="fa fa-times"><span> ยกเลิก</span></i></a>
-        <!-- <a><i class="fa fa-search"> ค้นหา</i></a> -->
+        <a id="editMenu" onclick="editTEST()" class="exit disableds"><i class="fa fa-pencil-alt"><span>
+                    แก้ไข</span></i></a>
+        <a id="saveMenu" onclick="insertTEST()" class="exit disableds"><i class="fa fa-save"><span>
+                    บันทึก</span></i></a>
+        <a id="restoreMenu" onclick="restoreTEST()" class="exit disableds"><i class="fa fa-reply"><span>
+                    เรียกคืน</span></i></a>
+        <a id="deleteMenu" onclick="deleteTEST()" class="exit disableds"><i class="fa fa-times"><span>
+                    ยกเลิก</span></i></a>
         <a id="exitMenu" onclick="exitTEST()" class="exit" style="float: right;width: 17%;"><i
                 class="fa fa-sign-out-alt">
-               <span> ออกจากระบบ</span></i></a>
+                <span> ออกจากระบบ</span></i></a>
     </div>
     <!-- เมนูด้านข้าง -->
     <div class="sidenav">
@@ -63,7 +66,8 @@
             <a href="renew_area_less_correct.html">- คำขอต่อหนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
             <a href="renew_market.html">- คำขอต่อใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
             <a href="renew_health_danger.html">- คำขอต่อกิจการที่เป็นอันตรายต่อสุขภาพ</a>
-        </div>  
+            <a href="renew_crematory.html">- คำขอต่อกิจการฌาปณสถาน</a>
+        </div>
         <button class="dropdown-btn"><b>ข้อมูลส่วนกลาง </b><i class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
             <a href="../central/operator.html">- ข้อมูลผู้ประกอบการ</a>
@@ -74,7 +78,8 @@
         <div class="dropdown-container">
             <a href="../utilities/petition.html">- บันทึกเรื่องร้องเรียน</a>
         </div>
-        <button class="dropdown-btn" id="adminna" style="display: none;"><b>ข้อมูลระบบ </b><i class="fa fa-caret-down"></i></button>
+        <button class="dropdown-btn" id="adminna" style="display: none;"><b>ข้อมูลระบบ </b><i
+                class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
             <a href="#"></a>
         </div>
@@ -111,7 +116,7 @@
                     <a>วันที่ยื่นขอ :
                         <input type="text" id="datepicker1" style="width: 16%;"></a>
                     <a>ประเภทคำขอ :
-                        <input list="brow" id="" name="" style="width: 19%;" class="drop">
+                        <input list="brow" id="typeReq" name="" style="width: 19%;" class="drop">
                         <datalist id="brow">
                             <option value="" hidden>เลือก...</option>
                             <option
@@ -120,142 +125,150 @@
                                 หรือทางสาธารณะโดยลักษณะวิธีการจัดวางสินค้าในที่หนึงที่ใดเป็นต้น
                             </option>
                         </datalist>
-                    <a>เขียนที่ :
-                        <input type="text" id="place" value="เทศบาลเมืองแสนสุข" style="width:16%;"></a>
-                    <br>
+                        <a>เขียนที่ :
+                            <input type="text" id="place" value="เทศบาลเมืองแสนสุข" style="width:16%;"></a>
+                        <br>
 
-                    <a style="margin-left: 1.4vw;">ข้าพเจ้า :
-                        <select id="typeUser" style="width: 11%;">
-                            <option value="บุคคลธรรมดา">บุคคลธรรมดา</option>
-                            <option value="นิติบุคคล">นิติบุคคล</option>
+                        <a style="margin-left: 1.4vw;">ข้าพเจ้า :
+                            <select id="typeUser" style="width: 11%;">
+                                <option value="บุคคลธรรมดา">บุคคลธรรมดา</option>
+                                <option value="นิติบุคคล">นิติบุคคล</option>
+                            </select>
+                            <input type="text" id="name" style="width: 16.5%;"></a>
+                        <a>เลขประจำตัว :
+                            <input type="text" id="id"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                maxlength="13" style="width: 13%;"></a>
+                        <a>อายุ :
+                            <input type="text" id="age"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                maxlength="3" style="width: 7%;"></a>
+                        <a>สัญชาติ :
+                            <input class="drop" list="nationality1" id="nationalityList1" name="" style="width: 7%;">
+                            <datalist id="nationality1">
+                                <option value="" hidden>เลือก...</option>
+                                <option value="ไทย">ไทย</option>
+                                <option value="จีน"></option>
+                                <option value="อเมริกัน"></option>
+                            </datalist>
+                            </input></a>
+                        <a>เชื้อชาติ :
+                            <input list="nationality2" id="nationalityList2" name="" style="width: 7%;">
+                            <datalist id="nationality2">
+                                <option value="" hidden>เลือก...</option>
+                                <option value="ไทย">ไทย</option>
+                                <option value="จีน"></option>
+                                <option value="อเมริกัน"></option>
+                            </datalist>
+                            </input></a>
+                        <br>
+                        <a style="margin-left: 0.58vw;">เลขที่บ้าน :
+                            <input type="text" style="width: 7%;"></a>
+                        <a>หมู่ที่ :
+                            <input type="text" style="width: 7%;"></a>
+                        <a>ตรอก :
+                            <input type="text" style="width: 13%;"></a>
+                        <a>ซอย :
+                            <input type="text" id="sxy" style="width: 13%;"></a>
+                        <a>อาคาร :
+                            <input type="text" id="building" style="width: 13.5%;"></a>
+                        <a>ถนน :
+                            <input type="text" id="road" style="width: 13.5%;"></a>
+                        <br>
+                        <a style="margin-left: 1.8vw;">จังหวัด :
+                            <select id="province" style="width: 14%;"></select></a>
+                        <a>อำเภอ :
+                            <select id="district" style="width: 14%;"></select></a>
+                        <a>ตำบล :
+                            <select id="subdistrict" style="width: 13.5%;"></select></a>
+                        <a>โทรศัพท์ :
+                            <input type="text" id="phone"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                maxlength="10" style="width: 6.5vw;"
+                                onkeyup="checkPhone(this.value,'phone','phone_more')"></a>
+                        <a style="margin-left: .1vw;">ต่อ</a>
+                        <input type="text" id="phone_more" style="width: 4vw"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            maxlength="4">
+                        <a>โทรสาร :
+                            <input type="text" id="fax"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                maxlength="9" style="width: 13.2%;"></a>
+                        <br>
+                        <br>
+                        <a>สถานที่ประกอบการ :
+                            <input type="text" id="workplaceName" style="width: 37.5%"> (ถ้ามี)</a>
+                        <a>พื้นที่ :
+                            <input type="int" id="area" style="width: 10%"> ตารางเมตร</a>
+                        <a>จำนวนคนงาน :
+                            <input type="int" id="numPeople" style="width: 10%;"> คน</a>
+                        <br>
+                        <a style="margin-left: 2.2vw;">ประเภทกิจการ :
+                            <input type="text" id="typeWorkplace" style="width: 37.5%"> </a>&emsp;
+                        <a>ใช้เครื่องจักรขนาด :
+                            <input type="text" id="machinery" style="width: 8%;"> แรงม้า</a>
+                        <br>
+                        <a>ตั้งอยู่เลขที่ :
+                            <input type="text" id="wHomeId" style="width: 7%;"></a>
+                        <a>หมู่ที่ :
+                            <input type="int" id="wMoo" style="width: 7%;"></a>
+                        <a>ตรอก:
+                            <input type="text" id="wTrxk" style="width: 13%;"></a>
+                        <a>ซอย :
+                            <input type="text" id="wSxy" style="width: 13%;"></a>
+                        <a>อาคาร :
+                            <input type="text" id="wBuilding" style="width: 13.5%;"></a>
+                        <a>ถนน :
+                            <input type="text" id="wRoad" style="width: 13.5%;"></a>
+                        <br>
+
+                        <a style="margin-left: 1.75vw;">จังหวัด :
+                            <select id="wProvince" style="width: 14%;"></a>
                         </select>
-                        <input type="text" id="name" style="width: 16.5%;">
-                        <button type="button" class="fa fa-search" style="border-radius: 5px;"
-                            onclick="testSearchOparator()"></button></a>
-                    <a>เลขประจำตัว :
-                        <input type="text" id="id"
+                        <a>อำเภอ :
+                            <select id="wDistrict" style="width: 14%;"></a>
+                        </select>
+                        <a>ตำบล :
+                            <select id="wSubdistrict" style="width: 13.5%;"></a>
+                        </select>
+                        <a>โทรศัพท์ :
+                            <input type="text" id="wPhone"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                maxlength="10" style="width: 6.5vw"
+                                onkeyup="checkPhone(this.value,'wPhone','wPhone_more')"></a>
+                        <a style="margin-left: .1vw;">ต่อ</a>
+                        <input type="text" id="wPhone_more" style="width: 4vw"
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                            maxlength="13" style="width: 13%;"></a>
-                    <a>อายุ :
-                        <input type="text" id="age"
-                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                            maxlength="3" style="width: 7%;"></a>
-                    <a>สัญชาติ :
-                        <input class="drop" list="nationality1" id="nationalityList1" name="" style="width: 7%;">
-                        <datalist id="nationality1">
-                            <option value="" hidden>เลือก...</option>
-                            <option value="ไทย">ไทย</option>
-                            <option value="จีน"></option>
-                            <option value="อเมริกัน"></option>
-                        </datalist>
-                        </input></a>
-                    <a>เชื้อชาติ :
-                        <input list="nationality2" id="nationalityList2" name="" style="width: 7%;">
-                        <datalist id="nationality2">
-                            <option value="" hidden>เลือก...</option>
-                            <option value="ไทย">ไทย</option>
-                            <option value="จีน"></option>
-                            <option value="อเมริกัน"></option>
-                        </datalist>
-                        </input></a>
-                    <br>
-                    <a style="margin-left: 0.58vw;">เลขที่บ้าน :
-                        <input type="text" style="width: 7%;"></a>
-                    <a>หมู่ที่ :
-                        <input type="text" style="width: 7%;"></a>
-                    <a>ตรอก :
-                        <input type="text" style="width: 13%;"></a>
-                    <a>ซอย :
-                        <input type="text" id="sxy" style="width: 13%;"></a>
-                    <a>อาคาร :
-                        <input type="text" id="building" style="width: 13.5%;"></a>
-                    <a>ถนน :
-                        <input type="text" id="road" style="width: 13.5%;"></a>
-                    <br>
-                    <a style="margin-left: 1.8vw;">จังหวัด :
-                        <select id="province" style="width: 14%;"></select></a>
-                    <a>อำเภอ :
-                        <select id="district" style="width: 14%;"></select></a>
-                    <a>ตำบล :
-                        <select id="subdistrict" style="width: 13.5%;"></select></a>
-                    <a>โทรศัพท์ :
-                        <input type="text" id="phone"
-                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                            maxlength="10" style="width: 12%;"></a>
-                    <a>โทรสาร :
-                        <input type="text" id="fax"
-                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                            maxlength="9" style="width: 13.2%;"></a>
-                    <br>
-                    <br>
-                    <a>สถานที่ประกอบการ :
-                        <input type="text" id="workplaceName" style="width: 37.5%"> (ถ้ามี)</a>
-                    <a>พื้นที่ :
-                        <input type="int" id="area" style="width: 10%"> ตารางเมตร</a>
-                    <a>จำนวนคนงาน :
-                        <input type="int" id="numPeople" style="width: 10%;"> คน</a>
-                    <br>
-                    <a style="margin-left: 2.2vw;">ประเภทกิจการ :
-                        <input type="text" id="" style="width: 37.5%"> </a>&emsp;
-                    <a>ใช้เครื่องจักรขนาด :
-                        <input type="text" id="" style="width: 8%;"> แรงม้า</a>
-                    <br>
-                    <a>ตั้งอยู่เลขที่ :
-                        <input type="text" id="wHomeId" style="width: 7%;"></a>
-                    <a>หมู่ที่ :
-                        <input type="int" id="wMoo" style="width: 7%;"></a>
-                    <a>ตรอก:
-                        <input type="text" id="wTrxk" style="width: 13%;"></a>
-                    <a>ซอย :
-                        <input type="text" id="wSxy" style="width: 13%;"></a>
-                    <a>อาคาร :
-                        <input type="text" id="wBuilding" style="width: 13.5%;"></a>
-                    <a>ถนน :
-                        <input type="text" id="wRoad" style="width: 13.5%;"></a>
-                    <br>
-
-                    <a style="margin-left: 1.75vw;">จังหวัด :
-                        <select id="wProvince" style="width: 14%;"></a>
-                    </select>
-                    <a>อำเภอ :
-                        <select id="wDistrict" style="width: 14%;"></a>
-                    </select>
-                    <a>ตำบล :
-                        <select id="wSubdistrict" style="width: 13.5%;"></a>
-                    </select>
-                    <a>โทรศัพท์ :
-                        <input type="text" id="wPhone"
-                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                            maxlength="10" style="width: 12%;"></a>
-                    <a>โทรสาร :
-                        <input type="text" id="wFax"
-                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                            maxlength="9" style="width: 13.2%;"></a>
-                    <br>
-                    <br>
-                    <a>ใบอนุญาตฉบับจริง
-                        เล่มที่ :
-                        <input type="text" id="" style="width: 5%;"></a>&ensp;
-                    <a>เลขที่ :
-                        <input type="text" id="" style="width: 10%;"></a>&ensp;
-                    <a>ออกให้เมื่อวันที่ :
-                        <input type="text" id="datepicker2" style="width: 12%;"></a>
-                    <a>ค่าธรรมเนียม :
-                        <input type="number" id="" style="width: 12%;"></a>
-                    <a>ค่าปรับ :
-                        <input type="number" id="" style="width: 12%;"></a>
-
-                    <br>
-                    <br>
+                            maxlength="4">
+                        <a>โทรสาร :
+                            <input type="text" id="wFax"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                maxlength="9" style="width: 13.2%;"></a>
+                        <br>
+                        <br>
+                        <a>ใบอนุญาตฉบับจริง
+                            <a>ออกให้เมื่อวันที่ :
+                                <input type="text" id="datepicker2" style="width: 12%;"></a>
+                            <a>ค่าธรรมเนียม :
+                                <input type="text" id="renew_fee" style="width: 12%;"
+                                maxlength="8"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></a>
+                            <a>ค่าปรับ :
+                                <input type="text" id="renew_fine" style="width: 12%;"
+                                maxlength="8"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></a>
+        
+                        <br>
+                        <br>
                 </div>
                 <br>
 
-                
-                
+
+
                 <!-- อนุญาต -->
                 <div class="box">
                     <br>
-                    
+
                     <input type="radio" name="confirm" id="confirm" onClick="show_confirm(this.value);" value="2">
                     <a> ยืนยันคำขอต่ออายุ </a>
                     <button type="button" style="position: absolute;right: 10%;">พิมพ์ใบขอต่ออนุญาต</button>
@@ -307,13 +320,14 @@
                             <a>
                                 <br>
                                 (ลงชื่อ)
-                                <input type="text" id="documentName" />
+                                <input type="text" id="documentName" disabled />
                                 ผู้ขอรับใบอนุญาต
                             </a>
                         </div>
                         <div class="col" style="width: 33.33%;">
                             <a>
-                                ลงชื่อ <input type="text" id="" />
+                                ลงชื่อ 
+                                <select id="documentName2" name="" style="width: 18vw;" disabled ></select>
                                 <br>
                                 <p class="text-center">ผู้รับเงิน</p>
                             </a>
@@ -321,10 +335,10 @@
                         <div class="col" style="width: 33.33%;">
                             <a>
                                 &emsp;ลงชื่อ
-                                <input type="text" id="" readonly disabled>
+                                <select id="documentName3" name="" style="width: 18vw;" disabled></select>
                                 <br>
                                 ตำแหน่ง
-                                <input type="text" id="" readonly disabled>
+                                <input type="text" id="position"  disabled>
                                 <br>
                                 เจ้าพนักงานท้องถิ่น
                             </a>
@@ -332,7 +346,7 @@
                     </div>
 
                 </div><br>
-                
+
 
 
             </div>
@@ -343,7 +357,7 @@
 
 </body>
 <script src="../../node_modules/axios/dist/axios.min.js"></script>
-<script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>   
+<script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
 <script src="../../js/service/utilities.js"></script>
 
 <script src="../../js/service/sideMenu.js"></script>

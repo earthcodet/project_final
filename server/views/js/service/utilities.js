@@ -440,6 +440,8 @@ function toRequest(value, id) {
     }
 }
 function toPerRequest(value, id) {
+    id = id.split('/')
+    id = `${id[0]}${id[1]}`
     switch (value) {
         case 'กิจการฌาปณสถาน':
             window.open('../renew/renew_crematory.html' + '?id=' + id, '_blank');
@@ -468,6 +470,38 @@ function toPerRequest(value, id) {
         default:
             //ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ
             window.open('../renew/renew_public_sell.html' + '?id=' + id, '_blank');
+            break;
+    }
+}
+function toRequestAdd(value, p_id , e_id) {
+    switch (value) {
+        case 'กิจการฌาปณสถาน':
+            window.open('../request/request_crematory.html?p_id=' + p_id +'&e_id='+e_id, '_blank');
+            break;
+        case 'กิจการที่เป็นอันตรายต่อสุขภาพ':
+            window.open('../request/request_health_danger.html?p_id=' + p_id +'&e_id='+e_id, '_blank');
+            break;
+        case 'ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน':
+            window.open('../request/request_market.html?p_id=' + p_id +'&e_id='+e_id, '_blank');
+            break;
+        case 'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร':
+            window.open('../request/request_area_less_correct.html?p_id=' + p_id +'&e_id='+e_id, '_blank');
+            break;
+        case 'หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร':
+            window.open('../request/request_area_less_sell.html?p_id=' + p_id +'&e_id='+e_id, '_blank');
+            break;
+        case 'ใบอนุญาตจัดตั้งสถานที่สะสมอาหาร':
+            window.open('../request/request_area_more_correct.html?p_id=' + p_id +'&e_id='+e_id, '_blank');
+            break;
+        case 'ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร':
+            window.open('../request/request_area_more_sell.html?p_id=' + p_id +'&e_id='+e_id, '_blank');
+            break;
+        case 'ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ':
+            window.open('../request/request_public_hawk.html?p_id=' + p_id +'&e_id='+e_id, '_blank');
+            break;
+        default:
+            //ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ
+            window.open('../request/request_public_sell.html?p_id=' + p_id +'&e_id='+e_id, '_blank');
             break;
     }
 }
