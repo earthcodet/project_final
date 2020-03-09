@@ -363,7 +363,7 @@ function changeStatusDeleteRequest(status) {
     console.log(`changeStatusDeleteRequest => `)
     console.log(requestDataDelete)
     return new Promise(function (resolve, reject) {
-        axios.post(`http://localhost:5000/update/request/status/`, { 'request': requestDataDelete }).then((result) => {
+        axios.post(`http://localhost:5000/update/request/status/delete`, { 'request': requestDataDelete }).then((result) => {
             console.log(`changeStatusDeleteRequest = ${result.data}`)
             return resolve(result.data);
         })

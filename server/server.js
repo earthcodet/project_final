@@ -303,7 +303,7 @@ app.get('/get/request/owner/:personal_id/:type/assistant', (req, res) => {
   })
 })
 
-app.post('/update/request/status', (req, res) => {
+app.post('/update/request/status/delete', (req, res) => {
   var obj = req.body.requestData
   webService.updateRequestStatus(obj, req.session.username).then((data) => {
     res.json(data);
