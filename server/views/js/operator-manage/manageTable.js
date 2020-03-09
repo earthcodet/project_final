@@ -654,7 +654,7 @@ $(function () {
             console.log(`this`)
             console.log(this)
             setDataItem(requestDataList[indexData])
-            if(inRequest.is_deleted === 'Y'){
+            if(inRequest.is_deleted === 'Y' && key != 'detail'){
                 statusRequestDelete()
             }else{
                 if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
@@ -708,24 +708,29 @@ $(function () {
             let id = this[0].cells[2].innerText.trim()
             let indexData = this[0].rowIndex - 1
             setDataItem(requestDataList[indexData])
-            if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
-                statusDelete()
-            } else {
-                switch (key) {
-                    case 'pay':
-                        payPopup()
-                        break;
-                    case 'delete':
-                        canclePopup()
-                        break;
-                    case 'cancel-status':
-                        cancelStatus()
-                        break;
-                    default:
-                        toRequest(type, id)
-                        break;
+            if(inRequest.is_deleted === 'Y' && key != 'detail'){
+                statusRequestDelete()
+            }else{
+                if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
+                    statusDelete()
+                } else {
+                    switch (key) {
+                        case 'pay':
+                            payPopup()
+                            break;
+                        case 'delete':
+                            canclePopup()
+                            break;
+                        case 'cancel-status':
+                            cancelStatus()
+                            break;
+                        default:
+                            toRequest(type, id)
+                            break;
+                    }
                 }
             }
+         
         },
         items: {
             "pay": { name: "ชำระเงินแล้ว" },
@@ -743,7 +748,7 @@ $(function () {
         callback: function (key, options) {
             let type = this[0].cells[1].innerText.trim()
             let id = this[0].cells[2].innerText.trim()
-            if(inRequest.is_deleted === 'Y'){
+            if(inRequest.is_deleted === 'Y' && key != 'detail'){
                 statusRequestDelete()
             }else{
                 if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
@@ -769,7 +774,7 @@ $(function () {
             let id = this[0].cells[2].innerText.trim()
             let indexData = this[0].rowIndex - 1
             setDataItem(requestDataList[indexData])
-            if(inRequest.is_deleted === 'Y'){
+            if(inRequest.is_deleted === 'Y' && key != 'detail'){
                 statusRequestDelete()
             }else{
                 if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
@@ -802,7 +807,7 @@ $(function () {
             let indexData = this[0].rowIndex - 1
             console.log(indexData)
             setDataItem(requestDataList[indexData])
-            if(inRequest.is_deleted === 'Y'){
+            if(inRequest.is_deleted === 'Y' && key != 'detail'){
                 statusRequestDelete()
             }else{
                 if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
@@ -842,7 +847,7 @@ $(function () {
         callback: function (key, options) {
             let id = this[0].cells[2].innerText.trim()
             let type = this[0].cells[1].innerText.trim()
-            if(inRequest.is_deleted === 'Y'){
+            if(inRequest.is_deleted === 'Y' && key != 'detail'){
                 statusRequestDelete()
             }else{
                 if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {

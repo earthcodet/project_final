@@ -1412,60 +1412,6 @@ class service {
         let new_addressOwner = this.formatInsert('ADDRESS', addressOwner)
         let new_land = this.formatInsert('LAND', land)
         return new Promise((resolve, reject) => {
-            EstablishmentDAOObj.getDuplication(Edata, address).then((establishmentData) => {
-                if (establishmentData.length != 0) {
-                    new_edata.id = establishmentData[0].ESTABLISHMENT_ID
-                    new_edata.address_id = establishmentData[0].ADDRESS_ID
-                    //use_land
-                    if (new_edata.grond != 'NULL') {
-                        EstablishmentDAOObj.updateGround(new_edata.id, new_edata.grond)
-                    }
-                    if (new_edata.is_land_owned != 'NULL') {
-                        this.insertLand(new_land, new_addressOwner).then((land_id) => {
-                            new_edata.is_land_owned = `'${land_id.id}'`
-                            new_edata.land_used = land_id.id
-                            new_edata.land_address_owner = land_id.address
-                            file.name = land_id.id
-                            this.insertFile(file).then((resultFile) => {
-                                if (resultFile.status) {
-                                    //NEW LAND 
-                                    if (land.type === 'duplication' && new_edata.is_land_owned === `'${establishmentData[0].ESTABLISHMENT_ID}'`) {
-                                        return resolve(new_edata)
-                                    } else {
-                                        EstablishmentDAOObj.updateUseLand(establishmentData[0].ESTABLISHMENT_ID, new_edata.is_land_owned).then((data_update_success) => {
-                                            if (data_update_success) {
-                                                return resolve(new_edata)
-                                            } else {
-                                                console.log('error update UseLand Establishment')
-                                                return resolve(new_edata)
-                                            }
-                                        })
-                                    }
-                                }
-                            })
-                        })
-                    } else {
-                        if (establishmentData[0].ESTABLISHMENT_IS_LAND_OWNED === null) {
-                            new_edata.is_land_owned = null
-                            new_edata.land_used = null
-                            new_edata.land_address_owner = null
-                            return resolve(new_edata)
-                        } else {
-                            //establishmentData[0].ESTABLISHMENT_IS_LAND_OWNED != null
-                            new_edata.is_land_owned = null
-                            new_edata.land_used = null
-                            new_edata.land_address_owner = null
-                            EstablishmentDAOObj.updateUseLand(establishmentData[0].ESTABLISHMENT_ID, new_edata.is_land_owned).then((data_update_success) => {
-                                if (data_update_success) {
-                                    return resolve(new_edata)
-                                } else {
-                                    console.log('error update UseLand Establishment')
-                                    return resolve(new_edata)
-                                }
-                            })
-                        }
-                    }
-                } else {
                     this.insertAddressOne(new_address).then((resultaddress) => {
                         if (resultaddress.check) {
                             new_edata.address_id = resultaddress.id
@@ -1491,9 +1437,6 @@ class service {
                             }
                         }
                     })
-                }
-            })
-
         })
     }
     getEstablishment(id) {
@@ -1954,9 +1897,19 @@ class service {
             })
         })
     }
-    updateRequestStatusDelete(status, id, year) {
+    updateRequestStatusDelete(request,user) {
+        let object = {
+            username : user,
+            status : request.status,
+            id : request.id,
+            year : request.year,
+            last_update : ''
+        }
+        var datetime = new Date();
+        let dateForUpdate = datetime.toISOString().slice(0, 10)
+        object.last_update = dateForUpdate
         return new Promise((resolve, reject) => {
-            RequestDAOObj.updateStatusDelete(status, id, year).then((data) => {
+            RequestDAOObj.updateStatusDelete(object).then((data) => {
                 if (data === `true`) {
                     return resolve(true)
                 } else {

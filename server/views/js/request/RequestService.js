@@ -194,10 +194,11 @@ function setDataProfile() {
         document.getElementById('numPeople').value = establishmentData.worker
     }
 
-    changeStatusMenuData(requestData.status) // RequestControl.js < switch menu to data === true
+    changeStatusMenuData(requestData.status, requestData.is_deleted) // RequestControl.js < switch menu to data === true
 }
 // setDataView
 function setDataView() {
+    setIdDeleteRequest(requestData.is_deleted)
     document.getElementById('documentName2').readOnly = true
     if (document.getElementById('print_new_doc') != undefined) {
         document.getElementById('print_new_doc').style.display = 'none'
@@ -511,6 +512,7 @@ function setDataView() {
 function setDataOperator(raw_data, type) {
     setOperatorData(raw_data)
     setOperatorAddressData(raw_data)
+    requestData.personal_id_owner = raw_data.PERSONAL_ID
     operatorData.is_personal_changed = true
     operatorAddressData.is_address_changed = true
     if (type === 'OPERATOR') {

@@ -6,6 +6,7 @@ var deleteData = false
 var addNew = false
 let personal_change = false
 function addPage() {
+    resetStyleIdDeleteRequest()
     resetRequestData()
     personal_change = false
     addNew = true
@@ -135,16 +136,21 @@ function deletePage() {
                 return new Promise(function (resolve, reject) {
                     setTimeout(function () {
                         //function ใน operator 
-
-                        ///-----------------
-                        // changeStatusDelete('Y').then((statusDelete) => {
-                        //     tempData.is_deleted = 'Y'
-                        //     console.log(`statusDelete = ${statusDelete}`)
-                        //     if (statusDelete) {
-                        //         resolve();
-                        //     }
-                        // })
-                    }, 1000);
+                        changeStatusDeleteRequest('Y').then((statusDelete) =>{
+                            let temp_status = requestData.is_deleted 
+                            requestData.is_deleted = 'Y'
+                            if(statusDelete){
+                                resolve();
+                            }else{
+                                requestData.is_deleted = temp_status  
+                                Swal.fire({
+                                    html: "เกิดข้อผิดพลาดกับระบบ",
+                                    icon: "error",
+                                    confirmButtonColor: "#009688"
+                                });
+                            }
+                        })
+                    }, 100);
                 })
             }
         })
@@ -157,13 +163,11 @@ function deletePage() {
                     });
                     // function update
                     deleteData = true
-                    setIdDelete(inPersonal.type)
+                    setIdDeleteRequest(requestData.is_deleted)
                     disableMenuAll()
                     enableMenu('addMenu')
                     enableMenu('editMenu')
                     enableMenu('restoreMenu')
-
-                    resetInputRequired()
                 } else if (result.dismiss === Swal.DismissReason.cancel) {
                     // Swal.fire("บันทึกล้มเหลว");
                 }
@@ -201,11 +205,11 @@ function deletePage() {
                         disableMenuAll()
                         enableMenu('addMenu')
                         enableFunction()
-                        //resetStyleIdDelete()
+                        resetStyleIdDeleteRequest()
                         resetFunction()
-                        //resetImageDefault()
                     } else {
                         //resetFunction()
+                        resetStyleIdDeleteRequest()
                         setDataView()
                         disableMenuAll()
                         addNew = false
@@ -222,53 +226,127 @@ function deletePage() {
     }
 }
 function restorePage() {
-    disableMenuAll()
-    enableMenu('addMenu')
-    enableMenu('editMenu')
-    enableMenu('deleteMenu')
-}
-function changeStatusMenuData(status) {
-    if (status === 'wait' || status === 'approval' || status === 'active') {
-        data = true
-        addNew = false
-        disableMenuAll()
-        enableMenu('addMenu')
-        enableMenu('editMenu')
-        enableMenu('deleteMenu')
-        enableFunction()
-    } else {
-        if (status === '') {
-            addNew = true
+    //function Update delete 
+    Swal.fire({
+        title: "สำนักงานเทศบาล",
+        html: "ต้องการยกเลิกสถาะลบหรือไม่",
+        icon: 'warning',
+        showCancelButton: true,
+        customClass: 'swal-height',
+        confirmButtonColor: "#009688",
+        confirmButtonText: "ใช่",
+        cancelButtonText: "ไม่ใช่",
+        cancelButtonColor: '#dc3545',
+        closeOnConfirm: false,
+        closeOnCancel: false,
+        showLoaderOnConfirm: true,
+        preConfirm: function () {
+            return new Promise(function (resolve, reject) {
+                setTimeout(function () {
+                    //function ใน operator 
+                    changeStatusDeleteRequest('N').then((statusDelete) =>{
+                        let temp_status = requestData.is_deleted 
+                        requestData.is_deleted = 'N'
+                        if(statusDelete){
+                            resolve();
+                        }else{
+                            requestData.is_deleted = temp_status  
+                            Swal.fire({
+                                html: "เกิดข้อผิดพลาดกับระบบ",
+                                icon: "error",
+                                confirmButtonColor: "#009688"
+                            });
+                        }
+                    })
+                }, 100);
+            })
+        }
+    }).then((result) => {
+        if (result.value) {
+            Swal.fire({
+                html: "ผู้ประกอบการนี้กลับอยู่ในสถานะปกติแล้ว",
+                icon: "success",
+                confirmButtonColor: "#009688"
+            });
+            resetStyleIdDeleteRequest()
             deleteData = false
-            data = false
-            disableFunction()
+            data = true
             disableMenuAll()
-            enableMenu('saveMenu')
-        } else {
+            enableMenu('addMenu')
+            enableMenu('editMenu')
+            enableMenu('deleteMenu')
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            // Swal.fire("บันทึกล้มเหลว");
+        }
+    });
+   
+}
+function changeStatusMenuData(status,status_delete) {
+    if(status_delete === 'Y'){
+        if (status === 'wait' || status === 'approval' || status === 'active') {
             data = true
             addNew = false
             disableMenuAll()
             enableMenu('addMenu')
+            enableMenu('editMenu')
+            enableMenu('deleteMenu')
             enableFunction()
+        } else {
+            if (status === '') {
+                addNew = true
+                deleteData = false
+                data = false
+                disableFunction()
+                disableMenuAll()
+                enableMenu('saveMenu')
+            } else {
+                data = true
+                addNew = false
+                disableMenuAll()
+                enableMenu('addMenu')
+                enableFunction()
+            }
+        }
+        enableMenu('restoreMenu')
+    }else{
+        if (status === 'wait' || status === 'approval' || status === 'active') {
+            data = true
+            addNew = false
+            disableMenuAll()
+            enableMenu('addMenu')
+            enableMenu('editMenu')
+            enableMenu('deleteMenu')
+            enableFunction()
+        } else {
+            if (status === '') {
+                addNew = true
+                deleteData = false
+                data = false
+                disableFunction()
+                disableMenuAll()
+                enableMenu('saveMenu')
+            } else {
+                data = true
+                addNew = false
+                disableMenuAll()
+                enableMenu('addMenu')
+                enableFunction()
+            }
         }
     }
+   
 }
-function changeStatusDelete(RequestNo, RequestYear) {
-    return new Promise((resolve, reject) => {
-        axios.get(`http://localhost:5000/search/personal/${id}/${name}/${surname}`).then((result) => {
-            if (result.data != 'Not found') {
-                createResultSearch(result.data, typeSearch)
-                errorSearch('', 'HIDE')
-
-                return resolve(result.data);
-            } else {
-                errorSearch('not found', 'SHOW')
-                var tbl = document.getElementById("resultItems");
-                if (tbl.getElementsByTagName("tbody")[0] != null || tbl.getElementsByTagName("tbody")[0] != undefined) {
-                    tbl.removeChild(tbl.getElementsByTagName("tbody")[0])
-                }
-
-            }
+function changeStatusDeleteRequest(status) {
+    let requestDataDelete = {}
+    requestDataDelete.id = requestData.no
+    requestDataDelete.year = requestData.year
+    requestDataDelete.status = status
+    console.log(`changeStatusDeleteRequest => `)
+    console.log(requestDataDelete)
+    return new Promise(function (resolve, reject) {
+        axios.post(`http://localhost:5000/update/request/status/`, { 'request': requestDataDelete }).then((result) => {
+            console.log(`changeStatusDeleteRequest = ${result.data}`)
+            return resolve(result.data);
         })
     })
 }
@@ -496,4 +574,20 @@ function getFormPrint(menu) {
         default:
             return '../view/view_area_more_correct.html'
     }
+}
+function resetStyleIdDeleteRequest(){
+    var id = document.getElementById('form_id')
+    if (id != undefined || id != null) {
+        id.style.textDecoration = ''
+    }
+}
+function setIdDeleteRequest (status){
+    var id = document.getElementById('form_id')
+        if (id != null) {
+            if (status === 'Y') {
+                id.style.textDecoration = 'line-through'
+            } else {
+                id.style.textDecoration = ''
+            }
+        }
 }

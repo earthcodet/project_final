@@ -174,6 +174,12 @@ app.post('/update/status/delete', (req, res) => {
     res.json(data)
   })
 })
+app.post('/update/request/status/', (req, res) => {
+  webService.updateRequestStatusDelete(req.body.request, req.session.username).then((data) => {
+    console.log(`server : function updateStatusDelete return = ${data}`)
+    res.json(data)
+  })
+})
 app.get('/search/personal/:id/:name/:surname/all', (req, res) => {
   if (req.params.id === 'none') {
     req.params.id = ''

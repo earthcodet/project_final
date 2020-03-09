@@ -157,10 +157,10 @@ class RequestDAO {
             })
         })
     }
-    updateStatusDelete(status,id,year){
+    updateStatusDelete(object){
         return new Promise((resolve, reject) => {
-            let column = `REQUEST_IS_DELETED='${status}'`
-            let query = `UPDATE request SET ${column} WHERE REQUEST_NO='${id}' AND REQUEST_YEAR='${year}'`
+            let column = `REQUEST_IS_DELETED='${object.status}', REQUEST_USER_UPDATE = '${object.username}' ,REQUEST_LAST_UPDATE = '${object.last_update}'`
+            let query = `UPDATE request SET ${column} WHERE REQUEST_NO='${object.id}' AND REQUEST_YEAR='${object.year}'`
             con.query(query, function (err, result) {
                 if (err) {
                     console.log(err.code) 
