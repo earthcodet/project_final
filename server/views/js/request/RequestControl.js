@@ -7,6 +7,7 @@ var addNew = false
 let personal_change = false
 function addPage() {
     resetRequestData()
+    personal_change = false
     addNew = true
     deleteData = false
     data = false
@@ -236,21 +237,40 @@ function changeStatusMenuData(status) {
         enableMenu('deleteMenu')
         enableFunction()
     } else {
-        if(status === ''){
+        if (status === '') {
             addNew = true
             deleteData = false
             data = false
             disableFunction()
             disableMenuAll()
             enableMenu('saveMenu')
-        }else{
+        } else {
             data = true
             addNew = false
             disableMenuAll()
             enableMenu('addMenu')
             enableFunction()
-        } 
+        }
     }
+}
+function changeStatusDelete(RequestNo, RequestYear) {
+    return new Promise((resolve, reject) => {
+        axios.get(`http://localhost:5000/search/personal/${id}/${name}/${surname}`).then((result) => {
+            if (result.data != 'Not found') {
+                createResultSearch(result.data, typeSearch)
+                errorSearch('', 'HIDE')
+
+                return resolve(result.data);
+            } else {
+                errorSearch('not found', 'SHOW')
+                var tbl = document.getElementById("resultItems");
+                if (tbl.getElementsByTagName("tbody")[0] != null || tbl.getElementsByTagName("tbody")[0] != undefined) {
+                    tbl.removeChild(tbl.getElementsByTagName("tbody")[0])
+                }
+
+            }
+        })
+    })
 }
 //Search Operator 
 function searchPersonal(typeSearch) {
