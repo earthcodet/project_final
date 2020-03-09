@@ -62,10 +62,10 @@ function deleteImage() {
 }
 function deleteImageAllRequest() {
     if(document.getElementById('outputImage') != undefined){
+        console.log('delete image all')
         document.getElementById('outputImage').textContent = ''
         totalFiles = []
         document.getElementById('uploadFile').value = ''
-        selectImageFile = 0
         selectImageFile = 0
     }
 }

@@ -203,6 +203,7 @@ function setDataView() {
         document.getElementById('print_new_doc').style.display = 'none'
     }
     createImage(imageDisplayFormDatabase)
+    console.log(imageDisplayFormDatabase)
     console.log('requestData.status ' + requestData.status)
     if (requestData.status === 'approval' || requestData.status === 'active') {
         if (document.getElementById('bFeeY2') != undefined) {
@@ -1752,8 +1753,11 @@ function getUrlVars() {
 function createImage(image) {
     deleteImageAllRequest()
     console.log(image)
-    totalFiles = image
+   totalFiles = []
     for (let i = 0; i < image.length; i++) {
+        console.log(`image i = ${i}`)
+        totalFiles.push(image[i])
+        selectImageFile = selectImageFile + 1
         console.log(image[i])
         var span = document.createElement('span');
         span.innerHTML =
