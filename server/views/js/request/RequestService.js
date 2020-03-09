@@ -340,7 +340,7 @@ function setDataView() {
     } else {
         document.getElementById("reference_phone").value = cut_phone_no2[0]
         document.getElementById('reference_phone_more').disabled = false
-        document.getElementById('reference_phone_more').value = cut_phone_no2[1]
+        document.getElementById('reference_phone_more').value = cut_phone_no2[1] === undefined ? '' : cut_phone_no2[1]
     }
 
     //Date request exp 
