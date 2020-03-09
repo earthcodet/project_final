@@ -69,13 +69,13 @@ class EstablishmentDAO {
         
         em.fax === '' || em.fax === 'NULL' ? values = values + ` AND establishment.ESTABLISHMENT_FAX IS NULL` : values = values + ` AND establishment.ESTABLISHMENT_FAX = ${em.fax}`
         em.grond === '' || em.grond === 'NULL' ? values = values + ` AND establishment.ESTABLISHMENT_GROUND IS NULL` : values = values + ` AND establishment.ESTABLISHMENT_GROUND = ${em.grond}`
-
-        em.subcategory === '' || em.subcategory === 'NULL' ? values = values + ` AND request.REQUEST_SUBCATEGORY IS NULL` : values = values + ` AND request.REQUEST_SUBCATEGORY = ${em.subcategory}`
-        em.product_type === '' || em.product_type === 'NULL' ? values = values + ` AND request.REQUEST_PRODUCT_TYPE IS NULL` : values = values + ` AND request.REQUEST_PRODUCT_TYPE = ${em.product_type}`
+        values = values + `AND establishment.PERSONAL_ID = '${em.perosonal_id_st}' `
+        // em.subcategory === '' || em.subcategory === 'NULL' ? values = values + ` AND request.REQUEST_SUBCATEGORY IS NULL` : values = values + ` AND request.REQUEST_SUBCATEGORY = ${em.subcategory}`
+        // em.product_type === '' || em.product_type === 'NULL' ? values = values + ` AND request.REQUEST_PRODUCT_TYPE IS NULL` : values = values + ` AND request.REQUEST_PRODUCT_TYPE = ${em.product_type}`
 
         console.log(values)
         return new Promise((resolve, reject) => {
-            let query = `SELECT * FROM establishment JOIN address ON establishment.ADDRESS_ID = address.ADDRESS_ID JOIN request ON establishment.ESTABLISHMENT_ID = request.ESTABLISHMENT_ID WHERE ${values}`
+            let query = `SELECT * FROM establishment JOIN address ON establishment.ADDRESS_ID = address.ADDRESS_ID WHERE ${values}`
             con.query(query, function (err, result) {
                 if (err) {
                     console.log(err)

@@ -1405,7 +1405,7 @@ class service {
             })
         })
     }
-    insertEstablishment(Edata, address, land, addressOwner, file, menu) {
+    insertEstablishment(Edata, address, land, addressOwner, file) {
         //Main personal set 
         let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
         let new_address = this.formatInsert('ADDRESS', address)
@@ -3193,9 +3193,8 @@ class service {
             //insert !!
             return new Promise((resolve, reject) => {
                 console.log('InsertRequestStep : loading')
-                Edata.subcategory = request.subcategory === '' ? 'NULL' : `'${request.subcategory}'`
-                Edata.product_type = request.product_type === '' ? 'NULL' : `'${request.product_type}'`
-                this.insertEstablishment(Edata, address, land, addressOwner, file, request.menu).then((data) => {
+                Edata.perosonal_id_st = request.personal_id_owner 
+                this.insertEstablishment(Edata, address, land, addressOwner, file).then((data) => {
                     request.establishment_id = data.id
                     request.land_address_establishment = data.address_id
                     request.establishment_is_land_owned = data.land_used === null || data.land_used === undefined ? 'NULL' : `'${data.land_used}'`
