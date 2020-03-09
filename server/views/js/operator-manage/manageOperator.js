@@ -62,7 +62,8 @@ let inRequest = {
     year: '',
     menu: '',
     establishment_id: '',
-    establishment_name: ''
+    establishment_name: '',
+    last_update:''
 }
 const numToMonth = {
     1: 'มกราคม',

@@ -175,7 +175,7 @@ app.post('/update/status/delete', (req, res) => {
   })
 })
 app.post('/update/request/status/', (req, res) => {
-  webService.updateRequestStatus(req.body.request, req.session.username).then((data) => {
+  webService.updateRequestStatus(req.body.requestData, req.session.username).then((data) => {
     console.log(`server : function updateStatusDelete return = ${data}`)
     res.json(data)
   })
