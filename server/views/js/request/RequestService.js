@@ -512,10 +512,10 @@ function setDataView() {
 function setDataOperator(raw_data, type) {
     setOperatorData(raw_data)
     setOperatorAddressData(raw_data)
-    requestData.personal_id_owner = raw_data.PERSONAL_ID
     operatorData.is_personal_changed = true
     operatorAddressData.is_address_changed = true
     if (type === 'OPERATOR') {
+        requestData.personal_id_owner = raw_data.PERSONAL_ID
         document.getElementById("typeUser").value = operatorData.type
         document.getElementById("id").value = operatorData.personal_id
         document.getElementById("name").value = `${operatorData.title} ${operatorData.name} ${operatorData.surname}`
