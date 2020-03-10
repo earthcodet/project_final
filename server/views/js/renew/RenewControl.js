@@ -3,16 +3,29 @@ let search_name = ''
 let search_surname = ''
 var data = false
 let _type_menu = ''
-const type_request_menu_ui = {
-    'ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ':0,
-    'ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ':1,
-    'ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร':2,
-    'ใบอนุญาตจัดตั้งสถานที่สะสมอาหาร':3,
-    'หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร':4,
-    'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร':5,
-    'ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน':6,
-    'กิจการที่เป็นอันตรายต่อสุขภาพ':7,
-    'กิจการฌาปณสถาน':8
+let Item_data_operator = []
+
+function switchRequestType(text) {
+    switch (text) {
+        case 'ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ':
+            return 0
+        case 'ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ':
+            return 1
+        case 'ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร':
+            return 2
+        case 'ใบอนุญาตจัดตั้งสถานที่สะสมอาหาร':
+            return 3
+        case 'หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร':
+            return 4
+        case 'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร':
+            return 5
+        case 'ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน':
+            return 6
+        case 'กิจการที่เป็นอันตรายต่อสุขภาพ':
+            return 7
+        default: //กิจการฌาปณสถาน
+            return 8
+    }
 }
 function setTypeMenu(menu) {
     _type_menu = menu
@@ -116,33 +129,25 @@ function changeStatusMenuData() {
     enableMenu('saveMenu')
 }
 //Search Request
-function searchRequestRenew() {
-        return new Promise((resolve, reject) => {
-            search_name = name
-            search_id = id
-            search_surname = surname
-            console.log('Searching')
-            axios.get(`http://localhost:5000/search/personal/${id}/${name}/${surname}`).then((result) => {
-                if (result.data != 'Not found') {
-                    createResultSearch(result.data)
-                    errorSearch('', 'HIDE')
-
-                    return resolve(result.data);
-                } else {
-                    errorSearch('not found', 'SHOW')
-                    var tbl = document.getElementById("resultItems");
-                    if (tbl.getElementsByTagName("tbody")[0] != null || tbl.getElementsByTagName("tbody")[0] != undefined) {
-                        tbl.removeChild(tbl.getElementsByTagName("tbody")[0])
-                    }
-
+function searchRequestByPersonalIdAndStatusActive(id) {
+    return new Promise((resolve, reject) => {
+        console.log('Searching')
+        axios.get(`http://localhost:5000/get/request/renew/${switchRequestType(_type_menu)}/${id}`).then((result) => {
+            if (result.data.length != 0) {
+                createResultSearchRequestRenew(result.data)
+                errorSearch('', 'HIDE', "Renew")
+                return resolve(result.data);
+            } else {
+                console.log()
+                errorSearch('not found', 'SHOW', 'Renew')
+                var tbl = document.getElementById("resultItems_request");
+                if (tbl.getElementsByTagName("tbody")[0] != null || tbl.getElementsByTagName("tbody")[0] != undefined) {
+                    tbl.removeChild(tbl.getElementsByTagName("tbody")[0])
                 }
-            })
+                return resolve(result.data);
+            }
         })
-    
-        console.log(`Search query doesn't change`)
-        errorSearch(`query doesn't change`, 'SHOW')
-    
-
+    })
 }
 //Search Operator 
 function searchPersonal() {
@@ -187,19 +192,74 @@ function searchPersonal() {
     }
 
 }
-function errorSearch(texterror, action) {
+function errorSearch(texterror, action, renew) {
     let error = document.getElementById('error_search')
+    if (renew != undefined) {
+        error = document.getElementById('error_search_request')
+    }
     error.classList.toggle('animation')
     if (action === 'SHOW') {
         error.style.display = ''
         if (texterror === 'not found') {
-            error.innerText = 'ค้นหารายชื่อผู้ประกอบการไม่พบ'
+            if (renew != undefined) {
+                error.innerText = 'ค้นใบอนุญาตไม่พบ'
+            }else{
+                error.innerText = 'ค้นหารายชื่อผู้ประกอบการไม่พบ'
+            }
+           
         } else {
             error.innerText = 'คำค้นหาไม่มีการเปลี่ยนแปลง'
         }
     } else {
         error.style.display = 'none'
     }
+}
+function createResultSearchRequestRenew(data, typeSearch) {
+    var tbl = document.getElementById("resultItems");
+    if (tbl.getElementsByTagName("tbody")[0] != null || tbl.getElementsByTagName("tbody")[0] != undefined) {
+        tbl.removeChild(tbl.getElementsByTagName("tbody")[0])
+    }
+    var tblBody = document.createElement('tbody')
+    for (var i = 0; i < data.length; i++) {
+        // creates a table row
+        var row = document.createElement("tr");
+        //row index = this.rowIndex
+        row.onclick = function () { showItem(data[this.rowIndex - 1], typeSearch) }
+
+        for (var j = 0; j < 4; j++) {
+            var cell = document.createElement("td");
+            if (j === 0) {
+                var cellText = document.createTextNode(data[i].PERSONAL_NAME);
+            } else if (j === 1) {
+                var cellText = document.createTextNode(data[i].PERSONAL_SURNAME);
+            } else if (j === 2) {
+                let AddressText = ''
+                AddressText = AddressText + `บ้านเลขที่ ${data[i].AID.ADDRESS_HOME_NUMBER} `
+                AddressText = AddressText + `หมู่ ${data[i].AID.ADDRESS_MOO === null ? '-' : data[i].AID.ADDRESS_MOO} `
+                AddressText = AddressText + `ตรอก ${data[i].AID.ADDRESS_TRXK === null ? '-' : data[i].AID.ADDRESS_TRXK} `
+                AddressText = AddressText + `ซอย ${data[i].AID.ADDRESS_SXY === null ? '-' : data[i].AID.ADDRESS_SXY} `
+                AddressText = AddressText + `อาคาร ${data[i].AID.ADDRESS_BUILDING === null ? '-' : data[i].AID.ADDRESS_BUILDING} `
+                AddressText = AddressText + `ถนน ${data[i].AID.ADDRESS_ROAD === null ? '-' : data[i].AID.ADDRESS_ROAD} `
+                AddressText = AddressText + `ตำบล ${data[i].AID.DISTRICT_NAME === null ? '-' : data[i].AID.DISTRICT_NAME} `
+                AddressText = AddressText + `อำเภอ ${data[i].AID.AMPHUR_NAME === null ? '-' : data[i].AID.AMPHUR_NAME}`
+                AddressText = AddressText + `จังหวัด ${data[i].AID.PROVINCE_NAME === null ? '-' : data[i].AID.PROVINCE_NAME}`
+                var cellText = document.createTextNode(AddressText);
+            } else {
+                var cellText = document.createTextNode(data[i].PERSONAL_PERSONAL_ID);
+            }
+
+            cell.appendChild(cellText);
+            if (j === 3 && data[i].PERSONAL_IS_DELETED === 'Y') {
+                cell.style.textDecoration = 'line-through'
+            }
+
+            row.appendChild(cell);
+        }
+        tblBody.appendChild(row);
+    }
+
+
+    tbl.appendChild(tblBody);
 }
 function createResultSearch(data, typeSearch) {
     var tbl = document.getElementById("resultItems");
@@ -305,11 +365,8 @@ function searchOparator() {
         closeOnCancel: false
     });
 }
-function searchRequestRenew(name , surname , personal_id , id ) {
+function searchRequestRenew(name, surname, personal_id, id) {
     // new list ค่าใหม่   
-    search_name = ''
-    search_surname = ''
-    search_id = ''
     let swal_html = `<div >
         <div >
             <button  type='button' class = 'fa fa-arrow-left'  style = 'background-color: #009688 ; color: white;' onClick='searchOparator()'>  ย้อนกลับ</button>
@@ -323,6 +380,7 @@ function searchRequestRenew(name , surname , personal_id , id ) {
                         <input type="text" id="popSearchId_request" style="width: 18%;"  value ='   ${personal_id}' disabled >
                        
                         <br>
+                        <font id='error_search_request' style='display:none'class='alert'> ค้นหาไม่พบ </font>
                     </h5>   
                     
                 </div>
@@ -351,11 +409,18 @@ function searchRequestRenew(name , surname , personal_id , id ) {
         closeOnConfirm: false,
         closeOnCancel: false
     });
+    searchRequestByPersonalIdAndStatusActive(id)
 }
-function showItem(arrayResult, type) {
-    setDataOperator(arrayResult, type)
-    personal_change = true
-    Swal.close()
+function showItem(arrayResult) {
+    Item_data_operator = []
+    Item_data_operator.push(arrayResult)
+    searchRequestRenew(
+        Item_data_operator[0].PERSONAL_NAME,
+        Item_data_operator[0].PERSONAL_SURNAME,
+        Item_data_operator[0].PERSONAL_PERSONAL_ID,
+        Item_data_operator[0].PERSONAL_ID)
+
+    //Swal.close()
 }
 
 function printImg(no, year) {

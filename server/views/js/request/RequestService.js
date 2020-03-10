@@ -510,7 +510,6 @@ function setDataView() {
 }
 // set data form database 
 function setDataOperator(raw_data, type) {
-   
     operatorData.is_personal_changed = true
     operatorAddressData.is_address_changed = true
     if (type === 'OPERATOR') {
