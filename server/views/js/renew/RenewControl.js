@@ -203,10 +203,10 @@ function errorSearch(texterror, action, renew) {
         if (texterror === 'not found') {
             if (renew != undefined) {
                 error.innerText = 'ค้นใบอนุญาตไม่พบ'
-            }else{
+            } else {
                 error.innerText = 'ค้นหารายชื่อผู้ประกอบการไม่พบ'
             }
-           
+
         } else {
             error.innerText = 'คำค้นหาไม่มีการเปลี่ยนแปลง'
         }
@@ -215,6 +215,7 @@ function errorSearch(texterror, action, renew) {
     }
 }
 function createResultSearchRequestRenew(data, typeSearch) {
+    console.log(data)
     var tbl = document.getElementById("resultItems_request");
     if (tbl.getElementsByTagName("tbody")[0] != null || tbl.getElementsByTagName("tbody")[0] != undefined) {
         tbl.removeChild(tbl.getElementsByTagName("tbody")[0])
@@ -226,51 +227,36 @@ function createResultSearchRequestRenew(data, typeSearch) {
         //row index = this.rowIndex
         row.onclick = function () { showItemRequest(data[this.rowIndex - 1], typeSearch) }
 
-        for (var j = 0; j < 4; j++) {
+        for (var j = 0; j < 7; j++) {
             var cell = document.createElement("td");
             if (j === 0) {
                 var cellText = document.createTextNode(`${data[i].REQUEST_NO}/${data[i].REQUEST_YEAR}`);
             } else if (j === 1) {
                 var cellText = document.createTextNode(data[i].REQUEST_TYPE_MENU);
             } else if (j === 2) {
-                let AddressText = ''
-                AddressText = AddressText + `บ้านเลขที่ ${data[i].AID.ADDRESS_HOME_NUMBER} `
-                AddressText = AddressText + `หมู่ ${data[i].AID.ADDRESS_MOO === null ? '-' : data[i].AID.ADDRESS_MOO} `
-                AddressText = AddressText + `ตรอก ${data[i].AID.ADDRESS_TRXK === null ? '-' : data[i].AID.ADDRESS_TRXK} `
-                AddressText = AddressText + `ซอย ${data[i].AID.ADDRESS_SXY === null ? '-' : data[i].AID.ADDRESS_SXY} `
-                AddressText = AddressText + `อาคาร ${data[i].AID.ADDRESS_BUILDING === null ? '-' : data[i].AID.ADDRESS_BUILDING} `
-                AddressText = AddressText + `ถนน ${data[i].AID.ADDRESS_ROAD === null ? '-' : data[i].AID.ADDRESS_ROAD} `
-                AddressText = AddressText + `ตำบล ${data[i].AID.DISTRICT_NAME === null ? '-' : data[i].AID.DISTRICT_NAME} `
-                AddressText = AddressText + `อำเภอ ${data[i].AID.AMPHUR_NAME === null ? '-' : data[i].AID.AMPHUR_NAME}`
-                AddressText = AddressText + `จังหวัด ${data[i].AID.PROVINCE_NAME === null ? '-' : data[i].AID.PROVINCE_NAME}`
-                var cellText = document.createTextNode(AddressText);
+                let text = data[i].ESTABLISHMENT_NAME === null ? '-' : data[i].ESTABLISHMENT_NAME
+                var cellText = document.createTextNode(text);
             } else if (j === 3) {
+                let text = data[i].ESTABLISHMENT_GROUND === null ? '-' : data[i].ESTABLISHMENT_GROUND
+                var cellText = document.createTextNode(text);
+            } else if (j === 4) {
                 let AddressText = ''
-                AddressText = AddressText + `บ้านเลขที่ ${data[i].AID.ADDRESS_HOME_NUMBER} `
-                AddressText = AddressText + `หมู่ ${data[i].AID.ADDRESS_MOO === null ? '-' : data[i].AID.ADDRESS_MOO} `
-                AddressText = AddressText + `ตรอก ${data[i].AID.ADDRESS_TRXK === null ? '-' : data[i].AID.ADDRESS_TRXK} `
-                AddressText = AddressText + `ซอย ${data[i].AID.ADDRESS_SXY === null ? '-' : data[i].AID.ADDRESS_SXY} `
-                AddressText = AddressText + `อาคาร ${data[i].AID.ADDRESS_BUILDING === null ? '-' : data[i].AID.ADDRESS_BUILDING} `
-                AddressText = AddressText + `ถนน ${data[i].AID.ADDRESS_ROAD === null ? '-' : data[i].AID.ADDRESS_ROAD} `
-                AddressText = AddressText + `ตำบล ${data[i].AID.DISTRICT_NAME === null ? '-' : data[i].AID.DISTRICT_NAME} `
-                AddressText = AddressText + `อำเภอ ${data[i].AID.AMPHUR_NAME === null ? '-' : data[i].AID.AMPHUR_NAME}`
-                AddressText = AddressText + `จังหวัด ${data[i].AID.PROVINCE_NAME === null ? '-' : data[i].AID.PROVINCE_NAME}`
+                AddressText = AddressText + `บ้านเลขที่ ${data[i].ADDRESS_HOME_NUMBER} `
+                AddressText = AddressText + `หมู่ ${data[i].ADDRESS_MOO === null ? '-' : data[i].ADDRESS_MOO} `
+                AddressText = AddressText + `ตรอก ${data[i].ADDRESS_TRXK === null ? '-' : data[i].ADDRESS_TRXK} `
+                AddressText = AddressText + `ซอย ${data[i].ADDRESS_SXY === null ? '-' : data[i].ADDRESS_SXY} `
+                AddressText = AddressText + `อาคาร ${data[i].ADDRESS_BUILDING === null ? '-' : data[i].ADDRESS_BUILDING} `
+                AddressText = AddressText + `ถนน ${data[i].ADDRESS_ROAD === null ? '-' : data[i].ADDRESS_ROAD} `
+                AddressText = AddressText + `ตำบล ${data[i].DISTRICT_NAME === null ? '-' : data[i].DISTRICT_NAME} `
+                AddressText = AddressText + `อำเภอ ${data[i].AMPHUR_NAME === null ? '-' : data[i].AMPHUR_NAME}`
+                AddressText = AddressText + `จังหวัด ${data[i].PROVINCE_NAME === null ? '-' : data[i].PROVINCE_NAME}`
                 var cellText = document.createTextNode(AddressText);
-            }else if (j === 4) {
-                var cellText = document.createTextNode(AddressText);
-            }else if (j === 4) {
-                var cellText = document.createTextNode(AddressText);
-            }else if (j === 4) {
-                var cellText = document.createTextNode(AddressText);
+            } else if (j === 5) {
+                var cellText = document.createTextNode(data[i].REQUEST_DATE_ISSUED);
             } else {
-                var cellText = document.createTextNode(data[i].PERSONAL_PERSONAL_ID);
+                var cellText = document.createTextNode(data[i].REQUEST_DATE_EXPIRED);
             }
-
             cell.appendChild(cellText);
-            if (j === 3 && data[i].PERSONAL_IS_DELETED === 'Y') {
-                cell.style.textDecoration = 'line-through'
-            }
-
             row.appendChild(cell);
         }
         tblBody.appendChild(row);

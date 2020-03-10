@@ -14,6 +14,7 @@ class PrintDAO {
             query = query + `request_type.REQUEST_TYPE_NAME,`
             query = query + `request.REQUEST_IMAGE_NAME,`
             query = query + `request.REQUEST_TOTAL_IMAGE,`
+            query = query + `request.REQUEST_MENU,`
             query = query + `personal.PERSONAL_TITLE,`
             query = query + `personal.PERSONAL_TYPE,`
             query = query + `personal.PERSONAL_NAME,`
@@ -30,7 +31,8 @@ class PrintDAO {
             query = query + ` FROM`
             query = query + ` request `
             query = query + `JOIN personal ON request.PERSONAL_ID_OWNER = personal.PERSONAL_ID`
-            query = query + ` JOIN address ON personal.ADDRESS_ID = address.ADDRESS_ID`
+            query = query + ` JOIN establishment ON establishment.ESTABLISHMENT_ID = request.ESTABLISHMENT_ID`
+            query = query + ` JOIN address ON establishment.ADDRESS_ID = address.ADDRESS_ID`
             query = query + ` JOIN request_type ON request.REQUEST_TYPE_ID = request_type.REQUEST_TYPE_ID`
             query = query + ` WHERE request.REQUEST_NO = '${id}' AND request.REQUEST_YEAR = '${year}'`
             con.query(query, function (err, result) {

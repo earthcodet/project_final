@@ -1423,6 +1423,9 @@ class service {
         console.log(`personal_id is ${personal_id}`)
         return new Promise((resolve, reject) => {
             RequestDAOObj.getRequestByReNew(type, personal_id).then((data) => {
+                for(let i = 0 ; i < data.length ; i++){
+                    data.REQUEST_DATE_APPROVE = data.REQUEST_DATE_APPROVE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_APPROVE + '') : data.REQUEST_DATE_APPROVE
+                }
                 return resolve(data)
             })
         })

@@ -22,11 +22,14 @@ function showViewImage(){
 }
 function setDocumentTitle() {
     if (raw_data.IMAGE_REVIEW.length < 5) {
+        document.getElementById('Topic_no1').innerText = 'แบบตรวจสถานประกอบการ ' + raw_data.REQUEST_MENU
         document.getElementById('requestType').innerText = `ประกอบกิจการประเภท ${raw_data.REQUEST_TYPE_NAME}`
         document.getElementById('pageTwo').style.display = 'none'
         document.getElementById('nameOperator').innerText = getName(raw_data)
         document.getElementById('addressOperator').innerText = getAddress(raw_data)
     } else {
+        document.getElementById('Topic_no1').innerText =  'แบบตรวจสถานประกอบการ ' +raw_data.REQUEST_MENU
+        document.getElementById('Topic_no2').innerText =  'แบบตรวจสถานประกอบการ ' +raw_data.REQUEST_MENU
         document.getElementById('requestType').innerText = `ประกอบกิจการประเภท ${raw_data.REQUEST_TYPE_NAME}`
         document.getElementById('requestType_2').innerText = `ประกอบกิจการประเภท ${raw_data.REQUEST_TYPE_NAME}`
         document.getElementById('nameOperator').innerText = getName(raw_data)
