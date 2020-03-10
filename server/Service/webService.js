@@ -24,8 +24,21 @@ const TransferDAO = require('../DAO/TransferDAO')
 const TransferDAOObj = new TransferDAO()
 const PrintDAO = require('../DAO/PrintDAO')
 const PrintDAOObj = new PrintDAO()
-
+const type_request_menu = {
+    0:'ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ',
+    1:'ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ',
+    2:'ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร',
+    3:'ใบอนุญาตจัดตั้งสถานที่สะสมอาหาร',
+    4:'หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร',
+    5:'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร',
+    6:'ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน',
+    7:'กิจการที่เป็นอันตรายต่อสุขภาพ',
+    8:'กิจการฌาปณสถาน'
+}
 class service {
+    getRequestTypeMenu(num){
+        return type_request_menu[num]
+    }
     getStaffฺByType(type) {
         return new Promise((resolve, reject) => {
             UserDAOObj.getStaffฺByType(type).then((data) => {
@@ -1402,6 +1415,15 @@ class service {
                         this.insertAddressOne(address)
                     }
                 })
+            })
+        })
+    }
+    getRquestRenew(type, personal_id) {
+        console.log(`type is ${type}`)
+        console.log(`personal_id is ${personal_id}`)
+        return new Promise((resolve, reject) => {
+            RequestDAOObj.getRequestByReNew(type, personal_id).then((data) => {
+                return resolve(data)
             })
         })
     }
@@ -3193,7 +3215,7 @@ class service {
             //insert !!
             return new Promise((resolve, reject) => {
                 console.log('InsertRequestStep : loading')
-                Edata.perosonal_id_st = request.personal_id_owner 
+                Edata.perosonal_id_st = request.personal_id_owner
                 this.insertEstablishment(Edata, address, land, addressOwner, file).then((data) => {
                     request.establishment_id = data.id
                     request.land_address_establishment = data.address_id

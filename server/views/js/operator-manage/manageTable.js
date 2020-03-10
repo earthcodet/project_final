@@ -695,7 +695,7 @@ $(function () {
             "detail": { name: "ดูรายละเอียด" },
             "cancle_status": { name: "ยกเลิกสถานะ" },
             "stop": { name: "พักใบอนุญาต" },
-            "delete": { name: "ยกเลิก" }
+            "delete": { name: "ยกเลิกใบอนุญาต" }
 
         }
     });
@@ -736,7 +736,7 @@ $(function () {
             "pay": { name: "ชำระเงินแล้ว" },
             "cancel-status": { name: "ยกเลิกสถานะ" },
             "detail": { name: "ดูรายละเอียด" },
-            "delete": { name: "ยกเลิก" }
+            "delete": { name: "ยกเลิกใบอนุญาต" }
 
         },
         autoHide: true
@@ -835,7 +835,7 @@ $(function () {
             "approval": { name: "อนุมัติ" },
             "not-approval": { name: "ไม่อนุมัติ" },
             "detail": { name: "ดูรายละเอียด" },
-            "delete": { name: "ยกเลิก" }
+            "delete": { name: "ยกเลิกใบอนุญาต" }
 
         },
         autoHide: true

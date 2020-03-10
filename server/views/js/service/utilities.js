@@ -441,35 +441,34 @@ function toRequest(value, id) {
 }
 function toPerRequest(value, id) {
     id = id.split('/')
-    id = `${id[0]}${id[1]}`
     switch (value) {
         case 'กิจการฌาปณสถาน':
-            window.open('../renew/renew_crematory.html' + '?id=' + id, '_blank');
+            window.open('../renew/renew_crematory.html' + '?id_no=' + id[0]+'&id_year='+id[1], '_blank');
             break;
         case 'กิจการที่เป็นอันตรายต่อสุขภาพ':
-            window.open('../renew/renew_health_danger.html' + '?id=' + id, '_blank');
+            window.open('../renew/renew_health_danger.html' + '?id_no=' + id[0]+'&id_year='+id[1], '_blank');
             break;
         case 'ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน':
-            window.open('../renew/renew_market.html' + '?id=' + id, '_blank');
+            window.open('../renew/renew_market.html' + '?id_no=' + id[0]+'&id_year='+id[1], '_blank');
             break;
         case 'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร':
-            window.open('../renew/renew_area_less_correct.html' + '?id=' + id, '_blank');
+            window.open('../renew/renew_area_less_correct.html' + '?id_no=' + id[0]+'&id_year='+id[1], '_blank');
             break;
         case 'หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร':
-            window.open('../renew/renew_area_less_sell.html' + '?id=' + id, '_blank');
+            window.open('../renew/renew_area_less_sell.html' + '?id_no=' + id[0]+'&id_year='+id[1], '_blank');
             break;
         case 'ใบอนุญาตจัดตั้งสถานที่สะสมอาหาร':
-            window.open('../renew/renew_area_more_correct.html' + '?id=' + id, '_blank');
+            window.open('../renew/renew_area_more_correct.html' + '?id_no=' + id[0]+'&id_year='+id[1], '_blank');
             break;
         case 'ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร':
-            window.open('../renew/renew_area_more_sell.html' + '?id=' + id, '_blank');
+            window.open('../renew/renew_area_more_sell.html' + '?id_no=' + id[0]+'&id_year='+id[1], '_blank');
             break;
         case 'ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ':
-            window.open('../renew/renew_public_hawk.html' + '?id=' + id, '_blank');
+            window.open('../renew/renew_public_hawk.html' + '?id_no=' + id[0]+'&id_year='+id[1], '_blank');
             break;
         default:
             //ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ
-            window.open('../renew/renew_public_sell.html' + '?id=' + id, '_blank');
+            window.open('../renew/renew_public_sell.html' + '?id_no=' + id[0]+'&id_year='+id[1], '_blank');
             break;
     }
 }

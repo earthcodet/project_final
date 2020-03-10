@@ -251,11 +251,6 @@ app.get('/get/request/:no/:year', (req, res) => {
     res.json(data)
   })
 })
-app.get('/get/request/profile/:p_id/:e_id', (req, res) => {
-  webService.getRequestProfileByPIDAndEID(req.params.p_id, req.params.e_id).then((data) => {
-    res.json(data)
-  })
-})
 
 app.get('/get/requestTypeById/:id', (req, res) => {
   webService.getRequestTypeById(req.params.id).then((data) => {
@@ -263,6 +258,13 @@ app.get('/get/requestTypeById/:id', (req, res) => {
     res.json(data)
   })
 })
+
+app.get('/get/request/renew/:type/:personal_id', (req, res) => {
+  webService.getRquestRenew(webService.getRequestTypeMenu(req.params.type), req.params.personal_id).then((data) => {
+    res.json(data)
+  })
+})
+console.log( )
 app.get('/get/viewImage/:id/:year', (req, res) => {
   webService.getViewImageRequestByIdAndYear(req.params.id, req.params.year).then((request_viewImage) => {
     res.json(request_viewImage)

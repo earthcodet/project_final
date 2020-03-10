@@ -1623,13 +1623,6 @@ function getRequestData(no, year) {
         })
     })
 }
-function getPersonalDataAndEstablishment(p_id, e_id) {
-    return new Promise((resolve, reject) => {
-        axios.get(`http://localhost:5000/get/request/profile/${p_id}/${e_id}`).then((result) => {
-            return resolve(result.data);
-        })
-    })
-}
 function getPresident() {
     alderman_list = []
     return new Promise((resolve, reject) => {
@@ -1699,53 +1692,6 @@ function displayUserMoney(id) {
         setLisetUserMoneyToUi(list_user)
     })
 }
-//get request type 
-function getRequestType(type) {
-    return new Promise((resolve, reject) => {
-        axios.get(`http://localhost:5000/get/requestType/${type}`).then((result) => {
-            for (let i = 0; i < result.data.length; i++) {
-                requestType.push(result.data[i])
-            }
-            resolve(result.data);
-        })
-    })
-}
-
-function setRequsetType(type) {
-    runForm().then((data) => {
-        document.getElementById('documentName3').disabled = false
-        getRequestType(type).then((data_test) => {
-            addRequestTypeToDatalist()
-        })
-        checkView(type)
-        displayUserAlderman()
-    })
-}
-function addRequestTypeToDatalist() {
-    const list = document.getElementById('brow')
-    for (let i = 0; i < requestType.length; i++) {
-        let option = document.createElement('option');
-        option.value = requestType[i].REQUEST_TYPE_NAME
-        list.appendChild(option);
-    }
-}
-
-function getRequestTypeId(type) {
-    for (let i = 0; i < requestType.length; i++) {
-        if (requestType[i].REQUEST_TYPE_NAME === type) {
-            return requestType[i].REQUEST_TYPE_ID
-        }
-    }
-}
-function getRequestTypeValue(value) {
-    for (let i = 0; i < requestType.length; i++) {
-        if (requestType[i].REQUEST_TYPE_ID === value) {
-            return requestType[i].REQUEST_TYPE_NAME
-        }
-    }
-}
-
-
 //get requestId form url
 function getUrlVars() {
     var vars = {};
@@ -1754,96 +1700,10 @@ function getUrlVars() {
     });
     return vars;
 }
-function createImage(image) {
-    deleteImageAllRequest()
-    console.log(image)
-   totalFiles = []
-    for (let i = 0; i < image.length; i++) {
-        console.log(`image i = ${i}`)
-        totalFiles.push(image[i])
-        selectImageFile = selectImageFile + 1
-        console.log(image[i])
-        var span = document.createElement('span');
-        span.innerHTML =
-            [
-                `<div class="col" style="width: 25%; height: 100%; ">
-    <img 
-    width=100% 
-    height=85% 
-    src="`
-                , `data:image/${image[i].E_IMAGE_TYPE};base64,${image[i].E_IMAGE_DATA_BASE64}`,
-                '" title="', escape(image[i].E_IMAGE_NAME), '"/>'
-                , "<br><button type='button' class='delete image'" +
-                "onclick='deleteImage()' >ลบรูปภาพนี้</button>", "</div>"
-            ].join('');
-
-        document.getElementById('outputImage').insertBefore(span, null);
-    }
-    console.log(totalFiles)
-}
 
 //create print 
 function printRequest() {
     //
-}
-
-//get sight
-function getSightFormType(type) {
-    let sightT = ''
-    console.log(`getSightFormType => ` + type)
-    switch (type) {
-        case 'ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ':
-            sightT = 'A'
-            break;
-        case 'ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ':
-            sightT = 'B'
-            break;
-        case 'ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร':
-            sightT = 'C'
-            break;
-        case 'ใบอนุญาตจัดตั้งสถานที่สะสมอาหาร':
-            sightT = 'D'
-            break;
-        case 'หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร':
-            sightT = 'E'
-            break;
-        case 'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร':
-            sightT = 'F'
-            break;
-        case 'ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน':
-            sightT = 'G'
-            break;
-        case 'กิจการที่เป็นอันตรายต่อสุขภาพ':
-            sightT = 'H'
-            break;
-        default:
-            //กิจการฌาปณสถาน
-            sightT = 'I'
-            break;
-    }
-    return sightT
-}
-
-//base64Toblob
-function base64toBlob(base64Data, contentType) {
-    contentType = contentType || '';
-    var sliceSize = 1024;
-    var byteCharacters = atob(base64Data);
-    var bytesLength = byteCharacters.length;
-    var slicesCount = Math.ceil(bytesLength / sliceSize);
-    var byteArrays = new Array(slicesCount);
-
-    for (var sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
-        var begin = sliceIndex * sliceSize;
-        var end = Math.min(begin + sliceSize, bytesLength);
-
-        var bytes = new Array(end - begin);
-        for (var offset = begin, i = 0; offset < end; ++i, ++offset) {
-            bytes[i] = byteCharacters[offset].charCodeAt(0);
-        }
-        byteArrays[sliceIndex] = new Uint8Array(bytes);
-    }
-    return new Blob(byteArrays, { type: contentType });
 }
 
 function resetOptionitem(id, length) {

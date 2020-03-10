@@ -2,37 +2,20 @@ let search_id = ''
 let search_name = ''
 let search_surname = ''
 var data = false
-var deleteData = false
-var addNew = false
-var new_document = false
-let personal_change = false
-function addPage() {
-    resetStyleIdDeleteRequest()
-    resetRequestData()
-    personal_change = false
-    addNew = true
-    new_document = true
-    deleteData = false
-    data = false
-    disableFunction()
-    disableMenuAll()
-    enableMenu('saveMenu')
-    var id = document.getElementById('id')
-    if (id != null) {
-        id.style.textDecoration = ''
-    }
-    resetFunction()
-    document.getElementById('print_new_doc').style.display = 'none'
-    if (document.getElementById('ownerDistrict') != undefined) {
-        resetAddressThreeAddress()
-    } else {
-        resetTwoAddress()
-    }
-    document.getElementById('documentName3').innerHTML = ''
-    document.getElementById('position').value = ''
-    setLisetUserAlderManToUi(alderman_list)
-    document.getElementById('delete_request').style.display = 'none'
-
+let _type_menu = ''
+const type_request_menu_ui = {
+    'ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ':0,
+    'ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ':1,
+    'ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร':2,
+    'ใบอนุญาตจัดตั้งสถานที่สะสมอาหาร':3,
+    'หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร':4,
+    'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร':5,
+    'ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน':6,
+    'กิจการที่เป็นอันตรายต่อสุขภาพ':7,
+    'กิจการฌาปณสถาน':8
+}
+function setTypeMenu(menu) {
+    _type_menu = menu
 }
 function insertPage() {
     Swal.fire({
@@ -87,21 +70,21 @@ function insertPage() {
                     icon: "success",
                     confirmButtonColor: "#009688"
                 }).then((result) => {
+                    disableMenuAll()
+                    if (window.location.href.split('?').length === 1) {
                         disableMenuAll()
-                        if (window.location.href.split('?').length === 1) {
-                            disableMenuAll()
-                            location.replace(window.location.href + '?id=' + requestData.no + '' + requestData.year)
-                        }
-                        else if (new_document === true) {
-                            let temp_html = window.location.href.split('?')
-                            location.replace(temp_html[0] + '?id=' + requestData.no + '' + requestData.year)
-                        }else{
-                            data = true
-                            enableMenu('addMenu')
-                            enableMenu('editMenu')
-                            enableMenu('deleteMenu')
-                            enableFunction()
-                        }
+                        location.replace(window.location.href + '?id=' + requestData.no + '' + requestData.year)
+                    }
+                    else if (new_document === true) {
+                        let temp_html = window.location.href.split('?')
+                        location.replace(temp_html[0] + '?id=' + requestData.no + '' + requestData.year)
+                    } else {
+                        data = true
+                        enableMenu('addMenu')
+                        enableMenu('editMenu')
+                        enableMenu('deleteMenu')
+                        enableFunction()
+                    }
                 })
                 data = true
                 disableMenuAll()
@@ -115,262 +98,54 @@ function insertPage() {
             }
         });
 }
-
 function editPage() {
-    if (!deleteData) {
-        addNew = true
-        image_changed = false
-        file = null
-        disableMenuAll()
-        enableMenu('saveMenu')
-        disableFunction()
-        enableMenu('deleteMenu')
-    } else {
-        Swal.fire({
-            title: "สำนักงานเทศบาล",
-            html: "ข้อมูลอยู่ในสถานะลบแล้ว",
-            confirmButtonColor: "#009688",
-            closeOnConfirm: false,
-            icon: 'warning'
-        })
-    }
-}
-function deletePage() {
-    if (addNew === false) {
-        Swal.fire({
-            title: "สำนักงานเทศบาล",
-            html: "ต้องการลบหรือไม่",
-            icon: 'warning',
-            showCancelButton: true,
-            customClass: 'swal-height',
-            // width: '30%',
-            confirmButtonColor: "#009688",
-            confirmButtonText: "ใช่",
-            cancelButtonText: "ไม่ใช่",
-            cancelButtonColor: '#dc3545',
-            closeOnConfirm: false,
-            closeOnCancel: false,
-            showLoaderOnConfirm: true,
-            preConfirm: function () {
-                return new Promise(function (resolve, reject) {
-                    setTimeout(function () {
-                        //function ใน operator 
-                        changeStatusDeleteRequest('Y').then((statusDelete) => {
-                            let temp_status = requestData.is_deleted
-                            requestData.is_deleted = 'Y'
-                            if (statusDelete) {
-                                resolve();
-                            } else {
-                                requestData.is_deleted = temp_status
-                                Swal.fire({
-                                    html: "เกิดข้อผิดพลาดกับระบบ",
-                                    icon: "error",
-                                    confirmButtonColor: "#009688"
-                                });
-                            }
-                        })
-                    }, 100);
-                })
-            }
-        })
-            .then((result) => {
-                if (result.value) {
-                    Swal.fire({
-                        html: "ลบสำเร็จ",
-                        icon: "success",
-                        confirmButtonColor: "#009688"
-                    });
-                    // function update
-                    deleteData = true
-                    setIdDeleteRequest(requestData.is_deleted)
-                    disableMenuAll()
-                    enableMenu('addMenu')
-                    enableMenu('editMenu')
-                    enableMenu('restoreMenu')
-                } else if (result.dismiss === Swal.DismissReason.cancel) {
-                    // Swal.fire("บันทึกล้มเหลว");
-                }
-            });
-    } else {
-        Swal.fire({
-            title: "สำนักงานเทศบาล",
-            html: "ต้องการยกเลิกหรือไม่",
-            icon: 'warning',
-            showCancelButton: true,
-            customClass: 'swal-height',
-            // width: '30%',
-            confirmButtonColor: "#009688",
-            confirmButtonText: "ใช่",
-            cancelButtonText: "ไม่ใช่",
-            cancelButtonColor: '#dc3545',
-            closeOnConfirm: false,
-            closeOnCancel: false
-        })
-            .then((result) => {
-                if (result.value) {
-                    Swal.fire({
-                        html: "ยกเลิกสำเร็จ",
-                        icon: "success",
-                        confirmButtonColor: "#009688"
-                    });
-                    if (document.getElementById('typeReForm') != undefined) {
-                        resetInputRequired();
-                    } else {
-                        resetInputRequired2();
-                    }
-                    if (data === false) {
-                        //resetInputUI()
-                        addNew = false
-                        disableMenuAll()
-                        enableMenu('addMenu')
-                        enableFunction()
-                        resetStyleIdDeleteRequest()
-                        resetFunction()
-                    } else {
-                        //resetFunction()
-                        resetStyleIdDeleteRequest()
-                        setDataView()
-                        disableMenuAll()
-                        addNew = false
-                        enableMenu('addMenu')
-                        enableMenu('editMenu')
-                        enableMenu('deleteMenu')
-                        enableFunction()
-                    }
-
-                } else if (result.dismiss === Swal.DismissReason.cancel) {
-                    // Swal.fire("บันทึกล้มเหลว");
-                }
-            });
-    }
-}
-function restorePage() {
-    //function Update delete 
     Swal.fire({
         title: "สำนักงานเทศบาล",
-        html: "ต้องการยกเลิกสถาะลบหรือไม่",
-        icon: 'warning',
-        showCancelButton: true,
-        customClass: 'swal-height',
+        html: "ข้อมูลอยู่ในสถานะลบแล้ว",
         confirmButtonColor: "#009688",
-        confirmButtonText: "ใช่",
-        cancelButtonText: "ไม่ใช่",
-        cancelButtonColor: '#dc3545',
         closeOnConfirm: false,
-        closeOnCancel: false,
-        showLoaderOnConfirm: true,
-        preConfirm: function () {
-            return new Promise(function (resolve, reject) {
-                setTimeout(function () {
-                    //function ใน operator 
-                    changeStatusDeleteRequest('N').then((statusDelete) => {
-                        let temp_status = requestData.is_deleted
-                        requestData.is_deleted = 'N'
-                        if (statusDelete) {
-                            resolve();
-                        } else {
-                            requestData.is_deleted = temp_status
-                            Swal.fire({
-                                html: "เกิดข้อผิดพลาดกับระบบ",
-                                icon: "error",
-                                confirmButtonColor: "#009688"
-                            });
-                        }
-                    })
-                }, 100);
-            })
-        }
-    }).then((result) => {
-        if (result.value) {
-            Swal.fire({
-                html: "ผู้ประกอบการนี้กลับอยู่ในสถานะปกติแล้ว",
-                icon: "success",
-                confirmButtonColor: "#009688"
-            });
-            resetStyleIdDeleteRequest()
-            deleteData = false
-            data = true
-            disableMenuAll()
-            enableMenu('addMenu')
-            enableMenu('editMenu')
-            enableMenu('deleteMenu')
-        } else if (result.dismiss === Swal.DismissReason.cancel) {
-            // Swal.fire("บันทึกล้มเหลว");
-        }
-    });
-
-}
-function changeStatusMenuData(status, status_delete) {
-    if (status_delete === 'Y') {
-        if (status === 'wait' || status === 'approval' || status === 'active') {
-            data = true
-            addNew = false
-            disableMenuAll()
-            enableMenu('addMenu')
-            enableMenu('editMenu')
-            enableMenu('deleteMenu')
-            enableFunction()
-        } else {
-            if (status === '') {
-                addNew = true
-                deleteData = false
-                data = false
-                disableFunction()
-                disableMenuAll()
-                enableMenu('saveMenu')
-            } else {
-                data = true
-                addNew = false
-                disableMenuAll()
-                enableMenu('addMenu')
-                enableFunction()
-            }
-        }
-        enableMenu('restoreMenu')
-    } else {
-        if (status === 'wait' || status === 'approval' || status === 'active') {
-            data = true
-            addNew = false
-            disableMenuAll()
-            enableMenu('addMenu')
-            enableMenu('editMenu')
-            enableMenu('deleteMenu')
-            enableFunction()
-        } else {
-            if (status === '') {
-                addNew = true
-                deleteData = false
-                data = false
-                disableFunction()
-                disableMenuAll()
-                enableMenu('saveMenu')
-            } else {
-                data = true
-                addNew = false
-                disableMenuAll()
-                enableMenu('addMenu')
-                enableFunction()
-            }
-        }
-    }
-
-}
-function changeStatusDeleteRequest(status) {
-    let requestDataDelete = {}
-    requestDataDelete.id = requestData.no
-    requestDataDelete.year = requestData.year
-    requestDataDelete.status = status
-    console.log(`changeStatusDeleteRequest => `)
-    console.log(requestDataDelete)
-    return new Promise(function (resolve, reject) {
-        axios.post(`http://localhost:5000/update/request/status/delete`, { 'requestData': requestDataDelete }).then((result) => {
-            console.log(`changeStatusDeleteRequest = ${result.data}`)
-            return resolve(result.data);
-        })
+        icon: 'warning'
     })
 }
+function changeStatusMenuData() {
+    addNew = true
+    deleteData = false
+    data = false
+    disableFunction()
+    disableMenuAll()
+    enableMenu('saveMenu')
+}
+//Search Request
+function searchRequestRenew() {
+        return new Promise((resolve, reject) => {
+            search_name = name
+            search_id = id
+            search_surname = surname
+            console.log('Searching')
+            axios.get(`http://localhost:5000/search/personal/${id}/${name}/${surname}`).then((result) => {
+                if (result.data != 'Not found') {
+                    createResultSearch(result.data)
+                    errorSearch('', 'HIDE')
+
+                    return resolve(result.data);
+                } else {
+                    errorSearch('not found', 'SHOW')
+                    var tbl = document.getElementById("resultItems");
+                    if (tbl.getElementsByTagName("tbody")[0] != null || tbl.getElementsByTagName("tbody")[0] != undefined) {
+                        tbl.removeChild(tbl.getElementsByTagName("tbody")[0])
+                    }
+
+                }
+            })
+        })
+    
+        console.log(`Search query doesn't change`)
+        errorSearch(`query doesn't change`, 'SHOW')
+    
+
+}
 //Search Operator 
-function searchPersonal(typeSearch) {
+function searchPersonal() {
     let id = document.getElementById('popSearchId').value.trim()
     let name = document.getElementById('popSearchName').value.trim()
     let surname = document.getElementById('popSearchSurname').value.trim()
@@ -392,7 +167,7 @@ function searchPersonal(typeSearch) {
             console.log('Searching')
             axios.get(`http://localhost:5000/search/personal/${id}/${name}/${surname}`).then((result) => {
                 if (result.data != 'Not found') {
-                    createResultSearch(result.data, typeSearch)
+                    createResultSearch(result.data)
                     errorSearch('', 'HIDE')
 
                     return resolve(result.data);
@@ -473,20 +248,23 @@ function createResultSearch(data, typeSearch) {
 
     tbl.appendChild(tblBody);
 }
-function runScript(e, type) {
+function runScript(e) {
     if (e.keyCode == 13) {
-        searchPersonal(type)
+        searchPersonal()
         return false;
     }
 }
-function searchOparator(typeSearch) {
+function searchOparator() {
     // new list ค่าใหม่   
     search_name = ''
     search_surname = ''
     search_id = ''
     let swal_html = `<div >
-        <div class="display-center" onkeypress="return runScript(event,'${typeSearch}')">
-                    <h5 style="font-size: 100%;">
+        <div class="display-center" onkeypress="return runScript(event)">
+        <div >
+            <button  type='button' class = 'fa fa-arrow-right style = 'background-color: gray ; color: white;' onClick="searchRequestRenew('p','n','1619900312611','P000001')">  </button>
+        </div>  
+            <h5 style="font-size: 100%;">
                         ชื่อ :
                         <input type="text" id="popSearchName" style="width: 18%;">
                         นามสกุล :
@@ -494,7 +272,7 @@ function searchOparator(typeSearch) {
                         เลขบัตรประจำตัว :
                         <input type="text" id="popSearchId" style="width: 18%;" >
                         <button type="button" style="width: auto;height: auto;"
-                        class="btn btn-secondary is-color" onClick="searchPersonal('${typeSearch}')">
+                        class="btn btn-secondary is-color" onClick="searchPersonal()">
                                 <i class="fa fa-search"></i> 
                                 ค้นหา
                            
@@ -518,7 +296,54 @@ function searchOparator(typeSearch) {
         </div>
     </div>`
     Swal.fire({
-        title: "ค้นหารายชื่อผู้ประกอบการ",
+        title: `ค้นหารายชื่อผู้ประกอบการ`,
+        html: swal_html,
+        width: '80%',
+        customClass: 'swal-height',
+        showConfirmButton: false,
+        closeOnConfirm: false,
+        closeOnCancel: false
+    });
+}
+function searchRequestRenew(name , surname , personal_id , id ) {
+    // new list ค่าใหม่   
+    search_name = ''
+    search_surname = ''
+    search_id = ''
+    let swal_html = `<div >
+        <div >
+            <button  type='button' class = 'fa fa-arrow-left'  style = 'background-color: #009688 ; color: white;' onClick='searchOparator()'>  ย้อนกลับ</button>
+        </div>  
+            <h5 style="font-size: 100%;">
+                        ชื่อ :
+                        <input type="text" id="popSearchName_request" style="width: 18%;"  value='${name}'disabled>
+                        นามสกุล :
+                        <input type="text" id="popSearchSurname_request" style="width: 18%;"  value = '${surname}' disabled >
+                        เลขบัตรประจำตัว :
+                        <input type="text" id="popSearchId_request" style="width: 18%;"  value ='   ${personal_id}' disabled >
+                       
+                        <br>
+                    </h5>   
+                    
+                </div>
+        <div class="search-popup-height">
+            <table id='resultItems_request' class="table tablesearch table-hover cursor-pointer">
+                <thead>
+                  <tr class="is-color ">
+                    <th>เลขที่ใบอนุญาต</th>
+                    <th>ประเภทใบอนุญาต</th>
+                    <th>ชื่อสถานประกอบการ</th>
+                    <th>กลุ่มบริเวณ</th>
+                    <th>ที่อยู่</th>
+                    <th>วันที่เริ่มใบอนุญาต</th>
+                    <th>วันที่สิ้นสุดใบใบอนุญาต</th>
+                  </tr>
+                </thead>
+              </table>
+        </div>
+    </div>`
+    Swal.fire({
+        title: `ค้นหาใบอนญาต`,
         html: swal_html,
         width: '80%',
         customClass: 'swal-height',

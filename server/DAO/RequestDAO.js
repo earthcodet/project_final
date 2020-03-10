@@ -67,9 +67,21 @@ class RequestDAO {
             })
         }) 
     }
+    getRequestByReNew(type , personal_id){
+        return new Promise((resolve, reject) => {  
+            let joinTable = `JOIN establishment ON request.ESTABLISHMENT_ID = establishment.ESTABLISHMENT_ID `
+            joinTable = joinTable + `JOIN request_type ON request.REQUEST_TYPE_ID = request_type.REQUEST_TYPE_ID`
+            let query = `SELECT * FROM request ${joinTable} WHERE PERSONAL_ID_OWNER='${personal_id}' AND REQUEST_MENU='${type}' AND REQUEST_STATUS = 'active'`
+            con.query(query, function (err, result) {
+                if (err) {
+                    console.log(err.code) 
+                    return resolve(err.code)
+                }
+                return resolve(result)
+            })
+        }) 
+    }
     getRequestByTpyeAndOwnerId(type,Owner){
-        console.log(type)
-        console.log(Owner)
         return new Promise((resolve, reject) => {  
             let query = `SELECT * FROM request JOIN establishment ON request.ESTABLISHMENT_ID = establishment.ESTABLISHMENT_ID WHERE REQUEST_STATUS='${type}' AND PERSONAL_ID_OWNER='${Owner}'`
             con.query(query, function (err, result) {
