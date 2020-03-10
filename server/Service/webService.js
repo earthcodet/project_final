@@ -2001,7 +2001,7 @@ class service {
     updateRequest(request) {
         console.log('---- Request Update ----')
         console.log(request)
-        request.image_name = `${request.no}/${request.year}`
+        request.image_name = `${request.no}${request.year}`
         console.log('E---- Request Update ----')
         return new Promise((resolve, reject) => {
             RequestDAOObj.update(this.formatInsert('REQUEST', request)).then((data) => {
