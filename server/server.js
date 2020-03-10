@@ -127,6 +127,16 @@ app.get('/get/personalId/:personalId', (req, res) => {
     }
   })
 })
+app.get('/get/personal/assistant/:personalId', (req, res) => {
+  webService.getPersonalAssistantByPersonalId(req.params.personalId).then((data) => {
+    if (data != null) {
+      res.json(data)
+    } else {
+      res.sendStatus(404)
+    }
+  })
+})
+
 app.get('/get/requestType', (req, res) => {
   webService.getRequestType().then((data) => {
     if (data != null) {

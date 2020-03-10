@@ -71,8 +71,8 @@ class RequestDAO {
         return new Promise((resolve, reject) => {  
             let joinTable = `JOIN establishment ON request.ESTABLISHMENT_ID = establishment.ESTABLISHMENT_ID `
             joinTable = joinTable + `JOIN request_type ON request.REQUEST_TYPE_ID = request_type.REQUEST_TYPE_ID `
-            joinTable = joinTable + `JOIN address ON address.ADDRESS_ID = establishment.ADDRESS_ID`
-            let query = `SELECT * FROM request ${joinTable} WHERE PERSONAL_ID_OWNER='${personal_id}' AND REQUEST_MENU='${type}' AND REQUEST_STATUS = 'active'`
+            joinTable = joinTable + `JOIN address ON address.ADDRESS_ID = establishment.ADDRESS_ID `
+            let query = `SELECT * FROM request ${joinTable} WHERE request.PERSONAL_ID_OWNER='${personal_id}' AND request.REQUEST_MENU='${type}' AND request.REQUEST_STATUS = 'active' AND request.REQUEST_IS_DELETED = 'N'`
             con.query(query, function (err, result) {
                 if (err) {
                     console.log(err.code) 

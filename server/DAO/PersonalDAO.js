@@ -47,6 +47,21 @@ class PersonalDAO {
             })
         })
     }
+    getPersonalAssistantById(personalId) {
+        return new Promise((resolve, reject) => {
+            let query = `SELECT PERSONAL_TITLE,PERSONAL_NAME,PERSONAL_SURNAME,PERSONAL_PERSONAL_ID FROM personal WHERE PERSONAL_ID='${personalId}'`
+            con.query(query, function (err, result) {
+                if (err) {
+                    console.log(err.code)
+                }
+                if (result.length === 0) {
+                    return resolve(result)
+                } else {
+                    return resolve(result)
+                }
+            })
+        })
+    }
     insertPersonal(personal) {
         personal.is_deleted = 'N'
         return new Promise((resolve, reject) => {

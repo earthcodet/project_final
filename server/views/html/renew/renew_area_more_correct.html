@@ -104,7 +104,7 @@
     </div>
     <!-- เนื้อหา -->
     <form id="form">
-        <fieldset disabled id="disable" style="border: 0;padding: 0;margin: 0;">
+        <fieldset disabled style="border: 0;padding: 0;margin: 0;">
             <div class="main">
                 <header class="w3-top2">
                     <h1 style="font-size:2.8vh;margin-left: 25px;padding: 2px;">
@@ -114,7 +114,7 @@
                 <div class="box">
                     <h3 style="font-size: 3vh;">ข้อมูลสถานประกอบการ</h3>
                     <a style="margin-left: 0vw;">เลขที่คำขอ :
-                        <input type="text" style="width: 16%;" readonly></a>
+                        <input type="text" id='form_id' style="width: 16%;" readonly></a>
                     <a>วันที่ยื่นขอ :
                         <input type="text" id="datepicker1" style="width: 16%;"></a>
                     <a>ประเภทคำขอ :
@@ -252,105 +252,90 @@
                             <a>ออกให้เมื่อวันที่ :
                                 <input type="text" id="datepicker2" style="width: 12%;"></a>
                             <a>ค่าธรรมเนียม :
-                                <input type="text" id="renew_fee" style="width: 12%;" maxlength="8"
+                                <input type="text" id="bFee" style="width: 12%;" maxlength="8" value="0"
                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></a>
                             <a>ค่าปรับ :
-                                <input type="text" id="renew_fine" style="width: 12%;" maxlength="8"
+                                <input type="text" id="bFine" style="width: 12%;" maxlength="8" value="0"
                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></a>
 
                             <br>
                             <br>
                 </div>
                 <br>
-
-
-
-                <!-- อนุญาต -->
-                <div class="box">
-                    <br>
-
-                    <input type="radio" name="confirm" id="confirm" onClick="show_confirm(this.value);" value="2">
-                    <a> ยืนยันคำขอต่ออายุ </a>
-                    <button type="button" style="position: absolute;right: 10%;">พิมพ์ใบขอต่ออนุญาต</button>
-                    <br><br>
-                    <div class="row" id="boxConfirm" style="width: 80%;margin-left: 5vw;display: none;">
-                        <div class="col" style="width: 33.33%;">
-                            เลขที่คำขอ : <input readonly>
-                            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            วันที่ยื่น : <input type="text" id="datepicker5">
-                        </div>
-                        <div class="col" style="width: 33.33%;">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            เล่มที่ : <input style="width: 65%;">
-                            <br>
-                            ค่าธรรมเนียม :&nbsp;<input style="width: 65%;">
-                        </div>
-                        <div class="col" style="width: 33.33%;">
-                            &nbsp;&nbsp;
-                            เลขที่ : <input>
-                            <br>
-                            ค่าปรับ : <input>
-                        </div>
-                    </div>
-                    <br>
-                    <br>
-                    <div style="margin-left: 8vw;">
-                        <input type="checkbox" id="documentId" value="cb1"><a>
-                            หนังสือยินยอมให้ใช้อาคารสถานที่เป็นที่ประกอบการ</a>
-                        <br>
-                        <input type="checkbox" id="documenthHome" value="cb2"><a>
-                            สำเนาทะเบียนบ้าน/โฉนดที่ดิน(ที่ให้ใช้เป็นสถานที่ประกอบกิจการ)</a>
-                        <br>
-                        <input type="checkbox" id="documentLegalEntity" value="cb3"><a>
-                            ใบรับรองแพทย์ผู้ขอรับใบอนุญาตและผู้ช่วยจำหน่ายสินค้า (ตามแบบ สณ.๑๑)</a>
-                        <br>
-                        <input type="checkbox" id="documentSignature" value="cb4"><a> หนังสือสัญญาเช่า</a>
-                        <br>
-                        <input type="checkbox" id="documentSJ4" value="cb5"><a> หนังสือมอบอำนาจพร้อมติดอากรแสตมป์</a>
-                        <br>
-                        <input type="checkbox" id="documentOther" value="cb6"><a> เอกสารอื่นๆที่เกี่ยวข้อง</a>
-                        <input type="text" id="other" size="40" />
-                        <br><br>
-                        ข้าพเจ้าขอรับรองว่า ข้อความในแบบคำร้องขอต่อใบอนุญาตนี้เป็นจริงทุกประการ
-                    </div>
-                    <br>
-                    <br>
-                    <div class="row" style="text-align: center;">
-                        <div class="col" style="width: 33.33%;">
-                            <a>
-                                <br>
-                                (ลงชื่อ)
-                                <input type="text" id="documentName" disabled />
-                                ผู้ขอรับใบอนุญาต
-                            </a>
-                        </div>
-                        <div class="col" style="width: 33.33%;">
-                            <a>
-                                ลงชื่อ
-                                <select id="documentName2" name="" style="width: 18vw;" disabled></select>
-                                <br>
-                                <p class="text-center">ผู้รับเงิน</p>
-                            </a>
-                        </div>
-                        <div class="col" style="width: 33.33%;">
-                            <a>
-                                &emsp;ลงชื่อ
-                                <select id="documentName3" name="" style="width: 18vw;" disabled></select>
-                                <br>
-                                ตำแหน่ง
-                                <input type="text" id="position" disabled>
-                                <br>
-                                เจ้าพนักงานท้องถิ่น
-                            </a>
-                        </div>
-                    </div>
-
-                </div><br>
-
-
-
             </div>
+        </fieldset>
+        <fieldset disabled id="disable" style="border: 0;padding: 0;margin: 0;">
+            <div class="main" style="margin-top:1vw">
+            <!-- อนุญาต -->
+            <div class="box">
+                <br>
+                <div  style="width: 80%;margin-left: 5vw;">
+                    <a>ใบอนุญาตฉบับจริง
+                        <a>ออกให้เมื่อวันที่ :
+                            <input type="text" id="datepicker2" style="width: 12%;"></a>
+                        <a>ค่าธรรมเนียม :
+                            <input type="text" id="renew_fee" style="width: 12%;"
+                            maxlength="8"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></a>
+                        <a>ค่าปรับ :
+                            <input type="text" id="renew_fine" style="width: 12%;"
+                            maxlength="8"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></a>
+                </div>
+                <br>
+                <br>
+                <div style="margin-left: 8vw;">
+                    <input type="checkbox" id="documentId" value="cb1"><a>
+                        หนังสือยินยอมให้ใช้อาคารสถานที่เป็นที่ประกอบการ</a>
+                    <br>
+                    <input type="checkbox" id="documenthHome" value="cb2"><a>
+                        สำเนาทะเบียนบ้าน/โฉนดที่ดิน(ที่ให้ใช้เป็นสถานที่ประกอบกิจการ)</a>
+                    <br>
+                    <input type="checkbox" id="documentLegalEntity" value="cb3"><a>
+                        ใบรับรองแพทย์ผู้ขอรับใบอนุญาตและผู้ช่วยจำหน่ายสินค้า (ตามแบบ สณ.๑๑)</a>
+                    <br>
+                    <input type="checkbox" id="documentSignature" value="cb4"><a> หนังสือสัญญาเช่า</a>
+                    <br>
+                    <input type="checkbox" id="documentSJ4" value="cb5"><a> หนังสือมอบอำนาจพร้อมติดอากรแสตมป์</a>
+                    <br>
+                    <input type="checkbox" id="documentOther" value="cb6"><a> เอกสารอื่นๆที่เกี่ยวข้อง</a>
+                    <input type="text" id="other" size="40" />
+                    <br><br>
+                </div>
+                <br>
+                <br>
+                <div class="row" style="text-align: center;">
+                    <div class="col" style="width: 33.33%;">
+                        <a>
+                            <br>
+                            (ลงชื่อ)
+                            <input type="text" id="documentName" disabled />
+                            ผู้ขอรับใบอนุญาต
+                        </a>
+                    </div>
+                    <div class="col" style="width: 33.33%;">
+                        <a>
+                            ลงชื่อ 
+                            <select id="documentName2" name="" style="width: 18vw;" disabled ></select>
+                            <br>
+                            <p class="text-center">ผู้รับเงิน</p>
+                        </a>
+                    </div>
+                    <div class="col" style="width: 33.33%;">
+                        <a>
+                            &emsp;ลงชื่อ
+                            <select id="documentName3" name="" style="width: 18vw;" disabled></select>
+                            <br>
+                            ตำแหน่ง
+                            <input type="text" id="position"  disabled>
+                            <br>
+                            เจ้าพนักงานท้องถิ่น
+                        </a>
+                    </div>
+                </div>
 
+            </div><br>
+        </div>
         </fieldset>
     </form>
 

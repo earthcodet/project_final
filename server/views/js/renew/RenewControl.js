@@ -30,6 +30,7 @@ function switchRequestType(text) {
 function setTypeMenu(menu) {
     _type_menu = menu
 }
+// Not
 function insertPage() {
     Swal.fire({
         title: "สำนักงานเทศบาล",
@@ -324,10 +325,7 @@ function searchOparator() {
     search_surname = ''
     search_id = ''
     let swal_html = `<div >
-        <div class="display-center" onkeypress="return runScript(event)">
-        <div >
-            <button  type='button' class = 'fa fa-arrow-right style = 'background-color: gray ; color: white;' onClick="searchRequestRenew('p','n','1619900312611','P000001')">  </button>
-        </div>  
+        <div class="display-center" onkeypress="return runScript(event)"> 
             <h5 style="font-size: 100%;">
                         ชื่อ :
                         <input type="text" id="popSearchName" style="width: 18%;">
@@ -416,41 +414,36 @@ function searchRequestRenew(name, surname, personal_id, id) {
     searchRequestByPersonalIdAndStatusActive(id)
 }
 function showItem(arrayResult) {
+    searchRequestRenew(
+        arrayResult.PERSONAL_NAME,
+        arrayResult.PERSONAL_SURNAME,
+        arrayResult.PERSONAL_PERSONAL_ID,
+        arrayResult.PERSONAL_ID)
     Item_data_operator = []
     Item_data_operator.push(arrayResult)
-    searchRequestRenew(
-        Item_data_operator[0].PERSONAL_NAME,
-        Item_data_operator[0].PERSONAL_SURNAME,
-        Item_data_operator[0].PERSONAL_PERSONAL_ID,
-        Item_data_operator[0].PERSONAL_ID)
-
-    //Swal.close()
 }
-
-function printImg(no, year) {
-
-    if (data === true) {
-        if (requestData.no != undefined && requestData.year != undefined) {
-            if (requestData.no === '') {
-                window.open(`../utilities/viewImg.html`, '_blank');
-            } else {
-                if (requestData.no != '') {
-                    window.open(`../utilities/viewImg.html?id=${requestData.no}${requestData.year}`, '_blank');
-                } else {
-                    let requsetId = getUrlVars()
-                    if (requsetId.id != undefined) {
-                        let requsetNo = requsetId.id.slice(0, 6)
-                        let requestYear = requsetId.id.slice(6, 10)
-                        window.open(`../utilities/viewImg.html?id=${requsetNo}${requestYear}`, '_blank');
-                    }
-                }
+function showItemRequest(arrayResult) {
+    if(arrayResult.PERSONAL_ID_ASSISTANT != null){
+        searchPersonalById(arrayResult.PERSONAL_ID_ASSISTANT).then((data) =>{
+            if(data.PERSONAL_PERSONAL_ID != undefined){
+                setDataRequest(arrayResult,Item_data_operator[0],data)
+                Swal.close()
+            }else{
+                setDataRequest(arrayResult,Item_data_operator[0],data)
+                Swal.close()
             }
-        }
-    } else {
-        insertPage()
+        })
+    }else{
+        setDataRequest(arrayResult,Item_data_operator[0])
+        Swal.close()
     }
-
-
+}
+function searchPersonalById(id) {
+    return new Promise((resolve, reject) => {
+        axios.get(`http://localhost:5000/get/personal/assistant/${id}`).then((result) => {
+                return resolve(result.data);
+        })
+    })
 }
 function printDocument() {
     if (requestData.no != undefined && requestData.year != undefined) {
@@ -486,21 +479,5 @@ function getFormPrint(menu) {
             return '../view/view_public.html'
         default:
             return '../view/view_area_more_correct.html'
-    }
-}
-function resetStyleIdDeleteRequest() {
-    var id = document.getElementById('form_id')
-    if (id != undefined || id != null) {
-        id.style.textDecoration = ''
-    }
-}
-function setIdDeleteRequest(status) {
-    var id = document.getElementById('form_id')
-    if (id != null) {
-        if (status === 'Y') {
-            id.style.textDecoration = 'line-through'
-        } else {
-            id.style.textDecoration = ''
-        }
     }
 }

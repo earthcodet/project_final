@@ -1587,7 +1587,9 @@ function insertRequest() {
         if (landData.file_upload_changed) {
             formData.append('files', filesPdf);
         }
-
+        if(requestData.no === ''){
+            formData.append('files', filesPdf); 
+        }
 
         if (requestData.image_is_changed) {
             for (var i = 0; i < totalFiles.length; i++) {
