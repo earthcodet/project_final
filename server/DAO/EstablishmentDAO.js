@@ -68,7 +68,7 @@ class EstablishmentDAO {
         values = values + ` AND establishment.ESTABLISHMENT_PHONE = '${em.phone}' `
         
         em.fax === '' || em.fax === 'NULL' ? values = values + ` AND establishment.ESTABLISHMENT_FAX IS NULL` : values = values + ` AND establishment.ESTABLISHMENT_FAX = ${em.fax}`
-        em.grond === '' || em.grond === 'NULL' ? values = values + ` AND establishment.ESTABLISHMENT_GROUND IS NULL` : values = values + ` AND establishment.ESTABLISHMENT_GROUND = ${em.grond}`
+        em.grond === '' || em.grond === 'NULL' ? values = values + ` AND establishment.ESTABLISHMENT_GROUND IS NULL ` : values = values + ` AND establishment.ESTABLISHMENT_GROUND = ${em.grond} `
         values = values + `AND establishment.PERSONAL_ID = '${em.perosonal_id_st}' `
         // em.subcategory === '' || em.subcategory === 'NULL' ? values = values + ` AND request.REQUEST_SUBCATEGORY IS NULL` : values = values + ` AND request.REQUEST_SUBCATEGORY = ${em.subcategory}`
         // em.product_type === '' || em.product_type === 'NULL' ? values = values + ` AND request.REQUEST_PRODUCT_TYPE IS NULL` : values = values + ` AND request.REQUEST_PRODUCT_TYPE = ${em.product_type}`
