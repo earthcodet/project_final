@@ -66,17 +66,17 @@ function checkView(typeForm) {
     if (requestId.p_id != undefined && requestId.e_id != undefined) {
         if (requestId.p_id.length === 7 && requestId.e_id.length === 7) {
             getPersonalDataAndEstablishment(requestId.p_id, requestId.e_id).then((raw_data) => {
-               // displayUserAlderman()
+                // displayUserAlderman()
                 if (raw_data[0] != false && raw_data[1] != false) {
                     setOperatorData(raw_data[0])
                     setOperatorAddressData(raw_data[0])
                     let temp = {
-                        ESTABLISHMENT_DATA:raw_data[1]
+                        ESTABLISHMENT_DATA: raw_data[1]
                     }
                     setEstablishmentData(temp)
                     let temp_address = {
-                        ESTABLISHMENT_DATA : raw_data[1]
-                        
+                        ESTABLISHMENT_DATA: raw_data[1]
+
                     }
                     setAddressEstablishmentData(temp_address)
                     setDataProfile()
@@ -181,7 +181,8 @@ function setDataProfile() {
 
     } else {
         if (document.getElementById('typeWorkplace') != undefined) {
-            document.getElementById('typeWorkplace').value = establishmentData.type
+            document.getElementById('typeWorkplace').value = requestData.product_type
+            // document.getElementById('typeWorkplace').value = establishmentData.type
         }
     }
     if (document.getElementById('machinery') != undefined) {
@@ -411,7 +412,8 @@ function setDataView() {
 
     } else {
         if (document.getElementById('typeWorkplace') != undefined) {
-            document.getElementById('typeWorkplace').value = establishmentData.type
+            document.getElementById('typeWorkplace').value = requestData.product_type
+            // document.getElementById('typeWorkplace').value = establishmentData.type
         }
     }
     if (document.getElementById('machinery') != undefined) {
@@ -591,7 +593,7 @@ function setRequestDataUpdateReturn(raw_data) {
     landData.id = raw_data.land_id === '' ? landData.id : raw_data.land_id
     requestData.establishment_address_id = checkformatReturn(raw_data.land_id)
     requestData.establishment_is_land_owned = checkformatReturn(raw_data.address_land_id)
-    establishmentData.id    = checkformatReturn(raw_data.establishment_id)
+    establishmentData.id = checkformatReturn(raw_data.establishment_id)
     requestData.establishment_id = checkformatReturn(raw_data.establishment_id)
     console.log('-o-<>-o-')
     console.log(establishmentData)
@@ -702,7 +704,7 @@ function setEstablishmentData(raw_data) {
         establishmentData.id = raw_data.ESTABLISHMENT_ID
         establishmentData.address_id = raw_data.ESTABLISHMENT_DATA.ADDRESS_ID
         establishmentData.perosonal_id = raw_data.ESTABLISHMENT_DATA.PERSONAL_ID
-        establishmentData.type = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_TYPE === null ? '' : raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_TYPE
+        // establishmentData.type = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_TYPE === null ? '' : raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_TYPE
         establishmentData.name = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_NAME === null ? '' : raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_NAME
         establishmentData.is_land_owned = raw_data.ESTABLISHMENT_IS_LAND_OWNED === null ? 'NO' : 'YES'
         establishmentData.machine_size = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_MACHINE_SIZE === null ? 0 : raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_MACHINE_SIZE
@@ -971,7 +973,8 @@ function createGroupData() {
             establishmentData.is_land_owned = 'NO'
         }
         if (document.getElementById('typeWorkplace') != undefined) {
-            establishmentData.type = document.getElementById('typeWorkplace').value.trim()
+            requestData.product_type = document.getElementById('typeWorkplace').value.trim()
+            // establishmentData.type = document.getElementById('typeWorkplace').value.trim()
         }
 
         establishmentData.name = document.getElementById('workplaceName').value.trim()
@@ -1144,14 +1147,24 @@ function dataChange(type) {
                 if (requestData.train_id != train_id_t) {
                     status_data_change = true
                 }
-            } if (document.getElementById('typeReForm') != undefined) {
+            }
+
+            establishmentData.type = document.getElementById('typeWorkplace').value.trim()
+            if (document.getElementById('typeReForm') != undefined) {
                 if (requestData.subcategory != document.getElementById('typeReForm').value ||
                     requestData.product_type != document.getElementById('typeProduct').value.trim() ||
                     requestData.sell_start != document.getElementById('timeStart').value ||
                     requestData.sell_end != document.getElementById('timeEnd').value) {
                     status_data_change = true
                 }
-            } if (document.getElementById('useSpirits') != undefined) {
+            }
+            if (document.getElementById('typeWorkplace') != undefined) {
+                if (requestData.product_type != document.getElementById('typeWorkplace').value.trim()) {
+                    status_data_change = true
+                    console.log(`sdsda2`)
+                }
+            }
+            if (document.getElementById('useSpirits') != undefined) {
                 if (requestData.sell_allow != sell_allow_t) {
                     status_data_change = true
                 }
@@ -1213,12 +1226,12 @@ function dataChange(type) {
             console.log(`1`)
             status_data_change = true
         } else {
-            if (document.getElementById('typeWorkplace') != undefined) {
-                if (establishmentData.type != document.getElementById('typeWorkplace').value.trim()) {
-                    status_data_change = true
-                    console.log(`2`)
-                }
-            }
+            // if (document.getElementById('typeWorkplace') != undefined) {
+            //     if (establishmentData.type != document.getElementById('typeWorkplace').value.trim()) {
+            //         status_data_change = true
+            //         console.log(`2`)
+            //     }
+            // }
             if (document.getElementById('machinery') != undefined) {
                 if (establishmentData.machine_size != document.getElementById('machinery').value.trim()) {
                     status_data_change = true
@@ -1420,7 +1433,8 @@ function setDataUpdate(type) {
             establishmentData.is_land_owned = 'NO'
         }
         if (document.getElementById('typeWorkplace') != undefined) {
-            establishmentData.type = document.getElementById('typeWorkplace').value.trim()
+            requestData.product_type = document.getElementById('typeWorkplace').value.trim()
+            // establishmentData.type = document.getElementById('typeWorkplace').value.trim()
         }
 
         establishmentData.name = document.getElementById('workplaceName').value.trim()
@@ -1590,8 +1604,8 @@ function insertRequest() {
         if (landData.file_upload_changed) {
             formData.append('files', filesPdf);
         }
-        if(requestData.no === ''){
-            formData.append('files', filesPdf); 
+        if (requestData.no === '') {
+            formData.append('files', filesPdf);
         }
 
         if (requestData.image_is_changed) {
@@ -1762,7 +1776,7 @@ function getUrlVars() {
 function createImage(image) {
     deleteImageAllRequest()
     console.log(image)
-   totalFiles = []
+    totalFiles = []
     for (let i = 0; i < image.length; i++) {
         console.log(`image i = ${i}`)
         totalFiles.push(image[i])
