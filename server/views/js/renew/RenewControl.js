@@ -31,7 +31,7 @@ function setTypeMenu(menu) {
     _type_menu = menu
 }
 // Not
-function insertPage() {
+function insertTEST() {
     Swal.fire({
         title: "สำนักงานเทศบาล",
         html: "ต้องการบันทึกหรือไม่",
@@ -112,22 +112,16 @@ function insertPage() {
             }
         });
 }
-function editPage() {
-    Swal.fire({
-        title: "สำนักงานเทศบาล",
-        html: "ข้อมูลอยู่ในสถานะลบแล้ว",
-        confirmButtonColor: "#009688",
-        closeOnConfirm: false,
-        icon: 'warning'
-    })
-}
-function changeStatusMenuData() {
-    addNew = true
-    deleteData = false
-    data = false
+function editTEST() {
     disableFunction()
     disableMenuAll()
     enableMenu('saveMenu')
+}
+function changeStatusMenuData() {
+    addNew = false
+    data = true
+    disableMenuAll()
+    enableMenu('editMenu')
 }
 //Search Request
 function searchRequestByPersonalIdAndStatusActive(id) {

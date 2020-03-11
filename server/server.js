@@ -274,6 +274,11 @@ app.get('/get/request/renew/:type/:personal_id', (req, res) => {
     res.json(data)
   })
 })
+app.get('/get/request/renew/id/:no/:year', (req, res) => {
+  webService.getRquestRenewByRequestId(req.params.no,req.params.year).then((data) => {
+    res.json(data)
+  })
+})
 console.log( )
 app.get('/get/viewImage/:id/:year', (req, res) => {
   webService.getViewImageRequestByIdAndYear(req.params.id, req.params.year).then((request_viewImage) => {
@@ -292,6 +297,31 @@ app.get('/get/user/:type', (req, res) => {
     type_name = 'ทะเบียน'
   }
     webService.getStaffฺByType(type_name).then((data) => {
+    res.json(data)
+  })
+})
+app.get('/get/users/:type1/:type2', (req, res) => {
+  let type_name = req.params.type1
+  let type_name2 = req.params.type2
+  if(type_name === 'money'){
+    type_name = 'การเงิน'
+  }
+  if(type_name === 'president'){
+    type_name = 'นายก'
+  }
+  if(type_name === 'information'){
+    type_name = 'ทะเบียน'
+  }
+  if(type_name2 === 'money'){
+    type_name2 = 'การเงิน'
+  }
+  if(type_name2 === 'president'){
+    type_name2 = 'นายก'
+  }
+  if(type_name2 === 'information'){
+    type_name2 = 'ทะเบียน'
+  }
+    webService.getStaffฺByTypes(type_name,type_name2).then((data) => {
     res.json(data)
   })
 })

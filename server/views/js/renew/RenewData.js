@@ -1,5 +1,3 @@
-let alderman_list = []
-let size_money_list = []
 let requestData = {
     is_request_changed: false,
     request_type_name : '',

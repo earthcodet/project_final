@@ -38,6 +38,16 @@ class LoginDAO {
             })
         })
     }
+    getStaffฺByTypes(value1, value2){
+        return new Promise((resolve, reject) =>{
+            con.query(`SELECT * FROM user WHERE USER_POSITION_TYPE ='${value1}' OR USER_POSITION_TYPE ='${value2}' ORDER By USER_IS_DEFAULT DESC`, function (err,result){
+                if(err) {
+                    throw err
+                }
+                return resolve(result)
+            })
+        })
+    }
     getMaxIdUser() {
         return new Promise((resolve, reject) => {
             let query = `SELECT MAX(USER_ID) As 'maxId' FROM user`

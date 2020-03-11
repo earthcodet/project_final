@@ -46,6 +46,13 @@ class service {
             })
         })
     }
+    getStaffฺByTypes(type1, type2) {
+        return new Promise((resolve, reject) => {
+            UserDAOObj.getStaffฺByTypes(type1, type2).then((data) => {
+                return resolve(data)
+            })
+        })
+    }
     getStaffฺById(userId) {
         return new Promise((resolve, reject) => {
             UserDAOObj.getUserByUserId(userId).then((data) => {
@@ -681,6 +688,23 @@ class service {
         return new Promise((resolve, reject) => {
             PersonalDAOObj.getPersonalByPersonalId(id).then((result) => {
                 if (result[0] != undefined) {
+                    if (result[0].PERSONAL_BIRTHDAY === null) {
+                        result[0].PERSONAL_BIRTHDAY = undefined
+                    } else {
+                        result[0].PERSONAL_BIRTHDAY = this.formatDate('TO-DISPLAY', result[0].PERSONAL_BIRTHDAY + '')
+                    }
+                    if (result[0].PERSONAL_CARD_ISSUED === null || result[0].PERSONAL_CARD_ISSUED === '0000-00-00') {
+                        result[0].PERSONAL_CARD_ISSUED = undefined
+                    } else {
+                        result[0].PERSONAL_CARD_ISSUED = this.formatDate('TO-DISPLAY', result[0].PERSONAL_CARD_ISSUED + '')
+                    }
+                    if (result[0].PERSONAL_CARD_EXPIRE === null) {
+                        result[0].PERSONAL_CARD_EXPIRE = undefined
+                    } else {
+                        result[0].PERSONAL_CARD_EXPIRE = this.formatDate('TO-DISPLAY', result[0].PERSONAL_CARD_EXPIRE + '')
+                    }
+                    result[0].PERSONAL_UPDATE = this.formatDate('TO-DISPLAY', result[0].PERSONAL_UPDATE + '')
+
                     this.getAddressByAddressId(result[0].ADDRESS_ID).then((address_data) => {
                         result[0].AID = address_data[0]
                         return resolve(result)
@@ -1446,6 +1470,28 @@ class service {
                 }
                 console.log(data)
                 return resolve(data)
+            })
+        })
+    }
+    getRquestRenewByRequestId(r_no, r_year) {
+        console.log(`get Request Renew id = ${r_no} , year =  ${r_year}`)
+        return new Promise((resolve, reject) => {
+            RequestDAOObj.getRequestByReNewByRequestId(r_no, r_year).then((data) => {
+                for(let i = 0 ; i < data.length ; i++){
+                    data[i].REQUEST_DATE_APPROVE = data[i].REQUEST_DATE_APPROVE != null ? this.formatDate("TO-DISPLAY", data[i].REQUEST_DATE_APPROVE + '') : data[i].REQUEST_DATE_APPROVE
+                    data[i].REQUEST_DATE_SUBMISSION = data[i].REQUEST_DATE_SUBMISSION != null ? this.formatDate("TO-DISPLAY", data[i].REQUEST_DATE_SUBMISSION + '') : data[i].REQUEST_DATE_SUBMISSION
+                    data[i].REQUEST_RECEIPT_DATE = data[i].REQUEST_RECEIPT_DATE != null ? this.formatDate("TO-DISPLAY", data[i].REQUEST_RECEIPT_DATE + '') : data[i].REQUEST_RECEIPT_DATE
+                    data[i].REQUEST_RECEIPT_DATE_YEAR_2 = data[i].REQUEST_RECEIPT_DATE_YEAR_2 != null ? this.formatDate("TO-DISPLAY", data[i].REQUEST_RECEIPT_DATE_YEAR_2 + '') : data[i].REQUEST_RECEIPT_DATE_YEAR_2
+                    data[i].REQUEST_RECEIPT_DATE_YEAR_3 = data[i].REQUEST_RECEIPT_DATE_YEAR_3 != null ? this.formatDate("TO-DISPLAY", data[i].REQUEST_RECEIPT_DATE_YEAR_3 + '') : data[i].REQUEST_RECEIPT_DATE_YEAR_3
+                    data[i].REQUEST_DATE_ISSUED = data[i].REQUEST_DATE_ISSUED != null ? this.formatDate("TO-DISPLAY", data[i].REQUEST_DATE_ISSUED + '') : data[i].REQUEST_DATE_ISSUED
+                    data[i].REQUEST_DATE_EXPIRED = data[i].REQUEST_DATE_EXPIRED != null ? this.formatDate("TO-DISPLAY", data[i].REQUEST_DATE_EXPIRED + '') : data[i].REQUEST_DATE_EXPIRED
+                    this.getPersonalAndAddressById(data[i].PERSONAL_ID_OWNER).then((o_data) => {
+                        data[i].GropDataProsonal = o_data[0]
+                        if(i === data.length -1){
+                            return resolve(data)
+                        }
+                    })
+                }
             })
         })
     }

@@ -1,13 +1,13 @@
 let newDocument = true
 let requestType = []
 let userMoney = ''
-let userAlderman = ''
+let listAlderMan = []
 function checkView(typeForm) {
     let requestId = getUrlVars()
     console.log(requestId)
-    if (requestId.id != undefined) {
-        let requsetNo = requestId.id.slice(0, 6)
-        let requestYear = requestId.id.slice(6, 10)
+    if (requestId.id_no != undefined && requestId.id_year != undefined) {
+        let requsetNo = requestId.id_no
+        let requestYear = requestId.id_year
         console.log(`typeForm ${typeForm}`)
         if (typeForm != undefined) {
             let sight = getSightFormType(typeForm)
@@ -16,181 +16,66 @@ function checkView(typeForm) {
             console.log(`checkSight = ${checkSight} > ${requsetNo.slice(0, 1)} === ${sight} > ${requsetNo.slice(0, 1) === sight}`)
             console.log(checkSight)
             if (checkSight) {
-                getRequestData(requsetNo, requestYear).then((raw_data) => {
-                    //displayUserAlderman()
-                    console.log(raw_data)
-                    if (raw_data != '') {
-                        console.log(`raw_data`)
-                        console.log(raw_data)
-                        setRequestData(raw_data)
-                        setEstablishmentData(raw_data)
-                        setAddressEstablishmentData(raw_data)
-                        setAddressOwnerLandData(raw_data)
-                        setLandData(raw_data)
-                        setReferecneData(raw_data)
-                        setTrianData(raw_data)
-                        setOperatorAddressData(raw_data.gropDataOperator)
-                        setOperatorData(raw_data.gropDataOperator)
-                        imageDisplayFormDatabase = raw_data.IMAGE_REVIEW
-                        if (raw_data.gropDataAssistant != undefined) {
-                            setassistantOperatorData(raw_data.gropDataAssistant)
+                getRequestDataRenew(requsetNo, requestYear).then((raw_data) => {
+                    if (raw_data.length != 0) {
+                        setRequestData(raw_data[0])
+                        setDataOperator(raw_data[0].GropDataProsonal)
+                        setOperatorAddressData(raw_data[0].GropDataProsonal)
+                        setAddressEstablishmentData(raw_data[0])
+                        setEstablishmentData(raw_data[0])
+                        if (raw_data[0].PERSONAL_ID_ASSISTANT != null) {
+                            searchPersonalById().then((data_assistant) => {
+                                if (data_assistant.PERSONAL_NAME != undefined) {
+                                    setassistantOperatorData(data_assistant)
+                                    console.log(`requestData`)
+                                    console.log(requestData)
+                                    console.log(`establishmentData`)
+                                    console.log(establishmentData)
+                                    console.log(`addressEstablishmentData`)
+                                    console.log(addressEstablishmentData)
+                                    console.log(`operatorAddressData`)
+                                    console.log(operatorAddressData)
+                                    console.log(`operatorData`)
+                                    console.log(operatorData)
+                                    console.log(`assistantOperatorData`)
+                                    console.log(assistantOperatorData)
+                                    setDataView()
+                                }else{
+                                    console.log(`requestData`)
+                                    console.log(requestData)
+                                    console.log(`establishmentData`)
+                                    console.log(establishmentData)
+                                    console.log(`addressEstablishmentData`)
+                                    console.log(addressEstablishmentData)
+                                    console.log(`operatorAddressData`)
+                                    console.log(operatorAddressData)
+                                    console.log(`operatorData`)
+                                    console.log(operatorData)
+                                    console.log(`assistantOperatorData`)
+                                    console.log(assistantOperatorData)
+                                    setDataView()
+                                }
+                            })
+                        } else {
+                            console.log(`requestData`)
+                            console.log(requestData)
+                            console.log(`establishmentData`)
+                            console.log(establishmentData)
+                            console.log(`addressEstablishmentData`)
+                            console.log(addressEstablishmentData)
+                            console.log(`operatorAddressData`)
+                            console.log(operatorAddressData)
+                            console.log(`operatorData`)
+                            console.log(operatorData)
+                            console.log(`assistantOperatorData`)
+                            console.log(assistantOperatorData)
+                            setDataView()
                         }
-                        console.log(`requestData`)
-                        console.log(requestData)
-                        console.log(`establishmentData`)
-                        console.log(establishmentData)
-                        console.log(`addressEstablishmentData`)
-                        console.log(addressEstablishmentData)
-                        console.log(`addressOwnerLandData`)
-                        console.log(addressOwnerLandData)
-                        console.log(`landData`)
-                        console.log(landData)
-                        console.log(`referecneData`)
-                        console.log(referenceData)
-                        console.log(`trianData`)
-                        console.log(trianData)
-                        console.log(`operatorAddressData`)
-                        console.log(operatorAddressData)
-                        console.log(`operatorData`)
-                        console.log(operatorData)
-                        console.log(`assistantOperatorData`)
-                        console.log(assistantOperatorData)
-                        setDataView()
-
-
                     }
                 })
             }
         }
     }
-    if (requestId.p_id != undefined && requestId.e_id != undefined) {
-        if (requestId.p_id.length === 7 && requestId.e_id.length === 7) {
-            getPersonalDataAndEstablishment(requestId.p_id, requestId.e_id).then((raw_data) => {
-                // displayUserAlderman()
-                if (raw_data[0] != false && raw_data[1] != false) {
-                    setOperatorData(raw_data[0])
-                    setOperatorAddressData(raw_data[0])
-                    let temp = {
-                        ESTABLISHMENT_DATA: raw_data[1]
-                    }
-                    setEstablishmentData(temp)
-                    let temp_address = {
-                        ESTABLISHMENT_DATA: raw_data[1]
-
-                    }
-                    setAddressEstablishmentData(temp_address)
-                    setDataProfile()
-                }
-            })
-        }
-    }
-}
-function deletePersonalTwo() {
-    deleteAssistant()
-    document.getElementById('person2_name').value = ''
-    document.getElementById('person2_id').value = ''
-    document.getElementById('personal2_delete').style.display = 'none'
-}
-function setDataProfile() {
-    document.getElementById('documentName2').readOnly = true
-    if (document.getElementById('print_new_doc') != undefined) {
-        document.getElementById('print_new_doc').style.display = 'none'
-    }
-    document.getElementById("typeUser").value = operatorData.type
-    document.getElementById("id").value = operatorData.personal_id
-    document.getElementById("name").value = `${operatorData.title} ${operatorData.name} ${operatorData.surname}`
-    document.getElementById("documentName").value = `${operatorData.title} ${operatorData.name} ${operatorData.surname}`
-    document.getElementById("age").value = operatorData.birthday === '-' ? '-' : parseInt(getAge(operatorData.birthday))
-    document.getElementById("nationality").value = operatorData.nationality
-    document.getElementById("nationality").readOnly = operatorData.type === 'บุคคลธรรมดา' ? false : true
-    document.getElementById("nationality").disabled = operatorData.type != 'บุคคลธรรมดา' ? true : false
-    document.getElementById("race").value = operatorData.race
-    document.getElementById("race").readOnly = operatorData.type === 'บุคคลธรรมดา' ? false : true
-    document.getElementById("race").disabled = operatorData.type != 'บุคคลธรรมดา' ? true : false
-    document.getElementById("age").disabled = operatorData.type != 'บุคคลธรรมดา' ? true : false
-    document.getElementById("home_id").value = operatorAddressData.home_number
-    document.getElementById("moo").value = operatorAddressData.moo
-    document.getElementById("trxk").value = operatorAddressData.trxk
-    document.getElementById("sxy").value = operatorAddressData.sxy
-    document.getElementById("building").value = operatorAddressData.building
-    document.getElementById("road").value = operatorAddressData.road
-    let provinceId = parseInt(getProviceIdByName(operatorAddressData.province_name))
-    let amphurId = parseInt(getAmphureIdByName(operatorAddressData.amphur_name, provinceId))
-    let districtId = parseInt(getDistrictIdByName(operatorAddressData.district_name, amphurId))
-    document.getElementById(`province`).value = provinceId
-    amphurSelect(parseInt(provinceId))
-    districtSelect(parseInt(amphurId))
-
-    document.getElementById(`district`).value = amphurId
-    if (districtId === undefined || districtId === '') {
-        document.getElementById(`subdistrict`).innerHTML = ''
-    } else {
-        document.getElementById(`subdistrict`).value = districtId
-    }
-    let cut_phone = operatorData.phone.split('/')
-    if (cut_phone[1] === '') {
-        document.getElementById("phone").value = cut_phone[0]
-        document.getElementById('phone_more').value = ''
-        document.getElementById('phone_more').disabled = false
-    } else {
-        document.getElementById("phone").value = cut_phone[0]
-        document.getElementById('phone_more').disabled = false
-        document.getElementById('phone_more').value = cut_phone[1]
-    }
-    document.getElementById("fax").value = operatorData.fax
-    //ที่อยู่สถานประกอบการ
-    document.getElementById("wPlaceId").value = addressEstablishmentData.home_number
-    document.getElementById("wMoo").value = addressEstablishmentData.moo
-    document.getElementById("wTrxk").value = addressEstablishmentData.trxk
-    document.getElementById("wSxy").value = addressEstablishmentData.sxy
-    document.getElementById("wBuilding").value = addressEstablishmentData.building
-    document.getElementById("wRoad").value = addressEstablishmentData.road
-    let provinceIdE = parseInt(getProviceIdByName(addressEstablishmentData.province_name))
-    let amphurIdE = parseInt(getAmphureIdByName(addressEstablishmentData.amphur_name, provinceIdE))
-    let districtIdE = parseInt(getDistrictIdByName(addressEstablishmentData.district_name, amphurIdE))
-    document.getElementById(`wProvince`).value = provinceIdE
-    wamphurSelect(parseInt(provinceIdE))
-    wdistrictSelect(parseInt(amphurIdE))
-    document.getElementById(`wDistrict`).value = amphurIdE
-    console.log(`districtIdE ${districtIdE === undefined || districtIdE === ''}   ${districtIdE}`)
-    if (districtIdE === undefined || districtIdE === '') {
-        document.getElementById(`wSubdistrict`).innerHTML = ''
-    } else {
-        document.getElementById(`wSubdistrict`).value = districtIdE
-    }
-    let cut_phone_no3 = establishmentData.phone.split('/')
-    if (cut_phone_no3[1] === '') {
-        document.getElementById("wPhone").value = cut_phone_no3[0]
-        document.getElementById('wPhone_more').value = ''
-        document.getElementById('wPhone_more').disabled = false
-    } else {
-        document.getElementById("wPhone").value = cut_phone_no3[0]
-        document.getElementById('wPhone_more').disabled = false
-        document.getElementById('wPhone_more').value = cut_phone_no3[1]
-    }
-    document.getElementById("wFax").value = establishmentData.fax
-
-    document.getElementById('workplaceName').value = establishmentData.name
-
-    if (document.getElementById("wLocation") != undefined) {
-        document.getElementById('wLocation').value = establishmentData.grond
-
-    } else {
-        if (document.getElementById('typeWorkplace') != undefined) {
-            document.getElementById('typeWorkplace').value = establishmentData.type
-        }
-    }
-    if (document.getElementById('machinery') != undefined) {
-        document.getElementById('machinery').value = establishmentData.machine_size
-    }
-    if (document.getElementById('area') != undefined) {
-        document.getElementById('area').value = establishmentData.area_size
-    }
-    if (document.getElementById('numPeople') != undefined) {
-        document.getElementById('numPeople').value = establishmentData.worker
-    }
-
-    changeStatusMenuData(requestData.status, requestData.is_deleted) // RequestControl.js < switch menu to data === true
 }
 // setDataView
 function setDataView() {
@@ -228,13 +113,6 @@ function setDataView() {
         document.getElementById('bFee').value = requestData.receipt_fee
         document.getElementById('bFine').value = requestData.receipt_fine
     }
-    if (requestData.staff_id_money === '') {
-        resetOptionitem('documentName2', size_money_list)
-    } else {
-        displayUserMoney(requestData.staff_id_money)
-    }
-    document.getElementById('documentName3').value = requestData.staff_id_alderman
-    document.getElementById('position').value = getPositionById(requestData.staff_id_alderman)
     if (document.getElementById('print_new_doc') != undefined) {
         document.getElementById('print_new_doc').style.display = ''
     }
@@ -356,10 +234,6 @@ function setDataView() {
     changeStatusMenuData() // RequestControl.js < switch menu to data === true
 }
 function setDataRequest(requestData_raw, ownerData_raw, assistantData_raw) {
-    console.log(`------`)
-    console.log(requestData_raw)
-    console.log(`ownerData`)
-    console.log(ownerData_raw)
     setRequestData(requestData_raw)
     setDataOperator(ownerData_raw)
     setOperatorAddressData(ownerData_raw)
@@ -586,57 +460,52 @@ function insertRequest() {
 
     });
 }
-function getRequestData(no, year) {
+function getRequestDataRenew(no, year) {
     return new Promise((resolve, reject) => {
-        axios.get(`http://localhost:5000/get/request/${no}/${year}`).then((result) => {
+        axios.get(`http://localhost:5000/get/request/renew/id/${no}/${year}`).then((result) => {
             return resolve(result.data);
         })
     })
 }
-function getPresident() {
-    alderman_list = []
-    return new Promise((resolve, reject) => {
-        axios.get(`http://localhost:5000/get/user/president`).then((result) => {
-            for (let i = 0; i < result.data.length; i++) {
-                alderman_list.push(result.data[i])
-            }
-            return resolve(result.data);
-        })
-    })
-}
-
-function setLisetUserAlderManToUi(list_user) {
-    console.log(list_user)
-    if (list_user.length != 0) {
-        userAlderman = list_user[0].USER_ID
-        requestData.staff_id_alderman = list_user[0].USER_ID
-        document.getElementById('position').value = list_user[0].USER_POSITION
-
-        for (let i = 0; i < list_user.length; i++) {
-            var select = document.getElementById("documentName3");
-            var option = document.createElement("option");
-            let item = list_user[i]
-            option.text = `${item.USER_TITLE} ${item.USER_NAME} ${item.USER_SURNAME}`
-            option.value = list_user[i].USER_ID;
-            select.onchange = function () { changePositionAlderman(value) };
-            select.add(option);
+function getPositionAlderman(userId) {
+    for (let i = 0; i < listAlderMan.length; i++) {
+        if (listAlderMan[i].USER_ID === userId) {
+            return listAlderMan[i].USER_POSITION
         }
     }
 }
-function changePositionAlderman(value) {
-    userAlderman = value.USER_ID
-    document.getElementById('position').value = value.USER_POSITION
+function setLisetUserAlderManToUi(list_user) {
+    console.log(list_user)
+    if (list_user.length != 0) {
+        listAlderMan = []
+        for (let i = 0; i < list_user.length; i++) {
+            if (list_user[i].USER_POSITION_TYPE != 'การเงิน') {
+                if (document.getElementById('position').value.trim() === '') {
+                    requestData.staff_id_alderman = list_user[i].USER_ID
+                    document.getElementById('position').value = list_user[i].USER_POSITION
+                }
+                var select = document.getElementById("documentName3");
+                var option = document.createElement("option");
+                let item = list_user[i]
+                option.text = `${item.USER_TITLE} ${item.USER_NAME} ${item.USER_SURNAME}`
+                option.value = list_user[i].USER_ID;
+                listAlderMan.push(list_user[i])
+                select.onchange = function () { changePositionAlderman(this.value) };
+                select.add(option);
+            }
+        }
+
+
+    }
 }
-function displayUserAlderman() {
-    getPresident().then((list_user) => {
-        setLisetUserAlderManToUi(list_user)
-    })
+function changePositionAlderman(userId) {
+    document.getElementById('position').value = getPositionAlderman(userId)
+    requestData.staff_id_alderman = document.getElementById('documentName3').valu
 }
 //get staff money 
-function getUserMoney(id) {
+function getUser() {
     return new Promise((resolve, reject) => {
-        axios.get(`http://localhost:5000/get/user/id/${id}`).then((result) => {
-            size_money_list = result.data.length
+        axios.get(`http://localhost:5000/get/users/money/president`).then((result) => {
             return resolve(result.data);
         })
     })
@@ -645,21 +514,23 @@ function setLisetUserMoneyToUi(list_user) {
     console.log(list_user)
     if (list_user.length != 0) {
         for (let i = 0; i < list_user.length; i++) {
-            var select = document.getElementById("documentName2");
-            var option = document.createElement("option");
-            let item = list_user[i]
-            option.text = `${item.USER_TITLE} ${item.USER_NAME} ${item.USER_SURNAME}`
-            option.value = list_user[i].USER_ID;
-
-            select.onchange = function () { userMoney = this.value };
-            select.add(option);
-
+            if (list_user[i].USER_POSITION_TYPE === 'การเงิน') {
+                var select = document.getElementById("documentName2");
+                var option = document.createElement("option");
+                let item = list_user[i]
+                option.text = `${item.USER_TITLE} ${item.USER_NAME} ${item.USER_SURNAME}`
+                option.value = list_user[i].USER_ID;
+                select.onchange = function () { requestData.staff_id_money = this.value };
+                select.add(option);
+            }
         }
+        requestData.staff_id_money = document.getElementById("documentName2").value
     }
 }
-function displayUserMoney(id) {
-    getUserMoney(id).then((list_user) => {
+function displayUser() {
+    getUser().then((list_user) => {
         setLisetUserMoneyToUi(list_user)
+        setLisetUserAlderManToUi(list_user)
     })
 }
 //get requestId form url
@@ -670,12 +541,10 @@ function getUrlVars() {
     });
     return vars;
 }
-
 //create print 
 function printRequest() {
     //
 }
-
 function resetOptionitem(id, length) {
     console.log(`resetOptionitem ${id}`)
     var select = document.getElementById(id);
@@ -692,8 +561,46 @@ function getPositionById(id) {
         }
     }
 }
-function loadingData(type){
-    runForm().then((data) =>{
+//get sight
+function getSightFormType(type) {
+    let sightT = ''
+    console.log(`getSightFormType => ` + type)
+    switch (type) {
+        case 'ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ':
+            sightT = 'A'
+            break;
+        case 'ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ':
+            sightT = 'B'
+            break;
+        case 'ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร':
+            sightT = 'C'
+            break;
+        case 'ใบอนุญาตจัดตั้งสถานที่สะสมอาหาร':
+            sightT = 'D'
+            break;
+        case 'หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร':
+            sightT = 'E'
+            break;
+        case 'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร':
+            sightT = 'F'
+            break;
+        case 'ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน':
+            sightT = 'G'
+            break;
+        case 'กิจการที่เป็นอันตรายต่อสุขภาพ':
+            sightT = 'H'
+            break;
+        default:
+            //กิจการฌาปณสถาน
+            sightT = 'I'
+            break;
+    }
+    return sightT
+}
+function loadingData(type) {
+    runForm().then((data) => {
+        displayUser()
         setTypeMenu(type)
+        checkView(type)
     })
 }
