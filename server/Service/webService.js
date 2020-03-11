@@ -1226,7 +1226,24 @@ class service {
             new_data.train_id = new_data.train_id === '' || new_data.train_id === 'NO' ? 'NULL' : 'YES'
             new_data.is_land_owned === 'NO' ? new_data.is_land_owned = 'NULL' : new_data.is_land_owned = `'${new_data.is_land_owned}'`
             new_data.type === '' ? new_data.type = 'NULL' : new_data.type = `'${new_data.type}'`
-            new_data.name === '' ? new_data.name = 'NULL' : new_data.name = `'${new_data.name}'`
+            new_data.name === '' ? new_data.name = 'NULL' : new_data.name = new_data.name
+            if(new_data.name === ''){
+                new_data.name = 'NULL'
+            }else{
+                let w_cut = new_data.name.split('"')
+                if(w_cut.length != 1){
+                    let temp_text = ""
+                    for(let i = 0; i < w_cut.length ; i++){
+                        temp_text = temp_text + w_cut[i]
+                        if(i != w_cut.length - 1){
+                            temp_text = temp_text + "''"
+                        }
+                    }
+                    new_data.name = temp_text
+                }else{
+                    new_data.name = new_data.name
+                }
+            }
 
             new_data.machine_size === '' ? new_data.machine_size = 0 : ''
             new_data.area_size === '' ? new_data.area_size = 0 : ''

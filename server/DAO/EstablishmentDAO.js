@@ -26,7 +26,8 @@ class EstablishmentDAO {
             column = column + `ESTABLISHMENT_NAME, ESTABLISHMENT_MACHINE_SIZE, ESTABLISHMENT_AREA_SIZE, `
             column = column + `ESTABLISHMENT_WORKER, ESTABLISHMENT_PHONE, ESTABLISHMENT_FAX, ESTABLISHMENT_GROUND`
             // let values = `'${em.id}', '${em.address_id}', '${em.perosonal_id}', ${em.is_land_owned}, ${em.type}, ${em.name}, `
-            let values = `'${em.id}', '${em.address_id}', '${em.perosonal_id}', ${em.is_land_owned}, ${em.name}, `
+            let values = `'${em.id}', '${em.address_id}', '${em.perosonal_id}', ${em.is_land_owned}, `
+            em.name === '' || em.name === 'NULL' ? values = values + `'NULL', ` : values = values +`"${em.name}", `
             values = values + `${em.machine_size}, ${em.area_size}, ${em.worker}, '${em.phone}', ${em.fax}, ${em.grond}`
             let query = `INSERT INTO establishment(${column}) VALUES (${values})`
             con.query(query, function (err, result) {
@@ -52,7 +53,7 @@ class EstablishmentDAO {
     }
     getDuplication(em, address) {
         let values = `establishment.ESTABLISHMENT_NAME `
-        em.name === 'NULL' || em.name === '' ? values = values + 'IS NULL ' : values = values + `= ${em.name} `
+        em.name === 'NULL' || em.name === '' ? values = values + 'IS NULL ' : values = values + `= "${em.name}" `
         values = values + `AND address.ADDRESS_HOME_NUMBER = '${address.home_number}' `
         address.moo === '' || address.moo === 'NULL' ? values = values + `AND address.ADDRESS_MOO IS NULL ` : values = values + `AND address.ADDRESS_MOO = ${address.moo} `
         address.trxk === '' || address.trxk === 'NULL' ? values = values + `AND address.ADDRESS_TRXK IS NULL ` : values = values + `AND address.ADDRESS_TRXK = ${address.trxk} `
@@ -95,7 +96,8 @@ class EstablishmentDAO {
             console.log(em)
             let value = `ESTABLISHMENT_IS_LAND_OWNED = ${em.is_land_owned}, `
             // value = value + `ESTABLISHMENT_TYPE=${em.type},ESTABLISHMENT_NAME=${em.name},`
-            value = value + `ESTABLISHMENT_NAME=${em.name},`
+            em.name === '' || em.name === 'NULL' ? value = value + `ESTABLISHMENT_NAME='NULL',` : value = value + `ESTABLISHMENT_NAME="${em.name}"`
+            // value = value + `ESTABLISHMENT_NAME=${em.name},`
             value = value + `ESTABLISHMENT_MACHINE_SIZE=${em.machine_size},ESTABLISHMENT_AREA_SIZE=${em.area_size},`
             value = value + `ESTABLISHMENT_WORKER=${em.worker},`
             value = value + `ESTABLISHMENT_PHONE='${em.phone}',ESTABLISHMENT_FAX=${em.fax},`
