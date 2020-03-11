@@ -2,6 +2,7 @@ let newDocument = true
 let requestType = []
 let userMoney = ''
 let userAlderman = ''
+let temp_alderman_list = []
 function checkView(typeForm) {
     let requestId = getUrlVars()
     console.log(requestId)
@@ -1374,6 +1375,9 @@ function setDataUpdate(type) {
         if (document.getElementById('typeProduct') != undefined) {
             requestData.product_type = document.getElementById('typeProduct').value.trim()
         }
+        if( document.getElementById('typeWorkplace') != undefined){
+            requestData.product_type = document.getElementById('typeWorkplace').value.trim()
+        }
         if (document.getElementById('timeStart') != undefined) {
             requestData.sell_start = document.getElementById('timeStart').value
         }
@@ -1421,8 +1425,7 @@ function setDataUpdate(type) {
         // requestData.receipt_fee = fee_y_1
         // requestData.receipt_date = date_y_1
         // requestData.staff_id_money = userMoney
-        // requestData.staff_id_alderman = userAlderman
-
+        requestData.staff_id_alderman = userAlderman
         requestData.total_image = totalFiles.length
     }
     if (type === 'establishmentData') {
@@ -1669,19 +1672,28 @@ function setLisetUserAlderManToUi(list_user) {
         document.getElementById('position').value = list_user[0].USER_POSITION
 
         for (let i = 0; i < list_user.length; i++) {
+            temp_alderman_list.push(list_user[i])
             var select = document.getElementById("documentName3");
             var option = document.createElement("option");
             let item = list_user[i]
             option.text = `${item.USER_TITLE} ${item.USER_NAME} ${item.USER_SURNAME}`
             option.value = list_user[i].USER_ID;
-            select.onchange = function () { changePositionAlderman(value) };
+            select.onchange = function () { changePositionAlderman(this.value) };
             select.add(option);
         }
     }
 }
-function changePositionAlderman(value) {
-    userAlderman = value.USER_ID
-    document.getElementById('position').value = value.USER_POSITION
+
+function getPositionAlderman(userId) {
+    for (let i = 0; i < temp_alderman_list.length; i++) {
+        if (temp_alderman_list[i].USER_ID === userId) {
+            return temp_alderman_list[i].USER_POSITION
+        }
+    }
+}
+function changePositionAlderman(userId) {
+    userAlderman = userId
+    document.getElementById('position').value = getPositionAlderman(userId)
 }
 function displayUserAlderman() {
     getPresident().then((list_user) => {
