@@ -90,7 +90,7 @@ class RequestDAO {
             let query = `SELECT * FROM request ${joinTable} WHERE request.REQUEST_NO='${no}' AND request.REQUEST_YEAR='${year}'`
             con.query(query, function (err, result) {
                 if (err) {
-                    console.log(err.code) 
+                    console.log(err) 
                     return resolve(err.code)
                 }
                 return resolve(result)

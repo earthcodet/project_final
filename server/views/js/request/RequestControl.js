@@ -4,14 +4,12 @@ let search_surname = ''
 var data = false
 var deleteData = false
 var addNew = false
-var new_document = false
 let personal_change = false
 function addPage() {
     resetStyleIdDeleteRequest()
     resetRequestData()
     personal_change = false
     addNew = true
-    new_document = true
     deleteData = false
     data = false
     disableFunction()
@@ -91,16 +89,10 @@ function insertPage() {
                         if (window.location.href.split('?').length === 1) {
                             disableMenuAll()
                             location.replace(window.location.href + '?id=' + requestData.no + '' + requestData.year)
-                        }
-                        else if (new_document === true) {
+                        }else{
                             let temp_html = window.location.href.split('?')
                             location.replace(temp_html[0] + '?id=' + requestData.no + '' + requestData.year)
-                        }else{
-                            data = true
-                            enableMenu('addMenu')
-                            enableMenu('editMenu')
-                            enableMenu('deleteMenu')
-                            enableFunction()
+
                         }
                 })
                 data = true

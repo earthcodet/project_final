@@ -24,7 +24,7 @@ function checkView(typeForm) {
                         setAddressEstablishmentData(raw_data[0])
                         setEstablishmentData(raw_data[0])
                         if (raw_data[0].PERSONAL_ID_ASSISTANT != null) {
-                            searchPersonalById().then((data_assistant) => {
+                            searchPersonalById(raw_data[0].PERSONAL_ID_ASSISTANT).then((data_assistant) => {
                                 if (data_assistant.PERSONAL_NAME != undefined) {
                                     setassistantOperatorData(data_assistant)
                                     console.log(`requestData`)
@@ -197,19 +197,13 @@ function setDataView() {
         document.getElementById('wPhone_more').value = cut_phone_no3[1]
     }
     document.getElementById("wFax").value = establishmentData.fax
-
+    
     document.getElementById('workplaceName').value = establishmentData.name
 
     if (document.getElementById("person2_name") != undefined) {
         document.getElementById("person2_name").value = `${assistantOperatorData.title} ${assistantOperatorData.name} ${assistantOperatorData.surname}`
         document.getElementById("person2_id").value = assistantOperatorData.personal_id
         document.getElementById('wLocation').value = establishmentData.grond
-        if (assistantOperatorData.id != '') {
-            document.getElementById('personal2_delete').style.display = ''
-        } else {
-            document.getElementById('personal2_delete').style.display = 'none'
-        }
-
 
         document.getElementById('typeReForm').value = requestData.subcategory
         document.getElementById('typeProduct').value = requestData.product_type

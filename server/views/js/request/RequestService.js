@@ -585,6 +585,7 @@ function checkformatReturn(value) {
 }
 //set data return form update
 function setRequestDataUpdateReturn(raw_data) {
+    console.log(raw_data)
     trianData.id = raw_data.train_id === '' ? trianData.id : raw_data.train_id
     referenceData.id = raw_data.reference_id === '' ? referenceData.id : raw_data.reference_id
     landData.id = raw_data.land_id === '' ? landData.id : raw_data.land_id
@@ -592,6 +593,8 @@ function setRequestDataUpdateReturn(raw_data) {
     requestData.establishment_is_land_owned = checkformatReturn(raw_data.address_land_id)
     establishmentData.id    = checkformatReturn(raw_data.establishment_id)
     requestData.establishment_id = checkformatReturn(raw_data.establishment_id)
+    console.log('-o-<>-o-')
+    console.log(establishmentData)
 }
 //set data return form insert
 function setRequestDataReturn(raw_data) {
@@ -611,7 +614,7 @@ function setRequestDataReturn(raw_data) {
     referenceData.id = checkformatReturn(raw_data.reference_id)
     landData.id = requestData.establishment_is_land_owned
     addressEstablishmentData.id = establishmentData.address_id
-    establishmentData.id = requestData.establishment_id
+    // establishmentData.id = requestData.establishment_id
     requestData.status = raw_data.status
     console.log(`landData`)
     console.log(landData)
@@ -696,7 +699,7 @@ function setRequestData(raw_data) {
 }
 function setEstablishmentData(raw_data) {
     if (raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_ID != undefined) {
-        establishmentData.id = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_ID
+        establishmentData.id = raw_data.ESTABLISHMENT_ID
         establishmentData.address_id = raw_data.ESTABLISHMENT_DATA.ADDRESS_ID
         establishmentData.perosonal_id = raw_data.ESTABLISHMENT_DATA.PERSONAL_ID
         establishmentData.type = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_TYPE === null ? '' : raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_TYPE

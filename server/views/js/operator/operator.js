@@ -151,9 +151,9 @@ function setDataUI(data) {
         }
         console.log(`phone_t`)
         console.log(phone_t)
-        if(phone_t[0] === '-') {
+        if (phone_t[0] === '-') {
             document.getElementById('phone_more').disabled = true
-        }else{
+        } else {
             document.getElementById('phone_more').disabled = false
         }
         document.getElementById('fax').value = data.PERSONAL_FAX === undefined || data.PERSONAL_FAX === null ? '' : data.PERSONAL_FAX
@@ -192,9 +192,9 @@ function setDataUI(data) {
             document.getElementById('company-phone-more').disabled = true
             document.getElementById('company-phone-more').value = phone_t[1]
         }
-        if(phone_t[0] === '-') {
+        if (phone_t[0] === '-') {
             document.getElementById('company-phone-more').disabled = true
-        }else{
+        } else {
             document.getElementById('company-phone-more').disabled = false
         }
         document.getElementById('company-fax').value = data.PERSONAL_FAX === undefined || data.PERSONAL_FAX === null ? '' : data.PERSONAL_FAX
@@ -357,7 +357,7 @@ function preInsert() {
                         inPersonal.personal_id = document.getElementById("id").value;
                         inPersonal.card_issued = document.getElementById("datepicker1").value;
                         inPersonal.card_expipe = document.getElementById("datepicker2").value;
-                        
+
                         let format_phone_t = `${document.getElementById("phone").value}/${document.getElementById("phone_more").value}`
                         inPersonal.phone = format_phone_t;
                         inPersonal.fax = document.getElementById("fax").value;
@@ -664,7 +664,19 @@ function insertToDatabase() {
         arrInsert[2].data = null
         console.log("insertToDatabase");
         var formData = new FormData();
-        formData.append("image", fileImage);
+        console.log(`
+        _isImageChange ${_isImageChange}
+        arrInsert[2].name ${arrInsert[2].name}
+        `)
+        if (_isImageChange === true) {
+            if (fileImage != null) {
+                formData.append("image", fileImage);
+            } else {
+                arrInsert[2].data = null
+            }
+        } else {
+            arrInsert[2].name = 'NO_UPlOAD'
+        }
         if (arrInsert[2].name === 'NO_UPlOAD') {
             arrInsert[2].data = null
         }
