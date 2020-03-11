@@ -370,10 +370,11 @@ function payPopup() {
                             let object = getDateExp(inRequest.menu, document.getElementById('datepicker7').value)
                             inRequest.date_expired = object.date_exp
                             inRequest.date_issued = object.date_issuse
-
+                            //จะเช็คต่อว่า ปัจุจบัน ต้องเพิ่มเงินไปที่ช่องไหน
                             let temp = inRequest.date_expired.split('-')
                             let year = parseInt(temp[2])
                             let year_now = parseInt(new Date().toISOString().slice(0, 10).split('-')[0])
+                            //ใบอนุญาต เหลืออีก 3 ปี บันทึกลงช่องที่ 1
                             if (year - year_now === 3) {
                                 inRequest.receipt_date = document.getElementById('datepicker7').value
                                 inRequest.receipt_fine = document.getElementById('pay_fine').value
@@ -381,12 +382,14 @@ function payPopup() {
                                 inRequest.status_before = inRequest.status
                                 inRequest.status = 'active'
                             } else if (year - year_now === 2) {
+                                //ใบอนุญาต เหลืออีก 2 ปี บันทึกลงช่องที่ 2
                                 inRequest.receipt_date_year_2 = document.getElementById('datepicker7').value
                                 inRequest.receipt_fine_year_2 = document.getElementById('pay_fine').value
                                 inRequest.receipt_fee_year_2 = document.getElementById('pay_fee').value
                                 inRequest.status_before = inRequest.status
                                 inRequest.status = 'active'
                             } else {
+                                //ใบอนุญาต เหลืออีก 1 ปี หรือ 0 ปี บันทึกลงช่องที่ 3
                                 inRequest.receipt_date_year_3 = document.getElementById('datepicker7').value
                                 inRequest.receipt_fine_year_3 = document.getElementById('pay_fine').value
                                 inRequest.receipt_fee_year_3 = document.getElementById('pay_fee').value
@@ -405,6 +408,7 @@ function payPopup() {
                                 }
                             })
                         } else {
+                            //มาครั้งแรก แบบไม่มีวันหมดอายุ ''
                             inRequest.receipt_date = document.getElementById('datepicker7').value
                             inRequest.receipt_fine = document.getElementById('pay_fine').value
                             inRequest.receipt_fee = document.getElementById('pay_fee').value
@@ -424,7 +428,7 @@ function payPopup() {
                                     });
                                 }
                             })
-                        }
+                         }
                     }, 100);
                 });
             }
