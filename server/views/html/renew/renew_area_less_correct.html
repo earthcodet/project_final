@@ -167,11 +167,11 @@
                             </input></a>
                         <br>
                         <a style="margin-left: 0.58vw;">เลขที่บ้าน :
-                            <input type="text" style="width: 7%;"></a>
+                            <input type="text" id='home_id' style="width: 7%;"></a>
                         <a>หมู่ที่ :
-                            <input type="text" style="width: 7%;"></a>
+                            <input type="text" id='moo' style="width: 7%;"></a>
                         <a>ตรอก :
-                            <input type="text" style="width: 13%;"></a>
+                            <input type="text" id='trxk' style="width: 13%;"></a>
                         <a>ซอย :
                             <input type="text" id="sxy" style="width: 13%;"></a>
                         <a>อาคาร :
@@ -213,7 +213,7 @@
                             <input type="text" id="machinery" style="width: 8%;"> แรงม้า</a>
                         <br>
                         <a>ตั้งอยู่เลขที่ :
-                            <input type="text" id="wHomeId" style="width: 7%;"></a>
+                            <input type="text" id="wPlaceId" style="width: 7%;"></a>
                         <a>หมู่ที่ :
                             <input type="int" id="wMoo" style="width: 7%;"></a>
                         <a>ตรอก:
@@ -377,8 +377,9 @@
 <script src='../../js/renew/RenewControl.js'></script>
 <script src='../../js/renew/RenewData.js'></script>
 <script src='../../js/renew/RenewService.js'></script>
+<script src='../../js/service/address/twoAddress.js'></script>
 <script>
-    setTypeMenu('หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร')
+    loadingData('หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร')
 </script>
 <!-- <script src="../../js/service/checkUserLogin.js"></script> -->
 

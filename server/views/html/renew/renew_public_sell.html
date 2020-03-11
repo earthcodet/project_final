@@ -171,11 +171,11 @@
                         </input></a>
                     <br>
                     <a style="margin-left: 0.58vw;">เลขที่บ้าน :
-                        <input type="text" style="width: 7%;"></a>
+                        <input type="text" id='home_id' style="width: 7%;"></a>
                     <a>หมู่ที่ :
-                        <input type="text" style="width: 7%;"></a>
+                        <input type="text" id='moo' style="width: 7%;"></a>
                     <a>ตรอก :
-                        <input type="text" style="width: 13%;"></a>
+                        <input type="text" id='trxk' style="width: 13%;"></a>
                     <a>ซอย :
                         <input type="text" id="sxy" style="width: 13%;"></a>
                     <a>อาคาร :
@@ -210,224 +210,13 @@
                         <br>
                         <br>
                         <a>สถานที่จำหน่ายสินค้า <font color="red">*</font> : </a>
-                        <input list="location" id="wLocation" name="" style="width: 29%;"
+                        <input id="wLocation" name="" style="width: 29%;"
                             onchange="document.getElementById('wLocation').classList.remove('alertInput')">
-                        <datalist id="location">
-                            <option value="" hidden>เลือก...</option>
-                            <option value="เขตปลอดร่มเตียงที่ 1">เขตปลอดร่มเตียงที่ 1</option>
-                            <option value="เขตปลอดร่มเตียงที่ 2">เขตปลอดร่มเตียงที่ 2</option>
-                            <option value="เขตปลอดร่มเตียงที่ 3">เขตปลอดร่มเตียงที่ 3</option>
-                            <option value="เขตปลอดร่มเตียงที่ 4">เขตปลอดร่มเตียงที่ 4</option>
-                            <option value="เขตปลอดร่มเตียงที่ 5">เขตปลอดร่มเตียงที่ 5</option>
-                            <option value="เขตปลอดร่มเตียงที่ 6">เขตปลอดร่มเตียงที่ 6</option>
-                            <option value="เขตปลอดร่มเตียงที่ 7">เขตปลอดร่มเตียงที่ 7</option>
-                            <option value="เขตปลอดร่มเตียงที่ 8">เขตปลอดร่มเตียงที่ 8</option>
-                            <option value="เขตปลอดร่มเตียงที่ 9">เขตปลอดร่มเตียงที่ 9</option>
-                            <option value="เขตปลอดร่มเตียงที่ 10">เขตปลอดร่มเตียงที่ 10</option>
-                            <option value="เขตปลอดร่มเตียงที่ 11">เขตปลอดร่มเตียงที่ 11</option>
-                            <option value="หาดบางแสน 1">หาดบางแสน 1</option>
-                            <option value="หาดบางแสน 2">หาดบางแสน 2</option>
-                            <option value="หาดบางแสน 3">หาดบางแสน 3</option>
-                            <option value="หาดบางแสน 4">หาดบางแสน 4</option>
-                            <option value="หาดบางแสน 5">หาดบางแสน 5</option>
-                            <option value="หาดบางแสน 6">หาดบางแสน 6</option>
-                            <option value="หาดบางแสน 7">หาดบางแสน 7</option>
-                            <option value="หาดบางแสน 8">หาดบางแสน 8</option>
-                            <option value="หาดบางแสน 9">หาดบางแสน 9</option>
-                            <option value="หาดบางแสน 10">หาดบางแสน 10</option>
-                            <option value="หาดบางแสน 11">หาดบางแสน 11</option>
-                            <option value="หาดบางแสน 12">หาดบางแสน 12</option>
-                            <option value="หาดบางแสน 13">หาดบางแสน 13</option>
-                            <option value="หาดบางแสน 14">หาดบางแสน 14</option>
-                            <option value="หาดบางแสน 15">หาดบางแสน 15</option>
-                            <option value="หาดบางแสน 16">หาดบางแสน 16</option>
-                            <option value="หาดบางแสน 17">หาดบางแสน 17</option>
-                            <option value="หาดบางแสน 18">หาดบางแสน 18</option>
-                            <option value="หาดบางแสน 19">หาดบางแสน 19</option>
-                            <option value="หาดบางแสน 20">หาดบางแสน 20</option>
-                            <option value="หาดบางแสน 21">หาดบางแสน 21</option>
-                            <option value="หาดบางแสน 22">หาดบางแสน 22</option>
-                            <option value="หาดบางแสน 23">หาดบางแสน 23</option>
-                            <option value="หาดบางแสน 24">หาดบางแสน 24</option>
-                            <option value="หาดบางแสน 25">หาดบางแสน 25</option>
-                            <option value="หาดบางแสน 26">หาดบางแสน 26</option>
-                            <option value="หาดบางแสน 27">หาดบางแสน 27</option>
-                            <option value="หาดบางแสน 28">หาดบางแสน 28</option>
-                            <option value="หาดบางแสน 29">หาดบางแสน 29</option>
-                            <option value="หาดบางแสน 30">หาดบางแสน 30</option>
-                            <option value="หาดบางแสน 31">หาดบางแสน 31</option>
-                            <option value="หาดบางแสน 32">หาดบางแสน 32</option>
-                            <option value="หาดบางแสน 33">หาดบางแสน 33</option>
-                            <option value="หาดบางแสน 34">หาดบางแสน 34</option>
-                            <option value="หาดบางแสน 35">หาดบางแสน 35</option>
-                            <option value="หาดบางแสน 36">หาดบางแสน 36</option>
-                            <option value="หาดบางแสน 37">หาดบางแสน 37</option>
-                            <option value="หาดบางแสน 38">หาดบางแสน 38</option>
-                            <option value="หาดบางแสน 39">หาดบางแสน 39</option>
-                            <option value="หาดบางแสน 40">หาดบางแสน 40</option>
-                            <option value="หาดบางแสน 41">หาดบางแสน 41</option>
-                            <option value="หาดบางแสน 42">หาดบางแสน 42</option>
-                            <option value="หาดบางแสน 43">หาดบางแสน 43</option>
-                            <option value="หาดบางแสน 44">หาดบางแสน 44</option>
-                            <option value="หาดบางแสน 45">หาดบางแสน 45</option>
-                            <option value="หาดบางแสน 46">หาดบางแสน 46</option>
-                            <option value="หาดบางแสน 47">หาดบางแสน 47</option>
-                            <option value="หาดบางแสน 48">หาดบางแสน 48</option>
-                            <option value="หาดบางแสน 49">หาดบางแสน 49</option>
-                            <option value="หาดบางแสน 50">หาดบางแสน 50</option>
-                            <option value="หาดบางแสน 51">หาดบางแสน 51</option>
-                            <option value="หาดบางแสน 52">หาดบางแสน 52</option>
-                            <option value="หาดบางแสน 53">หาดบางแสน 53</option>
-                            <option value="หาดบางแสน 54">หาดบางแสน 54</option>
-                            <option value="หาดบางแสน 55">หาดบางแสน 55</option>
-                            <option value="หาดบางแสน 56">หาดบางแสน 56</option>
-                            <option value="หาดบางแสน 57">หาดบางแสน 57</option>
-                            <option value="หาดบางแสน 58">หาดบางแสน 58</option>
-                            <option value="หาดบางแสน 59">หาดบางแสน 59</option>
-                            <option value="หาดบางแสน 60">หาดบางแสน 60</option>
-                            <option value="หาดบางแสน 61">หาดบางแสน 61</option>
-                            <option value="หาดบางแสน 62">หาดบางแสน 62</option>
-                            <option value="หาดบางแสน 63">หาดบางแสน 63</option>
-                            <option value="หาดบางแสน 64">หาดบางแสน 64</option>
-                            <option value="หาดบางแสน 65">หาดบางแสน 65</option>
-                            <option value="หาดบางแสน 66">หาดบางแสน 66</option>
-                            <option value="หาดบางแสน 67">หาดบางแสน 67</option>
-                            <option value="หาดบางแสน 68">หาดบางแสน 68</option>
-                            <option value="หาดบางแสน 69">หาดบางแสน 69</option>
-                            <option value="หาดบางแสน 70">หาดบางแสน 70</option>
-                            <option value="หาดบางแสน 71">หาดบางแสน 71</option>
-                            <option value="หาดบางแสน 72">หาดบางแสน 72</option>
-                            <option value="หาดบางแสน 73">หาดบางแสน 73</option>
-                            <option value="หาดบางแสน 74">หาดบางแสน 74</option>
-                            <option value="หาดบางแสน 75">หาดบางแสน 75</option>
-                            <option value="หาดบางแสน 76">หาดบางแสน 76</option>
-                            <option value="หาดบางแสน 77">หาดบางแสน 77</option>
-                            <option value="หาดบางแสน 78">หาดบางแสน 78</option>
-                            <option value="หาดบางแสน 79">หาดบางแสน 79</option>
-                            <option value="หาดบางแสน 80">หาดบางแสน 80</option>
-                            <option value="หาดบางแสน 81">หาดบางแสน 81</option>
-                            <option value="หาดบางแสน 82">หาดบางแสน 82</option>
-                            <option value="หาดบางแสน 83">หาดบางแสน 83</option>
-                            <option value="หาดบางแสน 84">หาดบางแสน 84</option>
-                            <option value="หาดบางแสน 85">หาดบางแสน 85</option>
-                            <option value="หาดบางแสน 86">หาดบางแสน 86</option>
-                            <option value="หาดบางล่าง 1">บางแสนล่าง 1</option>
-                            <option value="บางแสนล่าง 2">บางแสนล่าง 2</option>
-                            <option value="บางแสนล่าง 3">บางแสนล่าง 3</option>
-                            <option value="บางแสนล่าง 4">บางแสนล่าง 4</option>
-                            <option value="บางแสนล่าง 5">บางแสนล่าง 5</option>
-                            <option value="บางแสนล่าง 6">บางแสนล่าง 6</option>
-                            <option value="บางแสนล่าง 7">บางแสนล่าง 7</option>
-                            <option value="บางแสนล่าง 8">บางแสนล่าง 8</option>
-                            <option value="บางแสนล่าง 9">บางแสนล่าง 9</option>
-                            <option value="บางแสนล่าง 10">บางแสนล่าง 10</option>
-                            <option value="บางแสนล่าง 11">บางแสนล่าง 11</option>
-                            <option value="บางแสนล่าง 12">บางแสนล่าง 12</option>
-                            <option value="บางแสนล่าง 13">บางแสนล่าง 13</option>
-                            <option value="บางแสนล่าง 14">บางแสนล่าง 14</option>
-                            <option value="บางแสนล่าง 15">บางแสนล่าง 15</option>
-                            <option value="บางแสนล่าง 16">บางแสนล่าง 16</option>
-                            <option value="บางแสนล่าง 17">บางแสนล่าง 17</option>
-                            <option value="บางแสนล่าง 18">บางแสนล่าง 18</option>
-                            <option value="บางแสนล่าง 19">บางแสนล่าง 19</option>
-                            <option value="บางแสนล่าง 20">บางแสนล่าง 20</option>
-                            <option value="บางแสนล่าง 21">บางแสนล่าง 21</option>
-                            <option value="บางแสนล่าง 22">บางแสนล่าง 22</option>
-                            <option value="บางแสนล่าง 23">บางแสนล่าง 23</option>
-                            <option value="บางแสนล่าง 24">บางแสนล่าง 24</option>
-                            <option value="บางแสนล่าง 25">บางแสนล่าง 25</option>
-                            <option value="บางแสนล่าง 26">บางแสนล่าง 26</option>
-                            <option value="บางแสนล่าง 27">บางแสนล่าง 27</option>
-                            <option value="บางแสนล่าง 28">บางแสนล่าง 28</option>
-                            <option value="บางแสนล่าง 29">บางแสนล่าง 29</option>
-                            <option value="บางแสนล่าง 30">บางแสนล่าง 30</option>
-                            <option value="บางแสนล่าง 31">บางแสนล่าง 31</option>
-                            <option value="บางแสนล่าง 32">บางแสนล่าง 32</option>
-                            <option value="บางแสนล่าง 33">บางแสนล่าง 33</option>
-                            <option value="บางแสนล่าง 34">บางแสนล่าง 34</option>
-                            <option value="บางแสนล่าง 35">บางแสนล่าง 35</option>
-                            <option value="บางแสนล่าง 36">บางแสนล่าง 36</option>
-                            <option value="บางแสนล่าง 37">บางแสนล่าง 37</option>
-                            <option value="บางแสนล่าง 38">บางแสนล่าง 38</option>
-                            <option value="บางแสนล่าง 39">บางแสนล่าง 39</option>
-                            <option value="บางแสนล่าง 40">บางแสนล่าง 40</option>
-                            <option value="บางแสนล่าง 41">บางแสนล่าง 41</option>
-                            <option value="บางแสนล่าง 42">บางแสนล่าง 42</option>
-                            <option value="บางแสนล่าง 43">บางแสนล่าง 43</option>
-                            <option value="บางแสนล่าง 44">บางแสนล่าง 44</option>
-                            <option value="บางแสนล่าง 45">บางแสนล่าง 45</option>
-                            <option value="บางแสนล่าง 46">บางแสนล่าง 46</option>
-                            <option value="บางแสนล่าง 47">บางแสนล่าง 47</option>
-                            <option value="บางแสนล่าง 48">บางแสนล่าง 48</option>
-                            <option value="บางแสนล่าง 49">บางแสนล่าง 49</option>
-                            <option value="บางแสนล่าง 50">บางแสนล่าง 50</option>
-                            <option value="บางแสนล่าง 51">บางแสนล่าง 51</option>
-                            <option value="บางแสนล่าง 52">บางแสนล่าง 52</option>
-                            <option value="บางแสนล่าง 53">บางแสนล่าง 53</option>
-                            <option value="บางแสนล่าง 54">บางแสนล่าง 54</option>
-                            <option value="บางแสนล่าง 55">บางแสนล่าง 55</option>
-                            <option value="บางแสนล่าง 56">บางแสนล่าง 56</option>
-                            <option value="บางแสนล่าง 57">บางแสนล่าง 57</option>
-                            <option value="บางแสนล่าง 58">บางแสนล่าง 58</option>
-                            <option value="บางแสนล่าง 59">บางแสนล่าง 59</option>
-                            <option value="บางแสนล่าง 60">บางแสนล่าง 60</option>
-                            <option value="บางแสนล่าง 61">บางแสนล่าง 61</option>
-                            <option value="บางแสนล่าง 62">บางแสนล่าง 62</option>
-                            <option value="บางแสนล่าง 63">บางแสนล่าง 63</option>
-                            <option value="บางแสนล่าง 64">บางแสนล่าง 64</option>
-                            <option value="บางแสนล่าง 65">บางแสนล่าง 65</option>
-                            <option value="บางแสนล่าง 66">บางแสนล่าง 66</option>
-                            <option value="บางแสนล่าง 67">บางแสนล่าง 67</option>
-                            <option value="บางแสนล่าง 68">บางแสนล่าง 68</option>
-                            <option value="บางแสนล่าง 69">บางแสนล่าง 69</option>
-                            <option value="บางแสนล่าง 70">บางแสนล่าง 70</option>
-                            <option value="บางแสนล่าง 71">บางแสนล่าง 71</option>
-                            <option value="บางแสนล่าง 72">บางแสนล่าง 72</option>
-                            <option value="บางแสนล่าง 73">บางแสนล่าง 73</option>
-                            <option value="บางแสนล่าง 74">บางแสนล่าง 74</option>
-                            <option value="บางแสนล่าง 75">บางแสนล่าง 75</option>
-                            <option value="บางแสนล่าง 76">บางแสนล่าง 76</option>
-                            <option value="บางแสนล่าง 77">บางแสนล่าง 77</option>
-                            <option value="บางแสนล่าง 78">บางแสนล่าง 78</option>
-                            <option value="บางแสนล่าง 79">บางแสนล่าง 79</option>
-                            <option value="บางแสนล่าง 80">บางแสนล่าง 80</option>
-                            <option value="แหลมแท่น 1">แหลมแท่น 1</option>
-                            <option value="แหลมแท่น 2">แหลมแท่น 2</option>
-                            <option value="แหลมแท่น 3">แหลมแท่น 3</option>
-                            <option value="แหลมแท่น 4">แหลมแท่น 4</option>
-                            <option value="แหลมแท่น 5">แหลมแท่น 5</option>
-                            <option value="แหลมแท่น 6">แหลมแท่น 6</option>
-                            <option value="แหลมแท่น 7">แหลมแท่น 7</option>
-                            <option value="แหลมแท่น 8">แหลมแท่น 8</option>
-                            <option value="แหลมแท่น 9">แหลมแท่น 9</option>
-                            <option value="แหลมแท่น 10">แหลมแท่น 10</option>
-                            <option value="แหลมแท่น 11">แหลมแท่น 11</option>
-                            <option value="แหลมแท่น 12">แหลมแท่น 12</option>
-                            <option value="แหลมแท่น 13">แหลมแท่น 13</option>
-                            <option value="แหลมแท่น 14">แหลมแท่น 14</option>
-                            <option value="แหลมแท่น 15">แหลมแท่น 15</option>
-                            <option value="แหลมแท่น 16">แหลมแท่น 16</option>
-                            <option value="แหลมแท่น 17">แหลมแท่น 17</option>
-                            <option value="แหลมแท่น 18">แหลมแท่น 18</option>
-                            <option value="แหลมแท่น 19">แหลมแท่น 19</option>
-                            <option value="แหลมแท่น 20">แหลมแท่น 20</option>
-                            <option value="แหลมแท่น 21">แหลมแท่น 21</option>
-                            <option value="แหลมแท่น 22">แหลมแท่น 22</option>
-                            <option value="แหลมแท่น 23">แหลมแท่น 23</option>
-                            <option value="แหลมแท่น 24">แหลมแท่น 24</option>
-                            <option value="แพงลอยสุขุมวิท">แพงลอยสุขุมวิท</option>
-                            <option value="ตลาดหนองมน">ตลาดหนองมน</option>
-                            <option value="ลานหลังเทศบาล">ลานหลังเทศบาล</option>
-                            <option value="ศาลเจ้าแม่เขาสามมุข">ศาลเจ้าแม่เขาสามมุข</option>
-                            <option value="ปากซอย 1">ปากซอย 1</option>
-                            <option value="หน้าโรงแรมเฮอริเทจ">หน้าโรงแรมเฮอริเทจ</option>
-
-                        </datalist>
                         </input></a>
                     </a>
                     <br>
                     <a>ตั้งอยู่เลขที่ :
-                        <input type="text" id="wHomeId" style="width: 7%;"></a>
+                        <input type="text" id="wPlaceId" style="width: 7%;"></a>
                     <a>หมู่ที่ :
                         <input type="int" id="wMoo" style="width: 7%;"></a>
                     <a>ตรอก:

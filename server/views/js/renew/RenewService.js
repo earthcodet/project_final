@@ -692,3 +692,8 @@ function getPositionById(id) {
         }
     }
 }
+function loadingData(type){
+    runForm().then((data) =>{
+        setTypeMenu(type)
+    })
+}
