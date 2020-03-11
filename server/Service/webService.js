@@ -1155,7 +1155,7 @@ class service {
                         month = '09'
                         break;
                     case 'Oct':
-                        month = '010'
+                        month = '10'
                         break;
                     case 'Nov':
                         month = '11'
