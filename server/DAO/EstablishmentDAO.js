@@ -81,7 +81,9 @@ class EstablishmentDAO {
                     console.log(err)
                     return resolve(err)
                 }
+                console.log(`-------- duplication establishment --------`)
                 console.log(result)
+                console.log(`-------- E duplication establishment --------`)
                 return resolve(result)
             })
         })

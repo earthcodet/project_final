@@ -2174,6 +2174,7 @@ class service {
             })
         }
         if (request.no != '') {
+            Edata.perosonal_id_st = personal[0].id
             //Update !!
             let item_return = {
                 train_id: '',
@@ -2240,8 +2241,8 @@ class service {
                                                                 request.establishment_is_land_owned = land_data_update.id
                                                                 request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                                 request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
-                                                                console.log('8_update_request')
-                                                                this.updateRequest(request)
+                                                                
+                                                                
                                                                 console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                                 if (land.file_upload_changed) {
                                                                     console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
@@ -2249,25 +2250,51 @@ class service {
                                                                     this.insertFile(file)
                                                                 }
                                                                 let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                                this.updateEstablishmentAndCheckDuplication(new_edata,address)
+                                                                this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                                    if(est_id != true && est_id != false){
+                                                                        request.establishment_id = est_id
+                                                                        console.log('8_update_request')
+                                                                        this.updateRequest(request)
+                                                                    }else{
+                                                                        console.log('8_update_request-02')
+                                                                        this.updateRequest(request)
+                                                                    }
+                                                                })
                                                             })
                                                         }
                                                     } else {
                                                         Edata.is_land_owned = land.id
                                                         let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                        this.updateEstablishmentAndCheckDuplication(new_edata,address)
+                                                        
                                                         request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                         request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
-                                                        console.log('9_update_request')
-                                                        this.updateRequest(request)
+                                                        
+            
+                                                        this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                            if(est_id != true && est_id != false){
+                                                                request.establishment_id = est_id
+                                                                console.log('9_update_request')
+                                                                this.updateRequest(request)
+                                                            }else{
+                                                                console.log('9_update_request-02')
+                                                                this.updateRequest(request)
+                                                            }
+                                                        })
                                                     }
                                                 } else {
                                                     let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                    this.updateEstablishmentAndCheckDuplication(new_edata,address)
                                                     request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                     request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
-                                                    console.log('#1')
-                                                    this.updateRequest(request)
+                                                    this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                        if(est_id != true && est_id != false){
+                                                            request.establishment_id = est_id
+                                                            console.log('#1')
+                                                            this.updateRequest(request)
+                                                        }else{
+                                                            console.log('#1-02')
+                                                            this.updateRequest(request)
+                                                        }
+                                                    })
                                                 }
 
                                             } else {
@@ -2300,8 +2327,7 @@ class service {
                                                             request.establishment_is_land_owned = land_data_update.id
                                                             request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                             request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
-                                                            console.log('#3')
-                                                            this.updateRequest(request)
+                                                          
                                                             console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                             if (land.file_upload_changed) {
                                                                 console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
@@ -2309,7 +2335,16 @@ class service {
                                                                 this.insertFile(file)
                                                             }
                                                             let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                            this.updateEstablishmentAndCheckDuplication(new_edata,address)
+                                                            this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                                if(est_id != true && est_id != false){
+                                                                    request.establishment_id = est_id
+                                                                    console.log('#3')
+                                                                    this.updateRequest(request)
+                                                                }else{
+                                                                    console.log('#3-02')
+                                                                    this.updateRequest(request)
+                                                                }
+                                                            })
                                                         })
                                                     } else {
                                                         this.loopUpdateLand(land, addressOwner).then((land_data_update) => {
@@ -2322,7 +2357,6 @@ class service {
                                                             request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                             request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                             console.log('#4')
-                                                            this.updateRequest(request)
                                                             console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                             if (land.file_upload_changed) {
                                                                 console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
@@ -2330,25 +2364,50 @@ class service {
                                                                 this.insertFile(file)
                                                             }
                                                             let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                            this.updateEstablishmentAndCheckDuplication(new_edata,address)
+                                                            this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                                if(est_id != true && est_id != false){
+                                                                    request.establishment_id = est_id
+                                                                    console.log('#1')
+                                                                    this.updateRequest(request)
+                                                                }else{
+                                                                    console.log('#1-02')
+                                                                    this.updateRequest(request)
+                                                                }
+                                                            })
                                                         })
                                                     }
                                                 } else {
                                                     Edata.is_land_owned = land.id
                                                     let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                    this.updateEstablishmentAndCheckDuplication(new_edata,address)
                                                     request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                     request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                     console.log('#5')
-                                                    this.updateRequest(request)
+                                                    this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                        if(est_id != true && est_id != false){
+                                                            request.establishment_id = est_id
+                                                            console.log('#1')
+                                                            this.updateRequest(request)
+                                                        }else{
+                                                            console.log('#1-02')
+                                                            this.updateRequest(request)
+                                                        }
+                                                    })
                                                 }
                                             } else {
                                                 let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                this.updateEstablishmentAndCheckDuplication(new_edata,address)
                                                 request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                 request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                 console.log('#6')
-                                                this.updateRequest(request)
+                                                this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                    if(est_id != true && est_id != false){
+                                                        request.establishment_id = est_id
+                                                        console.log('#1')
+                                                        this.updateRequest(request)
+                                                    }else{
+                                                        console.log('#1-02')
+                                                        this.updateRequest(request)
+                                                    }
+                                                })
                                             }
 
                                         } else {
@@ -2379,7 +2438,7 @@ class service {
                                                         request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                         request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                         console.log('#8')
-                                                        this.updateRequest(request)
+                                                     
                                                         console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                         if (land.file_upload_changed) {
                                                             console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
@@ -2387,7 +2446,16 @@ class service {
                                                             this.insertFile(file)
                                                         }
                                                         let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                        this.updateEstablishmentAndCheckDuplication(new_edata,address)
+                                                        this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                            if(est_id != true && est_id != false){
+                                                                request.establishment_id = est_id
+                                                                console.log('#1')
+                                                                this.updateRequest(request)
+                                                            }else{
+                                                                console.log('#1-02')
+                                                                this.updateRequest(request)
+                                                            }
+                                                        })
                                                     })
                                                 } else {
                                                     this.loopUpdateLand(land, addressOwner).then((land_data_update) => {
@@ -2400,7 +2468,6 @@ class service {
                                                         request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                         request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                         console.log('#9')
-                                                        this.updateRequest(request)
                                                         console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                         if (land.file_upload_changed) {
                                                             console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
@@ -2408,25 +2475,51 @@ class service {
                                                             this.insertFile(file)
                                                         }
                                                         let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                        this.updateEstablishmentAndCheckDuplication(new_edata,address)
+                                                        this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                            if(est_id != true && est_id != false){
+                                                                request.establishment_id = est_id
+                                                                console.log('#1')
+                                                                this.updateRequest(request)
+                                                            }else{
+                                                                console.log('#1-02')
+                                                                this.updateRequest(request)
+                                                            }
+                                                        })
                                                     })
                                                 }
                                             } else {
                                                 Edata.is_land_owned = land.id
                                                 let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                this.updateEstablishmentAndCheckDuplication(new_edata,address)
+                                               
                                                 request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                 request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                 console.log('#10')
-                                                this.updateRequest(request)
+                                                this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                    if(est_id != true && est_id != false){
+                                                        request.establishment_id = est_id
+                                                        console.log('#1')
+                                                        this.updateRequest(request)
+                                                    }else{
+                                                        console.log('#1-02')
+                                                        this.updateRequest(request)
+                                                    }
+                                                })
                                             }
                                         } else {
                                             let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                            this.updateEstablishmentAndCheckDuplication(new_edata,address)
                                             request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                             request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                             console.log('#11')
-                                            this.updateRequest(request)
+                                            this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                if(est_id != true && est_id != false){
+                                                    request.establishment_id = est_id
+                                                    console.log('#1')
+                                                    this.updateRequest(request)
+                                                }else{
+                                                    console.log('#1-02')
+                                                    this.updateRequest(request)
+                                                }
+                                            })
                                         }
 
                                     } else {
@@ -2462,14 +2555,23 @@ class service {
                                                             request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                             request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                             console.log('#13')
-                                                            this.updateRequest(request)
+                                                           
 
                                                             if (land.file_upload_changed) {
                                                                 file.name = item_return.land_id
                                                                 this.insertFile(file)
                                                             }
                                                             let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                            this.updateEstablishmentAndCheckDuplication(new_edata,address)
+                                                            this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                                if(est_id != true && est_id != false){
+                                                                    request.establishment_id = est_id
+                                                                    console.log('#1')
+                                                                    this.updateRequest(request)
+                                                                }else{
+                                                                    console.log('#1-02')
+                                                                    this.updateRequest(request)
+                                                                }
+                                                            })
                                                         })
                                                     } else {
                                                         this.loopUpdateLand(land, addressOwner).then((land_data_update) => {
@@ -2482,7 +2584,6 @@ class service {
                                                             request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                             request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                             console.log('#14')
-                                                            this.updateRequest(request)
                                                             console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                             if (land.file_upload_changed) {
                                                                 console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
@@ -2490,25 +2591,50 @@ class service {
                                                                 this.insertFile(file)
                                                             }
                                                             let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                            this.updateEstablishmentAndCheckDuplication(new_edata,address)
+                                                            this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                                if(est_id != true && est_id != false){
+                                                                    request.establishment_id = est_id
+                                                                    console.log('#1')
+                                                                    this.updateRequest(request)
+                                                                }else{
+                                                                    console.log('#1-02')
+                                                                    this.updateRequest(request)
+                                                                }
+                                                            })
                                                         })
                                                     }
                                                 } else {
                                                     Edata.is_land_owned = land.id
                                                     let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                    this.updateEstablishmentAndCheckDuplication(new_edata,address)
                                                     request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                     request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                     console.log('#15')
-                                                    this.updateRequest(request)
+                                                    this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                        if(est_id != true && est_id != false){
+                                                            request.establishment_id = est_id
+                                                            console.log('#1')
+                                                            this.updateRequest(request)
+                                                        }else{
+                                                            console.log('#1-02')
+                                                            this.updateRequest(request)
+                                                        }
+                                                    })
                                                 }
                                             } else {
                                                 let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                this.updateEstablishmentAndCheckDuplication(new_edata,address)
                                                 request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                 request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                 console.log('#15')
-                                                this.updateRequest(request)
+                                                this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                    if(est_id != true && est_id != false){
+                                                        request.establishment_id = est_id
+                                                        console.log('#1')
+                                                        this.updateRequest(request)
+                                                    }else{
+                                                        console.log('#1-02')
+                                                        this.updateRequest(request)
+                                                    }
+                                                })
                                             }
                                         } else {
                                             request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
@@ -2537,14 +2663,22 @@ class service {
                                                         request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                         request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                         console.log('#13')
-                                                        this.updateRequest(request)
 
                                                         if (land.file_upload_changed) {
                                                             file.name = item_return.land_id
                                                             this.insertFile(file)
                                                         }
                                                         let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                        this.updateEstablishmentAndCheckDuplication(new_edata,address)
+                                                        this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                            if(est_id != true && est_id != false){
+                                                                request.establishment_id = est_id
+                                                                console.log('#1')
+                                                                this.updateRequest(request)
+                                                            }else{
+                                                                console.log('#1-02')
+                                                                this.updateRequest(request)
+                                                            }
+                                                        })
                                                     })
                                                 } else {
                                                     this.loopUpdateLand(land, addressOwner).then((land_data_update) => {
@@ -2557,7 +2691,6 @@ class service {
                                                         request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                         request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                         console.log('#14')
-                                                        this.updateRequest(request)
                                                         console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                         if (land.file_upload_changed) {
                                                             console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
@@ -2565,25 +2698,50 @@ class service {
                                                             this.insertFile(file)
                                                         }
                                                         let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                        this.updateEstablishmentAndCheckDuplication(new_edata,address)
+                                                        this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                            if(est_id != true && est_id != false){
+                                                                request.establishment_id = est_id
+                                                                console.log('#1')
+                                                                this.updateRequest(request)
+                                                            }else{
+                                                                console.log('#1-02')
+                                                                this.updateRequest(request)
+                                                            }
+                                                        })
                                                     })
                                                 }
                                             } else {
                                                 Edata.is_land_owned = land.id
                                                 let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                this.updateEstablishmentAndCheckDuplication(new_edata,address)
                                                 request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                 request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                 console.log('#15')
-                                                this.updateRequest(request)
+                                                this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                    if(est_id != true && est_id != false){
+                                                        request.establishment_id = est_id
+                                                        console.log('#1')
+                                                        this.updateRequest(request)
+                                                    }else{
+                                                        console.log('#1-02')
+                                                        this.updateRequest(request)
+                                                    }
+                                                })
                                             }
                                         } else {
                                             let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                            this.updateEstablishmentAndCheckDuplication(new_edata,address)
                                             request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                             request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                             console.log('#15')
-                                            this.updateRequest(request)
+                                            this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                if(est_id != true && est_id != false){
+                                                    request.establishment_id = est_id
+                                                    console.log('#1')
+                                                    this.updateRequest(request)
+                                                }else{
+                                                    console.log('#1-02')
+                                                    this.updateRequest(request)
+                                                }
+                                            })
                                         }
                                     } else {
                                         request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
@@ -2610,14 +2768,22 @@ class service {
                                                     request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                     request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                     console.log('#13')
-                                                    this.updateRequest(request)
 
                                                     if (land.file_upload_changed) {
                                                         file.name = item_return.land_id
                                                         this.insertFile(file)
                                                     }
                                                     let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                    this.updateEstablishmentAndCheckDuplication(new_edata,address)
+                                                    this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                        if(est_id != true && est_id != false){
+                                                            request.establishment_id = est_id
+                                                            console.log('#1')
+                                                            this.updateRequest(request)
+                                                        }else{
+                                                            console.log('#1-02')
+                                                            this.updateRequest(request)
+                                                        }
+                                                    })
                                                 })
                                             } else {
                                                 this.loopUpdateLand(land, addressOwner).then((land_data_update) => {
@@ -2630,7 +2796,6 @@ class service {
                                                     request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                     request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                     console.log('#14')
-                                                    this.updateRequest(request)
                                                     console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                     if (land.file_upload_changed) {
                                                         console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
@@ -2638,25 +2803,50 @@ class service {
                                                         this.insertFile(file)
                                                     }
                                                     let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                    this.updateEstablishmentAndCheckDuplication(new_edata,address)
+                                                    this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                        if(est_id != true && est_id != false){
+                                                            request.establishment_id = est_id
+                                                            console.log('#1')
+                                                            this.updateRequest(request)
+                                                        }else{
+                                                            console.log('#1-02')
+                                                            this.updateRequest(request)
+                                                        }
+                                                    })
                                                 })
                                             }
                                         } else {
                                             Edata.is_land_owned = land.id
                                             let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                            this.updateEstablishmentAndCheckDuplication(new_edata,address)
                                             request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                             request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                             console.log('#15')
-                                            this.updateRequest(request)
+                                            this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                if(est_id != true && est_id != false){
+                                                    request.establishment_id = est_id
+                                                    console.log('#1')
+                                                    this.updateRequest(request)
+                                                }else{
+                                                    console.log('#1-02')
+                                                    this.updateRequest(request)
+                                                }
+                                            })
                                         }
                                     } else {
                                         let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                        this.updateEstablishmentAndCheckDuplication(new_edata,address)
                                         request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                         request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                         console.log('#15')
-                                        this.updateRequest(request)
+                                        this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                            if(est_id != true && est_id != false){
+                                                request.establishment_id = est_id
+                                                console.log('#1')
+                                                this.updateRequest(request)
+                                            }else{
+                                                console.log('#1-02')
+                                                this.updateRequest(request)
+                                            }
+                                        })
                                     }
                                 } else {
                                     request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
@@ -2699,7 +2889,6 @@ class service {
                                                                 request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                                 request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                                 console.log('#13')
-                                                                this.updateRequest(request)
                                                                 console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                                 if (land.file_upload_changed) {
                                                                     console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
@@ -2707,7 +2896,16 @@ class service {
                                                                     this.insertFile(file)
                                                                 }
                                                                 let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                                this.updateEstablishmentAndCheckDuplication(new_edata,address)
+                                                                this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                                    if(est_id != true && est_id != false){
+                                                                        request.establishment_id = est_id
+                                                                        console.log('#1')
+                                                                        this.updateRequest(request)
+                                                                    }else{
+                                                                        console.log('#1-02')
+                                                                        this.updateRequest(request)
+                                                                    }
+                                                                })
                                                             })
                                                         } else {
                                                             this.loopUpdateLand(land, addressOwner).then((land_data_update) => {
@@ -2720,7 +2918,6 @@ class service {
                                                                 request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                                 request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                                 console.log('#14')
-                                                                this.updateRequest(request)
                                                                 console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                                 if (land.file_upload_changed) {
                                                                     console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
@@ -2728,7 +2925,16 @@ class service {
                                                                     this.insertFile(file)
                                                                 }
                                                                 let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                                this.updateEstablishmentAndCheckDuplication(new_edata,address)
+                                                                this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                                    if(est_id != true && est_id != false){
+                                                                        request.establishment_id = est_id
+                                                                        console.log('#1')
+                                                                        this.updateRequest(request)
+                                                                    }else{
+                                                                        console.log('#1-02')
+                                                                        this.updateRequest(request)
+                                                                    }
+                                                                })
                                                             })
                                                         }
 
@@ -2771,7 +2977,6 @@ class service {
                                                             request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                             request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                             console.log('#16')
-                                                            this.updateRequest(request)
                                                             console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                             if (land.file_upload_changed) {
                                                                 console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
@@ -2779,7 +2984,16 @@ class service {
                                                                 this.insertFile(file)
                                                             }
                                                             let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                            this.updateEstablishmentAndCheckDuplication(new_edata,address)
+                                                            this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                                if(est_id != true && est_id != false){
+                                                                    request.establishment_id = est_id
+                                                                    console.log('#1')
+                                                                    this.updateRequest(request)
+                                                                }else{
+                                                                    console.log('#1-02')
+                                                                    this.updateRequest(request)
+                                                                }
+                                                            })
                                                         })
                                                     } else {
                                                         this.loopUpdateLand(land, addressOwner).then((land_data_update) => {
@@ -2792,7 +3006,6 @@ class service {
                                                             request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                             request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                             console.log('#17')
-                                                            this.updateRequest(request)
                                                             console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                             if (land.file_upload_changed) {
                                                                 console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
@@ -2800,25 +3013,50 @@ class service {
                                                                 this.insertFile(file)
                                                             }
                                                             let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                            this.updateEstablishmentAndCheckDuplication(new_edata,address)
+                                                            this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                                if(est_id != true && est_id != false){
+                                                                    request.establishment_id = est_id
+                                                                    console.log('#1')
+                                                                    this.updateRequest(request)
+                                                                }else{
+                                                                    console.log('#1-02')
+                                                                    this.updateRequest(request)
+                                                                }
+                                                            })
                                                         })
                                                     }
                                                 } else {
                                                     Edata.is_land_owned = land.id
                                                     let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                    this.updateEstablishmentAndCheckDuplication(new_edata,address)
                                                     request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                     request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                     console.log('#18')
-                                                    this.updateRequest(request)
+                                                    this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                        if(est_id != true && est_id != false){
+                                                            request.establishment_id = est_id
+                                                            console.log('#1')
+                                                            this.updateRequest(request)
+                                                        }else{
+                                                            console.log('#1-02')
+                                                            this.updateRequest(request)
+                                                        }
+                                                    })
                                                 }
                                             } else {
                                                 let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                this.updateEstablishmentAndCheckDuplication(new_edata,address)
                                                 request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                 request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                 console.log('#19')
-                                                this.updateRequest(request)
+                                                this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                    if(est_id != true && est_id != false){
+                                                        request.establishment_id = est_id
+                                                        console.log('#1')
+                                                        this.updateRequest(request)
+                                                    }else{
+                                                        console.log('#1-02')
+                                                        this.updateRequest(request)
+                                                    }
+                                                })
                                             }
 
                                         } else {
@@ -2848,7 +3086,6 @@ class service {
                                                         request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                         request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                         console.log('#21')
-                                                        this.updateRequest(request)
                                                         console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                         if (land.file_upload_changed) {
                                                             console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
@@ -2856,7 +3093,16 @@ class service {
                                                             this.insertFile(file)
                                                         }
                                                         let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                        this.updateEstablishmentAndCheckDuplication(new_edata,address)
+                                                        this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                            if(est_id != true && est_id != false){
+                                                                request.establishment_id = est_id
+                                                                console.log('#1')
+                                                                this.updateRequest(request)
+                                                            }else{
+                                                                console.log('#1-02')
+                                                                this.updateRequest(request)
+                                                            }
+                                                        })
                                                     })
                                                 } else {
                                                     this.loopUpdateLand(land, addressOwner).then((land_data_update) => {
@@ -2869,7 +3115,6 @@ class service {
                                                         request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                         request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                         console.log('#22')
-                                                        this.updateRequest(request)
                                                         console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                         if (land.file_upload_changed) {
                                                             console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
@@ -2877,25 +3122,50 @@ class service {
                                                             this.insertFile(file)
                                                         }
                                                         let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                        this.updateEstablishmentAndCheckDuplication(new_edata,address)
+                                                        this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                            if(est_id != true && est_id != false){
+                                                                request.establishment_id = est_id
+                                                                console.log('#1')
+                                                                this.updateRequest(request)
+                                                            }else{
+                                                                console.log('#1-02')
+                                                                this.updateRequest(request)
+                                                            }
+                                                        })
                                                     })
                                                 }
                                             } else {
                                                 Edata.is_land_owned = land.id
                                                 let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                this.updateEstablishmentAndCheckDuplication(new_edata,address)
                                                 request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                 request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                 console.log('#23')
-                                                this.updateRequest(request)
+                                                this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                    if(est_id != true && est_id != false){
+                                                        request.establishment_id = est_id
+                                                        console.log('#1')
+                                                        this.updateRequest(request)
+                                                    }else{
+                                                        console.log('#1-02')
+                                                        this.updateRequest(request)
+                                                    }
+                                                })
                                             }
                                         } else {
                                             let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                            this.updateEstablishmentAndCheckDuplication(new_edata,address)
                                             request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                             request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                             console.log('#24')
-                                            this.updateRequest(request)
+                                            this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                if(est_id != true && est_id != false){
+                                                    request.establishment_id = est_id
+                                                    console.log('#1')
+                                                    this.updateRequest(request)
+                                                }else{
+                                                    console.log('#1-02')
+                                                    this.updateRequest(request)
+                                                }
+                                            })
                                         }
 
                                     } else {
@@ -2934,7 +3204,6 @@ class service {
                                                             request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                             request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                             console.log('1_update_request')
-                                                            this.updateRequest(request)
                                                             console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                             if (land.file_upload_changed) {
                                                                 console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
@@ -2942,7 +3211,16 @@ class service {
                                                                 this.insertFile(file)
                                                             }
                                                             let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                            this.updateEstablishmentAndCheckDuplication(new_edata,address)
+                                                            this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                                if(est_id != true && est_id != false){
+                                                                    request.establishment_id = est_id
+                                                                    console.log('#1')
+                                                                    this.updateRequest(request)
+                                                                }else{
+                                                                    console.log('#1-02')
+                                                                    this.updateRequest(request)
+                                                                }
+                                                            })
                                                         })
                                                     } else {
                                                         this.loopUpdateLand(land, addressOwner).then((land_data_update) => {
@@ -2955,7 +3233,6 @@ class service {
                                                             request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                             request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                             console.log('2_update_request')
-                                                            this.updateRequest(request)
                                                             console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                             if (land.file_upload_changed) {
                                                                 console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
@@ -2963,25 +3240,50 @@ class service {
                                                                 this.insertFile(file)
                                                             }
                                                             let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                            this.updateEstablishmentAndCheckDuplication(new_edata,address)
+                                                            this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                                if(est_id != true && est_id != false){
+                                                                    request.establishment_id = est_id
+                                                                    console.log('#1')
+                                                                    this.updateRequest(request)
+                                                                }else{
+                                                                    console.log('#1-02')
+                                                                    this.updateRequest(request)
+                                                                }
+                                                            })
                                                         })
                                                     }
                                                 } else {
                                                     Edata.is_land_owned = land.id
                                                     let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                    this.updateEstablishmentAndCheckDuplication(new_edata,address)
                                                     request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                     request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                     console.log('3_update_request')
-                                                    this.updateRequest(request)
+                                                    this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                        if(est_id != true && est_id != false){
+                                                            request.establishment_id = est_id
+                                                            console.log('#1')
+                                                            this.updateRequest(request)
+                                                        }else{
+                                                            console.log('#1-02')
+                                                            this.updateRequest(request)
+                                                        }
+                                                    })
                                                 }
                                             } else {
                                                 let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                this.updateEstablishmentAndCheckDuplication(new_edata,address)
                                                 request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                 request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                 console.log('#1')
-                                                this.updateRequest(request)
+                                                this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                    if(est_id != true && est_id != false){
+                                                        request.establishment_id = est_id
+                                                        console.log('#1')
+                                                        this.updateRequest(request)
+                                                    }else{
+                                                        console.log('#1-02')
+                                                        this.updateRequest(request)
+                                                    }
+                                                })
                                             }
 
                                         } else {
@@ -3011,14 +3313,22 @@ class service {
                                                         request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                         request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                         console.log('#13')
-                                                        this.updateRequest(request)
 
                                                         if (land.file_upload_changed) {
                                                             file.name = item_return.land_id
                                                             this.insertFile(file)
                                                         }
                                                         let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                        this.updateEstablishmentAndCheckDuplication(new_edata,address)
+                                                        this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                            if(est_id != true && est_id != false){
+                                                                request.establishment_id = est_id
+                                                                console.log('#1')
+                                                                this.updateRequest(request)
+                                                            }else{
+                                                                console.log('#1-02')
+                                                                this.updateRequest(request)
+                                                            }
+                                                        })
                                                     })
                                                 } else {
                                                     this.loopUpdateLand(land, addressOwner).then((land_data_update) => {
@@ -3031,7 +3341,6 @@ class service {
                                                         request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                         request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                         console.log('#14')
-                                                        this.updateRequest(request)
                                                         console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                         if (land.file_upload_changed) {
                                                             console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
@@ -3039,25 +3348,50 @@ class service {
                                                             this.insertFile(file)
                                                         }
                                                         let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                        this.updateEstablishmentAndCheckDuplication(new_edata,address)
+                                                        this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                            if(est_id != true && est_id != false){
+                                                                request.establishment_id = est_id
+                                                                console.log('#1')
+                                                                this.updateRequest(request)
+                                                            }else{
+                                                                console.log('#1-02')
+                                                                this.updateRequest(request)
+                                                            }
+                                                        })
                                                     })
                                                 }
                                             } else {
                                                 Edata.is_land_owned = land.id
                                                 let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                this.updateEstablishmentAndCheckDuplication(new_edata,address)
                                                 request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                 request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                 console.log('#15')
-                                                this.updateRequest(request)
+                                                this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                    if(est_id != true && est_id != false){
+                                                        request.establishment_id = est_id
+                                                        console.log('#1')
+                                                        this.updateRequest(request)
+                                                    }else{
+                                                        console.log('#1-02')
+                                                        this.updateRequest(request)
+                                                    }
+                                                })
                                             }
                                         } else {
                                             let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                            this.updateEstablishmentAndCheckDuplication(new_edata,address)
                                             request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                             request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                             console.log('#15')
-                                            this.updateRequest(request)
+                                            this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                if(est_id != true && est_id != false){
+                                                    request.establishment_id = est_id
+                                                    console.log('#1')
+                                                    this.updateRequest(request)
+                                                }else{
+                                                    console.log('#1-02')
+                                                    this.updateRequest(request)
+                                                }
+                                            })
                                         }
                                     } else {
                                         request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
@@ -3084,7 +3418,6 @@ class service {
                                                     request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                     request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                     console.log('1_update_request')
-                                                    this.updateRequest(request)
                                                     console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                     if (land.file_upload_changed) {
                                                         console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
@@ -3092,7 +3425,16 @@ class service {
                                                         this.insertFile(file)
                                                     }
                                                     let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                    this.updateEstablishmentAndCheckDuplication(new_edata,address)
+                                                    this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                        if(est_id != true && est_id != false){
+                                                            request.establishment_id = est_id
+                                                            console.log('#1')
+                                                            this.updateRequest(request)
+                                                        }else{
+                                                            console.log('#1-02')
+                                                            this.updateRequest(request)
+                                                        }
+                                                    })
                                                 })
                                             } else {
                                                 this.loopUpdateLand(land, addressOwner).then((land_data_update) => {
@@ -3105,7 +3447,6 @@ class service {
                                                     request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                     request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                     console.log('2_update_request')
-                                                    this.updateRequest(request)
                                                     console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                     if (land.file_upload_changed) {
                                                         console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
@@ -3113,25 +3454,50 @@ class service {
                                                         this.insertFile(file)
                                                     }
                                                     let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                    this.updateEstablishmentAndCheckDuplication(new_edata,address)
+                                                    this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                        if(est_id != true && est_id != false){
+                                                            request.establishment_id = est_id
+                                                            console.log('#1')
+                                                            this.updateRequest(request)
+                                                        }else{
+                                                            console.log('#1-02')
+                                                            this.updateRequest(request)
+                                                        }
+                                                    })
                                                 })
                                             }
                                         } else {
                                             Edata.is_land_owned = land.id
                                             let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                            this.updateEstablishmentAndCheckDuplication(new_edata,address)
                                             request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                             request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                             console.log('3_update_request')
-                                            this.updateRequest(request)
+                                            this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                if(est_id != true && est_id != false){
+                                                    request.establishment_id = est_id
+                                                    console.log('#1')
+                                                    this.updateRequest(request)
+                                                }else{
+                                                    console.log('#1-02')
+                                                    this.updateRequest(request)
+                                                }
+                                            })
                                         }
                                     } else {
                                         let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                        this.updateEstablishmentAndCheckDuplication(new_edata,address)
                                         request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                         request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                         console.log('#1')
-                                        this.updateRequest(request)
+                                        this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                            if(est_id != true && est_id != false){
+                                                request.establishment_id = est_id
+                                                console.log('#1')
+                                                this.updateRequest(request)
+                                            }else{
+                                                console.log('#1-02')
+                                                this.updateRequest(request)
+                                            }
+                                        })
                                     }
 
                                 } else {
@@ -3162,7 +3528,6 @@ class service {
                                                 request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                 request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                 console.log('#26')
-                                                this.updateRequest(request)
                                                 console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                 if (land.file_upload_changed) {
                                                     console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
@@ -3170,7 +3535,16 @@ class service {
                                                     this.insertFile(file)
                                                 }
                                                 let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                this.updateEstablishmentAndCheckDuplication(new_edata,address)
+                                                this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                    if(est_id != true && est_id != false){
+                                                        request.establishment_id = est_id
+                                                        console.log('#1')
+                                                        this.updateRequest(request)
+                                                    }else{
+                                                        console.log('#1-02')
+                                                        this.updateRequest(request)
+                                                    }
+                                                })
                                             })
                                         } else {
                                             this.loopUpdateLand(land, addressOwner).then((land_data_update) => {
@@ -3183,7 +3557,6 @@ class service {
                                                 request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                 request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                 console.log('#27')
-                                                this.updateRequest(request)
                                                 console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                 if (land.file_upload_changed) {
                                                     console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
@@ -3191,25 +3564,50 @@ class service {
                                                     this.insertFile(file)
                                                 }
                                                 let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                this.updateEstablishmentAndCheckDuplication(new_edata,address)
+                                                this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                                    if(est_id != true && est_id != false){
+                                                        request.establishment_id = est_id
+                                                        console.log('#1')
+                                                        this.updateRequest(request)
+                                                    }else{
+                                                        console.log('#1-02')
+                                                        this.updateRequest(request)
+                                                    }
+                                                })
                                             })
                                         }
                                     } else {
                                         Edata.is_land_owned = land.id
                                         let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                        this.updateEstablishmentAndCheckDuplication(new_edata,address)
                                         request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                         request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                         console.log('#28')
-                                        this.updateRequest(request)
+                                        this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                            if(est_id != true && est_id != false){
+                                                request.establishment_id = est_id
+                                                console.log('#1')
+                                                this.updateRequest(request)
+                                            }else{
+                                                console.log('#1-02')
+                                                this.updateRequest(request)
+                                            }
+                                        })
                                     }
                                 } else {
                                     let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                    this.updateEstablishmentAndCheckDuplication(new_edata,address)
                                     request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                     request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                     console.log('#29')
-                                    this.updateRequest(request)
+                                    this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                        if(est_id != true && est_id != false){
+                                            request.establishment_id = est_id
+                                            console.log('#1')
+                                            this.updateRequest(request)
+                                        }else{
+                                            console.log('#1-02')
+                                            this.updateRequest(request)
+                                        }
+                                    })
                                 }
 
                             } else {
@@ -3239,7 +3637,6 @@ class service {
                                     request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                     request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                     console.log('#31')
-                                    this.updateRequest(request)
                                     console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                     if (land.file_upload_changed) {
                                         console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
@@ -3247,7 +3644,16 @@ class service {
                                         this.insertFile(file)
                                     }
                                     let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                    this.updateEstablishmentAndCheckDuplication(new_edata,address)
+                                    this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                        if(est_id != true && est_id != false){
+                                            request.establishment_id = est_id
+                                            console.log('#1')
+                                            this.updateRequest(request)
+                                        }else{
+                                            console.log('#1-02')
+                                            this.updateRequest(request)
+                                        }
+                                    })
                                 })
                             } else {
                                 this.loopUpdateLand(land, addressOwner).then((land_data_update) => {
@@ -3260,7 +3666,6 @@ class service {
                                     request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                     request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                     console.log('#32')
-                                    this.updateRequest(request)
                                     console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                     if (land.file_upload_changed) {
                                         console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
@@ -3268,7 +3673,16 @@ class service {
                                         this.insertFile(file)
                                     }
                                     let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                    this.updateEstablishmentAndCheckDuplication(new_edata,address)
+                                    this.updateEstablishmentAndCheckDuplication(new_edata,address).then((est_id) =>{
+                                        if(est_id != true && est_id != false){
+                                            request.establishment_id = est_id
+                                            console.log('#1')
+                                            this.updateRequest(request)
+                                        }else{
+                                            console.log('#1-02')
+                                            this.updateRequest(request)
+                                        }
+                                    })
                                 })
                             }
 
