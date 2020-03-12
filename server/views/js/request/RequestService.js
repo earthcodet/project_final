@@ -732,7 +732,7 @@ function setAddressEstablishmentData(raw_data) {
     }
 }
 function setAddressOwnerLandData(raw_data) {
-    if (raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_IS_LAND_OWNED != null) {
+    if (raw_data.ESTABLISHMENT_DATA.LAND != null) {
         addressOwnerLandData.id = raw_data.ESTABLISHMENT_DATA.LAND.ADDRESS.ADDRESS_ID
         addressOwnerLandData.home_number = raw_data.ESTABLISHMENT_DATA.LAND.ADDRESS.ADDRESS_HOME_NUMBER
         addressOwnerLandData.moo = raw_data.ESTABLISHMENT_DATA.LAND.ADDRESS.ADDRESS_MOO === null ? '' : raw_data.ESTABLISHMENT_DATA.LAND.ADDRESS.ADDRESS_MOO
@@ -747,7 +747,8 @@ function setAddressOwnerLandData(raw_data) {
 }
 function setLandData(raw_data) {
     //ADDRESS
-    if (raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_IS_LAND_OWNED != undefined) {
+    console.log(raw_data)
+    if (raw_data.ESTABLISHMENT_DATA.LAND != undefined) {
         landData.id = raw_data.ESTABLISHMENT_DATA.LAND.LAND_ID
         landData.address_id = raw_data.ESTABLISHMENT_DATA.LAND.ADDRESS_ID
         landData.title = raw_data.ESTABLISHMENT_DATA.LAND.LAND_TITLE
