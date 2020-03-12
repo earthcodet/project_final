@@ -382,28 +382,34 @@ function createRenewData() {
     console.log(`date expire = ???>?>?>>?`)
     console.log(dateNew_t_n)
     console.log(requestData.menu)
-    if (requestData.menu === 'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร' || requestData.menu ===  'หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร') {
-       
-        let  day = dateNew_t_n[0]
-        let  month = dateNew_t_n[1]
-        let  year = parseInt(dateNew_t_n[2])+ 3
+    if (requestData.menu === 'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร' || requestData.menu === 'หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร') {
+
+        let day = dateNew_t_n[0]
+        let month = dateNew_t_n[1]
+        let year = parseInt(dateNew_t_n[2]) + 3
         if (day === '29' && month === '2' && year % 4 === 0) {
             requestData.date_expired = `01-03-${year}`
         } else {
             requestData.date_expired = `${day}-${month}-${year}`
         }
         console.log(`date expire condition 1 ${requestData.date_expired}`)
-    } else if ( requestData.menu === 'ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ' ||  requestData.menu === 'ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ') {
-        let year = parseInt(dateNew_t_n[2])  +1
+    } else if (requestData.menu === 'ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ' || requestData.menu === 'ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ') {
+        let year = parseInt(dateNew_t_n[2]) + 1
         requestData.date_expired = `31-12-${year}`
         console.log(`date expire condition 2  ${requestData.date_expired}`)
     } else {
         let day = dateNew_t_n[0]
         let month = dateNew_t_n[1]
-        let year = parseInt(dateNew_t_n[2])  + 1
+        let year = parseInt(dateNew_t_n[2]) + 1
         requestData.date_expired = `${day}-${month}-${year}`
         console.log(`date expire condition 3 ${requestData.date_expired}`)
     }
+    requestData.doc_no1 = document.getElementById('documentId').checked === true ? 'Y' : 'N'
+    requestData.doc_no2 = document.getElementById('documenthHome').checked === true ? 'Y' : 'N'
+    requestData.doc_no3 = document.getElementById('documentLegalEntity').checked === true ? 'Y' : 'N'
+    requestData.doc_no4 = document.getElementById('documentSignature').checked === true ? 'Y' : 'N'
+    requestData.doc_no5 = document.getElementById('documentSJ4').checked === true ? 'Y' : 'N'
+    requestData.doc_no6 = document.getElementById('documentOther').checked === true ? document.getElementById('other').value.trim() : 'N'
 }
 
 // getAge

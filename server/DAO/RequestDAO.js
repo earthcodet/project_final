@@ -113,7 +113,7 @@ class RequestDAO {
             let joinTable = `JOIN establishment ON request.ESTABLISHMENT_ID = establishment.ESTABLISHMENT_ID `
             joinTable = joinTable + `JOIN request_type ON request.REQUEST_TYPE_ID = request_type.REQUEST_TYPE_ID `
             joinTable = joinTable + `JOIN address ON address.ADDRESS_ID = establishment.ADDRESS_ID `
-            let query = `SELECT * FROM request ${joinTable} WHERE request.PERSONAL_ID_OWNER='${personal_id}' AND request.REQUEST_MENU='${type}' AND request.REQUEST_STATUS = 'active' AND request.REQUEST_IS_DELETED = 'N'`
+            let query = `SELECT * FROM request ${joinTable} WHERE request.PERSONAL_ID_OWNER='${personal_id}' AND request.REQUEST_MENU='${type}' AND request.REQUEST_STATUS = 'active' AND request.REQUEST_IS_DELETED = 'N' AND DATEDIFF(request.REQUEST_DATE_EXPIRED,NOW()) <=90`
             con.query(query, function (err, result) {
                 if (err) {
                     console.log(err.code) 
@@ -140,7 +140,7 @@ class RequestDAO {
     }
     getRequestByTpyeAndOwnerId(type,Owner){
         return new Promise((resolve, reject) => {  
-            let query = `SELECT * FROM request JOIN establishment ON request.ESTABLISHMENT_ID = establishment.ESTABLISHMENT_ID WHERE REQUEST_STATUS='${type}' AND PERSONAL_ID_OWNER='${Owner}'`
+            let query = `SELECT *,DATEDIFF(REQUEST_DATE_EXPIRED, NOW()) As  COUNT_DATE_EXPIRE FROM request JOIN establishment ON request.ESTABLISHMENT_ID = establishment.ESTABLISHMENT_ID WHERE REQUEST_STATUS='${type}' AND PERSONAL_ID_OWNER='${Owner}'`
             con.query(query, function (err, result) {
                 if (err) {
                     console.log(err.code) 
@@ -152,7 +152,7 @@ class RequestDAO {
     }
     getRequestByTpyeAndOwnerIdAssistant(type,Owner){
         return new Promise((resolve, reject) => {  
-            let query = `SELECT * FROM request WHERE REQUEST_STATUS='${type}' AND PERSONAL_ID_ASSISTANT='${Owner}'`
+            let query = `SELECT *,DATEDIFF(REQUEST_DATE_EXPIRED, NOW()) As  COUNT_DATE_EXPIRE FROM request WHERE REQUEST_STATUS='${type}' AND PERSONAL_ID_ASSISTANT='${Owner}'`
             con.query(query, function (err, result) {
                 if (err) {
                     console.log(err.code) 

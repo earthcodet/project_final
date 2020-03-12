@@ -208,76 +208,56 @@ function setDataView() {
     createImage(imageDisplayFormDatabase)
     console.log(imageDisplayFormDatabase)
     console.log('requestData.status ' + requestData.status)
-    if (requestData.status === 'approval' || requestData.status === 'active') {
-        if (document.getElementById('bFeeY2') != undefined) {
-            if (requestData.receipt_date_year_2 === '') {
-                document.getElementById('datepicker10').value = requestData.receipt_date_year_2
-                document.getElementById('bFeeY2').value = requestData.receipt_fee_year_2 === 0 ? '' : requestData.receipt_fee_year_2
-                document.getElementById('bFineY2').value = requestData.receipt_fine_year_2 === 0 ? '' : requestData.receipt_fine_year_2
-            } else {
-                document.getElementById('datepicker10').value = requestData.receipt_date_year_2
-                document.getElementById('bFeeY2').value = requestData.receipt_fee_year_2
-                document.getElementById('bFineY2').value = requestData.receipt_fine_year_2
-            }
-
-            if (requestData.receipt_date_year_3 === '') {
-                document.getElementById('datepicker11').value = requestData.receipt_date_year_3
-                document.getElementById('bFeeY3').value = requestData.receipt_fee_year_3 === 0 ? '' : requestData.receipt_fee_year_3
-                document.getElementById('bFineY3').value = requestData.receipt_fine_year_3 === 0 ? '' : requestData.receipt_fine_year_3
-            } else {
-                document.getElementById('datepicker11').value = requestData.receipt_date_year_3
-                document.getElementById('bFeeY3').value = requestData.receipt_fee_year_3
-                document.getElementById('bFineY3').value = requestData.receipt_fine_year_3
-            }
-            //cancle disable false
-            // document.getElementById('bFeeY2').disabled = false
-            // document.getElementById('bFee').disabled = false
-            // document.getElementById('bFineY2').disabled = false
-
-            // document.getElementById('datepicker11').disabled = false
-            // document.getElementById('bFeeY3').disabled = false
-            // document.getElementById('bFineY3').disabled = false
-        }
-        if (requestData.receipt_date === '') {
-            document.getElementById('datepicker2').value = requestData.receipt_date
-            document.getElementById('bFee').value = requestData.receipt_fee === 0 ? '' : requestData.receipt_fee
-            document.getElementById('bFine').value = requestData.receipt_fine === 0 ? '' : requestData.receipt_fine
+    // if (requestData.status === 'approval' || requestData.status === 'active') {
+    if (document.getElementById('bFeeY2') != undefined) {
+        if (requestData.receipt_date_year_2 === '') {
+            document.getElementById('datepicker10').value = requestData.receipt_date_year_2
+            document.getElementById('bFeeY2').value = requestData.receipt_fee_year_2 === 0 ? '' : requestData.receipt_fee_year_2
+            document.getElementById('bFineY2').value = requestData.receipt_fine_year_2 === 0 ? '' : requestData.receipt_fine_year_2
         } else {
-            document.getElementById('datepicker2').value = requestData.receipt_date
-            document.getElementById('bFee').value = requestData.receipt_fee
-            document.getElementById('bFine').value = requestData.receipt_fine
+            document.getElementById('datepicker10').value = requestData.receipt_date_year_2
+            document.getElementById('bFeeY2').value = requestData.receipt_fee_year_2
+            document.getElementById('bFineY2').value = requestData.receipt_fine_year_2
         }
 
-
-        //cancle disable false
-        // document.getElementById('datepicker2').disabled = false
-        // document.getElementById('bFee').disabled = false
-        // document.getElementById('bFine').disabled = false
-
-        // document.getElementById('documentName2').disabled = false
-
-
-        console.log('requestData.staff_id_money')
-        console.log(requestData.staff_id_money)
-        console.log(requestData.staff_id_money === '')
-
-
-        if (requestData.staff_id_money === '') {
-            resetOptionitem('documentName2', size_money_list)
-            console.log(document.getElementById('documentName2'))
+        if (requestData.receipt_date_year_3 === '') {
+            document.getElementById('datepicker11').value = requestData.receipt_date_year_3
+            document.getElementById('bFeeY3').value = requestData.receipt_fee_year_3 === 0 ? '' : requestData.receipt_fee_year_3
+            document.getElementById('bFineY3').value = requestData.receipt_fine_year_3 === 0 ? '' : requestData.receipt_fine_year_3
         } else {
-            displayUserMoney(requestData.staff_id_money)
+            document.getElementById('datepicker11').value = requestData.receipt_date_year_3
+            document.getElementById('bFeeY3').value = requestData.receipt_fee_year_3
+            document.getElementById('bFineY3').value = requestData.receipt_fine_year_3
         }
-
-        console.log(requestData.staff_id_alderman)
-        console.log(documentName3)
-        document.getElementById('documentName3').value = requestData.staff_id_alderman
-        document.getElementById('position').value = getPositionById(requestData.staff_id_alderman)
+    }
+    if (requestData.receipt_date === '') {
+        document.getElementById('datepicker2').value = requestData.receipt_date
+        document.getElementById('bFee').value = requestData.receipt_fee === 0 ? '' : requestData.receipt_fee
+        document.getElementById('bFine').value = requestData.receipt_fine === 0 ? '' : requestData.receipt_fine
+    } else {
+        document.getElementById('datepicker2').value = requestData.receipt_date
+        document.getElementById('bFee').value = requestData.receipt_fee
+        document.getElementById('bFine').value = requestData.receipt_fine
+    }
+    console.log('requestData.staff_id_money')
+    console.log(requestData.staff_id_money)
+    console.log(requestData.staff_id_money === '')
+    if (requestData.staff_id_money === '') {
+        resetOptionitem('documentName2', size_money_list)
+        console.log(document.getElementById('documentName2'))
+    } else {
+        displayUserMoney(requestData.staff_id_money)
+    }
+    console.log(requestData.staff_id_alderman)
+    console.log(documentName3)
+    document.getElementById('documentName3').value = requestData.staff_id_alderman
+    document.getElementById('position').value = getPositionById(requestData.staff_id_alderman)
+    if (requestData.status === 'active') {
         if (document.getElementById('print_new_doc') != undefined) {
             document.getElementById('print_new_doc').style.display = ''
         }
-
     }
+    // }
 
     if (requestData.status === 'cancel') {
         document.getElementById('delete_request').style.display = ''
@@ -828,15 +808,15 @@ function createGroupData() {
     operatorData.is_personal_changed = false
     operatorAddressData.is_address_changed = false
     if (operatorData.nationality != document.getElementById('nationality').value.trim()
-        || operatorData.race != document.getElementById('race').value.trim() || 
+        || operatorData.race != document.getElementById('race').value.trim() ||
         operatorData.phone != pt_check ||
         operatorData.fax != document.getElementById('fax').value.trim()) {
 
         operatorData.is_personal_changed = true
         operatorData.nationality = document.getElementById('nationality').value
         operatorData.race = document.getElementById('race').value
-        operatorData.phone =  pt_check
-        operatorData.fax = document.getElementById('fax').value 
+        operatorData.phone = pt_check
+        operatorData.fax = document.getElementById('fax').value
     }
 
     if (operatorAddressData.home_number != document.getElementById('home_id').value ||
@@ -1103,12 +1083,12 @@ function createGroupData() {
             addressOwnerLandData.is_address_owner_changed = true
         }
         if (document.getElementById('useOtherPlace') != undefined) {
-            if((requestData.establishment_id === '' && document.getElementById('useOtherPlace').checked != false) ||
-                requestData.establishment_id != '' && document.getElementById('useOtherPlace').checked != true){
-                    requestData.is_request_changed = true
-                    establishmentData.is_establishment_changed = true
-                    setDataUpdate('requestData')
-                    setDataUpdate('establishmentData')
+            if ((requestData.establishment_id === '' && document.getElementById('useOtherPlace').checked != false) ||
+                requestData.establishment_id != '' && document.getElementById('useOtherPlace').checked != true) {
+                requestData.is_request_changed = true
+                establishmentData.is_establishment_changed = true
+                setDataUpdate('requestData')
+                setDataUpdate('establishmentData')
             }
         }
         // reset Utilities.js
@@ -1390,7 +1370,7 @@ function setDataUpdate(type) {
         if (document.getElementById('typeProduct') != undefined) {
             requestData.product_type = document.getElementById('typeProduct').value.trim()
         }
-        if( document.getElementById('typeWorkplace') != undefined){
+        if (document.getElementById('typeWorkplace') != undefined) {
             requestData.product_type = document.getElementById('typeWorkplace').value.trim()
         }
         if (document.getElementById('timeStart') != undefined) {

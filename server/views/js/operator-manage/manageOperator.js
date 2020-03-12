@@ -610,7 +610,7 @@ function createTableRequestAssistant(data) {
             //row index = this.rowIndex
             // row.onclick = function () { showItem(data[this.rowIndex - 1]) }
     
-            for (var j = 0; j < 6; j++) {
+            for (var j = 0; j < 7; j++) {
                 console.log(j)
                 var cell = document.createElement("td");
                 if (j === 0) {
@@ -638,7 +638,20 @@ function createTableRequestAssistant(data) {
                         var cellText = document.createTextNode('-');
                     }
                 } else if (j === 4) {
-                    //end date
+                    //end start
+                    if (data[i].REQUEST_DATE_ISSUED != null && data[i].REQUEST_DATE_ISSUED != '') {
+                        let temp_date = data[i].REQUEST_DATE_ISSUED + ''
+                        //02-01-2563
+                        let temp_array = temp_date.split('-')
+                        let temp_montn = parseInt(temp_array[1])
+    
+                        let text = `${parseInt(temp_array[0])} ${numToMonth[temp_montn]} ${temp_array[2]}`
+                        var cellText = document.createTextNode(text);
+                    } else {
+                        var cellText = document.createTextNode('-');
+                    }
+                } else if( j=== 5){
+                   //end date
                     if (data[i].REQUEST_DATE_EXPIRED != null && data[i].REQUEST_DATE_EXPIRED != '') {
                         let temp_date = data[i].REQUEST_DATE_EXPIRED + ''
                         //02-01-2563
@@ -650,24 +663,15 @@ function createTableRequestAssistant(data) {
                     } else {
                         var cellText = document.createTextNode('-');
                     }
-                } else {
-                    // date exp count
+                }else{
+                     // date exp count
                     if (now_status === 'expire') {
                         var cellText = document.createTextNode('หมดอายุแล้ว');
                     } else if (now_status === 'cancel') {
                         var cellText = document.createTextNode('ยกเลิกแล้ว');
                     } else {
                         if (data[i].REQUEST_DATE_EXPIRED != null) {
-                            let now_date = new Date().toISOString().slice(0, 10).split('-')
-                            let year_now = parseInt(now_date[0]) + 543
-                            now_date = `${now_date[1]}-${now_date[2]}-${year_now}`
-    
-                            let exp_date = data[i].REQUEST_DATE_EXPIRED.split('-')
-                            exp_date = `${exp_date[1]}-${exp_date[0]}-${exp_date[2]}`
-                            console.log(`exp_date  ${exp_date}`)
-                            console.log(`now_date  ${now_date}`)
-                            var daysBetween = (Date.parse(exp_date) - Date.parse(now_date)) / (24 * 3600 * 1000);
-                            let text = ''
+                            let daysBetween = data[i].COUNT_DATE_EXPIRE
                             if (daysBetween < 0) {
                                 text = 'หมดอายุ'
                             } else {
@@ -678,7 +682,7 @@ function createTableRequestAssistant(data) {
                         } else {
                             var cellText = document.createTextNode('-');
                         }
-                    }
+                    } 
                 }
                 cell.appendChild(cellText);
                 row.appendChild(cell);
@@ -756,22 +760,12 @@ function createTableRequest(data) {
                     var cellText = document.createTextNode('ยกเลิกแล้ว');
                 } else {
                     if (data[i].REQUEST_DATE_EXPIRED != null) {
-                        let now_date = new Date().toISOString().slice(0, 10).split('-')
-                        let year_now = parseInt(now_date[0]) + 543
-                        now_date = `${now_date[1]}-${now_date[2]}-${year_now}`
-
-                        let exp_date = data[i].REQUEST_DATE_EXPIRED.split('-')
-                        exp_date = `${exp_date[1]}-${exp_date[0]}-${exp_date[2]}`
-                        console.log(`exp_date  ${exp_date}`)
-                        console.log(`now_date  ${now_date}`)
-                        var daysBetween = (Date.parse(exp_date) - Date.parse(now_date)) / (24 * 3600 * 1000);
-                        let text = ''
+                        let daysBetween = data[i].COUNT_DATE_EXPIRE
                         if (daysBetween < 0) {
                             text = 'หมดอายุ'
                         } else {
                             text = daysBetween + ' วัน'
                         }
-
                         var cellText = document.createTextNode(text);
                     } else {
                         var cellText = document.createTextNode('-');
