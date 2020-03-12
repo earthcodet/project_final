@@ -1226,7 +1226,7 @@ class service {
             new_data.is_land_owned === 'NO' ? new_data.is_land_owned = 'NULL' : new_data.is_land_owned = `'${new_data.is_land_owned}'`
             new_data.type === '' ? new_data.type = 'NULL' : new_data.type = `'${new_data.type}'`
             if (new_data.name === '') {
-                new_data.name = 'NULL'
+                new_data.name = "NULL"
             } else {
                 let w_cut = new_data.name.split('"')
                 if (w_cut.length != 1) {
