@@ -824,14 +824,19 @@ function setassistantOperatorData(raw_data) {
 // set data change
 function createGroupData() {
     // set 
+    let pt_check = `${document.getElementById('phone').value}/${document.getElementById('phone_more').value}`
     operatorData.is_personal_changed = false
     operatorAddressData.is_address_changed = false
-    if (operatorData.nationality != document.getElementById('nationality').value
-        || operatorData.race != document.getElementById('race').value) {
+    if (operatorData.nationality != document.getElementById('nationality').value.trim()
+        || operatorData.race != document.getElementById('race').value.trim() || 
+        operatorData.phone != pt_check ||
+        operatorData.fax != document.getElementById('fax').value.trim()) {
 
         operatorData.is_personal_changed = true
         operatorData.nationality = document.getElementById('nationality').value
         operatorData.race = document.getElementById('race').value
+        operatorData.phone =  pt_check
+        operatorData.fax = document.getElementById('fax').value 
     }
 
     if (operatorAddressData.home_number != document.getElementById('home_id').value ||
@@ -1409,31 +1414,6 @@ function setDataUpdate(type) {
         if (document.getElementById('con_no4') != undefined) {
             requestData.condition_no_4 = document.getElementById('con_no4').value.trim()
         }
-        // if (document.getElementById('bFeeY2') != undefined) {
-        //     let date_y_2 = document.getElementById('datepicker10').value.trim()
-        //     let fee_y_2 = document.getElementById('bFeeY2').value === '' ? 0 : document.getElementById('bFeeY2').value
-        //     let fine_y_2 = document.getElementById('bFineY2').value === '' ? 0 : document.getElementById('bFineY2').value
-
-        //     let date_y_3 = document.getElementById('datepicker11').value.trim()
-        //     let fee_y_3 = document.getElementById('bFeeY3').value === '' ? 0 : document.getElementById('bFeeY3').value
-        //     let fine_y_3 = document.getElementById('bFineY3').value === '' ? 0 : document.getElementById('bFineY3').value
-
-        //     requestData.receipt_fine_year_2 = fee_y_2
-        //     requestData.receipt_fee_year_2 = fine_y_2
-        //     requestData.receipt_date_year_2 = date_y_2
-
-        //     requestData.receipt_fine_year_3 = fine_y_3
-        //     requestData.receipt_fee_year_3 = fee_y_3
-        //     requestData.receipt_date_year_3 = date_y_3
-        // }
-        // let date_y_1 = document.getElementById('datepicker2').value.trim()
-        // let fee_y_1 = document.getElementById('bFee').value === 0 ? 0 : document.getElementById('bFee').value
-        // let fine_y_1 = document.getElementById('bFine').value === 0 ? 0 : document.getElementById('bFine').value
-
-        // requestData.receipt_fine = fine_y_1
-        // requestData.receipt_fee = fee_y_1
-        // requestData.receipt_date = date_y_1
-        // requestData.staff_id_money = userMoney
         requestData.staff_id_alderman = userAlderman
         requestData.total_image = totalFiles.length
     }
