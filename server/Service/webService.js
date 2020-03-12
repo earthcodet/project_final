@@ -1606,7 +1606,7 @@ class service {
         item.push(address)
         item[0] = this.formatInsert('ADDRESS', item[0])
         return new Promise((resolve, reject) => {
-            EstablishmentDAOObj.getDuplication(Edata, item[0]).then((establishmentData) => {
+            EstablishmentDAOObj.getDuplications(Edata, item[0]).then((establishmentData) => {
                 if (establishmentData.length === 0) {
                     EstablishmentDAOObj.update(Edata).then((data) => {
                         return resolve(data)
@@ -1977,12 +1977,12 @@ class service {
                         if (data.PERSONAL_ID_ASSISTANT != null) {
                             this.getPersonalById(data.PERSONAL_ID_ASSISTANT).then((personal_assistant_data) => {
                                 data.gropDataAssistant = personal_assistant_data[0]
-                                data.REQUEST_DATE_SUBMISSION = data.REQUEST_DATE_SUBMISSION != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_SUBMISSION.toISOString()) : data.REQUEST_DATE_SUBMISSION
-                                data.REQUEST_DATE_APPROVE = data.REQUEST_DATE_APPROVE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_APPROVE.toISOString()) : data.REQUEST_DATE_APPROVE
-                                data.REQUEST_RECEIPT_DATE = data.REQUEST_RECEIPT_DATE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_RECEIPT_DATE.toISOString()) : data.REQUEST_RECEIPT_DATE
-                                data.REQUEST_DATE_ISSUED = data.REQUEST_DATE_ISSUED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_ISSUED.toISOString()) : data.REQUEST_DATE_ISSUED
-                                data.REQUEST_DATE_EXPIRED = data.REQUEST_DATE_EXPIRED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_EXPIRED.toISOString()) : data.REQUEST_DATE_EXPIRED
-                                data.REQUEST_LAST_UPDATE = data.REQUEST_LAST_UPDATE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_LAST_UPDATE.toISOString()) : data.REQUEST_LAST_UPDATE
+                                data.REQUEST_DATE_SUBMISSION = data.REQUEST_DATE_SUBMISSION != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_SUBMISSION+'') : data.REQUEST_DATE_SUBMISSION
+                                data.REQUEST_DATE_APPROVE = data.REQUEST_DATE_APPROVE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_APPROVE+'') : data.REQUEST_DATE_APPROVE
+                                data.REQUEST_RECEIPT_DATE = data.REQUEST_RECEIPT_DATE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_RECEIPT_DATE+'') : data.REQUEST_RECEIPT_DATE
+                                data.REQUEST_DATE_ISSUED = data.REQUEST_DATE_ISSUED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_ISSUED+'') : data.REQUEST_DATE_ISSUED
+                                data.REQUEST_DATE_EXPIRED = data.REQUEST_DATE_EXPIRED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_EXPIRED+'') : data.REQUEST_DATE_EXPIRED
+                                data.REQUEST_LAST_UPDATE = data.REQUEST_LAST_UPDATE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_LAST_UPDATE+'') : data.REQUEST_LAST_UPDATE
                                 this.getEstablishment(data.ESTABLISHMENT_ID).then((dataEstablishment) => {
                                     data.ESTABLISHMENT_DATA = dataEstablishment
                                     if (data.TRAIN_ID != null) {
@@ -2023,12 +2023,12 @@ class service {
                             })
                         } else {
                             data.gropDataAssistant = undefined
-                            data.REQUEST_DATE_SUBMISSION = data.REQUEST_DATE_SUBMISSION != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_SUBMISSION.toISOString()) : data.REQUEST_DATE_SUBMISSION
-                            data.REQUEST_DATE_APPROVE = data.REQUEST_DATE_APPROVE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_APPROVE.toISOString()) : data.REQUEST_DATE_APPROVE
-                            data.REQUEST_RECEIPT_DATE = data.REQUEST_RECEIPT_DATE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_RECEIPT_DATE.toISOString()) : data.REQUEST_RECEIPT_DATE
-                            data.REQUEST_DATE_ISSUED = data.REQUEST_DATE_ISSUED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_ISSUED.toISOString()) : data.REQUEST_DATE_ISSUED
-                            data.REQUEST_DATE_EXPIRED = data.REQUEST_DATE_EXPIRED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_EXPIRED.toISOString()) : data.REQUEST_DATE_EXPIRED
-                            data.REQUEST_LAST_UPDATE = data.REQUEST_LAST_UPDATE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_LAST_UPDATE.toISOString()) : data.REQUEST_LAST_UPDATE
+                            data.REQUEST_DATE_SUBMISSION = data.REQUEST_DATE_SUBMISSION != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_SUBMISSION + '') : data.REQUEST_DATE_SUBMISSION
+                            data.REQUEST_DATE_APPROVE = data.REQUEST_DATE_APPROVE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_APPROVE+ '') : data.REQUEST_DATE_APPROVE
+                            data.REQUEST_RECEIPT_DATE = data.REQUEST_RECEIPT_DATE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_RECEIPT_DATE+ '') : data.REQUEST_RECEIPT_DATE
+                            data.REQUEST_DATE_ISSUED = data.REQUEST_DATE_ISSUED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_ISSUED+ '') : data.REQUEST_DATE_ISSUED
+                            data.REQUEST_DATE_EXPIRED = data.REQUEST_DATE_EXPIRED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_EXPIRED+ '') : data.REQUEST_DATE_EXPIRED
+                            data.REQUEST_LAST_UPDATE = data.REQUEST_LAST_UPDATE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_LAST_UPDATE+ '') : data.REQUEST_LAST_UPDATE
                             this.getEstablishment(data.ESTABLISHMENT_ID).then((dataEstablishment) => {
                                 data.ESTABLISHMENT_DATA = dataEstablishment
                                 if (data.TRAIN_ID != null) {
