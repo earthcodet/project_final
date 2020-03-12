@@ -1623,6 +1623,7 @@ class service {
                 if (e_data != undefined) {
                     if (l_id != undefined && a_id != undefined) {
                         if (l_id != e_data.ESTABLISHMENT_IS_LAND_OWNED) {
+                            console.log('get Request land owner')
                             LandDAOObj.get(l_id).then((land_data) => {
                                 if (land_data.LAND_BIRTHDAY != null) {
                                     land_data.LAND_BIRTHDAY = this.formatDate('TO-DISPLAY', land_data.LAND_BIRTHDAY + '')
@@ -1983,7 +1984,7 @@ class service {
                                 data.REQUEST_DATE_ISSUED = data.REQUEST_DATE_ISSUED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_ISSUED+'') : data.REQUEST_DATE_ISSUED
                                 data.REQUEST_DATE_EXPIRED = data.REQUEST_DATE_EXPIRED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_EXPIRED+'') : data.REQUEST_DATE_EXPIRED
                                 data.REQUEST_LAST_UPDATE = data.REQUEST_LAST_UPDATE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_LAST_UPDATE+'') : data.REQUEST_LAST_UPDATE
-                                this.getEstablishment(data.ESTABLISHMENT_ID).then((dataEstablishment) => {
+                                this.getEstablishment(data.ESTABLISHMENT_ID, data.ESTABLISHMENT_IS_LAND_OWNED,data.ESTABLISHMENT_ADDRESS_ID).then((dataEstablishment) => {
                                     data.ESTABLISHMENT_DATA = dataEstablishment
                                     if (data.TRAIN_ID != null) {
                                         this.getTrainByTrainId(data.TRAIN_ID).then((dataTrain) => {
@@ -2259,7 +2260,7 @@ class service {
                                                                     this.updateAddress(this.formatInsert('ADDRESS', addressOwner))
                                                                 }
                                                                 Edata.is_land_owned = land_data_update.id
-                                                                request.establishment_address_id = land_data_update.address
+                                                                request.establishment_address_id =  Edata.address_id
                                                                 request.establishment_is_land_owned = land_data_update.id
                                                                 request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                                 request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -2280,7 +2281,7 @@ class service {
                                                                 item_return.address = land_data_update.address
 
                                                                 Edata.is_land_owned = land_data_update.id
-                                                                request.establishment_address_id = land_data_update.address
+                                                                request.establishment_address_id =  Edata.address_id
                                                                 request.establishment_is_land_owned = land_data_update.id
                                                                 request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                                 request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -2366,7 +2367,7 @@ class service {
                                                                 this.updateAddress(this.formatInsert('ADDRESS', addressOwner))
                                                             }
                                                             Edata.is_land_owned = land_data_update.id
-                                                            request.establishment_address_id = land_data_update.address
+                                                            request.establishment_address_id =  Edata.address_id
                                                             request.establishment_is_land_owned = land_data_update.id
                                                             request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                             request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -2395,7 +2396,7 @@ class service {
                                                             item_return.address = land_data_update.address
 
                                                             Edata.is_land_owned = land_data_update.id
-                                                            request.establishment_address_id = land_data_update.address
+                                                            request.establishment_address_id =  Edata.address_id
                                                             request.establishment_is_land_owned = land_data_update.id
                                                             request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                             request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -2476,7 +2477,7 @@ class service {
                                                             this.updateAddress(this.formatInsert('ADDRESS', addressOwner))
                                                         }
                                                         Edata.is_land_owned = land_data_update.id
-                                                        request.establishment_address_id = land_data_update.address
+                                                        request.establishment_address_id =  Edata.address_id
                                                         request.establishment_is_land_owned = land_data_update.id
                                                         request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                         request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -2506,7 +2507,7 @@ class service {
                                                         item_return.address = land_data_update.address
 
                                                         Edata.is_land_owned = land_data_update.id
-                                                        request.establishment_address_id = land_data_update.address
+                                                        request.establishment_address_id =  Edata.address_id
                                                         request.establishment_is_land_owned = land_data_update.id
                                                         request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                         request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -2593,7 +2594,7 @@ class service {
                                                                 this.updateAddress(this.formatInsert('ADDRESS', addressOwner))
                                                             }
                                                             Edata.is_land_owned = land_data_update.id
-                                                            request.establishment_address_id = land_data_update.address
+                                                            request.establishment_address_id =  Edata.address_id
                                                             request.establishment_is_land_owned = land_data_update.id
                                                             request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                             request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -2622,7 +2623,7 @@ class service {
                                                             item_return.address = land_data_update.address
 
                                                             Edata.is_land_owned = land_data_update.id
-                                                            request.establishment_address_id = land_data_update.address
+                                                            request.establishment_address_id =  Edata.address_id
                                                             request.establishment_is_land_owned = land_data_update.id
                                                             request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                             request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -2701,7 +2702,7 @@ class service {
                                                             this.updateAddress(this.formatInsert('ADDRESS', addressOwner))
                                                         }
                                                         Edata.is_land_owned = land_data_update.id
-                                                        request.establishment_address_id = land_data_update.address
+                                                        request.establishment_address_id =  Edata.address_id
                                                         request.establishment_is_land_owned = land_data_update.id
                                                         request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                         request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -2729,7 +2730,7 @@ class service {
                                                         item_return.address = land_data_update.address
 
                                                         Edata.is_land_owned = land_data_update.id
-                                                        request.establishment_address_id = land_data_update.address
+                                                        request.establishment_address_id =  Edata.address_id
                                                         request.establishment_is_land_owned = land_data_update.id
                                                         request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                         request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -2806,7 +2807,7 @@ class service {
                                                         this.updateAddress(this.formatInsert('ADDRESS', addressOwner))
                                                     }
                                                     Edata.is_land_owned = land_data_update.id
-                                                    request.establishment_address_id = land_data_update.address
+                                                    request.establishment_address_id =  Edata.address_id
                                                     request.establishment_is_land_owned = land_data_update.id
                                                     request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                     request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -2834,7 +2835,7 @@ class service {
                                                     item_return.address = land_data_update.address
 
                                                     Edata.is_land_owned = land_data_update.id
-                                                    request.establishment_address_id = land_data_update.address
+                                                    request.establishment_address_id =  Edata.address_id
                                                     request.establishment_is_land_owned = land_data_update.id
                                                     request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                     request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -2927,7 +2928,7 @@ class service {
                                                                     this.updateAddress(this.formatInsert('ADDRESS', addressOwner))
                                                                 }
                                                                 Edata.is_land_owned = land_data_update.id
-                                                                request.establishment_address_id = land_data_update.address
+                                                                request.establishment_address_id =  Edata.address_id
                                                                 request.establishment_is_land_owned = land_data_update.id
                                                                 request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                                 request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -2956,7 +2957,7 @@ class service {
                                                                 item_return.address = land_data_update.address
 
                                                                 Edata.is_land_owned = land_data_update.id
-                                                                request.establishment_address_id = land_data_update.address
+                                                                request.establishment_address_id =  Edata.address_id
                                                                 request.establishment_is_land_owned = land_data_update.id
                                                                 request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                                 request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -3032,7 +3033,7 @@ class service {
                                                                 this.updateAddress(this.formatInsert('ADDRESS', addressOwner))
                                                             }
                                                             Edata.is_land_owned = land_data_update.id
-                                                            request.establishment_address_id = land_data_update.address
+                                                            request.establishment_address_id =  Edata.address_id
                                                             request.establishment_is_land_owned = land_data_update.id
                                                             request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                             request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -3061,7 +3062,7 @@ class service {
                                                             item_return.address = land_data_update.address
 
                                                             Edata.is_land_owned = land_data_update.id
-                                                            request.establishment_address_id = land_data_update.address
+                                                            request.establishment_address_id =  Edata.address_id
                                                             request.establishment_is_land_owned = land_data_update.id
                                                             request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                             request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -3141,7 +3142,7 @@ class service {
                                                             this.updateAddress(this.formatInsert('ADDRESS', addressOwner))
                                                         }
                                                         Edata.is_land_owned = land_data_update.id
-                                                        request.establishment_address_id = land_data_update.address
+                                                        request.establishment_address_id =  Edata.address_id
                                                         request.establishment_is_land_owned = land_data_update.id
                                                         request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                         request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -3170,7 +3171,7 @@ class service {
                                                         item_return.address = land_data_update.address
 
                                                         Edata.is_land_owned = land_data_update.id
-                                                        request.establishment_address_id = land_data_update.address
+                                                        request.establishment_address_id =  Edata.address_id
                                                         request.establishment_is_land_owned = land_data_update.id
                                                         request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                         request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -3259,7 +3260,7 @@ class service {
                                                                 this.updateAddress(this.formatInsert('ADDRESS', addressOwner))
                                                             }
                                                             Edata.is_land_owned = land_data_update.id
-                                                            request.establishment_address_id = land_data_update.address
+                                                            request.establishment_address_id =  Edata.address_id
                                                             request.establishment_is_land_owned = land_data_update.id
                                                             request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                             request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -3288,7 +3289,7 @@ class service {
                                                             item_return.address = land_data_update.address
 
                                                             Edata.is_land_owned = land_data_update.id
-                                                            request.establishment_address_id = land_data_update.address
+                                                            request.establishment_address_id =  Edata.address_id
                                                             request.establishment_is_land_owned = land_data_update.id
                                                             request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                             request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -3368,7 +3369,7 @@ class service {
                                                             this.updateAddress(this.formatInsert('ADDRESS', addressOwner))
                                                         }
                                                         Edata.is_land_owned = land_data_update.id
-                                                        request.establishment_address_id = land_data_update.address
+                                                        request.establishment_address_id =  Edata.address_id
                                                         request.establishment_is_land_owned = land_data_update.id
                                                         request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                         request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -3396,7 +3397,7 @@ class service {
                                                         item_return.address = land_data_update.address
 
                                                         Edata.is_land_owned = land_data_update.id
-                                                        request.establishment_address_id = land_data_update.address
+                                                        request.establishment_address_id =  Edata.address_id
                                                         request.establishment_is_land_owned = land_data_update.id
                                                         request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                         request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -3473,7 +3474,7 @@ class service {
                                                         this.updateAddress(this.formatInsert('ADDRESS', addressOwner))
                                                     }
                                                     Edata.is_land_owned = land_data_update.id
-                                                    request.establishment_address_id = land_data_update.address
+                                                    request.establishment_address_id =  Edata.address_id
                                                     request.establishment_is_land_owned = land_data_update.id
                                                     request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                     request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -3502,7 +3503,7 @@ class service {
                                                     item_return.address = land_data_update.address
 
                                                     Edata.is_land_owned = land_data_update.id
-                                                    request.establishment_address_id = land_data_update.address
+                                                    request.establishment_address_id =  Edata.address_id
                                                     request.establishment_is_land_owned = land_data_update.id
                                                     request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                     request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -3583,7 +3584,7 @@ class service {
                                                     this.updateAddress(this.formatInsert('ADDRESS', addressOwner))
                                                 }
                                                 Edata.is_land_owned = land_data_update.id
-                                                request.establishment_address_id = land_data_update.address
+                                                request.establishment_address_id =  Edata.address_id
                                                 request.establishment_is_land_owned = land_data_update.id
                                                 request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                 request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -3612,7 +3613,7 @@ class service {
                                                 item_return.address = land_data_update.address
 
                                                 Edata.is_land_owned = land_data_update.id
-                                                request.establishment_address_id = land_data_update.address
+                                                request.establishment_address_id =  Edata.address_id
                                                 request.establishment_is_land_owned = land_data_update.id
                                                 request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                 request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -3692,7 +3693,7 @@ class service {
                                         this.updateAddress(this.formatInsert('ADDRESS', addressOwner))
                                     }
                                     Edata.is_land_owned = land_data_update.id
-                                    request.establishment_address_id = land_data_update.address
+                                    request.establishment_address_id =  Edata.address_id
                                     request.establishment_is_land_owned = land_data_update.id
                                     request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                     request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -3721,7 +3722,7 @@ class service {
                                     item_return.address = land_data_update.address
 
                                     Edata.is_land_owned = land_data_update.id
-                                    request.establishment_address_id = land_data_update.address
+                                    request.establishment_address_id =  Edata.address_id
                                     request.establishment_is_land_owned = land_data_update.id
                                     request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                     request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -3790,7 +3791,7 @@ class service {
                     request.establishment_id = data.id
                     request.land_address_establishment = data.address_id
                     request.establishment_is_land_owned = data.land_used === null || data.land_used === undefined ? 'NULL' : `'${data.land_used}'`
-                    request.establishment_address_id = data.land_address_owner === null || data.land_address_owner === undefined ? 'NULL' : `'${data.land_address_owner}'`
+                    request.establishment_address_id = data.address_id === null || data.address_id === undefined ? 'NULL' : `'${data.address_id}'`
                     request.status = 'wait'
                     if (request.reference_id === 'YES') {
                         this.loopInsertReference(reference).then((result) => {
