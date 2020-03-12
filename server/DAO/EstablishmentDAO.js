@@ -27,7 +27,7 @@ class EstablishmentDAO {
             column = column + `ESTABLISHMENT_WORKER, ESTABLISHMENT_PHONE, ESTABLISHMENT_FAX, ESTABLISHMENT_GROUND`
             // let values = `'${em.id}', '${em.address_id}', '${em.perosonal_id}', ${em.is_land_owned}, ${em.type}, ${em.name}, `
             let values = `'${em.id}', '${em.address_id}', '${em.perosonal_id}', ${em.is_land_owned}, `
-            em.name === '' || em.name === 'NULL' ? values = values + `'NULL', ` : values = values +`"${em.name}", `
+            em.name === '' || em.name === 'NULL' ? values = values + `NULL, ` : values = values +`"${em.name}", `
             values = values + `${em.machine_size}, ${em.area_size}, ${em.worker}, '${em.phone}', ${em.fax}, ${em.grond}`
             let query = `INSERT INTO establishment(${column}) VALUES (${values})`
             con.query(query, function (err, result) {
@@ -35,6 +35,8 @@ class EstablishmentDAO {
                     console.log(err.code)
                     return resolve(err.code)
                 }
+                console.log('e_data update success')
+                console.log(query)
                 return resolve(`true`)
             })
         })
@@ -136,7 +138,7 @@ class EstablishmentDAO {
             console.log(em)
             let value = `ESTABLISHMENT_IS_LAND_OWNED = ${em.is_land_owned}, `
             // value = value + `ESTABLISHMENT_TYPE=${em.type},ESTABLISHMENT_NAME=${em.name},`
-            em.name === '' || em.name === 'NULL' ? value = value + `ESTABLISHMENT_NAME='NULL',` : value = value + `ESTABLISHMENT_NAME="${em.name}",`
+            em.name === '' || em.name === 'NULL' ? value = value + `ESTABLISHMENT_NAME=NULL,` : value = value + `ESTABLISHMENT_NAME="${em.name}",`
             // value = value + `ESTABLISHMENT_NAME=${em.name},`
             value = value + `ESTABLISHMENT_MACHINE_SIZE=${em.machine_size},ESTABLISHMENT_AREA_SIZE=${em.area_size},`
             value = value + `ESTABLISHMENT_WORKER=${em.worker},`
