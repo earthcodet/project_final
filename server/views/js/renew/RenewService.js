@@ -40,7 +40,7 @@ function checkView(typeForm) {
                                     console.log(`assistantOperatorData`)
                                     console.log(assistantOperatorData)
                                     setDataView()
-                                }else{
+                                } else {
                                     console.log(`requestData`)
                                     console.log(requestData)
                                     console.log(`establishmentData`)
@@ -197,7 +197,7 @@ function setDataView() {
         document.getElementById('wPhone_more').value = cut_phone_no3[1]
     }
     document.getElementById("wFax").value = establishmentData.fax
-    
+
     document.getElementById('workplaceName').value = establishmentData.name
 
     if (document.getElementById("person2_name") != undefined) {
@@ -213,7 +213,7 @@ function setDataView() {
 
     } else {
         if (document.getElementById('typeWorkplace') != undefined) {
-            document.getElementById('typeWorkplace').value = establishmentData.type
+            document.getElementById('typeWorkplace').value = requestData.product_type
         }
     }
     if (document.getElementById('machinery') != undefined) {
@@ -361,7 +361,7 @@ function setAddressEstablishmentData(raw_data) {
     addressEstablishmentData.province_name = raw_data.PROVINCE_NAME
 }
 function setEstablishmentData(raw_data) {
-    establishmentData.type = raw_data.ESTABLISHMENT_TYPE === null ? '' : raw_data.ESTABLISHMENT_TYPE
+    // establishmentData.type = raw_data.ESTABLISHMENT_TYPE === null ? '' : raw_data.ESTABLISHMENT_TYPE
     establishmentData.name = raw_data.ESTABLISHMENT_NAME === null ? '' : raw_data.ESTABLISHMENT_NAME
     establishmentData.machine_size = raw_data.ESTABLISHMENT_MACHINE_SIZE === null ? 0 : raw_data.ESTABLISHMENT_MACHINE_SIZE
     establishmentData.area_size = raw_data.ESTABLISHMENT_AREA_SIZE === null ? 0 : raw_data.ESTABLISHMENT_AREA_SIZE
@@ -371,9 +371,41 @@ function setEstablishmentData(raw_data) {
     establishmentData.grond = raw_data.ESTABLISHMENT_GROUND === null ? '' : raw_data.ESTABLISHMENT_GROUND
 }
 // set data change
-function createGroupData() {
-    //
+function createRenewData() {
+    requestData.receipt_data = document.getElementById('datepicker3').value.trim()
+    requestData.receipt_fine = document.getElementById('renew_fee').value.trim()
+    requestData.receipt_fee = document.getElementById('renew_fine').value.trim()
+    requestData.date_submission = document.getElementById('datepicker4').value.trim()
+    requestData.year = parseInt(new Date().toISOString().slice(0, 4)) + 543
+    requestData.date_issued = document.getElementById('datepicker3').value.trim()
+    let dateNew_t_n = requestData.date_expired.split('-')
+    console.log(`date expire = ???>?>?>>?`)
+    console.log(dateNew_t_n)
+    console.log(requestData.menu)
+    if (requestData.menu === 'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร' || requestData.menu ===  'หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร') {
+       
+        let  day = dateNew_t_n[0]
+        let  month = dateNew_t_n[1]
+        let  year = parseInt(dateNew_t_n[2])+ 3
+        if (day === '29' && month === '2' && year % 4 === 0) {
+            requestData.date_expired = `01-03-${year}`
+        } else {
+            requestData.date_expired = `${day}-${month}-${year}`
+        }
+        console.log(`date expire condition 1 ${requestData.date_expired}`)
+    } else if ( requestData.menu === 'ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ' ||  requestData.menu === 'ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ') {
+        let year = parseInt(dateNew_t_n[2])  +1
+        requestData.date_expired = `31-12-${year}`
+        console.log(`date expire condition 2  ${requestData.date_expired}`)
+    } else {
+        let day = dateNew_t_n[0]
+        let month = dateNew_t_n[1]
+        let year = parseInt(dateNew_t_n[2])  + 1
+        requestData.date_expired = `${day}-${month}-${year}`
+        console.log(`date expire condition 3 ${requestData.date_expired}`)
+    }
 }
+
 // getAge
 function getAge(date) {
     let now = new Date().toISOString().slice(0, 10) // 2020-02-16
@@ -409,49 +441,23 @@ function getAge(date) {
 
 }
 //prepare InsertData
-function createArrayInsert() {
+function createArrayInsertRenew() {
     let arrayItem = []
     arrayItem.push(requestData) // request 0
-
     return arrayItem
 }
-function insertRequest() {
-    createGroupData()
-    let item = createArrayInsert()
-    console.log(item)
+function insertRequestRenew() {
+    createRenewData()
+    let item = createArrayInsertRenew()
+    console.log(`--- data to return ---`)
+    console.log(item[0])
+    console.log(`--- End to return ---`)
     return new Promise((resolve, reject) => {
-        console.log("insertToDatabase");
-        var formData = new FormData();
-        if (landData.file_upload_changed) {
-            formData.append('files', filesPdf);
-        }
-
-
-        if (requestData.image_is_changed) {
-            for (var i = 0; i < totalFiles.length; i++) {
-                if (totalFiles[i].E_IMAGE_DATA === undefined) {
-                    let image = totalFiles[i];
-                    formData.append('files' + i, image);
-                } else {
-                    formData.append("files" + i, base64toBlob(totalFiles[i].E_IMAGE_DATA_BASE64, `image/${totalFiles[i].E_IMAGE_TYPE}`));
-                }
-            }
-        }
-        formData.append("gropData", JSON.stringify(item));
-        filesPdf = null
-        // totalFiles = []
-        selectImageFile = 0
-        axios.post("http://localhost:5000/insert/request", formData, {
-            headers: {
-                "Content-Type": "multipart/form-data"
-            }
-        })
-            .then(data => {
-                console.log(data.data)
-                return resolve(data.data);
-            });
-        // return resolve(true);
-
+        axios.post("http://localhost:5000/insert/request/renew", { 'renew_data': item[0] }).then(data => {
+            console.log(data.data)
+            return resolve(data.data);
+        });
+        // return resolve(true)
     });
 }
 function getRequestDataRenew(no, year) {
@@ -494,9 +500,9 @@ function setLisetUserAlderManToUi(list_user) {
 }
 function changePositionAlderman(userId) {
     document.getElementById('position').value = getPositionAlderman(userId)
-    requestData.staff_id_alderman = document.getElementById('documentName3').valu
+    requestData.staff_id_alderman = document.getElementById('documentName3').value
 }
-//get staff money 
+//get user
 function getUser() {
     return new Promise((resolve, reject) => {
         axios.get(`http://localhost:5000/get/users/money/president`).then((result) => {
@@ -537,7 +543,7 @@ function getUrlVars() {
 }
 //create print 
 function printRequest() {
-    //
+    //  Print Document
 }
 function resetOptionitem(id, length) {
     console.log(`resetOptionitem ${id}`)
@@ -597,4 +603,8 @@ function loadingData(type) {
         setTypeMenu(type)
         checkView(type)
     })
+}
+function setRequestRenewDataReturn(raw_data) {
+    requestData.no = raw_data.no
+    setDataView()
 }

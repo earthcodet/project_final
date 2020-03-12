@@ -255,7 +255,11 @@ app.post('/insert/request', (req, res) => {
     res.json(data);
   })
 })
-
+app.post('/insert/request/renew', (req, res) => {
+  webService.insertRequestRenew(req.body.renew_data, req.session.username,req.body.renew_data).then((data) => {
+    res.json(data);
+  })
+})
 app.get('/get/request/:no/:year', (req, res) => {
   webService.getRequestByIdAndYear(req.params.no, req.params.year).then((data) => {
     res.json(data)

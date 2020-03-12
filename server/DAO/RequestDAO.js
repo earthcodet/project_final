@@ -55,6 +55,47 @@ class RequestDAO {
             })
         })
     }
+    insertRenew(request){
+        request.status = 'active'
+        request.status_before = 'active'
+        request.is_deleted = 'N'
+        console.log('--- DATABASE INSERT RENEW --- ')
+        console.log(request)
+        console.log('--- END DATABASE INSERT RENEW ---')
+        return new Promise((resolve, reject) => {
+            let column = `REQUEST_NO, REQUEST_YEAR, PERSONAL_ID_OWNER, REQUEST_TYPE_ID, STAFF_ID_ALDERMAN, ESTABLISHMENT_ID, `
+            column = column + `STAFF_ID_MONEY, REFERENCE_ID, TRAIN_ID, PERSONAL_ID_ASSISTANT, STAFF_ID_APPROVE, ESTABLISHMENT_IS_LAND_OWNED,ESTABLISHMENT_ADDRESS_ID , REQUEST_MENU, `
+            column = column + `REQUEST_DATE_SUBMISSION, REQUEST_DATE_APPROVE, REQUEST_DOC_NO1, REQUEST_DOC_NO2, REQUEST_DOC_NO3, `
+            column = column + `REQUEST_DOC_NO4, REQUEST_DOC_NO5, REQUEST_DOC_NO6, REQUEST_SUBCATEGORY, REQUEST_PRODUCT_TYPE,` 
+            column = column + `REQUEST_SELL_START, REQUEST_SELL_END, REQUEST_SELL_ALLOW, `
+            column = column + `REQUEST_DATE_ISSUED, REQUEST_DATE_EXPIRED, `
+            column = column + `REQUEST_CONDITION_NO_1, REQUEST_CONDITION_NO_2, REQUEST_CONDITION_NO_3, REQUEST_CONDITION_NO_4, `
+            column = column + `REQUEST_IMAGE_NAME, REQUEST_TOTAL_IMAGE, REQUEST_STATUS, REQUEST_DELETE_LOGIC, REQUEST_IS_DELETED, `
+            column = column + `REQUEST_LAST_UPDATE, REQUEST_USER_UPDATE ,REQUEST_STATUS_BEFORE,` //${request.establishment_is_land_owned}
+            column = column + `REQUEST_RECEIPT_FINE, REQUEST_RECEIPT_FEE, REQUEST_RECEIPT_DATE`
+            let values = `'${request.no}','${request.year }', '${request.personal_id_owner }', '${request.request_type_id }', '${request.staff_id_alderman }', ` 
+            values = values +  `'${request.establishment_id }', ${request.staff_id_money }, ${request.reference_id}, ${request.train_id}, `
+            values = values +  `${request.personal_id_assistant }, ${request.staff_id_approve }, ${request.establishment_is_land_owned},${request.establishment_address_id}, '${request.menu }', '${request.date_submission }', `
+            values = values +  `${request.date_approve }, '${request.doc_no1}', '${request.doc_no2}', '${request.doc_no3}', `
+            values = values +  `'${request.doc_no4}', '${request.doc_no5}', '${request.doc_no6}', ${request.subcategory}, `
+            values = values +  `${request.product_type }, ${request.sell_start }, ${request.sell_end}, '${request.sell_allow}', `
+            values = values +  `${request.date_issued}, ${request.date_expired }, ${request.condition_no_1}, `
+            values = values +  `${request.condition_no_2}, ${request.condition_no_3}, ${request.condition_no_4}, ${request.image_name }, `
+            values = values +  `'${request.total_image }', '${request.status }', NULL, '${request.is_deleted }', `
+            values = values +  `'${request.last_update }', '${request.user_update }', '${request.status_before}' ,`
+            values = values +  `${request.receipt_fine}, ${request.receipt_fee}, ${request.receipt_date}`
+
+            let query = `INSERT INTO request(${column}) VALUES (${values})`
+            console.log(query)
+            con.query(query, function (err, result) {
+                if (err) {
+                    console.log(err) 
+                    return resolve(err.code)
+                }
+                return resolve(`true`)
+            })
+        })
+    }
     getRequestById(id,year){
         return new Promise((resolve, reject) => {  
             let query = `SELECT * FROM request WHERE REQUEST_NO='${id}' AND REQUEST_YEAR='${year}'`
@@ -181,6 +222,22 @@ class RequestDAO {
                     console.log(err) 
                     return resolve(err.code)
                 }
+                console.log(`Update id = ${request.no}/${request.year} status = ${request.status}`)
+                return resolve(`true`)
+            })
+        })
+    }
+    updateStatusExpire(no,year,user,last_update){
+        return new Promise((resolve, reject) => {
+            let column = `REQUEST_STATUS='expire',`
+            column = column + `REQUEST_LAST_UPDATE='${last_update}',REQUEST_USER_UPDATE='${user}'`
+            let query = `UPDATE request SET ${column} WHERE REQUEST_NO='${no}' AND REQUEST_YEAR='${year}'`
+            con.query(query, function (err, result) {
+                if (err) {
+                    console.log(err) 
+                    return resolve(err.code)
+                }
+                console.log(`Update status request id = ${no}/${year} status = expire`)
                 return resolve(`true`)
             })
         })

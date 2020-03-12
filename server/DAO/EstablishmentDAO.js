@@ -64,7 +64,7 @@ class EstablishmentDAO {
         values = values + ` AND address.AMPHUR_NAME = '${address.amphur_name}' `
         values = values + ` AND address.PROVINCE_NAME = '${address.province_name}'`
         //em.type === '' || em.type === 'NULL' ? values = values + ` AND establishment.ESTABLISHMENT_TYPE IS NULL` : values = values + ` AND establishment.ESTABLISHMENT_TYPE = ${em.type}`
-
+        values = values + ` AND establishment.ESTABLISHMENT_IS_LAND_OWNED = ${em.is_land_owned}`
         values = values + ` AND establishment.ESTABLISHMENT_MACHINE_SIZE = ${em.machine_size} `
         values = values + ` AND establishment.ESTABLISHMENT_AREA_SIZE = ${em.area_size} `
         values = values + ` AND establishment.ESTABLISHMENT_WORKER = ${em.worker} `
@@ -96,7 +96,7 @@ class EstablishmentDAO {
             console.log(em)
             let value = `ESTABLISHMENT_IS_LAND_OWNED = ${em.is_land_owned}, `
             // value = value + `ESTABLISHMENT_TYPE=${em.type},ESTABLISHMENT_NAME=${em.name},`
-            em.name === '' || em.name === 'NULL' ? value = value + `ESTABLISHMENT_NAME='NULL',` : value = value + `ESTABLISHMENT_NAME="${em.name}"`
+            em.name === '' || em.name === 'NULL' ? value = value + `ESTABLISHMENT_NAME='NULL',` : value = value + `ESTABLISHMENT_NAME="${em.name}",`
             // value = value + `ESTABLISHMENT_NAME=${em.name},`
             value = value + `ESTABLISHMENT_MACHINE_SIZE=${em.machine_size},ESTABLISHMENT_AREA_SIZE=${em.area_size},`
             value = value + `ESTABLISHMENT_WORKER=${em.worker},`

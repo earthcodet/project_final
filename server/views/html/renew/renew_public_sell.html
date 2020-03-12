@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</title>
+    <title>A-คำขอต่อใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -292,15 +292,22 @@
                 <div class="box">
                     <br>
                     <div style="width: 80%;margin-left: 5vw;">
+                        <a> วันที่ยื่นคำขอต่ออายุใบอนุญาต </a>
+                        <input type="text" id="datepicker4" style="width: 10vw;margin-left: .5vw;" maxlength="10"
+                        onkeyup="document.getElementById('datepicker4').classList.remove('alertInput')"></a>
+                        <br>
                         <a>ใบอนุญาตฉบับจริง
                             <a>ออกให้เมื่อวันที่ :
-                                <input type="text" id="datepicker3" style="width: 12%;"></a>
+                                <input type="text" id="datepicker3" style="width: 12%;"
+                                onkeyup="document.getElementById('datepicker3').classList.remove('alertInput')"></a>
                             <a>ค่าธรรมเนียม :
                                 <input type="text" id="renew_fee" style="width: 12%;" maxlength="8"
-                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></a>
+                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                    onkeyup="document.getElementById('renew_fee').classList.remove('alertInput')"></a>
                             <a>ค่าปรับ :
                                 <input type="text" id="renew_fine" style="width: 12%;" maxlength="8"
-                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></a>
+                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                    onkeyup="document.getElementById('renew_fine').classList.remove('alertInput')"></a>
                     </div>
                     <br>
                     <br>
@@ -373,7 +380,7 @@
 <script>
     loadingData('ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ')
 </script>
-
+<script src="../../js/renew/RenewRequire.js"></script>
 <!-- <script src="../../js/service/checkUserLogin.js"></script> -->
 
 </html>

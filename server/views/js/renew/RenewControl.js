@@ -52,24 +52,15 @@ function insertTEST() {
             return new Promise(function (resolve, reject) {
                 setTimeout(function () {
                     if (preInsert() === true) {
-                        insertRequest().then((data) => {
-                            if (data.land_id != undefined) {
-                                setRequestDataUpdateReturn(data)
+                        insertRequestRenew().then((data) => {
+                            if (data.no != undefined) {
                                 resolve();
                             } else {
-                                setRequestDataReturn(data)
-                                document.getElementById('form_id').value = `${requestData.no}/${requestData.year}`
-                                if (document.getElementById('uploadFilePdf') != undefined) {
-                                    document.getElementById('uploadFilePdf').value = ''
-                                }
-                                if (document.getElementById('status_upload_file') != undefined) {
-                                    if (filesPdf != null) {
-                                        document.getElementById('status_upload_file').style.display = ''
-                                    } else {
-                                        document.getElementById('status_upload_file').style.display = 'none'
-                                    }
-                                }
-                                resolve();
+                                Swal.fire({
+                                    html: "เกิดข้อผิดพลาด",
+                                    icon: "error",
+                                    confirmButtonColor: "#009688"
+                                })
                             }
                         })
                     }
@@ -83,22 +74,6 @@ function insertTEST() {
                     html: "บันทึกสำเร็จ",
                     icon: "success",
                     confirmButtonColor: "#009688"
-                }).then((result) => {
-                    disableMenuAll()
-                    if (window.location.href.split('?').length === 1) {
-                        disableMenuAll()
-                        location.replace(window.location.href + '?id=' + requestData.no + '' + requestData.year)
-                    }
-                    else if (new_document === true) {
-                        let temp_html = window.location.href.split('?')
-                        location.replace(temp_html[0] + '?id=' + requestData.no + '' + requestData.year)
-                    } else {
-                        data = true
-                        enableMenu('addMenu')
-                        enableMenu('editMenu')
-                        enableMenu('deleteMenu')
-                        enableFunction()
-                    }
                 })
                 data = true
                 disableMenuAll()
@@ -106,7 +81,6 @@ function insertTEST() {
                 enableMenu('editMenu')
                 enableMenu('deleteMenu')
                 enableFunction()
-
             } else if (result.dismiss === Swal.DismissReason.cancel) {
                 // Swal.fire("บันทึกล้มเหลว");
             }
@@ -417,25 +391,25 @@ function showItem(arrayResult) {
     Item_data_operator.push(arrayResult)
 }
 function showItemRequest(arrayResult) {
-    if(arrayResult.PERSONAL_ID_ASSISTANT != null){
-        searchPersonalById(arrayResult.PERSONAL_ID_ASSISTANT).then((data) =>{
-            if(data.PERSONAL_PERSONAL_ID != undefined){
-                setDataRequest(arrayResult,Item_data_operator[0],data)
+    if (arrayResult.PERSONAL_ID_ASSISTANT != null) {
+        searchPersonalById(arrayResult.PERSONAL_ID_ASSISTANT).then((data) => {
+            if (data.PERSONAL_PERSONAL_ID != undefined) {
+                setDataRequest(arrayResult, Item_data_operator[0], data)
                 Swal.close()
-            }else{
-                setDataRequest(arrayResult,Item_data_operator[0],data)
+            } else {
+                setDataRequest(arrayResult, Item_data_operator[0], data)
                 Swal.close()
             }
         })
-    }else{
-        setDataRequest(arrayResult,Item_data_operator[0])
+    } else {
+        setDataRequest(arrayResult, Item_data_operator[0])
         Swal.close()
     }
 }
 function searchPersonalById(id) {
     return new Promise((resolve, reject) => {
         axios.get(`http://localhost:5000/get/personal/assistant/${id}`).then((result) => {
-                return resolve(result.data);
+            return resolve(result.data);
         })
     })
 }

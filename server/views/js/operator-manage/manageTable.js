@@ -519,8 +519,6 @@ function cancelStatus() {
             return new Promise(function (resolve, reject) {
                 setTimeout(function () {
                     inRequest.status = inRequest.status_before
-                    inRequest.date_issued = ''
-                    inRequest.date_expired = ''
                     updateRequest().then((data) => {
                         if (data) {
                             resolve();

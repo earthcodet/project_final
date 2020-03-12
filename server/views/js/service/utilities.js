@@ -61,7 +61,7 @@ function deleteImage() {
     selectImageFile = selectImageFile - 1
 }
 function deleteImageAllRequest() {
-    if(document.getElementById('outputImage') != undefined){
+    if (document.getElementById('outputImage') != undefined) {
         console.log('delete image all')
         document.getElementById('outputImage').textContent = ''
         totalFiles = []
@@ -69,15 +69,15 @@ function deleteImageAllRequest() {
         selectImageFile = 0
     }
 }
-function inputNumberOnly(value, id){
+function inputNumberOnly(value, id) {
     console.log(`This is inputNumberOnly ${value} ${id}`)
     let temp_value = ''
     let temp_value_array = value.split('')
     console.log(temp_value_array)
-    for(let i = 0 ; i < temp_value_array.length; i++){
+    for (let i = 0; i < temp_value_array.length; i++) {
         console.log(`!isNaN(temp_value_array[${i}]) =>(${temp_value_array[i]}) {${!isNaN(temp_value_array[i])}}`)
-        if(!isNaN(temp_value_array[i])){
-            console.log('item '+i+'   ')
+        if (!isNaN(temp_value_array[i])) {
+            console.log('item ' + i + '   ')
             temp_value = temp_value + temp_value_array[i]
         }
     }
@@ -224,13 +224,17 @@ function checkPhone(value, id, new_id) {
         document.getElementById(id).value = ''
     }
     for (let i = 1; i < tempCheck.length; i++) {
-        if (tempCheck[0] === '0') {
-            if (tempCheck[1] === '0') {
-                document.getElementById(id).value = '0'
+        if (i <= 10) {
+            if (tempCheck[0] === '0') {
+                if (tempCheck[1] === '0') {
+                    document.getElementById(id).value = '0'
+                }
+                if (tempCheck[i] === '-') {
+                    document.getElementById(id).value = value.slice(0, value.length - 1)
+                }
             }
-            if (tempCheck[i] === '-') {
-                document.getElementById(id).value = value.slice(0, value.length - 1)
-            }
+        }else{
+            document.getElementById(id).value = value.slice(0, 10)
         }
     }
 }
@@ -443,64 +447,64 @@ function toPerRequest(value, id) {
     id = id.split('/')
     switch (value) {
         case 'กิจการฌาปณสถาน':
-            window.open('../renew/renew_crematory.html' + '?id_no=' + id[0]+'&id_year='+id[1], '_blank');
+            window.open('../renew/renew_crematory.html' + '?id_no=' + id[0] + '&id_year=' + id[1], '_blank');
             break;
         case 'กิจการที่เป็นอันตรายต่อสุขภาพ':
-            window.open('../renew/renew_health_danger.html' + '?id_no=' + id[0]+'&id_year='+id[1], '_blank');
+            window.open('../renew/renew_health_danger.html' + '?id_no=' + id[0] + '&id_year=' + id[1], '_blank');
             break;
         case 'ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน':
-            window.open('../renew/renew_market.html' + '?id_no=' + id[0]+'&id_year='+id[1], '_blank');
+            window.open('../renew/renew_market.html' + '?id_no=' + id[0] + '&id_year=' + id[1], '_blank');
             break;
         case 'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร':
-            window.open('../renew/renew_area_less_correct.html' + '?id_no=' + id[0]+'&id_year='+id[1], '_blank');
+            window.open('../renew/renew_area_less_correct.html' + '?id_no=' + id[0] + '&id_year=' + id[1], '_blank');
             break;
         case 'หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร':
-            window.open('../renew/renew_area_less_sell.html' + '?id_no=' + id[0]+'&id_year='+id[1], '_blank');
+            window.open('../renew/renew_area_less_sell.html' + '?id_no=' + id[0] + '&id_year=' + id[1], '_blank');
             break;
         case 'ใบอนุญาตจัดตั้งสถานที่สะสมอาหาร':
-            window.open('../renew/renew_area_more_correct.html' + '?id_no=' + id[0]+'&id_year='+id[1], '_blank');
+            window.open('../renew/renew_area_more_correct.html' + '?id_no=' + id[0] + '&id_year=' + id[1], '_blank');
             break;
         case 'ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร':
-            window.open('../renew/renew_area_more_sell.html' + '?id_no=' + id[0]+'&id_year='+id[1], '_blank');
+            window.open('../renew/renew_area_more_sell.html' + '?id_no=' + id[0] + '&id_year=' + id[1], '_blank');
             break;
         case 'ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ':
-            window.open('../renew/renew_public_hawk.html' + '?id_no=' + id[0]+'&id_year='+id[1], '_blank');
+            window.open('../renew/renew_public_hawk.html' + '?id_no=' + id[0] + '&id_year=' + id[1], '_blank');
             break;
         default:
             //ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ
-            window.open('../renew/renew_public_sell.html' + '?id_no=' + id[0]+'&id_year='+id[1], '_blank');
+            window.open('../renew/renew_public_sell.html' + '?id_no=' + id[0] + '&id_year=' + id[1], '_blank');
             break;
     }
 }
-function toRequestAdd(value, p_id , e_id) {
+function toRequestAdd(value, p_id, e_id) {
     switch (value) {
         case 'กิจการฌาปณสถาน':
-            window.open('../request/request_crematory.html?p_id=' + p_id +'&e_id='+e_id, '_blank');
+            window.open('../request/request_crematory.html?p_id=' + p_id + '&e_id=' + e_id, '_blank');
             break;
         case 'กิจการที่เป็นอันตรายต่อสุขภาพ':
-            window.open('../request/request_health_danger.html?p_id=' + p_id +'&e_id='+e_id, '_blank');
+            window.open('../request/request_health_danger.html?p_id=' + p_id + '&e_id=' + e_id, '_blank');
             break;
         case 'ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน':
-            window.open('../request/request_market.html?p_id=' + p_id +'&e_id='+e_id, '_blank');
+            window.open('../request/request_market.html?p_id=' + p_id + '&e_id=' + e_id, '_blank');
             break;
         case 'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร':
-            window.open('../request/request_area_less_correct.html?p_id=' + p_id +'&e_id='+e_id, '_blank');
+            window.open('../request/request_area_less_correct.html?p_id=' + p_id + '&e_id=' + e_id, '_blank');
             break;
         case 'หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร':
-            window.open('../request/request_area_less_sell.html?p_id=' + p_id +'&e_id='+e_id, '_blank');
+            window.open('../request/request_area_less_sell.html?p_id=' + p_id + '&e_id=' + e_id, '_blank');
             break;
         case 'ใบอนุญาตจัดตั้งสถานที่สะสมอาหาร':
-            window.open('../request/request_area_more_correct.html?p_id=' + p_id +'&e_id='+e_id, '_blank');
+            window.open('../request/request_area_more_correct.html?p_id=' + p_id + '&e_id=' + e_id, '_blank');
             break;
         case 'ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร':
-            window.open('../request/request_area_more_sell.html?p_id=' + p_id +'&e_id='+e_id, '_blank');
+            window.open('../request/request_area_more_sell.html?p_id=' + p_id + '&e_id=' + e_id, '_blank');
             break;
         case 'ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ':
-            window.open('../request/request_public_hawk.html?p_id=' + p_id +'&e_id='+e_id, '_blank');
+            window.open('../request/request_public_hawk.html?p_id=' + p_id + '&e_id=' + e_id, '_blank');
             break;
         default:
             //ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ
-            window.open('../request/request_public_sell.html?p_id=' + p_id +'&e_id='+e_id, '_blank');
+            window.open('../request/request_public_sell.html?p_id=' + p_id + '&e_id=' + e_id, '_blank');
             break;
     }
 }

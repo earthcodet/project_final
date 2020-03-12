@@ -434,11 +434,12 @@ function setDataView() {
     }
     //ใช้อาคารสถานที่ประกอบการของผู้อื่น
     if (document.getElementById('useOtherPlace') != undefined) {
-        if (requestData.establishment_is_land_owned === '') {
+        if (establishmentData.is_land_owned === 'NO' && requestData.establishment_is_land_owned === '') {
             document.getElementById('boxOwner').style.display = 'none'
             document.getElementById('notuseOtherPlace').checked = true
             document.getElementById('useOtherPlace').checked = false
         } else {
+            // get New Data Address
             document.getElementById('boxOwner').style.display = ''
             document.getElementById('ownPrefix').value = landData.title
             document.getElementById('ownName').value = landData.name
@@ -707,7 +708,7 @@ function setEstablishmentData(raw_data) {
         establishmentData.perosonal_id = raw_data.ESTABLISHMENT_DATA.PERSONAL_ID
         // establishmentData.type = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_TYPE === null ? '' : raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_TYPE
         establishmentData.name = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_NAME === null ? '' : raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_NAME
-        establishmentData.is_land_owned = raw_data.ESTABLISHMENT_IS_LAND_OWNED === null ? 'NO' : 'YES'
+        establishmentData.is_land_owned = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_IS_LAND_OWNED === null ? 'NO' : 'YES'
         establishmentData.machine_size = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_MACHINE_SIZE === null ? 0 : raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_MACHINE_SIZE
         establishmentData.area_size = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_AREA_SIZE === null ? 0 : raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_AREA_SIZE
         establishmentData.worker = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_WORKER === null ? 0 : raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_WORKER
@@ -747,7 +748,7 @@ function setAddressOwnerLandData(raw_data) {
 function setLandData(raw_data) {
     //ADDRESS
     if (raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_IS_LAND_OWNED != undefined) {
-        landData.id = raw_data.ESTABLISHMENT_DATA.ESTABLISHMENT_IS_LAND_OWNED
+        landData.id = raw_data.ESTABLISHMENT_DATA.LAND.LAND_ID
         landData.address_id = raw_data.ESTABLISHMENT_DATA.LAND.ADDRESS_ID
         landData.title = raw_data.ESTABLISHMENT_DATA.LAND.LAND_TITLE
         landData.name = raw_data.ESTABLISHMENT_DATA.LAND.LAND_NAME
@@ -1095,7 +1096,15 @@ function createGroupData() {
             setDataUpdate('addressOwnerLandData')
             addressOwnerLandData.is_address_owner_changed = true
         }
-
+        if (document.getElementById('useOtherPlace') != undefined) {
+            if((requestData.establishment_id === '' && document.getElementById('useOtherPlace').checked != false) ||
+                requestData.establishment_id != '' && document.getElementById('useOtherPlace').checked != true){
+                    requestData.is_request_changed = true
+                    establishmentData.is_establishment_changed = true
+                    setDataUpdate('requestData')
+                    setDataUpdate('establishmentData')
+            }
+        }
         // reset Utilities.js
         file_is_uploaded = false
         image_changed = false
@@ -1384,7 +1393,6 @@ function setDataUpdate(type) {
         if (document.getElementById('timeEnd') != undefined) {
             requestData.sell_end = document.getElementById('timeEnd').value
         }
-
         if (document.getElementById('useSpirits') != undefined) {
             requestData.sell_allow = document.getElementById('useSpirits').checked === true ? 'Y' : 'N'
         }

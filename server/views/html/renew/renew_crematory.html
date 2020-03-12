@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>ใบอนุญาตกิจการฌาปณสถาน</title>
+    <title>I-คำขอต่อใบอนุญาตกิจการฌาปณสถาน</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -109,7 +109,7 @@
         <fieldset disabled style="border: 0;padding: 0;margin: 0;">
             <div class="main">
                 <header class="w3-top2">
-                    <h1 style="font-size:2.8vh;margin-left: 25px;padding: 2px;"> คำขอต่อใบอนุญาตตลาดเอกชน</h1>
+                    <h1 style="font-size:2.8vh;margin-left: 25px;padding: 2px;"> คำขอต่อใบอนุญาตกิจการฌาปณสถาน</h1>
                 </header>
                 <!-- ข้อมูลใบ -->
                 <div class="box">
@@ -275,17 +275,22 @@
             <div class="box">
                 <br>
                 <div  style="width: 80%;margin-left: 5vw;">
+                    <a> วันที่ยื่นคำขอต่ออายุใบอนุญาต </a>
+                    <input type="text" id="datepicker4" style="width: 10vw;margin-left: .5vw;" maxlength="10"
+                    onkeyup="document.getElementById('datepicker4').classList.remove('alertInput')"></a>
+                    <br>
                     <a>ใบอนุญาตฉบับจริง
                         <a>ออกให้เมื่อวันที่ :
-                            <input type="text" id="datepicker3" style="width: 12%;"></a>
+                            <input type="text" id="datepicker3" style="width: 12%;"
+                            onkeyup="document.getElementById('datepicker3').classList.remove('alertInput')"></a>
                         <a>ค่าธรรมเนียม :
-                            <input type="text" id="renew_fee" style="width: 12%;"
-                            maxlength="8"
-                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></a>
+                            <input type="text" id="renew_fee" style="width: 12%;" maxlength="8"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                onkeyup="document.getElementById('renew_fee').classList.remove('alertInput')"></a>
                         <a>ค่าปรับ :
-                            <input type="text" id="renew_fine" style="width: 12%;"
-                            maxlength="8"
-                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></a>
+                            <input type="text" id="renew_fine" style="width: 12%;" maxlength="8"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                onkeyup="document.getElementById('renew_fine').classList.remove('alertInput')"></a>
                 </div>
                 <br>
                 <br>
@@ -356,9 +361,9 @@
 <script src='../../js/renew/RenewService.js'></script>
 <script src='../../js/service/address/twoAddress.js'></script>
 <script>
-    loadingData('ใบอนุญาตกิจการฌาปณสถาน')
+    loadingData('กิจการฌาปณสถาน')
 </script>
-
+<script src="../../js/renew/RenewRequire.js"></script>
 <!-- <script src="../../js/service/checkUserLogin.js"></script> -->
 
 </html>
