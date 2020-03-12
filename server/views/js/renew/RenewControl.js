@@ -54,6 +54,9 @@ function insertTEST() {
                     if (preInsert() === true) {
                         insertRequestRenew().then((data) => {
                             if (data.no != undefined) {
+                                requestData.no = data.no
+                                requestData.year = data.year
+                                document.getElementById('form_id').value = data.no
                                 resolve();
                             } else {
                                 Swal.fire({
@@ -71,16 +74,20 @@ function insertTEST() {
         .then((result) => {
             if (result.value) {
                 Swal.fire({
-                    html: "บันทึกสำเร็จ",
+                    html: `บันทึกสำเร็จ เลขที่ใบอนุญาตใหม่คือ ${requestData.no}/${requestData.year}`,
                     icon: "success",
                     confirmButtonColor: "#009688"
+                }).then((result) => {
+                    let temp_html = window.location.href.split('?')
+                    location.replace(temp_html[0])
+                    // data = true
+                    // disableMenuAll()
+                    // enableMenu('addMenu')
+                    // enableMenu('editMenu')
+                    // enableMenu('deleteMenu')
+                    // enableFunction()
                 })
-                data = true
-                disableMenuAll()
-                enableMenu('addMenu')
-                enableMenu('editMenu')
-                enableMenu('deleteMenu')
-                enableFunction()
+
             } else if (result.dismiss === Swal.DismissReason.cancel) {
                 // Swal.fire("บันทึกล้มเหลว");
             }

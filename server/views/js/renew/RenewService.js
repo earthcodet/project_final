@@ -604,7 +604,3 @@ function loadingData(type) {
         checkView(type)
     })
 }
-function setRequestRenewDataReturn(raw_data) {
-    requestData.no = raw_data.no
-    setDataView()
-}
