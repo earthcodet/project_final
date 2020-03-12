@@ -1617,35 +1617,55 @@ class service {
             })
         })
     }
-    getEstablishment(id) {
+    getEstablishment(id, l_id, a_id) {
         return new Promise((resolve, reject) => {
             EstablishmentDAOObj.get(id).then((e_data) => {
                 if (e_data != undefined) {
-                    this.getAddressByAddressId(e_data.ADDRESS_ID).then((e_address_data) => {
-                        e_data.ADDRESS = e_address_data[0]
-                        if (e_data.ESTABLISHMENT_IS_LAND_OWNED != null) {
-                            LandDAOObj.get(e_data.ESTABLISHMENT_IS_LAND_OWNED).then((land_data) => {
+                    if (l_id != undefined && a_id != undefined) {
+                        if (l_id != e_data.ESTABLISHMENT_IS_LAND_OWNED) {
+                            LandDAOObj.get(l_id).then((land_data) => {
                                 if (land_data.LAND_BIRTHDAY != null) {
                                     land_data.LAND_BIRTHDAY = this.formatDate('TO-DISPLAY', land_data.LAND_BIRTHDAY + '')
                                 } else {
                                     land_data.LAND_BIRTHDAY = ''
                                 }
-                                this.getAddressByAddressId(land_data.ADDRESS_ID).then((land_address_data) => {
+                                this.getAddressByAddressId(a_id).then((land_address_data) => {
                                     FileDAOObj.getfile(land_data.LAND_ID).then((data) => {
                                         land_data.UPLOADFILE = data
                                         land_data.ADDRESS = land_address_data[0]
                                         e_data.LAND = land_data
                                         return resolve(e_data)
                                     })
-
                                 })
-
-                                // this.getAddressByAddressId(land_data.ADDRESS_ID)
                             })
-                        } else {
-                            return resolve(e_data)
                         }
-                    })
+                    } else {
+                        this.getAddressByAddressId(e_data.ADDRESS_ID).then((e_address_data) => {
+                            e_data.ADDRESS = e_address_data[0]
+                            if (e_data.ESTABLISHMENT_IS_LAND_OWNED != null) {
+                                LandDAOObj.get(e_data.ESTABLISHMENT_IS_LAND_OWNED).then((land_data) => {
+                                    if (land_data.LAND_BIRTHDAY != null) {
+                                        land_data.LAND_BIRTHDAY = this.formatDate('TO-DISPLAY', land_data.LAND_BIRTHDAY + '')
+                                    } else {
+                                        land_data.LAND_BIRTHDAY = ''
+                                    }
+                                    this.getAddressByAddressId(land_data.ADDRESS_ID).then((land_address_data) => {
+                                        FileDAOObj.getfile(land_data.LAND_ID).then((data) => {
+                                            land_data.UPLOADFILE = data
+                                            land_data.ADDRESS = land_address_data[0]
+                                            e_data.LAND = land_data
+                                            return resolve(e_data)
+                                        })
+
+                                    })
+
+                                    // this.getAddressByAddressId(land_data.ADDRESS_ID)
+                                })
+                            } else {
+                                return resolve(e_data)
+                            }
+                        })
+                    }
                 } else {
                     return resolve(false)
                 }
@@ -1967,35 +1987,14 @@ class service {
                                 data.REQUEST_DATE_ISSUED = data.REQUEST_DATE_ISSUED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_ISSUED + '') : data.REQUEST_DATE_ISSUED
                                 data.REQUEST_DATE_EXPIRED = data.REQUEST_DATE_EXPIRED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_EXPIRED + '') : data.REQUEST_DATE_EXPIRED
                                 data.REQUEST_LAST_UPDATE = data.REQUEST_LAST_UPDATE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_LAST_UPDATE + '') : data.REQUEST_LAST_UPDATE
-                                this.getEstablishment(data.ESTABLISHMENT_ID).then((dataEstablishment) => {
-
-                                    console.log('------------------------------------')
-                                    console.log(`data.ESTABLISHMENT_IS_LAND_OWNED`)
-                                    console.log(data.ESTABLISHMENT_IS_LAND_OWNED)
-                                    console.log(`dataEstablishment.ESTABLISHMENT_IS_LAND_OWNED`)
-                                    console.log(dataEstablishment.ESTABLISHMENT_IS_LAND_OWNED)
-                                    console.log('------------------------------------D')
-                                    if (dataEstablishment.ESTABLISHMENT_IS_LAND_OWNED != data.ESTABLISHMENT_IS_LAND_OWNED) {
-                                        console.log('get TRUE THREE')
-                                        dataEstablishment.LAND = ''
-                                        LandDAOObj.get(data.ESTABLISHMENT_IS_LAND_OWNED).then((land_data) => {
-                                            if (land_data.LAND_BIRTHDAY != null) {
-                                                land_data.LAND_BIRTHDAY = this.formatDate('TO-DISPLAY', land_data.LAND_BIRTHDAY + '')
-                                            } else {
-                                                land_data.LAND_BIRTHDAY = ''
-                                            }
-                                            this.getAddressByAddressId(data.ESTABLISHMENT_ADDRESS_ID).then((land_address_data) => {
-                                                FileDAOObj.getfile(land_data.LAND_ID).then((data) => {
-                                                    land_data.UPLOADFILE = data
-                                                    land_data.ADDRESS = land_address_data[0]
-                                                    dataEstablishment.LAND = land_data
-                                                })
-
-                                            })
-
-                                            // this.getAddressByAddressId(land_data.ADDRESS_ID)
-                                        })
-                                    }
+                                this.getEstablishment(data.ESTABLISHMENT_ID, data.ESTABLISHMENT_IS_LAND_OWNED, data.ESTABLISHMENT_ADDRESS_ID).then((dataEstablishment) => {
+                                    data.gropDataAssistant = undefined
+                                    data.REQUEST_DATE_SUBMISSION = data.REQUEST_DATE_SUBMISSION != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_SUBMISSION + '') : data.REQUEST_DATE_SUBMISSION
+                                    data.REQUEST_DATE_APPROVE = data.REQUEST_DATE_APPROVE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_APPROVE + '') : data.REQUEST_DATE_APPROVE
+                                    data.REQUEST_RECEIPT_DATE = data.REQUEST_RECEIPT_DATE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_RECEIPT_DATE + '') : data.REQUEST_RECEIPT_DATE
+                                    data.REQUEST_DATE_ISSUED = data.REQUEST_DATE_ISSUED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_ISSUED + '') : data.REQUEST_DATE_ISSUED
+                                    data.REQUEST_DATE_EXPIRED = data.REQUEST_DATE_EXPIRED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_EXPIRED + '') : data.REQUEST_DATE_EXPIRED
+                                    data.REQUEST_LAST_UPDATE = data.REQUEST_LAST_UPDATE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_LAST_UPDATE + '') : data.REQUEST_LAST_UPDATE
                                     data.ESTABLISHMENT_DATA = dataEstablishment
                                     if (data.TRAIN_ID != null) {
                                         this.getTrainByTrainId(data.TRAIN_ID).then((dataTrain) => {
@@ -2034,41 +2033,14 @@ class service {
                                 })
                             })
                         } else {
-                            data.gropDataAssistant = undefined
-                            data.REQUEST_DATE_SUBMISSION = data.REQUEST_DATE_SUBMISSION != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_SUBMISSION + '') : data.REQUEST_DATE_SUBMISSION
-                            data.REQUEST_DATE_APPROVE = data.REQUEST_DATE_APPROVE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_APPROVE + '') : data.REQUEST_DATE_APPROVE
-                            data.REQUEST_RECEIPT_DATE = data.REQUEST_RECEIPT_DATE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_RECEIPT_DATE + '') : data.REQUEST_RECEIPT_DATE
-                            data.REQUEST_DATE_ISSUED = data.REQUEST_DATE_ISSUED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_ISSUED + '') : data.REQUEST_DATE_ISSUED
-                            data.REQUEST_DATE_EXPIRED = data.REQUEST_DATE_EXPIRED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_EXPIRED + '') : data.REQUEST_DATE_EXPIRED
-                            data.REQUEST_LAST_UPDATE = data.REQUEST_LAST_UPDATE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_LAST_UPDATE + '') : data.REQUEST_LAST_UPDATE
-                            this.getEstablishment(data.ESTABLISHMENT_ID).then((dataEstablishment) => {
-                                console.log('Not Assi--------------------------------')
-                                console.log(`data.ESTABLISHMENT_IS_LAND_OWNED`)
-                                console.log(data.ESTABLISHMENT_IS_LAND_OWNED)
-                                console.log(`dataEstablishment.ESTABLISHMENT_IS_LAND_OWNED`)
-                                console.log(dataEstablishment.ESTABLISHMENT_IS_LAND_OWNED)
-                                console.log('------------------------------------D')
-                                if (dataEstablishment.ESTABLISHMENT_IS_LAND_OWNED != data.ESTABLISHMENT_IS_LAND_OWNED) {
-                                    console.log('get TRUE THREE')
-                                    dataEstablishment.LAND = ''
-                                    LandDAOObj.get(data.ESTABLISHMENT_IS_LAND_OWNED).then((land_data) => {
-                                        if (land_data.LAND_BIRTHDAY != null) {
-                                            land_data.LAND_BIRTHDAY = this.formatDate('TO-DISPLAY', land_data.LAND_BIRTHDAY + '')
-                                        } else {
-                                            land_data.LAND_BIRTHDAY = ''
-                                        }
-                                        this.getAddressByAddressId(data.ESTABLISHMENT_ADDRESS_ID).then((land_address_data) => {
-                                            FileDAOObj.getfile(land_data.LAND_ID).then((data) => {
-                                                land_data.UPLOADFILE = data
-                                                land_data.ADDRESS = land_address_data[0]
-                                                dataEstablishment.LAND = land_data
-                                            })
-
-                                        })
-
-                                        // this.getAddressByAddressId(land_data.ADDRESS_ID)
-                                    })
-                                }
+                            this.getEstablishment(data.ESTABLISHMENT_ID, data.ESTABLISHMENT_IS_LAND_OWNED, data.ESTABLISHMENT_ADDRESS_ID).then((dataEstablishment) => {
+                                data.gropDataAssistant = undefined
+                                data.REQUEST_DATE_SUBMISSION = data.REQUEST_DATE_SUBMISSION != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_SUBMISSION + '') : data.REQUEST_DATE_SUBMISSION
+                                data.REQUEST_DATE_APPROVE = data.REQUEST_DATE_APPROVE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_APPROVE + '') : data.REQUEST_DATE_APPROVE
+                                data.REQUEST_RECEIPT_DATE = data.REQUEST_RECEIPT_DATE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_RECEIPT_DATE + '') : data.REQUEST_RECEIPT_DATE
+                                data.REQUEST_DATE_ISSUED = data.REQUEST_DATE_ISSUED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_ISSUED + '') : data.REQUEST_DATE_ISSUED
+                                data.REQUEST_DATE_EXPIRED = data.REQUEST_DATE_EXPIRED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_EXPIRED + '') : data.REQUEST_DATE_EXPIRED
+                                data.REQUEST_LAST_UPDATE = data.REQUEST_LAST_UPDATE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_LAST_UPDATE + '') : data.REQUEST_LAST_UPDATE
                                 data.ESTABLISHMENT_DATA = dataEstablishment
                                 if (data.TRAIN_ID != null) {
                                     this.getTrainByTrainId(data.TRAIN_ID).then((dataTrain) => {
@@ -2105,12 +2077,10 @@ class service {
                                     }
                                 }
                             })
+                            return resolve(undefined)
                         }
                     })
-                } else {
-                    return resolve(undefined)
                 }
-
             })
         })
     }
@@ -3026,8 +2996,25 @@ class service {
                                                         this.updateEstablishmentAndCheckDuplication(new_edata, address)
                                                     }
                                                 } else {
+                                                    /*
                                                     let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
                                                     this.updateEstablishmentAndCheckDuplication(new_edata, address)
+                                                    //last commit 
+                                                    */
+                                                    let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
+                                                    request.establishment_is_land_owned = 'NULL'
+                                                    request.establishment_address_id = 'NULL'
+                                                    console.log('#6')
+                                                    this.updateEstablishmentAndCheckDuplication(new_edata, address).then((est_id) => {
+                                                        if (est_id != true && est_id != false) {
+                                                            request.establishment_id = est_id
+                                                            console.log('#1')
+                                                            this.updateRequest(request)
+                                                        } else {
+                                                            console.log('#1-02')
+                                                            this.updateRequest(request)
+                                                        }
+                                                    })
                                                 }
 
                                             } else {
@@ -3126,8 +3113,8 @@ class service {
                                                 }
                                             } else {
                                                 let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
-                                                request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                request.establishment_is_land_owned = 'NULL'
+                                                request.establishment_address_id = 'NULL'
                                                 console.log('#19')
                                                 this.updateEstablishmentAndCheckDuplication(new_edata, address).then((est_id) => {
                                                     if (est_id != true && est_id != false) {
@@ -3235,8 +3222,8 @@ class service {
                                             }
                                         } else {
                                             let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                            request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
-                                            request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                            request.establishment_is_land_owned = 'NULL'
+                                            request.establishment_address_id = 'NULL'
                                             console.log('#24')
                                             this.updateEstablishmentAndCheckDuplication(new_edata, address).then((est_id) => {
                                                 if (est_id != true && est_id != false) {
@@ -3353,8 +3340,8 @@ class service {
                                                 }
                                             } else {
                                                 let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
-                                                request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                                request.establishment_is_land_owned = 'NULL'
+                                                request.establishment_address_id = 'NULL'
                                                 console.log('#1')
                                                 this.updateEstablishmentAndCheckDuplication(new_edata, address).then((est_id) => {
                                                     if (est_id != true && est_id != false) {
@@ -3461,8 +3448,8 @@ class service {
                                             }
                                         } else {
                                             let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                            request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
-                                            request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                            request.establishment_is_land_owned = 'NULL'
+                                            request.establishment_address_id = 'NULL'
                                             console.log('#15')
                                             this.updateEstablishmentAndCheckDuplication(new_edata, address).then((est_id) => {
                                                 if (est_id != true && est_id != false) {
@@ -3567,8 +3554,8 @@ class service {
                                         }
                                     } else {
                                         let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                        request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
-                                        request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                        request.establishment_is_land_owned = 'NULL'
+                                        request.establishment_address_id = 'NULL'
                                         console.log('#1')
                                         this.updateEstablishmentAndCheckDuplication(new_edata, address).then((est_id) => {
                                             if (est_id != true && est_id != false) {
@@ -3677,8 +3664,8 @@ class service {
                                     }
                                 } else {
                                     let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                    request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
-                                    request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
+                                    request.establishment_is_land_owned = 'NULL'
+                                    request.establishment_address_id = 'NULL'
                                     console.log('#29')
                                     this.updateEstablishmentAndCheckDuplication(new_edata, address).then((est_id) => {
                                         if (est_id != true && est_id != false) {
@@ -3775,7 +3762,19 @@ class service {
                         }
                     } else {
                         let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                        this.updateEstablishmentAndCheckDuplication(new_edata, address)
+                        request.establishment_is_land_owned = 'NULL'
+                        request.establishment_address_id = 'NULL'
+                        console.log('#29')
+                        this.updateEstablishmentAndCheckDuplication(new_edata, address).then((est_id) => {
+                            if (est_id != true && est_id != false) {
+                                request.establishment_id = est_id
+                                console.log('#1')
+                                this.updateRequest(request)
+                            } else {
+                                console.log('#1-02')
+                                this.updateRequest(request)
+                            }
+                        })
                     }
 
                 }

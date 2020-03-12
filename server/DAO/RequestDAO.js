@@ -178,6 +178,7 @@ class RequestDAO {
             column = column + `REQUEST_IMAGE_NAME=${request.image_name }, REQUEST_TOTAL_IMAGE='${request.total_image }', REQUEST_STATUS='${request.status }', REQUEST_DELETE_LOGIC=${request.delete_logic }, REQUEST_IS_DELETED='${request.is_deleted }', `
             column = column + `REQUEST_LAST_UPDATE='${request.last_update }', REQUEST_USER_UPDATE='${request.user_update }' , `
             column = column + `REQUEST_STATUS_BEFORE='${request.status_before}', REQUEST_STATUS='${request.status}', `
+            column = column + `ESTABLISHMENT_IS_LAND_OWNED = ${request.establishment_is_land_owned},ESTABLISHMENT_ADDRESS_ID = ${request.establishment_address_id},`
             //year 1
             column = column + `REQUEST_RECEIPT_FINE=${request.receipt_fine }, REQUEST_RECEIPT_FEE=${request.receipt_fee}, `
             column = column + `REQUEST_RECEIPT_TOTAL=${request.receipt_total}, REQUEST_RECEIPT_DATE=${request.receipt_date }, `
@@ -194,6 +195,8 @@ class RequestDAO {
                     console.log(err) 
                     return resolve(err.code)
                 }
+                console.log('UPDATE request sucess ')
+                console.log(query)
                 return resolve(`true`)
             })
         })
