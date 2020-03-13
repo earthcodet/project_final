@@ -428,7 +428,7 @@ function payPopup() {
                                     });
                                 }
                             })
-                         }
+                        }
                     }, 100);
                 });
             }
@@ -518,7 +518,40 @@ function cancelStatus() {
         preConfirm: function () {
             return new Promise(function (resolve, reject) {
                 setTimeout(function () {
-                    inRequest.status = inRequest.status_before
+                    switch (inRequest.status) {
+                        case 'wait':
+                            inRequest.status = 'wait'
+                            break;
+                        case 'approval':
+                            inRequest.status = 'wait'
+                            break;
+                        case 'active':
+                            inRequest.status = 'approval'
+                            inRequest.date_issued = ''
+                            inRequest.date_expired = ''
+                            //year 1
+                            inRequest.receipt_date = ''
+                            inRequest.receipt_fee = ''
+                            inRequest.receipt_fine = ''
+                            //year2
+                            inRequest.receipt_date_year_2 = ''
+                            inRequest.receipt_fee_year_2 = ''
+                            inRequest.receipt_fine_year_2 = ''
+                            //year 3
+                            inRequest.receipt_date_year_3 = ''
+                            inRequest.receipt_fee_year_3 = ''
+                            inRequest.receipt_fine_year_3 = ''
+                            break;
+                        case 'cancel':
+                            inRequest.status = inRequest.status_before
+                            break;
+                        default:
+                            //'ban'
+                            inRequest.status = 'active'
+                            break;
+
+                    }
+                    // inRequest.status = inRequest.status_before
                     updateRequest().then((data) => {
                         if (data) {
                             resolve();
@@ -599,7 +632,7 @@ function addPopup() {
     }).then((result) => {
         if (result.value) {
             let type = document.getElementById('add_type_menu').value
-            toRequestAdd(type,inPersonal.id,inRequest.establishment_id)
+            toRequestAdd(type, inPersonal.id, inRequest.establishment_id)
         } else if (result.dismiss === Swal.DismissReason.cancel) {
         }
     });
@@ -656,16 +689,16 @@ $(function () {
             console.log(`this`)
             console.log(this)
             setDataItem(requestDataList[indexData])
-            if(inRequest.is_deleted === 'Y' && key != 'detail'){
+            if (inRequest.is_deleted === 'Y' && key != 'detail') {
                 statusRequestDelete()
-            }else{
+            } else {
                 if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
                     statusDelete()
                 } else {
                     switch (key) {
                         case 'per':
                             // perPopup(type)
-                            toPerRequest(type,id)
+                            toPerRequest(type, id)
                             break;
                         case 'transfer':
                             transferPopup()
@@ -688,7 +721,7 @@ $(function () {
                     }
                 }
             }
-            
+
         },
         items: {
             "per": { name: "ต่อใบอนุญาต" },
@@ -710,9 +743,9 @@ $(function () {
             let id = this[0].cells[2].innerText.trim()
             let indexData = this[0].rowIndex - 1
             setDataItem(requestDataList[indexData])
-            if(inRequest.is_deleted === 'Y' && key != 'detail'){
+            if (inRequest.is_deleted === 'Y' && key != 'detail') {
                 statusRequestDelete()
-            }else{
+            } else {
                 if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
                     statusDelete()
                 } else {
@@ -732,7 +765,7 @@ $(function () {
                     }
                 }
             }
-         
+
         },
         items: {
             "pay": { name: "ชำระเงินแล้ว" },
@@ -750,16 +783,16 @@ $(function () {
         callback: function (key, options) {
             let type = this[0].cells[1].innerText.trim()
             let id = this[0].cells[2].innerText.trim()
-            if(inRequest.is_deleted === 'Y' && key != 'detail'){
+            if (inRequest.is_deleted === 'Y' && key != 'detail') {
                 statusRequestDelete()
-            }else{
+            } else {
                 if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
                     statusDelete()
                 } else {
                     toRequest(type, id)
                 }
             }
-           
+
         },
         items: {
             "detail": { name: "ดูรายละเอียด" }
@@ -776,9 +809,9 @@ $(function () {
             let id = this[0].cells[2].innerText.trim()
             let indexData = this[0].rowIndex - 1
             setDataItem(requestDataList[indexData])
-            if(inRequest.is_deleted === 'Y' && key != 'detail'){
+            if (inRequest.is_deleted === 'Y' && key != 'detail') {
                 statusRequestDelete()
-            }else{
+            } else {
                 if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
                     statusDelete()
                 } else {
@@ -790,7 +823,7 @@ $(function () {
                     }
                 }
             }
-          
+
 
         },
         items: {
@@ -809,9 +842,9 @@ $(function () {
             let indexData = this[0].rowIndex - 1
             console.log(indexData)
             setDataItem(requestDataList[indexData])
-            if(inRequest.is_deleted === 'Y' && key != 'detail'){
+            if (inRequest.is_deleted === 'Y' && key != 'detail') {
                 statusRequestDelete()
-            }else{
+            } else {
                 if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
                     statusDelete()
                 } else {
@@ -831,7 +864,7 @@ $(function () {
                     }
                 }
             }
-            
+
         },
         items: {
             "approval": { name: "อนุมัติ" },
@@ -849,16 +882,16 @@ $(function () {
         callback: function (key, options) {
             let id = this[0].cells[2].innerText.trim()
             let type = this[0].cells[1].innerText.trim()
-            if(inRequest.is_deleted === 'Y' && key != 'detail'){
+            if (inRequest.is_deleted === 'Y' && key != 'detail') {
                 statusRequestDelete()
-            }else{
+            } else {
                 if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
                     statusDelete()
                 } else {
                     toRequest(type, id)
                 }
             }
-           
+
         },
         items: {
             "detail": { name: "ดูรายละเอียด" }

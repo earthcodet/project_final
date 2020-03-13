@@ -1,3 +1,4 @@
+
 let newDocument = true
 let requestType = []
 let userMoney = ''
@@ -18,6 +19,7 @@ function checkView(typeForm) {
             if (checkSight) {
                 getRequestDataRenew(requsetNo, requestYear).then((raw_data) => {
                     if (raw_data.length != 0) {
+                        console.log(raw_data)
                         setRequestData(raw_data[0])
                         setDataOperator(raw_data[0].GropDataProsonal)
                         setOperatorAddressData(raw_data[0].GropDataProsonal)
@@ -264,8 +266,8 @@ function setRequestData(raw_data) {
     requestData.staff_id_money = raw_data.STAFF_ID_MONEY === null ? '' : raw_data.STAFF_ID_MONEY
     requestData.personal_id_assistant = raw_data.PERSONAL_ID_ASSISTANT === null ? '' : raw_data.PERSONAL_ID_ASSISTANT
     requestData.staff_id_approve = raw_data.STAFF_ID_APPROVE === null ? '' : raw_data.STAFF_ID_APPROVE
-    requestData.establishment_is_land_owned = raw_data.ESTABLISHMENT_IS_LAND_OWNED === null ? '' : raw_data.ESTABLISHMENT_IS_LAND_OWNED
-    requestData.establishment_address_id = raw_data.ESTABLISHMENT_ADDRESS_ID === null ? '' : raw_data.ESTABLISHMENT_ADDRESS_ID
+    requestData.establishment_is_land_owned = raw_data.E_DATA_LAND === null ? '' : raw_data.E_DATA_LAND
+    requestData.establishment_address_id = raw_data.E_DATA_ADDRESS === null ? '' : raw_data.E_DATA_ADDRESS
     requestData.menu = raw_data.REQUEST_MENU
     requestData.date_submission = raw_data.REQUEST_DATE_SUBMISSION
     requestData.date_approve = raw_data.REQUEST_DATE_APPROVE === null ? '' : raw_data.REQUEST_DATE_APPROVE
@@ -350,6 +352,7 @@ function setOperatorAddressData(raw_data) {
     operatorAddressData.province_name = raw_data.AID.PROVINCE_NAME
 }
 function setAddressEstablishmentData(raw_data) {
+    // addressEstablishmentData.id = raw_data.E
     addressEstablishmentData.home_number = raw_data.ADDRESS_HOME_NUMBER
     addressEstablishmentData.moo = raw_data.ADDRESS_MOO === null ? '' : raw_data.ADDRESS_MOO
     addressEstablishmentData.trxk = raw_data.ADDRESS_TRXK === null ? '' : raw_data.ADDRESS_TRXK
@@ -363,6 +366,7 @@ function setAddressEstablishmentData(raw_data) {
 function setEstablishmentData(raw_data) {
     // establishmentData.type = raw_data.ESTABLISHMENT_TYPE === null ? '' : raw_data.ESTABLISHMENT_TYPE
     establishmentData.name = raw_data.ESTABLISHMENT_NAME === null ? '' : raw_data.ESTABLISHMENT_NAME
+    establishmentData.is_land_owned = raw_data.ESTABLISHMENT_IS_LAND_OWNED === null ? '' : raw_data.ESTABLISHMENT_IS_LAND_OWNED
     establishmentData.machine_size = raw_data.ESTABLISHMENT_MACHINE_SIZE === null ? 0 : raw_data.ESTABLISHMENT_MACHINE_SIZE
     establishmentData.area_size = raw_data.ESTABLISHMENT_AREA_SIZE === null ? 0 : raw_data.ESTABLISHMENT_AREA_SIZE
     establishmentData.worker = raw_data.ESTABLISHMENT_WORKER === null ? 0 : raw_data.ESTABLISHMENT_WORKER
@@ -373,8 +377,8 @@ function setEstablishmentData(raw_data) {
 // set data change
 function createRenewData() {
     requestData.receipt_data = document.getElementById('datepicker3').value.trim()
-    requestData.receipt_fine = document.getElementById('renew_fee').value.trim()
-    requestData.receipt_fee = document.getElementById('renew_fine').value.trim()
+    requestData.receipt_fine = document.getElementById('renew_fine').value.trim()
+    requestData.receipt_fee = document.getElementById('renew_fee').value.trim()
     requestData.date_submission = document.getElementById('datepicker4').value.trim()
     requestData.year = parseInt(new Date().toISOString().slice(0, 4)) + 543
     requestData.date_issued = document.getElementById('datepicker3').value.trim()
@@ -387,7 +391,7 @@ function createRenewData() {
         let day = dateNew_t_n[0]
         let month = dateNew_t_n[1]
         let year = parseInt(dateNew_t_n[2]) + 3
-        if (day === '29' && month === '2' && year % 4 === 0) {
+        if (day === '29' && month === '02' && year % 4 === 0) {
             requestData.date_expired = `01-03-${year}`
         } else {
             requestData.date_expired = `${day}-${month}-${year}`
@@ -401,7 +405,11 @@ function createRenewData() {
         let day = dateNew_t_n[0]
         let month = dateNew_t_n[1]
         let year = parseInt(dateNew_t_n[2]) + 1
-        requestData.date_expired = `${day}-${month}-${year}`
+        if (day === '29' && month === '02' && year % 4 === 0) {
+            requestData.date_expired = `01-03-${year}`
+        } else {
+            requestData.date_expired = `${day}-${month}-${year}`
+        }
         console.log(`date expire condition 3 ${requestData.date_expired}`)
     }
     

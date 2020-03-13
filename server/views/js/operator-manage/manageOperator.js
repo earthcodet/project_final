@@ -627,19 +627,16 @@ function createTableRequestAssistant(data) {
                     //order
                     var cellText = document.createTextNode(`${data[i].REQUEST_NO}/${data[i].REQUEST_YEAR}`);
                 } else if (j === 3) {
-                    if (data[i].REQUEST_DATE_ISSUED != null && data[i].REQUEST_DATE_ISSUED != '') {
-                        let temp_date = data[i].REQUEST_DATE_ISSUED + ''
-                        //02-01-2563
-                        let temp_array = temp_date.split('-')
-                        let temp_montn = parseInt(temp_array[1])
-                        let text = `${parseInt(temp_array[0])} ${numToMonth[temp_montn]} ${temp_array[2]}`
+                    // name owner
+                        let titel_t = data[i].PERSONAL_TITLE === null ? '' : data[i].PERSONAL_TITLE
+                        let name_t = data[i].PERSONAL_NAME === null ? '' : data[i].PERSONAL_NAME
+                        let surname_t = data[i].PERSONAL_SURNAME === null ? '' : data[i].PERSONAL_SURNAME
+                        let text = `${titel_t} ${name_t} ${surname_t}`
                         var cellText = document.createTextNode(text);
-                    } else {
-                        var cellText = document.createTextNode('-');
-                    }
+                    
                 } else if (j === 4) {
                     //end start
-                    if (data[i].REQUEST_DATE_ISSUED != null && data[i].REQUEST_DATE_ISSUED != '') {
+                    if (data[i].REQUEST_DATE_ISSUED != null && data[i].REQUEST_DATE_ISSUED != ''&& data[i].REQUEST_STATUS != 'approval'&& data[i].REQUEST_STATUS != 'wait') {
                         let temp_date = data[i].REQUEST_DATE_ISSUED + ''
                         //02-01-2563
                         let temp_array = temp_date.split('-')
@@ -652,7 +649,7 @@ function createTableRequestAssistant(data) {
                     }
                 } else if( j=== 5){
                    //end date
-                    if (data[i].REQUEST_DATE_EXPIRED != null && data[i].REQUEST_DATE_EXPIRED != '') {
+                    if (data[i].REQUEST_DATE_EXPIRED != null && data[i].REQUEST_DATE_EXPIRED != '' && data[i].REQUEST_STATUS != 'approval'&& data[i].REQUEST_STATUS != 'wait') {
                         let temp_date = data[i].REQUEST_DATE_EXPIRED + ''
                         //02-01-2563
                         let temp_array = temp_date.split('-')
@@ -670,7 +667,7 @@ function createTableRequestAssistant(data) {
                     } else if (now_status === 'cancel') {
                         var cellText = document.createTextNode('ยกเลิกแล้ว');
                     } else {
-                        if (data[i].REQUEST_DATE_EXPIRED != null) {
+                        if (data[i].REQUEST_DATE_EXPIRED != null && data[i].REQUEST_STATUS != 'approval'&& data[i].REQUEST_STATUS != 'wait') {
                             let daysBetween = data[i].COUNT_DATE_EXPIRE
                             if (daysBetween < 0) {
                                 text = 'หมดอายุ'
@@ -729,7 +726,7 @@ function createTableRequest(data) {
                 //order
                 var cellText = document.createTextNode(`${data[i].REQUEST_NO}/${data[i].REQUEST_YEAR}`);
             } else if (j === 3) {
-                if (data[i].REQUEST_DATE_ISSUED != null && data[i].REQUEST_DATE_ISSUED != '') {
+                if (data[i].REQUEST_DATE_ISSUED != null && data[i].REQUEST_DATE_ISSUED != '' && data[i].REQUEST_STATUS != 'approval'&& data[i].REQUEST_STATUS != 'wait') {
                     let temp_date = data[i].REQUEST_DATE_ISSUED + ''
                     //02-01-2563
                     let temp_array = temp_date.split('-')
@@ -741,7 +738,7 @@ function createTableRequest(data) {
                 }
             } else if (j === 4) {
                 //end date
-                if (data[i].REQUEST_DATE_EXPIRED != null && data[i].REQUEST_DATE_EXPIRED != '') {
+                if (data[i].REQUEST_DATE_EXPIRED != null && data[i].REQUEST_DATE_EXPIRED != '' && data[i].REQUEST_STATUS != 'approval'&& data[i].REQUEST_STATUS != 'wait') {
                     let temp_date = data[i].REQUEST_DATE_EXPIRED + ''
                     //02-01-2563
                     let temp_array = temp_date.split('-')
@@ -759,7 +756,7 @@ function createTableRequest(data) {
                 } else if (now_status === 'cancel') {
                     var cellText = document.createTextNode('ยกเลิกแล้ว');
                 } else {
-                    if (data[i].REQUEST_DATE_EXPIRED != null) {
+                    if (data[i].REQUEST_DATE_EXPIRED != null&& data[i].REQUEST_STATUS != 'approval'&& data[i].REQUEST_STATUS != 'wait') {
                         let daysBetween = data[i].COUNT_DATE_EXPIRE
                         if (daysBetween < 0) {
                             text = 'หมดอายุ'

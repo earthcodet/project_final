@@ -80,16 +80,8 @@ function insertTEST() {
                 }).then((result) => {
                     let temp_html = window.location.href.split('?')
                     location.replace(temp_html[0])
-                    // data = true
-                    // disableMenuAll()
-                    // enableMenu('addMenu')
-                    // enableMenu('editMenu')
-                    // enableMenu('deleteMenu')
-                    // enableFunction()
                 })
-
             } else if (result.dismiss === Swal.DismissReason.cancel) {
-                // Swal.fire("บันทึกล้มเหลว");
             }
         });
 }
@@ -202,7 +194,7 @@ function createResultSearchRequestRenew(data, typeSearch) {
         var row = document.createElement("tr");
         //row index = this.rowIndex
         row.onclick = function () { showItemRequest(data[this.rowIndex - 1], typeSearch) }
-
+        row.style.fontSize = '0.9vw'
         for (var j = 0; j < 7; j++) {
             var cell = document.createElement("td");
             if (j === 0) {
@@ -227,6 +219,7 @@ function createResultSearchRequestRenew(data, typeSearch) {
                 AddressText = AddressText + `อำเภอ ${data[i].AMPHUR_NAME === null ? '-' : data[i].AMPHUR_NAME}`
                 AddressText = AddressText + `จังหวัด ${data[i].PROVINCE_NAME === null ? '-' : data[i].PROVINCE_NAME}`
                 var cellText = document.createTextNode(AddressText);
+                cellText
             } else if (j === 5) {
                 var cellText = document.createTextNode(data[i].REQUEST_DATE_ISSUED);
             } else {
