@@ -167,6 +167,7 @@ app.post('/insert/personal', (req, res) => {
   } else {
     obj[2].data = null
   }
+  
   webService.InsertPersonalStep(obj[0], obj[1], obj[2], req.session.username).then((data) => {
     console.log(`server : function InsertPersonalStep return = ${data}`)
     res.json(data)

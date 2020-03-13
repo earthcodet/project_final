@@ -325,7 +325,7 @@ function preInsert() {
     let check_id_company = document.getElementById('company-id').value
     let check_input = inputRequired()
     if (check_input) {
-        if (check_id_user.trim().length === 13 && type_user === 'บุคคลธรรมดา' || check_id_company.trim().length === 13 && type_user === 'นิติบุคคล') {
+         if (check_id_user.trim().length === 13 && type_user === 'บุคคลธรรมดา' || check_id_company.trim().length === 13 && type_user === 'นิติบุคคล') {
             if (!_isUsed) {
                 if (formatPhone(document.getElementById('phone').value.trim()) || formatPhone(document.getElementById('company-phone').value.trim())) {
                     if (document.getElementById("typeUser").value === 'บุคคลธรรมดา') {
@@ -468,7 +468,7 @@ function duplicateId(personalId) {
         axios
             .get("http://localhost:5000/get/personalId/" + personalId)
             .then(data => {
-                return resolve(data.data);
+                 return resolve(data.data);
             });
     });
 }
@@ -672,9 +672,11 @@ function insertToDatabase() {
             formData.append("image", fileImage);
         } else {
             formData.append("image", null);
-            arrInsert[2].name = 'NO_UPlOAD'
+           
             if(new_document === true){
                 arrInsert[2].name = ''
+            }else{
+                arrInsert[2].name = 'NO_UPlOAD'
             }
         }
 
