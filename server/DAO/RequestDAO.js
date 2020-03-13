@@ -128,7 +128,7 @@ class RequestDAO {
             let joinTable = `JOIN establishment ON request.ESTABLISHMENT_ID = establishment.ESTABLISHMENT_ID `
             joinTable = joinTable + `JOIN request_type ON request.REQUEST_TYPE_ID = request_type.REQUEST_TYPE_ID `
             joinTable = joinTable + `JOIN address ON address.ADDRESS_ID = establishment.ADDRESS_ID `
-            let query = `SELECT * FROM request ${joinTable} WHERE request.REQUEST_NO='${no}' AND request.REQUEST_YEAR='${year}'`
+            let query = `SELECT * FROM request ${joinTable} WHERE request.REQUEST_NO='${no}' AND request.REQUEST_YEAR='${year}' AND DATEDIFF(request.REQUEST_DATE_EXPIRED, NOW()) <= 90`
             con.query(query, function (err, result) {
                 if (err) {
                     console.log(err) 

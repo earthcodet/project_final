@@ -675,7 +675,7 @@ function createTableRequestAssistant(data) {
                             if (daysBetween < 0) {
                                 text = 'หมดอายุ'
                             } else {
-                                text = daysBetween + ' วัน'
+                                text ='เหลืออีก '+daysBetween + ' วัน'
                             }
     
                             var cellText = document.createTextNode(text);
@@ -764,7 +764,7 @@ function createTableRequest(data) {
                         if (daysBetween < 0) {
                             text = 'หมดอายุ'
                         } else {
-                            text = daysBetween + ' วัน'
+                            text ='เหลืออีก '+ daysBetween + ' วัน'
                         }
                         var cellText = document.createTextNode(text);
                     } else {

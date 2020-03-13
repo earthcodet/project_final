@@ -404,6 +404,7 @@ function createRenewData() {
         requestData.date_expired = `${day}-${month}-${year}`
         console.log(`date expire condition 3 ${requestData.date_expired}`)
     }
+    
     requestData.doc_no1 = document.getElementById('documentId').checked === true ? 'Y' : 'N'
     requestData.doc_no2 = document.getElementById('documenthHome').checked === true ? 'Y' : 'N'
     requestData.doc_no3 = document.getElementById('documentLegalEntity').checked === true ? 'Y' : 'N'
