@@ -523,6 +523,7 @@ function cancelStatus() {
                             inRequest.status = 'wait'
                             break;
                         case 'approval':
+                            inRequest.date_approve = ''
                             inRequest.status = 'wait'
                             break;
                         case 'active':
@@ -541,6 +542,8 @@ function cancelStatus() {
                             inRequest.receipt_date_year_3 = ''
                             inRequest.receipt_fee_year_3 = ''
                             inRequest.receipt_fine_year_3 = ''
+                            //delete logic 
+                            inRequest.delete_logic = ''
                             break;
                         case 'cancel':
                             inRequest.status = inRequest.status_before
