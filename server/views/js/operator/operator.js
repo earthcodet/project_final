@@ -673,6 +673,9 @@ function insertToDatabase() {
         } else {
             formData.append("image", null);
             arrInsert[2].name = 'NO_UPlOAD'
+            if(new_document === true){
+                arrInsert[2].name = ''
+            }
         }
 
         // if(new_document === true ){
