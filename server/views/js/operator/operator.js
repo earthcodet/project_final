@@ -10,6 +10,7 @@ let imageSelectype = ''
 let textChange = ''
 let _deleteImage = false
 let iconAlert = ''
+let check_id_new = false
 let inAddress = {
     id: "",
     home_number: "-",
@@ -327,102 +328,115 @@ function preInsert() {
     if (check_input) {
          if (check_id_user.trim().length === 13 && type_user === 'บุคคลธรรมดา' || check_id_company.trim().length === 13 && type_user === 'นิติบุคคล') {
             if (!_isUsed) {
-                if (formatPhone(document.getElementById('phone').value.trim()) || formatPhone(document.getElementById('company-phone').value.trim())) {
-                    if (document.getElementById("typeUser").value === 'บุคคลธรรมดา') {
-                        //address
-                        console.log(`preinsert บุคคลธรรมดา`)
-                        inAddress.home_number = document.getElementById('homeId').value
-                        inAddress.moo = document.getElementById('moo').value
-                        inAddress.trxk = document.getElementById('trxk').value
-                        inAddress.sxy = document.getElementById('sxy').value
-                        inAddress.building = document.getElementById('building').value
-                        inAddress.road = document.getElementById('road').value
-
-                        let provinceValue = parseInt(document.getElementById(`province`).value);
-                        let amphurValue = parseInt(document.getElementById(`district`).value);
-                        let districtValue = parseInt(
-                            document.getElementById(`subdistrict`).value
-                        );
-                        inAddress.district_name = district[districtValue - 1] === undefined ? '' : district[districtValue - 1].DISTRICT_NAME;
-                        inAddress.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
-                        inAddress.province_name = province[provinceValue - 1].PROVINCE_NAME;
-                        //personal
-                        inPersonal.title = document.getElementById("title").value;
-                        inPersonal.type = document.getElementById("typeUser").value;
-                        inPersonal.name = document.getElementById("nameUser").value;
-                        inPersonal.surname = document.getElementById("surnameUser").value;
-                        inPersonal.nationality = document.getElementById("nationality").value;
-                        inPersonal.race = document.getElementById("race").value;
-                        inPersonal.birthday = document.getElementById("datepicker3").value;
-                        inPersonal.personal_id = document.getElementById("id").value;
-                        inPersonal.card_issued = document.getElementById("datepicker1").value;
-                        inPersonal.card_expipe = document.getElementById("datepicker2").value;
-
-                        let format_phone_t = `${document.getElementById("phone").value}/${document.getElementById("phone_more").value}`
-                        inPersonal.phone = format_phone_t;
-                        inPersonal.fax = document.getElementById("fax").value;
-                        arrInsert.push(inPersonal);
-                        arrInsert.push(inAddress);
-                        console.log(`preinsert === ${_isImageChange}`)
-                        console.log(`_isImageChange ${_isImageChange} === false (${_isImageChange === false}) 
-                        && newAdd ${newAdd} === false (${newAdd === false})`)
-                        if (_isImageChange === false && newAdd === false && fileImage === null) {
-                            inImage.name = 'NO_UPlOAD'
-                            arrInsert.push(inImage);
+                if(check_id_new){
+                    if (formatPhone(document.getElementById('phone').value.trim()) || formatPhone(document.getElementById('company-phone').value.trim())) {
+                        if (document.getElementById("typeUser").value === 'บุคคลธรรมดา') {
+                            //address
+                            console.log(`preinsert บุคคลธรรมดา`)
+                            inAddress.home_number = document.getElementById('homeId').value
+                            inAddress.moo = document.getElementById('moo').value
+                            inAddress.trxk = document.getElementById('trxk').value
+                            inAddress.sxy = document.getElementById('sxy').value
+                            inAddress.building = document.getElementById('building').value
+                            inAddress.road = document.getElementById('road').value
+    
+                            let provinceValue = parseInt(document.getElementById(`province`).value);
+                            let amphurValue = parseInt(document.getElementById(`district`).value);
+                            let districtValue = parseInt(
+                                document.getElementById(`subdistrict`).value
+                            );
+                            inAddress.district_name = district[districtValue - 1] === undefined ? '' : district[districtValue - 1].DISTRICT_NAME;
+                            inAddress.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
+                            inAddress.province_name = province[provinceValue - 1].PROVINCE_NAME;
+                            //personal
+                            inPersonal.title = document.getElementById("title").value;
+                            inPersonal.type = document.getElementById("typeUser").value;
+                            inPersonal.name = document.getElementById("nameUser").value;
+                            inPersonal.surname = document.getElementById("surnameUser").value;
+                            inPersonal.nationality = document.getElementById("nationality").value;
+                            inPersonal.race = document.getElementById("race").value;
+                            inPersonal.birthday = document.getElementById("datepicker3").value;
+                            inPersonal.personal_id = document.getElementById("id").value;
+                            inPersonal.card_issued = document.getElementById("datepicker1").value;
+                            inPersonal.card_expipe = document.getElementById("datepicker2").value;
+    
+                            let format_phone_t = `${document.getElementById("phone").value}/${document.getElementById("phone_more").value}`
+                            inPersonal.phone = format_phone_t;
+                            inPersonal.fax = document.getElementById("fax").value;
+                            arrInsert.push(inPersonal);
+                            arrInsert.push(inAddress);
+                            console.log(`preinsert === ${_isImageChange}`)
+                            console.log(`_isImageChange ${_isImageChange} === false (${_isImageChange === false}) 
+                            && newAdd ${newAdd} === false (${newAdd === false})`)
+                            if (_isImageChange === false && newAdd === false && fileImage === null) {
+                                inImage.name = 'NO_UPlOAD'
+                                arrInsert.push(inImage);
+                            } else {
+                                arrInsert.push(inImage);
+                            }
+    
+                            console.log(arrInsert);
+                            console.log(fileImage);
+                            return true;
                         } else {
+                            console.log(`preinsert นิติบุคคล`)
+                            // นิติบุคคล
+                            let ch = document.getElementById('company-homeId')
+                            inAddress.home_number = ch.value === null || ch.value.trim().length === 0 || ch.value === undefined ? '-' : ch.value
+                            inAddress.moo = document.getElementById('company-moo').value
+                            inAddress.trxk = document.getElementById('company-trxk').value
+                            inAddress.sxy = document.getElementById('company-sxy').value
+                            inAddress.building = document.getElementById('company-building').value
+                            inAddress.road = document.getElementById('company-road').value
+    
+                            let provinceValue = parseInt(document.getElementById(`wProvince`).value);
+                            let amphurValue = parseInt(document.getElementById(`wDistrict`).value);
+                            let districtValue = parseInt(document.getElementById(`wSubdistrict`).value);
+                            inAddress.district_name = district[districtValue - 1] === undefined ? '' : district[districtValue - 1].DISTRICT_NAME;
+                            inAddress.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
+                            inAddress.province_name = province[provinceValue - 1].PROVINCE_NAME;
+                            //personal
+                            inPersonal.type = document.getElementById("typeUser").value;
+                            inPersonal.surname = ''
+                            inPersonal.name = document.getElementById("company-nameUser").value;
+                            inPersonal.personal_id = document.getElementById("company-id").value;
+                            inPersonal.card_issued = document.getElementById("datepicker4").value;
+    
+                            let format_phone_t = `${document.getElementById("company-phone").value}/${document.getElementById("company-phone-more").value}`
+                            inPersonal.phone = format_phone_t;
+                            inPersonal.fax = document.getElementById("company-fax").value;
+                            inImage.name = 'NO_UPlOAD'
+                            arrInsert.push(inPersonal);
+                            arrInsert.push(inAddress);
                             arrInsert.push(inImage);
+                            return true
                         }
-
-                        console.log(arrInsert);
-                        console.log(fileImage);
-                        return true;
                     } else {
-                        console.log(`preinsert นิติบุคคล`)
-                        // นิติบุคคล
-                        let ch = document.getElementById('company-homeId')
-                        inAddress.home_number = ch.value === null || ch.value.trim().length === 0 || ch.value === undefined ? '-' : ch.value
-                        inAddress.moo = document.getElementById('company-moo').value
-                        inAddress.trxk = document.getElementById('company-trxk').value
-                        inAddress.sxy = document.getElementById('company-sxy').value
-                        inAddress.building = document.getElementById('company-building').value
-                        inAddress.road = document.getElementById('company-road').value
-
-                        let provinceValue = parseInt(document.getElementById(`wProvince`).value);
-                        let amphurValue = parseInt(document.getElementById(`wDistrict`).value);
-                        let districtValue = parseInt(document.getElementById(`wSubdistrict`).value);
-                        inAddress.district_name = district[districtValue - 1] === undefined ? '' : district[districtValue - 1].DISTRICT_NAME;
-                        inAddress.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
-                        inAddress.province_name = province[provinceValue - 1].PROVINCE_NAME;
-                        //personal
-                        inPersonal.type = document.getElementById("typeUser").value;
-                        inPersonal.surname = ''
-                        inPersonal.name = document.getElementById("company-nameUser").value;
-                        inPersonal.personal_id = document.getElementById("company-id").value;
-                        inPersonal.card_issued = document.getElementById("datepicker4").value;
-
-                        let format_phone_t = `${document.getElementById("company-phone").value}/${document.getElementById("company-phone-more").value}`
-                        inPersonal.phone = format_phone_t;
-                        inPersonal.fax = document.getElementById("company-fax").value;
-                        inImage.name = 'NO_UPlOAD'
-                        arrInsert.push(inPersonal);
-                        arrInsert.push(inAddress);
-                        arrInsert.push(inImage);
-                        return true
+                        Swal.fire({
+                            title: "รูปแบบหมายเลขโทรศัพท์ไม่ถูกต้อง",
+                            width: "30%",
+                            showConfirmButton: true,
+                            closeOnConfirm: false,
+                            closeOnCancel: false,
+                            confirmButtonColor: "#009688",
+                            icon: "error"
+                        });
+                        document.getElementById('company-phone').classList.add('alertInput')
+                        document.getElementById('phone').classList.add('alertInput')
                     }
-                } else {
+                }else{
                     Swal.fire({
-                        title: "รูปแบบหมายเลขโทรศัพท์ไม่ถูกต้อง",
+                        title: textChange,
                         width: "30%",
                         showConfirmButton: true,
                         closeOnConfirm: false,
                         closeOnCancel: false,
                         confirmButtonColor: "#009688",
-                        icon: "error"
-                    });
-                    document.getElementById('company-phone').classList.add('alertInput')
-                    document.getElementById('phone').classList.add('alertInput')
+                        icon: iconAlert
+                    })
+                    document.getElementById('id').classList.add('alertInput')
+                document.getElementById('company-id').classList.add('alertInput')
                 }
-
             } else {
                 Swal.fire({
                     title: "เลขประจำตัวผู้ประกอบการนี้มีในระบบแล้ว",
@@ -509,7 +523,7 @@ function checkId(value, type) {
                             _isUsed = false;
                             textChange = 'เลขประจำตัวผู้ประกอบการนี้สามารถใช้ได้'
                             iconAlert = 'success'
-
+                            check_id_new = true
                         } else {
                             Swal.fire({
                                 title: "เลขประจำตัวผู้ประกอบการนี้มีในระบบแล้ว",
@@ -525,6 +539,7 @@ function checkId(value, type) {
                             textChange = 'เลขประจำตัวผู้ประกอบการนี้มีในระบบแล้ว'
                             document.getElementById('id').classList.add('alertInput')
                             document.getElementById('company-id').classList.add('alertInput')
+                            check_id_new = false
                         }
                         console.log(_isUsed);
                     });
@@ -539,6 +554,7 @@ function checkId(value, type) {
                         icon: "error"
                     });
                     iconAlert = 'error'
+                    check_id_new = false
                     textChange = 'หมายเลขประจำตัวประชาชนไม่ถูกต้อง'
                 }
             } else {
@@ -551,6 +567,7 @@ function checkId(value, type) {
                     confirmButtonColor: "#009688",
                     icon: iconAlert
                 });
+                check_id_new = false
                 console.log(`personal id not change`)
             }
         } else {
@@ -570,7 +587,7 @@ function checkId(value, type) {
                         _isUsed = false;
                         iconAlert = 'success'
                         textChange = 'เลขประจำตัวผู้ประกอบการนี้สามารถใช้ได้'
-
+                        check_id_new = true
                     } else {
                         Swal.fire({
                             title: "เลขประจำตัวผู้ประกอบการนี้มีในระบบแล้ว",
@@ -586,6 +603,7 @@ function checkId(value, type) {
                         textChange = 'เลขประจำตัวผู้ประกอบการนี้มีในระบบแล้ว'
                         document.getElementById('id').classList.add('alertInput')
                         document.getElementById('company-id').classList.add('alertInput')
+                        check_id_new = false
                     }
                     console.log(_isUsed);
                 });
@@ -600,6 +618,7 @@ function checkId(value, type) {
                     icon: iconAlert
                 });
                 console.log(`personal id not change`)
+                check_id_new = false
             }
         }
     } else {

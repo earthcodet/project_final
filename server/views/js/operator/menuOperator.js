@@ -20,6 +20,7 @@ function addPage() {
     // window.onbeforeunload = function() {
     //     return 'You have unsaved changes!';
     // }
+    check_id_new = false
     new_document = true
     inImage.name = ''
     resetTwoAddress()
@@ -145,6 +146,7 @@ function insertPage() {
                             console.log(insert.length)
                             _deleteImage = false
                             new_document = false
+                            check_id_new = false
                             if (insert.length != 0) {
                                 resolve();
                             }
