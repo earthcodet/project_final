@@ -311,8 +311,8 @@ function setRequestData(raw_data) {
     requestData.status = 'wait'
     requestData.status_before = 'wait'
 
-    requestData.delete_logic = raw_data.REQUEST_DELETE_LOGIC === null ? '' : raw_data.REQUEST_DELETE_LOGIC
-    requestData.is_deleted = raw_data.REQUEST_IS_DELETED
+    requestData.delete_logic = ''
+    requestData.is_deleted = 'N'
 
     requestData.last_update = raw_data.REQUEST_LAST_UPDATE
     // requestData.username: 'ADMIN'
