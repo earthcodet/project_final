@@ -5,6 +5,7 @@ let tSearchName = ''
 let tSearchSurname = ''
 let tSearchId = ''
 let tempData = {}
+let new_document = false
 function resetStyleIdDelete() {
     var id = document.getElementById('id')
     if (id != undefined || id != null) {
@@ -19,6 +20,7 @@ function addPage() {
     // window.onbeforeunload = function() {
     //     return 'You have unsaved changes!';
     // }
+    new_document = true
     inImage.name = ''
     resetTwoAddress()
     addNew = true
@@ -53,7 +55,7 @@ function addPage() {
 }
 
 function insertPage() {
-    
+    addNew = false
     let _redyToInsert = preInsert()
     if (_redyToInsert) {
         Swal.fire({
@@ -142,6 +144,7 @@ function insertPage() {
                             console.log(insert)
                             console.log(insert.length)
                             _deleteImage = false
+                            new_document = false
                             if (insert.length != 0) {
                                 resolve();
                             }
@@ -195,10 +198,12 @@ function resetImageDefault() {
     img.src = '../../img/userProfile.png'
 }
 function editPage() {
+   
     if (!deleteData) {
         // window.onbeforeunload = function() {
         //     return 'You have unsaved changes!';
         // }
+        
         addNew = true
         _isImageChange = false
         console.log(`editPage === ${_isImageChange}`)
@@ -254,6 +259,7 @@ function changeStatusDelete(status) {
 }
 
 function deletePage() {
+    
     if (addNew === false) {
         Swal.fire({
             title: "สำนักงานเทศบาล",

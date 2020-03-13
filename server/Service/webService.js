@@ -1039,6 +1039,10 @@ class service {
                         if (personal.title === 'บุคคลธรรมดา') {
                             imageFile.name = personal.id
                         }
+                        console.log(`image file != u`)
+                        console.log(`imageFile.name != 'NO_UPlOAD'`)
+                        console.log(imageFile)
+                        console.log(imageFile.name)
                         if (imageFile.name != 'NO_UPlOAD') {
                             imageFile.name = personal.id
                             this.insertImage(imageFile).then((data) => {
@@ -1950,6 +1954,17 @@ class service {
     getViewImageRequestByIdAndYear(id, year) {
         return new Promise((resolve, reject) => {
             PrintDAOObj.getViewImage(id, year).then((viewData_data) => {
+                ImageDAOObj.getImageEstablishmentByImage(viewData_data[0].REQUEST_IMAGE_NAME).then((imageDatas) => {
+                    console.log(imageDatas.length)
+                    viewData_data[0].IMAGE_REVIEW = imageDatas
+                    return resolve(viewData_data)
+                })
+            })
+        })
+    }
+    getViewRenewRequestByIdAndYear(id, year) {
+        return new Promise((resolve, reject) => {
+            PrintDAOObj.getViewRenew(id, year).then((viewData_data) => {
                 ImageDAOObj.getImageEstablishmentByImage(viewData_data[0].REQUEST_IMAGE_NAME).then((imageDatas) => {
                     console.log(imageDatas.length)
                     viewData_data[0].IMAGE_REVIEW = imageDatas

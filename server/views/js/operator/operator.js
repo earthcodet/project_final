@@ -668,19 +668,24 @@ function insertToDatabase() {
         _isImageChange ${_isImageChange}
         arrInsert[2].name ${arrInsert[2].name}
         `)
-        if (_isImageChange === true) {
-            if (fileImage != null) {
-                formData.append("image", fileImage);
-            } else {
-                arrInsert[2].data = null
-            }
+        if (_isImageChange === true ) {
+            formData.append("image", fileImage);
         } else {
+            formData.append("image", null);
             arrInsert[2].name = 'NO_UPlOAD'
         }
+
+        // if(new_document === true ){
+        //     arrInsert[2].name = ''
+        //     arrInsert[2].data = null
+        //     formData.append("image", fileImage);
+        // }
+
         if (arrInsert[2].name === 'NO_UPlOAD') {
             arrInsert[2].data = null
         }
         formData.append("personal", JSON.stringify(arrInsert));
+        console.log('real data redy to insert')
         console.log(arrInsert)
         axios.post("http://localhost:5000/insert/personal", formData, {
             headers: {
