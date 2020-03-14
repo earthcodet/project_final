@@ -252,6 +252,7 @@ app.post('/insert/request', (req, res) => {
       obj[9][i].data = image.data
     }
   }
+  console.log(obj[0])
   webService.InsertRequestStep(obj[0], obj[1], obj[2], obj[3], obj[4], obj[5], obj[6], obj[7], obj[8], req.session.username, obj[9]).then((data) => {
     res.json(data);
   })

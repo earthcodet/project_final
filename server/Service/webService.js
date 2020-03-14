@@ -1531,6 +1531,8 @@ class service {
                         EstablishmentDAOObj.updateGround(new_edata.id, new_edata.grond)
                     }
                     if (new_edata.is_land_owned != 'NULL') {
+                        console.log(`new_addressOwner`)
+                        console.log(new_addressOwner)
                         this.insertLand(new_land, new_addressOwner).then((land_id) => {
                             new_edata.is_land_owned = `'${land_id.id}'`
                             new_edata.land_used = land_id.id
@@ -1622,37 +1624,37 @@ class service {
         })
     }
     getEstablishment(id, l_id) {
+        console.log(`get Establishment ${id} ${l_id}`)
         return new Promise((resolve, reject) => {
             EstablishmentDAOObj.get(id).then((e_data) => {
                 if (e_data != undefined) {
                     this.getAddressByAddressId(e_data.ADDRESS_ID).then((e_address_data) => {
                         e_data.ADDRESS = e_address_data[0]
-                        if (l_id != undefined) {
-                            if (l_id != e_data.ESTABLISHMENT_IS_LAND_OWNED && (l_id != null || e_data.ESTABLISHMENT_IS_LAND_OWNED != null)) {
-                                console.log('get Request land owner')
-                                LandDAOObj.get(l_id).then((land_data) => {
-                                    if (land_data.LAND_BIRTHDAY != null) {
+                        if (l_id != undefined && l_id != e_data.ESTABLISHMENT_IS_LAND_OWNED && l_id != null) {
+                            console.log('get Request land owner')
+                            LandDAOObj.get(l_id).then((land_data) => {
+                                if (land_data.LAND_BIRTHDAY != null) {
+                                    if (land_data.LAND_BIRTHDAY != '0000-00-00') {
                                         land_data.LAND_BIRTHDAY = this.formatDate('TO-DISPLAY', land_data.LAND_BIRTHDAY + '')
-                                    } else {
-                                        land_data.LAND_BIRTHDAY = ''
                                     }
-                                    this.getAddressByAddressId(land_data.ADDRESS_ID).then((land_address_data) => {
-                                        FileDAOObj.getfile(land_data.LAND_ID).then((data) => {
-                                            land_data.UPLOADFILE = data
-                                            land_data.ADDRESS = land_address_data[0]
-                                            e_data.LAND = land_data
-                                            return resolve(e_data)
-                                        })
+                                }
+                                this.getAddressByAddressId(land_data.ADDRESS_ID).then((land_address_data) => {
+                                    FileDAOObj.getfile(land_data.LAND_ID).then((data) => {
+                                        land_data.UPLOADFILE = data
+                                        land_data.ADDRESS = land_address_data[0]
+                                        e_data.LAND = land_data
+                                        return resolve(e_data)
                                     })
                                 })
-                            }
+                            })
+
                         } else {
                             if (e_data.ESTABLISHMENT_IS_LAND_OWNED != null) {
                                 LandDAOObj.get(e_data.ESTABLISHMENT_IS_LAND_OWNED).then((land_data) => {
                                     if (land_data.LAND_BIRTHDAY != null) {
-                                        land_data.LAND_BIRTHDAY = this.formatDate('TO-DISPLAY', land_data.LAND_BIRTHDAY + '')
-                                    } else {
-                                        land_data.LAND_BIRTHDAY = ''
+                                        if (land_data.LAND_BIRTHDAY != '0000-00-00') {
+                                            land_data.LAND_BIRTHDAY = this.formatDate('TO-DISPLAY', land_data.LAND_BIRTHDAY + '')
+                                        }
                                     }
                                     this.getAddressByAddressId(land_data.ADDRESS_ID).then((land_address_data) => {
                                         FileDAOObj.getfile(land_data.LAND_ID).then((data) => {
@@ -1704,11 +1706,35 @@ class service {
                         'status_insert_address': true
                     }
                     land.id = land_data.LAND_ID
-                    LandDAOObj.updateLand(land).then((train_update_status) => {
-                        if (train_update_status) {
-                            return resolve(object)
-                        }
-                    })
+                    if (address.id != land_data.ADDRESS_ID) {
+                        console.log('Program run case this')
+                        address.id = land_data.ADDRESS_ID
+                        AddressDAOObj.updateAddress(this.formatInsert('ADDRESS', address)).then((data_address) =>{
+                            land.address_id = `${land_data.ADDRESS_ID}`
+                            LandDAOObj.updateLand(land).then((train_update_status) => {
+                                if (train_update_status) {
+                                    console.log('update land address ')
+                                    console.log(object)
+                                    address.id = ''
+                                    return resolve(object)
+                                } else {
+                                    address.id = ''
+                                    return resolve(object)
+                                }
+                            }) 
+                        })
+                    } else {
+                        land.address_id = `${land_data.ADDRESS_ID}`
+                        LandDAOObj.updateLand(land).then((train_update_status) => {
+                            if (train_update_status) {
+                                console.log('update land address ')
+                                console.log(object)
+                                return resolve(object)
+                            } else {
+                                return resolve(object)
+                            }
+                        })
+                    }
                 } else {
                     console.log('address =cxcxlzkc;xlzc')
                     address = this.formatInsert('ADDRESS', address)
@@ -1812,6 +1838,7 @@ class service {
         })
     }
     updateAddress(address) {
+        console.log('update address ' + address.id)
         return new Promise((resolve, reject) => {
             AddressDAOObj.updateAddress(address).then((data) => {
                 if (data) {
@@ -1986,13 +2013,15 @@ class service {
         })
     }
     getRequestByIdAndYear(id, year) {
-        //bug
         return new Promise((resolve, reject) => {
             RequestDAOObj.getRequestById(id, year).then((data) => {
+
                 if (data != undefined) {
+                    console.log(`get request ${id}/${year} : getRequest Pass`)
                     this.getPersonalAndAddressById(data.PERSONAL_ID_OWNER).then((personal_operator_data) => {
                         data.gropDataOperator = personal_operator_data[0]
                         if (data.PERSONAL_ID_ASSISTANT != null) {
+                            console.log(`get request ${id}/${year} : PERSONAL_ID_ASSISTANT != null`)
                             this.getPersonalById(data.PERSONAL_ID_ASSISTANT).then((personal_assistant_data) => {
                                 data.gropDataAssistant = personal_assistant_data[0]
                                 data.REQUEST_DATE_SUBMISSION = data.REQUEST_DATE_SUBMISSION != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_SUBMISSION + '') : data.REQUEST_DATE_SUBMISSION
@@ -2234,9 +2263,10 @@ class service {
                 console.log(updateAddressStatus)
             })
         }
+
         if (request.no != '') {
             Edata.perosonal_id_st = personal[0].id
-            //Update !!
+            //Update Request !!
             let item_return = {
                 train_id: '',
                 reference_id: '',
@@ -2275,9 +2305,11 @@ class service {
                                                                 if (land_data_update.address === addressOwner.id) {
                                                                     console.log('GGGGGGGGG  - 1')
                                                                     this.updateAddress(this.formatInsert('ADDRESS', addressOwner))
+                                                                } else {
+
                                                                 }
                                                                 Edata.is_land_owned = land_data_update.id
-                                                                request.establishment_address_id = Edata.address_id
+                                                                //request.establishment_address_id = Edata.address_id
                                                                 request.establishment_is_land_owned = land_data_update.id
                                                                 request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                                 request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -2298,7 +2330,7 @@ class service {
                                                                 item_return.address = land_data_update.address
 
                                                                 Edata.is_land_owned = land_data_update.id
-                                                                request.establishment_address_id = Edata.address_id
+                                                                //request.establishment_address_id = Edata.address_id
                                                                 request.establishment_is_land_owned = land_data_update.id
                                                                 request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                                 request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -2384,7 +2416,7 @@ class service {
                                                                 this.updateAddress(this.formatInsert('ADDRESS', addressOwner))
                                                             }
                                                             Edata.is_land_owned = land_data_update.id
-                                                            request.establishment_address_id = Edata.address_id
+                                                            //request.establishment_address_id = Edata.address_id
                                                             request.establishment_is_land_owned = land_data_update.id
                                                             request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                             request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -2413,7 +2445,7 @@ class service {
                                                             item_return.address = land_data_update.address
 
                                                             Edata.is_land_owned = land_data_update.id
-                                                            request.establishment_address_id = Edata.address_id
+                                                            //request.establishment_address_id = Edata.address_id
                                                             request.establishment_is_land_owned = land_data_update.id
                                                             request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                             request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -2457,7 +2489,8 @@ class service {
                                             } else {
                                                 let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
                                                 request.establishment_is_land_owned = 'NULL'
-                                                request.establishment_address_id = 'NULL'
+                                                //request.establishment_address_id = 'NULL'
+                                                request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                 console.log('#6')
                                                 this.updateEstablishmentAndCheckDuplication(new_edata, address).then((est_id) => {
                                                     if (est_id != true && est_id != false) {
@@ -2494,7 +2527,7 @@ class service {
                                                             this.updateAddress(this.formatInsert('ADDRESS', addressOwner))
                                                         }
                                                         Edata.is_land_owned = land_data_update.id
-                                                        request.establishment_address_id = Edata.address_id
+                                                        //request.establishment_address_id = Edata.address_id
                                                         request.establishment_is_land_owned = land_data_update.id
                                                         request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                         request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -2524,7 +2557,7 @@ class service {
                                                         item_return.address = land_data_update.address
 
                                                         Edata.is_land_owned = land_data_update.id
-                                                        request.establishment_address_id = Edata.address_id
+                                                        //request.establishment_address_id = Edata.address_id
                                                         request.establishment_is_land_owned = land_data_update.id
                                                         request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                         request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -2569,7 +2602,8 @@ class service {
                                         } else {
                                             let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
                                             request.establishment_is_land_owned = 'NULL'
-                                            request.establishment_address_id = 'NULL'
+                                            //request.establishment_address_id = 'NULL'
+                                            request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                             console.log('#11')
                                             this.updateEstablishmentAndCheckDuplication(new_edata, address).then((est_id) => {
                                                 if (est_id != true && est_id != false) {
@@ -2611,7 +2645,7 @@ class service {
                                                                 this.updateAddress(this.formatInsert('ADDRESS', addressOwner))
                                                             }
                                                             Edata.is_land_owned = land_data_update.id
-                                                            request.establishment_address_id = Edata.address_id
+                                                            //request.establishment_address_id = Edata.address_id
                                                             request.establishment_is_land_owned = land_data_update.id
                                                             request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                             request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -2640,7 +2674,7 @@ class service {
                                                             item_return.address = land_data_update.address
 
                                                             Edata.is_land_owned = land_data_update.id
-                                                            request.establishment_address_id = Edata.address_id
+                                                            //request.establishment_address_id = Edata.address_id
                                                             request.establishment_is_land_owned = land_data_update.id
                                                             request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                             request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -2684,7 +2718,8 @@ class service {
                                             } else {
                                                 let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
                                                 request.establishment_is_land_owned = 'NULL'
-                                                request.establishment_address_id = 'NULL'
+                                                //request.establishment_address_id = 'NULL'
+                                                request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                 console.log('#15')
                                                 this.updateEstablishmentAndCheckDuplication(new_edata, address).then((est_id) => {
                                                     if (est_id != true && est_id != false) {
@@ -2719,7 +2754,7 @@ class service {
                                                             this.updateAddress(this.formatInsert('ADDRESS', addressOwner))
                                                         }
                                                         Edata.is_land_owned = land_data_update.id
-                                                        request.establishment_address_id = Edata.address_id
+                                                        //request.establishment_address_id = Edata.address_id
                                                         request.establishment_is_land_owned = land_data_update.id
                                                         request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                         request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -2747,7 +2782,7 @@ class service {
                                                         item_return.address = land_data_update.address
 
                                                         Edata.is_land_owned = land_data_update.id
-                                                        request.establishment_address_id = Edata.address_id
+                                                        //request.establishment_address_id = Edata.address_id
                                                         request.establishment_is_land_owned = land_data_update.id
                                                         request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                         request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -2791,7 +2826,8 @@ class service {
                                         } else {
                                             let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
                                             request.establishment_is_land_owned = 'NULL'
-                                            request.establishment_address_id = 'NULL'
+                                            //request.establishment_address_id = 'NULL'
+                                            request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                             console.log('#15')
                                             this.updateEstablishmentAndCheckDuplication(new_edata, address).then((est_id) => {
                                                 if (est_id != true && est_id != false) {
@@ -2824,7 +2860,7 @@ class service {
                                                         this.updateAddress(this.formatInsert('ADDRESS', addressOwner))
                                                     }
                                                     Edata.is_land_owned = land_data_update.id
-                                                    request.establishment_address_id = Edata.address_id
+                                                    //request.establishment_address_id = Edata.address_id
                                                     request.establishment_is_land_owned = land_data_update.id
                                                     request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                     request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -2852,7 +2888,7 @@ class service {
                                                     item_return.address = land_data_update.address
 
                                                     Edata.is_land_owned = land_data_update.id
-                                                    request.establishment_address_id = Edata.address_id
+                                                    //request.establishment_address_id = Edata.address_id
                                                     request.establishment_is_land_owned = land_data_update.id
                                                     request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                     request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -2896,7 +2932,8 @@ class service {
                                     } else {
                                         let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
                                         request.establishment_is_land_owned = 'NULL'
-                                        request.establishment_address_id = 'NULL'
+                                        //request.establishment_address_id = 'NULL'
+                                        request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                         console.log('#15')
                                         this.updateEstablishmentAndCheckDuplication(new_edata, address).then((est_id) => {
                                             if (est_id != true && est_id != false) {
@@ -2945,7 +2982,7 @@ class service {
                                                                     this.updateAddress(this.formatInsert('ADDRESS', addressOwner))
                                                                 }
                                                                 Edata.is_land_owned = land_data_update.id
-                                                                request.establishment_address_id = Edata.address_id
+                                                                //request.establishment_address_id = Edata.address_id
                                                                 request.establishment_is_land_owned = land_data_update.id
                                                                 request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                                 request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -2974,7 +3011,7 @@ class service {
                                                                 item_return.address = land_data_update.address
 
                                                                 Edata.is_land_owned = land_data_update.id
-                                                                request.establishment_address_id = Edata.address_id
+                                                                //request.establishment_address_id = Edata.address_id
                                                                 request.establishment_is_land_owned = land_data_update.id
                                                                 request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                                 request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -3012,7 +3049,8 @@ class service {
                                                     */
                                                     let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
                                                     request.establishment_is_land_owned = 'NULL'
-                                                    request.establishment_address_id = 'NULL'
+                                                    //request.establishment_address_id = 'NULL'
+                                                    request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                     console.log('#6')
                                                     this.updateEstablishmentAndCheckDuplication(new_edata, address).then((est_id) => {
                                                         if (est_id != true && est_id != false) {
@@ -3050,7 +3088,7 @@ class service {
                                                                 this.updateAddress(this.formatInsert('ADDRESS', addressOwner))
                                                             }
                                                             Edata.is_land_owned = land_data_update.id
-                                                            request.establishment_address_id = Edata.address_id
+                                                            //request.establishment_address_id = Edata.address_id
                                                             request.establishment_is_land_owned = land_data_update.id
                                                             request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                             request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -3079,7 +3117,7 @@ class service {
                                                             item_return.address = land_data_update.address
 
                                                             Edata.is_land_owned = land_data_update.id
-                                                            request.establishment_address_id = Edata.address_id
+                                                            //request.establishment_address_id = Edata.address_id
                                                             request.establishment_is_land_owned = land_data_update.id
                                                             request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                             request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -3123,7 +3161,8 @@ class service {
                                             } else {
                                                 let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
                                                 request.establishment_is_land_owned = 'NULL'
-                                                request.establishment_address_id = 'NULL'
+                                                //request.establishment_address_id = 'NULL'
+                                                request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                 console.log('#19')
                                                 this.updateEstablishmentAndCheckDuplication(new_edata, address).then((est_id) => {
                                                     if (est_id != true && est_id != false) {
@@ -3159,7 +3198,7 @@ class service {
                                                             this.updateAddress(this.formatInsert('ADDRESS', addressOwner))
                                                         }
                                                         Edata.is_land_owned = land_data_update.id
-                                                        request.establishment_address_id = Edata.address_id
+                                                        //request.establishment_address_id = Edata.address_id
                                                         request.establishment_is_land_owned = land_data_update.id
                                                         request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                         request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -3188,7 +3227,7 @@ class service {
                                                         item_return.address = land_data_update.address
 
                                                         Edata.is_land_owned = land_data_update.id
-                                                        request.establishment_address_id = Edata.address_id
+                                                        //request.establishment_address_id = Edata.address_id
                                                         request.establishment_is_land_owned = land_data_update.id
                                                         request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                         request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -3232,7 +3271,8 @@ class service {
                                         } else {
                                             let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
                                             request.establishment_is_land_owned = 'NULL'
-                                            request.establishment_address_id = 'NULL'
+                                            //request.establishment_address_id = 'NULL'
+                                            request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                             console.log('#24')
                                             this.updateEstablishmentAndCheckDuplication(new_edata, address).then((est_id) => {
                                                 if (est_id != true && est_id != false) {
@@ -3277,7 +3317,7 @@ class service {
                                                                 this.updateAddress(this.formatInsert('ADDRESS', addressOwner))
                                                             }
                                                             Edata.is_land_owned = land_data_update.id
-                                                            request.establishment_address_id = Edata.address_id
+                                                            //request.establishment_address_id = Edata.address_id
                                                             request.establishment_is_land_owned = land_data_update.id
                                                             request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                             request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -3306,7 +3346,7 @@ class service {
                                                             item_return.address = land_data_update.address
 
                                                             Edata.is_land_owned = land_data_update.id
-                                                            request.establishment_address_id = Edata.address_id
+                                                            //request.establishment_address_id = Edata.address_id
                                                             request.establishment_is_land_owned = land_data_update.id
                                                             request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                             request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -3350,7 +3390,8 @@ class service {
                                             } else {
                                                 let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
                                                 request.establishment_is_land_owned = 'NULL'
-                                                request.establishment_address_id = 'NULL'
+                                                //request.establishment_address_id = 'NULL'
+                                                request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                 console.log('#1')
                                                 this.updateEstablishmentAndCheckDuplication(new_edata, address).then((est_id) => {
                                                     if (est_id != true && est_id != false) {
@@ -3386,7 +3427,7 @@ class service {
                                                             this.updateAddress(this.formatInsert('ADDRESS', addressOwner))
                                                         }
                                                         Edata.is_land_owned = land_data_update.id
-                                                        request.establishment_address_id = Edata.address_id
+                                                        //request.establishment_address_id = Edata.address_id
                                                         request.establishment_is_land_owned = land_data_update.id
                                                         request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                         request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -3414,7 +3455,7 @@ class service {
                                                         item_return.address = land_data_update.address
 
                                                         Edata.is_land_owned = land_data_update.id
-                                                        request.establishment_address_id = Edata.address_id
+                                                        //request.establishment_address_id = Edata.address_id
                                                         request.establishment_is_land_owned = land_data_update.id
                                                         request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                         request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -3458,7 +3499,8 @@ class service {
                                         } else {
                                             let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
                                             request.establishment_is_land_owned = 'NULL'
-                                            request.establishment_address_id = 'NULL'
+                                            //request.establishment_address_id = 'NULL'
+                                            request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                             console.log('#15')
                                             this.updateEstablishmentAndCheckDuplication(new_edata, address).then((est_id) => {
                                                 if (est_id != true && est_id != false) {
@@ -3491,7 +3533,7 @@ class service {
                                                         this.updateAddress(this.formatInsert('ADDRESS', addressOwner))
                                                     }
                                                     Edata.is_land_owned = land_data_update.id
-                                                    request.establishment_address_id = Edata.address_id
+                                                    //request.establishment_address_id = Edata.address_id
                                                     request.establishment_is_land_owned = land_data_update.id
                                                     request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                     request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -3520,7 +3562,7 @@ class service {
                                                     item_return.address = land_data_update.address
 
                                                     Edata.is_land_owned = land_data_update.id
-                                                    request.establishment_address_id = Edata.address_id
+                                                    //request.establishment_address_id = Edata.address_id
                                                     request.establishment_is_land_owned = land_data_update.id
                                                     request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                     request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -3564,7 +3606,8 @@ class service {
                                     } else {
                                         let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
                                         request.establishment_is_land_owned = 'NULL'
-                                        request.establishment_address_id = 'NULL'
+                                        //request.establishment_address_id = 'NULL'
+                                        request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                         console.log('#1')
                                         this.updateEstablishmentAndCheckDuplication(new_edata, address).then((est_id) => {
                                             if (est_id != true && est_id != false) {
@@ -3601,7 +3644,7 @@ class service {
                                                     this.updateAddress(this.formatInsert('ADDRESS', addressOwner))
                                                 }
                                                 Edata.is_land_owned = land_data_update.id
-                                                request.establishment_address_id = Edata.address_id
+                                                //request.establishment_address_id = Edata.address_id
                                                 request.establishment_is_land_owned = land_data_update.id
                                                 request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                 request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -3630,7 +3673,7 @@ class service {
                                                 item_return.address = land_data_update.address
 
                                                 Edata.is_land_owned = land_data_update.id
-                                                request.establishment_address_id = Edata.address_id
+                                                //request.establishment_address_id = Edata.address_id
                                                 request.establishment_is_land_owned = land_data_update.id
                                                 request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                 request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -3674,7 +3717,8 @@ class service {
                                 } else {
                                     let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
                                     request.establishment_is_land_owned = 'NULL'
-                                    request.establishment_address_id = 'NULL'
+                                    //request.establishment_address_id = 'NULL'
+                                    request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                     console.log('#29')
                                     this.updateEstablishmentAndCheckDuplication(new_edata, address).then((est_id) => {
                                         if (est_id != true && est_id != false) {
@@ -3710,7 +3754,7 @@ class service {
                                         this.updateAddress(this.formatInsert('ADDRESS', addressOwner))
                                     }
                                     Edata.is_land_owned = land_data_update.id
-                                    request.establishment_address_id = Edata.address_id
+                                    //request.establishment_address_id = Edata.address_id
                                     request.establishment_is_land_owned = land_data_update.id
                                     request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                     request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -3739,7 +3783,7 @@ class service {
                                     item_return.address = land_data_update.address
 
                                     Edata.is_land_owned = land_data_update.id
-                                    request.establishment_address_id = Edata.address_id
+                                    //request.establishment_address_id = Edata.address_id
                                     request.establishment_is_land_owned = land_data_update.id
                                     request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                     request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
@@ -3772,7 +3816,8 @@ class service {
                     } else {
                         let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
                         request.establishment_is_land_owned = 'NULL'
-                        request.establishment_address_id = 'NULL'
+                        //request.establishment_address_id = 'NULL'
+                        request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                         console.log('#29')
                         this.updateEstablishmentAndCheckDuplication(new_edata, address).then((est_id) => {
                             if (est_id != true && est_id != false) {

@@ -573,7 +573,6 @@ function setRequestDataUpdateReturn(raw_data) {
     trianData.id = raw_data.train_id === '' ? trianData.id : raw_data.train_id
     referenceData.id = raw_data.reference_id === '' ? referenceData.id : raw_data.reference_id
     landData.id = raw_data.land_id === '' ? landData.id : raw_data.land_id
-    requestData.establishment_address_id = checkformatReturn(raw_data.land_id)
     requestData.establishment_is_land_owned = checkformatReturn(raw_data.address_land_id)
     establishmentData.id = checkformatReturn(raw_data.establishment_id)
     requestData.establishment_id = checkformatReturn(raw_data.establishment_id)
@@ -586,7 +585,7 @@ function setRequestDataReturn(raw_data) {
     requestData.year = raw_data.year
     requestData.establishment_id = checkformatReturn(raw_data.establishment_is_land_owned)
     requestData.establishment_is_land_owned = checkformatReturn(raw_data.establishment_is_land_owned)
-    requestData.establishment_address_id = checkformatReturn(raw_data.establishment_address_id)
+    // requestData.establishment_address_id = checkformatReturn(raw_data.establishment_address_id)
     requestData.train_id = checkformatReturn(raw_data.train_id) === '' ? 'NO' : 'YES'
     requestData.reference_id = checkformatReturn(raw_data.reference_id) === '' ? 'NO' : 'YES'
     requestData.image_name = raw_data.image_name
@@ -727,14 +726,21 @@ function setAddressOwnerLandData(raw_data) {
 }
 function setLandData(raw_data) {
     //ADDRESS
-    console.log(raw_data)
     if (raw_data.ESTABLISHMENT_DATA.LAND != undefined) {
         landData.id = raw_data.ESTABLISHMENT_DATA.LAND.LAND_ID
         landData.address_id = raw_data.ESTABLISHMENT_DATA.LAND.ADDRESS_ID
         landData.title = raw_data.ESTABLISHMENT_DATA.LAND.LAND_TITLE
         landData.name = raw_data.ESTABLISHMENT_DATA.LAND.LAND_NAME
         landData.surname = raw_data.ESTABLISHMENT_DATA.LAND.LAND_SURNAME
-        landData.birthday = raw_data.ESTABLISHMENT_DATA.LAND.LAND_BIRTHDAY === null ? '' : raw_data.ESTABLISHMENT_DATA.LAND.LAND_BIRTHDAY
+        if(raw_data.ESTABLISHMENT_DATA.LAND.LAND_BIRTHDA === null){
+            landData.birthday = ''
+        }
+        else if(raw_data.ESTABLISHMENT_DATA.LAND.LAND_BIRTHDAY === '0000-00-00'){
+            landData.birthday = '-'
+        }
+        else{
+            landData.birthday = raw_data.ESTABLISHMENT_DATA.LAND.LAND_BIRTHDAY
+        }
         landData.phone = raw_data.ESTABLISHMENT_DATA.LAND.LAND_PHONE
 
         if (raw_data.ESTABLISHMENT_DATA.LAND.UPLOADFILE != undefined) {

@@ -67,7 +67,7 @@ class LandDAO {
             let query = `UPDATE land SET ${value} WHERE LAND_ID = '${land.id}'`
             con.query(query, function (err, result) {
                 if (err) {
-                    console.log(err.code)
+                    console.log(err)
                     return resolve(err.code)
                 }
                 if(result.affectedRows === 1){
