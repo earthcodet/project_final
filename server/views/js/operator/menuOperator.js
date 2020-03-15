@@ -6,6 +6,7 @@ let tSearchSurname = ''
 let tSearchId = ''
 let tempData = {}
 let new_document = false
+let edit_document = false
 function resetStyleIdDelete() {
     var id = document.getElementById('id')
     if (id != undefined || id != null) {
@@ -81,6 +82,7 @@ function insertPage() {
                         //function ใน operator 
                         console.log(arrInsert)
                         insertToDatabase().then((insert) => {
+                            edit_document = false
                             data = true
                             arrInsert = []
                             console.log(`insert return =`)
@@ -205,7 +207,7 @@ function editPage() {
         // window.onbeforeunload = function() {
         //     return 'You have unsaved changes!';
         // }
-        
+        edit_document = true
         addNew = true
         _isImageChange = false
         console.log(`editPage === ${_isImageChange}`)

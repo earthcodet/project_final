@@ -252,18 +252,29 @@ app.post('/insert/request', (req, res) => {
       obj[9][i].data = image.data
     }
   }
-  console.log(obj[0])
   webService.InsertRequestStep(obj[0], obj[1], obj[2], obj[3], obj[4], obj[5], obj[6], obj[7], obj[8], req.session.username, obj[9]).then((data) => {
     res.json(data);
   })
 })
 app.post('/insert/request/renew', (req, res) => {
-  webService.insertRequestRenew(req.body.renew_data, req.session.username,req.body.renew_data).then((data) => {
+  webService.insertRequestRenew(req.body.renew_data, req.session.username).then((data) => {
+    res.json(data);
+  })
+})
+app.post('/insert/request/transfer', (req, res) => {
+  console.log(req.body.transfer)
+  webService.createTransferRequest(req.body.transfer, req.session.username).then((data) => {
     res.json(data);
   })
 })
 app.get('/get/request/:no/:year', (req, res) => {
   webService.getRequestByIdAndYear(req.params.no, req.params.year).then((data) => {
+    res.json(data)
+  })
+})
+app.get('/get/owner/duplication/transfer/:no/:year/:pid', (req, res) => {
+  console.log(` search ${req.params.no} ${req.params.year} ${req.params.pid}`)
+  webService.getOwnerDuplication(req.params.no, req.params.year,req.params.pid).then((data) => {
     res.json(data)
   })
 })
@@ -277,6 +288,11 @@ app.get('/get/requestTypeById/:id', (req, res) => {
 
 app.get('/get/request/renew/:type/:personal_id', (req, res) => {
   webService.getRquestRenew(webService.getRequestTypeMenu(req.params.type), req.params.personal_id).then((data) => {
+    res.json(data)
+  })
+})
+app.get('/get/request/transfer/search/:personal_id', (req, res) => {
+  webService.getRquestTransfer(req.params.personal_id).then((data) => {
     res.json(data)
   })
 })

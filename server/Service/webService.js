@@ -1435,6 +1435,46 @@ class service {
             new_data.delete_logic = item === '' ? 'NULL' : `'${item}'`
             return new_data
         }
+        if (type = 'TRANSFER') {
+            //Not Null
+            new_data.REQUEST_DATE_SUBMISSION = new_data.REQUEST_DATE_SUBMISSION === null ? 'NULL' : this.formatDate('TO-INSERT', new_data.REQUEST_DATE_SUBMISSION)
+            new_data.REQUEST_RECEIPT_DATE_TRANSFER = new_data.REQUEST_RECEIPT_DATE_TRANSFER === '-' ? 'NULL' : this.formatDate('TO-INSERT', new_data.REQUEST_RECEIPT_DATE_TRANSFER)
+            //Null
+            new_data.STAFF_ID_MONEY = new_data.STAFF_ID_MONEY === null ? 'NULL' : `'${new_data.STAFF_ID_MONEY}'`
+            new_data.REFERENCE_ID = new_data.REFERENCE_ID === null ? 'NULL' : `'${new_data.REFERENCE_ID}'`
+            new_data.TRAIN_ID = new_data.TRAIN_ID === null ? 'NULL' : `'${new_data.TRAIN_ID}'`
+            new_data.PERSONAL_ID_ASSISTANT = new_data.PERSONAL_ID_ASSISTANT === null ? 'NULL' : `'${new_data.PERSONAL_ID_ASSISTANT}'`
+            new_data.STAFF_ID_APPROVE = new_data.STAFF_ID_APPROVE === null ? 'NULL' : `'${new_data.STAFF_ID_APPROVE}'`
+            new_data.ESTABLISHMENT_ADDRESS_ID = new_data.ESTABLISHMENT_ADDRESS_ID === null ? 'NULL' : `'${new_data.ESTABLISHMENT_ADDRESS_ID}'`
+            new_data.ESTABLISHMENT_IS_LAND_OWNED = new_data.ESTABLISHMENT_IS_LAND_OWNED === null ? 'NULL' : `'${new_data.ESTABLISHMENT_IS_LAND_OWNED}'`
+            new_data.REQUEST_DATE_APPROVE = new_data.REQUEST_DATE_APPROVE === null ? 'NULL' : `'${this.formatDate('TO-INSERT', new_data.REQUEST_DATE_APPROVE)}'`
+            new_data.REQUEST_SUBCATEGORY = new_data.REQUEST_SUBCATEGORY === null ? 'NULL' : `'${new_data.REQUEST_SUBCATEGORY}'`
+            new_data.REQUEST_PRODUCT_TYPE = new_data.REQUEST_PRODUCT_TYPE === null ? 'NULL' : `'${new_data.REQUEST_PRODUCT_TYPE}'`
+            new_data.REQUEST_SELL_START = new_data.REQUEST_SELL_START === null ? 'NULL' : `'${new_data.REQUEST_SELL_START}'`
+            new_data.REQUEST_SELL_END = new_data.REQUEST_SELL_END === null ? 'NULL' : `'${new_data.REQUEST_SELL_END}'`
+            new_data.REQUEST_RECEIPT_FINE = new_data.REQUEST_RECEIPT_FINE === null ? 'NULL' : `'${new_data.REQUEST_RECEIPT_FINE}'`
+            new_data.REQUEST_RECEIPT_FEE = new_data.REQUEST_RECEIPT_FEE === null ? 'NULL' : `'${new_data.REQUEST_RECEIPT_FEE}'`
+            new_data.REQUEST_RECEIPT_TOTAL = new_data.REQUEST_RECEIPT_TOTAL === null ? 'NULL' : `'${new_data.REQUEST_RECEIPT_TOTAL}'`
+            new_data.REQUEST_RECEIPT_DATE = new_data.REQUEST_RECEIPT_DATE === null ? 'NULL' : `'${this.formatDate('TO-INSERT', new_data.REQUEST_RECEIPT_DATE)}'`
+            new_data.REQUEST_RECEIPT_FINE_YEAR_2 = new_data.REQUEST_RECEIPT_FINE_YEAR_2 === null ? 'NULL' : `'${new_data.REQUEST_RECEIPT_FINE_YEAR_2}'`
+            new_data.REQUEST_RECEIPT_FEE_YEAR_2 = new_data.REQUEST_RECEIPT_FEE_YEAR_2 === null ? 'NULL' : `'${new_data.REQUEST_RECEIPT_FEE_YEAR_2}'`
+            new_data.REQUEST_RECEIPT_TOTAL_YEAR_2 = new_data.REQUEST_RECEIPT_TOTAL_YEAR_2 === null ? 'NULL' : `'${new_data.REQUEST_RECEIPT_TOTAL_YEAR_2}'`
+            new_data.REQUEST_RECEIPT_DATE_YEAR_2 = new_data.REQUEST_RECEIPT_DATE_YEAR_2 === null ? 'NULL' : `'${this.formatDate('TO-INSERT', new_data.REQUEST_RECEIPT_DATE_YEAR_2)}'`
+            new_data.REQUEST_RECEIPT_FINE_YEAR_3 = new_data.REQUEST_RECEIPT_FINE_YEAR_3 === null ? 'NULL' : `'${new_data.REQUEST_RECEIPT_FINE_YEAR_3}'`
+            new_data.REQUEST_RECEIPT_FEE_YEAR_3 = new_data.REQUEST_RECEIPT_FEE_YEAR_3 === null ? 'NULL' : `'${new_data.REQUEST_RECEIPT_FEE_YEAR_3}'`
+            new_data.REQUEST_RECEIPT_TOTAL_YEAR_3 = new_data.REQUEST_RECEIPT_TOTAL_YEAR_3 === null ? 'NULL' : `'${new_data.REQUEST_RECEIPT_TOTAL_YEAR_3}'`
+            new_data.REQUEST_RECEIPT_DATE_YEAR_3 = new_data.REQUEST_RECEIPT_DATE_YEAR_3 === null ? 'NULL' : `'${this.formatDate('TO-INSERT', new_data.REQUEST_RECEIPT_DATE_YEAR_3)}'`
+            new_data.REQUEST_DATE_ISSUED = new_data.REQUEST_DATE_ISSUED === null ? 'NULL' : `'${this.formatDate('TO-INSERT', new_data.REQUEST_DATE_ISSUED)}'`
+            new_data.REQUEST_DATE_EXPIRED = new_data.REQUEST_DATE_EXPIRED === null ? 'NULL' : `'${this.formatDate('TO-INSERT', new_data.REQUEST_DATE_EXPIRED)}'`
+            new_data.REQUEST_CONDITION_NO_1 = new_data.REQUEST_CONDITION_NO_1 === null ? 'NULL' : `'${new_data.REQUEST_CONDITION_NO_1}'`
+            new_data.REQUEST_CONDITION_NO_2 = new_data.REQUEST_CONDITION_NO_2 === null ? 'NULL' : `'${new_data.REQUEST_CONDITION_NO_2}'`
+            new_data.REQUEST_CONDITION_NO_3 = new_data.REQUEST_CONDITION_NO_3 === null ? 'NULL' : `'${new_data.REQUEST_CONDITION_NO_3}'`
+            new_data.REQUEST_CONDITION_NO_4 = new_data.REQUEST_CONDITION_NO_4 === null ? 'NULL' : `'${new_data.REQUEST_CONDITION_NO_4}'`
+            new_data.REQUEST_DELETE_LOGIC = new_data.REQUEST_DELETE_LOGIC === null ? 'NULL' : `'${new_data.REQUEST_DELETE_LOGIC}'`
+
+
+            return new_data
+        }
     }
     loopInsertEstablishment(Edata) {
         return new Promise((resolve, reject) => {
@@ -1449,6 +1489,116 @@ class service {
                         this.loopInsertEstablishment(Edata)
                     }
                 })
+            })
+        })
+    }
+    loopInsertRequestTransfer(request) {
+        return new Promise((resolve, reject) => {
+            this.getNewId('REQUEST', request.REQUEST_MENU).then((id) => {
+                request.REQUEST_NO = id
+                RequestDAOObj.insertDuplication(request).then((data) => {
+                    if (data === 'true') {
+                        return resolve(id)
+                    }
+                    else {
+                        this.loopInsertRequestTransfer(request)
+                    }
+                })
+            })
+        })
+    }
+    getOwnerDuplication(no, year, p_id) {
+        return new Promise((resolve, reject) => {
+            TransferDAOObj.getOwnerDuplication(no, year, p_id).then((data) => {
+                return resolve(data)
+            })
+        })
+    }
+
+    createTransferRequest(request, username) {
+        // doing
+        var datetime = new Date();
+        let dateForUpdate = datetime.toISOString().slice(0, 10)
+        // last_update , username
+        request.REQUEST_LAST_UPDATE = dateForUpdate
+        request.REQUEST_USER_UPDATE = username
+        let id_no = request.REQUEST_NO
+        let id_year = request.REQUEST_YEAR
+
+        return new Promise((resolve, reject) => {
+            this.loopInsertRequestTransfer(this.formatInsert('TRANSFER', request)).then((data) => {
+                if (data != undefined) {
+                    this.updateRequestStatusOnly(id_no, id_year, username, dateForUpdate, 'transfer').then((data_update_status) => {
+                        if (data_update_status) {
+                            TransferDAOObj.getOldId(id_no, id_year).then((old_id) => {
+                                console.log('console.log(old_id)   dasdsdas')
+                                console.log(old_id)
+                                if (old_id.length != 0) {
+                                    TransferDAOObj.updateDefaultTranfer(old_id[0].REQUEST_NO_OLD, old_id[0].REQUEST_YEAR_OLD).then((data_transfer) => {
+                                        if (data_transfer) {
+                                            let transfer_data = {
+                                                request_id: data,
+                                                request_year: id_year,
+                                                personal_id: request.PERSONAL_ID_OWNER,
+                                                date_exp: request.REQUEST_DATE_EXPIRED,
+                                                request_no_old: old_id[0].REQUEST_NO_OLD,
+                                                request_year_old: old_id[0].REQUEST_YEAR_OLD,
+                                                table_is_default: 'Y',
+                                                available: 'Y',
+                                                request_owner:old_id[0].REQUEST_OWNER,
+                                                date: this.formatDate('TO-INSERT', request.sub_date_transfer),
+                                                user_update: username,
+                                                last_update: dateForUpdate,
+                                            }
+                                            TransferDAOObj.insertTranfer(transfer_data).then((data_transfer_insert) => {
+                                                if (data_transfer_insert) {
+                                                    return resolve(data)
+                                                } else {
+                                                    console.log('insertTranfer => error')
+                                                    return resolve('error')
+                                                }
+                                            })
+                                        } else {
+                                            console.log('updateDefaultTranfer => error')
+                                            return resolve('error')
+                                        }
+                                    })
+                                } else {
+                                    let transfer_data = {
+                                        request_id: data,
+                                        request_year: id_year,
+                                        personal_id: request.PERSONAL_ID_OWNER,
+                                        date_exp: request.REQUEST_DATE_EXPIRED,
+                                        request_no_old: id_no,
+                                        request_year_old: id_year,
+                                        table_is_default: 'Y',
+                                        available: 'Y',
+                                        request_owner:request.old_owner,
+                                        date: this.formatDate('TO-INSERT', request.sub_date_transfer),
+                                        user_update: username,
+                                        last_update: dateForUpdate,
+                                    }
+                                    TransferDAOObj.insertTranfer(transfer_data).then((data_transfer_insert) => {
+                                        if (data_transfer_insert) {
+                                            return resolve(data)
+                                        } else {
+                                            console.log('insertTranfer => error')
+                                            return resolve('error')
+                                        }
+                                    })
+
+                                }
+                            })
+
+                        } else {
+                            console.log('updateRequestStatusOnly => error')
+                            return resolve('error')
+                        }
+                    })
+                } else {
+                    console.log('loopInsertRequestTransfer => error')
+                    return resolve('error')
+                }
             })
         })
     }
@@ -1488,6 +1638,22 @@ class service {
                     data[i].REQUEST_DATE_EXPIRED = data[i].REQUEST_DATE_EXPIRED != null ? this.formatDate("TO-DISPLAY", data[i].REQUEST_DATE_EXPIRED + '') : data[i].REQUEST_DATE_EXPIRED
                 }
                 console.log(data)
+                return resolve(data)
+            })
+        })
+    }
+    getRquestTransfer(personal_id) {
+        return new Promise((resolve, reject) => {
+            RequestDAOObj.getRequestTransfer(personal_id).then((data) => {
+                for (let i = 0; i < data.length; i++) {
+                    data[i].REQUEST_DATE_APPROVE = data[i].REQUEST_DATE_APPROVE != null ? this.formatDate("TO-DISPLAY", data[i].REQUEST_DATE_APPROVE + '') : data[i].REQUEST_DATE_APPROVE
+                    data[i].REQUEST_DATE_SUBMISSION = data[i].REQUEST_DATE_SUBMISSION != null ? this.formatDate("TO-DISPLAY", data[i].REQUEST_DATE_SUBMISSION + '') : data[i].REQUEST_DATE_SUBMISSION
+                    data[i].REQUEST_RECEIPT_DATE = data[i].REQUEST_RECEIPT_DATE != null ? this.formatDate("TO-DISPLAY", data[i].REQUEST_RECEIPT_DATE + '') : data[i].REQUEST_RECEIPT_DATE
+                    data[i].REQUEST_RECEIPT_DATE_YEAR_2 = data[i].REQUEST_RECEIPT_DATE_YEAR_2 != null ? this.formatDate("TO-DISPLAY", data[i].REQUEST_RECEIPT_DATE_YEAR_2 + '') : data[i].REQUEST_RECEIPT_DATE_YEAR_2
+                    data[i].REQUEST_RECEIPT_DATE_YEAR_3 = data[i].REQUEST_RECEIPT_DATE_YEAR_3 != null ? this.formatDate("TO-DISPLAY", data[i].REQUEST_RECEIPT_DATE_YEAR_3 + '') : data[i].REQUEST_RECEIPT_DATE_YEAR_3
+                    data[i].REQUEST_DATE_ISSUED = data[i].REQUEST_DATE_ISSUED != null ? this.formatDate("TO-DISPLAY", data[i].REQUEST_DATE_ISSUED + '') : data[i].REQUEST_DATE_ISSUED
+                    data[i].REQUEST_DATE_EXPIRED = data[i].REQUEST_DATE_EXPIRED != null ? this.formatDate("TO-DISPLAY", data[i].REQUEST_DATE_EXPIRED + '') : data[i].REQUEST_DATE_EXPIRED
+                }
                 return resolve(data)
             })
         })
@@ -1709,7 +1875,7 @@ class service {
                     if (address.id != land_data.ADDRESS_ID) {
                         console.log('Program run case this')
                         address.id = land_data.ADDRESS_ID
-                        AddressDAOObj.updateAddress(this.formatInsert('ADDRESS', address)).then((data_address) =>{
+                        AddressDAOObj.updateAddress(this.formatInsert('ADDRESS', address)).then((data_address) => {
                             land.address_id = `${land_data.ADDRESS_ID}`
                             LandDAOObj.updateLand(land).then((train_update_status) => {
                                 if (train_update_status) {
@@ -1721,7 +1887,7 @@ class service {
                                     address.id = ''
                                     return resolve(object)
                                 }
-                            }) 
+                            })
                         })
                     } else {
                         land.address_id = `${land_data.ADDRESS_ID}`
@@ -2015,7 +2181,6 @@ class service {
     getRequestByIdAndYear(id, year) {
         return new Promise((resolve, reject) => {
             RequestDAOObj.getRequestById(id, year).then((data) => {
-
                 if (data != undefined) {
                     console.log(`get request ${id}/${year} : getRequest Pass`)
                     this.getPersonalAndAddressById(data.PERSONAL_ID_OWNER).then((personal_operator_data) => {
@@ -2076,7 +2241,9 @@ class service {
                             data.REQUEST_DATE_ISSUED = data.REQUEST_DATE_ISSUED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_ISSUED + '') : data.REQUEST_DATE_ISSUED
                             data.REQUEST_DATE_EXPIRED = data.REQUEST_DATE_EXPIRED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_EXPIRED + '') : data.REQUEST_DATE_EXPIRED
                             data.REQUEST_LAST_UPDATE = data.REQUEST_LAST_UPDATE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_LAST_UPDATE + '') : data.REQUEST_LAST_UPDATE
+                            console.log('rundsda')
                             this.getEstablishment(data.ESTABLISHMENT_ID, data.ESTABLISHMENT_IS_LAND_OWNED).then((dataEstablishment) => {
+                                console.log(dataEstablishment)
                                 data.ESTABLISHMENT_DATA = dataEstablishment
                                 if (data.TRAIN_ID != null) {
                                     this.getTrainByTrainId(data.TRAIN_ID).then((dataTrain) => {
@@ -2122,9 +2289,23 @@ class service {
             })
         })
     }
-    updateRequestStatusExpire(no, year, user, last_update) {
+    updateRequestStatusOnly(no, year, user, last_update, status) {
+        var datetime = new Date();
+        let dateForUpdate2 = datetime.toISOString().slice(0, 10)
         return new Promise((resolve, reject) => {
-            RequestDAOObj.updateStatusExpire(no, year, user, last_update).then((data) => {
+            RequestDAOObj.updateStatusOnly(no, year, user, dateForUpdate2, status).then((data) => {
+                if (data === `true`) {
+                    return resolve(true)
+                } else {
+                    return resolve(false)
+                }
+            })
+        })
+    }
+
+    updateRequestStatusTransfer(no, year, user, last_update) {
+        return new Promise((resolve, reject) => {
+            RequestDAOObj.updateStatusTransfer(no, year, user, last_update).then((data) => {
                 if (data === `true`) {
                     return resolve(true)
                 } else {
@@ -2314,7 +2495,7 @@ class service {
                                                                 request.establishment_is_land_owned = request.establishment_is_land_owned === '' ? 'NULL' : `'${request.establishment_is_land_owned}'`
                                                                 request.establishment_address_id = request.establishment_address_id === '' ? 'NULL' : `'${request.establishment_address_id}'`
                                                                 console.log('7_update_request')
-                                                                this.updateRequest(request)
+                                                                // this.updateRequest(request)
                                                                 console.log(`land.file_upload_changed ${land.file_upload_changed === true} ${land.file_upload_changed}`)
                                                                 if (land.file_upload_changed) {
                                                                     console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!! UPLOAD !!!!!!!!!!!!!!!')
@@ -2322,7 +2503,16 @@ class service {
                                                                     this.insertFile(file)
                                                                 }
                                                                 let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                                                this.updateEstablishmentAndCheckDuplication(new_edata, address)
+                                                                this.updateEstablishmentAndCheckDuplication(new_edata, address).then((est_id) => {
+                                                                    if (est_id != true && est_id != false) {
+                                                                        request.establishment_id = est_id
+                                                                        console.log('8_update_request')
+                                                                        this.updateRequest(request)
+                                                                    } else {
+                                                                        console.log('8_update_request-02')
+                                                                        this.updateRequest(request)
+                                                                    }
+                                                                })
                                                             })
                                                         } else {
                                                             this.loopUpdateLand(land, addressOwner).then((land_data_update) => {
@@ -3950,7 +4140,7 @@ class service {
             request.last_update = dateForUpdate
             request.user_update = username
 
-            this.updateRequestStatusExpire(request.no, request.year, username, dateForUpdate).then((data) => {
+            this.updateRequestStatusOnly(request.no, request.year, username, dateForUpdate, 'expire').then((data) => {
                 let new_request = this.formatInsert('REQUEST', request)
                 new_request.establishment_is_land_owned = new_request.establishment_is_land_owned === '' ? 'NULL' : `'${new_request.establishment_is_land_owned}'`
                 new_request.establishment_address_id = new_request.establishment_address_id === '' ? 'NULL' : `'${new_request.establishment_address_id}'`

@@ -376,6 +376,7 @@ function setEstablishmentData(raw_data) {
 }
 // set data change
 function createRenewData() {
+    resetRequestMoney()
     requestData.receipt_data = document.getElementById('datepicker3').value.trim()
     requestData.receipt_fine = document.getElementById('renew_fine').value.trim()
     requestData.receipt_fee = document.getElementById('renew_fee').value.trim()

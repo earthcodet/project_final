@@ -34,26 +34,20 @@ let requestData = {
     sell_start: '',
     sell_end: '',
     sell_allow: 'N',
-    //Money Y1
     receipt_fine: 0,
     receipt_fee: 0,
     receipt_total: 0,
     receipt_date: '',
-    //Money Y2
     receipt_fine_year_2: 0,
     receipt_fee_year_2: 0,
     receipt_total_year_2: 0,
     receipt_date_year_2: '',
-    //Money Y3
     receipt_fine_year_3: 0,
     receipt_fee_year_3: 0,
     receipt_total_year_3: 0,
     receipt_date_year_3: '',
-    //
-    
     date_issued: '',
     date_expired: '',
-    //
     condition_no_1: '',
     condition_no_2: '',
     condition_no_3: '',

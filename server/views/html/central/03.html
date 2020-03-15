@@ -11,24 +11,28 @@
     <link rel="stylesheet" href="../../css/css2.css">
     <link href="../../css/fonts.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="../../css/jquery-ui-1.12.1.custom/jquery-ui.css">
 
     <!-- icon -->
     <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.css">
 
+
+
     <!-- เรียกไลบารี่สร้างปฎิทิน  -->
     <script src="../../js/service/jquery/jquery-3.4.1.min.js"></script>
-    <script src="../../js/service/date/datetimepicker.full.js"></script>
+    <script src="../../js/service/date/datetimepicker.full.js"></script> -->
     <script src="../../js/service/date/dateth.js"></script>
     <link rel="stylesheet" href="../../css/date.css">
+
+    <link rel="stylesheet" href="../../js/service/jquery/jquery.js">
+    <link href="../../css/jquery.contextMenu.css" rel="stylesheet">
 </head>
 
 <body>
     <!-- เมนูด้านบน -->
     <div class="w3-top icon-bar">
-        <a id="addMenu" class="exit " onclick="addTEST()"><i class="fa fa-plus-square"> เพิ่ม</i></a>
+        <a id="addMenu" class="exit disableds" onclick="addTEST()"><i class="fa fa-plus-square"> เพิ่ม</i></a>
         <a id="editMenu" onclick="editTEST()" class="exit disableds"><i class="fa fa-pencil-alt"> แก้ไข</i></a>
-        <a id="saveMenu" onclick="insertTEST()" class="exit disableds"><i class="fa fa-save"> บันทึก</i></a>
+        <a id="saveMenu" onclick="insertTEST()" class="exit "><i class="fa fa-save"> บันทึก</i></a>
         <a id="restoreMenu" onclick="restoreTEST()" class="exit disableds"><i class="fa fa-reply"> เรียกคืน</i></a>
         <a id="deleteMenu" onclick="deleteTEST()" class="exit disableds"><i class="fa fa-times"> ยกเลิก</i></a>
         <!-- <a><i class="fa fa-search"> ค้นหา</i></a> -->
@@ -67,7 +71,7 @@
             <a href="../renew/renew_area_less_correct.html">- คำขอต่อหนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
             <a href="../renew/renew_market.html">- คำขอต่อใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
             <a href="../renew/renew_health_danger.html">- คำขอต่อกิจการที่เป็นอันตรายต่อสุขภาพ</a>
-            <a href="../renew/renew_crematory.html" >- คำขอต่อกิจการฌาปณสถาน</a>
+            <a href="../renew/renew_crematory.html">- คำขอต่อกิจการฌาปณสถาน</a>
         </div>
         <button class="dropdown-btn select-active "><b>ข้อมูลส่วนกลาง </b><i class="fa fa-caret-down"></i></button>
         <div class="dropdown-container ">
@@ -79,7 +83,8 @@
         <div class="dropdown-container">
             <a href="../utilities/petition.html">- บันทึกเรื่องร้องเรียน</a>
         </div>
-        <button class="dropdown-btn" id="adminna" style="display: none;"><b>ข้อมูลระบบ </b><i class="fa fa-caret-down"></i></button>
+        <button class="dropdown-btn" id="adminna" style="display: none;"><b>ข้อมูลระบบ </b><i
+                class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
             <a href="#"></a>
         </div>
@@ -95,156 +100,203 @@
                     class="badge" style="margin-left:0.5vw;">100000</span></a>
         </div>
         <br><br>
-        <button class="dropdown-btn"><a href="../notfication/request copy.html" style="color: red;"><b>คำขอหมดอายุเกิน 3 ปี </b></a>
+        <button class="dropdown-btn"><a href="../notfication/request copy.html" style="color: red;"><b>คำขอหมดอายุเกิน 3
+                    ปี </b></a>
             <!-- <i class="fa fa-caret-down"></i> -->
         </button>
     </div>
     <!-- เนื้อหา -->
     <form id="form">
         <fieldset style="border: 0;padding: 0;margin: 0;">
-            <div class="main">
+            <div class="main"style="margin-top: 8vw;">
                 <header class="w3-top2">
                     <h1 style="font-size:2.8vh;margin-left: 25px;padding: 2px;"> โอนใบอนุญาต</h1>
                 </header>
-                <div class="box">
-                    <a>เลขที่คำขอโอน :</a>
-                    <input type="text" id="formId" name="" style="width: 12%;" placeholder="">
-                    <a>วันที่ยืน :</a>
-                    <input type="text" id="datepicker-th-2" name="date1" style="width: 12%;">
-                    <a>ใบอนุญาตเดิมเล่มที่ :</a>
-                    <input type="int" id="" style="width: 12%;">
-                    <a>เลขที่ :</a>
-                    <input type="int" id="" style="width: 12%;">
-                  <br>
-                    <a style="margin-left: vw;">ใบอนุญาตใหม่เล่มที่ :</a>
-                    <input type="int" id="" style="width: 12%;">
-                    <a>เลขที่ :</a>
-                    <input type="int" id="" style="width: 12%;">
-
-                    <br>
-                    <a>ข้าพเจ้า :</a>
-                    <input type="text" id="" style="width: 17%;">
-                    <button type="button" class="fa fa-search" style="border-radius: 5px;"
-                            onclick="testSearchOparator()"></button>
-                    <a>เลขบัตรประชาชน :</a>
-                    <input type="text" style="width: 12%;">
-                    <a>อายุ :</a>
-                    <input type="int" id="" style="width: 5%;">
-                    <a>สัญชาติ :</a>
-                    <select id="nationality" style="width: 10.5%;">
-                        <option value="" hidden>เลือก...</option>
-                        <option value="">ไทย</option>
-                        <option value=""></option>
-                    </select> 
-                    <a>เชื่อชาติ :</a>
-                    <select id="nationality" style="width: 10.5%;">
-                        <option value="" hidden>เลือก...</option>
-                        <option value="">ไทย</option>
-                        <option value=""></option>
-                    </select>
-                    <br>
-                    <a>อยู่บ้านเลขที่ :</a>
-                    <input type="text" id="homeId" style="width: 7%;"> 
-                    <a>หมู่ที่ :</a>
-                    <input type="int" id="moo" style="width: 7%;"> 
-                    <a>ตรอก:</a>
-                    <input type="text" id="trxk" style="width: 11%;"> 
-                    <a>ซอย :</a>
-                    <input type="text" id="sxy" style="width: 12%;"> 
-                    <a>อาคาร :</a>
-                    <input type="text" id="building" style="width: 12%;"> 
-                    <a>ถนน :</a>
-                    <input type="text" id="road" style="width: 12%;">
-
-                    <br>
-                    <a style="margin-left: 2.5vw;">จังหวัด :</a>
-                    <select id="province" style="width: 13%;">
-                    </select> 
-                    <a>อำเภอ :</a>
-                    <select id="district" style="width: 13%;">
-                    </select> 
-                    <a>ตำบล :</a>
-                    <select id="subdistrict" style="width: 13%;">
-                    </select> 
-                    <a>โทรศัพท์ :</a>
-                    <input type="text" id="phone" style="width: 13%;"> 
-
-                    <br><br>
-                
-                    <a><b>ขอยื่นคำร้องต่อนายกเทศมนตรี ดังนี้</b></a>
-
-                    <br>
-                    <a>ด้วยข้าพเจ้า มีความประสงค์ขอโอน</a>
-                    <select id="" style="width: 25%;">
-                        <option value="" hidden>เลือก...</option>
-                        <option value=""></option>
-                        <option value=""></option>
-                    </select>
-                    <br>
-                    <a>ให้แก่ (ผู้รับโอน)</a>
-                    <input type="text" id="" style="width: 17%;">
-                    <button type="button" class="fa fa-search" style="border-radius: 5px;"
-                            onclick="testSearchOparator()"></button>
-                    <a>เลขบัตรประชาชน :</a>
-                    <input type="text" style="width: 12%;">
-                    <a>อายุ :</a>
-                    <input type="int" id="" style="width: 5%;">
-                    <a>สัญชาติ :</a>
-                    <select id="nationality" style="width: 10.5%;">
-                        <option value="" hidden>เลือก...</option>
-                        <option value="">ไทย</option>
-                        <option value=""></option>
-                    </select> 
-                    <a>เชื่อชาติ :</a>
-                    <select id="nationality" style="width: 10.5%;">
-                        <option value="" hidden>เลือก...</option>
-                        <option value="">ไทย</option>
-                        <option value=""></option>
-                    </select>
-                    <br>
-                    <a>อยู่บ้านเลขที่ :</a>
-                    <input type="text" id="homeId" style="width: 7%;"> 
-                    <a>หมู่ที่ :</a>
-                    <input type="int" id="moo" style="width: 7%;"> 
-                    <a>ตรอก:</a>
-                    <input type="text" id="trxk" style="width: 11%;"> 
-                    <a>ซอย :</a>
-                    <input type="text" id="sxy" style="width: 12%;"> 
-                    <a>อาคาร :</a>
-                    <input type="text" id="building" style="width: 12%;"> 
-                    <a>ถนน :</a>
-                    <input type="text" id="road" style="width: 12%;">
-
-                    <br>
-                    <a style="margin-left: 2.5vw;">จังหวัด :</a>
-                    <select id="province" style="width: 13%;">
-                    </select> 
-                    <a>อำเภอ :</a>
-                    <select id="district" style="width: 13%;">
-                    </select> 
-                    <a>ตำบล :</a>
-                    <select id="subdistrict" style="width: 13%;">
-                    </select> 
-                    <a>โทรศัพท์ :</a>
-                    <input type="text" id="phone" style="width: 13%;"> 
-
-                    <br>
-                    <p>
-                        <a>โดยข้าพเจ้ายินดีที่จะจ่ายเงินค่าบำรุงให้แก่เทศบาลฯเป็นเงิน
-                        <input type="text" name="" id="" style="width: 12.5%;">บาท</a>
+                <div class="box" >
+                    <div>
+                        <a style="margin-left: 1vw;">เลขที่คำขอใบอนุญาตใหม่ :</a>
+                        <input disabled type="text" id="form_new_id" name="" style="width: 12%;" placeholder="">
+                        <a style="margin-left: 1vw;">วันที่ยืน :</a>
+                        <input type="text" id="datepicker1" name="date1" style="width: 12%;" maxlength="10"> 
+                        <a style="margin-left: 1vw;">เลขที่คำขอใบอนุญาตเดิม :</a>
+                        <input disabled type="int" id="form_old_id" style="width: 12%;">
                         <br>
-                        <a>ตามใบเสร็จรับเงิน เล่มที่</a>
-                        <input type="text" name="" id="" style="width: 12.5%;">
-                        <a>เลขที่</a>
-                        <input type="int" name="" id="" style="width: 12.5%;">
-                        <a>ลงวันที่</a>
-                        <input type="date" id="date" name="" style="width: 12.5%;" placeholder="">
+                        <!-- เจ้าของเดิม -->
+                        <div>
+                            <a style="margin-left: 1.4vw;">ข้าพเจ้า :
+                                <select id="typeUser" style="width: 11%;" disabled>
+                                    <option value="บุคคลธรรมดา">บุคคลธรรมดา</option>
+                                    <option value="นิติบุคคล">นิติบุคคล</option>
+                                </select>
+                                <input type="text" id="name" style="width: 16.5%;" readonly disabled>
+                                <button type="button" class="fa fa-search" style="border-radius: 5px;"
+                                    onclick="searchOparator('OLD')"></button></a>
 
-                        <br><br><br>
+                            <a>เลขประจำตัว :
+                                <input type="text" id="id" readonly disabled
+                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                    maxlength="13" style="width: 13%;"></a>
+                            <a>อายุ :
+                                <input type="text" id="age" readonly
+                                    oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
+                                    maxlength="3" style="width: 7%;" disabled></a>
+                            <a>สัญชาติ :
+                                <input class="drop" list="nationality1" id="nationality" name="" style="width: 7%;"
+                                    readonly disabled>
+                                <datalist id="nationality1">
+                                    <option value="" hidden>เลือก...</option>
+                                    <option value="ไทย">ไทย</option>
+                                    <option value="จีน"></option>
+                                    <option value="อเมริกัน"></option>
+                                </datalist>
+                                </input></a>
+                            <a>เชื้อชาติ :
+                                <input list="nationality2" id="race" name="" style="width: 7%;" readonly disabled>
+                                <datalist id="nationality2">
+                                    <option value="" hidden>เลือก...</option>
+                                    <option value="ไทย">ไทย</option>
+                                    <option value="จีน"></option>
+                                    <option value="อเมริกัน"></option>
+                                </datalist>
+                                </input></a>
+                            <br>
+                            <a style="margin-left: 0.58vw;">เลขที่บ้าน :
+                                <input type="text" id="home_id" disabled style="width: 7%;"></a>
+                            <a>หมู่ที่ :
+                                <input type="text" id="moo" disabled style="width: 7%;"></a>
+                            <a>ตรอก :
+                                <input type="text" id="trxk" disabled style="width: 13%;"></a>
+                            <a>ซอย :
+                                <input type="text" id="sxy" disabled style="width: 13%;"></a>
+                            <a>อาคาร :
+                                <input type="text" id="building" disabled style="width: 13.5%;"></a>
+                            <a>ถนน :
+                                <input type="text" id="road" disabled style="width: 13.5%;"></a>
+                            <br>
+                            <a style="margin-left: 1.8vw;">จังหวัด :
+                                <select id="province" style="width: 14%;" disabled></select></a>
+                            <a>อำเภอ :
+                                <select id="district" style="width: 14%;" disabled></select></a>
+                            <a>ตำบล :
+                                <select id="subdistrict" style="width: 13.5%;" disabled></select></a>
+                            <a>โทรศัพท์ :
+                                <input type="text" id="phone"
+                                    oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
+                                    maxlength="10" style="width: 6.5vw;" disabled
+                                   ></a>
+                            <a style="margin-left: .1vw;">ต่อ</a>
+                            <input type="text" id="phone_more" style="width: 4vw"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                maxlength="4" disabled>
+                            <a>โทรสาร :
+                                <input type="text" id="fax"
+                                    oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
+                                    maxlength="14" style="width: 13.2%;" disabled></a>
+                        </div>
+                        <br>
+                        <a><b>ขอยื่นคำร้องต่อนายกเทศมนตรี ดังนี้</b></a>
 
-                        <button type="button" class="button" id="" style="width: 20%;height: 3vw;">พิมพ์ใบขอโอน</button>
-                        
-                        
+                        <br>
+                        <a>ด้วยข้าพเจ้า มีความประสงค์ขอโอน</a>
+                        <button type="button" class="fa fa-search" style="border-radius: 5px;margin-left: 1.5vw;"
+                        onclick="onClickRequest()"></button>
+                        <a style="margin-left: .5vw;">เลือกใบอนุญาตที่ต้องการโอน</a>
+                        <br>
+                        <br>
+                        <a style="margin-left: 3vw; ">เลขที่ใบอนุญาต :</a>
+                        <a id='use_request_id'></a>
+                        <a style="margin-left: 3vw;">ประเภทใบอนุญาต :</a>
+                        <a id='use_request_type'></a>
+                      
+                        <!-- เจ้าของใหม่ -->
+                        <div>
+                            <a style="margin-left: 1.4vw;"> ให้แก่ (ผู้รับโอน) :
+                                <select id="ntypeUser" style="width: 11%;" disabled>
+                                    <option value="บุคคลธรรมดา">บุคคลธรรมดา</option>
+                                    <option value="นิติบุคคล">นิติบุคคล</option>
+                                </select>
+                                <input type="text" id="nname" style="width: 16.5%;" readonly disabled>
+                                <button type="button" class="fa fa-search" style="border-radius: 5px;"
+                                    onclick="onClickNewOperator()"></button></a>
+
+                            <a>เลขประจำตัว :
+                                <input type="text" id="nid" readonly disabled
+                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                    maxlength="13" style="width: 13%;"></a>
+                            <a>อายุ :
+                                <input type="text" id="nage" readonly
+                                    oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
+                                    maxlength="3" style="width: 7%;" disabled></a>
+                            <a>สัญชาติ :
+                                <input class="drop" list="nnationality1" id="nnationality" name="" style="width: 7%;"
+                                    readonly disabled>
+                                <datalist id="nnationality1">
+                                    <option value="" hidden>เลือก...</option>
+                                    <option value="ไทย">ไทย</option>
+                                    <option value="จีน"></option>
+                                    <option value="อเมริกัน"></option>
+                                </datalist>
+                                </input></a>
+                            <a>เชื้อชาติ :
+                                <input list="nnationality2" id="nrace" name="" style="width: 7%;" readonly disabled>
+                                <datalist id="nnationality2">
+                                    <option value="" hidden>เลือก...</option>
+                                    <option value="ไทย">ไทย</option>
+                                    <option value="จีน"></option>
+                                    <option value="อเมริกัน"></option>
+                                </datalist>
+                                </input></a>
+                            <br>
+                            <a style="margin-left: 0.58vw;">เลขที่บ้าน :
+                                <input type="text" id="nhome_id" disabled style="width: 7%;"></a>
+                            <a>หมู่ที่ :
+                                <input type="text" id="nmoo" disabled style="width: 7%;"></a>
+                            <a>ตรอก :
+                                <input type="text" id="ntrxk" disabled style="width: 13%;"></a>
+                            <a>ซอย :
+                                <input type="text" id="nsxy" disabled style="width: 13%;"></a>
+                            <a>อาคาร :
+                                <input type="text" id="nbuilding" disabled style="width: 13.5%;"></a>
+                            <a>ถนน :
+                                <input type="text" id="nroad" disabled style="width: 13.5%;"></a>
+                            <br>
+                            <a style="margin-left: 1.8vw;">จังหวัด :
+                                <select id="wProvince" style="width: 14%;" disabled></select></a>
+                            <a>อำเภอ :
+                                <select id="wDistrict" style="width: 14%;" disabled></select></a>
+                            <a>ตำบล :
+                                <select id="wSubdistrict" style="width: 13.5%;" disabled></select></a>
+                            <a>โทรศัพท์ :
+                                <input type="text" id="nphone"
+                                    oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
+                                    maxlength="10" style="width: 6.5vw;" disabled
+                                    </a>
+                            <a style="margin-left: .1vw;">ต่อ</a>
+                            <input type="text" id="nphone_more" style="width: 4vw"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                maxlength="4" disabled>
+                            <a>โทรสาร :
+                                <input type="text" id="nfax"
+                                    oninput="this.value = this.value.replace(/[^0-9\-]/g, '').replace(/(\..*)\./g, '$1');"
+                                    maxlength="14" style="width: 13.2%;" disabled></a>
+                        </div>
+                        <br>
+                        <p>
+                            <a>โดยข้าพเจ้ายินดีที่จะจ่ายเงินค่าบำรุงให้แก่เทศบาลฯ เป็นเงิน</a>
+                            <input type="text" name="" id="fine_transfer" style="width: 12.5%;"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')">
+                            <a style="margin-left: 0.5vw;"
+                           ">บาท</a>
+                            <a>ลงวันที่</a>
+                            <input type="text" id="datepicker2" name="" style="width: 12.5%; margin-left: 0.5vw;" maxlength="10" placeholder="">
+
+                            <br><br><br>
+
+                            <button type="button" class="button" id=""
+                                style="width: 20%;height: 3vw;" disabled>พิมพ์ใบขอโอน</button>
+
+
+
+                    </div>
 
                 </div>
             </div>
@@ -255,11 +307,16 @@
 </body>
 
 <script src="../../node_modules/axios/dist/axios.min.js"></script>
-<script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>   
+<script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
 <script src="../../js/service/utilities.js"></script>
+<script src="../../js/transfer/TransferControl.js"></script>
+<script src="../../js/transfer/TransferData.js"></script>
+<script src="../../js/transfer/TransferRequire.js"></script>
+<script src="../../js/transfer/TransferService.js"></script>
+<script src='../../js/service/sideMenu.js'></script>
+<!-- เอาไว้เช็คว่า user login หรือเปล่า --> -->
+<!-- <script src="../../js/service/checkUserLogin.js"></script> -->
 
-<script src="../../js/service/jquery/jquery.js"></script>
-<script src="../../js/service/sideMenu.js"></script>
-
-
+<script src="../../js/service/address/twoAddress.js"></script>
+<script> loadingData()</script>
 </html>
