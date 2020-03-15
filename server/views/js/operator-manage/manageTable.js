@@ -464,7 +464,7 @@ function payPopup() {
     displayUserInformation('app_name_money', 'money')
 }
 //โอนใบอนุญาติ *
-function transferPopup() {
+function transferPopup(id) {
     Swal.fire({
         title: 'ต้องการโอนใบอนุญาตหรือไม่',
         width: '40%',
@@ -491,7 +491,8 @@ function transferPopup() {
         }
     }).then((result) => {
         if (result.value) {
-            window.location.href = '03.html'
+            id = id.split('/')
+            window.location.href = `03.html?id_no=${id[0]}&id_year=${id[1]}`
         } else if (result.dismiss === Swal.DismissReason.cancel) {
         }
     });
@@ -704,7 +705,7 @@ $(function () {
                             toPerRequest(type, id)
                             break;
                         case 'transfer':
-                            transferPopup()
+                            transferPopup(id)
                             break;
                         case 'add':
                             addPopup()
