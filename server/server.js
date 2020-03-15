@@ -357,6 +357,11 @@ app.get('/get/user/id/:userId', (req, res) => {
     res.json(data)
   })
 })
+app.get('/get/request/profile/:pid/:eid', (req, res) => {
+  webService.getRequestProfileByPIDAndEID(req.params.pid, req.params.eid).then((data) => {
+  res.json(data)
+})
+})
 app.get('/get/request/owner/:personal_id/:type', (req, res) => {
   let type_type = req.params.type
   let type_id = req.params.personal_id
