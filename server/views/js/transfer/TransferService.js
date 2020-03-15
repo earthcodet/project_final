@@ -2,84 +2,42 @@ let newDocument = true
 let requestType = []
 let userMoney = ''
 let listAlderMan = []
-function checkView(typeForm) {
-    let requestId = getUrlVars()
-    console.log(requestId)
-    if (requestId.id_no != undefined && requestId.id_year != undefined) {
-        let requsetNo = requestId.id_no
-        let requestYear = requestId.id_year
-        console.log(`typeForm ${typeForm}`)
-        if (typeForm != undefined) {
-            let sight = getSightFormType(typeForm)
-            let checkSight = requsetNo.slice(0, 1) === sight ? true : false
-            console.log(`sight ${sight}`)
-            console.log(`checkSight = ${checkSight} > ${requsetNo.slice(0, 1)} === ${sight} > ${requsetNo.slice(0, 1) === sight}`)
-            console.log(checkSight)
-            if (checkSight) {
-                getRequestDataRenew(requsetNo, requestYear).then((raw_data) => {
-                    if (raw_data.length != 0) {
-                        console.log(raw_data)
-                        setRequestData(raw_data[0])
-                        setDataOperator(raw_data[0].GropDataProsonal)
-                        setOperatorAddressData(raw_data[0].GropDataProsonal)
-                        setAddressEstablishmentData(raw_data[0])
-                        setEstablishmentData(raw_data[0])
-                        if (raw_data[0].PERSONAL_ID_ASSISTANT != null) {
-                            searchPersonalById(raw_data[0].PERSONAL_ID_ASSISTANT).then((data_assistant) => {
-                                if (data_assistant.PERSONAL_NAME != undefined) {
-                                    setassistantOperatorData(data_assistant)
-                                    console.log(`requestData`)
-                                    console.log(requestData)
-                                    console.log(`establishmentData`)
-                                    console.log(establishmentData)
-                                    console.log(`addressEstablishmentData`)
-                                    console.log(addressEstablishmentData)
-                                    console.log(`operatorAddressData`)
-                                    console.log(operatorAddressData)
-                                    console.log(`operatorData`)
-                                    console.log(operatorData)
-                                    console.log(`assistantOperatorData`)
-                                    console.log(assistantOperatorData)
-                                    setDataView()
-                                } else {
-                                    console.log(`requestData`)
-                                    console.log(requestData)
-                                    console.log(`establishmentData`)
-                                    console.log(establishmentData)
-                                    console.log(`addressEstablishmentData`)
-                                    console.log(addressEstablishmentData)
-                                    console.log(`operatorAddressData`)
-                                    console.log(operatorAddressData)
-                                    console.log(`operatorData`)
-                                    console.log(operatorData)
-                                    console.log(`assistantOperatorData`)
-                                    console.log(assistantOperatorData)
-                                    setDataView()
-                                }
-                            })
-                        } else {
-                            console.log(`requestData`)
-                            console.log(requestData)
-                            console.log(`establishmentData`)
-                            console.log(establishmentData)
-                            console.log(`addressEstablishmentData`)
-                            console.log(addressEstablishmentData)
-                            console.log(`operatorAddressData`)
-                            console.log(operatorAddressData)
-                            console.log(`operatorData`)
-                            console.log(operatorData)
-                            console.log(`assistantOperatorData`)
-                            console.log(assistantOperatorData)
-                            setDataView()
-                        }
+function checkView() {
+    let item_key = getUrlVars()
+    console.log(item_key)
+    if (item_key.id_no != undefined && item_key.id_year != undefined) {
+        getRequestDataTransfer(item_key.id_no, item_key.id_year).then((raw_data) => {
+            console.log(raw_data)
+           
+            if (raw_data.length != 0) {
+                raw_data = raw_data[0]
+                setDataOperator(raw_data)
+                setRequestData(raw_data)
+                let object_t = {
+                    AID: {
+                        ADDRESS_HOME_NUMBER: raw_data.ADDRESS_HOME_NUMBER,
+                        ADDRESS_MOO: raw_data.ADDRESS_MOO,
+                        ADDRESS_TRXK: raw_data.ADDRESS_TRXK,
+                        ADDRESS_SXY: raw_data.ADDRESS_SXY,
+                        ADDRESS_BUILDING: raw_data.ADDRESS_BUILDING,
+                        ADDRESS_ROAD: raw_data.ADDRESS_ROAD,
+                        DISTRICT_NAME: raw_data.DISTRICT_NAME,
+                        AMPHUR_NAME: raw_data.AMPHUR_NAME,
+                        PROVINCE_NAME: raw_data.PROVINCE_NAME
                     }
-                })
+                }
+                setOperatorAddressData(object_t)
+                setDataView()
             }
-        }
+
+        })
+
+
     }
 }
 // setDataView
 function setDataView() {
+    console.log('set view')
     if (operatorData.id != '') {
         //เจ้าของเดิม
         document.getElementById("typeUser").value = operatorData.type
@@ -164,10 +122,10 @@ function setDataView() {
         document.getElementById('form_old_id').value = `${requestData.no}/${requestData.year}`
         document.getElementById('use_request_id').innerText = `${requestData.no}/${requestData.year}`
         document.getElementById('use_request_type').innerText = `${requestData.menu}`
-    } else {
+    }else{
         document.getElementById('form_old_id').value = ''
-        document.getElementById('use_request_id').innerText = ''
-        document.getElementById('use_request_type').innerText = ''
+    document.getElementById('use_request_id').innerText = ''
+    document.getElementById('use_request_type').innerText = ''
     }
 }
 function setDataOparatorToUi(raw_data, type) {
@@ -188,7 +146,6 @@ function checkformatReturn(value) {
 
 //set data full raw data
 function setRequestData(raw_data) {
-
     requestData.no = raw_data.REQUEST_NO
     requestData.year = raw_data.REQUEST_YEAR
     requestData.menu = raw_data.REQUEST_TYPE_NAME
@@ -245,13 +202,16 @@ function setRequestData(raw_data) {
         REQUEST_STATUS: raw_data.REQUEST_STATUS,
         REQUEST_STATUS_BEFORE: raw_data.REQUEST_STATUS_BEFORE,
         REQUEST_DELETE_LOGIC: raw_data.REQUEST_DELETE_LOGIC,
-        REQUEST_IS_DELETED: raw_data.REQUEST_IS_DELETED
-    }
+        REQUEST_IS_DELETED: raw_data.REQUEST_IS_DELETED  
+    } 
     console.log(raw_request_data)
+    console.log(requestData)
     setDataView()
 }
 function setDataOperator(raw_data) {
-    resetRequest()
+    if(requestData.no != ''){
+        resetRequest()
+    }
     operatorData.id = raw_data.PERSONAL_ID
     operatorData.address_id = raw_data.ADDRESS_ID
     operatorData.title = raw_data.PERSONAL_TITLE === null ? '' : raw_data.PERSONAL_TITLE
@@ -380,7 +340,7 @@ function insertRequestTransfer() {
 }
 function getRequestDataTransfer(no, year) {
     return new Promise((resolve, reject) => {
-        axios.get(`http://localhost:5000/get/request/renew/id/${no}/${year}`).then((result) => {
+        axios.get(`http://localhost:5000/get/request/transfer/${no}/${year}`).then((result) => {
             return resolve(result.data);
         })
     })
@@ -433,6 +393,6 @@ function getSightFormType(type) {
 }
 function loadingData() {
     runForm().then(() => {
-        //
+        checkView()
     })
 }

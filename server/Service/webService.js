@@ -1514,7 +1514,13 @@ class service {
             })
         })
     }
-
+    getRequestAndPersonal(no, year) {
+        return new Promise((resolve, reject) => {
+            RequestDAOObj.getRequestAndPersonal(no, year).then((data) => {
+                return resolve(data)
+            })
+        })
+    }
     createTransferRequest(request, username) {
         // doing
         var datetime = new Date();

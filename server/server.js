@@ -262,9 +262,13 @@ app.post('/insert/request/renew', (req, res) => {
   })
 })
 app.post('/insert/request/transfer', (req, res) => {
-  console.log(req.body.transfer)
   webService.createTransferRequest(req.body.transfer, req.session.username).then((data) => {
     res.json(data);
+  })
+})
+app.get('/get/request/transfer/:no/:year', (req, res) => {
+  webService.getRequestAndPersonal(req.params.no,req.params.year).then((data) => {
+    res.json(data)
   })
 })
 app.get('/get/request/:no/:year', (req, res) => {
@@ -291,7 +295,8 @@ app.get('/get/request/renew/:type/:personal_id', (req, res) => {
     res.json(data)
   })
 })
-app.get('/get/request/transfer/search/:personal_id', (req, res) => {
+app.get('/search/request/transfer/pid/:personal_id', (req, res) => {
+  console.log(req.params.personal_id)
   webService.getRquestTransfer(req.params.personal_id).then((data) => {
     res.json(data)
   })

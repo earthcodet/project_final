@@ -212,6 +212,25 @@ class RequestDAO {
             })
         })
     }
+    getRequestAndPersonal(r_no,r_year) {
+        return new Promise((resolve, reject) => {
+            let joinTable = `JOIN personal ON personal.PERSONAL_ID = request.PERSONAL_ID_OWNER `
+            joinTable = joinTable + `JOIN address ON personal.ADDRESS_ID = address.ADDRESS_ID `
+            joinTable = joinTable + `JOIN request_type ON request.REQUEST_TYPE_ID = request_type.REQUEST_TYPE_ID `
+            let condition = `REQUEST_NO = '${r_no}' AND REQUEST_YEAR = '${r_year}' AND `
+            condition = condition + `REQUEST_STATUS = 'active' `
+            condition = condition +`AND (request.REQUEST_MENU = 'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร' `
+            condition = condition + `OR request.REQUEST_MENU = 'หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร')`
+            let query = `SELECT * FROM request ${joinTable} WHERE ${condition}`
+            con.query(query, function (err, result) {
+                if (err) {
+                    console.log(err)
+                    return resolve(err.code)
+                }
+                return resolve(result)
+            })
+        })
+    }
     getRequestTransfer(personal_id) {
         return new Promise((resolve, reject) => {
             let joinTable = `JOIN establishment ON request.ESTABLISHMENT_ID = establishment.ESTABLISHMENT_ID `

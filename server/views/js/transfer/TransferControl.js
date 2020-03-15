@@ -267,12 +267,13 @@ function searchRequestTransfer() {
         closeOnConfirm: false,
         closeOnCancel: false
     });
+    console.log(operatorData.id)
     searchRequestByPersonalId(operatorData.id)
 }
 function searchRequestByPersonalId(id) {
     return new Promise((resolve, reject) => {
         console.log('Searching')
-        axios.get(`http://localhost:5000/get/request/transfer/search/${id}`).then((result) => {
+        axios.get(`http://localhost:5000/search/request/transfer/pid/${id}`).then((result) => {
             if (result.data.length != 0) {
                 createResultSearchRequestTransfer(result.data)
                 errorSearch('', 'HIDE', "Renew")
