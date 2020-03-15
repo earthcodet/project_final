@@ -1343,6 +1343,7 @@ class service {
             return new_data
         }
         if (type === 'REQUEST_UPDATE_STATUS') {
+
             let item = new_data.date_approve
             new_data.date_approve = item === '' ? 'NULL' : `'${this.formatDate('TO-INSERT', item)}'`
 
@@ -1517,12 +1518,54 @@ class service {
     getRequestAndPersonal(no, year) {
         return new Promise((resolve, reject) => {
             RequestDAOObj.getRequestAndPersonal(no, year).then((data) => {
-                return resolve(data)
+                if (data.length != 0) {
+                    data = data[0]
+                    data.REQUEST_DATE_SUBMISSION = data.REQUEST_DATE_SUBMISSION != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_SUBMISSION + '') : data.REQUEST_DATE_SUBMISSION
+                    data.REQUEST_DATE_APPROVE = data.REQUEST_DATE_APPROVE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_APPROVE + '') : data.REQUEST_DATE_APPROVE
+                    data.REQUEST_RECEIPT_DATE = data.REQUEST_RECEIPT_DATE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_RECEIPT_DATE + '') : data.REQUEST_RECEIPT_DATE
+                    data.REQUEST_DATE_ISSUED = data.REQUEST_DATE_ISSUED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_ISSUED + '') : data.REQUEST_DATE_ISSUED
+                    data.REQUEST_DATE_EXPIRED = data.REQUEST_DATE_EXPIRED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_EXPIRED + '') : data.REQUEST_DATE_EXPIRED
+                    data.REQUEST_LAST_UPDATE = data.REQUEST_LAST_UPDATE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_LAST_UPDATE + '') : data.REQUEST_LAST_UPDATE
+                    let object = []
+                    object.push(data)
+                    return resolve(object)
+                } else {
+                    return resolve(data)
+                }
+            })
+        })
+    }
+    getOldIdTransferRequest(r_no, r_year) {
+        return new Promise((resolve, reject) => {
+            TransferDAOObj.getOldId(r_no, r_year).then((data_check) => {
+                return resolve(data_check)
+            })
+        })
+    }
+    cancleStatusRequestExtra(requsetE, username) {
+        return new Promise((resolve, reject) => {
+            this.getOldIdTransferRequest(requsetE.no, requsetE.year).then((item_tranfer) => {
+                if (item_tranfer.length != 0) {
+                    var datetime = new Date();
+                    let dateForUpdate = datetime.toISOString().slice(0, 10)
+                    let transferOld = item_tranfer[0]
+                    TransferDAOObj.updateAllStatusCancel(transferOld.REQUEST_NO_OLD, transferOld.REQUEST_YEAR_OLD, dateForUpdate, username).then((data_check) => {
+                        RequestDAOObj.updateStatusOnly(transferOld.REQUEST_NO_OLD, transferOld.REQUEST_YEAR_OLD, username, dateForUpdate, 'cancel', 'transfer').then((data_c) => {
+                            return resolve(data_check)
+                        })
+                    })
+                } else {
+                    console.log('run')
+                    requsetE.status_before = requsetE.status
+                    requsetE.status = 'cancel'
+                    this.updateRequestStatus(requsetE, username).then((t_data) => {
+                        return resolve(t_data)
+                    })
+                }
             })
         })
     }
     createTransferRequest(request, username) {
-        // doing
         var datetime = new Date();
         let dateForUpdate = datetime.toISOString().slice(0, 10)
         // last_update , username
@@ -1551,7 +1594,7 @@ class service {
                                                 request_year_old: old_id[0].REQUEST_YEAR_OLD,
                                                 table_is_default: 'Y',
                                                 available: 'Y',
-                                                request_owner:old_id[0].REQUEST_OWNER,
+                                                request_owner: old_id[0].REQUEST_OWNER,
                                                 date: this.formatDate('TO-INSERT', request.sub_date_transfer),
                                                 user_update: username,
                                                 last_update: dateForUpdate,
@@ -1579,7 +1622,7 @@ class service {
                                         request_year_old: id_year,
                                         table_is_default: 'Y',
                                         available: 'Y',
-                                        request_owner:request.old_owner,
+                                        request_owner: request.old_owner,
                                         date: this.formatDate('TO-INSERT', request.sub_date_transfer),
                                         user_update: username,
                                         last_update: dateForUpdate,
@@ -2244,6 +2287,8 @@ class service {
                             data.REQUEST_DATE_SUBMISSION = data.REQUEST_DATE_SUBMISSION != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_SUBMISSION + '') : data.REQUEST_DATE_SUBMISSION
                             data.REQUEST_DATE_APPROVE = data.REQUEST_DATE_APPROVE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_APPROVE + '') : data.REQUEST_DATE_APPROVE
                             data.REQUEST_RECEIPT_DATE = data.REQUEST_RECEIPT_DATE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_RECEIPT_DATE + '') : data.REQUEST_RECEIPT_DATE
+                            data.REQUEST_RECEIPT_DATE_YEAR_2 = data.REQUEST_RECEIPT_DATE_YEAR_2 != null ? this.formatDate("TO-DISPLAY", data.REQUEST_RECEIPT_DATE_YEAR_2 + '') : data.REQUEST_RECEIPT_DATE_YEAR_2
+                            data.REQUEST_RECEIPT_DATE_YEAR_3 = data.REQUEST_RECEIPT_DATE_YEAR_3 != null ? this.formatDate("TO-DISPLAY", data.REQUEST_RECEIPT_DATE_YEAR_3 + '') : data.REQUEST_RECEIPT_DATE_YEAR_3
                             data.REQUEST_DATE_ISSUED = data.REQUEST_DATE_ISSUED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_ISSUED + '') : data.REQUEST_DATE_ISSUED
                             data.REQUEST_DATE_EXPIRED = data.REQUEST_DATE_EXPIRED != null ? this.formatDate("TO-DISPLAY", data.REQUEST_DATE_EXPIRED + '') : data.REQUEST_DATE_EXPIRED
                             data.REQUEST_LAST_UPDATE = data.REQUEST_LAST_UPDATE != null ? this.formatDate("TO-DISPLAY", data.REQUEST_LAST_UPDATE + '') : data.REQUEST_LAST_UPDATE
@@ -2385,6 +2430,8 @@ class service {
                         data[i].REQUEST_DATE_ISSUED = data[i].REQUEST_DATE_ISSUED != null ? this.formatDate("TO-DISPLAY", data[i].REQUEST_DATE_ISSUED + '') : data[i].REQUEST_DATE_ISSUED
                         data[i].REQUEST_DATE_EXPIRED = data[i].REQUEST_DATE_EXPIRED != null ? this.formatDate("TO-DISPLAY", data[i].REQUEST_DATE_EXPIRED + '') : data[i].REQUEST_DATE_EXPIRED
                         data[i].REQUEST_LAST_UPDATE = data[i].REQUEST_LAST_UPDATE != null ? this.formatDate("TO-DISPLAY", data[i].REQUEST_LAST_UPDATE + '') : data[i].REQUEST_LAST_UPDATE
+                        data[i].REQUEST_RECEIPT_DATE_YEAR_2 = data[i].REQUEST_RECEIPT_DATE_YEAR_2 != null ? this.formatDate("TO-DISPLAY", data[i].REQUEST_RECEIPT_DATE_YEAR_2 + '') : data[i].REQUEST_RECEIPT_DATE_YEAR_2
+                        data[i].REQUEST_RECEIPT_DATE_YEAR_3 = data[i].REQUEST_RECEIPT_DATE_YEAR_3 != null ? this.formatDate("TO-DISPLAY", data[i].REQUEST_RECEIPT_DATE_YEAR_3 + '') : data[i].REQUEST_RECEIPT_DATE_YEAR_3
                     }
                 }
                 return resolve(data)
@@ -4139,21 +4186,42 @@ class service {
             })
         })
     }
+    cancleStatusRequestExtraExpire(requsetE, username) {
+        return new Promise((resolve, reject) => {
+            this.getOldIdTransferRequest(requsetE.no, requsetE.year).then((item_tranfer) => {
+                if (item_tranfer.length != 0) {
+                    var datetime = new Date();
+                    let dateForUpdate = datetime.toISOString().slice(0, 10)
+                    let transferOld = item_tranfer[0]
+                    TransferDAOObj.updateAllStatusExpire(transferOld.REQUEST_NO_OLD, transferOld.REQUEST_YEAR_OLD, dateForUpdate, username).then((data_check) => {
+                        RequestDAOObj.updateStatusOnly(transferOld.REQUEST_NO_OLD, transferOld.REQUEST_YEAR_OLD, username, dateForUpdate, 'expire', 'transfer').then((data_c) => {
+                            return resolve(data_check)
+                        })
+                    })
+                } else {
+                    return resolve(true)
+                }
+            })
+        })
+    }
     insertRequestRenew(request, username) {
+        // bug /// // 
         return new Promise((resolve, reject) => {
             var datetime = new Date();
             let dateForUpdate = datetime.toISOString().slice(0, 10)
             request.last_update = dateForUpdate
             request.user_update = username
-
-            this.updateRequestStatusOnly(request.no, request.year, username, dateForUpdate, 'expire').then((data) => {
-                let new_request = this.formatInsert('REQUEST', request)
-                new_request.establishment_is_land_owned = new_request.establishment_is_land_owned === '' ? 'NULL' : `'${new_request.establishment_is_land_owned}'`
-                new_request.establishment_address_id = new_request.establishment_address_id === '' ? 'NULL' : `'${new_request.establishment_address_id}'`
-                this.loopInsertRequestRenew(new_request).then((data_return) => {
-                    return resolve(data_return)
+            this.cancleStatusRequestExtraExpire(request, username).then((data_check_temp) => {
+                this.updateRequestStatusOnly(request.no, request.year, username, dateForUpdate, 'expire').then((data) => {
+                    let new_request = this.formatInsert('REQUEST', request)
+                    new_request.establishment_is_land_owned = new_request.establishment_is_land_owned === '' ? 'NULL' : `'${new_request.establishment_is_land_owned}'`
+                    new_request.establishment_address_id = new_request.establishment_address_id === '' ? 'NULL' : `'${new_request.establishment_address_id}'`
+                    this.loopInsertRequestRenew(new_request).then((data_return) => {
+                        return resolve(data_return)
+                    })
                 })
             })
+
         })
     }
     getUser(username, password) {

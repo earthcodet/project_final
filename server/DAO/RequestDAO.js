@@ -356,10 +356,13 @@ class RequestDAO {
             })
         })
     }
-    updateStatusOnly(no, year, user, last_update, status) {
+    updateStatusOnly(no, year, user, last_update, status ,status_before) {
         return new Promise((resolve, reject) => {
             let column = `REQUEST_STATUS='${status}',`
             column = column + `REQUEST_LAST_UPDATE='${last_update}',REQUEST_USER_UPDATE='${user}'`
+            if(status_before != undefined){
+                column = column + `, REQUEST_STATUS_BEFORE='${status_before}'`
+            }
             let query = `UPDATE request SET ${column} WHERE REQUEST_NO='${no}' AND REQUEST_YEAR='${year}'`
             con.query(query, function (err, result) {
                 if (err) {

@@ -302,6 +302,7 @@ function getAge(date) {
 // set data change
 function createTransferData() {
     raw_request_data.old_owner = operatorData.id
+    raw_request_data.REQUEST_STATUS_BEFORE = 'transfer'
     raw_request_data.sub_date_transfer = document.getElementById('datepicker1').value.trim()
     let new_price = parseFloat(document.getElementById('fine_transfer').value.trim())
     raw_request_data.REQUEST_RECEIPT_FINE_TRANSFER = parseFloat(raw_request_data.REQUEST_RECEIPT_FINE_TRANSFER) + new_price

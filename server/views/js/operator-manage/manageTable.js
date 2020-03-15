@@ -113,7 +113,7 @@ function approvalPopup() {
     displayUserInformation('app_name', 'information')
 }
 //ยกเลิก
-function canclePopup() {
+function canclePopup(type) {
 
     let html_display = `
 <div style = 'text-align:left; display:block' >
@@ -157,20 +157,34 @@ function canclePopup() {
             } else {
                 return new Promise(function (resolve, reject) {
                     setTimeout(function () {
-                        inRequest.delete_logic = document.getElementById('cancleTextPopup').value
-                        inRequest.status_before = inRequest.status
-                        inRequest.status = 'cancel'
-                        updateRequest().then((data) => {
-                            if (data) {
-                                resolve();
-                            } else {
-                                Swal.fire({
-                                    html: "<h2>เกิดข้อผิดพลาด</h2>",
-                                    icon: "error",
-                                    confirmButtonColor: "#009688"
-                                });
-                            }
-                        })
+                        if (type != 'Extra') {
+                            inRequest.delete_logic = document.getElementById('cancleTextPopup').value
+                            inRequest.status_before = inRequest.status
+                            inRequest.status = 'cancel'
+                            updateRequest().then((data) => {
+                                if (data) {
+                                    resolve();
+                                } else {
+                                    Swal.fire({
+                                        html: "<h2>เกิดข้อผิดพลาด</h2>",
+                                        icon: "error",
+                                        confirmButtonColor: "#009688"
+                                    });
+                                }
+                            })
+                        }else{
+                            updateRequestExtra().then((data) => {
+                                if (data) {
+                                    resolve();
+                                } else {
+                                    Swal.fire({
+                                        html: "<h2>เกิดข้อผิดพลาด</h2>",
+                                        icon: "error",
+                                        confirmButtonColor: "#009688"
+                                    });
+                                }
+                            })
+                        }
                     }, 100);
                 });
             }
@@ -373,7 +387,8 @@ function payPopup() {
                             //จะเช็คต่อว่า ปัจุจบัน ต้องเพิ่มเงินไปที่ช่องไหน
                             let temp = inRequest.date_expired.split('-')
                             let year = parseInt(temp[2])
-                            let year_now = parseInt(new Date().toISOString().slice(0, 10).split('-')[0])
+                            let year_now = parseInt(new Date().toISOString().slice(0, 10).split('-')[0]) + 543 
+                          
                             //ใบอนุญาต เหลืออีก 3 ปี บันทึกลงช่องที่ 1
                             if (year - year_now === 3) {
                                 inRequest.receipt_date = document.getElementById('datepicker7').value
@@ -492,7 +507,8 @@ function transferPopup(id) {
     }).then((result) => {
         if (result.value) {
             id = id.split('/')
-            window.location.href = `03.html?id_no=${id[0]}&id_year=${id[1]}`
+            window.open('03.html' + '?id_no=' + id[0] + '&id_year=' + id[1], '_blank');
+            Swal.close()
         } else if (result.dismiss === Swal.DismissReason.cancel) {
         }
     });
@@ -661,10 +677,35 @@ function statusRequestDelete() {
         confirmButtonColor: "#009688"
     })
 }
+function notChangeStatus() {
+    Swal.fire({
+        html: 'ไม่สามารถยกเลิกสถานะใบนี้ได้ เนื่องจากใบนี้ผ่านการโอนมา',
+        width: '30%',
+        customClass: 'swal-height',
+        icon: 'warning',
+        confirmButtonColor: "#009688"
+    })
+}
 let controlPage = {
     'tr_select': undefined
 }
 
+function checkBackStatus(){
+    getDuplicationOwner().then((data_check) =>{
+        if(data_check){
+            notChangeStatus()
+        }else{
+            cancelStatus()
+        }
+    })
+}
+function getDuplicationOwner() {
+    return new Promise((resolve, reject) => {
+        axios.get(`http://localhost:5000/get/owner/duplication/transfer/${inRequest.no}/${inRequest.year}/${inPersonal.id}`).then((result) => {
+            return resolve(result.data);
+        })
+    })
+}
 function resetActiveRightClick() {
     if (controlPage.tr_select != undefined) {
         controlPage.tr_select.style.background = ''
@@ -728,6 +769,66 @@ $(function () {
 
         },
         items: {
+            "per": { name: "ต่อใบอนุญาต" },
+            "transfer": { name: "โอนใบอนุญาต" },
+            "add": { name: "เพิ่มใบอนุญาต" },
+            "detail": { name: "ดูรายละเอียด" },
+            "cancle_status": { name: "ยกเลิกสถานะ" },
+            "stop": { name: "พักใบอนุญาต" },
+            "delete": { name: "ยกเลิกใบอนุญาต" }
+
+        }
+    });
+    //ปกติ-เฉพาะ พวก หนังสือ
+    $.contextMenu({
+        selector: '.active-menu-extra',
+        autoHide: true,
+        callback: function (key, options) {
+            let type = this[0].cells[1].innerText.trim()
+            let id = this[0].cells[2].innerText.trim()
+            let indexData = this[0].rowIndex - 1
+            console.log(`this`)
+            console.log(this)
+            setDataItem(requestDataList[indexData])
+            if (inRequest.is_deleted === 'Y' && key != 'detail') {
+                statusRequestDelete()
+            } else {
+                if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
+                    statusDelete()
+                } else {
+                    switch (key) {
+                        case 'per':
+                            // perPopup(type)
+                            toPerRequest(type, id)
+                            break;
+                        case 'transfer':
+                            transferPopup(id)
+                            break;
+                        case 'add':
+                            addPopup()
+                            break;
+                        case 'detail':
+                            toRequest(type, id)
+                            break;
+                        case 'cancle_status':
+                            checkBackStatus()
+                            break;
+                        case 'pay':
+                            payPopup()
+                            break;
+                        case 'stop':
+                            viewPageReport(undefined, inPersonal.id, `${inRequest.no}${inRequest.year}`)
+                            break;
+                        default:
+                            canclePopup('Extra')
+                            break;
+                    }
+                }
+            }
+
+        },
+        items: {
+            "pay": { name: "ชำระเงินแล้ว" },
             "per": { name: "ต่อใบอนุญาต" },
             "transfer": { name: "โอนใบอนุญาต" },
             "add": { name: "เพิ่มใบอนุญาต" },
@@ -907,6 +1008,13 @@ $(function () {
 function updateRequest() {
     return new Promise((resolve, reject) => {
         axios.post(`http://localhost:5000/update/request/status`, { 'requestData': inRequest }).then((result) => {
+            return resolve(result.data);
+        })
+    })
+}
+function updateRequestExtra() {
+    return new Promise((resolve, reject) => {
+        axios.post(`http://localhost:5000/update/requestExtra/status/`, { 'requestData': inRequest }).then((result) => {
             return resolve(result.data);
         })
     })
