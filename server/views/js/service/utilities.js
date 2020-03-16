@@ -86,7 +86,7 @@ function inputNumberOnly(value, id) {
 const month = {
     'มกราคม': 1,
     'กุมภาพันธ์': 2,
-    'เดือนมีนาคม': 3,
+    'มีนาคม': 3,
     'เมษายน': 4,
     'พฤษภาคม': 5,
     'มิถุนายน': 6,
@@ -503,7 +503,6 @@ function toRequestAdd(value, p_id, e_id) {
             window.open('../request/request_public_hawk.html?p_id=' + p_id + '&e_id=' + e_id, '_blank');
             break;
         default:
-            //ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ
             window.open('../request/request_public_sell.html?p_id=' + p_id + '&e_id=' + e_id, '_blank');
             break;
     }

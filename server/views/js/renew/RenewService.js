@@ -3,6 +3,23 @@ let newDocument = true
 let requestType = []
 let userMoney = ''
 let listAlderMan = []
+function printDocumentRenew() {
+    let requestId = getUrlVars()
+    let id = []
+    id.push(requestId.id_no)
+    id.push(requestId.id_year)
+    let sc = requestId.id_no.slice(0, 1)
+    if (sc === 'E' || sc === 'F') {
+        // preview_copy.html
+        window.open('../central/preview_copy.html' + '?id_no=' + id[0] + '&id_year=' + id[1], '_blank');
+    } else if (sc === 'A' || sc === 'B') {
+        // preview_copy_3.html
+        window.open('../central/preview_copy_3.html' + '?id_no=' + id[0] + '&id_year=' + id[1], '_blank');
+    } else {
+        // preview_copy_2.html
+        window.open('../central/preview_copy_2.html' + '?id_no=' + id[0] + '&id_year=' + id[1], '_blank');
+    }
+}
 function checkView(typeForm) {
     let requestId = getUrlVars()
     console.log(requestId)
@@ -416,7 +433,7 @@ function createRenewData() {
         }
         console.log(`date expire condition 3 ${requestData.date_expired}`)
     }
-    
+
     requestData.doc_no1 = document.getElementById('documentId').checked === true ? 'Y' : 'N'
     requestData.doc_no2 = document.getElementById('documenthHome').checked === true ? 'Y' : 'N'
     requestData.doc_no3 = document.getElementById('documentLegalEntity').checked === true ? 'Y' : 'N'

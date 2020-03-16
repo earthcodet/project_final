@@ -60,6 +60,8 @@ class PrintDAO {
             query = query + `PERSONAL_PHONE, `
             query = query + `PERSONAL_FAX, `
             query = query + `request_type.REQUEST_TYPE_NAME, `
+            query = query + `request.PERSONAL_ID_ASSISTANT, `
+            query = query + `establishment.ESTABLISHMENT_AREA_SIZE, `
             query = query + `personal_address.ADDRESS_ID As PERSONAL_ADDRESS_ID, `
             query = query + `personal_address.ADDRESS_HOME_NUMBER As PERSONAL_ADDRESS_HOME_NUMBER, `
             query = query + `personal_address.ADDRESS_MOO As PERSONAL_ADDRESS_MOO, `
@@ -71,6 +73,8 @@ class PrintDAO {
             query = query + `personal_address.AMPHUR_NAME As PERSONAL_AMPHUR_NAME, `
             query = query + `personal_address.PROVINCE_NAME As PERSONAL_ROVINCE_NAME, `
             query = query + `establishment.ESTABLISHMENT_NAME, `
+            query = query + `establishment.ESTABLISHMENT_GROUND, `
+            query = query + `establishment.ESTABLISHMENT_PHONE, `
             query = query + `e_address.ADDRESS_ID As E_ADDRESS_ID, `
             query = query + `e_address.ADDRESS_HOME_NUMBER As E_ADDRESS_HOME_NUMBER, `
             query = query + `e_address.ADDRESS_MOO As E_ADDRESS_MOO, `

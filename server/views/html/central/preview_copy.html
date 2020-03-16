@@ -8,7 +8,7 @@
     <title></title>
 
     <link rel="stylesheet" href="../../css/fonts.css">
-    
+
     <script src="../../js/service/jquery/jquery-3.4.1.min.js"></script>
     <script src="../../js/service/bootstrap-4.4.1/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../../css/bootstrap-4.4.1/bootstrap.min.css">
@@ -27,6 +27,11 @@
     * {
         box-sizing: border-box;
         -moz-box-sizing: border-box;
+    }
+
+    a {
+        text-decoration: none !important;
+        margin-left: 1vw;
     }
 
     .page {
@@ -78,123 +83,153 @@
 </style>
 
 <body>
-    <div class="book">
+    <div class="book" id=box_no_1 style="">
         <div class="page">
             <br>
             <div class="container" style="font-family: 'Sarabun';">
+                <center>
+                    <img src='../../img/img1.jpg' width="90px" height="90px">
+                </center>
+                <p></p>
                 <h4 id='request_title' class="text-center">คำขอต่อหนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</h4>
                 <br>
                 <div class="row">
                     <div class="col">
                         <p class="text-right" style="margin-right: 4.5vw;">เขียนที่ สำนักงานเทศบาลเมืองแสนสุข</p>
-                        <p id='request_date_now' class="text-right" style="margin-right: 5.5vw;">วันที่ 17 เดือน ธันวาคม พ.ศ. 2562</p>
+                        <p id='request_date_now' class="text-right" style="margin-right: 5.5vw;">วันที่ 17 เดือน ธันวาคม
+                            พ.ศ. 2562</p>
                     </div>
                 </div>
                 <br>
                 <!-- 1. -->
                 <div class="row">
                     <div class="col-1"></div>
-                    <div class="col">
-                        <p>ข้าพเจ้า
-                            <input type="checkbox" name="nametype" id="user_type_1">บุคคลธรรมดา
-                            <input type="checkbox" name="nametype" id="user_type_2">นิติบุคคล</p>
+                    <div class="col-4">
+                        <p>1. ข้าพเจ้า &nbsp;
+                            <input type="checkbox" name="nametype" id="user_type_1">&nbsp;บุคคลธรรมดา
+                            <input type="checkbox" name="nametype" id="user_type_2">&nbsp;นิติบุคคล</p>
+                    </div>
+                    <div class="col-1">
+                        <p>ชื่อ </p>
+                    </div>
+                    <div class="col-4">
+                        <a id='user_fullname'></a>
                     </div>
                     <div class="col">
-                        <p id='user_fullname'>ชื่อ</p>
-                    </div>
-                    <div class="col">
-                        <p id='user_age'>อายุ</p>
+                        <p>อายุ<a id='user_age'> </a> ปี</p>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col">
-                        <p id='nationality'>สัญชาติ</p>
-                    </div>
-                    <div class="col">
-                        <p id='personal_id'>เลขบัตรประชาชนเลขที่</p>
-                    </div>
-                    <div class="col">
-                        <p id='homeId'>อยู่บ้าน/สำนักงานเลขที่ </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <p id='trxk'>ตรอก</p>
-                    </div>
-                    <div class="col">ซอย
-                        <p id='sxy'></p>
-                    </div>
-                    <div class="col">ถนน
-                        <p id='road'></p>
+                    <div class="col-1">
+                        <p>สัญชาติ</p>
                     </div>
                     <div class="col-2">
-                        <p id='moo'>หมู่ที่</p>
+                        <a id='nationality'></a>
+                    </div>
+                    <div class="col">
+                        <p>เลขบัตรประชาชนเลขที่</p>
+                    </div>
+                    <div class="col-2">
+                        <a id='personal_id'></a>
+                    </div>
+                    <div class="col">
+                        <p>อยู่บ้าน/สำนักงานเลขที่</p>
+                    </div>
+                    <div class="col">
+                        <a id='homeId'></a>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <p id='sub_district'>แขวง/ตำบล</p>
+                        <p>ตรอก</p>
                     </div>
-                    <div class="col">
-                        <p id='district'>เขต/อำเภอ</p>
+
+                    <div class="col-3">
+                        <a id='trxk'></a>
                     </div>
-                    <div class="col">
-                        <p id='province'>จังหวัด</p>
+                    <p>ซอย</p>
+                    <div class="col-3">
+                        <a id='sxy'></a>
+                    </div>
+                    <p>ถนน</p>
+                    <div class="col-3">
+                        <a id='road'></a>
+                    </div>
+                    <p>หมู่ที่</p>
+                    <div class="col-1">
+                        <a id='moo'></a>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col">
-                        <p id='phone'>โทรศัพท์</p>
+                    <div class="col-2">
+                        <p>แขวง/ตำบล</p>
                     </div>
-                    <div class="col" id='fax'>
-                        <p id='fax'>โทรสาร </p>
+                    <div class="col-2">
+                        <a id='sub_district'>
+                        </a>
                     </div>
-                    <div class="col"></div>
+                    <p>เขต/อำเภอ</p>
+                    <div class="col-3" style="text-align: center;">
+                        <a id='district'></a>
+                    </div>
+                    <p>จังหวัด</p>
+                    <div class="col-3" style="text-align: center;">
+                        <a id='province'></a>
+                    </div>
+
                 </div>
-                <br>
+                <div class="row">
+                    <div class="col">
+                        <p>โทรศัพท์<a id='phone'>061-6577015 ต่อ 1234</a></p>
+                    </div>
+                    <div class="col">
+                        <p>โทรสาร<a id='fax'>0282899003</a></p>
+                    </div>
+                    <div class="col">ผู้ขอแจ้ง</div>
+                </div>
+                <p></p>
                 <!-- 2. -->
                 <div class="row">
-                    <div class="col-1"></div>
-                    <div class="col-3">
-                        <p >2. สถานประกอบการชื่อ</p>
+                    <div style="margin-left: 5.5vw;">
+                        <p>2. สถานประกอบการชื่อ</p>
                     </div>
-                    <div class="col-4" style="text-align: center;">
-                        <p id='e_name'></p>
+                    <div class="col-6">
+                        <a id='e_name'> O'clockาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาาา</a>
                     </div>
-                    <div class="col-2">ประเภท</div>
+                    <p>ประเภท</p>
                     <div class="col-2">
-                        <p id='e_type'></p>
+                        <a id='e_type'>จำหน่ายอาหาร</a>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <p id='e_size'>มีพื้นที่ 150 ตรม</p>
+                        <p>มีพื้นที่ <a id='e_size'>150</a> &nbsp; ตรม.</p>
                     </div>
                     <div class="col">
-                        <a id="e_homeId">ตั้งอยู่เลขที่</a>
+                        <p>ตั้งอยู่เลขที่<a id="e_homeId">147/292</a></p>
                     </div>
                     <div class="col">
-                        <a id="e_trxk_sxy">&emsp;ตรอก/ซอย </a>
+                        <p>&emsp;ตรอก/ซอย<a id="e_trxk_sxy"> เนตรดี 98</a></p>
                     </div>
                     <div class="col">
-                        <a id="e_road">&emsp;ถนน </a>
+                        <p>&emsp;ถนน<a id="e_road"> เนตรดี</a></p>
                     </div>
                     <div class="col">
-                        <a id="e_moo">&emsp;หมู่ที่ </a>
+                        <p>&emsp;หมู่ที่ <a id="e_moo">9</a></p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <a id="e_sub_district">&emsp;ตำบล </a>
+                        <p>&emsp;แขวง/ตำบล<a id="e_sub_district"> </a></p>
                     </div>
                     <div class="col">
-                        <a id="e_district">&emsp;อำเภอ </a>
+                        <p>&emsp;เขต/อำเภอ<a id="e_district"> </a></p>
                     </div>
                     <div class="col">
-                        <a id="e_province">&emsp;จังหวัด </a>
+                        <p>&emsp;จังหวัด<a id="e_province"> </a></p>
                     </div>
                     <div class="col">
-                        <a id="e_phone">&emsp;โทรศัพท์ </a>
+                        <p>&emsp;โทรศัพท์<a id="e_phone"> </a></p>
                     </div>
                 </div>
                 <br>
@@ -224,7 +259,7 @@
                         (ลงชื่อ).........................................................................ผู้ขอรับใบอนุญาต
                         <br>
                         <p id='name_user_duplication'></p>
-                        
+
                     </div>
                 </div>
                 <br>
@@ -287,6 +322,18 @@
             </div>
         </div>
     </div>
+    <div id='box_no_2' style="margin-top:15vw ;display: none;">
+        <center>
+            <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+
+            <a style="font-size: 2vw;"> กำลังโหลดข้อมูล</a>
+
+
+        </center>
+    </div>
 </body>
+<script src="../../node_modules/axios/dist/axios.min.js"></script>
+<script src="../../js/renew_preview/renew_print.js"></script>
+<link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.css">
 
 </html>

@@ -299,6 +299,12 @@ app.get('/get/requestTypeById/:id', (req, res) => {
     res.json(data)
   })
 })
+app.get('/get/view/renew/:id/:year', (req, res) => {
+  webService.getViewRenewRequestByIdAndYear(req.params.id,req.params.year).then((data) => {
+
+    res.json(data)
+  })
+})
 
 app.get('/get/request/renew/:type/:personal_id', (req, res) => {
   webService.getRquestRenew(webService.getRequestTypeMenu(req.params.type), req.params.personal_id).then((data) => {

@@ -2207,11 +2207,7 @@ class service {
     getViewRenewRequestByIdAndYear(id, year) {
         return new Promise((resolve, reject) => {
             PrintDAOObj.getViewRenew(id, year).then((viewData_data) => {
-                ImageDAOObj.getImageEstablishmentByImage(viewData_data[0].REQUEST_IMAGE_NAME).then((imageDatas) => {
-                    console.log(imageDatas.length)
-                    viewData_data[0].IMAGE_REVIEW = imageDatas
-                    return resolve(viewData_data)
-                })
+                return resolve(viewData_data)
             })
         })
     }
@@ -2262,7 +2258,7 @@ class service {
                                                 return resolve(data)
                                                 // ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) => {
                                                 //     data.IMAGE_REVIEW = imageDatas
-                                                    
+
                                                 // })
                                             }
                                         })
@@ -2273,14 +2269,14 @@ class service {
                                                 return resolve(data)
                                                 // ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) => {
                                                 //     data.IMAGE_REVIEW = imageDatas
-                                                    
+
                                                 // })
                                             })
                                         } else {
                                             return resolve(data)
                                             // ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) => {
                                             //     data.IMAGE_REVIEW = imageDatas
-                                               
+
                                             // })
                                         }
                                     }
@@ -2315,7 +2311,7 @@ class service {
                                         } else {
                                             // ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) => {
                                             //     data.IMAGE_REVIEW = imageDatas
-                                                return resolve(data)
+                                            return resolve(data)
                                             // })
                                         }
                                     })
@@ -2326,14 +2322,14 @@ class service {
                                             return resolve(data)
                                             // ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) => {
                                             //     data.IMAGE_REVIEW = imageDatas
-                                            
+
                                             // })
                                         })
                                     } else {
                                         return resolve(data)
                                         // ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) => {
                                         //     data.IMAGE_REVIEW = imageDatas
-                                           
+
                                         // })
                                     }
                                 }
@@ -2347,11 +2343,11 @@ class service {
             })
         })
     }
-    getImageEstablishmentByImageRequest(image_name){
+    getImageEstablishmentByImageRequest(image_name) {
         return new Promise((resolve, reject) => {
             ImageDAOObj.getImageEstablishmentByImage(image_name).then((imageDatas) => {
-                   return resolve(imageDatas)  
-                })
+                return resolve(imageDatas)
+            })
         })
     }
     updateRequestStatusOnly(no, year, user, last_update, status) {
