@@ -391,6 +391,7 @@ function showItem(arrayResult) {
     Item_data_operator.push(arrayResult)
 }
 function showItemRequest(arrayResult) {
+    document.getElementById('print_document_renew').style.display = ''
     if (arrayResult.PERSONAL_ID_ASSISTANT != null) {
         searchPersonalById(arrayResult.PERSONAL_ID_ASSISTANT).then((data) => {
             if (data.PERSONAL_PERSONAL_ID != undefined) {

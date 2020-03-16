@@ -42,6 +42,7 @@ function checkView(typeForm) {
                                     console.log(`assistantOperatorData`)
                                     console.log(assistantOperatorData)
                                     setDataView()
+                                    document.getElementById('print_document_renew').style.display = ''
                                 } else {
                                     console.log(`requestData`)
                                     console.log(requestData)
@@ -56,6 +57,7 @@ function checkView(typeForm) {
                                     console.log(`assistantOperatorData`)
                                     console.log(assistantOperatorData)
                                     setDataView()
+                                    document.getElementById('print_document_renew').style.display = ''
                                 }
                             })
                         } else {
@@ -72,6 +74,7 @@ function checkView(typeForm) {
                             console.log(`assistantOperatorData`)
                             console.log(assistantOperatorData)
                             setDataView()
+                            document.getElementById('print_document_renew').style.display = ''
                         }
                     }
                 })

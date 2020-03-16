@@ -20,7 +20,6 @@ function addPage() {
         id.style.textDecoration = ''
     }
     resetFunction()
-    document.getElementById('print_new_doc').style.display = 'none'
     if (document.getElementById('ownerDistrict') != undefined) {
         resetAddressThreeAddress()
     } else {
@@ -30,6 +29,7 @@ function addPage() {
     document.getElementById('position').value = ''
     setLisetUserAlderManToUi(alderman_list)
     document.getElementById('delete_request').style.display = 'none'
+
     document.getElementById('print_document_image').style.display = 'none'
     document.getElementById('print_document_allow').style.display = 'none'
 }
@@ -223,7 +223,11 @@ function deletePage() {
                     } else {
                         //resetFunction()
                         document.getElementById('print_document_image').style.display = ''
-                        document.getElementById('print_document_allow').style.display = ''
+                        if (requestData.status === 'active') {
+                            document.getElementById('print_document_allow').style.display = ''
+                        }else{
+                            document.getElementById('print_document_allow').style.display = 'none'
+                        }
                         resetStyleIdDeleteRequest()
                         setDataView()
                         disableMenuAll()
