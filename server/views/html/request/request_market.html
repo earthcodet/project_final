@@ -65,7 +65,7 @@
             <a href="../renew/renew_area_less_correct.html">- คำขอต่อหนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
             <a href="../renew/renew_market.html">- คำขอต่อใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
             <a href="../renew/renew_health_danger.html">- คำขอต่อกิจการที่เป็นอันตรายต่อสุขภาพ</a>
-            <a href="../renew/renew_crematory.html" >- คำขอต่อกิจการฌาปณสถาน</a>
+            <a href="../renew/renew_crematory.html">- คำขอต่อกิจการฌาปณสถาน</a>
         </div>
         <button class="dropdown-btn"><b>ข้อมูลส่วนกลาง </b><i class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
@@ -100,23 +100,26 @@
             <!-- <i class="fa fa-caret-down"></i> -->
         </button>
     </div>
+    <header class="w3-top2">
+        <h1 style="font-size:2.8vh;margin-left: 25px;padding: 2px;"> ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน
+            <div class="dropdown" style="margin-left: 42.5vw; background-color: #add8e6;width:10vw;">
+                <button type='button' class="dropbtn fa fa-print" style='background-color: #add8e6;color: black;'>
+                    <a style="font-size:1.35vw;">เอกสาร</a>
+                </button>
+                <div class="dropdown-content">
+                    <a id="print_document_image" style="display: none;" onclick="printImg()">พิมพ์รูปภาพ</a>
+                    <a id="print_document_renew" style="display: none;"
+                        onclick="printDocumentRenew()">พิมพ์คำขอต่อ</a>
+                    <a id="print_document_allow" style="display: none;"
+                        onclick="printDocument()">พิมพ์ใบอนุญาต</a>
+                </div>
+            </div>
+        </h1>
+    </header>
     <!-- เนื้อหา -->
     <form id="form">
         <fieldset disabled id="disable" style="border: 0;padding: 0;margin: 0;">
-            <div class="main">
-                <header class="w3-top2">
-                    <h1 style="font-size:2.8vh;margin-left: 25px;padding: 2px;"> ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</h1>
-                    <div class="dropdown" style="margin-left: 38vw; background-color: #add8e6;width:10vw;">
-                        <button class="dropbtn fa fa-print" style='background-color: #add8e6;color: black;'>
-                            <a style="font-size:1.35vw;">เอกสาร</a>
-                        </button>
-                        <div class="dropdown-content">
-                          <a id="print_document_image" style="display: none;" onclick="printImg()">พิมพ์รูปภาพ</a>
-                          <a id="print_document_renew" style="display: none;" onclick="printDocumentRenew()">พิมพ์คำขอต่อ</a>
-                          <a id="print_document_allow" style="display: none;" onclick="printDocument()">พิมพ์ใบอนุญาต</a>
-                        </div>
-                      </div>
-                </header>
+        <div class="main">
                 <!-- ข้อมูลใบ -->
                 <div class="box">
                     <h3 style="font-size: 3vh;">ข้อมูลสถานประกอบการ</h3>
@@ -480,7 +483,7 @@
                     </div>
 
                 </div><br>
-                <div class='box' id = 'delete_request' style="display: none;">
+                <div class='box' id='delete_request' style="display: none;">
                     <br>
                     <a style="margin-left: 2vw;">วันที่ยกเลิก</a>
                     <input type='text' id='delete_date' style="margin-left: 0.5vw;width: 7.5vw;" disabled>
@@ -488,7 +491,8 @@
                     <br>
                     <a style="margin-left: 2vw;">เหตุผลที่ยกเลิก</a>
                     <br>
-                    <textarea id='delete_detail' row='10' style='width:90%;margin-left: 5.5vw;margin-top: .5vw;' disabled>
+                    <textarea id='delete_detail' row='10' style='width:90%;margin-left: 5.5vw;margin-top: .5vw;'
+                        disabled>
 
                     </textarea>
                     <br>
@@ -496,7 +500,7 @@
                 <br>
 
 
-            </div>
+        </div>
 
         </fieldset>
     </form>

@@ -105,23 +105,27 @@
         </button>
     </div>
     <!-- เนื้อหา -->
+    <header class="w3-top2">
+                <h1 style="font-size:2.8vh;margin-left: 1.5vw;padding: 2px;width: 97%;">
+                    คำขอต่อใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ
+                    <div class="dropdown" style="margin-left: 40vw; background-color: #add8e6;width:10vw;">
+                        <button type='button' class="dropbtn fa fa-print" style='background-color: #add8e6;color: black;'>
+                            <a style="font-size:1.35vw;">เอกสาร</a>
+                        </button>
+                        <div class="dropdown-content">
+                            <a id="print_document_image" style="display: none;" onclick="printImg()">พิมพ์รูปภาพ</a>
+                            <a id="print_document_renew" style="display: none;"
+                                onclick="printDocumentRenew()">พิมพ์คำขอต่อ</a>
+                            <a id="print_document_allow" style="display: none;"
+                                onclick="printDocument()">พิมพ์ใบอนุญาต</a>
+                        </div>
+                    </div>
+                </h1>
+            </header>
     <form id="form">
         <fieldset disabled style="border: 0;padding: 0;margin: 0;">
-            <div class="main">
-                <header class="w3-top2">
-                     <h1 style="font-size:2.8vh;margin-left: 1.5vw;padding: 2px;width: 97%;">
-                        คำขอต่อใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</h1>
-                        <div class="dropdown" style="margin-left: 38vw; background-color: #add8e6;width:10vw;">
-                            <button class="dropbtn fa fa-print" style='background-color: #add8e6;color: black;'>
-                                <a style="font-size:1.35vw;">เอกสาร</a>
-                            </button>
-                            <div class="dropdown-content">
-                              <a id="print_document_image" style="display: none;" onclick="printImg()">พิมพ์รูปภาพ</a>
-                              <a id="print_document_renew" style="display: none;" onclick="printDocumentRenew()">พิมพ์คำขอต่อ</a>
-                              <a id="print_document_allow" style="display: none;" onclick="printDocument()">พิมพ์ใบอนุญาต</a>
-                            </div>
-                          </div>
-                </header>
+        <div class="main">
+            
                 <!-- ข้อมูลใบ -->
                 <div class="box">
                     <h3 style="font-size: 3vh;">ข้อมูลสถานประกอบการ</h3>
@@ -228,73 +232,73 @@
                     <a>ประเภทย่อย </a>
                     <input id="typeReForm" style="width: 15vw;">
                     </input></a>
-                    <a style="margin-left: .5vw">สินค้าประเภท      : <input id="typeProduct" style="width: 20vw;"
-                        onchange="document.getElementById('typeProduct').classList.remove('alertInput')">
-                   <a>
-                    เวลาเริ่ม : <input id="timeStart" type="time" style="width: 11.6%;"
-                        onchange="document.getElementById('timeStart').classList.remove('alertInput')">
-                    เวลาสิ้นสุด : <input id="timeEnd" type="time" style="width: 11.7%;"></a>
-                    <br>
+                    <a style="margin-left: .5vw">สินค้าประเภท : <input id="typeProduct" style="width: 20vw;"
+                            onchange="document.getElementById('typeProduct').classList.remove('alertInput')">
+                        <a>
+                            เวลาเริ่ม : <input id="timeStart" type="time" style="width: 11.6%;"
+                                onchange="document.getElementById('timeStart').classList.remove('alertInput')">
+                            เวลาสิ้นสุด : <input id="timeEnd" type="time" style="width: 11.7%;"></a>
+                        <br>
 
-                    <a>ตั้งอยู่เลขที่ :
-                        <input type="text" id="wPlaceId" style="width: 7%;"></a>
-                    <a>หมู่ที่ :
-                        <input type="int" id="wMoo" style="width: 7%;"></a>
-                    <a>ตรอก:
-                        <input type="text" id="wTrxk" style="width: 13%;"></a>
-                    <a>ซอย :
-                        <input type="text" id="wSxy" style="width: 13%;"></a>
-                    <a>อาคาร :
-                        <input type="text" id="wBuilding" style="width: 13.5%;"></a>
-                    <a>ถนน :
-                        <input type="text" id="wRoad" style="width: 13.5%;"></a>
-                    <br>
+                        <a>ตั้งอยู่เลขที่ :
+                            <input type="text" id="wPlaceId" style="width: 7%;"></a>
+                        <a>หมู่ที่ :
+                            <input type="int" id="wMoo" style="width: 7%;"></a>
+                        <a>ตรอก:
+                            <input type="text" id="wTrxk" style="width: 13%;"></a>
+                        <a>ซอย :
+                            <input type="text" id="wSxy" style="width: 13%;"></a>
+                        <a>อาคาร :
+                            <input type="text" id="wBuilding" style="width: 13.5%;"></a>
+                        <a>ถนน :
+                            <input type="text" id="wRoad" style="width: 13.5%;"></a>
+                        <br>
 
-                    <a style="margin-left: 1.75vw;">จังหวัด :
-                        <select id="wProvince" style="width: 14%;"></a>
-                    </select>
-                    <a>อำเภอ :
-                        <select id="wDistrict" style="width: 14%;"></a>
-                    </select>
-                    <a>ตำบล :
-                        <select id="wSubdistrict" style="width: 13.5%;"></a>
-                    </select>
-                    <a>โทรศัพท์ :
-                        <input type="text" id="wPhone"
+                        <a style="margin-left: 1.75vw;">จังหวัด :
+                            <select id="wProvince" style="width: 14%;"></a>
+                        </select>
+                        <a>อำเภอ :
+                            <select id="wDistrict" style="width: 14%;"></a>
+                        </select>
+                        <a>ตำบล :
+                            <select id="wSubdistrict" style="width: 13.5%;"></a>
+                        </select>
+                        <a>โทรศัพท์ :
+                            <input type="text" id="wPhone"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                maxlength="10" style="width: 6.5vw"
+                                onkeyup="checkPhone(this.value,'wPhone','wPhone_more')"></a>
+                        <a style="margin-left: .1vw;">ต่อ</a>
+                        <input type="text" id="wPhone_more" style="width: 4vw"
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                            maxlength="10" style="width: 6.5vw"
-                            onkeyup="checkPhone(this.value,'wPhone','wPhone_more')"></a>
-                    <a style="margin-left: .1vw;">ต่อ</a>
-                    <input type="text" id="wPhone_more" style="width: 4vw"
-                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                        maxlength="4">
-                    <a>โทรสาร :
-                        <input type="text" id="wFax"
-                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                            maxlength="14" style="width: 13.2%;"></a>
-                    <br>
-                    <br>
-                    <a>ใบอนุญาตฉบับจริง
-                        <a>ออกให้เมื่อวันที่ :
-                            <input type="text" id="datepicker2" style="width: 12%;"></a>
-                        <a>ค่าธรรมเนียม :
-                            <input type="text" id="bFee" style="width: 12%;" maxlength="8" value="0"
-                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></a>
-                        <a>ค่าปรับ :
-                            <input type="text" id="bFine" style="width: 12%;" maxlength="8" value="0"
-                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></a>
+                            maxlength="4">
+                        <a>โทรสาร :
+                            <input type="text" id="wFax"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                maxlength="14" style="width: 13.2%;"></a>
+                        <br>
+                        <br>
+                        <a>ใบอนุญาตฉบับจริง
+                            <a>ออกให้เมื่อวันที่ :
+                                <input type="text" id="datepicker2" style="width: 12%;"></a>
+                            <a>ค่าธรรมเนียม :
+                                <input type="text" id="bFee" style="width: 12%;" maxlength="8" value="0"
+                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></a>
+                            <a>ค่าปรับ :
+                                <input type="text" id="bFine" style="width: 12%;" maxlength="8" value="0"
+                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></a>
 
-                        <br>
-                        <br>
-                        <br>
-                        <a style="margin-left: 6.3vw ;">ออกใบอนุญาตเมื่อ :
-                            <input type="text" id="request_date_issued" style="width: 12%;"></a>
-                        <a style="margin-left: .3vw ;">ใบอนุญาตหมดอายุ :
-                            <input type="text" id="request_date_exp" style="width: 12%;"></a>
-                        <br>
-                        <br>
+                            <br>
+                            <br>
+                            <br>
+                            <a style="margin-left: 6.3vw ;">ออกใบอนุญาตเมื่อ :
+                                <input type="text" id="request_date_issued" style="width: 12%;"></a>
+                            <a style="margin-left: .3vw ;">ใบอนุญาตหมดอายุ :
+                                <input type="text" id="request_date_exp" style="width: 12%;"></a>
+                            <br>
+                            <br>
                 </div> <br>
-            </div>
+        </div>
         </fieldset>
         <fieldset disabled id="disable" style="border: 0;padding: 0;margin: 0;">
             <div class="main" style="margin-top:1vw">
@@ -304,12 +308,12 @@
                     <div style="width: 80%;margin-left: 5vw;">
                         <a> วันที่ยื่นคำขอต่ออายุใบอนุญาต </a>
                         <input type="text" id="datepicker4" style="width: 10vw;margin-left: .5vw;" maxlength="10"
-                        onkeyup="document.getElementById('datepicker4').classList.remove('alertInput')"></a>
+                            onkeyup="document.getElementById('datepicker4').classList.remove('alertInput')"></a>
                         <br>
                         <a>ใบอนุญาตฉบับจริง
                             <a>ออกให้เมื่อวันที่ :
                                 <input type="text" id="datepicker3" style="width: 12%;"
-                                onkeyup="document.getElementById('datepicker3').classList.remove('alertInput')"></a>
+                                    onkeyup="document.getElementById('datepicker3').classList.remove('alertInput')"></a>
                             <a>ค่าธรรมเนียม :
                                 <input type="text" id="renew_fee" style="width: 12%;" maxlength="8"
                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"

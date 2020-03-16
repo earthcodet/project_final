@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
+
 
     <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.css">
     <link rel="stylesheet" href="../../css/css2.css">
@@ -105,24 +105,27 @@
             <!-- <i class="fa fa-caret-down"></i> -->
         </button>
     </div>
+    <header class="w3-top2">
+        <h1 style="font-size:2.8vh;margin-left: 1.5vw;padding: 2px;width: 97%;">
+            คำขอต่อหนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร
+            <div class="dropdown" style="margin-left: 36vw; background-color: #add8e6;width:10vw;">
+                <button type='button' class="dropbtn fa fa-print" style='background-color: #add8e6;color: black;'>
+                    <a style="font-size:1.35vw;">เอกสาร</a>
+                </button>
+                <div class="dropdown-content">
+                    <a id="print_document_image" style="display: none;" onclick="printImg()">พิมพ์รูปภาพ</a>
+                    <a id="print_document_renew" style="display: none;" onclick="printDocumentRenew()">พิมพ์คำขอต่อ</a>
+                    <a id="print_document_allow" style="display: none;" onclick="printDocument()">พิมพ์ใบอนุญาต</a>
+                </div>
+            </div>
+        </h1>
+    </header>
     <!-- เนื้อหา -->
     <form id="form">
+
         <fieldset disabled style="border: 0;padding: 0;margin: 0;">
             <div class="main">
-                <header class="w3-top2">
-                    <h1 style="font-size:2.8vh;margin-left: 1.5vw;padding: 2px;width: 97%;">
-                        คำขอต่อหนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</h1>
-                        <div class="dropdown" style="margin-left: 38vw; background-color: #add8e6;width:10vw;">
-                            <button class="dropbtn fa fa-print" style='background-color: #add8e6;color: black;'>
-                                <a style="font-size:1.35vw;">เอกสาร</a>
-                            </button>
-                            <div class="dropdown-content">
-                              <a id="print_document_image" style="display: none;" onclick="printImg()">พิมพ์รูปภาพ</a>
-                              <a id="print_document_renew" style="display: none;" onclick="printDocumentRenew()">พิมพ์คำขอต่อ</a>
-                              <a id="print_document_allow" style="display: none;" onclick="printDocument()">พิมพ์ใบอนุญาต</a>
-                            </div>
-                          </div>
-                </header>
+
                 <!-- ข้อมูลใบ -->
                 <div class="box">
                     <h3 style="font-size: 3vh;">ข้อมูลสถานประกอบการ</h3>
@@ -311,12 +314,12 @@
                     <div style="width: 80%;margin-left: 5vw;">
                         <a> วันที่ยื่นคำขอต่ออายุหนังสือรับรอง </a>
                         <input type="text" id="datepicker4" style="width: 10vw;margin-left: .5vw;" maxlength="10"
-                        onkeyup="document.getElementById('datepicker4').classList.remove('alertInput')"></a>
+                            onkeyup="document.getElementById('datepicker4').classList.remove('alertInput')"></a>
                         <br>
                         <a>ใบอนุญาตฉบับจริง
                             <a>ออกให้เมื่อวันที่ :
                                 <input type="text" id="datepicker3" style="width: 12%;"
-                                onkeyup="document.getElementById('datepicker3').classList.remove('alertInput')"></a>
+                                    onkeyup="document.getElementById('datepicker3').classList.remove('alertInput')"></a>
                             <a>ค่าธรรมเนียม :
                                 <input type="text" id="renew_fee" style="width: 12%;" maxlength="8"
                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
@@ -360,7 +363,7 @@
                         <div class="col" style="width: 33.33%;">
                             <a>
                                 ลงชื่อ
-                                <select id="documentName2" name="" style="width: 18vw;" ></select>
+                                <select id="documentName2" name="" style="width: 18vw;"></select>
                                 <br>
                                 <p class="text-center">ผู้รับเงิน</p>
                             </a>
@@ -368,7 +371,7 @@
                         <div class="col" style="width: 33.33%;">
                             <a>
                                 &emsp;ลงชื่อ
-                                <select id="documentName3" name="" style="width: 18vw;" ></select>
+                                <select id="documentName3" name="" style="width: 18vw;"></select>
                                 <br>
                                 ตำแหน่ง
                                 <input type="text" id="position" disabled>

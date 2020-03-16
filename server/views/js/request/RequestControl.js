@@ -30,7 +30,8 @@ function addPage() {
     document.getElementById('position').value = ''
     setLisetUserAlderManToUi(alderman_list)
     document.getElementById('delete_request').style.display = 'none'
-
+    document.getElementById('print_document_image').style.display = 'none'
+    document.getElementById('print_document_allow').style.display = 'none'
 }
 function insertPage() {
     Swal.fire({
@@ -85,15 +86,15 @@ function insertPage() {
                     icon: "success",
                     confirmButtonColor: "#009688"
                 }).then((result) => {
+                    disableMenuAll()
+                    if (window.location.href.split('?').length === 1) {
                         disableMenuAll()
-                        if (window.location.href.split('?').length === 1) {
-                            disableMenuAll()
-                            location.replace(window.location.href + '?id=' + requestData.no + '' + requestData.year)
-                        }else{
-                            let temp_html = window.location.href.split('?')
-                            location.replace(temp_html[0] + '?id=' + requestData.no + '' + requestData.year)
+                        location.replace(window.location.href + '?id=' + requestData.no + '' + requestData.year)
+                    } else {
+                        let temp_html = window.location.href.split('?')
+                        location.replace(temp_html[0] + '?id=' + requestData.no + '' + requestData.year)
 
-                        }
+                    }
                 })
                 data = true
                 disableMenuAll()
@@ -107,7 +108,6 @@ function insertPage() {
             }
         });
 }
-
 function editPage() {
     if (!deleteData) {
         addNew = true
@@ -218,8 +218,12 @@ function deletePage() {
                         enableFunction()
                         resetStyleIdDeleteRequest()
                         resetFunction()
+                        document.getElementById('print_document_image').style.display = 'none'
+                        document.getElementById('print_document_allow').style.display = 'none'
                     } else {
                         //resetFunction()
+                        document.getElementById('print_document_image').style.display = ''
+                        document.getElementById('print_document_allow').style.display = ''
                         resetStyleIdDeleteRequest()
                         setDataView()
                         disableMenuAll()
@@ -525,8 +529,7 @@ function showItem(arrayResult, type) {
     Swal.close()
 }
 
-function printImg(no, year) {
-
+function printImg() {
     if (data === true) {
         if (requestData.no != undefined && requestData.year != undefined) {
             if (requestData.no === '') {
@@ -551,21 +554,25 @@ function printImg(no, year) {
 
 }
 function printDocument() {
-    if (requestData.no != undefined && requestData.year != undefined) {
-        if (requestData.no === '') {
-            window.open(getFormPrint(requestData.menu) + `?id=${requestData.no}${requestData.year}`, '_blank');
-        } else {
-            if (requestData.no != '') {
+    if (data === true) {
+        if (requestData.no != undefined && requestData.year != undefined) {
+            if (requestData.no === '') {
                 window.open(getFormPrint(requestData.menu) + `?id=${requestData.no}${requestData.year}`, '_blank');
             } else {
-                let requsetId = getUrlVars()
-                if (requsetId.id != undefined) {
-                    let requsetNo = requsetId.id.slice(0, 6)
-                    let requestYear = requsetId.id.slice(6, 10)
-                    window.open(getFormPrint(requestData.menu) + `?id=${requsetNo}${requestYear}`, '_blank');
+                if (requestData.no != '') {
+                    window.open(getFormPrint(requestData.menu) + `?id=${requestData.no}${requestData.year}`, '_blank');
+                } else {
+                    let requsetId = getUrlVars()
+                    if (requsetId.id != undefined) {
+                        let requsetNo = requsetId.id.slice(0, 6)
+                        let requestYear = requsetId.id.slice(6, 10)
+                        window.open(getFormPrint(requestData.menu) + `?id=${requsetNo}${requestYear}`, '_blank');
+                    }
                 }
             }
         }
+    } else {
+        insertPage()
     }
 }
 function getFormPrint(menu) {

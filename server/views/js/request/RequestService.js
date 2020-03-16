@@ -57,8 +57,11 @@ function checkView(typeForm) {
                         console.log(`assistantOperatorData`)
                         console.log(assistantOperatorData)
                         setDataView()
-
-
+                        if(requestData.no != ''){
+                            document.getElementById('print_document_image').style.display = ''
+                        }else{
+                            document.getElementById('print_document_image').style.display = 'none'
+                        }
                     }
                 })
             }
