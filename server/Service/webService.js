@@ -2252,32 +2252,36 @@ class service {
                                             if (data.REFERENCE_ID != null) {
                                                 this.getReferenceByReferenceId(data.REFERENCE_ID).then((dataReference) => {
                                                     data.REFERENCE_DATA = dataReference[0]
-                                                    ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) => {
-                                                        data.IMAGE_REVIEW = imageDatas
-                                                        return resolve(data)
-                                                    })
+                                                    return resolve(data)
+                                                    // ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) => {
+                                                    //     data.IMAGE_REVIEW = imageDatas
+                                                    //     return resolve(data)
+                                                    // })
                                                 })
                                             } else {
-                                                ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) => {
-                                                    data.IMAGE_REVIEW = imageDatas
-                                                    return resolve(data)
-                                                })
+                                                return resolve(data)
+                                                // ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) => {
+                                                //     data.IMAGE_REVIEW = imageDatas
+                                                    
+                                                // })
                                             }
                                         })
                                     } else {
                                         if (data.REFERENCE_ID != null) {
                                             this.getReferenceByReferenceId(data.REFERENCE_ID).then((dataReference) => {
                                                 data.REFERENCE_DATA = dataReference[0]
-                                                ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) => {
-                                                    data.IMAGE_REVIEW = imageDatas
-                                                    return resolve(data)
-                                                })
+                                                return resolve(data)
+                                                // ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) => {
+                                                //     data.IMAGE_REVIEW = imageDatas
+                                                    
+                                                // })
                                             })
                                         } else {
-                                            ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) => {
-                                                data.IMAGE_REVIEW = imageDatas
-                                                return resolve(data)
-                                            })
+                                            return resolve(data)
+                                            // ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) => {
+                                            //     data.IMAGE_REVIEW = imageDatas
+                                               
+                                            // })
                                         }
                                     }
                                 })
@@ -2302,32 +2306,35 @@ class service {
                                         if (data.REFERENCE_ID != null) {
                                             this.getReferenceByReferenceId(data.REFERENCE_ID).then((dataReference) => {
                                                 data.REFERENCE_DATA = dataReference[0]
-                                                ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) => {
-                                                    data.IMAGE_REVIEW = imageDatas
-                                                    return resolve(data)
-                                                })
+                                                return resolve(data)
+                                                // ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) => {
+                                                //     data.IMAGE_REVIEW = imageDatas
+                                                //     return resolve(data)
+                                                // })
                                             })
                                         } else {
-                                            ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) => {
-                                                data.IMAGE_REVIEW = imageDatas
+                                            // ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) => {
+                                            //     data.IMAGE_REVIEW = imageDatas
                                                 return resolve(data)
-                                            })
+                                            // })
                                         }
                                     })
                                 } else {
                                     if (data.REFERENCE_ID != null) {
                                         this.getReferenceByReferenceId(data.REFERENCE_ID).then((dataReference) => {
                                             data.REFERENCE_DATA = dataReference[0]
-                                            ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) => {
-                                                data.IMAGE_REVIEW = imageDatas
-                                                return resolve(data)
-                                            })
+                                            return resolve(data)
+                                            // ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) => {
+                                            //     data.IMAGE_REVIEW = imageDatas
+                                            
+                                            // })
                                         })
                                     } else {
-                                        ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) => {
-                                            data.IMAGE_REVIEW = imageDatas
-                                            return resolve(data)
-                                        })
+                                        return resolve(data)
+                                        // ImageDAOObj.getImageEstablishmentByImage(data.REQUEST_IMAGE_NAME).then((imageDatas) => {
+                                        //     data.IMAGE_REVIEW = imageDatas
+                                           
+                                        // })
                                     }
                                 }
                             })
@@ -2338,6 +2345,13 @@ class service {
                 }
 
             })
+        })
+    }
+    getImageEstablishmentByImageRequest(image_name){
+        return new Promise((resolve, reject) => {
+            ImageDAOObj.getImageEstablishmentByImage(image_name).then((imageDatas) => {
+                   return resolve(imageDatas)  
+                })
         })
     }
     updateRequestStatusOnly(no, year, user, last_update, status) {

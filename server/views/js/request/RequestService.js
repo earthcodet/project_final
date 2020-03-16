@@ -32,7 +32,7 @@ function checkView(typeForm) {
                         setTrianData(raw_data)
                         setOperatorAddressData(raw_data.gropDataOperator)
                         setOperatorData(raw_data.gropDataOperator)
-                        imageDisplayFormDatabase = raw_data.IMAGE_REVIEW
+                        // imageDisplayFormDatabase = raw_data.IMAGE_REVIEW
                         if (raw_data.gropDataAssistant != undefined) {
                             setassistantOperatorData(raw_data.gropDataAssistant)
                         }
@@ -57,10 +57,18 @@ function checkView(typeForm) {
                         console.log(`assistantOperatorData`)
                         console.log(assistantOperatorData)
                         setDataView()
-                        if(requestData.no != ''){
+                        if (requestData.no != '') {
                             document.getElementById('print_document_image').style.display = ''
-                        }else{
+                        } else {
                             document.getElementById('print_document_image').style.display = 'none'
+                        }
+
+                        if (raw_data.REQUEST_IMAGE_NAME != null && raw_data.REQUEST_IMAGE_NAME != undefined) {
+                            console.log('get image '+raw_data.REQUEST_IMAGE_NAME)
+                            getImageRequestByImageName(raw_data.REQUEST_IMAGE_NAME).then((image_get) =>{
+                                imageDisplayFormDatabase = image_get
+                               createImage(imageDisplayFormDatabase) 
+                            })
                         }
                     }
                 })
@@ -101,9 +109,6 @@ function checkFormatMoneyId(value) {
 }
 function setDataProfile() {
     document.getElementById('documentName2').readOnly = true
-    if (document.getElementById('print_new_doc') != undefined) {
-        document.getElementById('print_new_doc').style.display = 'none'
-    }
     document.getElementById("typeUser").value = operatorData.type
     document.getElementById("id").value = operatorData.personal_id
     document.getElementById("name").value = `${operatorData.title} ${operatorData.name} ${operatorData.surname}`
@@ -208,8 +213,10 @@ function setDataView() {
     if (document.getElementById('print_new_doc') != undefined) {
         document.getElementById('print_new_doc').style.display = 'none'
     }
-    createImage(imageDisplayFormDatabase)
-    console.log(imageDisplayFormDatabase)
+    // IMAGE
+    if (imageDisplayFormDatabase.length != 0) {
+        createImage(imageDisplayFormDatabase)
+    }
     console.log('requestData.status ' + requestData.status)
     // if (requestData.status === 'approval' || requestData.status === 'active') {
     if (document.getElementById('bFeeY2') != undefined) {
@@ -735,13 +742,13 @@ function setLandData(raw_data) {
         landData.title = raw_data.ESTABLISHMENT_DATA.LAND.LAND_TITLE
         landData.name = raw_data.ESTABLISHMENT_DATA.LAND.LAND_NAME
         landData.surname = raw_data.ESTABLISHMENT_DATA.LAND.LAND_SURNAME
-        if(raw_data.ESTABLISHMENT_DATA.LAND.LAND_BIRTHDA === null){
+        if (raw_data.ESTABLISHMENT_DATA.LAND.LAND_BIRTHDA === null) {
             landData.birthday = ''
         }
-        else if(raw_data.ESTABLISHMENT_DATA.LAND.LAND_BIRTHDAY === '0000-00-00'){
+        else if (raw_data.ESTABLISHMENT_DATA.LAND.LAND_BIRTHDAY === '0000-00-00') {
             landData.birthday = '-'
         }
-        else{
+        else {
             landData.birthday = raw_data.ESTABLISHMENT_DATA.LAND.LAND_BIRTHDAY
         }
         landData.phone = raw_data.ESTABLISHMENT_DATA.LAND.LAND_PHONE
@@ -1720,7 +1727,13 @@ function getRequestType(type) {
         })
     })
 }
-
+function getImageRequestByImageName(image_name) {
+    return new Promise((resolve, reject) => {
+        axios.get(`http://localhost:5000/get/image/request/${image_name}`).then((result) => {
+            resolve(result.data);
+        })
+    })
+}
 function setRequsetType(type) {
     runForm().then((data) => {
         document.getElementById('documentName3').disabled = false

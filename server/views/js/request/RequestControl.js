@@ -530,7 +530,7 @@ function showItem(arrayResult, type) {
 }
 
 function printImg() {
-    if (data === true) {
+    if (addNew === false) {
         if (requestData.no != undefined && requestData.year != undefined) {
             if (requestData.no === '') {
                 window.open(`../utilities/viewImg.html`, '_blank');

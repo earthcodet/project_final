@@ -288,7 +288,11 @@ app.get('/get/owner/duplication/transfer/:no/:year/:pid', (req, res) => {
     res.json(data)
   })
 })
-
+app.get('/get/image/request/:imageName', (req, res) => {
+  webService.getImageEstablishmentByImageRequest(req.params.imageName).then((data) => {
+    res.json(data)
+  })
+})
 app.get('/get/requestTypeById/:id', (req, res) => {
   webService.getRequestTypeById(req.params.id).then((data) => {
     console.log(date.REQUEST_DATE_SUBMISSION)
