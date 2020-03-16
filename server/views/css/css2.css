@@ -20,6 +20,42 @@
     font-size: 2.5vh;
 }
 
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 1vw;
+    /* font-size: 1vw; */
+    border: none;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 15vw;
+    box-shadow: 0vw 1vw 2vw 0vw rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding:1vw 2vw;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-content a:hover {background-color: #ddd;}
+  
+  .dropdown:hover .dropdown-content {display: block;}
+  
+  .dropdown:hover .dropbtn {background-color: #3e8e41;}
+
 .icon-bar a:hover {
     background-color: #000;
 }

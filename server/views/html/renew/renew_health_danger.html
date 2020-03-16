@@ -110,8 +110,18 @@
         <fieldset disabled style="border: 0;padding: 0;margin: 0;">
             <div class="main">
                 <header class="w3-top2">
-                    <h1 style="font-size:2.8vh;margin-left: 25px;padding: 2px;">
+                     <h1 style="font-size:2.8vh;margin-left: 1.5vw;padding: 2px;width: 97%;">
                         คำขอต่อในอนุญาตกิจการที่เป็นอันตรายต่อสุขภาพ</h1>
+                        <div class="dropdown" style="margin-left: 38vw; background-color: #add8e6;width:10vw;">
+                            <button class="dropbtn fa fa-print" style='background-color: #add8e6;color: black;'>
+                                <a style="font-size:1.35vw;">เอกสาร</a>
+                            </button>
+                            <div class="dropdown-content">
+                              <a id="print_document_image" style="display: none;" onclick="printImg()">พิมพ์รูปภาพ</a>
+                              <a id="print_document_renew" style="display: none;" onclick="printDocumentRenew()">พิมพ์คำขอต่อ</a>
+                              <a id="print_document_allow" style="display: none;" onclick="printDocument()">พิมพ์ใบอนุญาต</a>
+                            </div>
+                          </div>
                 </header>
                 <!-- ข้อมูลใบ -->
                 <div class="box">
