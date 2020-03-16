@@ -39,8 +39,8 @@
         width: 310mm;
         min-height: 297mm;
         /* padding: 15mm; */
-        padding-left: 15mm;
-        padding-right: 15mm;
+        padding-left: 25mm;
+        padding-right: 25mm;
         padding-top: 3mm;
         margin: 10mm auto;
         border: 1px #D3D3D3 solid;
@@ -91,44 +91,55 @@
     <div class="page">
         <div class="container" style="font-family: 'Sarabun';">
             <div style="text-align: center;">
-                <p style="float: right;">แบบ ตล.3</p>
+                <p style="float: right;">แบบ สณ.2</p>
                 <br>
                 <br>
                 <p><img src="../../img/ตราครุฑ.png" style="width: 110px;"></p>
-                <h4>ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</h4>
+                <h4>ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</h4>
             </div>
-            <br><br>
+            <br>
             <div class="row">
-                <div class="col">
-                    เลขที่&emsp; <a id="number">07/2563</a>
-                    <a style="float: right;padding-right: 2cm;">สำนักงาน เทศบาลเมืองแสนสุข</a>
+                <div class="col-2">
+                    <img src="../../img/userProfile.png" style="height: 4.2cm;float: right;">
+                </div>
+                <div class="col-3">
+                    <br>
+                    <p>ผู้ได้รับใบอนุญาต</p>
+                    <p>ชื่อ &emsp;<a id="name">นางสาวยู้</a></p>
+                    <p>นามสกุล &emsp;<a id="surname">บุญช่วยชาติ</a></p>
+                </div>
+                <div class="col-1"></div>
+                <div class="col-2">
+                    <p><img src="../../img/userProfile.png" style="height: 4.2cm;float: right;"></p>
+                </div>
+                <div class="col-3">
+                    <br>
+                    <p>ผู้ช่วยจำหน่าย</p>
+                    <p>ชื่อ &emsp;<a id="nameA">นางสาวบู้บู้</a></p>
+                    <p>นามสกุล &emsp;<a id="surnameA">กหดหกดบุญช่วยชาติ</a></p>
                 </div>
             </div><br>
+            <div class="row">
+                <div class="col">
+                    เลขที่&emsp; <a id="number">12/2563</a>
+                    <a style="float: right;padding-right: 2cm;">สำนักงาน เทศบาลเมืองแสนสุข</a>
+                </div>
+            </div>
             <br>
             <!-- 1. -->
             <div class="row">
                 <div class="col-1"></div>
                 <div class="col-5">
-                    <p>เจ้าพนักงานท้องถิ่น &emsp;<a>เทศบาลเมืองแสนสุข</a></p>
+                    <p>อนุญาตให้&emsp;<a id="nameSurn">นางสาว ณัฐิดา ต้นบุญ</a></p>
                 </div>
-                <div class="col">อนุญาตให้ &emsp;<a id="name">นางสาว ณัฐิดา ต้นบุญ</a></div>
+                <div class="col">สัญชาติ &emsp;<a id="nationality">ไทย</a></div>
+                <div class="col">อายุ &emsp;<a id="age">28</a> &emsp;ปี</div>
             </div>
             <div class="row">
-                <div class="col-2">
-                    <p>อายุ &emsp;<a id="age">50</a>&emsp; ปี</p>
-                </div>
                 <div class="col-3">
-                    สัญชาติ &emsp;<a id="nationality">ไทย</a>
+                    <p>อยู่บ้านเลขที่ &emsp;<a id="homeId">250</a></p>
                 </div>
-                <div class="col-3">
-                    เชื่อชาติ &emsp;<a id="nationality2">ไทย</a>
-                </div>
-                <div class="col">อยู่บ้านเลขที่ &emsp;<a id="homeId">260/170</a></div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <p>ตรอก &emsp;<a id="trxk">-</a></p>
-                </div>
+                <div class="col"> ตรอก &emsp;<a id="trxk">-</a></div>
                 <div class="col">ซอย &emsp;<a id="sxy">-</a></div>
                 <div class="col">ถนน &emsp;<a id="road">-</a></div>
                 <div class="col">หมู่ที่ &emsp;<a id="moo">5</a></div>
@@ -139,55 +150,73 @@
                     <p>เขต/อำเภอ &emsp;<a id="district">ศรีราชา</a></p>
                 </div>
                 <div class="col">จังหวัด &emsp;<a id="province">ชลบุรี</a></div>
-            </div><br>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <p>โทรศัพท์ &emsp;<a id="phone">0955021002</a></p>
+                </div>
+            </div>
             <!-- 2. -->
             <div class="row">
-                <div class="col-7">
-                    <p>ใช้สถานที่ตลาด &emsp;<a id="market">ตลาดนัด หาดวอนนภา (จันทร์,ศุกร์)</a></p>
+                <div class="col-1"></div>
+                <div class="col">
+                    <p>1. จำหน่ายสินค้าในที่หรือทางสาธารณะ สินค้าประเภท &emsp;<a id="typeProduct">ข้าวหลาม ขนมจาก</a>
+                    </p>
+                    <p>2. สถานที่จำหน่ายสินค้า &emsp;<a
+                            id="location">บางแสน(เดินเร่)</a></p>
                 </div>
-                <div class="col">ซึ่งมีจำนวนพื้นที่ตลาด &emsp;<a id="area">-</a>&emsp; ตารางเมตร</div>
             </div>
             <div class="row">
+                <div class="col">ตรอก/ซอย &emsp;<a id="trxkS">-</a></div>
                 <div class="col">
-                    <p>ตั้งอยู่เลขที่ &emsp;<a id="homeIdS">236,238</a></p>
+                    <p>ถนน &emsp;<a id="roadS">-</a></p>
                 </div>
-                <div class="col">ถนน &emsp;<a id="roadS">บางแสนล่าง</a></div>
+                <div class="col">หมู่ที่ &emsp;<a id="mooS">-</a></div>
                 <div class="col">แขวง/ตำบล &emsp;<a id="subdistrictS">บึง</a></div>
-                <div class="col">เขต/อำเภอ &emsp;<a id="districtS">ศรีราชา</a>
-                </div>
             </div>
             <div class="row">
                 <div class="col">
-                    <p>จังหวัด &emsp;<a id="provinceS">ชลบุรี</a></p>
+                    <p>เขต/อำเภอ &emsp;<a id="districtS">ศรีราชา</a></p>
                 </div>
-                <div class="col">ค่าธรรมเนียมฉบับละ &emsp;<a id="fee">2,000</a>&emsp; บาทต่อปี</div>
-            </div>
-            <br><br>
-            <div class="row">
-                <div class="col-1"></div>
-                <div class="col-4">
-                    <p>ใบอนุญาตฉบับนี้ให้ไว้ตั้งแต่วันที่ &emsp;<a id="day2">9</a></p>
-                </div>
-                <div class="col-3">เดือน &emsp;<a id="month2">มกราคม</a></div>
-                <div class="col-3">พ.ศ. &emsp;<a id="year2">2563</a></div>
+                <div class="col">จังหวัด &emsp;<a id="provinceS">ชลบุรี</a></div>
             </div>
             <div class="row">
                 <div class="col-1"></div>
+                <div class="col">
+                    <p>3. ใบอนุญาตฉบับนี้ให้ใช้ได้เฉพาะผู้ได้รับใบอนุญาตและผู้ช่วยจำหน่าย</p>
+                    <p>4. ค่าธรรมเนียมฉบับละ &emsp;<a id="fee">50</a>&emsp; บาทต่อปี</p>
+                    <p>5. ผู้รับบใอนุญาตต้องปฏิบัติตามเงื่อนไขดังต่อไปนี้</p>
+                    <p>&emsp;&ensp;1 )&emsp; <a id="note1">หาบเร่</a></p>
+                    <p>&emsp;&ensp;2 )&emsp; <a id="note2"></a></p>
+                    <p>&emsp;&ensp;3 )&emsp; <a id="note3"></a></p>
+                    <p>&emsp;&ensp;4 )&emsp; <a id="note4"></a></p>
+                </div>
+            </div>
+
+            <div class="row">
                 <div class="col-4">
-                    <p>และสิ้นอายุใบอนุญาตในวันที่ &emsp;&emsp;<a id="day3">9</a></p>
+                    <p>ใบอนุญาตฉบับนี้ให้ใช้ได้จนถึงวันที่ &emsp;<a id="day3">9</a></p>
                 </div>
                 <div class="col-3">เดือน &emsp;<a id="month3">มกราคม</a></div>
                 <div class="col-3">พ.ศ. &emsp;<a id="year3">2563</a></div>
             </div>
-            <br><br><br><br><br><br><br><br><br><br>
+            <div class="row">
+                <div class="col-4">
+                    <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp; ออกให้ ณ วันที่ &emsp;<a id="day2">9</a></p>
+                </div>
+                <div class="col-3">เดือน &emsp;<a id="month2">มกราคม</a></div>
+                <div class="col-3">พ.ศ. &emsp;<a id="year2">2563</a></div>
+            </div>
+            <br><br><br>
             <!-- ลงชื่อ -->
             <div class="row">
-                <div class="col-6 text-center">(ลงชื่อ).........................................................................
+                <div class="col-6 text-center">
+                    (ลงชื่อ).........................................................................
                     <br>
                     ( นายวรชาติ ศักดิ์วราสวัสดิ์ )
                     <br>
                     ผู้รับเงิน
-                    </div>
+                </div>
                 <div class="col text-center">
                     (ลงชื่อ) &emsp;<img src="../../img/signature.png" style="width: 200px;">&emsp;&emsp;&emsp;
                     <br>
@@ -200,7 +229,8 @@
                     เจ้าพนักงานท้องถิ่น
                 </div>
             </div>
-<br><br>
+            <br><br>
+
             <div class="align">
                 <u><b>คำเตือน</b></u>&ensp;1. ต้องแสดงใบอนุญาตนี้ไว้ในที่เปิดเผย เห็นได้ง่าย ณ
                 สถานที่ที่ได้รับอนุญาต<br>
