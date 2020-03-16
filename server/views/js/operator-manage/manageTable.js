@@ -686,6 +686,15 @@ function notChangeStatus() {
         confirmButtonColor: "#009688"
     })
 }
+function toPerRequestError(){
+    Swal.fire({
+        html: 'ไม่ต่ออายุได้เนื่องจากใบอนุญาตยังมีอายุมากกว่า 90 วัน',
+        width: '30%',
+        customClass: 'swal-height',
+        icon: 'warning',
+        confirmButtonColor: "#009688"
+    })
+}
 let controlPage = {
     'tr_select': undefined
 }
@@ -722,6 +731,7 @@ function markList(event) {
     }
 }
 
+
 $(function () {
     //ปกติ
     $.contextMenu({
@@ -742,8 +752,11 @@ $(function () {
                 } else {
                     switch (key) {
                         case 'per':
-                            // perPopup(type)
-                            toPerRequest(type, id)
+                            if(inRequest.date_exp_count > 90){
+                                toPerRequestError()
+                            }else{
+                               toPerRequest(type, id)  
+                            }
                             break;
                         case 'transfer':
                             transferPopup(id)
@@ -798,8 +811,11 @@ $(function () {
                 } else {
                     switch (key) {
                         case 'per':
-                            // perPopup(type)
-                            toPerRequest(type, id)
+                            if(inRequest.date_exp_count > 90){
+                                toPerRequestError()
+                            }else{
+                               toPerRequest(type, id)  
+                            }
                             break;
                         case 'transfer':
                             transferPopup(id)

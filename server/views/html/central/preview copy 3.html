@@ -86,12 +86,13 @@
         <div class="page">
             <br>
             <div class="container" style="font-family: 'Sarabun';">
-                <h4 class="text-center">แบบคำขอต่อใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</h4>
+                <h4 id='request_title' class="text-center">แบบคำขอต่อใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</h4>
                 <br>
                 <div class="row">
                     <div class="col">
-                        <p class="text-right">เขียนที่ สำนักงานเทศบาลเมืองแสนสุข</p>
-                        <p class="text-right">วันที่ 17 เดือน ธันวาคม พ.ศ. 2562</p>
+                        <p class="text-right" style="margin-right: 4.5vw;">เขียนที่ สำนักงานเทศบาลเมืองแสนสุข</p>
+                        <p id='request_date_now' class="text-right" style="margin-right: 5.5vw;">วันที่ 17 เดือน ธันวาคม
+                            พ.ศ. 2562</p>
                     </div>
                 </div>
                 <br>
@@ -100,46 +101,78 @@
                     <div class="col-1"></div>
                     <div class="col">
                         <p>ข้าพเจ้า
-                            <input type="checkbox" name="nametype" id="">บุคคลธรรมดา <input type="checkbox"
-                                name="nametype" id="">นิติบุคคล</p>
+                            <input type="checkbox" name="nametype" id="user_type_1">บุคคลธรรมดา
+                            <input type="checkbox" name="nametype" id="user_type_2">นิติบุคคล</p>
                     </div>
-                    <div class="col">ชื่อ <a>sdddddddddsd</a></div>
-                    <div class="col">อายุ <a>sdผsd</a></div>
+                    <div class="col">
+                        <p id='user_fullname'>ชื่อ</p>
+                    </div>
+                    <div class="col">
+                        <p id='user_age'>อายุ</p>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <p>สัญชาติ <a>sdddddddddsd</a></p>
+                        <p id='nationality'>สัญชาติ</p>
                     </div>
-                    <div class="col">เลขบัตรประชาชนเลขที่ <a>sdddddddddsd</a></div>
-                    <div class="col">อยู่บ้าน/สำนักงานเลขที่ <a>sdddddddddsd</a>s</div>
+                    <div class="col">
+                        <p id='personal_id'>เลขบัตรประชาชนเลขที่</p>
+                    </div>
+                    <div class="col">
+                        <p id='homeId'>อยู่บ้าน/สำนักงานเลขที่ </p>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <p>ตรอก</p>
+                        <p id='trxk'>ตรอก/ซอย</p>
                     </div>
-                    <div class="col">ซอย</div>
-                    <div class="col">ถนน</div>
-                    <div class="col-2">หมู่ที่</div>
+                    <div class="col">ซอย
+                        <p id='sxy'></p>
+                    </div>
+                    <div class="col">ถนน
+                        <p id='road'></p>
+                    </div>
+                    <div class="col-2">
+                        <p id='moo'>หมู่ที่</p>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <p>แขวง/ตำบล</p>
+                        <p id='sub_district'>แขวง/ตำบล</p>
                     </div>
-                    <div class="col">เขต/อำเภอ</div>
-                    <div class="col">จังหวัด</div>
+                    <div class="col">
+                        <p id='district'>เขต/อำเภอ</p>
+                    </div>
+                    <div class="col">
+                        <p id='province'>จังหวัด</p>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <p>โทรศัพท์</p>
+                        <p id='phone'>โทรศัพท์</p>
                     </div>
-                    <div class="col">โทรสาร</div>
+                    <div class="col" id='fax'>
+                        <p id='fax'>โทรสาร </p>
+                    </div>
                     <div class="col"></div>
                 </div>
+                <div>
+                    <p>ขอยื่นคำขอต่อใบอนุญาตเป็นผู้จำหน่ายสินค้าในที่หรือทางสาธารณะ ประเภท <a style="float: right;margin-right: 15vw;" id='product_type'></a>
+                    </p>
+                </div>
                 <div class="row">
-                    <div class="col">
-                        <p>ขอยื่นคำขอต่อใบอนุญาตเป็นผู้จำหน่ายสินค้าในที่หรือทางสาธารณะ ประเภท </p>
-                        <a>สถานที่จำหน่ายสินค้า ประเภท </a>
-                        &emsp;&emsp;&emsp;&emsp;<a>ผู้ช่วยจำหน่ายสินค้า </a>
+
+                    <div class="col-3">
+                        <a>สถานที่จำหน่ายสินค้า </a>
+                    </div>
+                    <div class="col-3">
+                        <a id='e_ground'></a>
+                    </div>
+                    <div class="col-2">
+                        <a>ผู้ช่วยจำหน่ายสินค้า </a>
+                    </div>
+                    <div class="col-3">
+                        <a id='a_user_full_name'>นาง </a>
                     </div>
                 </div>
                 <br>
@@ -167,7 +200,7 @@
                 <div class="col text-center">
                     (ลงชื่อ).............................................................ผู้ขอรับใบอนุญาต
                     <br>
-                    <p>นาย ABC DEFG</p>
+                    <p id='name_user_duplication'>นาย </p>
                     <br>
                 </div>
             </div>

@@ -832,6 +832,7 @@ function setDataItem(data) {
     inRequest.menu = data.REQUEST_MENU
     inRequest.establishment_id = data.ESTABLISHMENT_ID
     inRequest.establishment_name = data.ESTABLISHMENT_NAME === null || data.ESTABLISHMENT_NAME === undefined ? 'ไม่มีชื่อร้าน' : data.ESTABLISHMENT_NAME
+    inRequest.date_exp_count = data.COUNT_DATE_EXPIRE
 }
 function checkNullReturn(item) {
     let temp = item === null ? '' : item
