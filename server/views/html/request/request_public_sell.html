@@ -104,16 +104,16 @@
     <header class="w3-top2">
         <h1 style="font-size:2.8vh;margin-left: 1.5vw;padding: 2px;width: 97%;">
             ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ
-            <div class="dropdown" style="margin-left: 42vw; background-color: #add8e6;width:10vw;">
+            <div class="dropdown" style="float: right;position: relative; bottom: 0.5vw;background-color: #add8e6;width:10vw;">
                 <button type='button' class="dropbtn fa fa-print" style='background-color: #add8e6;color: black;'>
                     <a style="font-size:1.35vw;">เอกสาร</a>
                 </button>
                 <div class="dropdown-content">
-                    <a id="print_document_image" style="display: none;" onclick="printImg()">พิมพ์รูปภาพ</a>
-                    <a id="print_document_renew" style="display: none;" onclick="printDocumentRenew()">พิมพ์คำขอต่อ</a>
-                    <a id="print_document_allow" style="display: none;" onclick="printDocument()">พิมพ์ใบอนุญาต</a>
+                  <a id="print_document_image" style="display: none;" onclick="printImg()">พิมพ์รูปภาพ</a>
+                  <a id="print_document_renew" style="display: none;" onclick="printDocumentRenew()">พิมพ์คำขอต่อ</a>
+                  <a id="print_document_allow" style="display: none;" onclick="printDocument()">พิมพ์ใบอนุญาต</a>
                 </div>
-            </div>
+              </div>
         </h1>
     </header>
     <form id="form">
@@ -620,20 +620,7 @@
                             <h5><i class="fa fa-upload"></i>
                                 อัพโหลดภาพ</h5>
                         </button>
-                        <button id='print_new_doc' type="button" class="button" style='margin-left: 5vw; display: none;'
-                            onclick="printDocument()">
-                            <h5><i class="fa fa-print"></i>
-                                พิมพ์ใบอนุญาติ</h5>
-                        </button>
-                        <button id='print_renew_doc' type="button" class="button"
-                            style='margin-left: 5vw; display: none;' onclick="printDocumentRenew()">
-                            <h5><i class="fa fa-print"></i>
-                                พิมพ์ใบขอต่ออนุญาติ</h5>
-                        </button>
-                        <button type="button" class="button" style="float: right;" onclick="printImg()">
-                            <h5><i class="fa fa-print"></i>
-                                พิมพ์รูปภาพ</h5>
-                        </button>
+                        
                         <br>
                         <br>
                         <div id='outputImage' style="height: 40vh; overflow-y:auto; border: 0.3vh solid black;">
