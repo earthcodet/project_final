@@ -223,7 +223,7 @@ function deletePage() {
                     } else {
                         //resetFunction()
                         document.getElementById('print_document_image').style.display = ''
-                        if (requestData.status === 'active') {
+                        if (requestData.status === 'active' && requestData.menu != 'กิจการฌาปณสถาน'){
                             document.getElementById('print_document_allow').style.display = ''
                         }else{
                             document.getElementById('print_document_allow').style.display = 'none'

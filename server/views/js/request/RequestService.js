@@ -58,7 +58,7 @@ function checkView(typeForm) {
                         console.log(assistantOperatorData)
                         setDataView()
                         if (requestData.no != '') {
-                            if(requestData.status === 'active'){
+                            if(requestData.status === 'active' && requestData.menu != 'กิจการฌาปณสถาน'){
                                 document.getElementById('print_document_allow').style.display = ''
                             }
                             document.getElementById('print_document_image').style.display = ''
@@ -214,9 +214,6 @@ function setDataProfile() {
 function setDataView() {
     setIdDeleteRequest(requestData.is_deleted)
     document.getElementById('documentName2').readOnly = true
-    if (document.getElementById('print_new_doc') != undefined) {
-        document.getElementById('print_new_doc').style.display = 'none'
-    }
     // IMAGE
     if (imageDisplayFormDatabase.length != 0) {
         createImage(imageDisplayFormDatabase)
@@ -266,11 +263,6 @@ function setDataView() {
     console.log(documentName3)
     document.getElementById('documentName3').value = requestData.staff_id_alderman
     document.getElementById('position').value = getPositionById(requestData.staff_id_alderman)
-    if (requestData.status === 'active') {
-        if (document.getElementById('print_new_doc') != undefined) {
-            document.getElementById('print_new_doc').style.display = ''
-        }
-    }
     // }
 
     if (requestData.status === 'cancel') {
