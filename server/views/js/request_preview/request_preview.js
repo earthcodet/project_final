@@ -40,6 +40,7 @@ function getDataView() {
     if (requestId.id_no != undefined && requestId.id_year != undefined) {
         getRequestData(requestId.id_no, requestId.id_year).then((data) => {
             if (data.length != 0) {
+                setSN(requestId.id_no.slice(0, 1))
                 if (data[0].STAFF_ID_ALDERMAN != null) {
                     getImageNayo(data[0].STAFF_ID_ALDERMAN).then((data_image) => {
                         console.log(data_image)
