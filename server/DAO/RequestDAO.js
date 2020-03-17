@@ -227,7 +227,7 @@ class RequestDAO {
             joinTable = joinTable + `JOIN personal ON personal.PERSONAL_ID = request.PERSONAL_ID_OWNER `
             let conditiion = ``
             if (status === 30) {
-                conditiion = `DATEDIFF(request.REQUEST_DATE_EXPIRED, NOW()) <= ${status} AND REQUEST_STATUS = 'active'`
+                conditiion = `DATEDIFF(request.REQUEST_DATE_EXPIRED, NOW()) <= ${status} AND DATEDIFF(request.REQUEST_DATE_EXPIRED, NOW()) >= 0 AND REQUEST_STATUS = 'active'`
             }
             if (status === 90) {
                 conditiion = `DATEDIFF(request.REQUEST_DATE_EXPIRED, NOW()) > -90 AND DATEDIFF(request.REQUEST_DATE_EXPIRED, NOW()) < -30 AND REQUEST_STATUS = 'expire'`
