@@ -77,7 +77,10 @@ function createTable(status, data) {
                     let daysBetween = data[i].COUNT_DATE_EXPIRE
                     if (daysBetween < 0) {
                         text = 'หมดอายุไปแล้ว '+ (daysBetween*(-1)) + ' วัน'
-                    } else {
+                    } else if(daysBetween === 0) {
+                        text = 'เหลืออีก วันนี้'
+                    }
+                    else{
                         text = 'เหลืออีก ' + daysBetween + ' วัน'
                     }
                     var cellText = document.createTextNode(text);
