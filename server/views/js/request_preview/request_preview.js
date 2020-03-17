@@ -114,8 +114,37 @@ function checkViewSight(id, raw_data) {
         setData(4, raw_data)
     }
 }
+function setSN(id){
+    if(id === 'A'){
+        document.getElementById('sn_no').innerText = 'แบบ สณ.๒'
+    }
+    if(id === 'B'){
+        document.getElementById('sn_no').innerText = 'แบบ สณ.๕'
+    }
+    if(id === 'C'){
+        document.getElementById('sn_no').innerText = 'แบบ สอ.๔'
+    }
+    if(id === 'D'){
+        document.getElementById('sn_no').innerText = 'แบบ สอ.๕'
+    }
+    if(id === 'E'){
+        document.getElementById('sn_no').innerText = 'แบบ สอ.๖'
+    }
+    if(id === 'F'){
+        document.getElementById('sn_no').innerText = 'แบบ สอ.๗'
+    }
+    if(id === 'G'){
+        document.getElementById('sn_no').innerText = 'แบบ ตล.๓'
+    }
+    if(id === 'H'){
+        document.getElementById('sn_no').innerText = 'แบบ อภ.๒'
+    }
+}
 function setData(type, raw_data) {
     if (type === 1) {
+        if(document.getElementById('t_topic') != undefined){
+            document.getElementById('t_topic').innerText = checkNull(raw_data.REQUEST_MENU)
+        }
         document.getElementById('number').innerText = `${raw_data.REQUEST_NO}/${raw_data.REQUEST_YEAR}`
         if (raw_data.PERSONAL_TYPE === 'บุคคลธรรมดา') {
             document.getElementById('typeName1').checked = true
