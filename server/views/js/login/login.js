@@ -27,11 +27,14 @@ function checkLogin() {
                         console.log(`password is incorrect`)
                     }
                     else {
-                        window.location.href = '/'
+                        setDateExp().then((data) => {
+                            window.location.href = '/'
+                        })
+
                     }
                 })
             }
-        }else{
+        } else {
             showAlert()
             console.log('username and password not change')
         }
@@ -67,7 +70,13 @@ function showAlert() {
 function hideAlert() {
     document.getElementById('alertLogin').classList.add('hide')
 }
-
+function setDateExp() {
+    return new Promise((resolve, reject) => {
+        axios.get(`http://localhost:5000/get/notification/request/`).then((result) => {
+            return resolve(result.data);
+        })
+    })
+}
 function getUser(username, password) {
     return new Promise((resolve, reject) => {
         axios.get(`http://localhost:5000/user/${username}/${password}`).then((result) => {

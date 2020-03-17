@@ -199,13 +199,50 @@ class RequestDAO {
     }
     getCountRequestExp30Day() {
         return new Promise((resolve, reject) => {
-            let query = `SELECT COUNT(REQUEST_NO) As RE_EXP FROM request WHERE DATEDIFF(request.REQUEST_DATE_EXPIRED, NOW()) <= 30`
+            let query = `SELECT COUNT(REQUEST_NO) As RE_EXP FROM request WHERE DATEDIFF(request.REQUEST_DATE_EXPIRED, NOW()) <= 30 AND REQUEST_STATUS = 'active'`
             con.query(query, function (err, result) {
                 if (err) {
                     console.log(err.code)
                     return resolve(err.code)
                 }
                 return resolve(result[0])
+            })
+        })
+    }
+    getCountRequestExpTable(status, more) {
+        return new Promise((resolve, reject) => {
+            let column = `request.REQUEST_NO As R_NO, `
+            column = column + `request.REQUEST_YEAR As R_YEAR, `
+            column = column + `request.REQUEST_MENU, `
+            column = column + `request_type.REQUEST_TYPE_NAME, `
+            column = column + `personal.PERSONAL_TITLE, `
+            column = column + `personal.PERSONAL_NAME, `
+            column = column + `personal.PERSONAL_SURNAME, `
+            column = column + `request.REQUEST_DATE_ISSUED As DATE_ISSUED, `
+            column = column + `DATEDIFF(request.REQUEST_DATE_EXPIRED, NOW()) As COUNT_DATE_EXPIRE, `
+
+            column = column + `request.REQUEST_DATE_EXPIRED As DATE_EXP `
+
+            let joinTable = `JOIN request_type ON request_type.REQUEST_TYPE_ID = request.REQUEST_TYPE_ID `
+            joinTable = joinTable + `JOIN personal ON personal.PERSONAL_ID = request.PERSONAL_ID_OWNER `
+            let conditiion = ``
+            if (status === 30) {
+                conditiion = `DATEDIFF(request.REQUEST_DATE_EXPIRED, NOW()) <= ${status}`
+            }
+            if (status === 90) {
+                conditiion = `DATEDIFF(request.REQUEST_DATE_EXPIRED, NOW()) <= ${status} AND DATEDIFF(request.REQUEST_DATE_EXPIRED, NOW()) > 30`
+            }
+            if (more === true) {
+                conditiion = `DATEDIFF(request.REQUEST_DATE_EXPIRED, NOW()) > 90`
+            }
+            console.log()
+            let query = `SELECT ${column} FROM request ${joinTable} WHERE ${conditiion} AND REQUEST_STATUS = 'active'`
+            con.query(query, function (err, result) {
+                if (err) {
+                    console.log(err)
+                    return resolve(err.code)
+                }
+                return resolve(result)
             })
         })
     }
@@ -224,14 +261,14 @@ class RequestDAO {
             })
         })
     }
-    getRequestAndPersonal(r_no,r_year) {
+    getRequestAndPersonal(r_no, r_year) {
         return new Promise((resolve, reject) => {
             let joinTable = `JOIN personal ON personal.PERSONAL_ID = request.PERSONAL_ID_OWNER `
             joinTable = joinTable + `JOIN address ON personal.ADDRESS_ID = address.ADDRESS_ID `
             joinTable = joinTable + `JOIN request_type ON request.REQUEST_TYPE_ID = request_type.REQUEST_TYPE_ID `
             let condition = `REQUEST_NO = '${r_no}' AND REQUEST_YEAR = '${r_year}' AND `
             condition = condition + `REQUEST_STATUS = 'active' `
-            condition = condition +`AND (request.REQUEST_MENU = 'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร' `
+            condition = condition + `AND (request.REQUEST_MENU = 'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร' `
             condition = condition + `OR request.REQUEST_MENU = 'หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร')`
             let query = `SELECT * FROM request ${joinTable} WHERE ${condition}`
             con.query(query, function (err, result) {
@@ -250,7 +287,7 @@ class RequestDAO {
             joinTable = joinTable + `JOIN address ON address.ADDRESS_ID = establishment.ADDRESS_ID `
             let query = `SELECT * FROM request ${joinTable} WHERE request.PERSONAL_ID_OWNER='${personal_id}' `
             query = query + `AND request.REQUEST_STATUS = 'active' AND request.REQUEST_IS_DELETED = 'N' `
-            query = query +`AND (request.REQUEST_MENU = 'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร' `
+            query = query + `AND (request.REQUEST_MENU = 'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร' `
             query = query + `OR request.REQUEST_MENU = 'หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร')`
             con.query(query, function (err, result) {
                 if (err) {
@@ -368,11 +405,11 @@ class RequestDAO {
             })
         })
     }
-    updateStatusOnly(no, year, user, last_update, status ,status_before) {
+    updateStatusOnly(no, year, user, last_update, status, status_before) {
         return new Promise((resolve, reject) => {
             let column = `REQUEST_STATUS='${status}',`
             column = column + `REQUEST_LAST_UPDATE='${last_update}',REQUEST_USER_UPDATE='${user}'`
-            if(status_before != undefined){
+            if (status_before != undefined) {
                 column = column + `, REQUEST_STATUS_BEFORE='${status_before}'`
             }
             let query = `UPDATE request SET ${column} WHERE REQUEST_NO='${no}' AND REQUEST_YEAR='${year}'`
