@@ -2204,6 +2204,28 @@ class service {
             })
         })
     }
+    getViewAllowRequestByIdAndYear(id, year) {
+        return new Promise((resolve, reject) => {
+            PrintDAOObj.getViewAllow(id, year).then((viewData_data) => {
+                if (viewData_data.length != 0) {
+                    viewData_data[0].DATE_EXP = viewData_data[0].DATE_EXP != null ? this.formatDate("TO-DISPLAY", viewData_data[0].DATE_EXP + '') : viewData_data[0].DATE_EXP
+                    viewData_data[0].DATE_ISSUED = viewData_data[0].DATE_ISSUED != null ? this.formatDate("TO-DISPLAY", viewData_data[0].DATE_ISSUED + '') : viewData_data[0].DATE_ISSUED
+                    viewData_data[0].DATE_SUM = viewData_data[0].DATE_SUM != null ? this.formatDate("TO-DISPLAY", viewData_data[0].DATE_SUM + '') : viewData_data[0].DATE_SUM
+                    return resolve(viewData_data)
+                } else {
+                    return resolve(viewData_data)
+                }
+
+            })
+        })
+    }
+    getImageNayo(id){
+        return new Promise((resolve, reject) => {
+            ImageDAOObj.getImageUserNayo(id).then((viewData_data) => {
+               return resolve(viewData_data)
+            })
+        })
+    }
     getViewRenewRequestByIdAndYear(id, year) {
         return new Promise((resolve, reject) => {
             PrintDAOObj.getViewRenew(id, year).then((viewData_data) => {
@@ -4215,7 +4237,6 @@ class service {
         })
     }
     insertRequestRenew(request, username) {
-        // bug /// // 
         return new Promise((resolve, reject) => {
             var datetime = new Date();
             let dateForUpdate = datetime.toISOString().slice(0, 10)

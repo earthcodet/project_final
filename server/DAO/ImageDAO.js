@@ -57,12 +57,14 @@ class ImageDAO {
                 if (err) {
                     console.log(err)
                 }
-                console.log(result)
                 if (result.length != 0 && result[0].IMAGE_DATA != null) {
-                    console.log(result[0].IMAGE_DATA)
-                    result[0].IMAGE_DATA = Buffer.from(result[0].IMAGE_DATA, 'binary').toString('base64');
+                    if (result[0] != undefined) {
+                        result[0].IMAGE_DATA = Buffer.from(result[0].IMAGE_DATA, 'binary').toString('base64');
+                    }
                 } else {
-                    result[0].IMAGE_DATA = null
+                    if (result[0] != undefined) {
+                        result[0].IMAGE_DATA = null
+                    }
                 }
                 return resolve(result)
             })
@@ -109,10 +111,26 @@ class ImageDAO {
                 if (err) {
                     console.log(err)
                 }
-                for(let i = 0 ; i< result.length ; i++){
-                        result[i].E_IMAGE_DATA_BASE64 = Buffer.from(result[i].E_IMAGE_DATA, 'binary').toString('base64');
+                for (let i = 0; i < result.length; i++) {
+                    result[i].E_IMAGE_DATA_BASE64 = Buffer.from(result[i].E_IMAGE_DATA, 'binary').toString('base64');
                 }
                 return resolve(result)
+            })
+        })
+    }
+    getImageUserNayo(n_id) {
+        return new Promise((resolve, reject) => {
+            let query = `SELECT * FROM user_image WHERE S_IMAGE_NAME = '${n_id}'`
+            con.query(query, function (err, result) {
+                if (err) {
+                    console.log(err)
+                }
+                if (result.length != 0) {
+                    result[0].S_IMAGE_DATA = Buffer.from(result[0].S_IMAGE_DATA, 'binary').toString('base64');
+                    return resolve(result)
+                } else {
+                    return resolve(result)
+                }
             })
         })
     }

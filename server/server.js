@@ -305,7 +305,17 @@ app.get('/get/view/renew/:id/:year', (req, res) => {
     res.json(data)
   })
 })
+app.get('/get/view/allow/:id/:year', (req, res) => {
+  webService.getViewAllowRequestByIdAndYear(req.params.id,req.params.year).then((data) => {
 
+    res.json(data)
+  })
+})
+app.get('/get/image/nayo/view/:id', (req, res) => {
+  webService.getImageNayo(req.params.id).then((data) => {
+    res.json(data)
+  })
+})
 app.get('/get/request/renew/:type/:personal_id', (req, res) => {
   webService.getRquestRenew(webService.getRequestTypeMenu(req.params.type), req.params.personal_id).then((data) => {
     res.json(data)
