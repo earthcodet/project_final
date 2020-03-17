@@ -76,7 +76,7 @@ function createTable(status, data) {
             } else {
                     let daysBetween = data[i].COUNT_DATE_EXPIRE
                     if (daysBetween < 0) {
-                        text = 'หมดอายุ'
+                        text = 'หมดอายุ '+(daysBetween)
                     } else {
                         text = 'เหลืออีก ' + daysBetween + ' วัน'
                     }
