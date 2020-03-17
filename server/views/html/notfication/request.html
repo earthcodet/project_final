@@ -100,243 +100,115 @@
                     <div class="box">
                         <p class="font"></p>
                         <div class="tab">
-                            <button type="button" class="tablinks" onclick="openCity(event, 'London')"><a>เหลือน้อยกว่า 30 วัน</a></button>
-                            <button type="button" class="tablinks" onclick="openCity(event, 'Paris')"><a>หมดอายุไปแล้วน้อยกว่า 90 วัน</a></button>
-                            <button type="button" class="tablinks" onclick="openCity(event, 'Tokyo')"><a>หมดอายุไปแล้วมากกว่า 90 วัน</a></button>
+                            <button type="button" id ='cbd'class="tablinks" onclick="onClickStatustab('d30', event, 'd30')"><a>เหลือน้อยกว่า 30 วัน</a></button>
+                            <button type="button" class="tablinks" onclick="onClickStatustab('d90', event, 'd90')"><a>หมดอายุไปแล้วน้อยกว่า 90 วัน</a></button>
+                            <button type="button" class="tablinks" onclick="onClickStatustab('d90p', event, 'd90p')"><a>หมดอายุไปแล้วมากกว่า 90 วัน</a></button>
                         </div>
 
-                        <div id="London" class="tabcontent" style="display: block;">
+                        <div id="d30" class="tabcontent" style="display: block;">
                             <div style="font-size: 1.7vh;">
                                 <br>       
-                                <table id="requestTable30day" class="table cursor-pointer table-hover tableresult">
+                                <table id="d30_table_date" class="table cursor-pointer table-hover tableresult">
                                     <thead>
                                         <tr class="is-color">
-                                            <th onclick="sortTable(0,'requestTable30day','')">
-                                                <p>ประเภทคำขอ <i class="fa fa-sort "></i></p>
+                                            <th onclick="sortTable(0,'d30_table_date','')">
+                                                <p>เลขที่คำขอ <i class="fa fa-sort "></i></p>
                                             </th>
-                                            <th onclick="sortTable(1,'requestTable30day','')">
-                                                <p>ชื่อ-นามสกุล <i class="fa fa-sort "></i></p>
+                                            <th onclick="sortTable(1,'d30_table_date','')">
+                                                <p>ประเภทใบอนุญาต <i class="fa fa-sort "></i></p>
                                             </th>
-                                            <th onclick="sortTable(2,'requestTable30day','')">
-                                                <p>ที่อยู่ <i class="fa fa-sort "></i>
-                                                </p>
+                                            <th onclick="sortTable(2,'d30_table_date','')">
+                                                <p>ประเภทคำขอ<i class="fa fa-sort "></i></p>
                                             </th>
-                                            <th onclick="sortTable(3,'requestTable30day','date')">
+                                            <th onclick="sortTable(3,'d30_table_date','')">
+                                                <p>ชื่อ-นามสกุล เจ้าของ<i class="fa fa-sort "></i></p>
+                                            </th>
+                                            <th onclick="sortTable(4,'d30_table_date','')">
                                                 <p>วันที่เริ่มคำขอ <i class="fa fa-sort "></i></p>
                                             </th>
-                                            <th onclick="sortTable(4,'requestTable30day','')">
+                                            <th onclick="sortTable(5,'d30_table_date','date')">
                                                 <p>วันที่สิ้นสุดคำขอ <i class="fa fa-sort "></i></p>
                                             </th>
-                                            <th onclick="sortTable(5,'requestTable30day','dateExp')">
+                                            <th onclick="sortTable(6,'d30_table_date','dateExp')">
                                                 <p>สถานะ <i class="fa fa-sort "></i></p>
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody style="height: 23vw;  text-align: center;" >
-                                        <tr onclick="toRequest(event)">
-                                            <td>ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</td>
-                                            <td>นาย สมชาย น้ำเงิน
-                                            </td>
-                                            <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
-                                            <td>20 ธันวาคม 2562</td>
-                                            <td>20 ธันวาคม 2563</td>
-                                            <td >2 วัน</td>
-                                        </tr>
-                                        <tr onclick="toRequest(event)">
-                                            <td>กิจการที่เป็นอันตรายต่อสุขภาพ</td>
-                                            <td>นาย สมชาย ชมพู
-                                            </td>
-                                            <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
-                                            <td>20 มกราคม 2562</td>
-                                            <td>20 มกราคม 2563</td>
-                                            <td>20 วัน</td>
-                                        </tr>
-                                        <tr onclick="toRequest(event)">
-                                            <td>กิจการที่เป็นอันตรายต่อสุขภาพ</td>
-                                            <td>นาย สมชาย แดง
-                                            </td>
-                                            <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
-                                            <td>20 สิงหาคม 2562</td>
-                                            <td>20 สิงหาคม 2563</td>
-                                            <td>24 วัน</td>
-                                        </tr>
-                                        <tr onclick="toRequest(event)">
-                                            <td>ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</td>
-                                            <td>นาย สมชาย เขียว
-                                            </td>
-                                            <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
-                                            <td>20 กันยายน 2562</td>
-                                            <td>20 กันยายน 2563</td>
-                                            <td>23 วัน</td>
-                                        </tr>
-                                        <tr onclick="toRequest(event)">
-                                            <td>กิจการที่เป็นอันตรายต่อสุขภาพ</td>
-                                            <td>นาย สมชาย ใจดี
-                                            </td>
-                                            <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
-                                            <td>20 สิงหาคม 2562</td>
-                                            <td>20 สิงหาคม 2563</td>
-                                            <td>15 วัน</td>
-                                        </tr>
+                                       
                                     </tbody>
                                 </table>
                                 <br>
                                 
                             </div>
                         </div>
-                        <div id="Paris" class="tabcontent">
+                        <div id="d90" class="tabcontent">
                             <div style="font-size: 1.7vh;">
                                 <br>       
-                                <table id="requestTable90day" class="table cursor-pointer table-hover tableresult">
+                                <table id="d90_table_date" class="table cursor-pointer table-hover tableresult">
                                     <thead>
-                                        <tr class="" style="background-color: rgba(212, 65, 65, 0.863); color: rgb(255, 255, 255);">
-                                            <th onclick="sortTable(0,'requestTable90day','')">
-                                                <p>ประเภทคำขอ <i class="fa fa-sort "></i></p>
-                                            </th>
-                                            <th onclick="sortTable(1,'requestTable90day','')">
-                                                <p>ชื่อ-นามสกุล <i class="fa fa-sort "></i></p>
-                                            </th>
-                                            <th onclick="sortTable(2,'requestTable90day','')">
-                                                <p>ที่อยู่ <i class="fa fa-sort "></i>
-                                                </p>
-                                            </th>
-                                            <th onclick="sortTable(3,'requestTable90day','date')">
-                                                <p>วันที่เริ่มคำขอ <i class="fa fa-sort "></i></p>
-                                            </th>
-                                            <th onclick="sortTable(4,'requestTable90day','')">
-                                                <p>วันที่สิ้นสุดคำขอ <i class="fa fa-sort "></i></p>
-                                            </th>
-                                            <th onclick="sortTable(5,'requestTable90day','dateExp')">
-                                                <p>สถานะ <i class="fa fa-sort "></i></p>
-                                            </th>
+                                        <tr class="is-color">
+                                        <th onclick="sortTable(0,'d90_table_date','')">
+                                            <p>เลขที่คำขอ <i class="fa fa-sort "></i></p>
+                                        </th>
+                                        <th onclick="sortTable(1,'d90_table_date','')">
+                                            <p>ประเภทใบอนุญาต <i class="fa fa-sort "></i></p>
+                                        </th>
+                                        <th onclick="sortTable(2,'d90_table_date','')">
+                                            <p>ประเภทคำขอ<i class="fa fa-sort "></i></p>
+                                        </th>
+                                        <th onclick="sortTable(3,'d90_table_date','')">
+                                            <p>ชื่อ-นามสกุล เจ้าของ<i class="fa fa-sort "></i></p>
+                                        </th>
+                                        <th onclick="sortTable(4,'d90_table_date','')">
+                                            <p>วันที่เริ่มคำขอ <i class="fa fa-sort "></i></p>
+                                        </th>
+                                        <th onclick="sortTable(5,'d90_table_date','date')">
+                                            <p>วันที่สิ้นสุดคำขอ <i class="fa fa-sort "></i></p>
+                                        </th>
+                                        <th onclick="sortTable(6,'d90_table_date','dateExp')">
+                                            <p>สถานะ <i class="fa fa-sort "></i></p>
+                                        </th>
                                         </tr>
                                     </thead>
                                     <tbody style="height: 23vw;  text-align: center;" >
-                                        <tr onclick="toRequest(event)">
-                                            <td>กิจการที่เป็นอันตรายต่อสุขภาพ</td>
-                                            <td>นาย สมชาย ใจดี
-                                            </td>
-                                            <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
-                                            <td>20 มกราคม 2562</td>
-                                            <td>20 มกราคม 2563</td>
-                                            <td >หมดอายุ 50 วัน</td>
-                                        </tr>
-                                        <tr onclick="toRequest(event)">
-                                            <td>กิจการที่เป็นอันตรายต่อสุขภาพ</td>
-                                            <td>นาย สมชาย ใจดี
-                                            </td>
-                                            <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
-                                            <td>20 ตุลาคม 2562</td>
-                                            <td>20 ตุลาคม 2563</td>
-                                            <td>หมดอายุ 60 วัน</td>
-                                        </tr>
-                                        <tr onclick="toRequest(event)">
-                                            <td>กิจการที่เป็นอันตรายต่อสุขภาพ</td>
-                                            <td>นาย สมชาย ใจดี
-                                            </td>
-                                            <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
-                                            <td>20 สิงหาคม 2562</td>
-                                            <td>20 สิงหาคม 2563</td>
-                                            <td>หมดอายุ 41 วัน</td>
-                                        </tr>
-                                        <tr onclick="toRequest(event)">
-                                            <td>กิจการที่เป็นอันตรายต่อสุขภาพ</td>
-                                            <td>นาย สมชาย ใจดี
-                                            </td>
-                                            <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
-                                            <td>20 ตุลาคม 2562</td>
-                                            <td>20 ตุลาคม 2563</td>
-                                            <td>หมดอายุ 75 วัน</td>
-                                        </tr>
-                                        <tr onclick="toRequest(event)">
-                                            <td>กิจการที่เป็นอันตรายต่อสุขภาพ</td>
-                                            <td>นาย สมชาย ใจดี
-                                            </td>
-                                            <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
-                                            <td>20 สิงหาคม 2562</td>
-                                            <td>20 สิงหาคม 2563</td>
-                                            <td>หมดอายุ 85 วัน</td>
-                                        </tr>
                                     </tbody>
                                 </table>
                                 <br>
                                 
                             </div>
                         </div>
-
-                        <div id="Tokyo" class="tabcontent">
+                        <div id="d90p" class="tabcontent">
                             <div style="font-size: 1.7vh;">
                                 <br>       
-                                <table id="requestTableM90dy" class="table cursor-pointer table-hover tableresult">
+                                <table id="d90p_table_date" class="table cursor-pointer table-hover tableresult">
                                     <thead>
-                                        <tr class="" style="background-color: rgba(212, 65, 65, 0.863); color: rgb(255, 255, 255);">
-                                            <th onclick="sortTable(0,'requestTableM90dy','')">
-                                                <p>ประเภทคำขอ <i class="fa fa-sort "></i></p>
-                                            </th>
-                                            <th onclick="sortTable(1,'requestTableM90dy','')">
-                                                <p>ชื่อ-นามสกุล <i class="fa fa-sort "></i></p>
-                                            </th>
-                                            <th onclick="sortTable(2,'requestTableM90dy','')">
-                                                <p>ที่อยู่ <i class="fa fa-sort "></i>
-                                                </p>
-                                            </th>
-                                            <th onclick="sortTable(3,'requestTableM90dy','date')">
-                                                <p>วันที่เริ่มคำขอ <i class="fa fa-sort "></i></p>
-                                            </th>
-                                            <th onclick="sortTable(4,'requestTableM90dy','')">
-                                                <p>วันที่สิ้นสุดคำขอ <i class="fa fa-sort "></i></p>
-                                            </th>
-                                            <th onclick="sortTable(5,'requestTableM90dy','dateExp')">
-                                                <p>สถานะ <i class="fa fa-sort "></i></p>
-                                            </th>
+                                        <tr class="is-color">
+                                        <th onclick="sortTable(0,'d90p_table_date','')">
+                                            <p>เลขที่คำขอ <i class="fa fa-sort "></i></p>
+                                        </th>
+                                        <th onclick="sortTable(1,'d90p_table_date','')">
+                                            <p>ประเภทใบอนุญาต <i class="fa fa-sort "></i></p>
+                                        </th>
+                                        <th onclick="sortTable(2,'d90p_table_date','')">
+                                            <p>ประเภทคำขอ<i class="fa fa-sort "></i></p>
+                                        </th>
+                                        <th onclick="sortTable(3,'d90p_table_date','')">
+                                            <p>ชื่อ-นามสกุล เจ้าของ<i class="fa fa-sort "></i></p>
+                                        </th>
+                                        <th onclick="sortTable(4,'d90p_table_date','')">
+                                            <p>วันที่เริ่มคำขอ <i class="fa fa-sort "></i></p>
+                                        </th>
+                                        <th onclick="sortTable(5,'d90p_table_date','date')">
+                                            <p>วันที่สิ้นสุดคำขอ <i class="fa fa-sort "></i></p>
+                                        </th>
+                                        <th onclick="sortTable(6,'d90p_table_date','dateExp')">
+                                            <p>สถานะ <i class="fa fa-sort "></i></p>
+                                        </th> 
                                         </tr>
                                     </thead>
                                     <tbody style="height: 23vw;  text-align: center;" >
-                                        <tr onclick="toRequest(event)">
-                                            <td>ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</td>
-                                            <td>นาย สมชาย ใจดี
-                                            </td>
-                                            <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
-                                            <td>20 มิถุนายน 2562</td>
-                                            <td>20 มิถุนายน 2563</td>
-                                            <td >หมดอายุ 100 วัน</td>
-                                        </tr>
-                                        <tr onclick="toRequest(event)">
-                                            <td>กิจการที่เป็นอันตรายต่อสุขภาพ</td>
-                                            <td>นาย สมชาย ใจดี
-                                            </td>
-                                            <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
-                                            <td>20 พฤษภาคม 2562</td>
-                                            <td>20 พฤษภาคม 2563</td>
-                                            <td>หมดอายุ 10000 วัน</td>
-                                        </tr>
-                                        <tr onclick="toRequest(event)">
-                                            <td>กิจการที่เป็นอันตรายต่อสุขภาพ</td>
-                                            <td>นาย สมชาย ใจดี
-                                            </td>
-                                            <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
-                                            <td>20 มกราคม 2562</td>
-                                            <td>20 มกราคม 2563</td>
-                                            <td>หมดอายุ 105 วัน</td>
-                                        </tr>
-                                        <tr onclick="toRequest(event)">
-                                            <td>ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</td>
-                                            <td>นาย สมชาย ใจดี
-                                            </td>
-                                            <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
-                                            <td>20 กรกฎาคม 2562</td>
-                                            <td>20 กรกฎาคม 2563</td>
-                                            <td>หมดอายุ 365 วัน</td>
-                                        </tr>
-                                        <tr onclick="toRequest(event)">
-                                            <td>ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</td>
-                                            <td>นาย สมชาย ใจดี
-                                            </td>
-                                            <td>169 ถนน ลงหาดบางแสน ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20131</td>
-                                            <td>20 กันยายน 2562</td>
-                                            <td>20 กันยายน 2563</td>
-                                            <td>หมดอายุ 9000 วัน</td>
-                                        </tr>
+                                        
                                     </tbody>
                                 </table>
                                 <br>
@@ -360,5 +232,5 @@
 <script src="../../js/service/jquery/jquery.js"></script>
 <script src="../../js/service/sideMenu.js"></script>
 
-
+<script src='../../js/notification_request/notification.js'></script>
 </html>

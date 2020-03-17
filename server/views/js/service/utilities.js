@@ -149,8 +149,14 @@ function sortTable(n, id, type) {
                 var tempX = x.innerHTML.split(' ')
                 var tempY = y.innerHTML.split(' ')
                 var dateX, dateY
-                dateX = tempX[0]
-                dateY = tempY[0]
+                if (tempX.length === 1) {
+                    dateX = tempX[0]
+                    dateY = tempY[0]
+                } else {
+                    dateX = tempX[1]
+                    dateY = tempY[1]
+                }
+
                 if (dir == "asc") {
                     if (dateX != 'หมดอายุ' && dateY != 'หมดอายุ') {
                         if (parseInt(dateX) > parseInt(dateY)) {
@@ -233,7 +239,7 @@ function checkPhone(value, id, new_id) {
                     document.getElementById(id).value = value.slice(0, value.length - 1)
                 }
             }
-        }else{
+        } else {
             document.getElementById(id).value = value.slice(0, 10)
         }
     }
@@ -540,3 +546,19 @@ function getDateExp(type, date) {
         return date_return
     }
 }
+function setReDateExp() {
+    getDateExpNotification().then((date_exp) => {
+        if (document.getElementById('notficationRequest') != undefined) {
+            document.getElementById('notficationRequest').innerText = date_exp
+            document.getElementById('notficationRequest2').innerText = date_exp
+        }
+    })
+}
+function getDateExpNotification() {
+    return new Promise((resolve, reject) => {
+        axios.get(`http://localhost:5000/get/session/re_exp`).then((result) => {
+            return resolve(result.data);
+        })
+    })
+}
+setReDateExp()

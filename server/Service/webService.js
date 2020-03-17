@@ -1192,6 +1192,32 @@ class service {
             })
         })
     }
+    getDateRequestLess(type) {
+        return new Promise((resolve, reject) => {
+            let t_s = 0
+            let more = false
+            if (type === 'd30') {
+                t_s = 30
+            } else if (type === 'd90') {
+                t_s = 90
+            } else {
+                // d90p
+                more = true
+                t_s = 90
+            }
+            RequestDAOObj.getCountRequestExpTable(t_s, more).then((viewData_data) => {
+                if (viewData_data.length != 0) {
+                    for (let i = 0; i < viewData_data.length; i++) {
+                        viewData_data[i].DATE_EXP = viewData_data[i].DATE_EXP != null ? this.formatDate("TO-DISPLAY", viewData_data[i].DATE_EXP + '') : viewData_data[i].DATE_EXP
+                        viewData_data[i].DATE_ISSUED = viewData_data[i].DATE_ISSUED != null ? this.formatDate("TO-DISPLAY", viewData_data[i].DATE_ISSUED + '') : viewData_data[i].DATE_ISSUED
+                    }
+                    return resolve(viewData_data)
+                } else {
+                    return resolve(viewData_data)
+                }
+            })
+        })
+    }
     getNotificationExp30Day() {
         return new Promise((resolve, reject) => {
             RequestDAOObj.getCountRequestExp30Day().then((data) => {
@@ -2226,10 +2252,10 @@ class service {
             })
         })
     }
-    getImageNayo(id){
+    getImageNayo(id) {
         return new Promise((resolve, reject) => {
             ImageDAOObj.getImageUserNayo(id).then((viewData_data) => {
-               return resolve(viewData_data)
+                return resolve(viewData_data)
             })
         })
     }

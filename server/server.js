@@ -132,6 +132,16 @@ app.get('/get/notification/request/', (req, res) => {
 app.get('/get/session/re_exp', (req, res) => {
     res.json(req.session.data_exp_count)
 })
+//nDada
+app.get('/get/type/request/exp/less/:date', (req, res) => {
+  webService.getDateRequestLess(req.params.date).then((data) => {
+    if (data != null) {
+      res.json(data)
+    } else {
+      res.sendStatus(404)
+    }
+  })
+})
 app.get('/get/personalId/:personalId', (req, res) => {
   webService.getPersonalId(req.params.personalId).then((data) => {
     if (data != null) {
