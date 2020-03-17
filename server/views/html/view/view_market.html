@@ -84,10 +84,21 @@
             position: absolute;
             bottom: 10mm;
         }
+        .hideWhenPrint {
+            display: none;
+            text-align: center;
+        }
     }
 </style>
 
 <body>
+    <div class="hideWhenPrint" style="text-align: center;">
+        <br>
+        <button type="button" class="btn btn-outline-success btn-lg is-color"
+            style="background-color: gray;color: white;cursor: pointer;"
+            onclick="window.print()">พิมพ์</button>
+        <br>
+    </div>
     <div class="page">
         <div class="container" style="font-family: 'Sarabun';">
             <div style="text-align: center;">
@@ -100,7 +111,7 @@
             <br><br>
             <div class="row">
                 <div class="col">
-                    เลขที่&emsp; <a id="number">07/2563</a>
+                    เลขที่&emsp; <a id="number"></a>
                     <a style="float: right;padding-right: 2cm;">สำนักงาน เทศบาลเมืองแสนสุข</a>
                 </div>
             </div><br>
@@ -111,73 +122,73 @@
                 <div class="col-5">
                     <p>เจ้าพนักงานท้องถิ่น &emsp;<a>เทศบาลเมืองแสนสุข</a></p>
                 </div>
-                <div class="col">อนุญาตให้ &emsp;<a id="name">นางสาว ณัฐิดา ต้นบุญ</a></div>
+                <div class="col">อนุญาตให้ &emsp;<a id="name"></a></div>
             </div>
             <div class="row">
                 <div class="col-2">
-                    <p>อายุ &emsp;<a id="age">50</a>&emsp; ปี</p>
+                    <p>อายุ &emsp;<a id="age"></a>&emsp; ปี</p>
                 </div>
                 <div class="col-3">
-                    สัญชาติ &emsp;<a id="nationality">ไทย</a>
+                    สัญชาติ &emsp;<a id="nationality"></a>
                 </div>
                 <div class="col-3">
-                    เชื่อชาติ &emsp;<a id="nationality2">ไทย</a>
+                    เชื่อชาติ &emsp;<a id="nationality2"></a>
                 </div>
-                <div class="col">อยู่บ้านเลขที่ &emsp;<a id="homeId">260/170</a></div>
+                <div class="col">อยู่บ้านเลขที่ &emsp;<a id="homeId"></a></div>
             </div>
             <div class="row">
                 <div class="col">
-                    <p>ตรอก &emsp;<a id="trxk">-</a></p>
+                    <p>ตรอก &emsp;<a id="trxk"></a></p>
                 </div>
-                <div class="col">ซอย &emsp;<a id="sxy">-</a></div>
-                <div class="col">ถนน &emsp;<a id="road">-</a></div>
-                <div class="col">หมู่ที่ &emsp;<a id="moo">5</a></div>
+                <div class="col">ซอย &emsp;<a id="sxy"></a></div>
+                <div class="col">ถนน &emsp;<a id="road"></a></div>
+                <div class="col">หมู่ที่ &emsp;<a id="moo"></a></div>
             </div>
             <div class="row">
-                <div class="col">แขวง/ตำบล &emsp;<a id="subdistrict">บึง</a></div>
+                <div class="col">แขวง/ตำบล &emsp;<a id="subdistrict"></a></div>
                 <div class="col">
-                    <p>เขต/อำเภอ &emsp;<a id="district">ศรีราชา</a></p>
+                    <p>เขต/อำเภอ &emsp;<a id="district"></a></p>
                 </div>
-                <div class="col">จังหวัด &emsp;<a id="province">ชลบุรี</a></div>
+                <div class="col">จังหวัด &emsp;<a id="province"></a></div>
             </div><br>
             <!-- 2. -->
             <div class="row">
                 <div class="col-7">
-                    <p>ใช้สถานที่ตลาด &emsp;<a id="market">ตลาดนัด หาดวอนนภา (จันทร์,ศุกร์)</a></p>
+                    <p>ใช้สถานที่ตลาด &emsp;<a id="market"></a></p>
                 </div>
-                <div class="col">ซึ่งมีจำนวนพื้นที่ตลาด &emsp;<a id="area">-</a>&emsp; ตารางเมตร</div>
+                <div class="col">ซึ่งมีจำนวนพื้นที่ตลาด &emsp;<a id="area"></a>&emsp; ตารางเมตร</div>
             </div>
             <div class="row">
                 <div class="col">
-                    <p>ตั้งอยู่เลขที่ &emsp;<a id="homeIdS">236,238</a></p>
+                    <p>ตั้งอยู่เลขที่ &emsp;<a id="homeIdS"></a></p>
                 </div>
-                <div class="col">ถนน &emsp;<a id="roadS">บางแสนล่าง</a></div>
-                <div class="col">แขวง/ตำบล &emsp;<a id="subdistrictS">บึง</a></div>
-                <div class="col">เขต/อำเภอ &emsp;<a id="districtS">ศรีราชา</a>
+                <div class="col">ถนน &emsp;<a id="roadS"></a></div>
+                <div class="col">แขวง/ตำบล &emsp;<a id="subdistrictS"></a></div>
+                <div class="col">เขต/อำเภอ &emsp;<a id="districtS"></a>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
-                    <p>จังหวัด &emsp;<a id="provinceS">ชลบุรี</a></p>
+                    <p>จังหวัด &emsp;<a id="provinceS"></a></p>
                 </div>
-                <div class="col">ค่าธรรมเนียมฉบับละ &emsp;<a id="fee">2,000</a>&emsp; บาทต่อปี</div>
+                <div class="col">ค่าธรรมเนียมฉบับละ &emsp;<a id="fee"></a>&emsp; บาทต่อปี</div>
             </div>
             <br><br>
             <div class="row">
                 <div class="col-1"></div>
                 <div class="col-4">
-                    <p>ใบอนุญาตฉบับนี้ให้ไว้ตั้งแต่วันที่ &emsp;<a id="day2">9</a></p>
+                    <p>ใบอนุญาตฉบับนี้ให้ไว้ตั้งแต่วันที่ &emsp;<a id="day2"></a></p>
                 </div>
-                <div class="col-3">เดือน &emsp;<a id="month2">มกราคม</a></div>
-                <div class="col-3">พ.ศ. &emsp;<a id="year2">2563</a></div>
+                <div class="col-3">เดือน &emsp;<a id="month2"></a></div>
+                <div class="col-3">พ.ศ. &emsp;<a id="year2"></a></div>
             </div>
             <div class="row">
                 <div class="col-1"></div>
                 <div class="col-4">
-                    <p>และสิ้นอายุใบอนุญาตในวันที่ &emsp;&emsp;<a id="day3">9</a></p>
+                    <p>และสิ้นอายุใบอนุญาตในวันที่ &emsp;&emsp;<a id="day3"></a></p>
                 </div>
-                <div class="col-3">เดือน &emsp;<a id="month3">มกราคม</a></div>
-                <div class="col-3">พ.ศ. &emsp;<a id="year3">2563</a></div>
+                <div class="col-3">เดือน &emsp;<a id="month3"></a></div>
+                <div class="col-3">พ.ศ. &emsp;<a id="year3"></a></div>
             </div>
             <br><br><br><br><br><br><br><br><br><br>
             <!-- ลงชื่อ -->

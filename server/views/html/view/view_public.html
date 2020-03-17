@@ -84,10 +84,21 @@
             position: absolute;
             bottom: 10mm;
         }
+        .hideWhenPrint {
+            display: none;
+            text-align: center;
+        }
     }
 </style>
 
 <body>
+    <div class="hideWhenPrint" style="text-align: center;">
+        <br>
+        <button type="button" class="btn btn-outline-success btn-lg is-color"
+            style="background-color: gray;color: white;cursor: pointer;"
+            onclick="window.print()">พิมพ์</button>
+        <br>
+    </div>
     <div class="page">
         <div class="container" style="font-family: 'Sarabun';">
             <div style="text-align: center;">
@@ -105,8 +116,8 @@
                 <div class="col-3">
                     <br>
                     <p>ผู้ได้รับใบอนุญาต</p>
-                    <p>ชื่อ &emsp;<a id="name">นางสาวยู้</a></p>
-                    <p>นามสกุล &emsp;<a id="surname">บุญช่วยชาติ</a></p>
+                    <p>ชื่อ &emsp;<a id="name"></a></p>
+                    <p>นามสกุล &emsp;<a id="surname"></a></p>
                 </div>
                 <div class="col-1"></div>
                 <div class="col-2">
@@ -115,13 +126,13 @@
                 <div class="col-3">
                     <br>
                     <p>ผู้ช่วยจำหน่าย</p>
-                    <p>ชื่อ &emsp;<a id="nameA">นางสาวบู้บู้</a></p>
-                    <p>นามสกุล &emsp;<a id="surnameA">กหดหกดบุญช่วยชาติ</a></p>
+                    <p>ชื่อ &emsp;<a id="nameA"></a></p>
+                    <p>นามสกุล &emsp;<a id="surnameA"></a></p>
                 </div>
             </div><br>
             <div class="row">
                 <div class="col">
-                    เลขที่&emsp; <a id="number">12/2563</a>
+                    เลขที่&emsp; <a id="number"></a>
                     <a style="float: right;padding-right: 2cm;">สำนักงาน เทศบาลเมืองแสนสุข</a>
                 </div>
             </div>
@@ -129,37 +140,37 @@
             <!-- 1. -->
             <div class="row">
                 <div class="col-1"></div>
-                <div class="col-5"><p>อนุญาตให้&emsp;<a id="nameSurn">นางสาว ณัฐิดา ต้นบุญ</a></p></div>
-                <div class="col">สัญชาติ &emsp;<a id="nationality">ไทย</a></div>
-                <div class="col">อายุ &emsp;<a id="age">28</a> &emsp;ปี</div>
+                <div class="col-5"><p>อนุญาตให้&emsp;<a id="nameSurn"></a></p></div>
+                <div class="col">สัญชาติ &emsp;<a id="nationality"></a></div>
+                <div class="col">อายุ &emsp;<a id="age"></a> &emsp;ปี</div>
             </div>
             <div class="row">
-                <div class="col-3"><p>อยู่บ้านเลขที่ &emsp;<a id="homeId">250</a></p></div>
-                <div class="col"> ตรอก &emsp;<a id="trxk">-</a></div>
-                <div class="col">ซอย &emsp;<a id="sxy">-</a></div>
-                <div class="col">ถนน &emsp;<a id="road">-</a></div>
-                <div class="col">หมู่ที่ &emsp;<a id="moo">5</a></div>
+                <div class="col-3"><p>อยู่บ้านเลขที่ &emsp;<a id="homeId"></a></p></div>
+                <div class="col"> ตรอก &emsp;<a id="trxk"></a></div>
+                <div class="col">ซอย &emsp;<a id="sxy"></a></div>
+                <div class="col">ถนน &emsp;<a id="road"></a></div>
+                <div class="col">หมู่ที่ &emsp;<a id="moo"></a></div>
             </div>
             <div class="row">
-                <div class="col">แขวง/ตำบล &emsp;<a id="subdistrict">บึง</a></div>
+                <div class="col">แขวง/ตำบล &emsp;<a id="subdistrict"></a></div>
                 <div class="col">
-                    <p>เขต/อำเภอ &emsp;<a id="district">ศรีราชา</a></p>
+                    <p>เขต/อำเภอ &emsp;<a id="district"></a></p>
                 </div>
-                <div class="col">จังหวัด &emsp;<a id="province">ชลบุรี</a></div>
+                <div class="col">จังหวัด &emsp;<a id="province"></a></div>
             </div>
             <div class="row">
                 <div class="col-4">
-                    <p>โทรศัพท์ &emsp;<a id="phone">0955021002</a></p>
+                    <p>โทรศัพท์ &emsp;<a id="phone"></a></p>
                 </div>
             </div>
             <!-- 2. -->
             <div class="row">
                 <div class="col-1"></div>
                 <div class="col">
-                    <p>1. จำหน่ายสินค้าในที่หรือทางสาธารณะ สินค้าประเภท &emsp;<a id="typeProduct">ข้าวหลาม ขนมจาก</a></p>
-                    <p>2. สถานที่เร่ขายสินค้าอยู่ในพื้นที่ที่มีการประกาศผ่อนผันให้จำหน่ายสินค้าได้ในท้องที่เขต &emsp;<a id="location">บางแสน(เดินเร่)</a></p>
+                    <p>1. จำหน่ายสินค้าในที่หรือทางสาธารณะ สินค้าประเภท &emsp;<a id="typeProduct"></a></p>
+                    <p>2. สถานที่เร่ขายสินค้าอยู่ในพื้นที่ที่มีการประกาศผ่อนผันให้จำหน่ายสินค้าได้ในท้องที่เขต &emsp;<a id="location"></a></p>
                     <p>3. ใบอนุญาตฉบับนี้ให้ใช้ได้เฉพาะผู้ได้รับใบอนุญาตและผู้ช่วยจำหน่าย</p>
-                    <p>4. ค่าธรรมเนียมฉบับละ &emsp;<a id="fee">50</a>&emsp; บาทต่อปี</p>
+                    <p>4. ค่าธรรมเนียมฉบับละ &emsp;<a id="fee"></a>&emsp; บาทต่อปี</p>
                     <p>5. ผู้รับบใอนุญาตต้องปฏิบัติตามเงื่อนไขดังต่อไปนี้</p>
                     <p>&emsp;&ensp;1 )&emsp; <a id="note1">หาบเร่</a></p>
                     <p>&emsp;&ensp;2 )&emsp; <a id="note2"></a></p>
@@ -170,17 +181,17 @@
             
             <div class="row">
                 <div class="col-4">
-                    <p>ใบอนุญาตฉบับนี้ให้ใช้ได้จนถึงวันที่ &emsp;<a id="day3">9</a></p>
+                    <p>ใบอนุญาตฉบับนี้ให้ใช้ได้จนถึงวันที่ &emsp;<a id="day3"></a></p>
                 </div>
-                <div class="col-3">เดือน &emsp;<a id="month3">มกราคม</a></div>
-                <div class="col-3">พ.ศ. &emsp;<a id="year3">2563</a></div>
+                <div class="col-3">เดือน &emsp;<a id="month3"></a></div>
+                <div class="col-3">พ.ศ. &emsp;<a id="year3"></a></div>
             </div>
             <div class="row">
                 <div class="col-4">
-                    <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp; ออกให้ ณ วันที่ &emsp;<a id="day2">9</a></p>
+                    <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp; ออกให้ ณ วันที่ &emsp;<a id="day2"></a></p>
                 </div>
-                <div class="col-3">เดือน &emsp;<a id="month2">มกราคม</a></div>
-                <div class="col-3">พ.ศ. &emsp;<a id="year2">2563</a></div>
+                <div class="col-3">เดือน &emsp;<a id="month2"></a></div>
+                <div class="col-3">พ.ศ. &emsp;<a id="year2"></a></div>
             </div>
             <br><br><br>
             <!-- ลงชื่อ -->
