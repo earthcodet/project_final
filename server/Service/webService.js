@@ -1192,6 +1192,13 @@ class service {
             })
         })
     }
+    getNotificationExp30Day() {
+        return new Promise((resolve, reject) => {
+            RequestDAOObj.getCountRequestExp30Day().then((data) => {
+                return resolve(data)
+            })
+        })
+    }
     insertImage(image) {
         return new Promise((resolve, reject) => {
             ImageDAOObj.insertImage(image).then((data) => {

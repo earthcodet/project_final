@@ -197,6 +197,18 @@ class RequestDAO {
             })
         })
     }
+    getCountRequestExp30Day() {
+        return new Promise((resolve, reject) => {
+            let query = `SELECT COUNT(REQUEST_NO) As RE_EXP FROM request WHERE DATEDIFF(request.REQUEST_DATE_EXPIRED, NOW()) <= 30`
+            con.query(query, function (err, result) {
+                if (err) {
+                    console.log(err.code)
+                    return resolve(err.code)
+                }
+                return resolve(result[0])
+            })
+        })
+    }
     getRequestByReNew(type, personal_id) {
         return new Promise((resolve, reject) => {
             let joinTable = `JOIN establishment ON request.ESTABLISHMENT_ID = establishment.ESTABLISHMENT_ID `

@@ -118,6 +118,20 @@ app.get('/get/image/:personalId', (req, res) => {
     }
   })
 })
+app.get('/get/notification/request/', (req, res) => {
+  webService.getNotificationExp30Day().then((data) => {
+    if (data.RE_EXP != undefined) {
+      req.session.data_exp_count = data.RE_EXP
+      res.json(data)
+    } else {
+      res.sendStatus(404)
+    }
+  })
+})
+//notification
+app.get('/get/session/re_exp', (req, res) => {
+    res.json(req.session.data_exp_count)
+})
 app.get('/get/personalId/:personalId', (req, res) => {
   webService.getPersonalId(req.params.personalId).then((data) => {
     if (data != null) {
@@ -160,24 +174,24 @@ app.post('/insert/personal', (req, res) => {
   try {
     var obj = JSON.parse(req.body.personal);
     console.log(req.files === null)
-  console.log(req.files === undefined)
-  if (req.files != null) {
-    var datafile = req.files.image.data
-    obj[2].data = datafile
-  } else {
-    obj[2].data = null
+    console.log(req.files === undefined)
+    if (req.files != null) {
+      var datafile = req.files.image.data
+      obj[2].data = datafile
+    } else {
+      obj[2].data = null
+    }
+
+    webService.InsertPersonalStep(obj[0], obj[1], obj[2], req.session.username).then((data) => {
+      console.log(`server : function InsertPersonalStep return = ${data}`)
+      res.json(data)
+    })
   }
-  
-  webService.InsertPersonalStep(obj[0], obj[1], obj[2], req.session.username).then((data) => {
-    console.log(`server : function InsertPersonalStep return = ${data}`)
-    res.json(data)
-  })
-  }
-  catch(error) {
+  catch (error) {
     console.error(error);
   }
-  
-  
+
+
 })
 app.post('/update/status/delete', (req, res) => {
   webService.updateStatusDelete(req.body.personal, req.session.username).then((data) => {
@@ -273,7 +287,7 @@ app.post('/insert/request/transfer', (req, res) => {
   })
 })
 app.get('/get/request/transfer/:no/:year', (req, res) => {
-  webService.getRequestAndPersonal(req.params.no,req.params.year).then((data) => {
+  webService.getRequestAndPersonal(req.params.no, req.params.year).then((data) => {
     res.json(data)
   })
 })
@@ -284,7 +298,7 @@ app.get('/get/request/:no/:year', (req, res) => {
 })
 app.get('/get/owner/duplication/transfer/:no/:year/:pid', (req, res) => {
   console.log(` search ${req.params.no} ${req.params.year} ${req.params.pid}`)
-  webService.getOwnerDuplication(req.params.no, req.params.year,req.params.pid).then((data) => {
+  webService.getOwnerDuplication(req.params.no, req.params.year, req.params.pid).then((data) => {
     res.json(data)
   })
 })
@@ -300,13 +314,13 @@ app.get('/get/requestTypeById/:id', (req, res) => {
   })
 })
 app.get('/get/view/renew/:id/:year', (req, res) => {
-  webService.getViewRenewRequestByIdAndYear(req.params.id,req.params.year).then((data) => {
+  webService.getViewRenewRequestByIdAndYear(req.params.id, req.params.year).then((data) => {
 
     res.json(data)
   })
 })
 app.get('/get/view/allow/:id/:year', (req, res) => {
-  webService.getViewAllowRequestByIdAndYear(req.params.id,req.params.year).then((data) => {
+  webService.getViewAllowRequestByIdAndYear(req.params.id, req.params.year).then((data) => {
 
     res.json(data)
   })
@@ -328,11 +342,11 @@ app.get('/search/request/transfer/pid/:personal_id', (req, res) => {
   })
 })
 app.get('/get/request/renew/id/:no/:year', (req, res) => {
-  webService.getRquestRenewByRequestId(req.params.no,req.params.year).then((data) => {
+  webService.getRquestRenewByRequestId(req.params.no, req.params.year).then((data) => {
     res.json(data)
   })
 })
-console.log( )
+console.log()
 app.get('/get/viewImage/:id/:year', (req, res) => {
   webService.getViewImageRequestByIdAndYear(req.params.id, req.params.year).then((request_viewImage) => {
     res.json(request_viewImage)
@@ -340,53 +354,53 @@ app.get('/get/viewImage/:id/:year', (req, res) => {
 })
 app.get('/get/user/:type', (req, res) => {
   let type_name = req.params.type
-  if(type_name === 'money'){
+  if (type_name === 'money') {
     type_name = 'การเงิน'
   }
-  if(type_name === 'president'){
+  if (type_name === 'president') {
     type_name = 'นายก'
   }
-  if(type_name === 'information'){
+  if (type_name === 'information') {
     type_name = 'ทะเบียน'
   }
-    webService.getStaffฺByType(type_name).then((data) => {
+  webService.getStaffฺByType(type_name).then((data) => {
     res.json(data)
   })
 })
 app.get('/get/users/:type1/:type2', (req, res) => {
   let type_name = req.params.type1
   let type_name2 = req.params.type2
-  if(type_name === 'money'){
+  if (type_name === 'money') {
     type_name = 'การเงิน'
   }
-  if(type_name === 'president'){
+  if (type_name === 'president') {
     type_name = 'นายก'
   }
-  if(type_name === 'information'){
+  if (type_name === 'information') {
     type_name = 'ทะเบียน'
   }
-  if(type_name2 === 'money'){
+  if (type_name2 === 'money') {
     type_name2 = 'การเงิน'
   }
-  if(type_name2 === 'president'){
+  if (type_name2 === 'president') {
     type_name2 = 'นายก'
   }
-  if(type_name2 === 'information'){
+  if (type_name2 === 'information') {
     type_name2 = 'ทะเบียน'
   }
-    webService.getStaffฺByTypes(type_name,type_name2).then((data) => {
+  webService.getStaffฺByTypes(type_name, type_name2).then((data) => {
     res.json(data)
   })
 })
 app.get('/get/user/id/:userId', (req, res) => {
-    webService.getStaffฺById(req.params.userId).then((data) => {
+  webService.getStaffฺById(req.params.userId).then((data) => {
     res.json(data)
   })
 })
 app.get('/get/request/profile/:pid/:eid', (req, res) => {
   webService.getRequestProfileByPIDAndEID(req.params.pid, req.params.eid).then((data) => {
-  res.json(data)
-})
+    res.json(data)
+  })
 })
 app.get('/get/request/owner/:personal_id/:type', (req, res) => {
   let type_type = req.params.type
