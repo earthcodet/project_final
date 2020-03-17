@@ -223,7 +223,7 @@ function deletePage() {
                     } else {
                         //resetFunction()
                         document.getElementById('print_document_image').style.display = ''
-                        if (requestData.status === 'active') {
+                        if (requestData.status === 'active' && requestData.menu != 'กิจการฌาปณสถาน'){
                             document.getElementById('print_document_allow').style.display = ''
                         }else{
                             document.getElementById('print_document_allow').style.display = 'none'
@@ -561,16 +561,16 @@ function printDocument() {
     if (data === true) {
         if (requestData.no != undefined && requestData.year != undefined) {
             if (requestData.no === '') {
-                window.open(getFormPrint(requestData.menu) + `?id=${requestData.no}${requestData.year}`, '_blank');
+                window.open(getFormPrint(requestData.menu) + `?id_no=${requestData.no}&id_year=${requestData.year}`, '_blank');
             } else {
                 if (requestData.no != '') {
-                    window.open(getFormPrint(requestData.menu) + `?id=${requestData.no}${requestData.year}`, '_blank');
+                    window.open(getFormPrint(requestData.menu) + `?id_no=${requestData.no}&id_year=${requestData.year}`, '_blank');
                 } else {
                     let requsetId = getUrlVars()
                     if (requsetId.id != undefined) {
                         let requsetNo = requsetId.id.slice(0, 6)
                         let requestYear = requsetId.id.slice(6, 10)
-                        window.open(getFormPrint(requestData.menu) + `?id=${requsetNo}${requestYear}`, '_blank');
+                        window.open(getFormPrint(requestData.menu) + `?id_no=${requsetNo}&id_year=${requestYear}`, '_blank');
                     }
                 }
             }
@@ -581,17 +581,17 @@ function printDocument() {
 }
 function getFormPrint(menu) {
     switch (menu) {
-        case 'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร':
+        case 'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร'://F
             return '../view/view_area_less_correct.html'
-        case 'หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร':
+        case 'หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร': //E
             return '../view/view_area_less_sell.html'
-        case 'กิจการที่เป็นอันตรายต่อสุขภาพ':
+        case 'กิจการที่เป็นอันตรายต่อสุขภาพ': //H
             return '../view/view_health_dander.html'
-        case 'ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน':
+        case 'ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน': //G
             return '../view/view_market.html'
-        case 'ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ':
+        case 'ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ'://A
             return '../view/view_public.html'
-        case 'ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ':
+        case 'ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ'://B
             return '../view/view_public.html'
         default:
             return '../view/view_area_more_correct.html'

@@ -9,7 +9,7 @@
 
     <link rel="stylesheet" href="../../css/fonts.css">
 
-
+    <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.css">
     <script src="../../js/service/jquery/jquery-3.4.1.min.js"></script>
     <script src="../../js/service/bootstrap-4.4.1/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../../css/bootstrap-4.4.1/bootstrap.min.css">
@@ -211,13 +211,13 @@
             <div class="row">
                 <div class="col-6"></div>
                 <div class="col text-center">
-                    (ลงชื่อ) &emsp;<img src="../../img/signature.png" style="width: 200px;">&emsp;&emsp;&emsp;
+                    (ลงชื่อ) &emsp;<img id='s_nayo' src="../../img/signature.png" style="width: 200px;">&emsp;&emsp;&emsp;
                     <br>
-                    ( นายวรชาติ ศักดิ์วราสวัสดิ์ )
+                    (  <c id='name_nayo'>นายประณีต ศักดิ์วราสวัสดิ์</c> )
                     <br>
-                    รองนายกเทศมนตรี ปฏิบัติราชการแทน
+                    <c id='position_nayo'>รองนายกเทศมนตรี ปฏิบัติราชการแทน</c>
                     <br>
-                    นายกเทศมนตรีเมืองแสนสุข
+                    <c >นายกเทศมนตรีเมืองแสนสุข</c>
                     <br>
                     เจ้าพนักงานท้องถิ่น
                 </div>
@@ -236,5 +236,6 @@
     </div>
 
 </body>
-
+<script src="../../node_modules/axios/dist/axios.min.js"></script>
+<script src="../../js/request_preview/request_preview.js"></script>
 </html>

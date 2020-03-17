@@ -1192,6 +1192,13 @@ class service {
             })
         })
     }
+    getNotificationExp30Day() {
+        return new Promise((resolve, reject) => {
+            RequestDAOObj.getCountRequestExp30Day().then((data) => {
+                return resolve(data)
+            })
+        })
+    }
     insertImage(image) {
         return new Promise((resolve, reject) => {
             ImageDAOObj.insertImage(image).then((data) => {
@@ -2201,6 +2208,28 @@ class service {
                     viewData_data[0].IMAGE_REVIEW = imageDatas
                     return resolve(viewData_data)
                 })
+            })
+        })
+    }
+    getViewAllowRequestByIdAndYear(id, year) {
+        return new Promise((resolve, reject) => {
+            PrintDAOObj.getViewAllow(id, year).then((viewData_data) => {
+                if (viewData_data.length != 0) {
+                    viewData_data[0].DATE_EXP = viewData_data[0].DATE_EXP != null ? this.formatDate("TO-DISPLAY", viewData_data[0].DATE_EXP + '') : viewData_data[0].DATE_EXP
+                    viewData_data[0].DATE_ISSUED = viewData_data[0].DATE_ISSUED != null ? this.formatDate("TO-DISPLAY", viewData_data[0].DATE_ISSUED + '') : viewData_data[0].DATE_ISSUED
+                    viewData_data[0].DATE_SUM = viewData_data[0].DATE_SUM != null ? this.formatDate("TO-DISPLAY", viewData_data[0].DATE_SUM + '') : viewData_data[0].DATE_SUM
+                    return resolve(viewData_data)
+                } else {
+                    return resolve(viewData_data)
+                }
+
+            })
+        })
+    }
+    getImageNayo(id){
+        return new Promise((resolve, reject) => {
+            ImageDAOObj.getImageUserNayo(id).then((viewData_data) => {
+               return resolve(viewData_data)
             })
         })
     }
@@ -4215,7 +4244,6 @@ class service {
         })
     }
     insertRequestRenew(request, username) {
-        // bug /// // 
         return new Promise((resolve, reject) => {
             var datetime = new Date();
             let dateForUpdate = datetime.toISOString().slice(0, 10)
