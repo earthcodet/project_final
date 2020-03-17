@@ -235,7 +235,7 @@ class RequestDAO {
             if (more === true) {
                 conditiion = `DATEDIFF(request.REQUEST_DATE_EXPIRED, NOW()) < -90 AND REQUEST_STATUS = 'expire'`
             }
-            console.log()
+            console.log(conditiion)
             let query = `SELECT ${column} FROM request ${joinTable} WHERE ${conditiion}`
             con.query(query, function (err, result) {
                 if (err) {
