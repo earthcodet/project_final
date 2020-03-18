@@ -58,7 +58,7 @@ function checkView(typeForm) {
                         console.log(assistantOperatorData)
                         setDataView()
                         if (requestData.no != '') {
-                            if(requestData.status === 'active' && requestData.menu != 'กิจการฌาปณสถาน'){
+                            if(requestData.status === 'active' ){
                                 document.getElementById('print_document_allow').style.display = ''
                             }
                             document.getElementById('print_document_image').style.display = ''
