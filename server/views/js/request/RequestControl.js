@@ -595,7 +595,7 @@ function getFormPrint(menu) {
         case 'ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ'://B
             return '../view/view_public.html'
             //กิจการฌาปณสถาน
-        // case '' :
+        // case 'กิจการฌาปณสถาน' :
             // return '../view/view_.html'
         default:
             return '../view/view_area_more_correct.html'

@@ -103,50 +103,42 @@
         <div class="container" style="font-family: 'Sarabun';">
             <div style="text-align: center;">
                 <br>
-                <p id='sn_no' style="float: right;">แบบ สอ.6</p>
-                <br><br>
+                <p id='sn_no' style="float: right;">แบบ สฌ.4</p>
+                <br>
+                <br>
                 <p><img src="../../img/ตราครุฑ.png" style="width: 130px;"></p>
                 <b>
-                    <h4 style="font-size: 7mm;">หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</h4>
+                    <h4 style="font-size: 7mm;" id='t_topic'>ใบอนุญาต</h4>
                 </b>
             </div>
-            <br>
+            <br><br>
             <div class="row">
                 <div class="col">
                     เลขที่&emsp; <a id="number"></a>
                     <a style="float: right;padding-right: 2cm;">สำนักงาน เทศบาลเมืองแสนสุข</a>
                 </div>
-            </div>
-            <br>
-            <!-- 1. -->
+            </div><br>
             <div class="row">
                 <div class="col-1"></div>
-                <div class="col">
-                    <p>เจ้าพนักงานท้องถิ่นออกหนังสือฉบับนี้รับรองให้&emsp;
-                        <input type="checkbox" name="nametype" id="typeName1"> บุคคลธรรมดา  &emsp;<input type="checkbox"
-                            name="nametype" id="typeName2"> นิติบุคคล</p>
-                </div>
+                <div class="col"><p><a>อาศัยอำนาจตามความในมาตรา <a id="no">7</a> <a>แห่งพระราชบัญญัติสุสานและฌาปนสถาน พ.ศ. 2528</a></p></div>
+            </div>
+            <!-- 1. -->
+            <div class="row">
+                <div class="col"><p>เจ้าพนักงานท้องถิ่นอนุญาตให้ &emsp;<a id="name"></a></p></div>
+                <div class="col-2">อายุ &emsp;<a id="age"></a>&emsp; ปี</div>
+                <div class="col-3">สัญชาติ &emsp;<a id="nationality"></a></div>
             </div>
             <div class="row">
-                <div class="col-6">
-                    <p>ชื่อ &emsp;<a id="name"></a></p>
-                </div>
-                <div class="col">สัญชาติ &emsp;<a id="nationality"></a></div>
-                <div class="col">อายุ &emsp;<a id="age"></a> ปี</div>
-            </div>
-            <div class="row">
-                <div class="col">
+                <div class="col-5">
                     <p>เลขบัตรประชาชนเลขที่ &emsp;<a id="nameId"></a></p>
                 </div>
                 <div class="col">อยู่บ้าน/สำนักงานเลขที่ &emsp;<a id="homeId"></a></div>
-                <div class="col">ตรอก &emsp;<a id="trxk">-</a></div>
+                <div class="col">ตรอก &emsp;<a id="trxk"></a></div>
             </div>
             <div class="row">
-                <div class="col">
-                    <p>ซอย &emsp;<a id="sxy"></a></p>
-                </div>
+                <div class="col"><p>ซอย &emsp;<a id="sxy"></a></p></div>
                 <div class="col">ถนน &emsp;<a id="road"></a></div>
-                <div class="col-2">หมู่ที่ &emsp;<a id="moo"></a></div>
+                <div class="col">หมู่ที่ &emsp;<a id="moo"></a></div>
                 <div class="col">แขวง/ตำบล &emsp;<a id="subdistrict"></a></div>
             </div>
             <div class="row">
@@ -158,68 +150,42 @@
             </div>
             <!-- 2. -->
             <div class="row">
-                <div class="col-1"></div>
-                <div class="col">
-                    <p>1. จัดตั้งสถานที่จำหน่ายอาหารประเภท &emsp;<a id="category"></a></p>
-                </div>
-            </div>
-            <div class="row">
                 <div class="col-5">
-                    <p>สถานที่ชื่อ &emsp;<a id="nameShop"></a></p>
+                    <p>ดำเนินการสุสานและฌาปนสถาน&emsp;ตั้งอยู่เลขที่ &emsp;<a id="homeIdS"></a></p>
                 </div>
-                <div class="col">พื้นที่ประกอบการ &emsp;<a id="area"></a>&emsp; ตารางเมตร</div>
+                <div class="col-3">หมู่ &emsp;<a id="mooS"></a></div>
+                <div class="col-3">ตรอก/ซอย &emsp;<a id="sxyS"></a></div>
             </div>
             <div class="row">
-                <div class="col-1"></div>
-                <div class="col">
-                    <p>2. ตั้งอยู่ที่ &emsp;<a id="homeIdS"></a></p>
-                </div>
-                <div class="col">ตรอก &emsp;<a id="trxkS"></a></div>
-                <div class="col">ถนน &emsp;<a id="roadS"></a></div>
-            </div>
-            <div class="row">
-                <div class="col-3">
-                    <p>หมู่ที่ &emsp;<a id="mooS"></a></p>
-                </div>
-                <div class="col-3">โทรศัพท์ &emsp;<a id="phoneS"></a></div>
-            </div>
-            <div class="row">
-                <div class="col-1"></div>
-                <div class="col-5">
-                    <p>3. ค่าธรรมเนียมฉบับละ &emsp;<a id="fee"></a>&emsp; บาทต่อปี</p>
-                </div>
-
-            </div>
-            <div class="row">
-                <div class="col-1"></div>
-                <div class="col">
-                    <p>4. ผู้รับใบหนังสือรับรองการแจ้งเตือนต้องปฏิบัติตามเงี่อนไขดังต่อไปนี้</p>
-                    <p>&emsp;&ensp;4.1 ตามข้อปฏิบัติตามเทศบัญญัติ เทศบาลเมืองแสนสุข
-                        ว่าด้วยสถานที่จำหน่ายอาหารและสถานที่สะสมอาหาร
-                        <br>&emsp;&emsp;&ensp;&ensp;
-                        และปฏิบัติอื่นใดเกี่ยวด้วยสุขลักษณะตามคำแนะนำของเจ้าพนักงานสาธารณสุข คำสั่งเจ้าพนักงานท้องถิ่น
-                        <br>&emsp;&emsp;&ensp;&ensp;
-                        รวมทั้งระเบียบข้อบังคับ และคำสั่ง</p>
-                    <p>&emsp;&ensp;4.2 <a id="note42"></a></p>
-                    <p>&emsp;&ensp;4.3 <a id="note43"></a></p>
-                    <p>&emsp;&ensp;4.4 <a id="note44"></a></p>
-                    <p>&emsp;&ensp;4.5 <a id="note45"></a></p>
-                    <!-- <p>&emsp;&ensp;4.6</p> -->
+                <div class="col"><p>ถนน &emsp;<a id="roadS"></a></p></div>
+                <div class="col">แขวง/ตำบล &emsp;<a id="subdistrictS"></a></div>
+                <div class="col">เขต/อำเภอ &emsp;<a id="districtS"></a>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
-                    <p>ออกให้ ณ วันที่ &emsp;<a id="day2"></a></p>
+                    <p>จังหวัด &emsp;<a id="provinceS"></a></p>
                 </div>
-                <div class="col">เดือน &emsp;<a id="month2"></a></div>
-                <div class="col">พ.ศ. &emsp;<a id="year2"></a></div>
-                <div class="col-3">ชำระค่าธรรมเนียม ภายในวันที่ &emsp;<a id="day3"></a></div>
-                <div class="col">เดือน &emsp;<a id="month3"></a></div>
-                <div class="col">พ.ศ. &emsp;<a id="year3"></a></div>
+               
             </div>
-
-            <br>
-            <br>
+            <br><br>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-4">
+                    <p>ใบอนุญาตฉบับนี้ให้ไว้ตั้งแต่วันที่ &emsp;<a id="day2"></a></p>
+                </div>
+                <div class="col-3">เดือน &emsp;<a id="month2"></a></div>
+                <div class="col-3">พ.ศ. &emsp;<a id="year2"></a></div>
+            </div>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-4">
+                    <p>และสิ้นอายุใบอนุญาตในวันที่ &emsp;&emsp;<a id="day3"></a></p>
+                </div>
+                <div class="col-3">เดือน &emsp;<a id="month3"></a></div>
+                <div class="col-3">พ.ศ. &emsp;<a id="year3"></a></div>
+            </div>
+            <br><br><br><br><br><br><br><br>
             <!-- ลงชื่อ -->
             <div class="row">
                 <div class="col-6 text-center">
@@ -244,13 +210,11 @@
                     เจ้าพนักงานท้องถิ่น
                 </div>
             </div>
-
+            <br><br>
             <div class="align">
                 <u><b>คำเตือน</b></u>&ensp;1. ต้องแสดงใบอนุญาตนี้ไว้ในที่เปิดเผย เห็นได้ง่าย ณ
                 สถานที่ที่ได้รับอนุญาต<br>
-                &emsp;&emsp;&emsp;&ensp; 2. ต้องต่อใบอนุญาตก่อนสิ้นอายุ มิฉะนั้นจะต้องชำระค่าปรับเพิ่มขึ้นร้อยละ 20
-                ของอัตราค่าธรรมเนียมใบอนุญาตนั้นๆ<br>
-                &emsp;&emsp;&emsp;&ensp; 3. สามารถต่ออายุหนังสือรับรองล้วงหน้า 90 วันก่อนวันหมดอายุ
+                &emsp;&emsp;&emsp;&ensp; 2. สามารถต่ออายุหนังสือรับรองล้วงหน้า 90 วันก่อนวันหมดอายุ
             </div>
         </div>
         <br>
