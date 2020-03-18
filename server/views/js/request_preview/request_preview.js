@@ -115,35 +115,35 @@ function checkViewSight(id, raw_data) {
         setData(4, raw_data)
     }
 }
-function setSN(id){
-    if(id === 'A'){
+function setSN(id) {
+    if (id === 'A') {
         document.getElementById('sn_no').innerText = 'แบบ สณ.๒'
     }
-    if(id === 'B'){
+    if (id === 'B') {
         document.getElementById('sn_no').innerText = 'แบบ สณ.๕'
     }
-    if(id === 'C'){
+    if (id === 'C') {
         document.getElementById('sn_no').innerText = 'แบบ สอ.๔'
     }
-    if(id === 'D'){
+    if (id === 'D') {
         document.getElementById('sn_no').innerText = 'แบบ สอ.๕'
     }
-    if(id === 'E'){
+    if (id === 'E') {
         document.getElementById('sn_no').innerText = 'แบบ สอ.๖'
     }
-    if(id === 'F'){
+    if (id === 'F') {
         document.getElementById('sn_no').innerText = 'แบบ สอ.๗'
     }
-    if(id === 'G'){
+    if (id === 'G') {
         document.getElementById('sn_no').innerText = 'แบบ ตล.๓'
     }
-    if(id === 'H'){
+    if (id === 'H') {
         document.getElementById('sn_no').innerText = 'แบบ อภ.๒'
     }
 }
 function setData(type, raw_data) {
     if (type === 1) {
-        if(document.getElementById('t_topic') != undefined){
+        if (document.getElementById('t_topic') != undefined) {
             document.getElementById('t_topic').innerText = checkNull(raw_data.REQUEST_MENU)
         }
         document.getElementById('number').innerText = `${raw_data.REQUEST_NO}/${raw_data.REQUEST_YEAR}`
@@ -309,12 +309,12 @@ function setData(type, raw_data) {
         document.getElementById('location').innerText = checkNull(raw_data.ESTABLISHMENT_GROUND)
         //
         if (document.getElementById('trxkS') != undefined) {
-            document.getElementById('trxkS').innerText = checkNull(raw_data.DATE_EXP)
-            document.getElementById('roadS').innerText = checkNull(raw_data.DATE_EXP)
-            document.getElementById('mooS').innerText = checkNull(raw_data.DATE_EXP)
-            document.getElementById('subdistrictS').innerText = checkNull(raw_data.DATE_EXP)
-            document.getElementById('districtS').innerText = checkNull(raw_data.DATE_EXP)
-            document.getElementById('provinceS').innerText = checkNull(raw_data.DATE_EXP)
+            document.getElementById('trxkS').innerText = checkNull(raw_data.E_ADDRESS_TRXK)
+            document.getElementById('roadS').innerText = checkNull(raw_data.E_ADDRESS_ROAD)
+            document.getElementById('mooS').innerText = checkNull(raw_data.E_ADDRESS_MOO)
+            document.getElementById('subdistrictS').innerText = checkNull(raw_data.E_DISTRICT_NAME)
+            document.getElementById('districtS').innerText = checkNull(raw_data.E_AMPHUR_NAME)
+            document.getElementById('provinceS').innerText = checkNull(raw_data.E_PROVINCE_NAME)
         }
         //
         document.getElementById('fee').innerText = checkNull(raw_data.R_FEE)

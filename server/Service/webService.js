@@ -1236,16 +1236,20 @@ class service {
         console.log(`format Insert type => ${type}`)
         let new_data = data
         if (type === 'PERSONAL') {
-            new_data.surname = '' ? new_data.surname = 'NULL' : new_data.surname = `'${new_data.surname}'`
-            new_data.title === '' ? new_data.title = 'NULL' : new_data.title = `'${new_data.title}'`
+            new_data.surname = '' ? new_data.surname = null : new_data.surname = new_data.surname
+            new_data.title === '' ? new_data.title = null : new_data.title = new_data.title
             new_data.phone === '/' ? new_data.phone = '-/' : new_data.phone = new_data.phone
-            new_data.nationality = new_data.nationality === '' || new_data.nationality === '-' ? 'NULL' : `'${new_data.nationality}'`
-            new_data.race === '' || new_data.race === '-' ? new_data.race = 'NULL' : new_data.race = `'${new_data.race}'`
-            new_data.birthday = new_data.birthday.length === 0 || new_data.birthday.split('-').length != 3 ? new_data.birthday = 'NULL' : `'${this.formatDate('TO-INSERT', new_data.birthday)}'`
-            new_data.card_expipe = new_data.card_expipe.length === 0 || new_data.card_expipe.split('-').length != 3 ? new_data.card_expipe = 'NULL' : `'${this.formatDate('TO-INSERT', new_data.card_expipe)}'`
-            new_data.fax === '' || new_data.fax === '-' ? new_data.fax = 'NULL' : new_data.fax = `'${new_data.fax}'`
-            new_data.surname === '' ? new_data.surname = 'NULL' : `'${new_data.surname}'`
-            new_data.card_issued = new_data.card_issued === undefined || (new_data.card_issued != undefined ? new_data.card_issued.length === 0 : false) || new_data.card_issued.split('-').length != 3 ? '-' : this.formatDate('TO-INSERT', new_data.card_issued)
+            new_data.nationality = new_data.nationality === '' || new_data.nationality === '-' ? null : new_data.nationality
+            new_data.race === '' || new_data.race === '-' ? new_data.race = null : new_data.race = new_data.race
+            new_data.birthday = new_data.birthday.length === 0 || new_data.birthday.split('-').length != 3 ? new_data.birthday = null : this.formatDate('TO-INSERT', new_data.birthday)
+            new_data.card_expipe = new_data.card_expipe.length === 0 || new_data.card_expipe.split('-').length != 3 ? new_data.card_expipe = null : this.formatDate('TO-INSERT', new_data.card_expipe)
+            new_data.fax === '' || new_data.fax === '-' ? new_data.fax = null : new_data.fax = new_data.fax
+            new_data.surname === '' ? new_data.surname = null : new_data.surname
+            if(new_data.card_issued != undefined && new_data.card_issued != '-' && new_data.card_issued != '' && new_data.card_issued.split('-').length === 3){
+               new_data.card_issued =  this.formatDate('TO-INSERT', new_data.card_issued)
+            }else{
+                new_data.card_issued =  '0000-00-00'
+            }
             return new_data
         }
         if (type === 'ADDRESS') {
