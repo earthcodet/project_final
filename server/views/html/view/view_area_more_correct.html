@@ -84,6 +84,7 @@
             position: absolute;
             bottom: 10mm;
         }
+
         .hideWhenPrint {
             display: none;
             text-align: center;
@@ -95,18 +96,20 @@
     <div class="hideWhenPrint" style="text-align: center;">
         <br>
         <button type="button" class="btn btn-outline-success btn-lg is-color"
-            style="background-color: gray;color: white;cursor: pointer;"
-            onclick="window.print()">พิมพ์</button>
+            style="background-color: gray;color: white;cursor: pointer;" onclick="window.print()">พิมพ์</button>
         <br>
     </div>
     <div class="page">
         <div class="container" style="font-family: 'Sarabun';">
             <div style="text-align: center;">
+                <br>
                 <p id='sn_no' style="float: right;">แบบ สอ.5</p>
                 <br>
                 <br>
-                <p><img src="../../img/ตราครุฑ.png" style="width: 110px;"></p>
-                <h4 id= 't_topic'>ใบอนุญาตจัดตั้งสถานที่สะสมอาหาร</h4>
+                <p><img src="../../img/ตราครุฑ.png" style="width: 130px;"></p>
+                <b>
+                    <h4 style="font-size: 7mm;" id='t_topic'>ใบอนุญาตจัดตั้งสถานที่สะสมอาหาร</h4>
+                </b>
             </div>
             <br>
             <div class="row">
@@ -121,16 +124,14 @@
                 <div class="col-1"></div>
                 <div class="col">
                     <p>อนุญาตให้&emsp;
-                        <input type="checkbox" name="nametype" id="typeName1"> บุคคลธรรมดา <input type="checkbox" name="nametype"
-                            id="typeName2"> นิติบุคคล</p>
+                        <input type="checkbox" name="nametype" id="typeName1"> บุคคลธรรมดา <input type="checkbox"
+                            name="nametype" id="typeName2"> นิติบุคคล</p>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-6">
+                <div class="col-3">
                     <p>ชื่อ &emsp;<a id="name"></a></p>
                 </div>
-                <div class="col">สัญชาติ &emsp;<a id="nationality"></a></div>
-                <div class="col">อายุ &emsp;<a id="age"></a> ปี</div>
+                <div class="col-2">อายุ &emsp;<a id="age"></a>&emsp;ปี</div>
+                <div class="col-2">สัญชาติ &emsp;<a id="nationality"></a></div>           
             </div>
             <div class="row">
                 <div class="col">
@@ -191,18 +192,23 @@
             <div class="row">
                 <div class="col-1"></div>
                 <div class="col">
-                    <p>4. ผู้รับใบหนังสือรับรองการแจ้งเตือนต้องปฏิบัติตามเงี่อนไขดังต่อไปนี้</p>
-                    <p>&emsp;&ensp;4.1 ตามข้อปฏิบัติตามเทศบัญญัติ เทศบาลเมืองแสนสุข
-                        ว่าด้วยสถานที่จำหน่ายอาหารและสถานที่สะสมอาหาร
-                        <br>&emsp;&emsp;&ensp;&ensp;
-                        และปฏิบัติอื่นใดเกี่ยวด้วยสุขลักษณะตามคำแนะนำของเจ้าพนักงานสาธารณสุข คำสั่งเจ้าพนักงานท้องถิ่น
-                        <br>&emsp;&emsp;&ensp;&ensp;
-                        รวมทั้งระเบียบข้อบังคับ และคำสั่ง</p>
-                    <p>&emsp;&ensp;4.2 <a id="note42"></a></p>
-                    <p>&emsp;&ensp;4.3 <a id="note43"></a></p>
-                    <p>&emsp;&ensp;4.4 <a id="note44"></a></p>
-                    <p>&emsp;&ensp;4.5 <a id="note45"></a></p>
-                    <!-- <p>&emsp;&ensp;4.6</p> -->
+                    <p>4. ผู้รับใบญาตรับรองการแจ้งเตือนต้องปฏิบัติตามเงี่อนไขดังต่อไปนี้</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col">
+                    <p>&emsp;4.1) ผู้รับใบอนุญาตต้องปฏิบัติให้ถูกต้อง ครบถ้วน ตามหลักเกณฑ์วิธีการ และ
+                        เงื่อนไขที่กำหนดในข้อกำหนดของท้องถิ่น</a></p>
+                    <p>&emsp;4.2)
+                        หากปรากฎในภายหลังว่าการประกอบการที่ได้รับอนุญาตนี้เป็นการขัดต่อข้อกฏหมายอื่นที่่เกี่ยวข้องโดยมิอาจแก้ไขได้
+                        </a></p>
+                    <p>&emsp;&emsp;&emsp;เจ้าพนักงานท้องถิ่นอาจพิจารณาให้เพิกถอนการอนุญาตนี้ได้</p>
+                    <p>&emsp;4.3) ผู้รับบใอนุญาตต้องปฏิบัติตามเงื่อนไขเฉพาะดังต่อไปนี้ คือ</p>
+                    <p>&emsp;&ensp;&emsp; 4.3.1 )&emsp; <a id="note42"></a></p>
+                    <p>&emsp;&ensp;&emsp; 4.3.2 )&emsp; <a id="note43"></a></p>
+                    <p>&emsp;&ensp;&emsp; 4.3.3 )&emsp; <a id="note44"></a></p>
+                    <p>&emsp;&ensp;&emsp; 4.3.4 )&emsp; <a id="note45"></a></p>
                 </div>
             </div>
             <div class="row">
@@ -217,18 +223,26 @@
             </div>
 
             <br>
-            <br>
             <!-- ลงชื่อ -->
             <div class="row">
-                <div class="col-6"></div>
-                <div class="col text-center">
-                    (ลงชื่อ) &emsp;<img id='s_nayo' src="../../img/signature.png" style="width: 200px;">&emsp;&emsp;&emsp;
+                <div class="col-6 text-center">
+                    <br><br>
+                    (ลงชื่อ)................................................................ผู้รับเงิน
                     <br>
-                    (  <c id='name_nayo'>นายประณีต ศักดิ์วราสวัสดิ์</c> )
+                    ( <c id='name_money'>นายวรชาติ ศักดิ์วราสวัสดิ์</c> )
+                    <br>
+
+                </div>
+                <div class="col text-center">
+                    <br>
+                    (ลงชื่อ) &emsp;<img id='s_nayo' src="../../img/signature.png"
+                        style="width: 200px;">&emsp;&emsp;&emsp;
+                    <br>
+                    ( <c id='name_nayo'>นายวรชาติ ศักดิ์วราสวัสดิ์</c> )
                     <br>
                     <c id='position_nayo'>รองนายกเทศมนตรี ปฏิบัติราชการแทน</c>
                     <br>
-                    <c >นายกเทศมนตรีเมืองแสนสุข</c>
+                    <c>นายกเทศมนตรีเมืองแสนสุข</c>
                     <br>
                     เจ้าพนักงานท้องถิ่น
                 </div>
@@ -237,9 +251,7 @@
             <div class="align">
                 <u><b>คำเตือน</b></u>&ensp;1. ต้องแสดงใบอนุญาตนี้ไว้ในที่เปิดเผย เห็นได้ง่าย ณ
                 สถานที่ที่ได้รับอนุญาต<br>
-                &emsp;&emsp;&emsp;&ensp; 2. ต้องต่อใบอนุญาตก่อนสิ้นอายุ มิฉะนั้นจะต้องชำระค่าปรับเพิ่มขึ้นร้อยละ 20
-                ของอัตราค่าธรรมเนียมใบอนุญาตนั้นๆ<br>
-                &emsp;&emsp;&emsp;&ensp; 3. สามารถต่ออายุหนังสือรับรองล้วงหน้า 90 วันก่อนวันหมดอายุ
+                &emsp;&emsp;&emsp;&ensp; 2. สามารถต่ออายุหนังสือรับรองล้วงหน้า 90 วันก่อนวันหมดอายุ
             </div>
         </div>
         <br>
@@ -249,4 +261,5 @@
 </body>
 <script src="../../node_modules/axios/dist/axios.min.js"></script>
 <script src="../../js/request_preview/request_preview.js"></script>
+
 </html>

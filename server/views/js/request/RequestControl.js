@@ -590,7 +590,7 @@ function getFormPrint(menu) {
         case 'ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน': //G
             return '../view/view_market.html'
         case 'ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ'://A
-            return '../view/view_public.html'
+            return '../view/view_public_sell.html'
         case 'ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ'://B
             return '../view/view_public.html'
         default:
