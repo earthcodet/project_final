@@ -520,7 +520,20 @@ function isEmpty(arg) {
     }
     return true;
 }
-
+const mn = [
+    '31',
+    '28',
+    '31',
+    '30',
+    '31',
+    '30',
+    '31',
+    '31',
+    '30',
+    '31',
+    '30',
+    '31'
+]
 function getDateExp(type, date) {
     let date_return = {
         date_issuse: '',
@@ -534,15 +547,68 @@ function getDateExp(type, date) {
     let year = parseInt(date[2])
     if (type === 'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร' || type === 'หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร') {
         // 3 year - 1 day
-        date_return.date_exp = `${day - 1}-${month}-${year + 3}`
+        // date_return.date_exp = `${day - 1}-${month}-${year + 3}`
+        if(year + 1 % 4 === 0){
+            if(parseInt(month) === 3 && day === 1){
+                date_return.date_exp = '29-02-'+(year+1)
+            }else{
+                if(day === 1){
+                    if(parseInt(month)-1 === 0){
+                        date_return.date_exp = `${mn[11]}-12-${year + 3}`
+                    }else{
+                        date_return.date_exp = `${mn[parseInt(month)-1]}-${parseInt(month)-1}-${year+3}`
+                    }
+                }else{
+                    date_return.date_exp = `${day - 1}-${month}-${year + 3}`
+                }
+            }
+        }else{
+            if(day === 1){
+                if(parseInt(month)-1 === 0){
+                    date_return.date_exp = `${mn[11]}-12-${year + 3}`
+                }else{
+                    date_return.date_exp = `${mn[parseInt(month)-1]}-${parseInt(month)-1}-${year+3}`
+                }
+            }else{
+                date_return.date_exp = `${day - 1}-${month}-${year + 3}`
+            }
+        }
+        console.log(date_return.date_exp)
         return date_return
     } else if (type === 'ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ' || type === 'ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ') {
         //31 Dec Year +1
         date_return.date_exp = `31-12-${year + 1}`
+        console.log(date_return.date_exp)
         return date_return
     } else {
         // 1 Year - 1 day
-        date_return.date_exp = `${day - 1}-${month}-${year + 1}`
+        if(year + 1 % 4 === 0){
+            if(parseInt(month) === 3 && day === 1){
+                date_return.date_exp = '29-02-'+(year+1)
+            }else{
+                if(day === 1){
+                    if(parseInt(month)-1 === 0){
+                        date_return.date_exp = `${mn[11]}-12-${year+1}`
+                    }else{
+                        
+                        date_return.date_exp = `${mn[parseInt(month)-1]}-${parseInt(month)-1}-${year+1}`
+                    }
+                }else{
+                    date_return.date_exp = `${day - 1}-${month}-${year + 1}`
+                }
+            }
+        }else{
+            if(day === 1){
+                if(parseInt(month)-1 === 0){
+                    date_return.date_exp = `${mn[11]}-12-${year+1}`
+                }else{
+                     date_return.date_exp = `${mn[parseInt(month)-1]}-${parseInt(month)-1}-${year+1}`
+                }
+            }else{
+                date_return.date_exp = `${day - 1}-${month}-${year + 1}`
+            }
+        }
+        console.log(date_return)
         return date_return
     }
 }
