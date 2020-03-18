@@ -1254,11 +1254,11 @@ class service {
         }
         if (type === 'ADDRESS') {
             new_data.home_number === '' ? new_data.home_number = '-' : new_data.home_number = new_data.home_number
-            new_data.moo === '' || new_data.moo === '-' ? new_data.moo = 'NULL' : new_data.moo = `'${new_data.moo}'`
-            new_data.trxk === '' || new_data.trxk === '-' ? new_data.trxk = 'NULL' : new_data.trxk = `'${new_data.trxk}'`
-            new_data.sxy === '' || new_data.sxy === '-' ? new_data.sxy = 'NULL' : new_data.sxy = `'${new_data.sxy}'`
-            new_data.building === '' || new_data.building === '-' ? new_data.building = 'NULL' : new_data.building = `'${new_data.building}'`
-            new_data.road === '' || new_data.road === '-' ? new_data.road = 'NULL' : new_data.road = `'${new_data.road}'`
+            new_data.moo === '' || new_data.moo === '-' ? new_data.moo = null : new_data.moo = new_data.moo
+            new_data.trxk === '' || new_data.trxk === '-' ? new_data.trxk = null : new_data.trxk = new_data.trxk
+            new_data.sxy === '' || new_data.sxy === '-' ? new_data.sxy = null : new_data.sxy = new_data.sxy
+            new_data.building === '' || new_data.building === '-' ? new_data.building = null : new_data.building = new_data.building
+            new_data.road === '' || new_data.road === '-' ? new_data.road = null : new_data.road = new_data.road
             return new_data
         }
         if (type === 'ESTABLISHMENT') {

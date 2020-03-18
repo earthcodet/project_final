@@ -41,7 +41,7 @@ class AddressDAO {
             });
         });
     }
-    getAddressByAddressId(aid){
+    getAddressByAddressId(aid) {
         return new Promise((resolve, reject) => {
             con.query(`SELECT * FROM address WHERE ADDRESS_ID='${aid}'`, function (err, rows) {
                 if (err) {
@@ -51,12 +51,23 @@ class AddressDAO {
             });
         });
     }
-    insertAddress(address){
+    insertAddress(address) {
         return new Promise((resolve, reject) => {
-            let value  = `'${address.id}', '${address.home_number}', ${address.moo}, ${address.trxk}, ${address.sxy}, ${address.building}, ${address.road}, '${address.district_name}', '${address.amphur_name}', '${address.province_name}'`
             let column = 'ADDRESS_ID, ADDRESS_HOME_NUMBER, ADDRESS_MOO, ADDRESS_TRXK, ADDRESS_SXY, ADDRESS_BUILDING, ADDRESS_ROAD, DISTRICT_NAME, AMPHUR_NAME, PROVINCE_NAME'
-            let query = `INSERT INTO address(${column}) VALUES (${value})`
-            con.query(query, function (err, result) {
+            let query = `INSERT INTO address(${column}) VALUES (?)`
+            let list_value = [
+                address.id,
+                address.home_number,
+                address.moo,
+                address.trxk,
+                address.sxy,
+                address.building,
+                address.road,
+                address.district_name,
+                address.amphur_name,
+                address.province_name
+            ]
+            con.query(query,[list_value], function (err, result) {
                 if (err) {
                     return resolve(err.code)
                 }
@@ -66,31 +77,36 @@ class AddressDAO {
     }
     updateAddress(address) {
         return new Promise((resolve, reject) => {
-            let condition = `'${address.id}'`
-            let value = `ADDRESS_HOME_NUMBER = '${address.home_number}', ADDRESS_MOO = ${address.moo}, `
-            value = value + `ADDRESS_TRXK=${address.trxk}, ADDRESS_SXY=${address.sxy}, `
-            value = value + `ADDRESS_BUILDING = ${address.building},ADDRESS_ROAD = ${address.road}, `
-            value = value + `DISTRICT_NAME = '${address.district_name}', `
-            value = value + `AMPHUR_NAME = '${address.amphur_name}', PROVINCE_NAME='${address.province_name}'`
-            let query = `UPDATE address SET ${value} WHERE ADDRESS_ID = ${condition}`
-            con.query(query, function (err, result) {
+            let text = `UPDATE address SET ? WHERE ADDRESS_ID='${address.id}'`
+            let query = text
+            ,
+            values = {
+                ADDRESS_HOME_NUMBER: address.home_number,
+                ADDRESS_MOO:address.moo,
+                ADDRESS_TRXK:address.trxk,
+                ADDRESS_SXY:address.sxy,
+                ADDRESS_BUILDING:address.building,
+                ADDRESS_ROAD:address.road,
+                DISTRICT_NAME:address.district_name,
+                AMPHUR_NAME:address.amphur_name,
+                PROVINCE_NAME:address.province_name
+            }
+            con.query(query,values, function (err, result) {
                 if (err) {
                     console.log(`DAO message : updateAddress error ${err.code}`)
                     console.log(err)
                 }
-                if(result.affectedRows === 1){
+                if (result.affectedRows === 1) {
                     return resolve(true)
-                }else{
+                } else {
                     console.log(`DAO message : updateAddress result.affectedRows != 1`)
                     console.log(address)
                     console.log(result)
                     return resolve(false)
                 }
-                
             })
         })
     }
-
     getMaxIdAddress() {
         return new Promise((resolve, reject) => {
             let query = `SELECT MAX(ADDRESS_ID) As 'maxId' FROM address`
