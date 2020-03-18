@@ -443,7 +443,8 @@ function createResultSearch(data, typeSearch) {
             if (j === 0) {
                 var cellText = document.createTextNode(data[i].PERSONAL_NAME);
             } else if (j === 1) {
-                var cellText = document.createTextNode(data[i].PERSONAL_SURNAME);
+                let textJ1 = data[i].PERSONAL_SURNAME === null ? '' :data[i].PERSONAL_SURNAME
+                var cellText = document.createTextNode(textJ1);
             } else if (j === 2) {
                 let AddressText = ''
                 AddressText = AddressText + `บ้านเลขที่ ${data[i].AID.ADDRESS_HOME_NUMBER} `
