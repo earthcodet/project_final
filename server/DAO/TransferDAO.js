@@ -18,14 +18,22 @@ class TransferDAO {
             column = column + `TRANSFER_IS_DEFAULT, TRANSFER_AVAILABLE, `
             column = column + `TRANSFER_DATE, TRANSFER_USER_UPDATE,TRANSFER_LAST_UPDATE,REQUEST_OWNER`
 
-            let values = `'${tranfer.request_id}','${tranfer.request_year}', `
-            values = values + `'${tranfer.personal_id}',${tranfer.date_exp}, `
-            values = values + `'${tranfer.request_no_old}', '${tranfer.request_year_old}', `
-            values = values + `'${tranfer.table_is_default}','${tranfer.available}', `
-            values = values + `'${tranfer.date}','${tranfer.user_update}','${tranfer.last_update}', '${tranfer.request_owner}'`
-
-            let query = `INSERT INTO transfer(${column}) VALUES (${values})`
-            con.query(query, function (err, result) {
+            let list_values = [
+                tranfer.request_id,
+                tranfer.request_year,
+                tranfer.personal_id,
+                tranfer.date_exp,
+                tranfer.request_no_old,
+                tranfer.request_year_old,
+                tranfer.table_is_default,
+                tranfer.available,
+                tranfer.date,
+                tranfer.user_update,
+                tranfer.last_update,
+                tranfer.request_owner
+            ]
+            let query = `INSERT INTO transfer(${column}) VALUES (?)`
+            con.query(query,[list_valuess], function (err, result) {
                 if (err) {
                     console.log(err)
                     return resolve(err.code)
@@ -46,7 +54,7 @@ class TransferDAO {
             })
         })
     }
-    updateAllStatusCancel(old_no , old_year,last_update , username) {
+    updateAllStatusCancel(old_no, old_year, last_update, username) {
         return new Promise((resolve, reject) => {
             let joinTable = 'INNER JOIN transfer ON transfer.REQUEST_NO = request.REQUEST_NO AND transfer.REQUEST_YEAR = request.REQUEST_YEAR '
             let condition = `transfer.REQUEST_NO_OLD = '${old_no}' AND transfer.REQUEST_YEAR_OLD = '${old_year}' `
@@ -65,7 +73,7 @@ class TransferDAO {
             })
         })
     }
-    updateAllStatusExpire(old_no , old_year,last_update , username) {
+    updateAllStatusExpire(old_no, old_year, last_update, username) {
         return new Promise((resolve, reject) => {
             let joinTable = 'INNER JOIN transfer ON transfer.REQUEST_NO = request.REQUEST_NO AND transfer.REQUEST_YEAR = request.REQUEST_YEAR '
             let condition = `transfer.REQUEST_NO_OLD = '${old_no}' AND transfer.REQUEST_YEAR_OLD = '${old_year}' `

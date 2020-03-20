@@ -41,10 +41,15 @@ class TrainDAO {
     }
     insertTrian(train){
         return new Promise((resolve, reject) => {
-            let value  =`'${train.id}', '${train.issuse}', '${train.date_exp}', '${train.date_issued}'`
             let column = 'TRAIN_ID, TRAIN_ISSUED, TRAIN_DATE_EXP, TRAIN_DATE_ISSUED'
-            let query = `INSERT INTO train(${column}) VALUES (${value})`
-            con.query(query, function (err, result) {
+            let query = `INSERT INTO train(${column}) VALUES (?)`
+            let list_value =  [
+                train.id,
+                train.issuse,
+                train.date_exp, 
+                train.date_issued
+            ]
+            con.query(query,[list_value], function (err, result) {
                 if (err) {
                     console.log(err.code)
                 }
@@ -54,9 +59,13 @@ class TrainDAO {
     }
     updateTrian(train){
         return new Promise((resolve, reject) => {
-            let value  =`TRAIN_ISSUED='${train.date_issued}', TRAIN_DATE_ISSUED='${train.issuse}', TRAIN_DATE_EXP='${train.date_exp}'`
-            let query = `UPDATE train SET ${value} WHERE TRAIN_ID = '${train.id}'`
-            con.query(query, function (err, result) {
+            let query = `UPDATE train SET ? WHERE TRAIN_ID = '${train.id}'`
+            let values = {
+                TRAIN_ISSUED:train.date_issued, 
+                RAIN_DATE_ISSUED:train.issuse,
+                TRAIN_DATE_EXP:train.date_exp
+            }
+            con.query(query,values, function (err, result) {
                 if (err) {
                     console.log(err.code)
                     return resolve(err.code)

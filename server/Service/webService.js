@@ -1232,86 +1232,94 @@ class service {
             })
         })
     }
+    setNullValue(value, type) {
+        if (type === 'date') {
+            if (value === '' || value === '-') {
+                return null
+            } else {
+                return this.formatDate("TO-INSERT", value)
+            }
+        } else if(type === 'phone'){
+            if (value === '' || value === '/') {
+                return '-/'
+            } else {
+                return value
+            }
+        }else if(type === 'int'){
+            if (value === '' || value === '-') {
+                return 0
+            } else {
+                return value
+            }
+        }else if(type === 'time'){
+            if (value === '' || value === '-') {
+                return null
+            } else {
+                return this.formatTime(value)
+            }
+        }else{
+            if (value === '' || value === '-') {
+                return null
+            } else {
+                return value
+            }
+        }
+    }
     formatInsert(type, data) {
         console.log(`format Insert type => ${type}`)
         let new_data = data
         if (type === 'PERSONAL') {
-            new_data.surname = '' ? new_data.surname = null : new_data.surname = new_data.surname
-            new_data.title === '' ? new_data.title = null : new_data.title = new_data.title
-            new_data.phone === '/' ? new_data.phone = '-/' : new_data.phone = new_data.phone
-            new_data.nationality = new_data.nationality === '' || new_data.nationality === '-' ? null : new_data.nationality
-            new_data.race === '' || new_data.race === '-' ? new_data.race = null : new_data.race = new_data.race
-            new_data.birthday = new_data.birthday.length === 0 || new_data.birthday.split('-').length != 3 ? new_data.birthday = null : this.formatDate('TO-INSERT', new_data.birthday)
-            new_data.card_expipe = new_data.card_expipe.length === 0 || new_data.card_expipe.split('-').length != 3 ? new_data.card_expipe = null : this.formatDate('TO-INSERT', new_data.card_expipe)
-            new_data.fax === '' || new_data.fax === '-' ? new_data.fax = null : new_data.fax = new_data.fax
-            new_data.surname === '' ? new_data.surname = null : new_data.surname
-            if(new_data.card_issued != undefined && new_data.card_issued != '-' && new_data.card_issued != '' && new_data.card_issued.split('-').length === 3){
-               new_data.card_issued =  this.formatDate('TO-INSERT', new_data.card_issued)
-            }else{
-                new_data.card_issued =  '0000-00-00'
-            }
+            new_data.surname = this.setNullValue(new_data.surname)
+            new_data.title = this.setNullValue(new_data.title)
+            new_data.phone = this.setNullValue(new_data.phone, 'phone')
+            new_data.nationality = this.setNullValue(new_data.nationality)
+            new_data.race = this.setNullValue(new_data.race)
+            new_data.birthday = this.setNullValue(new_data.birthday, 'date')
+            new_data.card_expipe = this.setNullValue(new_data.card_expipe, 'date')
+            new_data.fax = this.setNullValue(new_data.fax)
+            new_data.surname = this.setNullValue(new_data.surname)
+            new_data.card_issued = this.setNullValue(new_data.card_issued, 'date')
             return new_data
         }
         if (type === 'ADDRESS') {
-            new_data.home_number === '' ? new_data.home_number = '-' : new_data.home_number = new_data.home_number
-            new_data.moo === '' || new_data.moo === '-' ? new_data.moo = null : new_data.moo = new_data.moo
-            new_data.trxk === '' || new_data.trxk === '-' ? new_data.trxk = null : new_data.trxk = new_data.trxk
-            new_data.sxy === '' || new_data.sxy === '-' ? new_data.sxy = null : new_data.sxy = new_data.sxy
-            new_data.building === '' || new_data.building === '-' ? new_data.building = null : new_data.building = new_data.building
-            new_data.road === '' || new_data.road === '-' ? new_data.road = null : new_data.road = new_data.road
+            new_data.home_number = this.setNullValue(new_data.home_number)
+            new_data.moo = this.setNullValue(new_data.moo)
+            new_data.trxk = this.setNullValue(new_data.trxk)
+            new_data.sxy = this.setNullValue(new_data.sxy)
+            new_data.building = this.setNullValue(new_data.building)
+            new_data.road = this.setNullValue(new_data.road)
             return new_data
         }
         if (type === 'ESTABLISHMENT') {
-            new_data.reference_id = new_data.reference_id === '' ? 'NULL' : 'YES'
-            new_data.train_id = new_data.train_id === '' || new_data.train_id === 'NO' ? 'NULL' : 'YES'
-            new_data.is_land_owned === 'NO' ? new_data.is_land_owned = 'NULL' : new_data.is_land_owned = `'${new_data.is_land_owned}'`
-            new_data.type === '' ? new_data.type = 'NULL' : new_data.type = `'${new_data.type}'`
-            if (new_data.name === '') {
-                new_data.name = "NULL"
-            } else {
-                let w_cut = new_data.name.split('"')
-                if (w_cut.length != 1) {
-                    let temp_text = ""
-                    for (let i = 0; i < w_cut.length; i++) {
-                        temp_text = temp_text + w_cut[i]
-                        if (i != w_cut.length - 1) {
-                            temp_text = temp_text + "''"
-                        }
-                    }
-                    new_data.name = temp_text
-                } else {
-                    new_data.name = new_data.name
-                }
-            }
-
-            new_data.machine_size === '' ? new_data.machine_size = 0 : ''
-            new_data.area_size === '' ? new_data.area_size = 0 : ''
-            new_data.worker === '' ? new_data.worker = 0 : ''
-
-            new_data.fax === '' || new_data.fax === '-' ? new_data.fax = 'NULL' : new_data.fax = `'${new_data.fax}'`
-            new_data.grond === '' ? new_data.grond = 'NULL' : new_data.grond = `'${new_data.grond}'`
+            new_data.reference_id = new_data.reference_id === '' ? null : 'YES'
+            new_data.train_id = new_data.train_id === '' || new_data.train_id === 'NO' ? null : 'YES'
+            new_data.is_land_owned = new_data.is_land_owned === 'NO' ? null : new_data.is_land_owned
+            new_data.type =  this.setNullValue(new_data.type)
+            new_data.name =  this.setNullValue(new_data.name)
+            new_data.machine_size = this.setNullValue(new_data.machine_size, 'int')
+            new_data.area_size = this.setNullValue(new_data.area_size, 'int') 
+            new_data.worker = this.setNullValue(new_data.worker, 'int')
+            new_data.fax = this.setNullValue(new_data.fax)
+            new_data.grond = this.setNullValue(new_data.grond)
             return new_data
         }
         if (type === 'LAND') {
-            new_data.birthday === '' ? new_data.birthday = 'NULL' : new_data.birthday = `'${this.formatDate("TO-INSERT", new_data.birthday)}'`
+            new_data.birthday = this.setNullValue(new_data.birthday, 'date')
             return new_data
         }
         if (type === 'REQUEST') {
-            //Time Database 15:10:14
-            //Time Web 13:48:00.000
-            //Time  = time.slice(0,8)
-            new_data.staff_id_money = new_data.staff_id_money === '-' || new_data.staff_id_money === '' ? 'NULL' : `'${new_data.staff_id_money}'`
-            new_data.reference_id = new_data.reference_id === '-' || new_data.reference_id === '' || new_data.reference_id === 'NO' ? 'NULL' : `'${new_data.reference_id}'`
-            new_data.train_id = new_data.train_id === '-' || new_data.train_id === '' || new_data.train_id === 'NO' ? 'NULL' : `'${new_data.train_id}'`
-            new_data.personal_id_assistant = new_data.personal_id_assistant === '-' || new_data.personal_id_assistant === '' ? 'NULL' : `'${new_data.personal_id_assistant}'`
-            new_data.staff_id_approve = new_data.staff_id_approve === '-' || new_data.staff_id_approve === '' ? 'NULL' : `'${new_data.staff_id_approve}'`
-            new_data.date_submission = this.formatDate('TO-INSERT', new_data.date_submission)
-            new_data.date_approve = new_data.date_approve === '-' || new_data.date_approve === '' ? 'NULL' : `'${this.formatDate('TO-INSERT', new_data.date_approve)}'`
-            new_data.subcategory = new_data.subcategory === '-' || new_data.subcategory === '' ? 'NULL' : `'${new_data.subcategory}'`
-            new_data.product_type = new_data.product_type === '-' || new_data.product_type === '' ? 'NULL' : `'${new_data.product_type}'`
-            new_data.sell_start = new_data.sell_start === '-' || new_data.sell_start === '' ? 'NULL' : `'${this.formatTime(new_data.sell_start)}'`
-            new_data.sell_end = new_data.sell_end === '-' || new_data.sell_end === '' ? 'NULL' : `'${this.formatTime(new_data.sell_end)}'`
+            new_data.staff_id_money = this.setNullValue(new_data.staff_id_money)
+            new_data.reference_id = new_data.reference_id === '-' || new_data.reference_id === '' || new_data.reference_id === 'NO' ? null : new_data.reference_id
+            new_data.train_id = new_data.train_id === '-' || new_data.train_id === '' || new_data.train_id === 'NO' ? null : new_data.train_id
 
+            new_data.personal_id_assistant = this.setNullValue(new_data.personal_id_assistant)
+            new_data.staff_id_approve = this.setNullValue(new_data.staff_id_approve)
+            new_data.date_submission = this.setNullValue(new_data.date_submission, 'date')
+            new_data.date_approve = this.setNullValue(new_data.date_approve, 'date')
+            new_data.subcategory = this.setNullValue(new_data.subcategory) 
+            new_data.product_type = this.setNullValue(new_data.product_type) 
+            new_data.sell_start = this.setNullValue(new_data.sell_start, 'time')
+            new_data.sell_end = this.setNullValue(new_data.sell_end, 'time')
 
             //Year No 1
             if (new_data.receipt_fine != '' && new_data.receipt_fine != '-') {
@@ -1323,9 +1331,9 @@ class service {
             } else {
                 new_data.receipt_total = 0
             }
-            new_data.receipt_fine = new_data.receipt_fine === '-' || new_data.receipt_fine === '' ? 'NULL' : new_data.receipt_fine
-            new_data.receipt_fee = new_data.receipt_fee === '-' || new_data.receipt_fee === '' ? 'NULL' : new_data.receipt_fee
-            new_data.receipt_date = new_data.receipt_date === '-' || new_data.receipt_date === '' ? 'NULL' : `'${this.formatDate('TO-INSERT', new_data.receipt_date)}'`
+            new_data.receipt_fine = this.setNullValue(new_data.receipt_fine)
+            new_data.receipt_fee = this.setNullValue(new_data.receipt_fee)
+            new_data.receipt_date = this.setNullValue(new_data.receipt_date, 'date')
 
             //Year No 2
             if (new_data.receipt_fine_year_2 != '' && new_data.receipt_fine_year_2 != '-') {
@@ -1337,9 +1345,9 @@ class service {
             } else {
                 new_data.receipt_total_year_2 = 0
             }
-            new_data.receipt_fine_year_2 = new_data.receipt_fine_year_2 === '-' || new_data.receipt_fine_year_2 === '' ? 'NULL' : new_data.receipt_fine_year_2
-            new_data.receipt_fee_year_2 = new_data.receipt_fee_year_2 === '-' || new_data.receipt_fee_year_2 === '' ? 'NULL' : new_data.receipt_fee_year_2
-            new_data.receipt_date_year_2 = new_data.receipt_date_year_2 === '-' || new_data.receipt_date_year_2 === '' ? 'NULL' : `'${this.formatDate('TO-INSERT', new_data.receipt_date_year_2)}'`
+            new_data.receipt_fine_year_2 = this.setNullValue(new_data.receipt_fine_year_2) 
+            new_data.receipt_fee_year_2 = this.setNullValue(new_data.receipt_fee_year_2) 
+            new_data.receipt_date_year_2 = this.setNullValue(new_data.receipt_date_year_2, 'date')
 
             //Year No 3
             if (new_data.receipt_fine_year_3 != '' && new_data.receipt_fine_year_3 != '-') {
@@ -1351,47 +1359,32 @@ class service {
             } else {
                 new_data.receipt_total_year_3 = 0
             }
-            console.log(` new_data.receipt_fine_year_3 ${new_data.receipt_fine_year_3}`)
-            new_data.receipt_fine_year_3 = new_data.receipt_fine_year_3 === '-' || new_data.receipt_fine_year_3 === '' || new_data.receipt_fine_year_3 === undefined ? 'NULL' : new_data.receipt_fine_year_3
-            new_data.receipt_fee_year_3 = new_data.receipt_fee_year_3 === '-' || new_data.receipt_fee_year_3 === '' || new_data.receipt_fee_year_3 === undefined ? 'NULL' : new_data.receipt_fee_year_3
-            new_data.receipt_date_year_3 = new_data.receipt_date_year_3 === '-' || new_data.receipt_date_year_3 === '' || new_data.receipt_date_year_3 === undefined ? 'NULL' : `'${this.formatDate('TO-INSERT', new_data.receipt_date_year_3)}'`
+            new_data.receipt_fine_year_3 = this.setNullValue(new_data.receipt_fine_year_3) 
+            new_data.receipt_fee_year_3 = this.setNullValue(new_data.receipt_fee_year_3)
+            new_data.receipt_date_year_3 = this.setNullValue(new_data.receipt_date_year_3, 'date')
 
+            new_data.date_issued = this.setNullValue(new_data.date_issued, 'date')
+            new_data.date_expired = this.setNullValue(new_data.date_expired, 'date')
 
+            new_data.condition_no_1 = this.setNullValue(new_data.condition_no_1) 
+            new_data.condition_no_2 = this.setNullValue(new_data.condition_no_2) 
+            new_data.condition_no_3 = this.setNullValue(new_data.condition_no_3) 
+            new_data.condition_no_4 = this.setNullValue(new_data.condition_no_4) 
 
-            new_data.date_issued = new_data.date_issued === '-' || new_data.date_issued === '' ? 'NULL' : `'${this.formatDate('TO-INSERT', new_data.date_issued)}'`
-            new_data.date_expired = new_data.date_expired === '-' || new_data.date_expired === '' ? 'NULL' : `'${this.formatDate('TO-INSERT', new_data.date_expired)}'`
-
-            new_data.condition_no_1 = new_data.condition_no_1 === '-' || new_data.condition_no_1 === '' ? 'NULL' : `'${new_data.condition_no_1}'`
-            new_data.condition_no_2 = new_data.condition_no_2 === '-' || new_data.condition_no_2 === '' ? 'NULL' : `'${new_data.condition_no_2}'`
-            new_data.condition_no_3 = new_data.condition_no_3 === '-' || new_data.condition_no_3 === '' ? 'NULL' : `'${new_data.condition_no_3}'`
-            new_data.condition_no_4 = new_data.condition_no_4 === '-' || new_data.condition_no_4 === '' ? 'NULL' : `'${new_data.condition_no_4}'`
-
-            new_data.image_name = new_data.image_name === '-' || new_data.image_name === '' ? 'NULL' : `'${new_data.image_name}'`
-            new_data.delete_logic = new_data.delete_logic === '-' || new_data.delete_logic === '' ? 'NULL' : `'${new_data.delete_logic}'`
-            console.log('$$$$$$$$$$$$$$ --- format Insert -- $$$$$$$$$$$$$$$$')
-            console.log(new_data)
-            console.log('$$$$$$$$$$$$$$ --- format Insert -- $$$$$$$$$$$$$$$$')
+            new_data.image_name = this.setNullValue(new_data.image_name)
+            new_data.delete_logic = this.setNullValue(new_data.delete_logic)
             return new_data
         }
         if (type === 'USER') {
-            new_data.username = new_data.username === '' || new_data.username === '-' ? 'NULL' : `'${new_data.username}'`
-            new_data.password = new_data.password === '' || new_data.password === '-' ? 'NULL' : `'${new_data.password}'`
-            new_data.is_default = new_data.is_default === '' || new_data.is_default === '-' ? 'NULL' : `'${new_data.is_default}'`
+            // รอ แก้
+            new_data.username = this.setNullValue(new_data.username)
+            new_data.password = this.setNullValue(new_data.password)
+            new_data.is_default = this.setNullValue(new_data.is_default) 
             return new_data
         }
         if (type === 'REQUEST_UPDATE_STATUS') {
-
-            let item = new_data.date_approve
-            new_data.date_approve = item === '' ? 'NULL' : `'${this.formatDate('TO-INSERT', item)}'`
-
-            item = new_data.staff_id_approve
-            new_data.staff_id_approve = item === '' ? 'NULL' : `'${item}'`
-
-            item = new_data.receipt_order
-            new_data.receipt_order = item === '' ? 'NULL' : item
-
-            item = new_data.receipt_order_year
-            new_data.receipt_order_year = item === '' ? 'NULL' : item
+            new_data.date_approve = this.setNullValue(new_data.date_approve, 'date')
+            new_data.staff_id_approve = this.setNullValue(new_data.staff_id_approve)
 
             if (new_data.receipt_fine != '' && new_data.receipt_fine != '-') {
                 if (new_data.receipt_fee != '' && new_data.receipt_fee != '-') {
@@ -1402,20 +1395,9 @@ class service {
             } else {
                 new_data.receipt_total = 0
             }
-            item = new_data.receipt_fine
-            new_data.receipt_fine = item === '' ? 'NULL' : item
-
-            item = new_data.receipt_fee
-            new_data.receipt_fee = item === '' ? 'NULL' : item
-
-            item = new_data.receipt_date
-            new_data.receipt_date = item === '' ? 'NULL' : `'${this.formatDate('TO-INSERT', item)}'`
-
-            item = new_data.receipt_order_year_2
-            new_data.receipt_order_year_2 = item === '' ? 'NULL' : item
-
-            item = new_data.receipt_order_year_year_2
-            new_data.receipt_order_year_year_2 = item === '' ? 'NULL' : item
+            new_data.receipt_fine = this.setNullValue(new_data.receipt_fine)
+            new_data.receipt_fee = this.setNullValue(new_data.receipt_fee)
+            new_data.receipt_date = this.setNullValue(new_data.receipt_date, 'date')
 
             if (new_data.receipt_fine_year_2 != '' && new_data.receipt_fine_year_2 != '-') {
                 if (new_data.receipt_fee_year_2 != '' && new_data.receipt_fee_year_2 != '-') {
@@ -1426,20 +1408,9 @@ class service {
             } else {
                 new_data.receipt_total_year_2 = 0
             }
-            item = new_data.receipt_fine_year_2
-            new_data.receipt_fine_year_2 = item === '' ? 'NULL' : item
-
-            item = new_data.receipt_fee_year_2
-            new_data.receipt_fee_year_2 = item === '' ? 'NULL' : item
-
-            item = new_data.receipt_date_year_2
-            new_data.receipt_date_year_2 = item = item === '' ? 'NULL' : `'${this.formatDate('TO-INSERT', item)}'`
-
-            item = new_data.receipt_order_year_3
-            new_data.receipt_order_year_3 = item === '' ? 'NULL' : item
-
-            item = new_data.receipt_order_year_year_3
-            new_data.receipt_order_year_year_3 = item === '' ? 'NULL' : item
+            new_data.receipt_fine_year_2 = this.setNullValue(new_data.receipt_fine_year_2)
+            new_data.receipt_fee_year_2 = this.setNullValue(new_data.receipt_fee_year_2)
+            new_data.receipt_date_year_2 = this.setNullValue(new_data.receipt_date_year_2, 'date')
 
             if (new_data.receipt_fine_year_3 != '' && new_data.receipt_fine_year_3 != '-') {
                 if (new_data.receipt_fee_year_3 != '' && new_data.receipt_fee_year_3 != '-') {
@@ -1450,67 +1421,51 @@ class service {
             } else {
                 new_data.receipt_total_year_3 = 0
             }
+            new_data.receipt_fine_year_3 = this.setNullValue(new_data.receipt_fine_year_3)
+            new_data.receipt_fee_year_3 = this.setNullValue(new_data.receipt_fee_year_3)
+            new_data.receipt_date_year_3 = this.setNullValue(new_data.receipt_date_year_3, 'date')
 
-            item = new_data.receipt_fine_year_3
-            new_data.receipt_fine_year_3 = item === '' ? 'NULL' : item
+            new_data.staff_id_money = this.setNullValue(new_data.staff_id_money)
 
-            item = new_data.receipt_fee_year_3
-            new_data.receipt_fee_year_3 = item === '' ? 'NULL' : item
-
-            item = new_data.receipt_date_year_3
-            new_data.receipt_date_year_3 = item === '' ? 'NULL' : `'${this.formatDate('TO-INSERT', item)}'`
-
-            item = new_data.staff_id_money
-            new_data.staff_id_money = item === '' ? 'NULL' : `'${item}'`
-
-            item = new_data.date_issued
-            new_data.date_issued = item === '' ? 'NULL' : `'${this.formatDate('TO-INSERT', item)}'`
-
-            item = new_data.date_expired
-            new_data.date_expired = item === '' ? 'NULL' : `'${this.formatDate('TO-INSERT', item)}'`
-
-            item = new_data.delete_logic
-            new_data.delete_logic = item === '' ? 'NULL' : `'${item}'`
+            new_data.date_issued = this.setNullValue(new_data.date_issued, 'date')
+            new_data.date_expired = this.setNullValue(new_data.date_expired, 'date')
+            new_data.delete_logic = this.setNullValue(new_data.delete_logic)
             return new_data
         }
         if (type = 'TRANSFER') {
-            //Not Null
-            new_data.REQUEST_DATE_SUBMISSION = new_data.REQUEST_DATE_SUBMISSION === null ? 'NULL' : this.formatDate('TO-INSERT', new_data.REQUEST_DATE_SUBMISSION)
-            new_data.REQUEST_RECEIPT_DATE_TRANSFER = new_data.REQUEST_RECEIPT_DATE_TRANSFER === '-' ? 'NULL' : this.formatDate('TO-INSERT', new_data.REQUEST_RECEIPT_DATE_TRANSFER)
-            //Null
-            new_data.STAFF_ID_MONEY = new_data.STAFF_ID_MONEY === null ? 'NULL' : `'${new_data.STAFF_ID_MONEY}'`
-            new_data.REFERENCE_ID = new_data.REFERENCE_ID === null ? 'NULL' : `'${new_data.REFERENCE_ID}'`
-            new_data.TRAIN_ID = new_data.TRAIN_ID === null ? 'NULL' : `'${new_data.TRAIN_ID}'`
-            new_data.PERSONAL_ID_ASSISTANT = new_data.PERSONAL_ID_ASSISTANT === null ? 'NULL' : `'${new_data.PERSONAL_ID_ASSISTANT}'`
-            new_data.STAFF_ID_APPROVE = new_data.STAFF_ID_APPROVE === null ? 'NULL' : `'${new_data.STAFF_ID_APPROVE}'`
-            new_data.ESTABLISHMENT_ADDRESS_ID = new_data.ESTABLISHMENT_ADDRESS_ID === null ? 'NULL' : `'${new_data.ESTABLISHMENT_ADDRESS_ID}'`
-            new_data.ESTABLISHMENT_IS_LAND_OWNED = new_data.ESTABLISHMENT_IS_LAND_OWNED === null ? 'NULL' : `'${new_data.ESTABLISHMENT_IS_LAND_OWNED}'`
-            new_data.REQUEST_DATE_APPROVE = new_data.REQUEST_DATE_APPROVE === null ? 'NULL' : `'${this.formatDate('TO-INSERT', new_data.REQUEST_DATE_APPROVE)}'`
-            new_data.REQUEST_SUBCATEGORY = new_data.REQUEST_SUBCATEGORY === null ? 'NULL' : `'${new_data.REQUEST_SUBCATEGORY}'`
-            new_data.REQUEST_PRODUCT_TYPE = new_data.REQUEST_PRODUCT_TYPE === null ? 'NULL' : `'${new_data.REQUEST_PRODUCT_TYPE}'`
-            new_data.REQUEST_SELL_START = new_data.REQUEST_SELL_START === null ? 'NULL' : `'${new_data.REQUEST_SELL_START}'`
-            new_data.REQUEST_SELL_END = new_data.REQUEST_SELL_END === null ? 'NULL' : `'${new_data.REQUEST_SELL_END}'`
-            new_data.REQUEST_RECEIPT_FINE = new_data.REQUEST_RECEIPT_FINE === null ? 'NULL' : `'${new_data.REQUEST_RECEIPT_FINE}'`
-            new_data.REQUEST_RECEIPT_FEE = new_data.REQUEST_RECEIPT_FEE === null ? 'NULL' : `'${new_data.REQUEST_RECEIPT_FEE}'`
-            new_data.REQUEST_RECEIPT_TOTAL = new_data.REQUEST_RECEIPT_TOTAL === null ? 'NULL' : `'${new_data.REQUEST_RECEIPT_TOTAL}'`
-            new_data.REQUEST_RECEIPT_DATE = new_data.REQUEST_RECEIPT_DATE === null ? 'NULL' : `'${this.formatDate('TO-INSERT', new_data.REQUEST_RECEIPT_DATE)}'`
-            new_data.REQUEST_RECEIPT_FINE_YEAR_2 = new_data.REQUEST_RECEIPT_FINE_YEAR_2 === null ? 'NULL' : `'${new_data.REQUEST_RECEIPT_FINE_YEAR_2}'`
-            new_data.REQUEST_RECEIPT_FEE_YEAR_2 = new_data.REQUEST_RECEIPT_FEE_YEAR_2 === null ? 'NULL' : `'${new_data.REQUEST_RECEIPT_FEE_YEAR_2}'`
-            new_data.REQUEST_RECEIPT_TOTAL_YEAR_2 = new_data.REQUEST_RECEIPT_TOTAL_YEAR_2 === null ? 'NULL' : `'${new_data.REQUEST_RECEIPT_TOTAL_YEAR_2}'`
-            new_data.REQUEST_RECEIPT_DATE_YEAR_2 = new_data.REQUEST_RECEIPT_DATE_YEAR_2 === null ? 'NULL' : `'${this.formatDate('TO-INSERT', new_data.REQUEST_RECEIPT_DATE_YEAR_2)}'`
-            new_data.REQUEST_RECEIPT_FINE_YEAR_3 = new_data.REQUEST_RECEIPT_FINE_YEAR_3 === null ? 'NULL' : `'${new_data.REQUEST_RECEIPT_FINE_YEAR_3}'`
-            new_data.REQUEST_RECEIPT_FEE_YEAR_3 = new_data.REQUEST_RECEIPT_FEE_YEAR_3 === null ? 'NULL' : `'${new_data.REQUEST_RECEIPT_FEE_YEAR_3}'`
-            new_data.REQUEST_RECEIPT_TOTAL_YEAR_3 = new_data.REQUEST_RECEIPT_TOTAL_YEAR_3 === null ? 'NULL' : `'${new_data.REQUEST_RECEIPT_TOTAL_YEAR_3}'`
-            new_data.REQUEST_RECEIPT_DATE_YEAR_3 = new_data.REQUEST_RECEIPT_DATE_YEAR_3 === null ? 'NULL' : `'${this.formatDate('TO-INSERT', new_data.REQUEST_RECEIPT_DATE_YEAR_3)}'`
-            new_data.REQUEST_DATE_ISSUED = new_data.REQUEST_DATE_ISSUED === null ? 'NULL' : `'${this.formatDate('TO-INSERT', new_data.REQUEST_DATE_ISSUED)}'`
-            new_data.REQUEST_DATE_EXPIRED = new_data.REQUEST_DATE_EXPIRED === null ? 'NULL' : `'${this.formatDate('TO-INSERT', new_data.REQUEST_DATE_EXPIRED)}'`
-            new_data.REQUEST_CONDITION_NO_1 = new_data.REQUEST_CONDITION_NO_1 === null ? 'NULL' : `'${new_data.REQUEST_CONDITION_NO_1}'`
-            new_data.REQUEST_CONDITION_NO_2 = new_data.REQUEST_CONDITION_NO_2 === null ? 'NULL' : `'${new_data.REQUEST_CONDITION_NO_2}'`
-            new_data.REQUEST_CONDITION_NO_3 = new_data.REQUEST_CONDITION_NO_3 === null ? 'NULL' : `'${new_data.REQUEST_CONDITION_NO_3}'`
-            new_data.REQUEST_CONDITION_NO_4 = new_data.REQUEST_CONDITION_NO_4 === null ? 'NULL' : `'${new_data.REQUEST_CONDITION_NO_4}'`
-            new_data.REQUEST_DELETE_LOGIC = new_data.REQUEST_DELETE_LOGIC === null ? 'NULL' : `'${new_data.REQUEST_DELETE_LOGIC}'`
-
-
+            new_data.REQUEST_DATE_SUBMISSION = this.setNullValue(new_data.REQUEST_DATE_SUBMISSION, 'date')
+            new_data.REQUEST_RECEIPT_DATE_TRANSFER = this.setNullValue(new_data.REQUEST_RECEIPT_DATE_TRANSFER, 'date')
+            new_data.STAFF_ID_MONEY = this.setNullValue(new_data.STAFF_ID_MONEY) 
+            new_data.REFERENCE_ID = this.setNullValue(new_data.REFERENCE_ID) 
+            new_data.TRAIN_ID = this.setNullValue(new_data.TRAIN_ID) 
+            new_data.PERSONAL_ID_ASSISTANT = this.setNullValue(new_data.PERSONAL_ID_ASSISTANT)
+            new_data.STAFF_ID_APPROVE = this.setNullValue(new_data.STAFF_ID_APPROVE)
+            new_data.ESTABLISHMENT_ADDRESS_ID = this.setNullValue(new_data.ESTABLISHMENT_ADDRESS_ID)
+            new_data.ESTABLISHMENT_IS_LAND_OWNED = this.setNullValue(new_data.ESTABLISHMENT_IS_LAND_OWNED)
+            new_data.REQUEST_DATE_APPROVE = this.setNullValue(new_data.REQUEST_DATE_APPROVE, 'date')
+            new_data.REQUEST_SUBCATEGORY = this.setNullValue(new_data.REQUEST_SUBCATEGORY)
+            new_data.REQUEST_PRODUCT_TYPE = this.setNullValue(new_data.REQUEST_PRODUCT_TYPE)
+            new_data.REQUEST_SELL_START = this.setNullValue(new_data.REQUEST_SELL_START)
+            new_data.REQUEST_SELL_END = this.setNullValue(new_data.REQUEST_SELL_END)
+            new_data.REQUEST_RECEIPT_FINE = this.setNullValue(new_data.REQUEST_RECEIPT_FINE) 
+            new_data.REQUEST_RECEIPT_FEE = this.setNullValue(new_data.REQUEST_RECEIPT_FEE) 
+            new_data.REQUEST_RECEIPT_TOTAL = this.setNullValue(new_data.REQUEST_RECEIPT_TOTAL) 
+            new_data.REQUEST_RECEIPT_DATE = this.setNullValue(new_data.REQUEST_RECEIPT_DATE, 'date')
+            new_data.REQUEST_RECEIPT_FINE_YEAR_2 = this.setNullValue(new_data.REQUEST_RECEIPT_FINE_YEAR_2)
+            new_data.REQUEST_RECEIPT_FEE_YEAR_2 = this.setNullValue(new_data.REQUEST_RECEIPT_FEE_YEAR_2)
+            new_data.REQUEST_RECEIPT_TOTAL_YEAR_2 = this.setNullValue(new_data.REQUEST_RECEIPT_TOTAL_YEAR_2)
+            new_data.REQUEST_RECEIPT_DATE_YEAR_2 = this.setNullValue(new_data.REQUEST_RECEIPT_DATE_YEAR_2, 'date')
+            new_data.REQUEST_RECEIPT_FINE_YEAR_3 = this.setNullValue(new_data.REQUEST_RECEIPT_FINE_YEAR_3)
+            new_data.REQUEST_RECEIPT_FEE_YEAR_3 = this.setNullValue(new_data.REQUEST_RECEIPT_FEE_YEAR_3)
+            new_data.REQUEST_RECEIPT_TOTAL_YEAR_3 = this.setNullValue(new_data.REQUEST_RECEIPT_TOTAL_YEAR_3)
+            new_data.REQUEST_RECEIPT_DATE_YEAR_3 = this.setNullValue(new_data.REQUEST_RECEIPT_DATE_YEAR_3, 'date')
+            new_data.REQUEST_DATE_ISSUED = this.setNullValue(new_data.REQUEST_DATE_ISSUED, 'date')
+            new_data.REQUEST_DATE_EXPIRED = this.setNullValue(new_data.REQUEST_DATE_EXPIRED, 'date')
+            new_data.REQUEST_CONDITION_NO_1 = this.setNullValue(new_data.REQUEST_CONDITION_NO_1)
+            new_data.REQUEST_CONDITION_NO_2 = this.setNullValue(new_data.REQUEST_CONDITION_NO_2)
+            new_data.REQUEST_CONDITION_NO_3 = this.setNullValue(new_data.REQUEST_CONDITION_NO_3)
+            new_data.REQUEST_CONDITION_NO_4 = this.setNullValue(new_data.REQUEST_CONDITION_NO_4)
+            new_data.REQUEST_DELETE_LOGIC = this.setNullValue(new_data.REQUEST_DELETE_LOGIC)
             return new_data
         }
     }
