@@ -481,7 +481,7 @@ class RequestDAO {
         return new Promise((resolve, reject) => {
             let query = `UPDATE request SET ? WHERE REQUEST_NO='${request.no}' AND REQUEST_YEAR='${request.year}'`
                 , values = {
-                    EQUEST_STATUS: request.status,
+                    REQUEST_STATUS: request.status,
                     REQUEST_STATUS_BEFORE: request.status_before,
                     REQUEST_LAST_UPDATE: request.last_update,
                     REQUEST_USER_UPDATE: request.user_update+``,
