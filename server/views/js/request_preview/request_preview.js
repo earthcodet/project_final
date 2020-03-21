@@ -70,7 +70,7 @@ function getDataView() {
     }
 }
 function createImagetoUI(image) {
-    if (image.length != 0) {
+    if (image.length != 0 && image[0].S_IMAGE_DATA != undefined) {
         document.getElementById('s_nayo').src = `data:image/${image[0].S_IMAGE_TYPE};base64,${image[0].S_IMAGE_DATA}`
     }
 }

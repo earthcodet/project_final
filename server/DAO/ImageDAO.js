@@ -126,7 +126,9 @@ class ImageDAO {
                     console.log(err)
                 }
                 if (result.length != 0) {
-                    result[0].S_IMAGE_DATA = Buffer.from(result[0].S_IMAGE_DATA, 'binary').toString('base64');
+                    if (result[0].S_IMAGE_DATA != undefined) {
+                        result[0].S_IMAGE_DATA = Buffer.from(result[0].S_IMAGE_DATA, 'binary').toString('base64');
+                    }
                     return resolve(result)
                 } else {
                     return resolve(result)
