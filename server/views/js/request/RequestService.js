@@ -624,7 +624,6 @@ function setRequestDataReturn(raw_data) {
     console.log(`raw_data`)
     console.log(raw_data)
 }
-
 //set data full raw data
 function setRequestData(raw_data) {
     requestData.no = raw_data.REQUEST_NO
@@ -821,6 +820,7 @@ function createGroupData() {
     let pt_check = `${document.getElementById('phone').value}/${document.getElementById('phone_more').value}`
     operatorData.is_personal_changed = false
     operatorAddressData.is_address_changed = false
+    requestData.staff_id_alderman = userAlderman
     if (operatorData.nationality != document.getElementById('nationality').value.trim()
         || operatorData.race != document.getElementById('race').value.trim() ||
         operatorData.phone != pt_check ||
@@ -926,7 +926,6 @@ function createGroupData() {
                 break;
         }
         requestData.date_submission = document.getElementById('datepicker1').value
-
         requestData.doc_no1 = document.getElementById('documentId').checked === true ? 'Y' : 'N'
         requestData.doc_no2 = document.getElementById('documenthHome').checked === true ? 'Y' : 'N'
         requestData.doc_no3 = document.getElementById('documentLegalEntity').checked === true ? 'Y' : 'N'
