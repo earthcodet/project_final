@@ -51,11 +51,6 @@ app.get('/get/username/login', (req, res) => {
   }
 })
 
-app.get('/test/login', (req, res) => {
-  req.session.username  =  'admin'
-})
-
-
 app.get('/user/:username/:password', (req, res) => {
   webService.getUser(req.params.username, req.params.password).then((data) => {
     if (data.length != 0) {
