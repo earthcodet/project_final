@@ -21,6 +21,7 @@ function checkView(typeForm) {
                     //displayUserAlderman()
                     console.log(raw_data)
                     if (raw_data != '') {
+                        document.getElementById('btn_sc_op').disabled = true
                         console.log(`raw_data`)
                         console.log(raw_data)
                         setRequestData(raw_data)
@@ -84,6 +85,7 @@ function checkView(typeForm) {
             getPersonalDataAndEstablishment(requestId.p_id, requestId.e_id).then((raw_data) => {
                 // displayUserAlderman()
                 if (raw_data[0] != false && raw_data[1] != false) {
+                    document.getElementById('btn_sc_op').disabled = true
                     setOperatorData(raw_data[0])
                     setOperatorAddressData(raw_data[0])
                     let temp = {
@@ -1156,8 +1158,12 @@ function dataChange(type) {
                     status_data_change = true
                 }
             }
-
-            establishmentData.type = document.getElementById('typeWorkplace').value.trim()
+            if(document.getElementById('typeWorkplace') != undefined){
+                establishmentData.type = document.getElementById('typeWorkplace').value.trim()
+            }else{
+                establishmentData.type = ''
+            }
+            
             if (document.getElementById('typeReForm') != undefined) {
                 if (requestData.subcategory != document.getElementById('typeReForm').value ||
                     requestData.product_type != document.getElementById('typeProduct').value.trim() ||

@@ -448,7 +448,7 @@ class RequestDAO {
                     REQUEST_DELETE_LOGIC: request.delete_logic,
                     REQUEST_IS_DELETED: request.is_deleted,
                     REQUEST_LAST_UPDATE: request.last_update,
-                    REQUEST_USER_UPDATE: request.user_update,
+                    REQUEST_USER_UPDATE: request.user_update+``,
                     REQUEST_STATUS_BEFORE: request.status_before,
                     REQUEST_STATUS: request.status,
                     ESTABLISHMENT_IS_LAND_OWNED: request.establishment_is_land_owned,
@@ -484,7 +484,7 @@ class RequestDAO {
                     EQUEST_STATUS: request.status,
                     REQUEST_STATUS_BEFORE: request.status_before,
                     REQUEST_LAST_UPDATE: request.last_update,
-                    REQUEST_USER_UPDATE: request.user_update,
+                    REQUEST_USER_UPDATE: request.user_update+``,
                     REQUEST_DATE_APPROVE: request.date_approve,
                     STAFF_ID_APPROVE: request.staff_id_approve,
                     REQUEST_RECEIPT_FINE: request.receipt_fine,
@@ -523,14 +523,14 @@ class RequestDAO {
                 values = {
                     REQUEST_STATUS: status,
                     REQUEST_LAST_UPDATE: last_update,
-                    REQUEST_USER_UPDATE: user,
+                    REQUEST_USER_UPDATE: user+``,
                     REQUEST_STATUS_BEFORE: status_before
                 }
             } else {
                 values = {
                     REQUEST_STATUS: status,
                     REQUEST_LAST_UPDATE: last_update,
-                    REQUEST_USER_UPDATE: user
+                    REQUEST_USER_UPDATE: user+``
                 }
             }
             con.query(query,values, function (err, result) {
@@ -548,7 +548,7 @@ class RequestDAO {
             let query = `UPDATE request SET ? WHERE REQUEST_NO='${object.id}' AND REQUEST_YEAR='${object.year}'`
             let values = {
                 REQUEST_IS_DELETED :object.status, 
-                REQUEST_USER_UPDATE : object.username ,
+                REQUEST_USER_UPDATE : object.username+`` ,
                 REQUEST_LAST_UPDATE : object.last_update
             }
             con.query(query,values, function (err, result) {

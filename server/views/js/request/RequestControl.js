@@ -6,6 +6,7 @@ var deleteData = false
 var addNew = false
 let personal_change = false
 function addPage() {
+    
     resetStyleIdDeleteRequest()
     resetRequestData()
     personal_change = false
@@ -32,6 +33,7 @@ function addPage() {
 
     document.getElementById('print_document_image').style.display = 'none'
     document.getElementById('print_document_allow').style.display = 'none'
+    document.getElementById('btn_sc_op').disabled = false
 }
 function insertPage() {
     Swal.fire({
