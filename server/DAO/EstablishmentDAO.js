@@ -73,9 +73,9 @@ class EstablishmentDAO {
         values = values + ` AND address.DISTRICT_NAME = "${address.district_name}" `
         values = values + ` AND address.AMPHUR_NAME = "${address.amphur_name}" `
         values = values + ` AND address.PROVINCE_NAME = "${address.province_name}"`
-        values = values + ` AND establishment.ESTABLISHMENT_MACHINE_SIZE = ${em.machine_size} `
+        // values = values + ` AND establishment.ESTABLISHMENT_MACHINE_SIZE = ${em.machine_size} `
         values = values + ` AND establishment.ESTABLISHMENT_AREA_SIZE = ${em.area_size} `
-        values = values + ` AND establishment.ESTABLISHMENT_WORKER = ${em.worker} `
+        // values = values + ` AND establishment.ESTABLISHMENT_WORKER = ${em.worker} `
         values = values + ` AND establishment.ESTABLISHMENT_PHONE = "${em.phone}" `
 
         em.fax === '' || em.fax === null ? values = values + ` AND establishment.ESTABLISHMENT_FAX IS NULL` : values = values + ` AND establishment.ESTABLISHMENT_FAX = "${em.fax}"`
@@ -106,9 +106,9 @@ class EstablishmentDAO {
         values = values + ` AND address.AMPHUR_NAME = "${address.amphur_name}" `
         values = values + ` AND address.PROVINCE_NAME = "${address.province_name}"`
         em.is_land_owned === '' || em.is_land_owned === null ? values = values + `AND establishment.ESTABLISHMENT_IS_LAND_OWNED IS NULL ` : values = values + `AND establishment.ESTABLISHMENT_IS_LAND_OWNED= "${address.building}" `
-        values = values + ` AND establishment.ESTABLISHMENT_MACHINE_SIZE = ${em.machine_size} `
+        // values = values + ` AND establishment.ESTABLISHMENT_MACHINE_SIZE = ${em.machine_size} `
         values = values + ` AND establishment.ESTABLISHMENT_AREA_SIZE = ${em.area_size} `
-        values = values + ` AND establishment.ESTABLISHMENT_WORKER = ${em.worker} `
+        // values = values + ` AND establishment.ESTABLISHMENT_WORKER = ${em.worker} `
         values = values + ` AND establishment.ESTABLISHMENT_PHONE = "${em.phone}" `
 
         em.fax === '' || em.fax === null ? values = values + ` AND establishment.ESTABLISHMENT_FAX IS NULL` : values = values + ` AND establishment.ESTABLISHMENT_FAX = "${em.fax}"`
