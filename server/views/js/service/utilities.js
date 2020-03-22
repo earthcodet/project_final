@@ -585,7 +585,7 @@ function getDateExp(type, date) {
         console.log(date_return.date_exp)
         return date_return
     } else if (type === 'กิจการฌาปณสถาน') {
-        date_return.date_exp = `31-12-${year+3}`
+        date_return.date_exp = `31-12-${year + 3}`
         return date_return
     } else {
         // 1 Year - 1 day
@@ -620,16 +620,25 @@ function getDateExp(type, date) {
     }
 }
 function setReDateExp() {
-    getDateExpNotification().then((date_exp) => {
-        if (document.getElementById('notficationRequest') != undefined) {
-            document.getElementById('notficationRequest').innerText = date_exp
-            document.getElementById('notficationRequest2').innerText = date_exp
-        }
+    setDateExpss().then((data) => {
+        getDateExpNotification().then((date_exp) => {
+            if (document.getElementById('notficationRequest') != undefined) {
+                document.getElementById('notficationRequest').innerText = date_exp
+                document.getElementById('notficationRequest2').innerText = date_exp
+            }
+        })
     })
 }
 function getDateExpNotification() {
     return new Promise((resolve, reject) => {
         axios.get(`http://localhost:5000/get/session/re_exp`).then((result) => {
+            return resolve(result.data);
+        })
+    })
+}
+function setDateExpss() {
+    return new Promise((resolve, reject) => {
+        axios.get(`http://localhost:5000/get/notification/request/`).then((result) => {
             return resolve(result.data);
         })
     })

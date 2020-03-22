@@ -263,7 +263,7 @@ class RequestDAO {
     }
     getCountRequestExp30Day() {
         return new Promise((resolve, reject) => {
-            let query = `SELECT COUNT(REQUEST_NO) As RE_EXP FROM request WHERE DATEDIFF(request.REQUEST_DATE_EXPIRED, NOW()) <= 30 AND REQUEST_STATUS = 'active'`
+            let query = `SELECT COUNT(REQUEST_NO) As RE_EXP FROM request WHERE DATEDIFF(request.REQUEST_DATE_EXPIRED, NOW()) <= 30 AND DATEDIFF(request.REQUEST_DATE_EXPIRED, NOW()) > -1 AND REQUEST_STATUS = 'active'`
             con.query(query, function (err, result) {
                 if (err) {
                     console.log(err.code)
@@ -299,8 +299,8 @@ class RequestDAO {
             if (more === true) {
                 conditiion = `DATEDIFF(request.REQUEST_DATE_EXPIRED, NOW()) < -90 AND REQUEST_STATUS = 'expire'`
             }
-            console.log(conditiion)
             let query = `SELECT ${column} FROM request ${joinTable} WHERE ${conditiion}`
+            console.log(query)
             con.query(query, function (err, result) {
                 if (err) {
                     console.log(err)
