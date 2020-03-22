@@ -32,7 +32,7 @@ class LandDAO {
                 land.birthday,
                 land.phone
             ]
-            con.query(query,[list_value], function (err, result) {
+            con.query(text,[list_value], function (err, result) {
                 if (err) {
                     console.log(err.code) 
                     return resolve(err.code)

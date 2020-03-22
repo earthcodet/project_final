@@ -2415,7 +2415,7 @@ class service {
     updateRequest(request) {
         console.log('---- Request Update ----')
         console.log(request)
-        request.image_name = `${request.no}${request.year}`
+        // request.image_name = `${request.no}${request.year}`
         console.log('E---- Request Update ----')
         return new Promise((resolve, reject) => {
             RequestDAOObj.update(this.formatInsert('REQUEST', request)).then((data) => {
@@ -2521,6 +2521,7 @@ class service {
                 if (request.is_request_changed) {
                     if (request.image_is_changed) {
                         this.insertImageEstablishments(image, `${request.no}${request.year}`)
+                        request.image_name = `${request.no}${request.year}`
                     }
                     if (request.reference_id === 'YES') {
                         if (reference.is_reference_changed) {

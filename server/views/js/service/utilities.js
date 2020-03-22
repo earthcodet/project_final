@@ -411,13 +411,11 @@ function toRequest(value, id) {
     id = id.split('/')
     id = id[0] + id[1]
     let type = ''
-
     if (value.path != undefined) {
         type = value.path[0].textContent
     } else {
         type = value
     }
-
     switch (type) {
         case 'กิจการฌาปณสถาน':
             window.open('../request/request_crematory.html?id=' + id, '_blank');

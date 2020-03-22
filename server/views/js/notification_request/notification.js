@@ -1,6 +1,9 @@
+let data_list = []
 function getRequestED(status) {
+    data_list = []
     return new Promise((resolve, reject) => {
         axios.get(`http://localhost:5000/get/type/request/exp/less/${status}`).then((result) => {
+            data_list = result.data
             resolve(result.data);
         })
     })
@@ -33,7 +36,7 @@ function createTable(status, data) {
             r_id : data[i].R_NO,
             r_year : data[i].R_YEAR
         }
-        row.onclick = function () { onOpenRequest(i) };
+        row.onclick = function () { onOpenRequest(data[this.rowIndex - 1]) };
         for (var j = 0; j < 7; j++) {
             console.log(j)
             var cell = document.createElement("td");
@@ -110,6 +113,10 @@ function onClickStatustab(status, event, id) {
 }
 function onOpenRequest(item) {
     // connection
-    console.log(item)
+    if(item != undefined){
+        toRequest(item.REQUEST_MENU,`${item.R_NO}/${item.R_YEAR}`)
+    }else{
+        console.log('error get')
+    }
 }
 document.getElementById('cbd').click()
