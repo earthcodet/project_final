@@ -546,15 +546,16 @@ function getDateExp(type, date) {
     if (type === 'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร' || type === 'หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร') {
         // 3 year - 1 day
         // date_return.date_exp = `${day - 1}-${month}-${year + 3}`
-        if (year + 1 % 4 === 0) {
+        if (((year + 1)-543) % 4 === 0) {
             if (parseInt(month) === 3 && day === 1) {
                 date_return.date_exp = '29-02-' + (year + 1)
             } else {
+                
                 if (day === 1) {
                     if (parseInt(month) - 1 === 0) {
                         date_return.date_exp = `${mn[11]}-12-${year + 3}`
                     } else {
-                        date_return.date_exp = `${mn[parseInt(month) - 1]}-${parseInt(month) - 1}-${year + 3}`
+                        date_return.date_exp = `${mn[parseInt(month) - 2]}-${parseInt(month) - 1}-${year + 3}`
                     }
                 } else {
                     date_return.date_exp = `${day - 1}-${month}-${year + 3}`
@@ -565,7 +566,7 @@ function getDateExp(type, date) {
                 if (parseInt(month) - 1 === 0) {
                     date_return.date_exp = `${mn[11]}-12-${year + 3}`
                 } else {
-                    date_return.date_exp = `${mn[parseInt(month) - 1]}-${parseInt(month) - 1}-${year + 3}`
+                    date_return.date_exp = `${mn[parseInt(month) - 2]}-${parseInt(month) - 1}-${year + 3}`
                 }
             } else {
                 date_return.date_exp = `${day - 1}-${month}-${year + 3}`
@@ -587,27 +588,34 @@ function getDateExp(type, date) {
         return date_return
     } else {
         // 1 Year - 1 day
-        if (year + 1 % 4 === 0) {
-            if (parseInt(month) === 3 && day === 1) {
+        if (((year + 1)-543) % 4 === 0) {
+            console.log('1 date => '+day)
+            console.log('1 month => '+month)
+            console.log('1 year+1 => '+(year+1))
+            if (month === 3 && day === 1) {
                 date_return.date_exp = '29-02-' + (year + 1)
+                console.log('date '+date_return.date_exp)
             } else {
                 if (day === 1) {
                     if (parseInt(month) - 1 === 0) {
                         date_return.date_exp = `${mn[11]}-12-${year + 1}`
                     } else {
 
-                        date_return.date_exp = `${mn[parseInt(month) - 1]}-${parseInt(month) - 1}-${year + 1}`
+                        date_return.date_exp = `${mn[parseInt(month) - 2]}-${parseInt(month) - 1}-${year + 1}`
                     }
                 } else {
                     date_return.date_exp = `${day - 1}-${month}-${year + 1}`
                 }
             }
         } else {
+            console.log('2 date => '+day)
+            console.log('2 month => '+month)
+            console.log('2 year+1 => '+(year+1))
             if (day === 1) {
                 if (parseInt(month) - 1 === 0) {
                     date_return.date_exp = `${mn[11]}-12-${year + 1}`
                 } else {
-                    date_return.date_exp = `${mn[parseInt(month) - 1]}-${parseInt(month) - 1}-${year + 1}`
+                    date_return.date_exp = `${mn[parseInt(month) - 2]}-${parseInt(month) - 1}-${year + 1}`
                 }
             } else {
                 date_return.date_exp = `${day - 1}-${month}-${year + 1}`

@@ -12,6 +12,20 @@ const month = [
     'พฤศจิกายน',
     'ธันวาคม'
 ]
+const mn = [
+    '31',
+    '28',
+    '31',
+    '30',
+    '31',
+    '30',
+    '31',
+    '31',
+    '30',
+    '31',
+    '30',
+    '31'
+]
 function getRequestData(no, year) {
     return new Promise((resolve, reject) => {
         axios.get(`http://localhost:5000/get/view/allow/${no}/${year}`).then((result) => {
@@ -103,7 +117,7 @@ function displayForm() {
 function checkViewSight(id, raw_data) {
     if (id === 'C' || id === 'D' || id === 'E' || id === 'F') {
         //set no 1
-        setData(1, raw_data)
+        setData(1, raw_data, 'ex')
     } else if (id === 'H') {
         //set no 2
         setData(2, raw_data)
@@ -143,7 +157,7 @@ function setSN(id) {
         document.getElementById('sn_no').innerText = 'แบบ อภ.๒'
     }
 }
-function setData(type, raw_data) {
+function setData(type, raw_data, ex) {
     if (type === 1) {
         if (document.getElementById('t_topic') != undefined) {
             document.getElementById('t_topic').innerText = checkNull(raw_data.REQUEST_MENU)
@@ -198,9 +212,16 @@ function setData(type, raw_data) {
         document.getElementById('month2').innerText = dateFormat(raw_data.DATE_ISSUED)[1]
         document.getElementById('year2').innerText = dateFormat(raw_data.DATE_ISSUED)[2]
         //End Date
-        document.getElementById('day3').innerText = dateFormat(raw_data.DATE_EXP)[0]
-        document.getElementById('month3').innerText = dateFormat(raw_data.DATE_EXP)[1]
-        document.getElementById('year3').innerText = dateFormat(raw_data.DATE_EXP)[2]
+        if (ex != undefined) {
+            document.getElementById('day3').innerText = parseInt(dateFormat(raw_data.DATE_ISSUED)[0]) - 1
+            document.getElementById('month3').innerText = dateFormat(raw_data.DATE_EXP)[1]
+            document.getElementById('year3').innerText = parseInt(dateFormat(raw_data.DATE_ISSUED)[2]) + 1
+        } else {
+            document.getElementById('day3').innerText = dateFormat(raw_data.DATE_EXP)[0]
+            document.getElementById('month3').innerText = dateFormat(raw_data.DATE_EXP)[1]
+            document.getElementById('year3').innerText = dateFormat(raw_data.DATE_EXP)[2]
+        }
+
     }
     if (type === 2) {
         document.getElementById('number').innerText = `${raw_data.REQUEST_NO}/${raw_data.REQUEST_YEAR}`
@@ -338,15 +359,15 @@ function setData(type, raw_data) {
     if (type === 5) {
         if (document.getElementById('t_topic') != undefined) {
             let text = ''
-            if( raw_data.RT_ID === 13){
+            if (raw_data.RT_ID === 13) {
                 text = 'ใบอนุญาตจัดตั้งสุสาน และฌาปณกิจสถาน'
-            }else{
+            } else {
                 text = 'ใบอนุญาตดำเนินการสุสานและฌาปณกิจสถาน'
             }
             document.getElementById('t_topic').innerText = text
         }
         document.getElementById('number').innerText = `${raw_data.REQUEST_NO}/${raw_data.REQUEST_YEAR}`
-        document.getElementById('no').innerText = raw_data.RT_ID === 13 ? '6' :  '7'
+        document.getElementById('no').innerText = raw_data.RT_ID === 13 ? '6' : '7'
         document.getElementById('name').innerText = getFullName(raw_data)
         document.getElementById('age').innerText = checkNull(raw_data.PERSONAL_AGE)
         document.getElementById('nationality').innerText = checkNull(raw_data.PERSONAL_NATIONALITY)
@@ -398,6 +419,44 @@ function dateFormat(raw_data) {
     c_t.push(month[month_t_i])
     c_t.push(year_t_i)
     return c_t
+}
+function minusDateplusOne(date_r) {
+    //25-05-2563
+    let date_exp =''
+    let date = date_r.split('-')
+    let day = parseInt(date[0])
+    let month = parseInt(date[1])
+    let year = parseInt(date[2])
+    // 1 Year - 1 day
+    if (year + 1 % 4 === 0) {
+        if (parseInt(month) === 3 && day === 1) {
+            date_exp = '29-02-' + (year + 1)
+        } else {
+            if (day === 1) {
+                if (parseInt(month) - 1 === 0) {
+                   date_exp = `${mn[11]}-12-${year + 1}`
+                } else {
+
+                    date_exp = `${mn[parseInt(month) - 2]}-${parseInt(month) - 1}-${year + 1}`
+                }
+            } else {
+                date_exp = `${day - 1}-${month}-${year + 1}`
+            }
+        }
+    } else {
+        if (day === 1) {
+            if (parseInt(month) - 1 === 0) {
+                date_exp = `${mn[11]}-12-${year + 1}`
+            } else {
+                date_exp = `${mn[parseInt(month) - 2]}-${parseInt(month) - 1}-${year + 1}`
+            }
+        } else {
+            date_exp = `${day - 1}-${month}-${year + 1}`
+        }
+    }
+    return date_exp
+
+
 }
 function displayFax(fax) {
     if (fax === null) {
