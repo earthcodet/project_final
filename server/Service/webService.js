@@ -2465,6 +2465,21 @@ class service {
             })
         })
     }
+    searchRequestByItem(item) {
+        return new Promise((resolve, reject) => {
+            console.log(item)
+            RequestDAOObj.searchPangeRequest(item).then((data) => {
+                if (data.length != 0) {
+                    for (let i = 0; i < data.length; i++) {
+                        data[i].REQUEST_DATE_ISSUED = data[i].REQUEST_DATE_ISSUED != null ? this.formatDate("TO-DISPLAY", data[i].REQUEST_DATE_ISSUED + '') : data[i].REQUEST_DATE_ISSUED
+                        data[i].REQUEST_DATE_EXPIRED = data[i].REQUEST_DATE_EXPIRED != null ? this.formatDate("TO-DISPLAY", data[i].REQUEST_DATE_EXPIRED + '') : data[i].REQUEST_DATE_EXPIRED
+                    }
+                    return resolve(data)
+                }
+                return resolve(data)
+            })
+        })
+    }
 
     InsertRequestStep(request, personal, Edata, address, land, addressOwner, file, reference, train, username, image) {
         //ets = Edata, address, land, addressOwner, file

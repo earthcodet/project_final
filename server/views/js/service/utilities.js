@@ -109,7 +109,6 @@ function sortTable(n, id, type) {
         rows = table.rows;
         for (i = 1; i < (rows.length - 1); i++) {
             shouldSwitch = false;
-            console.log(table.rows[i])
             x = rows[i].getElementsByTagName("TD")[n];
             y = rows[i + 1].getElementsByTagName("TD")[n];
             if (type === "date" && x != '-') {

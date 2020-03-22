@@ -159,7 +159,19 @@ app.get('/get/personal/assistant/:personalId', (req, res) => {
     }
   })
 })
-
+//
+app.get('/search/request/page', (req, res) => {
+  console.log('get request  ')
+  var obj = JSON.parse(req.query.r_s);
+  // console.log(obj)
+  webService.searchRequestByItem(obj).then((data) => {
+    if (data != null) {
+      res.json(data)
+    } else {
+      res.sendStatus(404)
+    }
+  })
+})
 app.get('/get/requestType', (req, res) => {
   webService.getRequestType().then((data) => {
     if (data != null) {

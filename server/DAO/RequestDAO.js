@@ -401,6 +401,111 @@ class RequestDAO {
             })
         })
     }
+    searchPangeRequest(item) {
+        return new Promise((resolve, reject) => {
+            let value = ``
+            if (item.typeSearch === 1) {
+                //personal name and personal surname
+                value = value + `personal.PERSONAL_NAME LIKE "%${item.name_s}%" `
+                value = value + `AND personal.PERSONAL_SURNAME LIKE "%${item.surname_s}%"`
+            }
+            if (item.typeSearch === 2) {
+                //date sub
+                value = value + `request.REQUEST_DATE_ISSUED = '${item.datepicker1}'`
+            }
+            if (item.typeSearch === 3) {
+                //request Id
+                value = value + `request.REQUEST_NO LIKE "%${item.r_no}%" `
+                value = value + `AND request.REQUEST_YEAR LIKE "%${item.r_year}%" `
+            }
+            if (item.typeSearch === 4) {
+                //personal Id
+                value = value + `personal.PERSONAL_PERSONAL_ID LIKE "%${item.personal_id}%" `
+            }
+            if (item.typeSearch === 5) {
+                //หมดอายุ
+                value = value + `request.REQUEST_DATE_EXPIRED = '${item.datepicker2}' `
+            }
+            if (item.typeSearch === 6) {
+                //ใบอนุญาต
+                value = value + `request.REQUEST_MENU LIKE "%${item.type_request}%" `
+            }
+            if (item.typeSearch === 7) {
+                //ประเภทใบอนุญาต
+                value = value + `request_type.REQUEST_TYPE_NAME LIKE "%${item.type_product}%" `
+            }
+            if (item.typeSearch === 8) {
+                //ที่อยู่
+                value = value + `address.ADDRESS_HOME_NUMBER LIKE "%${item.homeId}%" `
+                if (item.moo != '') {
+                    value = value + `AND address.ADDRESS_MOO LIKE "%${item.moo}%" `
+                }
+                if (item.trxk != '') {
+                    value = value + `AND address.ADDRESS_TRXK LIKE "%${item.trxk}%" `
+                }
+                if (item.sxy != '') {
+                    value = value + `AND address.ADDRESS_SXY LIKE "%${item.sxy}%" `
+                }
+                if (item.bA != '') {
+                    value = value + `AND address.ADDRESS_BUILDING LIKE "%${item.bA}%" `
+                }
+                if (item.road != '') {
+                    value = value + `AND address.ADDRESS_ROAD LIKE "%${item.road}%" `
+                }
+                value = value + `AND address.DISTRICT_NAME LIKE "%${item.subdistrict}%" `
+                value = value + `AND address.AMPHUR_NAME LIKE "%${item.district}%" `
+                value = value + `AND address.PROVINCE_NAME LIKE "%${item.province}%" `
+            }
+            if (item.typeSearch === 9) {
+                //ชื่อสถานประกอบการ
+                if (item.e_name != '') {
+                    value = value + `establishment.ESTABLISHMENT_NAME LIKE "%${item.e_name}%" `
+                }else{
+                    value = value + `1`
+                } 
+
+            }
+
+
+
+            let column = `request.REQUEST_MENU As R_MENU, `
+            column = column + `request_type.REQUEST_TYPE_NAME As R_TYPE, `
+            column = column + `request.REQUEST_NO As R_NO, `
+            column = column + `request.REQUEST_YEAR As R_YEAR, `
+            column = column + `establishment.ESTABLISHMENT_NAME As E_NAME, `
+            column = column + `personal.PERSONAL_TITLE As P_TITLE, `
+            column = column + `personal.PERSONAL_NAME As P_NAME, `
+            column = column + `personal.PERSONAL_SURNAME As P_SURNAME, `
+            column = column + `personal.PERSONAL_PERSONAL_ID As P_ID, `
+
+            column = column + `request.REQUEST_DATE_ISSUED, `
+            column = column + `request.REQUEST_DATE_EXPIRED, `
+
+            column = column + `address.ADDRESS_HOME_NUMBER As A_H, `
+            column = column + `address.ADDRESS_MOO As A_M, `
+            column = column + `address.ADDRESS_TRXK  As A_T, `
+            column = column + `address.ADDRESS_SXY As A_S, `
+            column = column + `address.ADDRESS_BUILDING As A_B, `
+            column = column + `address.ADDRESS_ROAD  As A_R, `
+            column = column + `address.DISTRICT_NAME As A_D, `
+            column = column + `address.AMPHUR_NAME  As A_A, `
+            column = column + `address.PROVINCE_NAME As A_P`
+            let joinTable = `JOIN personal ON personal.PERSONAL_ID = request.PERSONAL_ID_OWNER `
+            joinTable = joinTable + `JOIN establishment ON establishment.ESTABLISHMENT_ID  = request.ESTABLISHMENT_ID ` //e
+            joinTable = joinTable + `JOIN address ON address.ADDRESS_ID = establishment.ADDRESS_ID ` //ea
+            joinTable = joinTable + `JOIN request_type ON request_type.REQUEST_TYPE_ID = request.REQUEST_TYPE_ID`
+            let query = `SELECT ${column} FROM request ${joinTable} WHERE ${value}`
+            console.log(value)
+            con.query(query, function (err, result) {
+                if (err) {
+                    console.log(err.code)
+                    return resolve(err.code)
+                }
+                return resolve(result)
+            })
+        })
+    }
+
     //UPDATE personal SET ${value} WHERE PERSONAL_ID='${personal.id}'\
     update(request) {
         console.log(`-------- DATABASE -------`)
@@ -448,7 +553,7 @@ class RequestDAO {
                     REQUEST_DELETE_LOGIC: request.delete_logic,
                     REQUEST_IS_DELETED: request.is_deleted,
                     REQUEST_LAST_UPDATE: request.last_update,
-                    REQUEST_USER_UPDATE: request.user_update+``,
+                    REQUEST_USER_UPDATE: request.user_update + ``,
                     REQUEST_STATUS_BEFORE: request.status_before,
                     REQUEST_STATUS: request.status,
                     ESTABLISHMENT_IS_LAND_OWNED: request.establishment_is_land_owned,
@@ -484,7 +589,7 @@ class RequestDAO {
                     REQUEST_STATUS: request.status,
                     REQUEST_STATUS_BEFORE: request.status_before,
                     REQUEST_LAST_UPDATE: request.last_update,
-                    REQUEST_USER_UPDATE: request.user_update+``,
+                    REQUEST_USER_UPDATE: request.user_update + ``,
                     REQUEST_DATE_APPROVE: request.date_approve,
                     STAFF_ID_APPROVE: request.staff_id_approve,
                     REQUEST_RECEIPT_FINE: request.receipt_fine,
@@ -523,17 +628,17 @@ class RequestDAO {
                 values = {
                     REQUEST_STATUS: status,
                     REQUEST_LAST_UPDATE: last_update,
-                    REQUEST_USER_UPDATE: user+``,
+                    REQUEST_USER_UPDATE: user + ``,
                     REQUEST_STATUS_BEFORE: status_before
                 }
             } else {
                 values = {
                     REQUEST_STATUS: status,
                     REQUEST_LAST_UPDATE: last_update,
-                    REQUEST_USER_UPDATE: user+``
+                    REQUEST_USER_UPDATE: user + ``
                 }
             }
-            con.query(query,values, function (err, result) {
+            con.query(query, values, function (err, result) {
                 if (err) {
                     console.log(err)
                     return resolve(err.code)
@@ -547,11 +652,11 @@ class RequestDAO {
         return new Promise((resolve, reject) => {
             let query = `UPDATE request SET ? WHERE REQUEST_NO='${object.id}' AND REQUEST_YEAR='${object.year}'`
             let values = {
-                REQUEST_IS_DELETED :object.status, 
-                REQUEST_USER_UPDATE : object.username+`` ,
-                REQUEST_LAST_UPDATE : object.last_update
+                REQUEST_IS_DELETED: object.status,
+                REQUEST_USER_UPDATE: object.username + ``,
+                REQUEST_LAST_UPDATE: object.last_update
             }
-            con.query(query,values, function (err, result) {
+            con.query(query, values, function (err, result) {
                 if (err) {
                     console.log(err.code)
                     return resolve(err.code)
