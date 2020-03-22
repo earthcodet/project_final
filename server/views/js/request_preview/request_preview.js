@@ -213,9 +213,9 @@ function setData(type, raw_data, ex) {
         document.getElementById('year2').innerText = dateFormat(raw_data.DATE_ISSUED)[2]
         //End Date
         if (ex != undefined) {
-            document.getElementById('day3').innerText = parseInt(dateFormat(raw_data.DATE_ISSUED)[0]) - 1
-            document.getElementById('month3').innerText = dateFormat(raw_data.DATE_EXP)[1]
-            document.getElementById('year3').innerText = parseInt(dateFormat(raw_data.DATE_ISSUED)[2]) + 1
+            document.getElementById('day3').innerText = minusDateplusOne(raw_data.DATE_ISSUED)[0]
+            document.getElementById('month3').innerText = minusDateplusOne(raw_data.DATE_EXP)[1]
+            document.getElementById('year3').innerText = minusDateplusOne(raw_data.DATE_ISSUED)[2]
         } else {
             document.getElementById('day3').innerText = dateFormat(raw_data.DATE_EXP)[0]
             document.getElementById('month3').innerText = dateFormat(raw_data.DATE_EXP)[1]
@@ -422,39 +422,46 @@ function dateFormat(raw_data) {
 }
 function minusDateplusOne(date_r) {
     //25-05-2563
-    let date_exp =''
+    let date_exp = ''
     let date = date_r.split('-')
     let day = parseInt(date[0])
-    let month = parseInt(date[1])
+    let month_d = parseInt(date[1])
     let year = parseInt(date[2])
     // 1 Year - 1 day
-    if (year + 1 % 4 === 0) {
-        if (parseInt(month) === 3 && day === 1) {
+    let c_t = []
+    if (((year + 1) - 543) % 4 === 0) {
+        if (month_d === 3 && day === 1) {
             date_exp = '29-02-' + (year + 1)
         } else {
             if (day === 1) {
-                if (parseInt(month) - 1 === 0) {
-                   date_exp = `${mn[11]}-12-${year + 1}`
+                if (parseInt(month_d) - 1 === 0) {
+                    date_exp = `${mn[11]}-12-${year + 1}`
                 } else {
 
-                    date_exp = `${mn[parseInt(month) - 2]}-${parseInt(month) - 1}-${year + 1}`
+                    date_exp = `${mn[parseInt(month_d) - 2]}-${parseInt(month_d) - 1}-${year + 1}`
                 }
             } else {
-                date_exp = `${day - 1}-${month}-${year + 1}`
+                date_exp = `${day - 1}-${month_d}-${year + 1}`
             }
         }
     } else {
         if (day === 1) {
-            if (parseInt(month) - 1 === 0) {
+            if (parseInt(month_d) - 1 === 0) {
                 date_exp = `${mn[11]}-12-${year + 1}`
             } else {
-                date_exp = `${mn[parseInt(month) - 2]}-${parseInt(month) - 1}-${year + 1}`
+                date_exp = `${mn[parseInt(month_d) - 2]}-${parseInt(month_d) - 1}-${year + 1}`
             }
         } else {
-            date_exp = `${day - 1}-${month}-${year + 1}`
+            date_exp = `${day - 1}-${month_d}-${year + 1}`
         }
     }
-    return date_exp
+    let mn_t_c = parseInt(date_exp.split('-')[1]) - 1
+    console.log(month[mn_t_c])
+    c_t.push(date_exp.split('-')[0])
+    c_t.push(month[mn_t_c])
+    c_t.push(date_exp.split('-')[2])
+
+    return c_t
 
 
 }
