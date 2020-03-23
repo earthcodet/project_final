@@ -29,7 +29,12 @@ function addPage() {
     totalFiles_report = []
     resetP()
     document.getElementById('c_id').disabled = false
+    document.getElementById('btn_name').disabled = false
+    deleteImageAll()
     displayBlock(1)
+    document.getElementById('request_id_report').value = ''
+    document.getElementById('datepicker4').value = ''
+    document.getElementById('datepicker3').value = ''
 }
 function insertPage() {
     Swal.fire({
@@ -238,10 +243,11 @@ function changeStatusMenuData() {
 
 }
 function changeSaveMenu() {
+    addNew = true
     disableFunction()
-    data = true
     disableMenuAll()
     enableMenu('saveMenu')
+    enableMenu('deleteMenu')
 }
 //Search Operator 
 function searchPersonal() {

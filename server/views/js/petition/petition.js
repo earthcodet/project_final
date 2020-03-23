@@ -53,6 +53,20 @@ function getView(value_t) {
             }
         })
     }
+    if (value_t.id != undefined && value_t.r_id === undefined) {
+        console.log('working')
+        console.log(p_data.personal_id)
+        p_data.personal_id = value_t.id
+
+        getPersonal(p_data.personal_id).then((data_profile) => {
+            if (data_profile.length != 0) {
+                displayBlock(1)
+                setPDATA(data_profile[0], 2)
+                setUIDataCom(3)
+                document.getElementById('c_id').disabled = false
+            }
+        })
+    }
 }
 
 function setPDATA(data, type) {
@@ -89,6 +103,8 @@ function displayBlock(type) {
     if (type === 1) {
         document.getElementById('block_no1').style.display = ''
         document.getElementById('button_block_2').style.display = 'none'
+        document.getElementById('block_no1').style.display = ''
+        document.getElementById('block_no2').style.display = 'none'
     } else {
         document.getElementById('button_block_1').style.display = 'none'
         document.getElementById('button_block_2').style.display = ''
@@ -100,6 +116,7 @@ function displayBlock(type) {
 function setUIDataCom(type, type_step) {
 
     if (type_step === 1) {
+        disableMenuAll()
         document.getElementById('c_id').value = p_data.id
         document.getElementById('c_id').disabled = true
         document.getElementById('btn_name').disabled = true
@@ -107,15 +124,29 @@ function setUIDataCom(type, type_step) {
         document.getElementById('full_name_op').value = name_user
         if (type === 1) {
             let id = ['t_1', 't_2', 't_3', 't_4', 't_5', 't_6', 't_7', 't_8']
-            if (isNaN(p_data.type)) {
-                document.getElementById('t_e').value = p_data.type
-            } else {
-                let id_s = id[parseInt(p_data.type) - 1]
-                document.getElementById(id_s).checked = true
+            let name = ['สุขลักษณะด้านอาหาร', 'กลิ่น', 'สารเคมี', 'ขยะมูลฝอย/สิ่งปฏิกูล', 'เสียงดัง', 'แสง รังสี', 'ควัน เถ้า เขม่า ฝุ่นละออง']
+            for (let i = 0; i < name.length; i++) {
+                console.log(`1. ${p_data.type}`)
+                console.log(`1. ${name[i]}`)
+                if (p_data.type === name[i]) {
+                    let id_s = id[i]
+                    if (document.getElementById(id_s) != undefined) {
+                        document.getElementById(id_s).checked = true
+                    }
+                    break;
+                } else {
+                    if (i === name.length - 1) {
+                        if (p_data.type != 'ไม่มีประเภท') {
+                            document.getElementById('t_8').checked = true
+                            document.getElementById('t_e').value = p_data.type
+                        }
+                    }
+                }
             }
             if (p_data.status === 'Y') {
                 document.getElementById('w_2').checked = true
-            } else {
+            }
+            if (p_data.status === 'N') {
                 //p_data.status === 'N'
                 document.getElementById('w_1').checked = true
             }
@@ -124,18 +155,29 @@ function setUIDataCom(type, type_step) {
             document.getElementById('datepicker4').value = p_data.date_start
             document.getElementById('datepicker3').value = p_data.date_end
             document.getElementById('c_id').disabled = false
-            changeSaveMenu()
+           
         }
-        if (p_data.is_deleted === 'Y') {
-            disableMenuAll()
+        if (p_data.total_image === 0) {
+            if (p_data.is_deleted === 'Y') {
+                disableMenuAll()
+            }
+            if (p_data.is_deleted === 'N') {
+                changeStatusMenuData()
+            }
         }
-        if (p_data.is_deleted === 'N') {
-            changeStatusMenuData()
-        }
+
     } else if (type_step === 2) {
         if (list_image.length != 0) {
-            createImages(list_image)
+            createImages(list_image).then((data_image_status) => {
+                if (p_data.is_deleted === 'Y') {
+                    disableMenuAll()
+                }
+                if (p_data.is_deleted === 'N') {
+                    changeStatusMenuData()
+                }
+            })
         }
+
     } else {
         document.getElementById('c_id').value = p_data.id
         document.getElementById('c_id').disabled = true
@@ -144,26 +186,41 @@ function setUIDataCom(type, type_step) {
         document.getElementById('full_name_op').value = name_user
         if (type === 1) {
             let id = ['t_1', 't_2', 't_3', 't_4', 't_5', 't_6', 't_7', 't_8']
-            if (isNaN(p_data.type)) {
-                if (p_data.type != 'ไม่มีประเภท') {
-                    document.getElementById('t_8').checked = true
-                    document.getElementById('t_e').value = p_data.type
+            let name = ['สุขลักษณะด้านอาหาร', 'กลิ่น', 'สารเคมี', 'ขยะมูลฝอย/สิ่งปฏิกูล', 'เสียงดัง', 'แสง รังสี', 'ควัน เถ้า เขม่า ฝุ่นละออง']
+            for (let i = 0; i < name.length; i++) {
+                console.log(`1. ${p_data.type}`)
+                console.log(`1. ${name[i]}`)
+                if (p_data.type === name[i]) {
+                    let id_s = id[i]
+                    if (document.getElementById(id_s) != undefined) {
+                        document.getElementById(id_s).checked = true
+                    }
+                    break;
+                } else {
+                    if (i === name.length - 1) {
+                        if (p_data.type != 'ไม่มีประเภท') {
+                            document.getElementById('t_8').checked = true
+                            document.getElementById('t_e').value = p_data.type
+                        }
+                    }
                 }
-            } else {
-                let id_s = id[parseInt(p_data.type) - 1]
-                document.getElementById(id_s).checked = true
             }
             if (p_data.status === 'Y') {
                 document.getElementById('w_2').checked = true
-            } else {
+            }
+            if (p_data.status === 'N') {
                 //p_data.status === 'N'
                 document.getElementById('w_1').checked = true
             }
-        } else {
+        }
+        if (type === 2) {
             document.getElementById('request_id_report').value = `${p_data.request_id}/${p_data.request_year}`
             document.getElementById('datepicker4').value = p_data.date_start
             document.getElementById('datepicker3').value = p_data.date_end
             document.getElementById('c_id').disabled = false
+            changeSaveMenu()
+        }
+        if (type === 3) {
             changeSaveMenu()
         }
         if (list_image.length != 0) {
@@ -275,7 +332,15 @@ function createGroupData() {
     }
     p_data.date_submission = document.getElementById('datepicker2').value.trim()
     p_data.type = getValueType()
-    p_data.status = document.getElementById('w_1').checked === true ? 'N' : 'Y'
+    let w_c_1 = document.getElementById('w_1').checked 
+    let w_c_2 = document.getElementById('w_2').checked 
+    if(w_c_1){
+        p_data.status = 'N'
+    }else if(w_c_2){
+        p_data.status = 'N'
+    }else{
+        p_data.status = 'M'
+    }
     p_data.date_start = document.getElementById('datepicker4').value.trim()
     p_data.date_end = document.getElementById('datepicker3').value.trim()
     p_data.total_image = totalFiles_report.length
@@ -429,29 +494,32 @@ function base64toBlob(base64Data, contentType) {
 }
 //IMAGE
 function createImages(image) {
-    deleteImageAll()
-    totalFiles_report = []
-    for (let i = 0; i < image.length; i++) {
-        console.log(`image i = ${i}`)
-        totalFiles_report.push(image[i])
-        selectImageFile_report = selectImageFile_report + 1
-        var span = document.createElement('span');
-        span.innerHTML =
-            [
-                `<div class="col" style="width: 25%; height: 100%; ">
+    return new Promise((resolve, reject) => {
+        deleteImageAll()
+        totalFiles_report = []
+        for (let i = 0; i < image.length; i++) {
+            console.log(`image i = ${i}`)
+            totalFiles_report.push(image[i])
+            selectImageFile_report = selectImageFile_report + 1
+            var span = document.createElement('span');
+            span.innerHTML =
+                [
+                    `<div class="col" style="width: 25%; height: 100%; ">
     <img 
     width=100% 
     height=85% 
     src="`
-                , `data:image/${image[i].COMPLAINT_IMAGE_TYPE};base64,${image[i].COMPLAINT_IMAGE_DATA_BASE64}`,
-                '" title="', escape(image[i].COMPLAINT_IMAGE_NAME), '"/>'
-                , "<br><button type='button' class='delete image'" +
-                "onclick='deleteImage()' >ลบรูปภาพนี้</button>", "</div>"
-            ].join('');
+                    , `data:image/${image[i].COMPLAINT_IMAGE_TYPE};base64,${image[i].COMPLAINT_IMAGE_DATA_BASE64}`,
+                    '" title="', escape(image[i].COMPLAINT_IMAGE_NAME), '"/>'
+                    , "<br><button type='button' class='delete image'" +
+                    "onclick='deleteImage()' >ลบรูปภาพนี้</button>", "</div>"
+                ].join('');
 
-        document.getElementById('outputImage_report').insertBefore(span, null);
-    }
-    console.log(totalFiles_report)
+            document.getElementById('outputImage_report').insertBefore(span, null);
+        }
+        console.log(totalFiles_report)
+        return resolve(true)
+    })
 }
 function deleteImageAll() {
     if (document.getElementById('outputImage_report') != undefined) {

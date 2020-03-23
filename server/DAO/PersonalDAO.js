@@ -20,6 +20,7 @@ class PersonalDAO {
         })
     }
     getPersonalByPersonalId(personalId) {
+        console.log(personalId)
         return new Promise((resolve, reject) => {
             let query = `SELECT * FROM personal WHERE PERSONAL_ID='${personalId}'`
             con.query(query, function (err, result) {

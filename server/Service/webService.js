@@ -695,6 +695,21 @@ class service {
                     } else {
                         if (p_id.request_id != null) {
                             RequestDAOObj.updateStatusOnly(p_id.request_id, p_id.request_year, user_update, dateForUpdate, 'ban').then((t_data) => {
+                                if (image.length != 0) {
+                                    this.insertImageComplainth(image, p_id.id).then((data) => {
+                                        if (data) {
+                                            return resolve(true)
+                                        } else {
+                                            return resolve('Image Error')
+                                        }
+                                    })
+                                } else {
+                                    return resolve(true)
+                                }
+                            })
+                        } else {
+                            console.log('insert image end')
+                            if (image.length != 0) {
                                 this.insertImageComplainth(image, p_id.id).then((data) => {
                                     if (data) {
                                         return resolve(true)
@@ -702,16 +717,9 @@ class service {
                                         return resolve('Image Error')
                                     }
                                 })
-                            })
-                        } else {
-                            console.log('insert image end')
-                            this.insertImageComplainth(image, p_id.id).then((data) => {
-                                if (data) {
-                                    return resolve(true)
-                                } else {
-                                    return resolve('Image Error')
-                                }
-                            })
+                            } else {
+                                return resolve(true)
+                            }
                         }
                     }
                 })
@@ -721,25 +729,37 @@ class service {
                     if (!result) {
                         return resolve(false)
                     } else {
-                        this.insertImageComplainth(image, p_id.id).then((data) => {
-                            console.log('0 true')
-                            if (data) {
-                                if (p_id.is_deleted === 'Y' && p_id.request_id != null) {
-                                    console.log('update Y')
-                                    RequestDAOObj.updateStatusOnly(p_id.request_id, p_id.request_year, user_update, dateForUpdate, 'active').then((t_data) => {
-                                        console.log('1 true')
+                        if (image.length != 0) {
+                            this.insertImageComplainth(image, p_id.id).then((data) => {
+                                console.log('0 true')
+                                if (data) {
+                                    if (p_id.is_deleted === 'Y' && p_id.request_id != null) {
+                                        console.log('update Y')
+                                        RequestDAOObj.updateStatusOnly(p_id.request_id, p_id.request_year, user_update, dateForUpdate, 'active').then((t_data) => {
+                                            console.log('1 true')
+                                            return resolve(true)
+                                        })
+                                    } else {
+                                        console.log('2 true')
                                         return resolve(true)
-                                    })
+                                    }
                                 } else {
-                                    console.log('2 true')
-                                    return resolve(true)
+                                    console.log('image error')
+                                    return resolve('Image Error')
                                 }
+                            })
+                        } else {
+                            if (p_id.is_deleted === 'Y' && p_id.request_id != null) {
+                                console.log('update Y')
+                                RequestDAOObj.updateStatusOnly(p_id.request_id, p_id.request_year, user_update, dateForUpdate, 'active').then((t_data) => {
+                                    console.log('11 true')
+                                    return resolve(true)
+                                })
                             } else {
-                                console.log('image error')
-                                return resolve('Image Error')
+                                console.log('21 true')
+                                return resolve(true)
                             }
-                        })
-
+                        }
                     }
                 })
             }
@@ -782,7 +802,7 @@ class service {
     getComplaintByPersonalId(p_id) {
         return new Promise((resolve, reject) => {
             ComplaintDAOObj.getByPersonalId(p_id).then((result) => {
-                for(let i = 0 ; i < result.length ; i++){
+                for (let i = 0; i < result.length; i++) {
                     if (result[i].COMPLAINT_DATE_SUBMISSION === null || result[i].COMPLAINT_DATE_SUBMISSION === '0000-00-00') {
                         result[i].COMPLAINT_DATE_SUBMISSION = null
                     } else {
@@ -811,6 +831,7 @@ class service {
         })
     }
     getPersonalById(id) {
+        console.log(id + ` NEW`)
         return new Promise((resolve, reject) => {
             PersonalDAOObj.getPersonalByPersonalId(id).then((result) => {
                 return resolve(result)

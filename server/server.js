@@ -373,6 +373,7 @@ app.get('/get/list/complaint/id/:p_id', (req, res) => {
   })
 })
 app.get('/get/personal/profile/:id', (req, res) => {
+  console.log('get data personal Id')
   webService.getPersonalById(req.params.id).then((data) => {
     res.json(data)
   })
