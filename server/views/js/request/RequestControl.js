@@ -6,6 +6,7 @@ var deleteData = false
 var addNew = false
 let personal_change = false
 function addPage() {
+
     resetStyleIdDeleteRequest()
     resetRequestData()
     personal_change = false
@@ -32,6 +33,7 @@ function addPage() {
 
     document.getElementById('print_document_image').style.display = 'none'
     document.getElementById('print_document_allow').style.display = 'none'
+    document.getElementById('btn_sc_op').disabled = false
 }
 function insertPage() {
     Swal.fire({
@@ -223,9 +225,9 @@ function deletePage() {
                     } else {
                         //resetFunction()
                         document.getElementById('print_document_image').style.display = ''
-                        if (requestData.status === 'active'){
+                        if (requestData.status === 'active') {
                             document.getElementById('print_document_allow').style.display = ''
-                        }else{
+                        } else {
                             document.getElementById('print_document_allow').style.display = 'none'
                         }
                         resetStyleIdDeleteRequest()
@@ -443,7 +445,8 @@ function createResultSearch(data, typeSearch) {
             if (j === 0) {
                 var cellText = document.createTextNode(data[i].PERSONAL_NAME);
             } else if (j === 1) {
-                var cellText = document.createTextNode(data[i].PERSONAL_SURNAME);
+                let textJ1 = data[i].PERSONAL_SURNAME === null ? '' : data[i].PERSONAL_SURNAME
+                var cellText = document.createTextNode(textJ1);
             } else if (j === 2) {
                 let AddressText = ''
                 AddressText = AddressText + `บ้านเลขที่ ${data[i].AID.ADDRESS_HOME_NUMBER} `
@@ -593,9 +596,8 @@ function getFormPrint(menu) {
             return '../view/view_public_sell.html'
         case 'ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ'://B
             return '../view/view_public.html'
-            //กิจการฌาปณสถาน
-        // case 'กิจการฌาปณสถาน' :
-            // return '../view/view_.html'
+        case 'กิจการฌาปณสถาน':
+            return '../view/view_crematory.html'
         default:
             return '../view/view_area_more_correct.html'
     }

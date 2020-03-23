@@ -12,6 +12,20 @@ const month = [
     'พฤศจิกายน',
     'ธันวาคม'
 ]
+const mn = [
+    '31',
+    '28',
+    '31',
+    '30',
+    '31',
+    '30',
+    '31',
+    '31',
+    '30',
+    '31',
+    '30',
+    '31'
+]
 function getRequestData(no, year) {
     return new Promise((resolve, reject) => {
         axios.get(`http://localhost:5000/get/view/allow/${no}/${year}`).then((result) => {
@@ -70,7 +84,7 @@ function getDataView() {
     }
 }
 function createImagetoUI(image) {
-    if (image.length != 0) {
+    if (image.length != 0 && image[0].S_IMAGE_DATA != undefined) {
         document.getElementById('s_nayo').src = `data:image/${image[0].S_IMAGE_TYPE};base64,${image[0].S_IMAGE_DATA}`
     }
 }
@@ -103,47 +117,49 @@ function displayForm() {
 function checkViewSight(id, raw_data) {
     if (id === 'C' || id === 'D' || id === 'E' || id === 'F') {
         //set no 1
-        setData(1, raw_data)
+        setData(1, raw_data, 'ex')
     } else if (id === 'H') {
         //set no 2
         setData(2, raw_data)
     } else if (id === 'G') {
         //set no 3
         setData(3, raw_data)
+    } else if (id === 'I') {
+        setData(5, raw_data)
     } else {
         //สาธาณะ //set no 4
         setData(4, raw_data)
     }
 }
-function setSN(id){
-    if(id === 'A'){
+function setSN(id) {
+    if (id === 'A') {
         document.getElementById('sn_no').innerText = 'แบบ สณ.๒'
     }
-    if(id === 'B'){
+    if (id === 'B') {
         document.getElementById('sn_no').innerText = 'แบบ สณ.๕'
     }
-    if(id === 'C'){
+    if (id === 'C') {
         document.getElementById('sn_no').innerText = 'แบบ สอ.๔'
     }
-    if(id === 'D'){
+    if (id === 'D') {
         document.getElementById('sn_no').innerText = 'แบบ สอ.๕'
     }
-    if(id === 'E'){
+    if (id === 'E') {
         document.getElementById('sn_no').innerText = 'แบบ สอ.๖'
     }
-    if(id === 'F'){
+    if (id === 'F') {
         document.getElementById('sn_no').innerText = 'แบบ สอ.๗'
     }
-    if(id === 'G'){
+    if (id === 'G') {
         document.getElementById('sn_no').innerText = 'แบบ ตล.๓'
     }
-    if(id === 'H'){
+    if (id === 'H') {
         document.getElementById('sn_no').innerText = 'แบบ อภ.๒'
     }
 }
-function setData(type, raw_data) {
+function setData(type, raw_data, ex) {
     if (type === 1) {
-        if(document.getElementById('t_topic') != undefined){
+        if (document.getElementById('t_topic') != undefined) {
             document.getElementById('t_topic').innerText = checkNull(raw_data.REQUEST_MENU)
         }
         document.getElementById('number').innerText = `${raw_data.REQUEST_NO}/${raw_data.REQUEST_YEAR}`
@@ -196,9 +212,16 @@ function setData(type, raw_data) {
         document.getElementById('month2').innerText = dateFormat(raw_data.DATE_ISSUED)[1]
         document.getElementById('year2').innerText = dateFormat(raw_data.DATE_ISSUED)[2]
         //End Date
-        document.getElementById('day3').innerText = dateFormat(raw_data.DATE_EXP)[0]
-        document.getElementById('month3').innerText = dateFormat(raw_data.DATE_EXP)[1]
-        document.getElementById('year3').innerText = dateFormat(raw_data.DATE_EXP)[2]
+        if (ex != undefined) {
+            document.getElementById('day3').innerText = minusDateplusOne(raw_data.DATE_ISSUED)[0]
+            document.getElementById('month3').innerText = minusDateplusOne(raw_data.DATE_EXP)[1]
+            document.getElementById('year3').innerText = minusDateplusOne(raw_data.DATE_ISSUED)[2]
+        } else {
+            document.getElementById('day3').innerText = dateFormat(raw_data.DATE_EXP)[0]
+            document.getElementById('month3').innerText = dateFormat(raw_data.DATE_EXP)[1]
+            document.getElementById('year3').innerText = dateFormat(raw_data.DATE_EXP)[2]
+        }
+
     }
     if (type === 2) {
         document.getElementById('number').innerText = `${raw_data.REQUEST_NO}/${raw_data.REQUEST_YEAR}`
@@ -309,12 +332,12 @@ function setData(type, raw_data) {
         document.getElementById('location').innerText = checkNull(raw_data.ESTABLISHMENT_GROUND)
         //
         if (document.getElementById('trxkS') != undefined) {
-            document.getElementById('trxkS').innerText = checkNull(raw_data.DATE_EXP)
-            document.getElementById('roadS').innerText = checkNull(raw_data.DATE_EXP)
-            document.getElementById('mooS').innerText = checkNull(raw_data.DATE_EXP)
-            document.getElementById('subdistrictS').innerText = checkNull(raw_data.DATE_EXP)
-            document.getElementById('districtS').innerText = checkNull(raw_data.DATE_EXP)
-            document.getElementById('provinceS').innerText = checkNull(raw_data.DATE_EXP)
+            document.getElementById('trxkS').innerText = checkNull(raw_data.E_ADDRESS_TRXK)
+            document.getElementById('roadS').innerText = checkNull(raw_data.E_ADDRESS_ROAD)
+            document.getElementById('mooS').innerText = checkNull(raw_data.E_ADDRESS_MOO)
+            document.getElementById('subdistrictS').innerText = checkNull(raw_data.E_DISTRICT_NAME)
+            document.getElementById('districtS').innerText = checkNull(raw_data.E_AMPHUR_NAME)
+            document.getElementById('provinceS').innerText = checkNull(raw_data.E_PROVINCE_NAME)
         }
         //
         document.getElementById('fee').innerText = checkNull(raw_data.R_FEE)
@@ -333,7 +356,48 @@ function setData(type, raw_data) {
         document.getElementById('year3').innerText = dateFormat(raw_data.DATE_EXP)[2]
 
     }
+    if (type === 5) {
+        if (document.getElementById('t_topic') != undefined) {
+            let text = ''
+            if (raw_data.RT_ID === 13) {
+                text = 'ใบอนุญาตจัดตั้งสุสาน และฌาปณกิจสถาน'
+            } else {
+                text = 'ใบอนุญาตดำเนินการสุสานและฌาปณกิจสถาน'
+            }
+            document.getElementById('t_topic').innerText = text
+        }
+        document.getElementById('number').innerText = `${raw_data.REQUEST_NO}/${raw_data.REQUEST_YEAR}`
+        document.getElementById('no').innerText = raw_data.RT_ID === 13 ? '6' : '7'
+        document.getElementById('name').innerText = getFullName(raw_data)
+        document.getElementById('age').innerText = checkNull(raw_data.PERSONAL_AGE)
+        document.getElementById('nationality').innerText = checkNull(raw_data.PERSONAL_NATIONALITY)
+        document.getElementById('nameId').innerText = checkNull(raw_data.PERSONAL_PERSONAL_ID)
+        document.getElementById('homeId').innerText = checkNull(raw_data.PERSONAL_ADDRESS_HOME_NUMBER)
+        document.getElementById('trxk').innerText = checkNull(raw_data.PERSONAL_ADDRESS_TRXK)
+        document.getElementById('sxy').innerText = checkNull(raw_data.PERSONAL_ADDRESS_SXY)
+        document.getElementById('road').innerText = checkNull(raw_data.PERSONAL_ADDRESS_ROAD)
+        document.getElementById('moo').innerText = checkNull(raw_data.PERSONAL_ADDRESS_MOO)
+        document.getElementById('subdistrict').innerText = checkNull(raw_data.PERSONAL_DISTRICT_NAME)
+        document.getElementById('district').innerText = checkNull(raw_data.PERSONAL_AMPHUR_NAME)
+        document.getElementById('province').innerText = checkNull(raw_data.PERSONAL_ROVINCE_NAME)
+        document.getElementById('phone').innerText = displayPhone(raw_data.PERSONAL_PHONE)
+        document.getElementById('homeIdS').innerText = checkNull(raw_data.E_ADDRESS_HOME_NUMBER)
+        document.getElementById('sxyS').innerText = checkNull(raw_data.E_ADDRESS_TRXK)
+        document.getElementById('roadS').innerText = checkNull(raw_data.E_ADDRESS_ROAD)
+        document.getElementById('mooS').innerText = checkNull(raw_data.E_ADDRESS_MOO)
+        document.getElementById('subdistrictS').innerText = checkNull(raw_data.E_DISTRICT_NAME)
+        document.getElementById('districtS').innerText = checkNull(raw_data.E_AMPHUR_NAME)
+        document.getElementById('provinceS').innerText = checkNull(raw_data.E_PROVINCE_NAME)
+        //Start Date
+        document.getElementById('day2').innerText = dateFormat(raw_data.DATE_ISSUED)[0]
+        document.getElementById('month2').innerText = dateFormat(raw_data.DATE_ISSUED)[1]
+        document.getElementById('year2').innerText = dateFormat(raw_data.DATE_ISSUED)[2]
+        //End Date
+        document.getElementById('day3').innerText = dateFormat(raw_data.DATE_EXP)[0]
+        document.getElementById('month3').innerText = dateFormat(raw_data.DATE_EXP)[1]
+        document.getElementById('year3').innerText = dateFormat(raw_data.DATE_EXP)[2]
 
+    }
     //การเงิน
     if (document.getElementById('name_money') != undefined) {
         document.getElementById('name_money').innerText = `${raw_data.M_TITLE} ${raw_data.M_NAME} ${raw_data.M_SURNAME}`
@@ -355,6 +419,51 @@ function dateFormat(raw_data) {
     c_t.push(month[month_t_i])
     c_t.push(year_t_i)
     return c_t
+}
+function minusDateplusOne(date_r) {
+    //25-05-2563
+    let date_exp = ''
+    let date = date_r.split('-')
+    let day = parseInt(date[0])
+    let month_d = parseInt(date[1])
+    let year = parseInt(date[2])
+    // 1 Year - 1 day
+    let c_t = []
+    if (((year + 1) - 543) % 4 === 0) {
+        if (month_d === 3 && day === 1) {
+            date_exp = '29-02-' + (year + 1)
+        } else {
+            if (day === 1) {
+                if (parseInt(month_d) - 1 === 0) {
+                    date_exp = `${mn[11]}-12-${year + 1}`
+                } else {
+
+                    date_exp = `${mn[parseInt(month_d) - 2]}-${parseInt(month_d) - 1}-${year + 1}`
+                }
+            } else {
+                date_exp = `${day - 1}-${month_d}-${year + 1}`
+            }
+        }
+    } else {
+        if (day === 1) {
+            if (parseInt(month_d) - 1 === 0) {
+                date_exp = `${mn[11]}-12-${year + 1}`
+            } else {
+                date_exp = `${mn[parseInt(month_d) - 2]}-${parseInt(month_d) - 1}-${year + 1}`
+            }
+        } else {
+            date_exp = `${day - 1}-${month_d}-${year + 1}`
+        }
+    }
+    let mn_t_c = parseInt(date_exp.split('-')[1]) - 1
+    console.log(month[mn_t_c])
+    c_t.push(date_exp.split('-')[0])
+    c_t.push(month[mn_t_c])
+    c_t.push(date_exp.split('-')[2])
+
+    return c_t
+
+
 }
 function displayFax(fax) {
     if (fax === null) {

@@ -51,7 +51,6 @@ app.get('/get/username/login', (req, res) => {
   }
 })
 
-
 app.get('/user/:username/:password', (req, res) => {
   webService.getUser(req.params.username, req.params.password).then((data) => {
     if (data.length != 0) {
@@ -130,7 +129,7 @@ app.get('/get/notification/request/', (req, res) => {
 })
 //notification
 app.get('/get/session/re_exp', (req, res) => {
-    res.json(req.session.data_exp_count)
+  res.json(req.session.data_exp_count)
 })
 //nDada
 app.get('/get/type/request/exp/less/:date', (req, res) => {
@@ -160,7 +159,19 @@ app.get('/get/personal/assistant/:personalId', (req, res) => {
     }
   })
 })
-
+//
+app.get('/search/request/page', (req, res) => {
+  console.log('get request  ')
+  var obj = JSON.parse(req.query.r_s);
+  // console.log(obj)
+  webService.searchRequestByItem(obj).then((data) => {
+    if (data != null) {
+      res.json(data)
+    } else {
+      res.sendStatus(404)
+    }
+  })
+})
 app.get('/get/requestType', (req, res) => {
   webService.getRequestType().then((data) => {
     if (data != null) {
@@ -286,6 +297,35 @@ app.post('/insert/request', (req, res) => {
     res.json(data);
   })
 })
+app.post('/insert/complaint', (req, res) => {
+  // console.log(req)
+  console.log('Doing')
+  var obj = JSON.parse(req.body.gropData);
+  for (let i = 0; i < obj[1].length; i++) {
+    let image
+    i === 0 ? image = req.files.files0 : ''
+    i === 1 ? image = req.files.files1 : ''
+    i === 2 ? image = req.files.files2 : ''
+    i === 3 ? image = req.files.files3 : ''
+    i === 4 ? image = req.files.files4 : ''
+    i === 5 ? image = req.files.files5 : ''
+    i === 6 ? image = req.files.files6 : ''
+    i === 7 ? image = req.files.files7 : ''
+    if (obj[1][i].type === '') {
+      obj[1][i].name = i + 1
+      obj[1][i].type = image.mimetype.slice(6, image.mimetype.length)
+      obj[1][i].data = image.data
+    } else {
+      obj[1][i].name = i + 1
+      obj[1][i].data = image.data
+    }
+  }
+
+  webService.insertComplaintStep(obj[0],obj[1], req.session.username).then((data) => {
+    console.log(`status server return ${data}`)
+    res.json(data);
+  })
+})
 app.post('/insert/request/renew', (req, res) => {
   webService.insertRequestRenew(req.body.renew_data, req.session.username).then((data) => {
     res.json(data);
@@ -306,6 +346,16 @@ app.get('/get/request/:no/:year', (req, res) => {
     res.json(data)
   })
 })
+app.get('/get/image/comlaint/:id', (req, res) => {
+  webService.getImageComlaint(req.params.id).then((data) => {
+    res.json(data)
+  })
+})
+app.get('/get/cmplaint/id/:no/:year', (req, res) => {
+  webService.getComplaintById(req.params.no, req.params.year).then((data) => {
+    res.json(data)
+  })
+})
 app.get('/get/owner/duplication/transfer/:no/:year/:pid', (req, res) => {
   console.log(` search ${req.params.no} ${req.params.year} ${req.params.pid}`)
   webService.getOwnerDuplication(req.params.no, req.params.year, req.params.pid).then((data) => {
@@ -314,6 +364,17 @@ app.get('/get/owner/duplication/transfer/:no/:year/:pid', (req, res) => {
 })
 app.get('/get/image/request/:imageName', (req, res) => {
   webService.getImageEstablishmentByImageRequest(req.params.imageName).then((data) => {
+    res.json(data)
+  })
+})
+app.get('/get/list/complaint/id/:p_id', (req, res) => {
+  webService.getComplaintByPersonalId(req.params.p_id).then((data) => {
+    res.json(data)
+  })
+})
+app.get('/get/personal/profile/:id', (req, res) => {
+  console.log('get data personal Id')
+  webService.getPersonalById(req.params.id).then((data) => {
     res.json(data)
   })
 })

@@ -155,8 +155,8 @@
                         </select>
                         <input type="text" id="name" style="width: 16.5%;" readonly
                             onchange="document.getElementById('name').classList.remove('alertInput')">
-                        <button type="button" class="fa fa-search" style="border-radius: 5px;"
-                            onclick="searchOparator('OPERATOR')"></button></a>
+                        <button type="button" id='btn_sc_op' class="fa fa-search" style="border-radius: 5px;"
+                                onclick="searchOparator('OPERATOR')"></button></a>
                     <a>เลขประจำตัว <font color="red">*</font> :
                         <input type="text" id="id" style="width: 13%;" readonly
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"

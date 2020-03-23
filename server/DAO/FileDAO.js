@@ -21,12 +21,6 @@ class FileDAO {
                     console.log(err)
                 }
                 console.log(result)
-                // if (result.affectedRows === 1) {
-                //     return resolve(true)
-                // } else {
-                //     return resolve(false)
-                // }
-
                 return resolve(true)
             })
         })

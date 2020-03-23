@@ -33,20 +33,53 @@ class RequestDAO {
             column = column + `REQUEST_DATE_ISSUED, REQUEST_DATE_EXPIRED, `
             column = column + `REQUEST_CONDITION_NO_1, REQUEST_CONDITION_NO_2, REQUEST_CONDITION_NO_3, REQUEST_CONDITION_NO_4, `
             column = column + `REQUEST_IMAGE_NAME, REQUEST_TOTAL_IMAGE, REQUEST_STATUS, REQUEST_DELETE_LOGIC, REQUEST_IS_DELETED, `
-            column = column + `REQUEST_LAST_UPDATE, REQUEST_USER_UPDATE ,REQUEST_STATUS_BEFORE` //${request.establishment_is_land_owned}
+            column = column + `REQUEST_LAST_UPDATE, REQUEST_USER_UPDATE ,REQUEST_STATUS_BEFORE`
+            let query = `INSERT INTO request(${column}) VALUES (?)`
 
-            let values = `'${request.no}','${request.year}', '${request.personal_id_owner}', '${request.request_type_id}', '${request.staff_id_alderman}', `
-            values = values + `'${request.establishment_id}', ${request.staff_id_money}, ${request.reference_id}, ${request.train_id}, `
-            values = values + `${request.personal_id_assistant}, ${request.staff_id_approve}, ${request.establishment_is_land_owned},${request.establishment_address_id}, '${request.menu}', '${request.date_submission}', `
-            values = values + `${request.date_approve}, '${request.doc_no1}', '${request.doc_no2}', '${request.doc_no3}', `
-            values = values + `'${request.doc_no4}', '${request.doc_no5}', '${request.doc_no6}', ${request.subcategory}, `
-            values = values + `${request.product_type}, ${request.sell_start}, ${request.sell_end}, '${request.sell_allow}', `
-            values = values + `${request.date_issued}, ${request.date_expired}, ${request.condition_no_1}, `
-            values = values + `${request.condition_no_2}, ${request.condition_no_3}, ${request.condition_no_4}, ${request.image_name}, `
-            values = values + `'${request.total_image}', '${request.status}', ${request.delete_logic}, '${request.is_deleted}', `
-            values = values + `'${request.last_update}', '${request.user_update}', '${request.status_before}' `
-            let query = `INSERT INTO request(${column}) VALUES (${values})`
-            con.query(query, function (err, result) {
+            let list_value = [
+                request.no,
+                request.year,
+                request.personal_id_owner,
+                request.request_type_id,
+                request.staff_id_alderman,
+                request.establishment_id,
+                request.staff_id_money,
+                request.reference_id,
+                request.train_id,
+                request.personal_id_assistant,
+                request.staff_id_approve,
+                request.establishment_is_land_owned,
+                request.establishment_address_id,
+                request.menu,
+                request.date_submission,
+                request.date_approve,
+                request.doc_no1,
+                request.doc_no2,
+                request.doc_no3,
+                request.doc_no4,
+                request.doc_no5,
+                request.doc_no6,
+                request.subcategory,
+                request.product_type,
+                request.sell_start,
+                request.sell_end,
+                request.sell_allow,
+                request.date_issued,
+                request.date_expired,
+                request.condition_no_1,
+                request.condition_no_2,
+                request.condition_no_3,
+                request.condition_no_4,
+                request.image_name,
+                request.total_image,
+                request.status,
+                request.delete_logic,
+                request.is_deleted,
+                request.last_update,
+                request.user_update,
+                request.status_before
+            ]
+            con.query(query, [list_value], function (err, result) {
                 if (err) {
                     console.log(err)
                     return resolve(err.code)
@@ -59,9 +92,6 @@ class RequestDAO {
         request.status = 'active'
         request.status_before = 'active'
         request.is_deleted = 'N'
-        console.log('--- DATABASE INSERT RENEW --- ')
-        console.log(request)
-        console.log('--- END DATABASE INSERT RENEW ---')
         return new Promise((resolve, reject) => {
             let column = `REQUEST_NO, REQUEST_YEAR, PERSONAL_ID_OWNER, REQUEST_TYPE_ID, STAFF_ID_ALDERMAN, ESTABLISHMENT_ID, `
             column = column + `STAFF_ID_MONEY, REFERENCE_ID, TRAIN_ID, PERSONAL_ID_ASSISTANT, STAFF_ID_APPROVE, ESTABLISHMENT_IS_LAND_OWNED,ESTABLISHMENT_ADDRESS_ID , REQUEST_MENU, `
@@ -71,23 +101,57 @@ class RequestDAO {
             column = column + `REQUEST_DATE_ISSUED, REQUEST_DATE_EXPIRED, `
             column = column + `REQUEST_CONDITION_NO_1, REQUEST_CONDITION_NO_2, REQUEST_CONDITION_NO_3, REQUEST_CONDITION_NO_4, `
             column = column + `REQUEST_IMAGE_NAME, REQUEST_TOTAL_IMAGE, REQUEST_STATUS, REQUEST_DELETE_LOGIC, REQUEST_IS_DELETED, `
-            column = column + `REQUEST_LAST_UPDATE, REQUEST_USER_UPDATE ,REQUEST_STATUS_BEFORE,` //${request.establishment_is_land_owned}
+            column = column + `REQUEST_LAST_UPDATE, REQUEST_USER_UPDATE ,REQUEST_STATUS_BEFORE,`
             column = column + `REQUEST_RECEIPT_FINE, REQUEST_RECEIPT_FEE, REQUEST_RECEIPT_DATE`
-            let values = `'${request.no}','${request.year}', '${request.personal_id_owner}', '${request.request_type_id}', '${request.staff_id_alderman}', `
-            values = values + `'${request.establishment_id}', ${request.staff_id_money}, ${request.reference_id}, ${request.train_id}, `
-            values = values + `${request.personal_id_assistant}, ${request.staff_id_approve}, ${request.establishment_is_land_owned},${request.establishment_address_id}, '${request.menu}', '${request.date_submission}', `
-            values = values + `${request.date_approve}, '${request.doc_no1}', '${request.doc_no2}', '${request.doc_no3}', `
-            values = values + `'${request.doc_no4}', '${request.doc_no5}', '${request.doc_no6}', ${request.subcategory}, `
-            values = values + `${request.product_type}, ${request.sell_start}, ${request.sell_end}, '${request.sell_allow}', `
-            values = values + `${request.date_issued}, ${request.date_expired}, ${request.condition_no_1}, `
-            values = values + `${request.condition_no_2}, ${request.condition_no_3}, ${request.condition_no_4}, ${request.image_name}, `
-            values = values + `'${request.total_image}', '${request.status}', NULL, '${request.is_deleted}', `
-            values = values + `'${request.last_update}', '${request.user_update}', '${request.status_before}' ,`
-            values = values + `${request.receipt_fine}, ${request.receipt_fee}, ${request.receipt_date}`
+            let list_value = [
+                request.no,
+                request.year,
+                request.personal_id_owner,
+                request.request_type_id,
+                request.staff_id_alderman,
+                request.establishment_id,
+                request.staff_id_money,
+                request.reference_id,
+                request.train_id,
+                request.personal_id_assistant,
+                request.staff_id_approve,
+                request.establishment_is_land_owned,
+                request.establishment_address_id,
+                request.menu,
+                request.date_submission,
+                request.date_approve,
+                request.doc_no1,
+                request.doc_no2,
+                request.doc_no3,
+                request.doc_no4,
+                request.doc_no5,
+                request.doc_no6,
+                request.subcategory,
+                request.product_type,
+                request.sell_start,
+                request.sell_end,
+                request.sell_allow,
+                request.date_issued,
+                request.date_expired,
+                request.condition_no_1,
+                request.condition_no_2,
+                request.condition_no_3,
+                request.condition_no_4,
+                request.image_name,
+                request.total_image,
+                request.status,
+                null,
+                request.is_deleted,
+                request.last_update,
+                request.user_update + '',
+                request.status_before,
+                request.receipt_fine,
+                request.receipt_fee,
+                request.receipt_date
+            ]
 
-            let query = `INSERT INTO request(${column}) VALUES (${values})`
-            console.log(query)
-            con.query(query, function (err, result) {
+            let query = `INSERT INTO request(${column}) VALUES (?)`
+            con.query(query, [list_value], function (err, result) {
                 if (err) {
                     console.log(err)
                     return resolve(err.code)
@@ -118,65 +182,65 @@ class RequestDAO {
             column = column + `REQUEST_STATUS, REQUEST_DELETE_LOGIC, REQUEST_IS_DELETED, REQUEST_STATUS_BEFORE,`
             column = column + `REQUEST_LAST_UPDATE, REQUEST_USER_UPDATE , REQUEST_RECEIPT_FINE_TRANSFER ,REQUEST_RECEIPT_DATE_TRANSFER`
 
-            let values = ``
-            values = values + `'${request.REQUEST_NO}',`
-            values = values + `'${request.REQUEST_YEAR}',`
-            values = values + `'${request.PERSONAL_ID_OWNER}',`
-            values = values + `'${request.REQUEST_TYPE_ID}',`
-            values = values + `'${request.STAFF_ID_ALDERMAN}',`
-            values = values + `'${request.ESTABLISHMENT_ID}',`
-            values = values + `${request.STAFF_ID_MONEY},`
-            values = values + `${request.REFERENCE_ID},`
-            values = values + `${request.TRAIN_ID},`
-            values = values + `${request.PERSONAL_ID_ASSISTANT},`
-            values = values + `${request.STAFF_ID_APPROVE},`
-            values = values + `${request.ESTABLISHMENT_ADDRESS_ID},`
-            values = values + `${request.ESTABLISHMENT_IS_LAND_OWNED},`
-            values = values + `'${request.REQUEST_MENU}',`
-            values = values + `'${request.REQUEST_DATE_SUBMISSION}',`
-            values = values + `${request.REQUEST_DATE_APPROVE},`
-            values = values + `'${request.REQUEST_DOC_NO1}',`
-            values = values + `'${request.REQUEST_DOC_NO2}',`
-            values = values + `'${request.REQUEST_DOC_NO3}',`
-            values = values + `'${request.REQUEST_DOC_NO4}',`
-            values = values + `'${request.REQUEST_DOC_NO5}',`
-            values = values + `'${request.REQUEST_DOC_NO6}',`
-            values = values + `${request.REQUEST_SUBCATEGORY},`
-            values = values + `${request.REQUEST_PRODUCT_TYPE},`
-            values = values + `${request.REQUEST_SELL_START},`
-            values = values + `${request.REQUEST_SELL_END},`
-            values = values + `'${request.REQUEST_SELL_ALLOW}',`
-            values = values + `${request.REQUEST_RECEIPT_FINE},`
-            values = values + `${request.REQUEST_RECEIPT_FEE},`
-            values = values + `${request.REQUEST_RECEIPT_TOTAL},`
-            values = values + `${request.REQUEST_RECEIPT_DATE},`
-            values = values + `${request.REQUEST_RECEIPT_FINE_YEAR_2},`
-            values = values + `${request.REQUEST_RECEIPT_FEE_YEAR_2},`
-            values = values + `${request.REQUEST_RECEIPT_TOTAL_YEAR_2},`
-            values = values + `${request.REQUEST_RECEIPT_DATE_YEAR_2},`
-            values = values + `${request.REQUEST_RECEIPT_FINE_YEAR_3},`
-            values = values + `${request.REQUEST_RECEIPT_FEE_YEAR_3},`
-            values = values + `${request.REQUEST_RECEIPT_TOTAL_YEAR_3},`
-            values = values + `${request.REQUEST_RECEIPT_DATE_YEAR_3},`
-            values = values + `${request.REQUEST_DATE_ISSUED},`
-            values = values + `${request.REQUEST_DATE_EXPIRED},`
-            values = values + `${request.REQUEST_CONDITION_NO_1},`
-            values = values + `${request.REQUEST_CONDITION_NO_2},`
-            values = values + `${request.REQUEST_CONDITION_NO_3},`
-            values = values + `${request.REQUEST_CONDITION_NO_4},`
-            values = values + `'${request.REQUEST_IMAGE_NAME}',`
-            values = values + `'${request.REQUEST_TOTAL_IMAGE}',`
-            values = values + `'${request.REQUEST_STATUS}',`
-            values = values + `${request.REQUEST_DELETE_LOGIC},`
-            values = values + `'${request.REQUEST_IS_DELETED}',`
-            values = values + `'${request.REQUEST_STATUS_BEFORE}',`
-            values = values + `'${request.REQUEST_LAST_UPDATE}',`
-            values = values + `'${request.REQUEST_USER_UPDATE}',`
-            values = values + `${request.REQUEST_RECEIPT_FINE_TRANSFER},`
-            values = values + `'${request.REQUEST_RECEIPT_DATE_TRANSFER}'`
-            console.log(values)
-            let query = `INSERT INTO request(${column}) VALUES (${values})`
-            con.query(query, function (err, result) {
+            let values = [
+                request.REQUEST_NO,
+                request.REQUEST_YEAR,
+                request.PERSONAL_ID_OWNER,
+                request.REQUEST_TYPE_ID,
+                request.STAFF_ID_ALDERMAN,
+                request.ESTABLISHMENT_ID,
+                request.STAFF_ID_MONEY,
+                request.REFERENCE_ID,
+                request.TRAIN_ID,
+                request.PERSONAL_ID_ASSISTANT,
+                request.STAFF_ID_APPROVE,
+                request.ESTABLISHMENT_ADDRESS_ID,
+                request.ESTABLISHMENT_IS_LAND_OWNED,
+                request.REQUEST_MENU,
+                request.REQUEST_DATE_SUBMISSION,
+                request.REQUEST_DATE_APPROVE,
+                request.REQUEST_DOC_NO1,
+                request.REQUEST_DOC_NO2,
+                request.REQUEST_DOC_NO3,
+                request.REQUEST_DOC_NO4,
+                request.REQUEST_DOC_NO5,
+                request.REQUEST_DOC_NO6,
+                request.REQUEST_SUBCATEGORY,
+                request.REQUEST_PRODUCT_TYPE,
+                request.REQUEST_SELL_START,
+                request.REQUEST_SELL_END,
+                request.REQUEST_SELL_ALLOW,
+                request.REQUEST_RECEIPT_FINE,
+                request.REQUEST_RECEIPT_FEE,
+                request.REQUEST_RECEIPT_TOTAL,
+                request.REQUEST_RECEIPT_DATE,
+                request.REQUEST_RECEIPT_FINE_YEAR_2,
+                request.REQUEST_RECEIPT_FEE_YEAR_2,
+                request.REQUEST_RECEIPT_TOTAL_YEAR_2,
+                request.REQUEST_RECEIPT_DATE_YEAR_2,
+                request.REQUEST_RECEIPT_FINE_YEAR_3,
+                request.REQUEST_RECEIPT_FEE_YEAR_3,
+                request.REQUEST_RECEIPT_TOTAL_YEAR_3,
+                request.REQUEST_RECEIPT_DATE_YEAR_3,
+                request.REQUEST_DATE_ISSUED,
+                request.REQUEST_DATE_EXPIRED,
+                request.REQUEST_CONDITION_NO_1,
+                request.REQUEST_CONDITION_NO_2,
+                request.REQUEST_CONDITION_NO_3,
+                request.REQUEST_CONDITION_NO_4,
+                request.REQUEST_IMAGE_NAME,
+                request.REQUEST_TOTAL_IMAGE,
+                request.REQUEST_STATUS,
+                request.REQUEST_DELETE_LOGIC,
+                request.REQUEST_IS_DELETED,
+                request.REQUEST_STATUS_BEFORE,
+                request.REQUEST_LAST_UPDATE,
+                request.REQUEST_USER_UPDATE,
+                request.REQUEST_RECEIPT_FINE_TRANSFER,
+                request.REQUEST_RECEIPT_DATE_TRANSFER
+            ]
+            let query = `INSERT INTO request(${column}) VALUES (?)`
+            con.query(query, [values], function (err, result) {
                 if (err) {
                     console.log(err)
                     return resolve(err.code)
@@ -199,7 +263,7 @@ class RequestDAO {
     }
     getCountRequestExp30Day() {
         return new Promise((resolve, reject) => {
-            let query = `SELECT COUNT(REQUEST_NO) As RE_EXP FROM request WHERE DATEDIFF(request.REQUEST_DATE_EXPIRED, NOW()) <= 30 AND REQUEST_STATUS = 'active'`
+            let query = `SELECT COUNT(REQUEST_NO) As RE_EXP FROM request WHERE DATEDIFF(request.REQUEST_DATE_EXPIRED, NOW()) <= 30 AND DATEDIFF(request.REQUEST_DATE_EXPIRED, NOW()) > -1 AND REQUEST_STATUS = 'active'`
             con.query(query, function (err, result) {
                 if (err) {
                     console.log(err.code)
@@ -235,8 +299,8 @@ class RequestDAO {
             if (more === true) {
                 conditiion = `DATEDIFF(request.REQUEST_DATE_EXPIRED, NOW()) < -90 AND REQUEST_STATUS = 'expire'`
             }
-            console.log(conditiion)
             let query = `SELECT ${column} FROM request ${joinTable} WHERE ${conditiion}`
+            console.log(query)
             con.query(query, function (err, result) {
                 if (err) {
                     console.log(err)
@@ -337,35 +401,177 @@ class RequestDAO {
             })
         })
     }
+    searchPangeRequest(item) {
+        return new Promise((resolve, reject) => {
+            let value = ``
+            if (item.typeSearch === 1) {
+                //personal name and personal surname
+                value = value + `personal.PERSONAL_NAME LIKE "%${item.name_s}%" `
+                value = value + `AND personal.PERSONAL_SURNAME LIKE "%${item.surname_s}%"`
+            }
+            if (item.typeSearch === 2) {
+                //date sub
+                value = value + `request.REQUEST_DATE_ISSUED = '${item.datepicker1}'`
+            }
+            if (item.typeSearch === 3) {
+                //request Id
+                value = value + `request.REQUEST_NO LIKE "%${item.r_no}%" `
+                value = value + `AND request.REQUEST_YEAR LIKE "%${item.r_year}%" `
+            }
+            if (item.typeSearch === 4) {
+                //personal Id
+                value = value + `personal.PERSONAL_PERSONAL_ID LIKE "%${item.personal_id}%" `
+            }
+            if (item.typeSearch === 5) {
+                //หมดอายุ
+                value = value + `request.REQUEST_DATE_EXPIRED = '${item.datepicker2}' `
+            }
+            if (item.typeSearch === 6) {
+                //ใบอนุญาต
+                value = value + `request.REQUEST_MENU LIKE "%${item.type_request}%" `
+            }
+            if (item.typeSearch === 7) {
+                //ประเภทใบอนุญาต
+                value = value + `request_type.REQUEST_TYPE_NAME LIKE "%${item.type_product}%" `
+            }
+            if (item.typeSearch === 8) {
+                //ที่อยู่
+                value = value + `address.ADDRESS_HOME_NUMBER LIKE "%${item.homeId}%" `
+                if (item.moo != '') {
+                    value = value + `AND address.ADDRESS_MOO LIKE "%${item.moo}%" `
+                }
+                if (item.trxk != '') {
+                    value = value + `AND address.ADDRESS_TRXK LIKE "%${item.trxk}%" `
+                }
+                if (item.sxy != '') {
+                    value = value + `AND address.ADDRESS_SXY LIKE "%${item.sxy}%" `
+                }
+                if (item.bA != '') {
+                    value = value + `AND address.ADDRESS_BUILDING LIKE "%${item.bA}%" `
+                }
+                if (item.road != '') {
+                    value = value + `AND address.ADDRESS_ROAD LIKE "%${item.road}%" `
+                }
+                value = value + `AND address.DISTRICT_NAME LIKE "%${item.subdistrict}%" `
+                value = value + `AND address.AMPHUR_NAME LIKE "%${item.district}%" `
+                value = value + `AND address.PROVINCE_NAME LIKE "%${item.province}%" `
+            }
+            if (item.typeSearch === 9) {
+                //ชื่อสถานประกอบการ
+                if (item.e_name != '') {
+                    value = value + `establishment.ESTABLISHMENT_NAME LIKE "%${item.e_name}%" `
+                }else{
+                    value = value + `1`
+                } 
+
+            }
+
+
+
+            let column = `request.REQUEST_MENU As R_MENU, `
+            column = column + `request_type.REQUEST_TYPE_NAME As R_TYPE, `
+            column = column + `request.REQUEST_NO As R_NO, `
+            column = column + `request.REQUEST_YEAR As R_YEAR, `
+            column = column + `establishment.ESTABLISHMENT_NAME As E_NAME, `
+            column = column + `personal.PERSONAL_TITLE As P_TITLE, `
+            column = column + `personal.PERSONAL_NAME As P_NAME, `
+            column = column + `personal.PERSONAL_SURNAME As P_SURNAME, `
+            column = column + `personal.PERSONAL_PERSONAL_ID As P_ID, `
+
+            column = column + `request.REQUEST_DATE_ISSUED, `
+            column = column + `request.REQUEST_DATE_EXPIRED, `
+
+            column = column + `address.ADDRESS_HOME_NUMBER As A_H, `
+            column = column + `address.ADDRESS_MOO As A_M, `
+            column = column + `address.ADDRESS_TRXK  As A_T, `
+            column = column + `address.ADDRESS_SXY As A_S, `
+            column = column + `address.ADDRESS_BUILDING As A_B, `
+            column = column + `address.ADDRESS_ROAD  As A_R, `
+            column = column + `address.DISTRICT_NAME As A_D, `
+            column = column + `address.AMPHUR_NAME  As A_A, `
+            column = column + `address.PROVINCE_NAME As A_P`
+            let joinTable = `JOIN personal ON personal.PERSONAL_ID = request.PERSONAL_ID_OWNER `
+            joinTable = joinTable + `JOIN establishment ON establishment.ESTABLISHMENT_ID  = request.ESTABLISHMENT_ID ` //e
+            joinTable = joinTable + `JOIN address ON address.ADDRESS_ID = establishment.ADDRESS_ID ` //ea
+            joinTable = joinTable + `JOIN request_type ON request_type.REQUEST_TYPE_ID = request.REQUEST_TYPE_ID`
+            let query = `SELECT ${column} FROM request ${joinTable} WHERE ${value}`
+            console.log(value)
+            con.query(query, function (err, result) {
+                if (err) {
+                    console.log(err.code)
+                    return resolve(err.code)
+                }
+                return resolve(result)
+            })
+        })
+    }
+
     //UPDATE personal SET ${value} WHERE PERSONAL_ID='${personal.id}'\
     update(request) {
         console.log(`-------- DATABASE -------`)
         console.log(request)
         console.log(`-------- DATABASE -------`)
         return new Promise((resolve, reject) => {
-            let column = `PERSONAL_ID_OWNER='${request.personal_id_owner}', REQUEST_TYPE_ID='${request.request_type_id}', STAFF_ID_ALDERMAN='${request.staff_id_alderman}', ESTABLISHMENT_ID='${request.establishment_id}', `
-            column = column + `STAFF_ID_MONEY=${request.staff_id_money}, REFERENCE_ID=${request.reference_id}, TRAIN_ID=${request.train_id}, PERSONAL_ID_ASSISTANT=${request.personal_id_assistant}, STAFF_ID_APPROVE=${request.staff_id_approve}, REQUEST_MENU='${request.menu}', `
-            column = column + `REQUEST_DATE_SUBMISSION='${request.date_submission}', REQUEST_DATE_APPROVE=${request.date_approve}, REQUEST_DOC_NO1='${request.doc_no1}', REQUEST_DOC_NO2='${request.doc_no2}', REQUEST_DOC_NO3='${request.doc_no3}', `
-            column = column + `REQUEST_DOC_NO4='${request.doc_no4}', REQUEST_DOC_NO5='${request.doc_no5}', REQUEST_DOC_NO6='${request.doc_no6}', REQUEST_SUBCATEGORY=${request.subcategory}, REQUEST_PRODUCT_TYPE=${request.product_type},`
-            column = column + `REQUEST_SELL_START=${request.sell_start}, REQUEST_SELL_END=${request.sell_end}, REQUEST_SELL_ALLOW='${request.sell_allow}', REQUEST_RECEIPT_FINE=${request.receipt_fine}, `
-            column = column + `REQUEST_RECEIPT_FEE=${request.receipt_fee}, REQUEST_RECEIPT_TOTAL=${request.receipt_total}, REQUEST_RECEIPT_DATE=${request.receipt_date}, REQUEST_DATE_ISSUED=${request.date_issued}, REQUEST_DATE_EXPIRED=${request.date_expired}, `
-            column = column + `REQUEST_CONDITION_NO_1=${request.condition_no_1}, REQUEST_CONDITION_NO_2=${request.condition_no_2}, REQUEST_CONDITION_NO_3=${request.condition_no_3}, REQUEST_CONDITION_NO_4=${request.condition_no_4}, `
-            column = column + `REQUEST_IMAGE_NAME=${request.image_name}, REQUEST_TOTAL_IMAGE='${request.total_image}', REQUEST_STATUS='${request.status}', REQUEST_DELETE_LOGIC=${request.delete_logic}, REQUEST_IS_DELETED='${request.is_deleted}', `
-            column = column + `REQUEST_LAST_UPDATE='${request.last_update}', REQUEST_USER_UPDATE='${request.user_update}' , `
-            column = column + `REQUEST_STATUS_BEFORE='${request.status_before}', REQUEST_STATUS='${request.status}', `
-            column = column + `ESTABLISHMENT_IS_LAND_OWNED = ${request.establishment_is_land_owned},ESTABLISHMENT_ADDRESS_ID = ${request.establishment_address_id},`
-            //year 1
-            column = column + `REQUEST_RECEIPT_FINE=${request.receipt_fine}, REQUEST_RECEIPT_FEE=${request.receipt_fee}, `
-            column = column + `REQUEST_RECEIPT_TOTAL=${request.receipt_total}, REQUEST_RECEIPT_DATE=${request.receipt_date}, `
-            //year 2 
-            column = column + `REQUEST_RECEIPT_FINE_YEAR_2=${request.receipt_fine_year_2}, REQUEST_RECEIPT_FEE_YEAR_2=${request.receipt_fee_year_2}, `
-            column = column + `REQUEST_RECEIPT_TOTAL_YEAR_2=${request.receipt_total_year_2}, REQUEST_RECEIPT_DATE_YEAR_2=${request.receipt_date_year_2}, `
-            //year 3
-            column = column + `REQUEST_RECEIPT_FINE_YEAR_3=${request.receipt_fine_year_3}, REQUEST_RECEIPT_FEE_YEAR_3=${request.receipt_fee_year_3}, `
-            column = column + `REQUEST_RECEIPT_TOTAL_YEAR_3=${request.receipt_total_year_3}, REQUEST_RECEIPT_DATE_YEAR_3=${request.receipt_date_year_3}`
-
-            let query = `UPDATE request SET ${column} WHERE REQUEST_NO='${request.no}' AND REQUEST_YEAR='${request.year}'`
-            con.query(query, function (err, result) {
+            let query = `UPDATE request SET ? WHERE REQUEST_NO='${request.no}' AND REQUEST_YEAR='${request.year}'`
+                , values = {
+                    PERSONAL_ID_OWNER: request.personal_id_owner,
+                    REQUEST_TYPE_ID: request.request_type_id,
+                    STAFF_ID_ALDERMAN: request.staff_id_alderman,
+                    ESTABLISHMENT_ID: request.establishment_id,
+                    STAFF_ID_MONEY: request.staff_id_money,
+                    REFERENCE_ID: request.reference_id,
+                    TRAIN_ID: request.train_id,
+                    PERSONAL_ID_ASSISTANT: request.personal_id_assistant,
+                    STAFF_ID_APPROVE: request.staff_id_approve,
+                    REQUEST_MENU: request.menu,
+                    REQUEST_DATE_SUBMISSION: request.date_submission,
+                    REQUEST_DATE_APPROVE: request.date_approve,
+                    REQUEST_DOC_NO1: request.doc_no1,
+                    REQUEST_DOC_NO2: request.doc_no2,
+                    REQUEST_DOC_NO3: request.doc_no3,
+                    REQUEST_DOC_NO4: request.doc_no4,
+                    REQUEST_DOC_NO5: request.doc_no5,
+                    REQUEST_DOC_NO6: request.doc_no6,
+                    REQUEST_SUBCATEGORY: request.subcategory,
+                    REQUEST_PRODUCT_TYPE: request.product_type,
+                    REQUEST_SELL_START: request.sell_start,
+                    REQUEST_SELL_END: request.sell_end,
+                    REQUEST_SELL_ALLOW: request.sell_allow,
+                    REQUEST_RECEIPT_FINE: request.receipt_fine,
+                    REQUEST_RECEIPT_FEE: request.receipt_fee,
+                    REQUEST_RECEIPT_TOTAL: request.receipt_total,
+                    REQUEST_RECEIPT_DATE: request.receipt_date,
+                    REQUEST_DATE_ISSUED: request.date_issued,
+                    REQUEST_DATE_EXPIRED: request.date_expired,
+                    REQUEST_CONDITION_NO_1: request.condition_no_1,
+                    REQUEST_CONDITION_NO_2: request.condition_no_2,
+                    REQUEST_CONDITION_NO_3: request.condition_no_3,
+                    REQUEST_CONDITION_NO_4: request.condition_no_4,
+                    REQUEST_IMAGE_NAME: request.image_name,
+                    REQUEST_TOTAL_IMAGE: request.total_image,
+                    REQUEST_STATUS: request.status,
+                    REQUEST_DELETE_LOGIC: request.delete_logic,
+                    REQUEST_IS_DELETED: request.is_deleted,
+                    REQUEST_LAST_UPDATE: request.last_update,
+                    REQUEST_USER_UPDATE: request.user_update + ``,
+                    REQUEST_STATUS_BEFORE: request.status_before,
+                    REQUEST_STATUS: request.status,
+                    ESTABLISHMENT_IS_LAND_OWNED: request.establishment_is_land_owned,
+                    ESTABLISHMENT_ADDRESS_ID: request.establishment_address_id,
+                    REQUEST_RECEIPT_FINE: request.receipt_fine,
+                    REQUEST_RECEIPT_FEE: request.receipt_fee,
+                    REQUEST_RECEIPT_TOTAL: request.receipt_total,
+                    REQUEST_RECEIPT_DATE: request.receipt_date,
+                    REQUEST_RECEIPT_FINE_YEAR_2: request.receipt_fine_year_2,
+                    REQUEST_RECEIPT_FEE_YEAR_2: request.receipt_fee_year_2,
+                    REQUEST_RECEIPT_TOTAL_YEAR_2: request.receipt_total_year_2,
+                    REQUEST_RECEIPT_DATE_YEAR_2: request.receipt_date_year_2,
+                    REQUEST_RECEIPT_FINE_YEAR_3: request.receipt_fine_year_3,
+                    REQUEST_RECEIPT_FEE_YEAR_3: request.receipt_fee_year_3,
+                    REQUEST_RECEIPT_TOTAL_YEAR_3: request.receipt_total_year_3,
+                    REQUEST_RECEIPT_DATE_YEAR_3: request.receipt_date_year_3
+                }
+            con.query(query, values, function (err, result) {
                 if (err) {
                     console.log(err)
                     return resolve(err.code)
@@ -378,24 +584,33 @@ class RequestDAO {
     }
     updateStatus(request) {
         return new Promise((resolve, reject) => {
-            let column = `REQUEST_STATUS='${request.status}',REQUEST_STATUS_BEFORE ='${request.status_before}',`
-            column = column + `REQUEST_LAST_UPDATE='${request.last_update}',REQUEST_USER_UPDATE='${request.user_update}',`
-            column = column + `REQUEST_DATE_APPROVE=${request.date_approve}, STAFF_ID_APPROVE = ${request.staff_id_approve},`
-            //year 1
-            column = column + `REQUEST_RECEIPT_FINE=${request.receipt_fine}, REQUEST_RECEIPT_FEE=${request.receipt_fee}, `
-            column = column + `REQUEST_RECEIPT_TOTAL=${request.receipt_total}, REQUEST_RECEIPT_DATE=${request.receipt_date}, `
-            //year 2 
-            column = column + `REQUEST_RECEIPT_FINE_YEAR_2=${request.receipt_fine_year_2}, REQUEST_RECEIPT_FEE_YEAR_2=${request.receipt_fee_year_2}, `
-            column = column + `REQUEST_RECEIPT_TOTAL_YEAR_2=${request.receipt_total_year_2}, REQUEST_RECEIPT_DATE_YEAR_2=${request.receipt_date_year_2}, `
-            //year 3
-            column = column + `REQUEST_RECEIPT_FINE_YEAR_3=${request.receipt_fine_year_3}, REQUEST_RECEIPT_FEE_YEAR_3=${request.receipt_fee_year_3}, `
-            column = column + `REQUEST_RECEIPT_TOTAL_YEAR_3=${request.receipt_total_year_3}, REQUEST_RECEIPT_DATE_YEAR_3=${request.receipt_date_year_3},`
-
-            column = column + `STAFF_ID_MONEY=${request.staff_id_money},REQUEST_DATE_ISSUED=${request.date_issued},REQUEST_DATE_EXPIRED=${request.date_expired},`
-            column = column + `REQUEST_DELETE_LOGIC =${request.delete_logic},REQUEST_IS_DELETED='${request.is_deleted}'`
-
-            let query = `UPDATE request SET ${column} WHERE REQUEST_NO='${request.no}' AND REQUEST_YEAR='${request.year}'`
-            con.query(query, function (err, result) {
+            let query = `UPDATE request SET ? WHERE REQUEST_NO='${request.no}' AND REQUEST_YEAR='${request.year}'`
+                , values = {
+                    REQUEST_STATUS: request.status,
+                    REQUEST_STATUS_BEFORE: request.status_before,
+                    REQUEST_LAST_UPDATE: request.last_update,
+                    REQUEST_USER_UPDATE: request.user_update + ``,
+                    REQUEST_DATE_APPROVE: request.date_approve,
+                    STAFF_ID_APPROVE: request.staff_id_approve,
+                    REQUEST_RECEIPT_FINE: request.receipt_fine,
+                    REQUEST_RECEIPT_FEE: request.receipt_fee,
+                    REQUEST_RECEIPT_TOTAL: request.receipt_total,
+                    REQUEST_RECEIPT_DATE: request.receipt_date,
+                    REQUEST_RECEIPT_FINE_YEAR_2: request.receipt_fine_year_2,
+                    REQUEST_RECEIPT_FEE_YEAR_2: request.receipt_fee_year_2,
+                    REQUEST_RECEIPT_TOTAL_YEAR_2: request.receipt_total_year_2,
+                    REQUEST_RECEIPT_DATE_YEAR_2: request.receipt_date_year_2,
+                    REQUEST_RECEIPT_FINE_YEAR_3: request.receipt_fine_year_3,
+                    REQUEST_RECEIPT_FEE_YEAR_3: request.receipt_fee_year_3,
+                    REQUEST_RECEIPT_TOTAL_YEAR_3: request.receipt_total_year_3,
+                    REQUEST_RECEIPT_DATE_YEAR_3: request.receipt_date_year_3,
+                    STAFF_ID_MONEY: request.staff_id_money,
+                    REQUEST_DATE_ISSUED: request.date_issued,
+                    REQUEST_DATE_EXPIRED: request.date_expired,
+                    REQUEST_DELETE_LOGIC: request.delete_logic,
+                    REQUEST_IS_DELETED: request.is_delete
+                }
+            con.query(query, values, function (err, result) {
                 if (err) {
                     console.log(err)
                     return resolve(err.code)
@@ -405,29 +620,43 @@ class RequestDAO {
             })
         })
     }
-    updateStatusOnly(no, year, user, last_update, status, status_before) {
+        updateStatusOnly(no, year, user, last_update, status, status_before) {
         return new Promise((resolve, reject) => {
-            let column = `REQUEST_STATUS='${status}',`
-            column = column + `REQUEST_LAST_UPDATE='${last_update}',REQUEST_USER_UPDATE='${user}'`
+            let query = `UPDATE request SET ? WHERE REQUEST_NO='${no}' AND REQUEST_YEAR='${year}'`
+            let values = {}
             if (status_before != undefined) {
-                column = column + `, REQUEST_STATUS_BEFORE='${status_before}'`
+                values = {
+                    REQUEST_STATUS: status,
+                    REQUEST_LAST_UPDATE: last_update,
+                    REQUEST_USER_UPDATE: user + ``,
+                    REQUEST_STATUS_BEFORE: status_before
+                }
+            } else {
+                values = {
+                    REQUEST_STATUS: status,
+                    REQUEST_LAST_UPDATE: last_update,
+                    REQUEST_USER_UPDATE: user + ``
+                }
             }
-            let query = `UPDATE request SET ${column} WHERE REQUEST_NO='${no}' AND REQUEST_YEAR='${year}'`
-            con.query(query, function (err, result) {
+            con.query(query, values, function (err, result) {
                 if (err) {
                     console.log(err)
                     return resolve(err.code)
                 }
-                console.log(`Update status request id = ${no}/${year} status = expire`)
+                console.log(`Update status request id = ${no}/${year} status = ${status}`)
                 return resolve(`true`)
             })
         })
     }
     updateStatusDelete(object) {
         return new Promise((resolve, reject) => {
-            let column = `REQUEST_IS_DELETED='${object.status}', REQUEST_USER_UPDATE = '${object.username}' ,REQUEST_LAST_UPDATE = '${object.last_update}'`
-            let query = `UPDATE request SET ${column} WHERE REQUEST_NO='${object.id}' AND REQUEST_YEAR='${object.year}'`
-            con.query(query, function (err, result) {
+            let query = `UPDATE request SET ? WHERE REQUEST_NO='${object.id}' AND REQUEST_YEAR='${object.year}'`
+            let values = {
+                REQUEST_IS_DELETED: object.status,
+                REQUEST_USER_UPDATE: object.username + ``,
+                REQUEST_LAST_UPDATE: object.last_update
+            }
+            con.query(query, values, function (err, result) {
                 if (err) {
                     console.log(err.code)
                     return resolve(err.code)

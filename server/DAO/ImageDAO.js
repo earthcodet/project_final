@@ -126,11 +126,61 @@ class ImageDAO {
                     console.log(err)
                 }
                 if (result.length != 0) {
-                    result[0].S_IMAGE_DATA = Buffer.from(result[0].S_IMAGE_DATA, 'binary').toString('base64');
+                    if (result[0].S_IMAGE_DATA != undefined) {
+                        result[0].S_IMAGE_DATA = Buffer.from(result[0].S_IMAGE_DATA, 'binary').toString('base64');
+                    }
                     return resolve(result)
                 } else {
                     return resolve(result)
                 }
+            })
+        })
+    }
+    insertImageComplaint(image) {
+        return new Promise((resolve, reject) => {
+            var sql = "INSERT INTO complaint_image(COMPLAINT_IMAGE_NAME , COMPLAINT_IMAGE_TYPE, COMPLAINT_IMAGE_DATA) VALUES ?";
+            var values = [];
+            for (let i = 0; i < image.length; i++) {
+                values.push([image[i].name, image[i].type, image[i].data])
+            }
+            con.query(sql, [values], function (err, result) {
+                if (err) {
+                    console.log(err)
+                }
+                if (result != undefined || result != null) {
+                    return resolve(true)
+                } else {
+                    return resolve(false)
+                }
+            })
+        })
+    }
+    deleteImageComplaint(id) {
+        return new Promise((resolve, reject) => {
+            let query = "DELETE FROM `complaint_image` WHERE COMPLAINT_IMAGE_NAME LIKE " + "'%" + id + "%'"
+            con.query(query, function (err, result) {
+                if (err) {
+                    console.log(err)
+                }
+                if (result != undefined || result != null) {
+                    return resolve(true)
+                } else {
+                    return resolve(false)
+                }
+            })
+        })
+    }
+    getImageComplaintByImage(id) {
+        return new Promise((resolve, reject) => {
+            let query = `SELECT * FROM complaint_image WHERE COMPLAINT_IMAGE_NAME LIKE '%${id}%'`
+            con.query(query, function (err, result) {
+                if (err) {
+                    console.log(err)
+                }
+                for (let i = 0; i < result.length; i++) {
+                    result[i].COMPLAINT_IMAGE_DATA_BASE64 = Buffer.from(result[i].COMPLAINT_IMAGE_DATA, 'binary').toString('base64');
+                }
+                return resolve(result)
             })
         })
     }

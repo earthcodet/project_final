@@ -21,6 +21,7 @@ function checkView(typeForm) {
                     //displayUserAlderman()
                     console.log(raw_data)
                     if (raw_data != '') {
+                        document.getElementById('btn_sc_op').disabled = true
                         console.log(`raw_data`)
                         console.log(raw_data)
                         setRequestData(raw_data)
@@ -84,6 +85,7 @@ function checkView(typeForm) {
             getPersonalDataAndEstablishment(requestId.p_id, requestId.e_id).then((raw_data) => {
                 // displayUserAlderman()
                 if (raw_data[0] != false && raw_data[1] != false) {
+                    document.getElementById('btn_sc_op').disabled = true
                     setOperatorData(raw_data[0])
                     setOperatorAddressData(raw_data[0])
                     let temp = {
@@ -622,7 +624,6 @@ function setRequestDataReturn(raw_data) {
     console.log(`raw_data`)
     console.log(raw_data)
 }
-
 //set data full raw data
 function setRequestData(raw_data) {
     requestData.no = raw_data.REQUEST_NO
@@ -819,6 +820,7 @@ function createGroupData() {
     let pt_check = `${document.getElementById('phone').value}/${document.getElementById('phone_more').value}`
     operatorData.is_personal_changed = false
     operatorAddressData.is_address_changed = false
+    requestData.staff_id_alderman = userAlderman
     if (operatorData.nationality != document.getElementById('nationality').value.trim()
         || operatorData.race != document.getElementById('race').value.trim() ||
         operatorData.phone != pt_check ||
@@ -924,7 +926,6 @@ function createGroupData() {
                 break;
         }
         requestData.date_submission = document.getElementById('datepicker1').value
-
         requestData.doc_no1 = document.getElementById('documentId').checked === true ? 'Y' : 'N'
         requestData.doc_no2 = document.getElementById('documenthHome').checked === true ? 'Y' : 'N'
         requestData.doc_no3 = document.getElementById('documentLegalEntity').checked === true ? 'Y' : 'N'
@@ -1156,8 +1157,12 @@ function dataChange(type) {
                     status_data_change = true
                 }
             }
-
-            establishmentData.type = document.getElementById('typeWorkplace').value.trim()
+            if(document.getElementById('typeWorkplace') != undefined){
+                establishmentData.type = document.getElementById('typeWorkplace').value.trim()
+            }else{
+                establishmentData.type = ''
+            }
+            
             if (document.getElementById('typeReForm') != undefined) {
                 if (requestData.subcategory != document.getElementById('typeReForm').value ||
                     requestData.product_type != document.getElementById('typeProduct').value.trim() ||

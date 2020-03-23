@@ -1,6 +1,9 @@
+let data_list = []
 function getRequestED(status) {
+    data_list = []
     return new Promise((resolve, reject) => {
         axios.get(`http://localhost:5000/get/type/request/exp/less/${status}`).then((result) => {
+            data_list = result.data
             resolve(result.data);
         })
     })
@@ -29,7 +32,11 @@ function createTable(status, data) {
     for (var i = 0; i < data.length; i++) {
         // creates a table row
         var row = document.createElement("tr");
-        row.onclick = function () { onOpenRequest(data[i].R_NO, data[i].R_YEAR) };
+        let item = {
+            r_id : data[i].R_NO,
+            r_year : data[i].R_YEAR
+        }
+        row.onclick = function () { onOpenRequest(data[this.rowIndex - 1]) };
         for (var j = 0; j < 7; j++) {
             console.log(j)
             var cell = document.createElement("td");
@@ -104,8 +111,12 @@ function onClickStatustab(status, event, id) {
     displayTableRequest(status)
     openCity(event, id)
 }
-function onOpenRequest(id_no, id_year) {
+function onOpenRequest(item) {
     // connection
-    console.log(`id_no ${id_no} / id_year ${id_year}`)
+    if(item != undefined){
+        toRequest(item.REQUEST_MENU,`${item.R_NO}/${item.R_YEAR}`)
+    }else{
+        console.log('error get')
+    }
 }
 document.getElementById('cbd').click()

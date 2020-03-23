@@ -14,20 +14,27 @@ function addPage() {
     enableMenu('saveMenu')
     let temp_value = document.getElementById('request_id_report').value
     resetFunction()
-   document.getElementById('request_id_report').value = temp_value
-    if(document.getElementById('block_no1').style.display === 'none'){
+    document.getElementById('request_id_report').value = temp_value
+    if (document.getElementById('block_no1').style.display === 'none') {
         document.getElementById('block_no1').style.display = 'none'
         document.getElementById('button_block_1').style.display = 'none'
         document.getElementById('block_no2').style.display = ''
         document.getElementById('button_block_2').style.display = ''
-    }else{
+    } else {
         document.getElementById('block_no1').style.display = ''
         document.getElementById('button_block_1').style.display = ''
         document.getElementById('block_no2').style.display = 'none'
         document.getElementById('button_block_2').style.display = 'none'
     }
-    
-
+    totalFiles_report = []
+    resetP()
+    document.getElementById('c_id').disabled = false
+    document.getElementById('btn_name').disabled = false
+    deleteImageAll()
+    displayBlock(1)
+    document.getElementById('request_id_report').value = ''
+    document.getElementById('datepicker4').value = ''
+    document.getElementById('datepicker3').value = ''
 }
 function insertPage() {
     Swal.fire({
@@ -49,7 +56,45 @@ function insertPage() {
         preConfirm: function () {
             return new Promise(function (resolve, reject) {
                 setTimeout(function () {
-                    resolve();
+                    console.log('check input')
+                    if (checkInputInsert() === true) {
+                        if (document.getElementById('c_id').value.trim().length != 3) {
+                            Swal.fire({
+                                html: "เลขที่ใบคำร้องต้องมี 3 หลัก",
+                                icon: "error",
+                                confirmButtonColor: "#009688"
+                            });
+                        } else {
+                            console.log('check input = true')
+                            insertData(type).then((data) => {
+                                if (data) {
+                                    resolve();
+                                } else {
+                                    if (!data) {
+                                        Swal.fire({
+                                            html: "เลขที่ใบคำร้อง มีในระบบแล้ว",
+                                            icon: "error",
+                                            confirmButtonColor: "#009688"
+                                        });
+                                    } else {
+                                        Swal.fire({
+                                            html: "เกิดข้อผิดพลาดทางเซิพเวอร์",
+                                            icon: "error",
+                                            confirmButtonColor: "#009688"
+                                        });
+                                    }
+
+                                }
+                            })
+                        }
+                    } else {
+                        console.log('check input = false')
+                        Swal.fire({
+                            html: "ไม่สามารถเว้นว่างได้",
+                            icon: "error",
+                            confirmButtonColor: "#009688"
+                        });
+                    }
                 }), 1000
             });
         }
@@ -60,13 +105,17 @@ function insertPage() {
                     html: "บันทึกสำเร็จ",
                     icon: "success",
                     confirmButtonColor: "#009688"
-                });
-                data = true
-                disableMenuAll()
-                enableMenu('addMenu')
-                enableMenu('editMenu')
-                enableMenu('deleteMenu')
-                enableFunction()
+                }).then((result_data) => {
+                    if (window.location.href.split('?').length === 1) {
+                        disableMenuAll()
+                        location.replace(window.location.href + '?com_id=' + p_data.id + '&com_year=' + p_data.year)
+                    } else {
+                        let temp_html = window.location.href.split('?')
+                        location.replace(temp_html[0] + '?com_id=' + p_data.id + '&com_year=' + p_data.year)
+
+                    }
+                })
+
             } else if (result.dismiss === Swal.DismissReason.cancel) {
                 // Swal.fire("บันทึกล้มเหลว");
             }
@@ -74,23 +123,13 @@ function insertPage() {
 }
 
 function editPage() {
-    if (!deleteData) {
-        addNew = true
-        image_changed = false
-        file = null
-        disableMenuAll()
-        enableMenu('saveMenu')
-        disableFunction()
-        enableMenu('deleteMenu')
-    } else {
-        Swal.fire({
-            title: "สำนักงานเทศบาล",
-            html: "ข้อมูลอยู่ในสถานะลบแล้ว",
-            confirmButtonColor: "#009688",
-            closeOnConfirm: false,
-            icon: 'warning'
-        })
-    }
+    p_data.status_insert = 'UPDATE'
+    addNew = true
+    file = null
+    disableMenuAll()
+    enableMenu('saveMenu')
+    disableFunction()
+    enableMenu('deleteMenu')
 }
 function deletePage() {
     if (addNew === false) {
@@ -111,17 +150,21 @@ function deletePage() {
             preConfirm: function () {
                 return new Promise(function (resolve, reject) {
                     setTimeout(function () {
-                        //function ใน operator 
-
-                        ///-----------------
-                        // changeStatusDelete('Y').then((statusDelete) => {
-                        //     tempData.is_deleted = 'Y'
-                        //     console.log(`statusDelete = ${statusDelete}`)
-                        //     if (statusDelete) {
-                        //         resolve();
-                        //     }
-                        // })
-                    }, 1000);
+                        p_data.status_insert = 'UPDATE'
+                        p_data.is_deleted = 'Y'
+                        insertData().then((data) => {
+                            if (data) {
+                                resolve();
+                            } else {
+                                console.log(data)
+                                Swal.fire({
+                                    html: "เกิดข้อผิดพลาดทางเซิพเวอร์",
+                                    icon: "error",
+                                    confirmButtonColor: "#009688"
+                                });
+                            }
+                        })
+                    }, 100);
                 })
             }
         })
@@ -133,14 +176,12 @@ function deletePage() {
                         confirmButtonColor: "#009688"
                     });
                     // function update
+                    p_data.status_insert = 'NEW'
                     deleteData = true
-                    setIdDelete(inPersonal.type)
+                    document.getElementById('c_id').style.textDecoration = 'line-through'
                     disableMenuAll()
-                    enableMenu('addMenu')
-                    enableMenu('editMenu')
-                    enableMenu('restoreMenu')
+                    resetAlertInput()
 
-                    resetInputRequired()
                 } else if (result.dismiss === Swal.DismissReason.cancel) {
                     // Swal.fire("บันทึกล้มเหลว");
                 }
@@ -167,23 +208,16 @@ function deletePage() {
                         icon: "success",
                         confirmButtonColor: "#009688"
                     });
-                    if (document.getElementById('typeReForm') != undefined) {
-                        resetInputRequired();
-                    } else {
-                        resetInputRequired2();
-                    }
+                    p_data.status_insert = 'NEW'
+                    resetAlertInput()
                     if (data === false) {
-                        //resetInputUI()
                         addNew = false
                         disableMenuAll()
                         enableMenu('addMenu')
                         enableFunction()
-                        //resetStyleIdDelete()
                         resetFunction()
-                        //resetImageDefault()
                     } else {
-                        //resetFunction()
-                        setDataView()
+                        setUIDataCom(type)
                         disableMenuAll()
                         addNew = false
                         enableMenu('addMenu')
@@ -191,18 +225,11 @@ function deletePage() {
                         enableMenu('deleteMenu')
                         enableFunction()
                     }
-
                 } else if (result.dismiss === Swal.DismissReason.cancel) {
                     // Swal.fire("บันทึกล้มเหลว");
                 }
             });
     }
-}
-function restorePage() {
-    disableMenuAll()
-    enableMenu('addMenu')
-    enableMenu('editMenu')
-    enableMenu('deleteMenu')
 }
 // Data is true
 function changeStatusMenuData() {
@@ -215,8 +242,15 @@ function changeStatusMenuData() {
     enableFunction()
 
 }
+function changeSaveMenu() {
+    addNew = true
+    disableFunction()
+    disableMenuAll()
+    enableMenu('saveMenu')
+    enableMenu('deleteMenu')
+}
 //Search Operator 
-function searchPersonal(typeSearch) {
+function searchPersonal() {
     let id = document.getElementById('popSearchId').value.trim()
     let name = document.getElementById('popSearchName').value.trim()
     let surname = document.getElementById('popSearchSurname').value.trim()
@@ -238,7 +272,7 @@ function searchPersonal(typeSearch) {
             console.log('Searching')
             axios.get(`http://localhost:5000/search/personal/${id}/${name}/${surname}`).then((result) => {
                 if (result.data != 'Not found') {
-                    createResultSearch(result.data, typeSearch)
+                    createResultSearch(result.data)
                     errorSearch('', 'HIDE')
 
                     return resolve(result.data);
@@ -272,7 +306,7 @@ function errorSearch(texterror, action) {
         error.style.display = 'none'
     }
 }
-function createResultSearch(data, typeSearch) {
+function createResultSearch(data) {
     var tbl = document.getElementById("resultItems");
     if (tbl.getElementsByTagName("tbody")[0] != null || tbl.getElementsByTagName("tbody")[0] != undefined) {
         tbl.removeChild(tbl.getElementsByTagName("tbody")[0])
@@ -282,7 +316,7 @@ function createResultSearch(data, typeSearch) {
         // creates a table row
         var row = document.createElement("tr");
         //row index = this.rowIndex
-        row.onclick = function () { showItem(data[this.rowIndex - 1], typeSearch) }
+        row.onclick = function () { showItem(data[this.rowIndex - 1]) }
 
         for (var j = 0; j < 4; j++) {
             var cell = document.createElement("td");
@@ -321,17 +355,17 @@ function createResultSearch(data, typeSearch) {
 }
 function runScript(e, type) {
     if (e.keyCode == 13) {
-        searchPersonal(type)
+        searchPersonal()
         return false;
     }
 }
-function searchOparator(typeSearch) {
+function searchOparator() {
     // new list ค่าใหม่   
     search_name = ''
     search_surname = ''
     search_id = ''
     let swal_html = `<div >
-        <div class="display-center" onkeypress="return runScript(event,'${typeSearch}')">
+        <div class="display-center" onkeypress="return runScript(event)">
                     <h5 style="font-size: 100%;">
                         ชื่อ :
                         <input type="text" id="popSearchName" style="width: 18%;">
@@ -340,7 +374,7 @@ function searchOparator(typeSearch) {
                         เลขบัตรประจำตัว :
                         <input type="text" id="popSearchId" style="width: 18%;" >
                         <button type="button" style="width: auto;height: auto;"
-                        class="btn btn-secondary is-color" onClick="searchPersonal('${typeSearch}')">
+                        class="btn btn-secondary is-color" onClick="searchPersonal()">
                                 <i class="fa fa-search"></i> 
                                 ค้นหา
                            
@@ -373,8 +407,8 @@ function searchOparator(typeSearch) {
         closeOnCancel: false
     });
 }
-function showItem(arrayResult, type) {
-    setDataOperator(arrayResult, type)
-    personal_change = true
+function showItem(arrayResult) {
+    // setDataOperator(arrayResult)
+    setOPcom(arrayResult)
     Swal.close()
 }

@@ -109,7 +109,6 @@ function sortTable(n, id, type) {
         rows = table.rows;
         for (i = 1; i < (rows.length - 1); i++) {
             shouldSwitch = false;
-            console.log(table.rows[i])
             x = rows[i].getElementsByTagName("TD")[n];
             y = rows[i + 1].getElementsByTagName("TD")[n];
             if (type === "date" && x != '-') {
@@ -411,13 +410,11 @@ function toRequest(value, id) {
     id = id.split('/')
     id = id[0] + id[1]
     let type = ''
-
     if (value.path != undefined) {
         type = value.path[0].textContent
     } else {
         type = value
     }
-
     switch (type) {
         case 'กิจการฌาปณสถาน':
             window.open('../request/request_crematory.html?id=' + id, '_blank');
@@ -548,28 +545,29 @@ function getDateExp(type, date) {
     if (type === 'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร' || type === 'หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร') {
         // 3 year - 1 day
         // date_return.date_exp = `${day - 1}-${month}-${year + 3}`
-        if(year + 1 % 4 === 0){
-            if(parseInt(month) === 3 && day === 1){
-                date_return.date_exp = '29-02-'+(year+1)
-            }else{
-                if(day === 1){
-                    if(parseInt(month)-1 === 0){
+        if (((year + 1)-543) % 4 === 0) {
+            if (parseInt(month) === 3 && day === 1) {
+                date_return.date_exp = '29-02-' + (year + 1)
+            } else {
+                
+                if (day === 1) {
+                    if (parseInt(month) - 1 === 0) {
                         date_return.date_exp = `${mn[11]}-12-${year + 3}`
-                    }else{
-                        date_return.date_exp = `${mn[parseInt(month)-1]}-${parseInt(month)-1}-${year+3}`
+                    } else {
+                        date_return.date_exp = `${mn[parseInt(month) - 2]}-${parseInt(month) - 1}-${year + 3}`
                     }
-                }else{
+                } else {
                     date_return.date_exp = `${day - 1}-${month}-${year + 3}`
                 }
             }
-        }else{
-            if(day === 1){
-                if(parseInt(month)-1 === 0){
+        } else {
+            if (day === 1) {
+                if (parseInt(month) - 1 === 0) {
                     date_return.date_exp = `${mn[11]}-12-${year + 3}`
-                }else{
-                    date_return.date_exp = `${mn[parseInt(month)-1]}-${parseInt(month)-1}-${year+3}`
+                } else {
+                    date_return.date_exp = `${mn[parseInt(month) - 2]}-${parseInt(month) - 1}-${year + 3}`
                 }
-            }else{
+            } else {
                 date_return.date_exp = `${day - 1}-${month}-${year + 3}`
             }
         }
@@ -577,34 +575,48 @@ function getDateExp(type, date) {
         return date_return
     } else if (type === 'ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ' || type === 'ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ') {
         //31 Dec Year +1
-        date_return.date_exp = `31-12-${year + 1}`
+        if (month < 10) {
+            date_return.date_exp = `31-12-${year}`
+        } else {
+            date_return.date_exp = `31-12-${year + 1}`
+        }
         console.log(date_return.date_exp)
+        return date_return
+    } else if (type === 'กิจการฌาปณสถาน') {
+        date_return.date_exp = `31-12-${year + 3}`
         return date_return
     } else {
         // 1 Year - 1 day
-        if(year + 1 % 4 === 0){
-            if(parseInt(month) === 3 && day === 1){
-                date_return.date_exp = '29-02-'+(year+1)
-            }else{
-                if(day === 1){
-                    if(parseInt(month)-1 === 0){
-                        date_return.date_exp = `${mn[11]}-12-${year+1}`
-                    }else{
-                        
-                        date_return.date_exp = `${mn[parseInt(month)-1]}-${parseInt(month)-1}-${year+1}`
+        if (((year + 1)-543) % 4 === 0) {
+            console.log('1 date => '+day)
+            console.log('1 month => '+month)
+            console.log('1 year+1 => '+(year+1))
+            if (month === 3 && day === 1) {
+                date_return.date_exp = '29-02-' + (year + 1)
+                console.log('date '+date_return.date_exp)
+            } else {
+                if (day === 1) {
+                    if (parseInt(month) - 1 === 0) {
+                        date_return.date_exp = `${mn[11]}-12-${year + 1}`
+                    } else {
+
+                        date_return.date_exp = `${mn[parseInt(month) - 2]}-${parseInt(month) - 1}-${year + 1}`
                     }
-                }else{
+                } else {
                     date_return.date_exp = `${day - 1}-${month}-${year + 1}`
                 }
             }
-        }else{
-            if(day === 1){
-                if(parseInt(month)-1 === 0){
-                    date_return.date_exp = `${mn[11]}-12-${year+1}`
-                }else{
-                     date_return.date_exp = `${mn[parseInt(month)-1]}-${parseInt(month)-1}-${year+1}`
+        } else {
+            console.log('2 date => '+day)
+            console.log('2 month => '+month)
+            console.log('2 year+1 => '+(year+1))
+            if (day === 1) {
+                if (parseInt(month) - 1 === 0) {
+                    date_return.date_exp = `${mn[11]}-12-${year + 1}`
+                } else {
+                    date_return.date_exp = `${mn[parseInt(month) - 2]}-${parseInt(month) - 1}-${year + 1}`
                 }
-            }else{
+            } else {
                 date_return.date_exp = `${day - 1}-${month}-${year + 1}`
             }
         }
@@ -613,11 +625,13 @@ function getDateExp(type, date) {
     }
 }
 function setReDateExp() {
-    getDateExpNotification().then((date_exp) => {
-        if (document.getElementById('notficationRequest') != undefined) {
-            document.getElementById('notficationRequest').innerText = date_exp
-            document.getElementById('notficationRequest2').innerText = date_exp
-        }
+    setDateExpss().then((data) => {
+        getDateExpNotification().then((date_exp) => {
+            if (document.getElementById('notficationRequest') != undefined) {
+                document.getElementById('notficationRequest').innerText = date_exp
+                document.getElementById('notficationRequest2').innerText = date_exp
+            }
+        })
     })
 }
 function getDateExpNotification() {
@@ -626,5 +640,24 @@ function getDateExpNotification() {
             return resolve(result.data);
         })
     })
+}
+function setDateExpss() {
+    return new Promise((resolve, reject) => {
+        axios.get(`http://localhost:5000/get/notification/request/`).then((result) => {
+            return resolve(result.data);
+        })
+    })
+}
+function checkDateFormat(value){
+    value = value+''
+    if(value.split('-').length != 3 ){
+        return false
+    }else{
+        if(value.split('-')[0].length === 2 && value.split('-')[1].length === 2 && value.split('-')[2].length === 4){
+            return true
+        }else{
+            return false
+        }
+    }
 }
 setReDateExp()

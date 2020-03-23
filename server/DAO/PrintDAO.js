@@ -59,6 +59,7 @@ class PrintDAO {
             query = query + `PERSONAL_PERSONAL_ID, `
             query = query + `PERSONAL_PHONE, `
             query = query + `PERSONAL_FAX, `
+            query = query + `request_type.REQUEST_TYPE_ID As RT_ID, `
             query = query + `request_type.REQUEST_TYPE_NAME, `
             query = query + `request.PERSONAL_ID_ASSISTANT, `
             query = query + `establishment.ESTABLISHMENT_AREA_SIZE, `
