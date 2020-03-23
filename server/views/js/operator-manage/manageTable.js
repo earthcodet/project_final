@@ -983,9 +983,6 @@ $(function () {
                                 toPerRequest(type, id)
                             }
                             break;
-                        case 'transfer':
-                            transferPopup(id)
-                            break;
                         case 'add':
                             addPopup()
                             break;
@@ -1008,7 +1005,6 @@ $(function () {
         },
         items: {
             "per": { name: "ต่อใบอนุญาต" },
-            "transfer": { name: "โอนใบอนุญาต" },
             "add": { name: "เพิ่มใบอนุญาต" },
             "detail": { name: "ดูรายละเอียด" },
             "cancle_status": { name: "ยกเลิกสถานะ" },
