@@ -31,15 +31,15 @@
 <body>
     <!-- เมนูด้านบน -->
     <div class="w3-top icon-bar">
-        <a id="addMenu" class="exit  "><i class="fa fa-plus-square" onclick="addPage()">
+        <a id="addMenu" onclick="addPage()" class="exit  "><i class="fa fa-plus-square" >
                 <span>เพิ่ม</span></i></a>
-        <a id="editMenu" class="exit disableds"><i class="fa fa-pencil-alt" onclick="editPage()">
+        <a id="editMenu" onclick="editPage()" class="exit disableds"><i class="fa fa-pencil-alt" >
                 <span>แก้ไข</span></i></a>
-        <a id="saveMenu" class="exit disableds"><i class="fa fa-save" onclick="insertPage()">
+        <a id="saveMenu" onclick="insertPage()" class="exit disableds"><i class="fa fa-save" >
                 <span>บันทึก</span></i></a>
-        <a id="restoreMenu" class="exit disableds"><i class="fa fa-reply" onclick="restorePage()">
+        <a id="restoreMenu"  class="exit disableds"><i class="fa fa-reply" >
                 <span>เรียกคืน</span></i></a>
-        <a id="deleteMenu" class="exit disableds"><i class="fa fa-times" onclick="deletePage()">
+        <a id="deleteMenu" onclick="deletePage()" class="exit disableds"><i class="fa fa-times" >
                 <span>ยกเลิก</span></i></a>
         <!-- <a><i class="fa fa-search"> ค้นหา</i></a> -->
         <a id="exitMenu" onclick="exitPage()" class="exit" style="float: right;width: 17%;"><i
@@ -77,7 +77,7 @@
             <a href="../renew/renew_area_less_correct.html">- คำขอต่อหนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
             <a href="../renew/renew_market.html">- คำขอต่อใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
             <a href="../renew/renew_health_danger.html">- คำขอต่อกิจการที่เป็นอันตรายต่อสุขภาพ</a>
-            <a href="../renew/renew_crematory.html" >- คำขอต่อกิจการฌาปณสถาน</a>
+            <a href="../renew/renew_crematory.html">- คำขอต่อกิจการฌาปณสถาน</a>
         </div>
         <button class="dropdown-btn  "><b>ข้อมูลส่วนกลาง </b><i class="fa fa-caret-down"></i></button>
         <div class="dropdown-container ">
@@ -120,68 +120,80 @@
                     <h1 style="font-size:2.8vh;margin-left: 25px;padding: 2px;"> บันทึกเรื่องร้องเรียน</h1>
                 </header>
                 <div class="box">
-                    <a style="margin-left: 5vw;">เลขที่ใบคำร้อง : </a>
-                    <input type="text" style="margin-left: 1vw;">
-                    <a style="margin-left: 1vw;">วันที่ยืนคำร้อง : </a>
+                    <a style="margin-left: 5vw;">เลขที่ใบคำร้อง<a style="color: red;">*</a> : </a>
+                    <input type="text" id='c_id' style="margin-left: 1vw;" maxlength="3"
+                    oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                    <a style="margin-left: 1vw;">วันที่ยืนคำร้อง<a style="color: red;">*</a> : </a>
                     <input type="text" id="datepicker2" style="margin-left: 1vw;">
                     <br>
-                    <a style="margin-left: 5vw;">บุคคลที่ต้องการร้องเรียน : </a>
-                    <input type="text" id="" style="margin-left: 1vw;width: 20vw;" disabled value="นาย ประปอง ปะแป้ง">
-                    <button type="button" class="fa fa-search" style="margin-left: 1vw;">
+                    <a style="margin-left: 5vw;">บุคคลที่ต้องการร้องเรียน<a style="color: red;">*</a> : </a>
+                    <input type="text" id="full_name_op" style="margin-left: 1vw;width: 20vw;" disabled>
+                    <button type="button" class="fa fa-search" id='btn_name' onclick="searchOparator()" style="margin-left: 1vw;">
                     </button>
                     <br>
                     <br>
                     <div class="tab" style="height: 3.5vw;width: 85%; margin-left: 5vw;">
 
-                        <button type="button" class="tablinks" id='button_block_1'disabled
+                        <button type="button" class="tablinks" id='button_block_1' disabled
                             onclick="openCity(event, 'block_no1'); "
                             style="height: 100%;"><a>บันทึกร้องเรียน</a></button>
                         <button type="button" class="tablinks" id='button_block_2' disabled
-                            onclick="openCity(event, 'block_no2');" style="height: 100%; display: none;"><a>พักใบอนุญาติ</a></button>
+                            onclick="openCity(event, 'block_no2');"
+                            style="height: 100%; display: none;"><a>พักใบอนุญาติ</a></button>
                     </div>
-                    
+
                     <div id='block_no1' style='width: 85%; margin-left: 5vw;'>
                         <br>
                         <a style="margin-left: 5vw;">ประเภทเรื่องร้องเรียน : </a>
-                        <input type="radio" name="petition" style="margin-left: 3vw;">
+                        <input type="radio" id='t_1' onclick="openInpustEst()" name="petition"
+                            style="margin-left: 3vw;">
                         <a> สุขลักษณะด้านอาหาร </a>
-                        <input type="radio" name="petition" style="margin-left: 3vw;">
+                        <input type="radio" id='t_2' onclick="openInpustEst()" name="petition"
+                            style="margin-left: 3vw;">
                         <a> กลิ่น </a>
-                        <input type="radio" name="petition" style="margin-left: 3vw;">
+                        <input type="radio" id='t_3' onclick="openInpustEst()" name="petition"
+                            style="margin-left: 3vw;">
                         <a> สารเคมี </a>
                         <br>
-                        <input type="radio" name="petition" style="margin-left: 17.2vw;">
+                        <input type="radio" id='t_4' onclick="openInpustEst()" name="petition"
+                            style="margin-left: 17.2vw;">
                         <a> ขยะมูลฝอย/สิ่งปฏิกูล </a>
-                        <input type="radio" name="petition" style="margin-left: 3.15vw;">
+                        <input type="radio" id='t_5' onclick="openInpustEst()" name="petition"
+                            style="margin-left: 3.15vw;">
                         <a> เสียงดัง </a>
-                        <input type="radio" name="petition" style="margin-left: 1.88vw;">
+                        <input type="radio" id='t_6' onclick="openInpustEst()" name="petition"
+                            style="margin-left: 1.88vw;">
                         <a> แสง รังสี </a>
                         <br>
-                        <input type="radio" name="petition" style="margin-left: 17.2vw;">
+                        <input type="radio" id='t_7' onclick="openInpustEst()" name="petition"
+                            style="margin-left: 17.2vw;">
                         <a> ควัน เถ้า เขม่า ฝุ่นละออง</a>
-                        <input type="radio" name="petition" style="margin-left: 1.9vw;">
+                        <input type="radio" id='t_8' onclick="openInpustEst()" name="petition"
+                            style="margin-left: 1.9vw;">
                         <a> อื่นๆ </a>
-                        <input type="text" style="margin-left: 3vw; width: 35%;">
+                        <input type="text" id='t_e' style="margin-left: 3vw; width: 35%;" disabled>
                         <br>
                         <a style="margin-left: 5vw;">การดำเนินการ : </a>
-                        <input type="radio" name="petition" style="margin-left: 1vw;">
+                        <input type="radio" id='w_1'name="petition2" style="margin-left: 1vw;">
                         <a> อยู่ระหว่างดำเนินการ </a><br>
-                        <input type="radio" name="petition" style="margin-left: 12.3vw;">
+                        <input type="radio" id='w_2'name="petition2" style="margin-left: 12.3vw;">
                         <a> ดำเนินการเรียบร้อย </a>
                     </div>
                     <div id='block_no2' style='width: 85%; margin-left: 5vw;display: none'>
                         <a style="margin-left: 6.8vw;">เลขที่ใบอนุญาตที่ต้องการยกเลิก : </a>
                         <input type="text" id="request_id_report" style="width: 20vw;" disabled value="">
                         <br>
-                        <a style="margin-left: 1vw;">โดยขอหยุดประกอบกิจการชั่วคราวระหว่างวันที่ : </a><input type="text" id="datepicker4">
-                        <a style="margin-left: 1vw;">ถึงวันที่ : </a><input type="text" id="datepicker3">
+                        <a style="margin-left: 1vw;">โดยขอหยุดประกอบกิจการชั่วคราวระหว่างวันที่ <a style="color: red;">*</a> : </a><input type="text"
+                            id="datepicker4">
+                        <a style="margin-left: 1vw;">ถึงวันที่ <a style="color: red;">*</a>: </a><input type="text" id="datepicker3">
                         <br>
                     </div>
                     <br><br>
-                    <input type="file" id="uploadFile" style="display: none;" onchange="handleImageSelect(event)"
-                            accept="image/*" multiple>
+                    <input type="file" id="uploadFile" style="display: none;" onchange="imageSelect(event)"
+                        accept="image/*" multiple>
                     <a style="margin-left: 5vw;"> ภาพถ่ายเหตุการร้องเรียน </a>
-                    <button type="button" class="button" style="height: 2.7vw;" onclick="document.getElementById('uploadFile').click()">
+                    <button type="button" class="button" style="height: 2.7vw;"
+                        onclick="document.getElementById('uploadFile').click()">
                         <a><i class="fa fa-upload"></i>
                             อัพโหลดภาพ</a>
                     </button>
@@ -203,7 +215,7 @@
 <script src="../../js/service/utilities.js"></script>
 
 <!-- เอาไว้เช็คว่า user login หรือเปล่า --> -->
-<script src="../../js/service/checkUserLogin.js"></script>
+<!-- <script src="../../js/service/checkUserLogin.js"></script> -->
 
 <script src="../../js/service/sideMenu.js"></script>
 
@@ -212,9 +224,12 @@
 <script src="../../js/service/clickRight/jquery.contextMenu.js"></script>
 <script src="../../js/service/clickRight/jquery.ui.position.min.js"></script>
 
-<script src="../../js/petition/petition.js"></script>
+
+<script src='../../js/petition/petitionData.js'></script>
 <script src="../../js/petition/petition_control.js"></script>
+<script src="../../js/petition/petition.js"></script>
 <script>
     startForm()
 </script>
+
 </html>

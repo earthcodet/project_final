@@ -968,7 +968,7 @@ $(function () {
             let indexData = this[0].rowIndex - 1
             console.log(`this`)
             console.log(this)
-            setDataItem(requestDataList[indexData])
+                setDataItem(requestDataList[indexData])
             if (inRequest.is_deleted === 'Y' && key != 'detail') {
                 statusRequestDelete()
             } else {

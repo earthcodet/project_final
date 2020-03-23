@@ -620,7 +620,7 @@ class RequestDAO {
             })
         })
     }
-    updateStatusOnly(no, year, user, last_update, status, status_before) {
+        updateStatusOnly(no, year, user, last_update, status, status_before) {
         return new Promise((resolve, reject) => {
             let query = `UPDATE request SET ? WHERE REQUEST_NO='${no}' AND REQUEST_YEAR='${year}'`
             let values = {}
@@ -643,7 +643,7 @@ class RequestDAO {
                     console.log(err)
                     return resolve(err.code)
                 }
-                console.log(`Update status request id = ${no}/${year} status = expire`)
+                console.log(`Update status request id = ${no}/${year} status = ${status}`)
                 return resolve(`true`)
             })
         })

@@ -24,6 +24,8 @@ const TransferDAO = require('../DAO/TransferDAO')
 const TransferDAOObj = new TransferDAO()
 const PrintDAO = require('../DAO/PrintDAO')
 const PrintDAOObj = new PrintDAO()
+const ComplaintDAO = require('../DAO/ComplaintDAO')
+const ComplaintDAOObj = new ComplaintDAO()
 const type_request_menu = {
     0: 'ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ',
     1: 'ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ',
@@ -673,6 +675,138 @@ class service {
                     return resolve('Not found')
                 }
 
+            })
+        })
+    }
+    //Complaint
+    insertComplaintStep(p_id, image, user_update) {
+        p_id = this.formatInsert('COMPLAINT', p_id)
+        var datetime = new Date();
+        let dateForUpdate = datetime.toISOString().slice(0, 10)
+        console.log(p_id)
+        return new Promise((resolve, reject) => {
+            if (p_id.status_insert === 'NEW') {
+                console.log('insert com start')
+                ComplaintDAOObj.insert(p_id).then((result) => {
+                    console.log('insert com end')
+                    console.log(`result = ${result}`)
+                    if (result != 'true') {
+                        return resolve(false)
+                    } else {
+                        if (p_id.request_id != null) {
+                            RequestDAOObj.updateStatusOnly(p_id.request_id, p_id.request_year, user_update, dateForUpdate, 'ban').then((t_data) => {
+                                this.insertImageComplainth(image, p_id.id).then((data) => {
+                                    if (data) {
+                                        return resolve(true)
+                                    } else {
+                                        return resolve('Image Error')
+                                    }
+                                })
+                            })
+                        } else {
+                            console.log('insert image end')
+                            this.insertImageComplainth(image, p_id.id).then((data) => {
+                                if (data) {
+                                    return resolve(true)
+                                } else {
+                                    return resolve('Image Error')
+                                }
+                            })
+                        }
+                    }
+                })
+            } else {
+                console.log('UPDATE COM')
+                ComplaintDAOObj.update(p_id).then((result) => {
+                    if (!result) {
+                        return resolve(false)
+                    } else {
+                        this.insertImageComplainth(image, p_id.id).then((data) => {
+                            console.log('0 true')
+                            if (data) {
+                                if (p_id.is_deleted === 'Y' && p_id.request_id != null) {
+                                    console.log('update Y')
+                                    RequestDAOObj.updateStatusOnly(p_id.request_id, p_id.request_year, user_update, dateForUpdate, 'active').then((t_data) => {
+                                        console.log('1 true')
+                                        return resolve(true)
+                                    })
+                                } else {
+                                    console.log('2 true')
+                                    return resolve(true)
+                                }
+                            } else {
+                                console.log('image error')
+                                return resolve('Image Error')
+                            }
+                        })
+
+                    }
+                })
+            }
+
+        })
+    }
+    insertImageComplainth(image, id) {
+        let newImage = this.createIdImage(image, id)
+        return new Promise((resolve, reject) => {
+            ImageDAOObj.deleteImageComplaint(id).then((data) => {
+                ImageDAOObj.insertImageComplaint(newImage).then((result) => {
+                    return resolve(result)
+                })
+            })
+
+        })
+    }
+    getComplaintById(id_no, id_year) {
+        return new Promise((resolve, reject) => {
+            ComplaintDAOObj.getById(id_no, id_year).then((result) => {
+                if (result[0].COMPLAINT_DATE_SUBMISSION === null || result[0].COMPLAINT_DATE_SUBMISSION === '0000-00-00') {
+                    result[0].COMPLAINT_DATE_SUBMISSION = null
+                } else {
+                    result[0].COMPLAINT_DATE_SUBMISSION = this.formatDate('TO-DISPLAY', result[0].COMPLAINT_DATE_SUBMISSION + '')
+                }
+                if (result[0].COMPLAINT_DATE_START === null) {
+                    result[0].COMPLAINT_DATE_START = null
+                } else {
+                    result[0].COMPLAINT_DATE_START = this.formatDate('TO-DISPLAY', result[0].COMPLAINT_DATE_START + '')
+                }
+                if (result[0].COMPLAINT_DATE_END === null) {
+                    result[0].COMPLAINT_DATE_END = null
+                } else {
+                    result[0].COMPLAINT_DATE_END = this.formatDate('TO-DISPLAY', result[0].COMPLAINT_DATE_END + '')
+                }
+                return resolve(result)
+            })
+        })
+    }
+    getComplaintByPersonalId(p_id) {
+        return new Promise((resolve, reject) => {
+            ComplaintDAOObj.getByPersonalId(p_id).then((result) => {
+                for(let i = 0 ; i < result.length ; i++){
+                    if (result[i].COMPLAINT_DATE_SUBMISSION === null || result[i].COMPLAINT_DATE_SUBMISSION === '0000-00-00') {
+                        result[i].COMPLAINT_DATE_SUBMISSION = null
+                    } else {
+                        result[i].COMPLAINT_DATE_SUBMISSION = this.formatDate('TO-DISPLAY', result[i].COMPLAINT_DATE_SUBMISSION + '')
+                    }
+                    if (result[i].COMPLAINT_DATE_START === null) {
+                        result[i].COMPLAINT_DATE_START = null
+                    } else {
+                        result[i].COMPLAINT_DATE_START = this.formatDate('TO-DISPLAY', result[i].COMPLAINT_DATE_START + '')
+                    }
+                    if (result[i].COMPLAINT_DATE_END === null) {
+                        result[i].COMPLAINT_DATE_END = null
+                    } else {
+                        result[i].COMPLAINT_DATE_END = this.formatDate('TO-DISPLAY', result[i].COMPLAINT_DATE_END + '')
+                    }
+                }
+                return resolve(result)
+            })
+        })
+    }
+    getImageComlaint(id) {
+        return new Promise((resolve, reject) => {
+            ImageDAOObj.getImageComplaintByImage(id).then((imageDatas) => {
+                return resolve(imageDatas)
             })
         })
     }
@@ -1432,7 +1566,7 @@ class service {
             new_data.delete_logic = this.setNullValue(new_data.delete_logic)
             return new_data
         }
-        if (type = 'TRANSFER') {
+        if (type === 'TRANSFER') {
             new_data.REQUEST_DATE_SUBMISSION = this.setNullValue(new_data.REQUEST_DATE_SUBMISSION, 'date')
             new_data.REQUEST_RECEIPT_DATE_TRANSFER = this.setNullValue(new_data.REQUEST_RECEIPT_DATE_TRANSFER, 'date')
             new_data.STAFF_ID_MONEY = this.setNullValue(new_data.STAFF_ID_MONEY)
@@ -1466,6 +1600,16 @@ class service {
             new_data.REQUEST_CONDITION_NO_3 = this.setNullValue(new_data.REQUEST_CONDITION_NO_3)
             new_data.REQUEST_CONDITION_NO_4 = this.setNullValue(new_data.REQUEST_CONDITION_NO_4)
             new_data.REQUEST_DELETE_LOGIC = this.setNullValue(new_data.REQUEST_DELETE_LOGIC)
+            return new_data
+        }
+        if (type === 'COMPLAINT') {
+            new_data.request_id = this.setNullValue(new_data.request_id)
+            new_data.request_year = this.setNullValue(new_data.request_year)
+            new_data.date_submission = this.setNullValue(new_data.date_submission, 'date')
+            new_data.type = this.setNullValue(new_data.type)
+            new_data.status = this.setNullValue(new_data.status)
+            new_data.date_start = this.setNullValue(new_data.date_start, 'date')
+            new_data.date_end = this.setNullValue(new_data.date_end, 'date')
             return new_data
         }
     }

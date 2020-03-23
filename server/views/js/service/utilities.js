@@ -648,4 +648,16 @@ function setDateExpss() {
         })
     })
 }
+function checkDateFormat(value){
+    value = value+''
+    if(value.split('-').length != 3 ){
+        return false
+    }else{
+        if(value.split('-')[0].length === 2 && value.split('-')[1].length === 2 && value.split('-')[2].length === 4){
+            return true
+        }else{
+            return false
+        }
+    }
+}
 setReDateExp()

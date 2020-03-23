@@ -11,6 +11,7 @@ let inAddress = {
     province_name: ""
 };
 let requestDataList = []
+let reportDataList = []
 let inPersonal = {
     id: "",
     address_id: "",
@@ -64,6 +65,14 @@ let inRequest = {
     establishment_id: '',
     establishment_name: '',
     last_update: ''
+}
+let inComplaint = {
+    id: '',
+    year: '',
+    type: '',
+    date_submission: '',
+    request_no: '',
+    request_year: ''
 }
 const numToMonth = {
     1: 'มกราคม',
@@ -411,8 +420,13 @@ function showItem(dataOperator) {
     resetParameter()
     resetStyleIdDelete()
     now_personal = dataOperator.PERSONAL_ID
-    displayTableRequest()
-    displayTableRequestAssistant()
+    if (now_status != 'ban' && now_status != 'report') {
+        displayTableRequest()
+        displayTableRequestAssistant()
+    } else {
+        displayReportTable()
+    }
+
     changeOption(dataOperator.PERSONAL_TYPE.trim())
     if (dataOperator.PERSONAL_TYPE === 'บุคคลธรรมดา') {
         getImageByPeronalId(dataOperator.PERSONAL_TYPE, dataOperator.PERSONAL_ID).then((result) => {
@@ -454,7 +468,7 @@ function createResultSearch(data) {
             if (j === 0) {
                 var cellText = document.createTextNode(data[i].PERSONAL_NAME);
             } else if (j === 1) {
-                let textJ1 = data[i].PERSONAL_SURNAME === null ? '' :data[i].PERSONAL_SURNAME
+                let textJ1 = data[i].PERSONAL_SURNAME === null ? '' : data[i].PERSONAL_SURNAME
                 var cellText = document.createTextNode(textJ1);
             } else if (j === 2) {
                 let AddressText = ''
@@ -542,8 +556,13 @@ function changeStatusNow(status) {
 function onClickStatustab(status, event, id) {
     now_status = status
     if (now_status != '' && now_personal != '') {
-        displayTableRequest()
-        displayTableRequestAssistant()
+        if (now_status != 'ban' && now_status != 'report') {
+            displayTableRequest()
+            displayTableRequestAssistant()
+        } else {
+            displayReportTable()
+        }
+
     }
     openCity(event, id)
 }
@@ -570,6 +589,15 @@ function getRequestByPersonalIdAndStatus(personal_id) {
         })
     })
 }
+function getTableReport(personal_id) {
+    return new Promise((resolve, reject) => {
+        axios.get(`http://localhost:5000/get/list/complaint/id/${personal_id}`).then((result) => {
+            reportDataList = result.data
+            console.log(reportDataList)
+            resolve(result.data);
+        })
+    })
+}
 function getRequestByPersonalIdAndStatusAssistant(personal_id) {
     return new Promise((resolve, reject) => {
         axios.get(`http://localhost:5000/get/request/owner/${personal_id}/${now_status}/assistant`).then((result) => {
@@ -581,6 +609,12 @@ function displayTableRequest() {
     getRequestByPersonalIdAndStatus(now_personal).then((data) => {
         console.log(requestDataList)
         createTableRequest(data)
+    })
+}
+function displayReportTable() {
+    getTableReport(now_personal).then((data) => {
+        console.log(requestDataList)
+        createTableReport(data)
     })
 }
 function displayTableRequestAssistant() {
@@ -691,6 +725,82 @@ function createTableRequestAssistant(data) {
         tbl.appendChild(tblBody);
     }
 }
+function setPageReport(index) {
+    setDataItemReport(index)
+    viewPageReport('setId')
+}
+function createTableReport(data) {
+    console.log(data)
+    var tbl = document.getElementById(getTableIdTableByStatus(now_status));
+    if (tbl.getElementsByTagName("tbody")[0] != null || tbl.getElementsByTagName("tbody")[0] != undefined) {
+        tbl.removeChild(tbl.getElementsByTagName("tbody")[0])
+    }
+    var tblBody = document.createElement('tbody')
+    // style="height: 17vw;  text-align: center;"
+    tblBody.style.height = '17vw'
+    tblBody.style.textAlign = 'center'
+    for (var i = 0; i < data.length; i++) {
+        // creates a table row
+        var row = document.createElement("tr");
+        row.onclick = function () {
+            setPageReport(reportDataList[this.rowIndex - 1])
+        }
+        if (now_status != 'ban') {
+            if (data[i].COMPLAINT_DATE_END === null) {
+                for (var j = 0; j < 3; j++) {
+                    var cell = document.createElement("td");
+                    if (j === 0) {
+                        var cellText = document.createTextNode(data[i].COMPLAINT_ID);
+                    } else if (j === 1) {
+                        var cellText = document.createTextNode(data[i].COMPLAINT_TYPE);
+                    } else {
+                        let temp_date = data[i].COMPLAINT_DATE_SUBMISSION + ''
+                        //02-01-2563
+                        let temp_array = temp_date.split('-')
+                        let temp_montn = parseInt(temp_array[1])
+
+                        let text = `${parseInt(temp_array[0])} ${numToMonth[temp_montn]} ${temp_array[2]}`
+                        var cellText = document.createTextNode(text);
+                    }
+                    cell.appendChild(cellText);
+                    row.appendChild(cell);
+                }
+            }
+        } else {
+            if (data[i].COMPLAINT_DATE_END != null) {
+                for (var j = 0; j < 4; j++) {
+                    var cell = document.createElement("td");
+                    if (j === 0) {
+                        var cellText = document.createTextNode(data[i].COMPLAINT_ID);
+                    } else if (j === 1) {
+                        var cellText = document.createTextNode(`${data[i].REQUEST_NO}/${data[i].REQUEST_YEAR}`);
+                    } else if (j === 2) {
+                        let temp_date = data[i].COMPLAINT_DATE_START + ''
+                        //02-01-2563
+                        let temp_array = temp_date.split('-')
+                        let temp_montn = parseInt(temp_array[1])
+
+                        let text = `${parseInt(temp_array[0])} ${numToMonth[temp_montn]} ${temp_array[2]}`
+                        var cellText = document.createTextNode(text);
+                    } else {
+                        let temp_date = data[i].COMPLAINT_DATE_END + ''
+                        //02-01-2563
+                        let temp_array = temp_date.split('-')
+                        let temp_montn = parseInt(temp_array[1])
+
+                        let text = `${parseInt(temp_array[0])} ${numToMonth[temp_montn]} ${temp_array[2]}`
+                        var cellText = document.createTextNode(text);
+                    }
+                    cell.appendChild(cellText);
+                    row.appendChild(cell);
+                }
+            }
+        }
+        tblBody.appendChild(row);
+    }
+    console.log(tblBody)
+    tbl.appendChild(tblBody);
+}
 function createTableRequest(data) {
     console.log(data)
     var tbl = document.getElementById(getTableIdTableByStatus(now_status));
@@ -712,7 +822,7 @@ function createTableRequest(data) {
             } else {
                 row.classList.add(now_status + '-menu-extra')
             }
-        }else{
+        } else {
             row.classList.add(now_status + '-menu')
         }
 
@@ -800,6 +910,10 @@ function getTableIdTableByStatus(status) {
             return 'transfer_table'
         case 'expire':
             return 'date_exp_table'
+        case 'ban':
+            return 'ban_table'
+        case 'report':
+            return 'report_table'
         default: //cancel
             return 'cancel_table'
     }
@@ -835,6 +949,14 @@ function setDataItem(data) {
     inRequest.establishment_name = data.ESTABLISHMENT_NAME === null || data.ESTABLISHMENT_NAME === undefined ? 'ไม่มีชื่อร้าน' : data.ESTABLISHMENT_NAME
     inRequest.date_exp_count = data.COUNT_DATE_EXPIRE
 }
+function setDataItemReport(data) {
+    inComplaint.id = checkNullReturn(data.COMPLAINT_ID)
+    inComplaint.year = checkNullReturn(data.COMPLAINT_YEAR)
+    inComplaint.type = checkNullReturn(data.COMPLAINT_TYPE)
+    inComplaint.date_submission = checkNullReturn(data.COMPLAINT_DATE_SUBMISSION)
+    inComplaint.request_no = checkNullReturn(data.REQUEST_NO)
+    inComplaint.request_year = checkNullReturn(data.REQUEST_YEAR)
+}
 function checkNullReturn(item) {
     let temp = item === null ? '' : item
     return temp
@@ -843,11 +965,11 @@ function openPageReport() {
     window.open('../utilities/petition.html?id=' + inPersonal.id, '_blank');
 }
 function viewPageReport(id, id_menu, id_request) {
+    console.log(this)
     if (id === undefined) {
         id = `''`
-        window.open('../utilities/petition.html?id=' + id_menu + '?r_id=' + id_request, '_blank');
+        window.open('../utilities/petition.html?id=' + id_menu + '&r_id=' + id_request, '_blank');
     } else {
-        id = id.getElementsByTagName("TD")[0].textContent
-        window.open('../utilities/petition.html?id=' + id, '_blank');
+        window.open('../utilities/petition.html?com_id=' + inComplaint.id + '&com_year=' + inComplaint.year, '_blank');
     }
 }
