@@ -1602,17 +1602,17 @@ class service {
             new_data.REQUEST_PRODUCT_TYPE = this.setNullValue(new_data.REQUEST_PRODUCT_TYPE)
             new_data.REQUEST_SELL_START = this.setNullValue(new_data.REQUEST_SELL_START)
             new_data.REQUEST_SELL_END = this.setNullValue(new_data.REQUEST_SELL_END)
-            new_data.REQUEST_RECEIPT_FINE = this.setNullValue(new_data.REQUEST_RECEIPT_FINE)
+            new_data.REQUEST_RECEIPT_FINE = this.setNullValue(new_data.REQUEST_RECEIPT_FINE) === null ? 0 : new_data.REQUEST_RECEIPT_FINE
             new_data.REQUEST_RECEIPT_FEE = this.setNullValue(new_data.REQUEST_RECEIPT_FEE)
-            new_data.REQUEST_RECEIPT_TOTAL = this.setNullValue(new_data.REQUEST_RECEIPT_TOTAL)
+            new_data.REQUEST_RECEIPT_TOTAL = this.setNullValue(new_data.REQUEST_RECEIPT_TOTAL) === null ? 0 : new_data.REQUEST_RECEIPT_TOTAL
             new_data.REQUEST_RECEIPT_DATE = this.setNullValue(new_data.REQUEST_RECEIPT_DATE, 'date')
             new_data.REQUEST_RECEIPT_FINE_YEAR_2 = this.setNullValue(new_data.REQUEST_RECEIPT_FINE_YEAR_2)
             new_data.REQUEST_RECEIPT_FEE_YEAR_2 = this.setNullValue(new_data.REQUEST_RECEIPT_FEE_YEAR_2)
-            new_data.REQUEST_RECEIPT_TOTAL_YEAR_2 = this.setNullValue(new_data.REQUEST_RECEIPT_TOTAL_YEAR_2)
+            new_data.REQUEST_RECEIPT_TOTAL_YEAR_2 = this.setNullValue(new_data.REQUEST_RECEIPT_TOTAL_YEAR_2) === null ? 0 : new_data.REQUEST_RECEIPT_TOTAL_YEAR_2
             new_data.REQUEST_RECEIPT_DATE_YEAR_2 = this.setNullValue(new_data.REQUEST_RECEIPT_DATE_YEAR_2, 'date')
             new_data.REQUEST_RECEIPT_FINE_YEAR_3 = this.setNullValue(new_data.REQUEST_RECEIPT_FINE_YEAR_3)
             new_data.REQUEST_RECEIPT_FEE_YEAR_3 = this.setNullValue(new_data.REQUEST_RECEIPT_FEE_YEAR_3)
-            new_data.REQUEST_RECEIPT_TOTAL_YEAR_3 = this.setNullValue(new_data.REQUEST_RECEIPT_TOTAL_YEAR_3)
+            new_data.REQUEST_RECEIPT_TOTAL_YEAR_3 = this.setNullValue(new_data.REQUEST_RECEIPT_TOTAL_YEAR_3) === null ? 0 : new_data.REQUEST_RECEIPT_TOTAL_YEAR_3
             new_data.REQUEST_RECEIPT_DATE_YEAR_3 = this.setNullValue(new_data.REQUEST_RECEIPT_DATE_YEAR_3, 'date')
             new_data.REQUEST_DATE_ISSUED = this.setNullValue(new_data.REQUEST_DATE_ISSUED, 'date')
             new_data.REQUEST_DATE_EXPIRED = this.setNullValue(new_data.REQUEST_DATE_EXPIRED, 'date')

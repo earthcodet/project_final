@@ -239,6 +239,7 @@ class RequestDAO {
                 request.REQUEST_RECEIPT_FINE_TRANSFER,
                 request.REQUEST_RECEIPT_DATE_TRANSFER
             ]
+            console.log(values)
             let query = `INSERT INTO request(${column}) VALUES (?)`
             con.query(query, [values], function (err, result) {
                 if (err) {
