@@ -498,7 +498,7 @@ function setDataView() {
         }
     }
 
-    changeStatusMenuData(requestData.status) // RequestControl.js < switch menu to data === true
+    changeStatusMenuData(requestData.status, requestData.is_deleted) // RequestControl.js < switch menu to data === true
 }
 // set data form database 
 function setDataOperator(raw_data, type) {

@@ -303,6 +303,9 @@ function restorePage() {
 
 }
 function changeStatusMenuData(status, status_delete) {
+    console.log('dsda')
+    console.log(status)
+    console.log(status_delete)
     if (status_delete === 'Y') {
         if (status === 'wait' || status === 'approval' || status === 'active') {
             data = true
