@@ -473,6 +473,10 @@ class RequestDAO {
             column = column + `request_type.REQUEST_TYPE_NAME As R_TYPE, `
             column = column + `request.REQUEST_NO As R_NO, `
             column = column + `request.REQUEST_YEAR As R_YEAR, `
+
+            column = column + `request.REQUEST_STATUS As R_STATUS, `
+            column = column + `request.REQUEST_IS_DELETED As R_STATUS_DELETE, `
+
             column = column + `establishment.ESTABLISHMENT_NAME As E_NAME, `
             column = column + `personal.PERSONAL_TITLE As P_TITLE, `
             column = column + `personal.PERSONAL_NAME As P_NAME, `

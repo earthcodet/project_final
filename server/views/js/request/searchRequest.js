@@ -218,7 +218,7 @@ function createResultSearch(data) {
     //row index = this.rowIndex
     row.onclick = function () { newURL(event) }
 
-    for (var j = 0; j < 9; j++) {
+    for (var j = 0; j < 10; j++) {
       var cell = document.createElement("td");
       if (j === 0) {
         var cellText = document.createTextNode(data[i].R_MENU);
@@ -237,7 +237,7 @@ function createResultSearch(data) {
         let t_full = t_title + ' ' + t_name + ' ' + t_surname
         var cellText = document.createTextNode(t_full);
       } else if (j === 5) {
-        var cellText = document.createTextNode( data[i].P_ID);
+        var cellText = document.createTextNode(data[i].P_ID);
       } else if (j === 6) {
         let AddressText = ''
         AddressText = AddressText + `บ้านเลขที่ ${data[i].A_H} `
@@ -251,25 +251,65 @@ function createResultSearch(data) {
         AddressText = AddressText + `จังหวัด ${data[i].A_P === null ? '-' : data[i].A_P}`
         var cellText = document.createTextNode(AddressText);
       } else if (j === 7) {
+        if( data[i].REQUEST_DATE_ISSUED != null){
         let temp_date = data[i].REQUEST_DATE_ISSUED + ''
         //02-01-2563
         let temp_array = temp_date.split('-')
         let temp_montn = parseInt(temp_array[1])
         let text = `${parseInt(temp_array[0])} ${numToMonth[temp_montn]} ${temp_array[2]}`
-        var cellText = document.createTextNode(text);
+        var cellText = document.createTextNode(text); 
+      }else{
+        var cellText = document.createTextNode('-'); 
+      }
+        
+      } else if (j === 8) {
+        if (data[i].REQUEST_DATE_EXPIRED != null) {
+          let temp_date = data[i].REQUEST_DATE_EXPIRED + ''
+          //02-01-2563
+          let temp_array = temp_date.split('-')
+          let temp_montn = parseInt(temp_array[1])
+          let text = `${parseInt(temp_array[0])} ${numToMonth[temp_montn]} ${temp_array[2]}`
+          var cellText = document.createTextNode(text);
+        }else{
+          var cellText = document.createTextNode('-');
+        }
+
       } else {
-        let temp_date = data[i].REQUEST_DATE_EXPIRED + ''
-        //02-01-2563
-        let temp_array = temp_date.split('-')
-        let temp_montn = parseInt(temp_array[1])
-        let text = `${parseInt(temp_array[0])} ${numToMonth[temp_montn]} ${temp_array[2]}`
+        let text = ''
+        let status_delete = data[i].R_STATUS_DELETE
+        let status_request = data[i].R_STATUS
+        if (status_delete === 'Y') {
+          text = 'ลบข้อมูล'
+        } else {
+          switch (status_request) {
+            case 'ban':
+              text = 'พักใบอนุญาต'
+              break;
+            case 'wait':
+              text = 'รออนุมัติ'
+              break;
+            case 'active':
+              text = 'ปกติ'
+              break;
+            case 'cancel':
+              text = 'ยกเลิก'
+              break;
+            case 'transfer':
+              text = 'โอน'
+              break;
+            default:
+              //expire
+              text = 'หมดอายุ'
+              break;
+          }
+        }
         var cellText = document.createTextNode(text);
       }
 
       cell.appendChild(cellText);
-      if (j === 3 && data[i].PERSONAL_IS_DELETED === 'Y') {
-        cell.style.textDecoration = 'line-through'
-      }
+      // if (j === 3 && data[i].PERSONAL_IS_DELETED === 'Y') {
+      //   cell.style.textDecoration = 'line-through'
+      // }
       row.appendChild(cell);
     }
     tblBody.appendChild(row);
