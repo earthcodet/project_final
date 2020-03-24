@@ -33,7 +33,7 @@ class TransferDAO {
                 tranfer.request_owner
             ]
             let query = `INSERT INTO transfer(${column}) VALUES (?)`
-            con.query(query,[list_valuess], function (err, result) {
+            con.query(query,[list_values], function (err, result) {
                 if (err) {
                     console.log(err)
                     return resolve(err.code)

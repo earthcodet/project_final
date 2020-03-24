@@ -349,10 +349,11 @@ class RequestDAO {
             let joinTable = `JOIN establishment ON request.ESTABLISHMENT_ID = establishment.ESTABLISHMENT_ID `
             joinTable = joinTable + `JOIN request_type ON request.REQUEST_TYPE_ID = request_type.REQUEST_TYPE_ID `
             joinTable = joinTable + `JOIN address ON address.ADDRESS_ID = establishment.ADDRESS_ID `
-            let query = `SELECT * FROM request ${joinTable} WHERE request.PERSONAL_ID_OWNER='${personal_id}' `
+            let query = `SELECT * FROM request ${joinTable} WHERE request.PERSONAL_ID_OWNER = '${personal_id}' `
             query = query + `AND request.REQUEST_STATUS = 'active' AND request.REQUEST_IS_DELETED = 'N' `
-            query = query + `AND (request.REQUEST_MENU = 'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร' `
+            query = query + `AND ( request.REQUEST_MENU = 'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร' `
             query = query + `OR request.REQUEST_MENU = 'หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร')`
+            console.log(query)
             con.query(query, function (err, result) {
                 if (err) {
                     console.log(err.code)
