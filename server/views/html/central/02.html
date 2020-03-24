@@ -370,11 +370,11 @@
         <div class="box">
             <a>
                 <p class="font">ประวัติการออกใบอนุญาต</p>
-                <a>ปีงบประมาณ : <input type="text"
+                <a>ปีงบประมาณ : <input type="text" id='search_list_year'
                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                         maxlength="4"></a>
                 <a>ประเภทใบอนุญาต :
-                    <input list="brow" id="" name="" style="width: 30%;">
+                    <input list="brow" id="search_list_type" name="" style="width: 30%;">
                     <datalist id="brow">
                         <option value="ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ">
                             ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ
@@ -395,7 +395,7 @@
                         <option value="กิจการที่เป็นอันตรายต่อสุขภาพ">กิจการที่เป็นอันตรายต่อสุขภาพ</option>
                         <option value="กิจการฌาปณสถาน">กิจการฌาปณสถาน</option>
                     </datalist>
-                    <button type="button" class="fa fa-search" style="margin-left: 1vw;"></button></a>
+                    <button type="button" onclick="searchFilter()" class="fa fa-search" style="margin-left: 1vw;"></button></a>
                 <button type="button" id='report_open' style="float: right;border-radius: 0.3vw;" class='fa fa-file'
                     onclick="openPageReport()" disabled> ร้องเรียน</button>
                 <div class="tab" style="height: 3.5vw;width: 100%;">
@@ -868,7 +868,7 @@
 <script src="../../js/service/utilities.js"></script>
 
 <!-- เอาไว้เช็คว่า user login หรือเปล่า --> -->
-<script src="../../js/service/checkUserLogin.js"></script>
+<!-- <script src="../../js/service/checkUserLogin.js"></script> -->
 <script src="../../js/service/address/twoAddress.js"></script>
 
 <script src="../../js/operator-manage/manageOperator.js"></script>

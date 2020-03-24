@@ -973,3 +973,65 @@ function viewPageReport(id, id_menu, id_request) {
         window.open('../utilities/petition.html?com_id=' + inComplaint.id + '&com_year=' + inComplaint.year, '_blank');
     }
 }
+function searchFilter() {
+    var input, filter, input2, filter2, table, tr, td, i, textValue;
+    input = document.getElementById("search_list_year");
+    filter = input.value.trim()
+    input2 = document.getElementById("search_list_type");
+    filter2 = input2.value.trim()
+    console.log('filter =' +filter )
+    console.log('filter2 =' +filter2 )
+    table = document.getElementById(getTableIdTableByStatus(now_status));
+    tr = table.getElementsByTagName("tr");
+
+    if (filter.length != 0 && filter2.length === 0) {
+        console.log('con 1')
+        for (i = 1; i < tr.length; i++) {
+            td = tr[i].cells[0];
+            textValue = td.textContent || td.innerText;
+            textValue = textValue + ''
+            textValue = textValue.trim()
+            if (textValue.indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    } else if (filter.length === 0 && filter2.length != 0) {
+        console.log('con 2')
+        for (i = 1; i < tr.length; i++) {
+            td = tr[i].cells[1];
+            textValue = td.textContent || td.innerText;
+            textValue = textValue + ''
+            textValue = textValue.trim()
+            if (textValue.indexOf(filter2) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    } else if (filter.length != 0 && filter2.length != 0) {
+        console.log('con 3')
+        for (i = 1; i < tr.length; i++) {
+            td = tr[i].cells[0];
+            td2 = tr[i].cells[1];
+            textValue = td.textContent || td.innerText;
+            textValue = textValue + ''
+            extValue = textValue.trim()
+            textValue2 = td2.textContent || td2.innerText;
+            textValue2 = textValue2 + ''
+            textValue2 = textValue2.trim()
+            textValue  = textValue .trim()
+            if (textValue.indexOf(filter) > -1 && textValue2.indexOf(filter2) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }else{
+        console.log('con 4')
+        for (i = 0; i < tr.length; i++) {
+                tr[i].style.display = "";
+        }
+    }
+}
