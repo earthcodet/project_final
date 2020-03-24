@@ -1213,7 +1213,7 @@ class service {
                             return resolve(personal.id)
                         }
                     } else {
-                        this.loopInsertPersonal(personal)
+                        this.loopInsertPersonal(personal, imageFile)
                     }
                 })
             })
@@ -1256,7 +1256,7 @@ class service {
                             }
                         })
                     } else {
-                        this.loopInsertAddress(address)
+                        this.loopInsertAddress(personal, address, imageFile)
                     }
                 })
             })
@@ -1437,7 +1437,7 @@ class service {
             return new_data
         }
         if (type === 'ADDRESS') {
-            new_data.home_number = this.setNullValue(new_data.home_number)
+            // new_data.home_number = this.setNullValue(new_data.home_number)
             new_data.moo = this.setNullValue(new_data.moo)
             new_data.trxk = this.setNullValue(new_data.trxk)
             new_data.sxy = this.setNullValue(new_data.sxy)
@@ -2271,6 +2271,150 @@ class service {
                 }
             })
         })
+    }//User
+    InsertUserStep(user, image, username) {
+        console.log(`username update = ${username}`)
+        var datetime = new Date();
+        let dateForUpdate = datetime.toISOString().slice(0, 10)
+        user.last_update = dateForUpdate
+        user.update = username
+        return new Promise((resolve, reject) => {
+            if (user.id.length != 0) {
+                if (user.is_default != null) {
+                    UserDAOObj.updateStatus(user.position_type).then((data_status_update) => {
+                        UserDAOObj.updateStaff(user).then((update_status) => {
+                            if (update_status) {
+                                if (image != undefined) {
+                                    image.name = user.id
+                                    ImageDAOObj.updateImageUser(image).then((data_a) => {
+                                        if (data_a) {
+                                            let objectA = {
+                                                id: 'update',
+                                                status: true
+                                            }
+                                            return resolve(objectA)
+                                        } else {
+                                            let object = {
+                                                id: 'update image error',
+                                                status: false
+                                            }
+                                            return resolve(object)
+                                        }
+                                    })
+                                } else {
+                                    let object = {
+                                        id: 'update',
+                                        status: true
+                                    }
+                                    return resolve(object)
+                                }
+                            } else {
+                                return resolve('update user error')
+                            }
+                        })
+                    })
+
+                } else {
+                    UserDAOObj.updateStaff(user).then((update_status) => {
+                        if (update_status) {
+                            if (image != undefined) {
+                                image.name = user.id
+                                ImageDAOObj.updateImageUser(image).then((data) => {
+                                    if (data) {
+                                        let object = {
+                                            id: 'update',
+                                            status: true
+                                        }
+                                        return resolve(object)
+                                    } else {
+                                        let object = {
+                                            id: 'update image error',
+                                            status: false
+                                        }
+                                        return resolve(object)
+                                    }
+                                })
+                            } else {
+                                let object = {
+                                    id: 'update',
+                                    status: true
+                                }
+                                return resolve(object)
+                            }
+                        } else {
+                            return resolve('update user error')
+                        }
+                    })
+                }
+
+            } else {
+                if (user.is_default != null) {
+                    UserDAOObj.updateStatus(user.position_type).then((data_status_update) => {
+                        this.loopInsertUser(user, image).then((data) => {
+                            if (data.status) {
+                                return resolve(data)
+                            } else {
+                                let object = {
+                                    id: 'loop insert user error',
+                                    status: false
+                                }
+                                return resolve(object)
+                            }
+                        })
+                    })
+                } else {
+                    this.loopInsertUser(user, image).then((data) => {
+                        if (data.status) {
+                            return resolve(data)
+                        } else {
+                            let object = {
+                                id: 'loop insert user error',
+                                status: false
+                            }
+                            return resolve(object)
+                        }
+                    })
+                }
+            }
+        })
+    }
+    //Insert USER
+    loopInsertUser(user, imageFile) {
+        return new Promise((resolve, reject) => {
+            this.getNewId('USER').then((id) => {
+                user.id = id
+                UserDAOObj.insertUser(user).then((data) => {
+                    if (data) {
+                        if (imageFile != undefined) {
+                            imageFile.name = user.id
+                            ImageDAOObj.insertImageUser(imageFile).then((data) => {
+                                if (data) {
+                                    let object = {
+                                        id: user.id,
+                                        status: true
+                                    }
+                                    return resolve(object)
+                                } else {
+                                    let object = {
+                                        id: 'insert image error',
+                                        status: false
+                                    }
+                                    return resolve(object)
+                                }
+                            })
+                        } else {
+                            let object = {
+                                id: user.id,
+                                status: true
+                            }
+                            return resolve(object)
+                        }
+                    } else {
+                        this.loopInsertUser(user, imageFile)
+                    }
+                })
+            })
+        })
     }
     InsertPersonalStep(personal, address, image, username) {
         var datetime = new Date();
@@ -2364,6 +2508,13 @@ class service {
     getImageNayo(id) {
         return new Promise((resolve, reject) => {
             ImageDAOObj.getImageUserNayo(id).then((viewData_data) => {
+                return resolve(viewData_data)
+            })
+        })
+    }
+    getImageNayoUser(id) {
+        return new Promise((resolve, reject) => {
+            ImageDAOObj.getImageUser(id).then((viewData_data) => {
                 return resolve(viewData_data)
             })
         })
