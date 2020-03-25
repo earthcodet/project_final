@@ -18,6 +18,16 @@ class LoginDAO {
             })
         })
     }
+    getUserAll() {
+        return new Promise((resolve, reject) => {
+            con.query(`SELECT * FROM user `, function (err, result) {
+                if (err) {
+                    throw err
+                }
+                return resolve(result)
+            })
+        })
+    }
     getUserByUserId(user_id) {
         return new Promise((resolve, reject) => {
             con.query(`SELECT * FROM user WHERE USER_ID='${user_id}'`, function (err, result) {
@@ -54,7 +64,7 @@ class LoginDAO {
             con.query(query, function (err, result) {
                 if (err) {
                     console.log(err)
-                    
+
                 }
                 return resolve(result)
             })
@@ -65,7 +75,7 @@ class LoginDAO {
         return new Promise((resolve, reject) => {
             let column = 'USER_ID,USER_USERNAME,USER_PASSWORD,USER_TITLE,USER_NAME,USER_SURNAME,USER_TYPE_USER,'
             column = column + ` USER_POSITION, USER_POSITION_TYPE,USER_IS_DEFAULT,USER_STATUS,USER_LAST_UPDATE,USER_UPDATE`
-            
+
             let query = `INSERT INTO user(${column}) VALUES (?)`
             let value_list = [
                 user.id,
@@ -80,7 +90,7 @@ class LoginDAO {
                 user.is_default,
                 user.status,
                 user.last_update,
-                user.update+''
+                user.update + ''
             ]
             con.query(query, [value_list], function (err, result) {
                 if (err) {
@@ -94,24 +104,24 @@ class LoginDAO {
     updateStaff(user) {
         return new Promise((resolve, reject) => {
             let value = {
-                USER_ID : user.id,
-                USER_USERNAME : user.username,
-                USER_PASSWORD : user.password,
-                USER_TITLE : user.title,
-                USER_NAME : user.name,
-                USER_SURNAME : user.surname,
-                USER_TYPE_USER : user.type_user,
-                USER_POSITION : user.position,
-                USER_POSITION_TYPE : user.position_type,
-                USER_IS_DEFAULT : user.is_default,
-                USER_STATUS : user.status,
-                USER_LAST_UPDATE : user.last_update,
-                USER_UPDATE : user.update +''
+                USER_ID: user.id,
+                USER_USERNAME: user.username,
+                USER_PASSWORD: user.password,
+                USER_TITLE: user.title,
+                USER_NAME: user.name,
+                USER_SURNAME: user.surname,
+                USER_TYPE_USER: user.type_user,
+                USER_POSITION: user.position,
+                USER_POSITION_TYPE: user.position_type,
+                USER_IS_DEFAULT: user.is_default,
+                USER_STATUS: user.status,
+                USER_LAST_UPDATE: user.last_update,
+                USER_UPDATE: user.update + ''
             }
 
             let query = `UPDATE user SET ? WHERE USER_ID = '${user.id}'`
 
-            con.query(query,value, function (err, result) {
+            con.query(query, value, function (err, result) {
                 if (err) {
                     console.log(err)
                     return resolve(err.code)
@@ -124,14 +134,32 @@ class LoginDAO {
             })
         })
     }
-    updateStatus(type){
+    updateStatus(type) {
         return new Promise((resolve, reject) => {
             let query = `UPDATE user SET USER_IS_DEFAULT = NULL WHERE USER_POSITION_TYPE = '${type}'`
             con.query(query, function (err, result) {
                 if (err) {
                     console.log(err)
                     return resolve(err.code)
-                }else{
+                } else {
+                    return resolve(true)
+                }
+            })
+        })
+    }
+    updateStatusDelete(id, status, username, last_update) {
+        return new Promise((resolve, reject) => {
+            let query = `UPDATE user SET ? WHERE USER_ID = '${id}'`
+            let value = {
+                USER_STATUS : status,
+                USER_UPDATE : username + '',
+                USER_LAST_UPDATE : last_update
+            }
+            con.query(query,value, function (err, result) {
+                if (err) {
+                    console.log(err)
+                    return resolve(err.code)
+                } else {
                     return resolve(true)
                 }
             })

@@ -49,27 +49,34 @@ function getView(value_t) {
                 setUI()
                 if (user.position_type === 'นายก') {
                     getImage(user.id).then((data_image) => {
-                        if(data_image.length != 0){
+                        if (data_image.length != 0) {
                             data_nayo_image = true
                             image_list = data_image[0]
                             createImageFormURL()
                             document.getElementById('box_image').style.display = ''
+                            if(user.status === 'Y'){
+                                disbleall()
+                            }
                         }
                     })
+                } else {
+                    if(user.status === 'Y'){
+                        disbleall()
+                    }
                 }
             }
         })
     }
 }
-function createImageFormURL(){
-    if(image_list != null){
+function createImageFormURL() {
+    if (image_list != null) {
         let img = document.getElementById('operatorImage')
-        if(image_list.S_IMAGE_DATA != null){
+        if (image_list.S_IMAGE_DATA != null) {
             img.src = `data:image/${image_list.S_IMAGE_TYPE};base64,${image_list.S_IMAGE_DATA}`
-        }else{
+        } else {
             img.src = `../../img/userProfile.png`
         }
-        
+
     }
 }
 function setData(data) {
@@ -96,7 +103,7 @@ function setUI() {
     document.getElementById('type_user').value = user.type_user
     document.getElementById('position_detail').value = user.position
     document.getElementById('defalut').value = user.is_default
-    // createImageFormURL()
+
 }
 function getImage(id) {
     return new Promise((resolve, reject) => {
@@ -167,7 +174,22 @@ function createGroupData() {
     user.position_type = document.getElementById('position').value
     user.position = setNull(document.getElementById('position_detail').value)
     user.is_default = document.getElementById('defalut').value === 'Y' ? 'Y' : null
-    user.status = 'N'
+    user.status === '' ? user.status = 'N' : user.status = user.status
+
+}
+function disbleall() {
+    document.getElementById('username').disabled = true
+    document.getElementById('password').disabled = true
+    document.getElementById('title').disabled = true
+    document.getElementById('name').disabled = true
+    document.getElementById('surname').disabled = true
+    document.getElementById('position').disabled = true
+    document.getElementById('position_detail').disabled = true
+    document.getElementById('defalut').disabled = true
+    document.getElementById('type_user').disabled = true
+    document.getElementById('addImage_btn').disabled = true
+    document.getElementById('cancelImage').disabled = true
+    document.getElementById('bth_i_u').disabled = true
 }
 function setNull(value) {
     if (value === '' || value === '-') {
@@ -220,7 +242,7 @@ function insertData() {
 }
 function insertPage() {
     if (checkInputInsert()) {
-        if ((document.getElementById('box_image').style.display === '' && fileImage != null)|| data_nayo_image) {
+        if ((document.getElementById('box_image').style.display === '' && fileImage != null) || data_nayo_image) {
             insertData().then((data) => {
                 if (data.status) {
                     console.log(data)
@@ -249,7 +271,7 @@ function insertPage() {
             })
         } else {
             Swal.fire({
-                html: `<a>กรุณาเลือกภาพก่อน</a>` ,
+                html: `<a>กรุณาเลือกภาพก่อน</a>`,
                 icon: "error",
                 confirmButtonColor: "#009688"
             })
@@ -262,6 +284,8 @@ function insertPage() {
             confirmButtonColor: "#009688"
         })
     }
+
+
 }
 function checkInputInsert() {
     resetAlertInput()

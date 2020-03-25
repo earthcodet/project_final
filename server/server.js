@@ -63,6 +63,19 @@ app.get('/user/:username/:password', (req, res) => {
     }
   })
 })
+app.get('/get/user/all', (req, res) => {
+  webService.getUserAll().then((data) => {
+    res.json(data)
+  })
+})
+app.post('/user/update/status/delete/', (req, res) => {
+  //userItem
+  webService.updateStatusDeleteUser(req.body.userItem.id,req.body.userItem.status,req.session.username).then((data) => {
+    res.json(data)
+  })
+})
+
+
 router.get('/logout', redirectLogin, function (req, res) {
   req.session.destroy(function (err) {
     if (err) {

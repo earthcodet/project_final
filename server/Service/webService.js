@@ -1727,7 +1727,7 @@ class service {
         let dateForUpdate = datetime.toISOString().slice(0, 10)
         // last_update , username
         request.REQUEST_LAST_UPDATE = dateForUpdate
-        request.REQUEST_USER_UPDATE = username
+        request.REQUEST_USER_UPDATE = username 
         let id_no = request.REQUEST_NO
         let id_year = request.REQUEST_YEAR
 
@@ -4557,6 +4557,22 @@ class service {
     getUser(username, password) {
         return new Promise((resolve, reject) => {
             UserDAOObj.getUser(username, password).then((data) => {
+                return resolve(data)
+            })
+        })
+    }
+    getUserAll() {
+        return new Promise((resolve, reject) => {
+            UserDAOObj.getUserAll().then((data) => {
+                return resolve(data)
+            })
+        })
+    }
+    updateStatusDeleteUser(id, status, username) {
+        var datetime = new Date();
+        let dateForUpdate = datetime.toISOString().slice(0, 10)
+        return new Promise((resolve, reject) => {
+            UserDAOObj.updateStatusDelete(id, status, username, dateForUpdate).then((data) => {
                 return resolve(data)
             })
         })

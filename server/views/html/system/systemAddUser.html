@@ -155,7 +155,7 @@
                                     <input style='display: none;' type="file" id="uploadFile"
                                         onchange="uploadImage(event)" accept="image/*">
 
-                                    <button type="button" class="addimage" onclick="buttonImage()"
+                                    <button type="button" class="addimage" onclick="buttonImage()" id='addImage_btn'
                                         style="width:5vw ">รูปภาพ</button>
 
                                     <button type="button" class="delete" id="cancelImage"
@@ -164,7 +164,7 @@
                                 </div>
                             </div>
                             <br><br>
-                            <button type='button' style="width: 20%;border-radius: 2px;" onclick="insertPage()">ยืนยัน</button>
+                            <button type='button' id='bth_i_u' style="width: 20%;border-radius: 2px;" onclick="insertPage()">ยืนยัน</button>
                             <br><br>
                         </center>
                     </a>
@@ -183,6 +183,6 @@
 <script src="../../js/service/jquery/jquery.js"></script>
 <script src="../../js/service/sideMenu.js"></script>
 <script src='../../js/system/user.js'></script>
-<script src="../../js/service/checkUserLogin.js"></script>
+<!-- <script src="../../js/service/checkUserLogin.js"></script> -->
 
 </html>
