@@ -85,7 +85,8 @@
         <button class="dropdown-btn" id="adminna" style="display: none;"><b>ข้อมูลระบบ </b><i
                 class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
-            <a href="#"></a>
+            <a href="../system/systemUser.html">จัดการผู้ใช้งาน</a>
+            <a href="../system/systemType.html">จัดการประเภท</a>
         </div>
         <button class="dropdown-btn"><b>รายงาน </b><i class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
@@ -132,7 +133,7 @@
                     <a style="margin-left: 0vw;">เลขที่คำขอ :
                         <input type="text" id='form_id' style="width: 16%;" readonly></a>
                     <a>วันที่ยื่นขอ :
-                        <input type="text" id="datepicker1" style="width: 16%;"></a>
+                        <input type="text" id="datepicker1" style="width: 16%;" maxlength="10"></a>
                     <a>ประเภทคำขอ :
                         <input list="brow" id="typeReq" name="" style="width: 19%;" class="drop">
                         <datalist id="brow">
@@ -266,7 +267,7 @@
                         <br>
                         <a>ใบอนุญาตฉบับจริง ปีที่ 1
                             <a>ออกให้เมื่อวันที่ :
-                                <input type="text" id="datepicker2" style="width: 12%;"></a>
+                                <input type="text" id="datepicker2" maxlength="10" style="width: 12%;"></a>
                             <a>ค่าธรรมเนียม :
                                 <input type="text" id="bFee" style="width: 12%;" maxlength="8" value="0"
                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></a>
@@ -276,7 +277,7 @@
                             <br>
                             <a>ใบอนุญาตฉบับจริง ปีที่ 2</a>
                             <a>ออกให้เมื่อวันที่ :
-                                <input type="text" id="datepicker10" id="" style="width: 12%;" disabled></a>
+                                <input type="text" id="datepicker10" id="" style="width: 12%;" maxlength="10" disabled></a>
                             <a>ค่าธรรมเนียม :
                                 <input type="number" id="bFeeY2" style="width: 12%;" value="0" disabled></a>
                             <a>ค่าปรับ :
@@ -286,7 +287,7 @@
                             <br>
                             <a>ใบอนุญาตฉบับจริง ปีที่ 3</a>
                             <a>ออกให้เมื่อวันที่ :
-                                <input type="text" id="datepicker11" id="" style="width: 12%;" disabled></a>
+                                <input type="text" id="datepicker11" id="" style="width: 12%;" maxlength="10" disabled></a>
                             <a>ค่าธรรมเนียม :
                                 <input type="number" id="bFeeY3" style="width: 12%;" value="0" disabled></a>
                             <a>ค่าปรับ :

@@ -81,7 +81,8 @@
         <button class="dropdown-btn" id="adminna" style="display: none;"><b>ข้อมูลระบบ </b><i
                 class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
-            <a href="#"></a>
+            <a href="../system/systemUser.html">จัดการผู้ใช้งาน</a>
+            <a href="../system/systemType.html">จัดการประเภท</a>
         </div>
         <button class="dropdown-btn"><b>รายงาน </b><i class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
@@ -125,7 +126,7 @@
                     <a style="margin-left: 0vw;">เลขที่คำขอ :
                         <input id="form_id" type="text" style="width: 16%;" readonly></a>
                     <a>วันที่ยื่นขอ <font color="red">*</font> :
-                        <input type="text" id="datepicker1" style="width: 16%;" maxlength="70"
+                        <input type="text" id="datepicker1" style="width: 16%;" maxlength="10"
                             onchange="document.getElementById('datepicker1').classList.remove('alertInput')"></a>
                     <a>ประเภทคำขอ <font color="red">*</font> :
                         <input id="typeReq" list="brow" id="" name="" style="width: 19%;" class="drop"
@@ -483,7 +484,7 @@
                     <br>
                     <a>ใบอนุญาตฉบับจริง</a>&ensp;
                     <a>ออกให้เมื่อวันที่ :
-                        <input type="text" id="datepicker2" style="width: 12%;" disabled></a>
+                        <input type="text" id="datepicker2" style="width: 12%;" maxlength="10" disabled></a>
                     <a>ค่าธรรมเนียม :
                         <input type="number" id="bFee" style="width: 12%;" disabled value="0"></a>
                     <a>ค่าปรับ :
@@ -600,10 +601,10 @@
                             onchange="document.getElementById('foodBy').classList.remove('alertInput')" />
                         <br>
                         <a>ให้ไว้ ณ วันที่</a>
-                        <input type="text" id="datepicker5"
+                        <input type="text" id="datepicker5" maxlength="10"
                             onchange="document.getElementById('datepicker5').classList.remove('alertInput')" />&nbsp;
                         <a>มีผลถึง ณ วันที่</a>
-                        <input type="text" id="datepicker6"
+                        <input type="text" id="datepicker6" maxlength="10"
                             onchange="document.getElementById('datepicker6').classList.remove('alertInput')" />
                     </div>
                     <br>
