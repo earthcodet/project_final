@@ -9,7 +9,7 @@
 
     <link rel="stylesheet" href="../../css/css2.css">
     <link href="../../css/fonts.css" rel="stylesheet">
-
+    <title> จัดการผู้ใช้งาน</title>
     <!-- icon -->
     <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.css">
 </head>
@@ -103,7 +103,7 @@
                 <div class="box">
                     <center>
                         <br>
-                       <a>ค้นหา</a> <input type="text" style="width: 30%;"> &emsp;<button type='button'>เพิ่มผู้ใช้</button>
+                       <a>ค้นหา</a> <input type="text" style="width: 30%;" onkeyup="searchFilter(this.value)"> &emsp;<button type='button' onclick="openAddUser('NEW')">เพิ่มผู้ใช้</button>
                         <br><br>
                         <table id="list_user" class="table cursor-pointer table-hover tableresult"
                             style="width: 80%; text-align: center;" >
@@ -141,7 +141,7 @@
 <script src="../../js/service/jquery/jquery.js"></script>
 <script src="../../js/service/sideMenu.js"></script>
 
-<!-- <script src="../../js/service/checkUserLogin.js"></script> -->
+<script src="../../js/service/checkUserLogin.js"></script>
 
 </html>
 <script src="../../js/system/user_main.js"></script>

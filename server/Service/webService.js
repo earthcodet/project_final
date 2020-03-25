@@ -4586,6 +4586,30 @@ class service {
             })
         })
     }
+    insertRequestTypeStep(request){
+        return new Promise((resolve, reject) => {
+            if(request.id != ''){
+                //update
+                console.log('update request')
+                RequestTypeDAOObj.update(request).then((data_update) =>{
+                    return resolve(data_update)
+                })
+            }else{
+                //insert
+                console.log('isnert request')
+                this.insertRequestType(request).then((data) =>{
+                    return resolve(data)
+                })
+            }
+        })
+    }
+    getRequestBymenuName(id) {
+        return new Promise((resolve, reject) => {
+            RequestTypeDAOObj.getRequestBymenuName(id).then((data) => {
+                return resolve(data)
+            })
+        })
+    }
     getRequestTypeById(id) {
         return new Promise((resolve, reject) => {
             RequestTypeDAOObj.getRequestTypeById(id).then((data) => {
