@@ -45,7 +45,7 @@ app.use(session({
 }))
 app.get('/get/username/login', (req, res) => {
   if (req.session.username != undefined) {
-    res.json(true)
+    res.json(req.session.userType)
   } else {
     res.json(false)
   }
@@ -55,6 +55,7 @@ app.get('/user/:username/:password', (req, res) => {
   webService.getUser(req.params.username, req.params.password).then((data) => {
     if (data.length != 0) {
       req.session.username = req.params.username
+      req.session.userType = data[0].USER_TYPE_USER
       console.log('Username and Password correct')
       console.log(`username => ${req.session.username}`)
       res.redirect('/')

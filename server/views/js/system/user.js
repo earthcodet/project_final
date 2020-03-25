@@ -45,6 +45,8 @@ function getView(value_t) {
     if (value_t.id != undefined) {
         getComData(value_t.id).then((raw_data) => {
             if (raw_data.length != 0) {
+                document.getElementById('topic').innerText = 'อัพเดทข้อมูล'
+                document.getElementById('head_topic').innerText = 'อัพเดทข้อมูล'
                 setData(raw_data[0])
                 setUI()
                 if (user.position_type === 'นายก') {
@@ -54,13 +56,13 @@ function getView(value_t) {
                             image_list = data_image[0]
                             createImageFormURL()
                             document.getElementById('box_image').style.display = ''
-                            if(user.status === 'Y'){
+                            if (user.status === 'Y') {
                                 disbleall()
                             }
                         }
                     })
                 } else {
-                    if(user.status === 'Y'){
+                    if (user.status === 'Y') {
                         disbleall()
                     }
                 }
@@ -240,9 +242,24 @@ function insertData() {
 
     });
 }
+function checkImagenayo() {
+    if (user.position_type != 'นายก') {
+        return true
+    } else {
+        //file Image คือ check ว่า มีการเลือกไฟล์
+        //data_nayo_image (ค่อยบอกว่าข้อมูลที่ผ่านการ get มามีรูปไหม)
+        if (fileImage != null || data_nayo_image) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+}
 function insertPage() {
     if (checkInputInsert()) {
-        if ((document.getElementById('box_image').style.display === '' && fileImage != null) || data_nayo_image) {
+        //check ว่าเลือกภาพหรือยัง
+        if (checkImagenayo()) {
             insertData().then((data) => {
                 if (data.status) {
                     console.log(data)

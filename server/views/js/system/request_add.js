@@ -40,6 +40,8 @@ function setUI() {
     document.getElementById('menu_type').value = menu.type
     document.getElementById('menu_name').value = menu.name
     document.getElementById('topic').innerText = 'อัพเดทข้อมูล'
+    document.getElementById('head_topic').innerText = 'อัพเดทข้อมูล'
+    
 }
 function getComData(id) {
     return new Promise((resolve, reject) => {
