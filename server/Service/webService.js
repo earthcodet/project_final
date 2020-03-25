@@ -1213,7 +1213,7 @@ class service {
                             return resolve(personal.id)
                         }
                     } else {
-                        this.loopInsertPersonal(personal)
+                        this.loopInsertPersonal(personal, imageFile)
                     }
                 })
             })
@@ -1256,7 +1256,7 @@ class service {
                             }
                         })
                     } else {
-                        this.loopInsertAddress(address)
+                        this.loopInsertAddress(personal, address, imageFile)
                     }
                 })
             })
@@ -1437,7 +1437,7 @@ class service {
             return new_data
         }
         if (type === 'ADDRESS') {
-            new_data.home_number = this.setNullValue(new_data.home_number)
+            // new_data.home_number = this.setNullValue(new_data.home_number)
             new_data.moo = this.setNullValue(new_data.moo)
             new_data.trxk = this.setNullValue(new_data.trxk)
             new_data.sxy = this.setNullValue(new_data.sxy)
@@ -1602,17 +1602,17 @@ class service {
             new_data.REQUEST_PRODUCT_TYPE = this.setNullValue(new_data.REQUEST_PRODUCT_TYPE)
             new_data.REQUEST_SELL_START = this.setNullValue(new_data.REQUEST_SELL_START)
             new_data.REQUEST_SELL_END = this.setNullValue(new_data.REQUEST_SELL_END)
-            new_data.REQUEST_RECEIPT_FINE = this.setNullValue(new_data.REQUEST_RECEIPT_FINE)
+            new_data.REQUEST_RECEIPT_FINE = this.setNullValue(new_data.REQUEST_RECEIPT_FINE) === null ? 0 : new_data.REQUEST_RECEIPT_FINE
             new_data.REQUEST_RECEIPT_FEE = this.setNullValue(new_data.REQUEST_RECEIPT_FEE)
-            new_data.REQUEST_RECEIPT_TOTAL = this.setNullValue(new_data.REQUEST_RECEIPT_TOTAL)
+            new_data.REQUEST_RECEIPT_TOTAL = this.setNullValue(new_data.REQUEST_RECEIPT_TOTAL) === null ? 0 : new_data.REQUEST_RECEIPT_TOTAL
             new_data.REQUEST_RECEIPT_DATE = this.setNullValue(new_data.REQUEST_RECEIPT_DATE, 'date')
             new_data.REQUEST_RECEIPT_FINE_YEAR_2 = this.setNullValue(new_data.REQUEST_RECEIPT_FINE_YEAR_2)
             new_data.REQUEST_RECEIPT_FEE_YEAR_2 = this.setNullValue(new_data.REQUEST_RECEIPT_FEE_YEAR_2)
-            new_data.REQUEST_RECEIPT_TOTAL_YEAR_2 = this.setNullValue(new_data.REQUEST_RECEIPT_TOTAL_YEAR_2)
+            new_data.REQUEST_RECEIPT_TOTAL_YEAR_2 = this.setNullValue(new_data.REQUEST_RECEIPT_TOTAL_YEAR_2) === null ? 0 : new_data.REQUEST_RECEIPT_TOTAL_YEAR_2
             new_data.REQUEST_RECEIPT_DATE_YEAR_2 = this.setNullValue(new_data.REQUEST_RECEIPT_DATE_YEAR_2, 'date')
             new_data.REQUEST_RECEIPT_FINE_YEAR_3 = this.setNullValue(new_data.REQUEST_RECEIPT_FINE_YEAR_3)
             new_data.REQUEST_RECEIPT_FEE_YEAR_3 = this.setNullValue(new_data.REQUEST_RECEIPT_FEE_YEAR_3)
-            new_data.REQUEST_RECEIPT_TOTAL_YEAR_3 = this.setNullValue(new_data.REQUEST_RECEIPT_TOTAL_YEAR_3)
+            new_data.REQUEST_RECEIPT_TOTAL_YEAR_3 = this.setNullValue(new_data.REQUEST_RECEIPT_TOTAL_YEAR_3) === null ? 0 : new_data.REQUEST_RECEIPT_TOTAL_YEAR_3
             new_data.REQUEST_RECEIPT_DATE_YEAR_3 = this.setNullValue(new_data.REQUEST_RECEIPT_DATE_YEAR_3, 'date')
             new_data.REQUEST_DATE_ISSUED = this.setNullValue(new_data.REQUEST_DATE_ISSUED, 'date')
             new_data.REQUEST_DATE_EXPIRED = this.setNullValue(new_data.REQUEST_DATE_EXPIRED, 'date')
@@ -1727,7 +1727,7 @@ class service {
         let dateForUpdate = datetime.toISOString().slice(0, 10)
         // last_update , username
         request.REQUEST_LAST_UPDATE = dateForUpdate
-        request.REQUEST_USER_UPDATE = username
+        request.REQUEST_USER_UPDATE = username 
         let id_no = request.REQUEST_NO
         let id_year = request.REQUEST_YEAR
 
@@ -2271,6 +2271,150 @@ class service {
                 }
             })
         })
+    }//User
+    InsertUserStep(user, image, username) {
+        console.log(`username update = ${username}`)
+        var datetime = new Date();
+        let dateForUpdate = datetime.toISOString().slice(0, 10)
+        user.last_update = dateForUpdate
+        user.update = username
+        return new Promise((resolve, reject) => {
+            if (user.id.length != 0) {
+                if (user.is_default != null) {
+                    UserDAOObj.updateStatus(user.position_type).then((data_status_update) => {
+                        UserDAOObj.updateStaff(user).then((update_status) => {
+                            if (update_status) {
+                                if (image != undefined) {
+                                    image.name = user.id
+                                    ImageDAOObj.updateImageUser(image).then((data_a) => {
+                                        if (data_a) {
+                                            let objectA = {
+                                                id: 'update',
+                                                status: true
+                                            }
+                                            return resolve(objectA)
+                                        } else {
+                                            let object = {
+                                                id: 'update image error',
+                                                status: false
+                                            }
+                                            return resolve(object)
+                                        }
+                                    })
+                                } else {
+                                    let object = {
+                                        id: 'update',
+                                        status: true
+                                    }
+                                    return resolve(object)
+                                }
+                            } else {
+                                return resolve('update user error')
+                            }
+                        })
+                    })
+
+                } else {
+                    UserDAOObj.updateStaff(user).then((update_status) => {
+                        if (update_status) {
+                            if (image != undefined) {
+                                image.name = user.id
+                                ImageDAOObj.updateImageUser(image).then((data) => {
+                                    if (data) {
+                                        let object = {
+                                            id: 'update',
+                                            status: true
+                                        }
+                                        return resolve(object)
+                                    } else {
+                                        let object = {
+                                            id: 'update image error',
+                                            status: false
+                                        }
+                                        return resolve(object)
+                                    }
+                                })
+                            } else {
+                                let object = {
+                                    id: 'update',
+                                    status: true
+                                }
+                                return resolve(object)
+                            }
+                        } else {
+                            return resolve('update user error')
+                        }
+                    })
+                }
+
+            } else {
+                if (user.is_default != null) {
+                    UserDAOObj.updateStatus(user.position_type).then((data_status_update) => {
+                        this.loopInsertUser(user, image).then((data) => {
+                            if (data.status) {
+                                return resolve(data)
+                            } else {
+                                let object = {
+                                    id: 'loop insert user error',
+                                    status: false
+                                }
+                                return resolve(object)
+                            }
+                        })
+                    })
+                } else {
+                    this.loopInsertUser(user, image).then((data) => {
+                        if (data.status) {
+                            return resolve(data)
+                        } else {
+                            let object = {
+                                id: 'loop insert user error',
+                                status: false
+                            }
+                            return resolve(object)
+                        }
+                    })
+                }
+            }
+        })
+    }
+    //Insert USER
+    loopInsertUser(user, imageFile) {
+        return new Promise((resolve, reject) => {
+            this.getNewId('USER').then((id) => {
+                user.id = id
+                UserDAOObj.insertUser(user).then((data) => {
+                    if (data) {
+                        if (imageFile != undefined) {
+                            imageFile.name = user.id
+                            ImageDAOObj.insertImageUser(imageFile).then((data) => {
+                                if (data) {
+                                    let object = {
+                                        id: user.id,
+                                        status: true
+                                    }
+                                    return resolve(object)
+                                } else {
+                                    let object = {
+                                        id: 'insert image error',
+                                        status: false
+                                    }
+                                    return resolve(object)
+                                }
+                            })
+                        } else {
+                            let object = {
+                                id: user.id,
+                                status: true
+                            }
+                            return resolve(object)
+                        }
+                    } else {
+                        this.loopInsertUser(user, imageFile)
+                    }
+                })
+            })
+        })
     }
     InsertPersonalStep(personal, address, image, username) {
         var datetime = new Date();
@@ -2364,6 +2508,13 @@ class service {
     getImageNayo(id) {
         return new Promise((resolve, reject) => {
             ImageDAOObj.getImageUserNayo(id).then((viewData_data) => {
+                return resolve(viewData_data)
+            })
+        })
+    }
+    getImageNayoUser(id) {
+        return new Promise((resolve, reject) => {
+            ImageDAOObj.getImageUser(id).then((viewData_data) => {
                 return resolve(viewData_data)
             })
         })
@@ -4410,12 +4561,52 @@ class service {
             })
         })
     }
+    getUserAll() {
+        return new Promise((resolve, reject) => {
+            UserDAOObj.getUserAll().then((data) => {
+                return resolve(data)
+            })
+        })
+    }
+    updateStatusDeleteUser(id, status, username) {
+        var datetime = new Date();
+        let dateForUpdate = datetime.toISOString().slice(0, 10)
+        return new Promise((resolve, reject) => {
+            UserDAOObj.updateStatusDelete(id, status, username, dateForUpdate).then((data) => {
+                return resolve(data)
+            })
+        })
+    }
     //Request type
     insertRequestType(request) {
         return new Promise((resolve, reject) => {
             RequestTypeDAOObj.insert(request).then((data) => {
                 // console.log(`== insert || insertRequestType ==`)
                 return resolve(true)
+            })
+        })
+    }
+    insertRequestTypeStep(request){
+        return new Promise((resolve, reject) => {
+            if(request.id != ''){
+                //update
+                console.log('update request')
+                RequestTypeDAOObj.update(request).then((data_update) =>{
+                    return resolve(data_update)
+                })
+            }else{
+                //insert
+                console.log('isnert request')
+                this.insertRequestType(request).then((data) =>{
+                    return resolve(data)
+                })
+            }
+        })
+    }
+    getRequestBymenuName(id) {
+        return new Promise((resolve, reject) => {
+            RequestTypeDAOObj.getRequestBymenuName(id).then((data) => {
+                return resolve(data)
             })
         })
     }

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- <!-- <script src="../js/js22.js"></script> --> -->
-
+    <title>จัดการประเภทคำขอ</title>
     <link rel="stylesheet" href="../../css/css2.css">
     <link href="../../css/fonts.css" rel="stylesheet">
 
@@ -98,24 +98,24 @@
         <fieldset style="border: 0;padding: 0;margin: 0;">
             <div class="main">
                 <header class="w3-top2">
-                    <h1 style="font-size:2.8vh;margin-left: 25px;padding: 2px;"> จัดการผู้ใช้งาน</h1>
+                    <h1 style="font-size:2.8vh;margin-left: 25px;padding: 2px;"> จัดการประเภทคำขอ</h1>
                 </header>
                 <div class="box">
                     <center>
                         <br>
-                        <select style="width: 30%;">
-                            <option>ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</option>
-                            <option>ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</option>
-                            <option>ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</option>
-                            <option>ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</option>
-                            <option>หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</option>
-                            <option>หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</option>
-                            <option>ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</option>
-                            <option>กิจการที่เป็นอันตรายต่อสุขภาพ</option>
-                            <option>กิจการฌาปณสถาน</option>
-                        </select> <button>ค้นหา</button>&emsp;<button>เพิ่ม</button>
+                        <select  id='search_type' style="width: 30%;">
+                            <option value="ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ">ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</option>
+                            <option value="ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ">ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</option>
+                            <option value="ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร">ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</option>
+                            <option value="ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร">ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</option>
+                            <option value="หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร">หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</option>
+                            <option value="หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร">หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</option>
+                            <option value="ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน">ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</option>
+                            <option value="กิจการที่เป็นอันตรายต่อสุขภาพ">กิจการที่เป็นอันตรายต่อสุขภาพ</option>
+                            <option value="กิจการฌาปณสถาน">กิจการฌาปณสถาน</option>
+                        </select> <button type='button' onclick="searchFilter(document.getElementById('search_type').value)">ค้นหา</button>&emsp;<button type='button' onclick="openAddUser('NEW')">เพิ่ม</button>
                         <br><br>
-                        <table id="requestTable30day" class="table cursor-pointer table-hover tableresult"
+                        <table id="list_request" class="table cursor-pointer table-hover tableresult"
                             style="width: 70%;" >
                             <thead>
                                 <tr class="is-color">
@@ -130,51 +130,9 @@
                                     </th>
                                 </tr>
                             </thead>
-                                <tr>
-                                    <td>กิจการที่เป็นอันตรายต่อสุขภาพ</td>
-                                    <td>1. ก. การเลี้ยงม้า โค กระบือ เกิน 10 ตัวขึ้นไป</td>
-                                    <td style="text-align: center;"><button>แก้ไข</button>&emsp;<button>ลบ</button></td>
-                                </tr>
-                                <tr>
-                                    <td>กิจการที่เป็นอันตรายต่อสุขภาพ</td>
-                                    <td>1. ข. การเลี้ยงมา โค กระบือ ไม่เกิน 10 ตัว</td>
-                                    <td style="text-align: center;"><button>แก้ไข</button>&emsp;<button>ลบ</button></td>
-                                </tr>
-                                <tr>
-                                    <td>กิจการที่เป็นอันตรายต่อสุขภาพ</td>
-                                    <td>2. ก. การเลี้ยงสุกรเกิน 50 ตัวขั้นไป</td>
-                                    <td style="text-align: center;"><button>แก้ไข</button>&emsp;<button>ลบ</button></td>
-                                </tr>
-                                <tr>
-                                    <td>กิจการที่เป็นอันตรายต่อสุขภาพ</td>
-                                    <td>2. ข. การเลี้ยงสุกรเกิน 20 ตัว แต่ไม่เกิน 50 ตัว</td>
-                                    <td style="text-align: center;"><button>แก้ไข</button>&emsp;<button>ลบ</button></td>
-                                </tr>
-                                <tr>
-                                    <td>กิจการที่เป็นอันตรายต่อสุขภาพ</td>
-                                    <td>2. ค. การเลี้ยงสุกรไม่เกิน 20 ตัว</td>
-                                    <td style="text-align: center;"><button>แก้ไข</button>&emsp;<button>ลบ</button></td>
-                                </tr>
-                                <tr>
-                                    <td>กิจการที่เป็นอันตรายต่อสุขภาพ</td>
-                                    <td>3. ก. การเลี้ยงแพะ แกะเกิน 50 ตัวขึ้นไป</td>
-                                    <td style="text-align: center;"><button>แก้ไข</button>&emsp;<button>ลบ</button></td>
-                                </tr>
-                                <tr>
-                                    <td>กิจการที่เป็นอันตรายต่อสุขภาพ</td>
-                                    <td>3. ข. การเลี้ยงแพะ แกะเกิน 20 ตัว แต่ไม่เกิน 50 ตัว</td>
-                                    <td style="text-align: center;"><button>แก้ไข</button>&emsp;<button>ลบ</button></td>
-                                </tr>
-                                <tr>
-                                    <td>กิจการที่เป็นอันตรายต่อสุขภาพ</td>
-                                    <td>3. ค. การเลี้ยงแพะ แกะไม่เกิน 20 ตัว</td>
-                                    <td style="text-align: center;"><button>แก้ไข</button>&emsp;<button>ลบ</button></td>
-                                </tr>
-                                <tr>
-                                    <td>กิจการที่เป็นอันตรายต่อสุขภาพ</td>
-                                    <td>4. ก. การเลี้ยงห่าน เป็ด ไก่ เกิน 50 ตัวขึ้นไป</td>
-                                    <td style="text-align: center;"><button>แก้ไข</button>&emsp;<button>ลบ</button></td>
-                                </tr>
+                               <tbody>
+
+                               </tbody>
                         </table>
                         <br>
                     </center>
@@ -195,5 +153,6 @@
 <script src="../../js/service/sideMenu.js"></script>
 
 <script src="../../js/service/checkUserLogin.js"></script>
+<script src="../../js/system/request_main.js"></script>
 
 </html>

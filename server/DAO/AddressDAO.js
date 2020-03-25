@@ -69,6 +69,7 @@ class AddressDAO {
             ]
             con.query(query,[list_value], function (err, result) {
                 if (err) {
+                    console.log(err)
                     return resolve(err.code)
                 }
                 return resolve(`true`)

@@ -63,6 +63,42 @@ app.get('/user/:username/:password', (req, res) => {
     }
   })
 })
+app.get('/get/user/all', (req, res) => {
+  webService.getUserAll().then((data) => {
+    res.json(data)
+  })
+})
+app.post('/user/update/status/delete/', (req, res) => {
+  //userItem
+  webService.updateStatusDeleteUser(req.body.userItem.id,req.body.userItem.status,req.session.username).then((data) => {
+    res.json(data)
+  })
+})
+//Request type 
+//get ALL
+app.get('/requesttype/get/all', (req, res) => {
+  webService.getRequestType().then((data) => {
+    res.json(data)
+  })
+})
+app.get('/requesttype/get/id/:id', (req, res) => {
+  webService.getRequestTypeById(req.params.id).then((data) => {
+    res.json(data)
+  })
+})
+app.get('/requesttype/get/name/:id', (req, res) => {
+  webService.getRequestBymenuName(req.params.id).then((data) => {
+    res.json(data)
+  })
+})
+
+app.post('/requesttype/insert', (req, res) => {
+  //userItem
+  webService.insertRequestTypeStep(req.body.requestItem).then((data) => {
+    res.json(data)
+  })
+})
+
 router.get('/logout', redirectLogin, function (req, res) {
   req.session.destroy(function (err) {
     if (err) {
@@ -214,6 +250,32 @@ app.post('/insert/personal', (req, res) => {
 
 
 })
+app.post('/insert/user', (req, res) => {
+  console.log('server user = '+ req.session.username)
+  try {
+    var obj = JSON.parse(req.body.gropData);
+    var datafile = undefined
+    if (req.files != null) {
+      obj[1].data = req.files.files.data
+    } else {
+      if(obj[1].name === 'delete_image'){
+        obj[1].name = ''
+        obj[1].data = null
+      }else{
+        obj[1] = datafile
+      }
+    }
+    console.log('server user = '+ req.session.username)
+    webService.InsertUserStep(obj[0], obj[1], req.session.username).then((data) => {
+      res.json(data)
+    })
+  }
+  catch (error) {
+    console.log(error)
+    res.json('server error')
+  }
+})
+
 app.post('/update/status/delete', (req, res) => {
   webService.updateStatusDelete(req.body.personal, req.session.username).then((data) => {
     console.log(`server : function updateStatusDelete return = ${data}`)
@@ -401,6 +463,12 @@ app.get('/get/image/nayo/view/:id', (req, res) => {
     res.json(data)
   })
 })
+app.get('/get/image/nayo/user/:id', (req, res) => {
+  webService.getImageNayoUser(req.params.id).then((data) => {
+    res.json(data)
+  })
+})
+
 app.get('/get/request/renew/:type/:personal_id', (req, res) => {
   webService.getRquestRenew(webService.getRequestTypeMenu(req.params.type), req.params.personal_id).then((data) => {
     res.json(data)
@@ -493,6 +561,9 @@ app.post('/update/request/status/delete', (req, res) => {
   webService.updateRequestStatusDelete(obj, req.session.username).then((data) => {
     res.json(data);
   })
+})
+webService.getNewId('ADDRESS').then((data) =>{
+  console.log(data)
 })
 //ทำให้ css กับ js ใช้ได้
 app.use(express.static(__dirname + '/views'));

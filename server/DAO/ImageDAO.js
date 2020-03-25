@@ -70,6 +70,70 @@ class ImageDAO {
             })
         })
     }
+    //user
+    insertImageUser(image) {
+        return new Promise((resolve, reject) => {
+            var query = "INSERT INTO `user_image` SET ?"
+                ,
+                values = {
+                    S_IMAGE_NAME : image.name,
+                    S_IMAGE_TYPE: image.type,
+                    S_IMAGE_DATA: image.data
+                };
+            con.query(query, values, function (err, result) {
+                if (err) {
+                    console.log(err)
+                }
+                return resolve(result)
+            })
+        })
+    }
+    updateImageUser(image) {
+        console.log("update Image #image")
+        console.log(image)
+        return new Promise((resolve, reject) => {
+            let text = 'UPDATE `user_image` SET ? WHERE S_IMAGE_NAME = '
+            text = text + `'${image.name}'`
+            let query = text
+                ,
+                values = {
+                    S_IMAGE_TYPE: image.type,
+                    S_IMAGE_DATA: image.data
+                }
+            con.query(query, values, function (err, result) {
+                if (err) {
+                    console.log(err)
+                }
+                if (result.affectedRows === 1) {
+                    return resolve(true)
+                } else {
+                    return resolve(false)
+                }
+
+            })
+        })
+    }
+    getImageUser(id) {
+        return new Promise((resolve, reject) => {
+            let query = `SELECT * FROM user_image WHERE S_IMAGE_NAME = '${id}'`
+            con.query(query, function (err, result) {
+                if (err) {
+                    console.log(err)
+                }
+                if (result.length != 0 && result[0].S_IMAGE_DATA != null) {
+                    if (result[0] != undefined) {
+                        result[0].S_IMAGE_DATA = Buffer.from(result[0].S_IMAGE_DATA, 'binary').toString('base64');
+                    }
+                } else {
+                    if (result[0] != undefined) {
+                        result[0].S_IMAGE_DATA = null
+                    }
+                }
+                return resolve(result)
+            })
+        })
+    }
+
     insertImageEstablishment(image) {
         return new Promise((resolve, reject) => {
             var sql = "INSERT INTO image_establishment(E_IMAGE_NAME, E_IMAGE_TYPE, E_IMAGE_DATA) VALUES ?";

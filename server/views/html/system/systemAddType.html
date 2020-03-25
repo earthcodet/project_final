@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../../css/css2.css">
     <link href="../../css/fonts.css" rel="stylesheet">
 
-
+<title>เพิ่มประเภทคำขอ</title>
     <!-- icon -->
     <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.css">
 </head>
@@ -59,7 +59,7 @@
             <a href="../renew/renew_area_less_correct.html">- คำขอต่อหนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
             <a href="../renew/renew_market.html">- คำขอต่อใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
             <a href="../renew/renew_health_danger.html">- คำขอต่อกิจการที่เป็นอันตรายต่อสุขภาพ</a>
-            <a href="../renew/renew_crematory.html" >- คำขอต่อกิจการฌาปณสถาน</a>
+            <a href="../renew/renew_crematory.html">- คำขอต่อกิจการฌาปณสถาน</a>
         </div>
         <button class="dropdown-btn"><b>ข้อมูลส่วนกลาง </b><i class="fa fa-caret-down"></i></button>
         <div class="dropdown-container ">
@@ -97,30 +97,41 @@
     <!-- เนื้อหา -->
     <form id="form">
         <fieldset style="border: 0;padding: 0;margin: 0;">
-            <div class="main">
+            <div class="main"style='margin-top:7.5vw;'>
                 <header class="w3-top2">
-                    <h1 style="font-size:2.8vh;margin-left: 25px;padding: 2px;"> จัดการผู้ใช้งาน</h1>
+                    <h1 style="font-size:2.8vh;margin-left: 25px;padding: 2px;"> เพิ่มประเภทคำขอ</h1>
                 </header>
                 <div class="box">
                     <center>
-                        <br>
-                        <label style="margin-left: 28px;">ชื่อเมนู : </label>
-                        <select style="width: 40%;">
-                            <option>ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</option>
-                            <option>ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</option>
-                            <option>ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</option>
-                            <option>ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</option>
-                            <option>หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</option>
-                            <option>หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</option>
-                            <option>ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</option>
-                            <option>กิจการที่เป็นอันตรายต่อสุขภาพ</option>
-                            <option>กิจการฌาปณสถาน</option>
-                        </select>
-                        <br>
-                        <label style="margin-left: 0px;">ชื่อประเภท : </label><input type="text" style="width: 40%;">
-                        <br><br>
-                        <button style="width: 20%;">ยืนยัน</button>
-                        <br><br>
+                        <br><a>
+                            <h1 id='topic'>เพิ่มข้อมูล</h1>
+                            <label style="margin-left: 2vw;">ชื่อประเภท : </label>
+                            <select style="width: 40%;" id='menu_type'>
+                                <option value="ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ">
+                                    ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</option>
+                                <option value="ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ">
+                                    ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</option>
+                                <option value="ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร">ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร
+                                </option>
+                                <option value="ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร">ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร
+                                </option>
+                                <option value="หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร">
+                                    หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</option>
+                                <option value="หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร">
+                                    หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</option>
+                                <option value="ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน">ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน
+                                </option>
+                                <option value="กิจการที่เป็นอันตรายต่อสุขภาพ">กิจการที่เป็นอันตรายต่อสุขภาพ</option>
+                                <option value="กิจการฌาปณสถาน">กิจการฌาปณสถาน</option>
+                            </select>
+                            <br>
+                            <label style="margin-left: 3.6vw;">ชื่อเมนู :
+                            </label>
+                            <input type="text" id='menu_name' style="width: 40%;">
+                            <br><br>
+                            <button type='button' onclick="insertPage()" style="width: 20%;border-radius: 2px;">ยืนยัน</button>
+                            <br><br>
+                        </a>
                     </center>
                 </div>
             </div>
@@ -138,5 +149,6 @@
 <script src="../../js/service/sideMenu.js"></script>
 <script src="../../js/service/checkUserLogin.js"></script>
 
+<script src='../../js/system/request_add.js'></script>
 
 </html>
