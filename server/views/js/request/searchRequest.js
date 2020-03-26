@@ -87,7 +87,7 @@ function setObjectSearch() {
   } else {
     let d = objectSearch.datepicker1.split('-')[0]
     let m = objectSearch.datepicker1.split('-')[1]
-    let y = objectSearch.datepicker1.split('-')[2]
+    let y = parseInt(objectSearch.datepicker1.split('-')[2]) - 543
     objectSearch.datepicker1 = `${y}-${m}-${d}`
   }
 
@@ -96,7 +96,7 @@ function setObjectSearch() {
   } else {
     let d = objectSearch.datepicker2.split('-')[0]
     let m = objectSearch.datepicker2.split('-')[1]
-    let y = objectSearch.datepicker2.split('-')[2]
+    let y = parseInt(objectSearch.datepicker2.split('-')[2]) - 543
     objectSearch.datepicker2 = `${y}-${m}-${d}`
   }
 

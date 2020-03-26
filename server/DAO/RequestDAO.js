@@ -501,12 +501,13 @@ class RequestDAO {
             joinTable = joinTable + `JOIN address ON address.ADDRESS_ID = establishment.ADDRESS_ID ` //ea
             joinTable = joinTable + `JOIN request_type ON request_type.REQUEST_TYPE_ID = request.REQUEST_TYPE_ID`
             let query = `SELECT ${column} FROM request ${joinTable} WHERE ${value}`
-            console.log(value)
+            // console.log(query)
             con.query(query, function (err, result) {
                 if (err) {
                     console.log(err.code)
                     return resolve(err.code)
                 }
+                // console.log(result)
                 return resolve(result)
             })
         })
