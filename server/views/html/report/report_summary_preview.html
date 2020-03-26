@@ -11,7 +11,7 @@
     <!-- bootstrap -->
     <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
 
-            <!-- css ส่วนกลาง -->
+    <!-- css ส่วนกลาง -->
     <link href="../../css/utilities.css" rel="stylesheet">
 </head>
 <style type="text/css">
@@ -45,21 +45,23 @@
 <body>
     <div class="hideWhenPrint">
         <button type="button" class="btn btn-outline-success btn-lg is-color" onclick="window.print()">พิมพ์</button>
-        <button type="button" class="btn btn-outline-success btn-lg is-color" onclick="ExportToExcel(table)">Excel</button>
+        <button type="button" class="btn btn-outline-success btn-lg is-color"
+            onclick="ExportToExcel(table)">Excel</button>
         <br><br>
     </div>
     <p class="text-center">รายงานการชำระค่าธรรมเนียมใบอนุญาตประกอบการค้าประเภทต่างๆ</p>
-    <p class="text-center">ประจำเดือน <z>รอใส่เดือน</z></p>
+    <p class="text-center">ประจำเดือน <z id='mon_report'></z>
+    </p>
     <div class="sarabun-font">
-        <table id="table" class="table table-bordered table-hover">
+        <table id="table" class="table table-bordered ">
             <thead class="text-center">
-                <tr>
+                <tr >
                     <th class="align-middle" rowspan="2">ที่</th>
                     <th class="align-middle" rowspan="2" width="29%"> รายการ </th>
                     <th class="align-middle" rowspan="2">ยอดประมาณการ(ราย)</th>
                     <th class="align-middle" rowspan="2">ยอดประมาณการ(บาท)</th>
                     <th class="align-middle" colspan="2">ยอดยกมา</th>
-                    <th class="align-middle" colspan="2">ยอดเดือน</th>
+                    <th class="align-middle" colspan="2">ยอดเดือน <a id='ta_m'></a></th>
                     <th class="align-middle" colspan="2">ยอดรวม</th>
                     <th class="align-middle" colspan="2" width="10%">งบประมาณ</th>
                 </tr>
@@ -70,7 +72,7 @@
                     <th class="align-middle">จำนวนเงิน(บาท)</th>
                     <th class="align-middle">จำนวน(ราย)</th>
                     <th class="align-middle">จำนวนเงิน(บาท)</th>
-                    <th class="align-middle" colspan="2">+เกิน    -ขาด</th>
+                    <th class="align-middle" colspan="2">+เกิน -ขาด</th>
                 </tr>
             </thead>
             <tbody>
@@ -207,22 +209,24 @@
             </tbody>
         </table>
         <br>
-    <thead>
+
         <table class="table" id='table_sum'>
+            <thead>
             <tr>
                 <td>ยอดรวมที่จัดเก็บได้ในปีงบประมาณ</td>
-                <td class="text-left"></td>
+                <td class="text-left" id='year_report'> </td>
                 <td>รวมจำนวนทั้งหมด</td>
-                <td></td>
+                <td id='total_op'> </td>
                 <td class="text-left">ราย</td>
                 <td>เป็นเงิน</td>
-                <td></td>
+                <td id='total_money'></td>
                 <td class="text-left">บาท</td>
             </tr>
+            </thead>
         </table>
-    </thead>
     </div>
 </body>
 <script src="../../node_modules/axios/dist/axios.min.js"></script>
 <script src="../../js/report_preview/preview_report_sum.js"></script>
+
 </html>

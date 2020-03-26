@@ -2559,11 +2559,9 @@ class service {
                         if (viewData_data.length != 0) {
                             for (let j = 0; j < list_money.length; j++) {
                                 let e_ot = viewData_data[i].REPORT_E_OT === null ? 0 : viewData_data[i].REPORT_E_OT
-                                let e_m = viewData_data[i].REPORT_E_M === null ? 0 : viewData_data[i].REPORT_E_M
-                                // list_money[i] =parseInt(list_money[i])  + e_m 
-                                // list_op[i] = parseInt(list_op[i]) + e_ot 
-                                list_money[j] = parseInt(list_money[j]) + 5
-                                list_op[j] = parseInt(list_op[j]) + 5
+                                let e_m = viewData_data[i].REPORT_E_M === null ? 0 : viewData_data[i].REPORT_E_M 
+                                list_money[j] = parseFloat(list_money[j]) + e_m
+                                list_op[j] = parseInt(list_op[j]) + e_ot
                             }
                         } 
                         if (i === list_year.length - 1) {
