@@ -22,7 +22,8 @@
         <a id="restoreMenu" onclick="restoreTEST()" class="exit disableds"><i class="fa fa-reply"> เรียกคืน</i></a>
         <a id="deleteMenu" onclick="deleteTEST()" class="exit disableds"><i class="fa fa-times"> ยกเลิก</i></a>
         <!-- <a><i class="fa fa-search"> ค้นหา</i></a> -->
-        <a id="exitMenu" onclick="exitPage()" class="exit" style="float: right;width: 17%;"><i class="fa fa-sign-out-alt">
+        <a id="exitMenu" onclick="exitPage()" class="exit" style="float: right;width: 17%;"><i
+                class="fa fa-sign-out-alt">
                 ออกจากระบบ</i></a>
     </div>
     <!-- เมนูด้านข้าง -->
@@ -54,7 +55,7 @@
             <a href="../renew/renew_area_less_correct.html">- คำขอต่อหนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
             <a href="../renew/renew_market.html">- คำขอต่อใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
             <a href="../renew/renew_health_danger.html">- คำขอต่อกิจการที่เป็นอันตรายต่อสุขภาพ</a>
-            <a href="../renew/renew_crematory.html" >- คำขอต่อกิจการฌาปณสถาน</a>
+            <a href="../renew/renew_crematory.html">- คำขอต่อกิจการฌาปณสถาน</a>
         </div>
         <button class="dropdown-btn"><b>ข้อมูลส่วนกลาง </b><i class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
@@ -67,7 +68,8 @@
             <a href="../utilities/petition.html">- บันทึกเรื่องร้องเรียน</a>
             <!-- <a href="#">- บันทึกคำร้อง</a> -->
         </div>
-        <button class="dropdown-btn" id="adminna" style="display: none;"><b>ข้อมูลระบบ </b><i class="fa fa-caret-down"></i></button>
+        <button class="dropdown-btn" id="adminna" style="display: none;"><b>ข้อมูลระบบ </b><i
+                class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
             <a href="../system/systemUser.html">จัดการผู้ใช้งาน</a>
             <a href="../system/systemType.html">จัดการประเภท</a>
@@ -84,7 +86,8 @@
                     class="badge" style="margin-left:0.5vw;">100000</span></a>
         </div>
         <br><br>
-        <button class="dropdown-btn"><a href="../notfication/request copy.html" style="color: red;"><b>คำขอหมดอายุเกิน 3 ปี </b></a>
+        <button class="dropdown-btn"><a href="../notfication/request copy.html" style="color: red;"><b>คำขอหมดอายุเกิน 3
+                    ปี </b></a>
             <!-- <i class="fa fa-caret-down"></i> -->
         </button>
     </div>
@@ -97,33 +100,46 @@
                 </header>
                 <div style="text-align: center; ">
                     <a>รายเดือน : </a>
-                    <select style="width: 17%;">
-                        <option value="มกราคม">มกราคม</option>
-                        <option value="กุมภาพันธ์">กุมภาพันธ์</option>
-                        <option value="มีนาคม">มีนาคม</option>
-                        <option value="เมษายน">เมษายน</option>
-                        <option value="พฤษภาคม">พฤษภาคม</option>
-                        <option value="มิถุนายน">มิถุนายน</option>
-                        <option value="กรกฎาคม">กรกฎาคม</option>
-                        <option value="สิงหาคม">สิงหาคม</option>
-                        <option value="กันยายน">กันยายน</option>
-                        <option value="ตุลาคม">ตุลาคม</option>
-                        <option value="พฤศจิกายน">พฤศจิกายน</option>
-                        <option value="ธันวาคม">ธันวาคม</option>
+                    <select id='mon' style="width: 17%;">
+                        <option value=1>มกราคม</option>
+                        <option value=2>กุมภาพันธ์</option>
+                        <option value=3>มีนาคม</option>
+                        <option value=4>เมษายน</option>
+                        <option value=5>พฤษภาคม</option>
+                        <option value=6>มิถุนายน</option>
+                        <option value=7>กรกฎาคม</option>
+                        <option value=8>สิงหาคม</option>
+                        <option value=9>กันยายน</option>
+                        <option value=10>ตุลาคม</option>
+                        <option value=11>พฤศจิกายน</option>
+                        <option value=12>ธันวาคม</option>
                     </select>
                     <a>ปี พ.ศ. : </a>
-                    <select id="yearPrint" style="width: 10%;">
-                        <option value="2560">2560</option>
-                        <option value="2561">2561</option>
-                        <option value="2562">2562</option>
-                        <option value="2563">2563</option>
-                        <option value="2564">2564</option>
+                    <select id="year" style="width: 10%;">
+                        <option value=2550>2550</option>
+                        <option value=2551>2551</option>
+                        <option value=2552>2552</option>
+                        <option value=2553>2553</option>
+                        <option value=2554>2554</option>
+                        <option value=2555>2555</option>
+                        <option value=2556>2556</option>
+                        <option value=2557>2557</option>
+                        <option value=2558>2558</option>
+                        <option value=2559>2559</option>
+                        <option value=2560>2560</option>
+                        <option value=2561>2561</option>
+                        <option value=2562>2562</option>
+                        <option value=2563>2563</option>
+                        <option value=2564>2564</option>
+                        <option value=2565>2564</option>
+                        <option value=2566>2564</option>
+                        <option value=2567>2564</option>
+                        <option value=2568>2564</option>
+                        <option value=2569>2564</option>
+                        <option value=2570>2564</option>
                     </select>
-                        <br>
-                    <a href="report_summary_preview.html" target="popup"
-                        onclick="window.open('report_summary_preview.html','popup','width=1100,height=570'); return false;">
-                        <button type="button" class=""
-                            style="background-color: #009688;color: white ;width: 10%;">ตกลง</button></a>
+                    <br> <button type="button" class="" onclick="openReport()"
+                        style="background-color: #009688;color: white ;width: 10%;border-radius: 2px;">ตกลง</button>
                 </div>
             </div>
         </fieldset>
@@ -132,11 +148,12 @@
 
 </body>
 <script src="../../node_modules/axios/dist/axios.min.js"></script>
-<script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>   
+<script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
 <script src="../../js/service/utilities.js"></script>
 
 <script src="../../js/service/sideMenu.js"></script>
 
-<script src="../../js/service/checkUserLogin.js"></script>
+<!-- <script src="../../js/service/checkUserLogin.js"></script> -->
+<script src="../../js/report_preview/preview_report_sum_control.js"></script>
 
 </html>

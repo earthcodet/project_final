@@ -459,6 +459,20 @@ app.get('/get/view/allow/:id/:year', (req, res) => {
     res.json(data)
   })
 })
+app.get('/get/view/report/sum/:m/:year', (req, res) => {
+  console.log(req.params.m)
+  console.log(req.params.year)
+  webService.getReportSum(req.params.m, req.params.year).then((data) => {
+
+    res.json(data)
+  })
+})
+
+app.get('/get/view/report/:id/:date_start/:date_end', (req, res) => {
+  webService.getReportByDateAndRtID(req.params.id, req.params.date_start , req.params.date_end).then((data) => {
+    res.json(data)
+  })
+})
 app.get('/get/image/nayo/view/:id', (req, res) => {
   webService.getImageNayo(req.params.id).then((data) => {
     res.json(data)

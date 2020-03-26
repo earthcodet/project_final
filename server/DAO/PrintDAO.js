@@ -190,5 +190,69 @@ class PrintDAO {
             })
         })
     }
+    getViewReport(id_type , date_start, date_end){
+        return new Promise((resolve, reject) => {
+            let query = `SELECT `
+            query = query + `p_data.PERSONAL_TITLE As P_TITLE,`
+            query = query + `p_data.PERSONAL_NAME As P_NAME,`
+            query = query + `p_data.PERSONAL_SURNAME As P_SURNAME,`
+            query = query + `r_data.REQUEST_DATE_ISSUED As R_ISSUED,`
+            query = query + `r_data.REQUEST_DATE_EXPIRED As R_EXPIRED,`
+            query = query + `rt_data.REQUEST_TYPE_NAME As RT_NAME,`
+            query = query + `r_data.REQUEST_RECEIPT_TOTAL  As R_TO_Y1,`
+            query = query + `r_data.REQUEST_RECEIPT_TOTAL_YEAR_2  As R_TO_Y2,`
+            query = query + `r_data.REQUEST_RECEIPT_TOTAL_YEAR_3  As R_TO_Y3,`
+            query = query + `e_data.ESTABLISHMENT_NAME As E_NAME,`
+            query = query + `a_data.ADDRESS_HOME_NUMBER As A_HOME,`
+            query = query + `a_data.ADDRESS_MOO As A_MOO,`
+            query = query + `a_data.ADDRESS_SXY As A_SXY,`
+            query = query + `a_data.ADDRESS_ROAD As A_ROAD,`
+            query = query + `a_data.DISTRICT_NAME As A_DISTRICT,`
+            query = query + `a_data.AMPHUR_NAME As A_AMPHUR,`
+            query = query + `a_data.PROVINCE_NAME As A_PROVINCE,`
+            query = query + `e_data.ESTABLISHMENT_PHONE As E_PHONE `
+            query = query + `FROM `
+            query = query + `request As r_data `
+            query = query + `JOIN establishment As e_data ON e_data.ESTABLISHMENT_ID = r_data.ESTABLISHMENT_ID `
+            query = query + `JOIN address As a_data ON a_data.ADDRESS_ID = e_data.ADDRESS_ID `
+            query = query + `JOIN request_type As rt_data On rt_data.REQUEST_TYPE_ID = r_data.REQUEST_TYPE_ID `
+            query = query + `JOIN personal As p_data ON p_data.PERSONAL_ID = r_data.PERSONAL_ID_OWNER `
+            query = query + `WHERE `
+            query = query + `rt_data.REQUEST_TYPE_ID  = ${id_type} AND `
+            query = query + `r_data.REQUEST_DATE_EXPIRED BETWEEN `
+            query = query + `'${date_start}' AND '${date_end}'`
+            con.query(query, function (err, result) {
+                if (err) {
+                    console.log(err)
+                    return resolve(err)
+                }
+                return resolve(result)
+            })
+        })
+    }
+    getReport(m , y){
+        return new Promise((resolve, reject) => {
+            let query = `SELECT * FROM report WHERE REPORT_MONTH = ${m} AND REPORT_YEAR =${y}`
+            con.query(query, function (err, result) {
+                if (err) {
+                    console.log(err)
+                    return resolve(err)
+                }
+                return resolve(result)
+            })
+        })
+    }
+    getReportT(m , y){
+        return new Promise((resolve, reject) => {
+            let query = `SELECT REPORT_E_OT,REPORT_E_M FROM report WHERE REPORT_MONTH = ${m} AND REPORT_YEAR =${y}`
+            con.query(query, function (err, result) {
+                if (err) {
+                    console.log(err)
+                    return resolve(err)
+                }
+                return resolve(result)
+            })
+        })
+    }
 }
 module.exports = PrintDAO

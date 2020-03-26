@@ -1727,7 +1727,7 @@ class service {
         let dateForUpdate = datetime.toISOString().slice(0, 10)
         // last_update , username
         request.REQUEST_LAST_UPDATE = dateForUpdate
-        request.REQUEST_USER_UPDATE = username 
+        request.REQUEST_USER_UPDATE = username
         let id_no = request.REQUEST_NO
         let id_year = request.REQUEST_YEAR
 
@@ -2503,6 +2503,81 @@ class service {
                 }
 
             })
+        })
+    }
+
+    getReportByDateAndRtID(id, date_start, date_end) {
+        console.log(id)
+        console.log(date_start)
+        console.log(date_end)
+        return new Promise((resolve, reject) => {
+            PrintDAOObj.getViewReport(id, date_start, date_end).then((viewData_data) => {
+                if (viewData_data.length != 0) {
+                    for (let i = 0; i < viewData_data.length; i++) {
+                        viewData_data[i].R_ISSUED = viewData_data[i].R_ISSUED != null ? this.formatDate("TO-DISPLAY", viewData_data[i].R_ISSUED + '') : viewData_data[i].R_ISSUED
+                        viewData_data[i].R_EXPIRED = viewData_data[i].R_EXPIRED != null ? this.formatDate("TO-DISPLAY", viewData_data[i].R_EXPIRED + '') : viewData_data[i].R_EXPIRED
+                    }
+                    return resolve(viewData_data)
+                } else {
+                    return resolve(viewData_data)
+                }
+
+            })
+        })
+    }
+
+    getReportSum(m, y) {
+        return new Promise((resolve, reject) => {
+            PrintDAOObj.getReport(m, y).then((viewData_data) => {
+                this.getTotalReportSum(m, y).then((data_money) => {
+                    console.log(data_money)
+                    for (let i = 0; i < viewData_data.length; i++) {
+
+                        viewData_data[i].W_OT = data_money[1][i]
+                        viewData_data[i].W_M = data_money[0][i]
+                    }
+                    return resolve(viewData_data)
+                })
+            })
+        })
+    }
+    getTotalReportSum(m, y) {
+
+        //ยอดยกมา
+        return new Promise((resolve, reject) => {
+            let list_year = [10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+            let list_money = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+            let list_op = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+            let check = false
+            for (let i = 0; i < list_year.length; i++) {
+                if (m == list_year[i]) {
+                    check = true
+                }
+                if (check && m != list_year[i]) {
+                    console.log('mon = ' + list_year[i])
+                    PrintDAOObj.getReportT(list_year[i], y).then((viewData_data) => {
+                        if (viewData_data.length != 0) {
+                            for (let j = 0; j < list_money.length; j++) {
+                                let e_ot = viewData_data[i].REPORT_E_OT === null ? 0 : viewData_data[i].REPORT_E_OT
+                                let e_m = viewData_data[i].REPORT_E_M === null ? 0 : viewData_data[i].REPORT_E_M
+                                // list_money[i] =parseInt(list_money[i])  + e_m 
+                                // list_op[i] = parseInt(list_op[i]) + e_ot 
+                                list_money[j] = parseInt(list_money[j]) + 5
+                                list_op[j] = parseInt(list_op[j]) + 5
+                            }
+                        } 
+                        if (i === list_year.length - 1) {
+                            let temp_array_return = [list_money, list_op]
+                            return resolve(temp_array_return)
+                        }
+                    })
+                }
+            }
+            if (!check) {
+                let temp_array_return = [list_money, list_op]
+                return resolve(temp_array_return)
+            }
+
         })
     }
     getImageNayo(id) {
@@ -4586,18 +4661,18 @@ class service {
             })
         })
     }
-    insertRequestTypeStep(request){
+    insertRequestTypeStep(request) {
         return new Promise((resolve, reject) => {
-            if(request.id != ''){
+            if (request.id != '') {
                 //update
                 console.log('update request')
-                RequestTypeDAOObj.update(request).then((data_update) =>{
+                RequestTypeDAOObj.update(request).then((data_update) => {
                     return resolve(data_update)
                 })
-            }else{
+            } else {
                 //insert
                 console.log('isnert request')
-                this.insertRequestType(request).then((data) =>{
+                this.insertRequestType(request).then((data) => {
                     return resolve(data)
                 })
             }

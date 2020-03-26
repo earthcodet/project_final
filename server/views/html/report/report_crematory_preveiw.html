@@ -5,16 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>รายงานประจำวัน/เดือน/ปี ประเภทใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</title>
+    <title>รายงาน</title>
 
     <link href="../../css/fonts.css" rel="stylesheet">
 
     <!-- bootstrap -->
     <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
-    
+
     <!-- css ส่วนกลาง -->
     <link href="../../css/utilities.css" rel="stylesheet">
-
+    <script src="../../node_modules/axios/dist/axios.min.js"></script>
+    <script src="../../js/report_preview/preview_report.js"></script>
 
 </head>
 
@@ -37,6 +38,8 @@
     body {
         padding: 20px;
     }
+
+
 </style>
 <script type="text/javascript">
     function ExportToExcel(table) {
@@ -64,8 +67,7 @@
             <thead class="text-center">
                 <tr>
                     <th class="align-middle" rowspan="2">ลำดับ</th>
-                    <th class="align-middle" rowspan="2" width="16
-                    %">ชื่อ-นามสกุล</th>
+                    <th class="align-middle" rowspan="2" width="16%">ชื่อ-นามสกุล</th>
                     <th class="align-middle" rowspan="2">วันออกใบอนุญาต</th>
                     <th class="align-middle" rowspan="2">วันหมดอายุ</th>
                     <th class="align-middle" rowspan="2" width="20%">ประเภทกิจการ</th>
@@ -133,6 +135,10 @@
                 </tr>
             </tbody>
         </table>
+        <div style="display: block; text-align: right;margin-right:38vw;">
+            รวมค่าธรรมเนียม <a id='sum_report' style="text-decoration: underline;margin-left: 0.5vw;"></a> บาท
+
+        </div>
     </div>
 </body>
 
