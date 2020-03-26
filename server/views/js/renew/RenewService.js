@@ -4,20 +4,102 @@ let requestType = []
 let userMoney = ''
 let listAlderMan = []
 function printDocumentRenew() {
+    let html_display = `
+    <div style = 'text-align:left; display:block' >
+    <a>เลือกวันที่ที่ต้องการพิมพ์ใบอนุญาต</a>
+    <br>
+    <input type="text" id="datepicker5" placeholder=""   style="width: 95%" maxlength="10">
+    <br> 
+    <div class='center'>
+        <label id='datepicker5_alert' class='alert tabOne' style='display:none' >ช่องนี้เว้นว่างไม่ได้</label>
+    </div>
+    </div>
+`
+    Swal.fire({
+        html: html_display,
+        width: '35%',
+        customClass: 'swal-height',
+        showCancelButton: true,
+        showConfirmButton: true,
+        confirmButtonText: "ใช่",
+        cancelButtonText: "ไม่ใช่",
+        confirmButtonColor: "#009688",
+        cancelButtonColor: '#dc3545',
+        closeOnConfirm: false,
+        closeOnCancel: false,
+        showLoaderOnConfirm: true,
+        preConfirm: function () {
+            let date_text = document.getElementById('datepicker5')
+            let datepicker5_alert = document.getElementById('datepicker5_alert')
+            date_text.classList.remove('alertInput')
+            datepicker5_alert.style.display = 'none'
+            if (date_text.value.trim().length === 0) {
+                if (date_text.value.trim().length === 0) {
+                    date_text.classList.add('alertInput')
+                    datepicker5_alert.style.display = ''
+                }
+                Swal.showValidationMessage(
+                    `ข้อมูลไม่ครบ`
+                )
+            } else {
+                return new Promise(function (resolve, reject) {
+                    resolve()
+                })
+            }
+        }
+    }).then((result) => {
+        if (result.value) {
+            printDocRenew(document.getElementById('datepicker5').value)
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+        }
+    });
+    // กรณีใช้แบบ input
+    $("#datepicker5").datetimepicker({
+        timepicker: false,
+        format: "d-m-Y", // กำหนดรูปแบบวันที่ ที่ใช้ เป็น 00-00-0000
+        lang: "th", // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
+        onSelectDate: function (dp, $input) {
+            var yearT = new Date(dp).getFullYear();
+            var yearTH = yearT + 543;
+            var fulldate = $input.val();
+            var fulldateTH = fulldate.replace(yearT, yearTH);
+            $input.val(fulldateTH);
+        }
+    });
+    // กรณีใช้กับ input ต้องกำหนดส่วนนี้ด้วยเสมอ เพื่อปรับปีให้เป็น ค.ศ. ก่อนแสดงปฏิทิน
+    $('#datepicker5').keyup(function () {
+        formatDate(this.value, 'datepicker5')
+    });
+}
+function printDocRenew(date) {
     let requestId = getUrlVars()
     let id = []
-    id.push(requestId.id_no)
-    id.push(requestId.id_year)
-    let sc = requestId.id_no.slice(0, 1)
+    let sc = ''
+    if (requestId.id_no != undefined & requestId.idyear != undefined) {
+        sc = requestId.id_no.slice(0, 1)
+        id.push(requestId.id_no)
+        id.push(requestId.id_year)
+    } else {
+        sc = requestData.no.slice(0, 1)
+        id.push(requestData.no)
+        id.push(requestData.year)
+    }
+
+
+    date = date.split('-')
+    let year = parseInt(date[2]) - 543
+    let month = date[1]
+    let day = date[0]
+    let temp_date = `${year}-${month}-${day}`
     if (sc === 'E' || sc === 'F') {
         // preview_copy.html
-        window.open('../central/preview_copy.html' + '?id_no=' + id[0] + '&id_year=' + id[1], '_blank');
+        window.open('../central/preview_copy.html' + '?id_no=' + id[0] + '&id_year=' + id[1] + '&date=' + temp_date, '_blank');
     } else if (sc === 'A' || sc === 'B') {
         // preview_copy_3.html
-        window.open('../central/preview_copy_3.html' + '?id_no=' + id[0] + '&id_year=' + id[1], '_blank');
+        window.open('../central/preview_copy_3.html' + '?id_no=' + id[0] + '&id_year=' + id[1] + '&date=' + temp_date, '_blank');
     } else {
         // preview_copy_2.html
-        window.open('../central/preview_copy_2.html' + '?id_no=' + id[0] + '&id_year=' + id[1], '_blank');
+        window.open('../central/preview_copy_2.html' + '?id_no=' + id[0] + '&id_year=' + id[1] + '&date=' + temp_date, '_blank');
     }
 }
 function checkView(typeForm) {

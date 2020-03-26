@@ -16,17 +16,17 @@ function getUrlVars() {
 function getDataView() {
     let requestId = getUrlVars()
     console.log(requestId)
-    if (requestId.id_no != undefined && requestId.id_year != undefined) {
+    if (requestId.id_no != undefined && requestId.id_year != undefined && requestId.date != undefined) {
         getRequestDataRenew(requestId.id_no, requestId.id_year).then((data) => {
             console.log(data)
             if (data.length != 0) {
                 if (data[0].PERSONAL_ID_ASSISTANT != null) {
                     searchPersonalById(PERSONAL_ID_ASSISTANT).then((data_op) => {
                         console.log(data_op)
-                        setData(data[0], data_op, requestId.id_no.slice(0, 1))
+                        setData(data[0], data_op, requestId.id_no.slice(0, 1),requestId.date)
                     })
                 } else {
-                    setData(data[0], undefined, requestId.id_no.slice(0, 1))
+                    setData(data[0], undefined, requestId.id_no.slice(0, 1),requestId.date)
                 }
                 displayForm()
             }
@@ -53,8 +53,9 @@ const month = [
     'พฤศจิกายน',
     'ธันวาคม'
 ]
-function setData(rd, op, sc) {
-    let date_now_temp = new Date().toISOString().slice(0,10).split('-')
+function setData(rd, op, sc , date_temp) {
+    // let date_now_temp = new Date().toISOString().slice(0,10).split('-')
+    let date_now_temp = date_temp.split('-')
     let year = parseInt(date_now_temp[0]) + 543
     let month_num = parseInt(date_now_temp[1])-1
     let day = parseInt(date_now_temp[2])
