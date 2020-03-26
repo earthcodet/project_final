@@ -468,8 +468,8 @@ app.get('/get/view/report/sum/:m/:year', (req, res) => {
   })
 })
 
-app.get('/get/view/report/:id/:date_start/:date_end', (req, res) => {
-  webService.getReportByDateAndRtID(req.params.id, req.params.date_start , req.params.date_end).then((data) => {
+app.get('/get/view/report/:id/:date_start/:date_end/:menu', (req, res) => {
+  webService.getReportByDateAndRtID(req.params.id, req.params.date_start , req.params.date_end, req.params.menu).then((data) => {
     res.json(data)
   })
 })

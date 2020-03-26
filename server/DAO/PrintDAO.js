@@ -190,7 +190,7 @@ class PrintDAO {
             })
         })
     }
-    getViewReport(id_type , date_start, date_end){
+    getViewReport(id_type , date_start, date_end,menu){
         return new Promise((resolve, reject) => {
             let query = `SELECT `
             query = query + `p_data.PERSONAL_TITLE As P_TITLE,`
@@ -199,6 +199,7 @@ class PrintDAO {
             query = query + `r_data.REQUEST_DATE_ISSUED As R_ISSUED,`
             query = query + `r_data.REQUEST_DATE_EXPIRED As R_EXPIRED,`
             query = query + `rt_data.REQUEST_TYPE_NAME As RT_NAME,`
+            query = query + `r_data.REQUEST_MENU As R_MENU,`
             query = query + `r_data.REQUEST_RECEIPT_TOTAL  As R_TO_Y1,`
             query = query + `r_data.REQUEST_RECEIPT_TOTAL_YEAR_2  As R_TO_Y2,`
             query = query + `r_data.REQUEST_RECEIPT_TOTAL_YEAR_3  As R_TO_Y3,`
@@ -217,7 +218,7 @@ class PrintDAO {
             query = query + `JOIN address As a_data ON a_data.ADDRESS_ID = e_data.ADDRESS_ID `
             query = query + `JOIN request_type As rt_data On rt_data.REQUEST_TYPE_ID = r_data.REQUEST_TYPE_ID `
             query = query + `JOIN personal As p_data ON p_data.PERSONAL_ID = r_data.PERSONAL_ID_OWNER `
-            query = query + `WHERE `
+            query = query + `WHERE r_data.REQUEST_MENU = '${menu}' AND `
             query = query + `rt_data.REQUEST_TYPE_ID  = ${id_type} AND `
             query = query + `r_data.REQUEST_DATE_EXPIRED BETWEEN `
             query = query + `'${date_start}' AND '${date_end}'`

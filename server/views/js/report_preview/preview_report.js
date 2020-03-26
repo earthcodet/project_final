@@ -6,16 +6,26 @@ function getUrlVars() {
     });
     return vars;
 }
+function changeformatDisplayDate(date) {
+    date = date.split('-')
+    let day = date[2]
+    let month = date[1]
+    let year = parseInt(date[0]) +543
+    return `${day}/${month}/${year}` 
+}
 function start() {
     let item = getUrlVars()
-    if (item.r_id != undefined && item.date_start != undefined && item.date_end != undefined) {
-        getDataReport(item.r_id, item.date_start, item.date_end).then((raw_data) => {
+    if (item.r_id != undefined && item.date_start != undefined && item.date_end != undefined&&item.menu !=undefined) {
+        getDataReport(item.r_id, item.date_start, item.date_end,item.menu).then((raw_data) => {
             console.log(raw_data)
+            document.getElementById('date_start').innerText = changeformatDisplayDate(item.date_start)
+            document.getElementById('date_end').innerText = changeformatDisplayDate(item.date_end)
             setUI(raw_data)
         })
     }
 }
 function setUI(data) {
+    document.getElementById('type_menu').innerText = data[0].R_MENU
     var tbl = document.getElementById('table');
     if (tbl.getElementsByTagName("tbody")[0] != null || tbl.getElementsByTagName("tbody")[0] != undefined) {
         tbl.removeChild(tbl.getElementsByTagName("tbody")[0])
@@ -23,8 +33,10 @@ function setUI(data) {
     var tblBody = document.createElement('tbody')
     for (var i = 0; i < data.length; i++) {
         var row = document.createElement("tr");
+        
         for (var j = 0; j < 9; j++) {
             var cell = document.createElement("td");
+            cell.style.fontSize = '0.95vw'
             if (j === 0) {
                 var cellText = document.createTextNode(i + 1);
             } else if (j === 1) {
@@ -51,6 +63,7 @@ function setUI(data) {
                 let total_year3 = parseInt(data[i].R_TO_Y3)
                 let text = total_year1 + total_year2 + total_year3
                 total_money = total_money + text
+                cell.style.textAlign = 'right'
                 var cellText = document.createTextNode(addCommas(text));
             } else if (j === 6) {
                 let text = data[i].E_NAME === null ? '-' : data[i].E_NAME
@@ -70,11 +83,12 @@ function setUI(data) {
                 let temp_array = temp_date.split('/')
                 let text = ''
                 if (temp_array[1] === '') {
-                    text = `${temp_array[0]}`
+                    text = `${temp_array[0].slice(0,3)}-${temp_array[0].slice(4,temp_array[0].length)}`
                 } else {
-                    text = `${temp_array[0]} ต่อ ${temp_array[1]}`
+                    text = `${temp_array[0].slice(0,3)}-${temp_array[0].slice(4,temp_array[0].length)} ต่อ ${temp_array[1]}`
                 }
                 var cellText = document.createTextNode(text);
+                cell.style.fontSize = '0.8vw'
             }
             cell.appendChild(cellText);
             row.appendChild(cell);
@@ -84,9 +98,9 @@ function setUI(data) {
     tbl.appendChild(tblBody);
     document.getElementById('sum_report').innerText = addCommas(total_money)
 }
-function getDataReport(id, date_start, date_end) {
+function getDataReport(id, date_start, date_end,menu) {
     return new Promise((resolve, reject) => {
-        axios.get(`http://localhost:5000/get/view/report/${id}/${date_start}/${date_end}`).then((result) => {
+        axios.get(`http://localhost:5000/get/view/report/${id}/${date_start}/${date_end}/${menu}`).then((result) => {
             return resolve(result.data);
         })
     })

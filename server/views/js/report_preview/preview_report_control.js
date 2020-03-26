@@ -2,9 +2,10 @@ let list_request_type = []
 function showprint() {
     let text_url = `../report/report_crematory_preveiw.html`
     let text_value = document.getElementById('type_search').value.trim()
+    let text_menu = document.getElementById('type_menu').value
     let text_id = ''
     for (let i = 0; i < list_request_type.length; i++) {
-        if (text_value === list_request_type[i].REQUEST_TYPE_NAME) {
+        if (text_value === list_request_type[i].REQUEST_TYPE_NAME && list_request_type[i].REQUEST_TYPE_MENU === text_menu) {
             text_id = list_request_type[i].REQUEST_TYPE_ID
             break;
         }
@@ -25,7 +26,7 @@ function showprint() {
                 confirmButtonColor: "#009688"
             })
         } else {
-            text_url = `${text_url}?r_id=${text_id}&date_start=${formatToGetDate(date_start)}&date_end=${formatToGetDate(date_end)}`
+            text_url = `${text_url}?r_id=${text_id}&date_start=${formatToGetDate(date_start)}&date_end=${formatToGetDate(date_end)}&menu=${text_menu}`
             window.open(text_url, '_blank');
         }
     }
@@ -39,7 +40,7 @@ function formatToGetDate(value) {
     let m = temp_array[1]
     let y = parseInt(temp_array[2]) - 543
     //End Ex yyyy-mm-dd
-    return  `${y}-${m}-${d}`
+    return `${y}-${m}-${d}`
 }
 function startfrom() {
     getRequestType().then((data_test) => {
@@ -62,13 +63,30 @@ function addRequestTypeToDatalist() {
     for (let i = 0; i < list_request_type.length; i++) {
         let option = document.createElement('option');
         option.value = list_request_type[i].REQUEST_TYPE_NAME
+        if (list_request_type[i].REQUEST_TYPE_MENU != 'ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ') {
+            option.disabled = true
+        }
         list.appendChild(option);
     }
 }
-function getRequestTypeId(type) {
-    for (let i = 0; i < requestType.length; i++) {
-        if (requestType[i].REQUEST_TYPE_NAME === type) {
-            return requestType[i].REQUEST_TYPE_ID
+function checkRequestType(type, id) {
+    if (list_request_type[id].REQUEST_TYPE_MENU === type) {
+        return true
+    }
+
+}
+function searchFilter(value) {
+    var select, i, lengths;
+    select = document.getElementById('brow');
+    lengths = select.options.length;
+    console.log(lengths)
+    for (i = 0; i < lengths; i++) {
+        let t_option = select.options[i]
+        if (checkRequestType(value, i) != undefined) {
+            console.log('found')
+            t_option.disabled = false;
+        } else {
+            t_option.disabled = true
         }
     }
 }

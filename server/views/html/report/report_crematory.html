@@ -104,16 +104,38 @@
                     <h1 style="font-size:2.8vh;margin-left: 25px;padding: 2px;"> รายงานตามประเภทคำขอ</h1>
                 </header>
                 <div style="text-align: center;">
+                    <a>เมนูคำขอ :
+                    </a>
+                <select id='type_menu' style="width: 23vw;" onchange="searchFilter(this.value)">
+                    <option value="ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ">
+                        ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ
+                    </option>
+                    <option value="ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ">
+                        ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ
+                    </option>
+                    <option value="ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร">ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร
+                    </option>
+                    <option value="ใบอนุญาตจัดตั้งสถานที่สะสมอาหาร">ใบอนุญาตจัดตั้งสถานที่สะสมอาหาร
+                    </option>
+                    <option value="หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร">
+                        หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</option>
+                    <option value="หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร">
+                        หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</option>
+                    <option value="ใบอนุญาติให้ใช้สถานที่เป็นตลาดเอกชน">ใบอนุญาติให้ใช้สถานที่เป็นตลาดเอกชน
+                    </option>
+                    <option value="กิจการที่เป็นอันตรายต่อสุขภาพ">กิจการที่เป็นอันตรายต่อสุขภาพ</option>
+                    <option value="กิจการฌาปณสถาน">กิจการฌาปณสถาน</option>
+                </select><br>
                     <a>ประเภทคำขอ :
                     </a>
-                    <input list="brow" id="type_search" name="" style="width: 29%;">
+                    <input list="brow" id="type_search" name="" style="width: 24.5vw;">
                     <datalist id="brow">
                     </datalist>
-
-                    <a>วันที่เริ่ม :
-                        <input type="text" id="datepicker1" style="width: 15%;" maxlength="10"></a>
-                    <a>วันที่สิ้นสุด :
-                        <input type="text" id="datepicker2" style="width: 15%;" maxlength="10"></a>
+                    <br>
+                    <a style="margin-right: 3vw;">วันที่เริ่ม :
+                        <input type="text" id="datepicker1" style="width: 19vw;" maxlength="10"></a>
+                        <br><a style="margin-right: 4vw;">วันที่สิ้นสุด :
+                        <input type="text" id="datepicker2" style="width: 19vw;" maxlength="10"></a>
                     <br><br>
                     <button type="button" class=""
                         style="background-color: #009688;color: white ;width: 10%;border-radius: 2px;"
@@ -132,7 +154,7 @@
 
 <script src="../../js/service/sideMenu.js"></script>
 
-<script src="../../js/service/checkUserLogin.js"></script>
+<!-- <script src="../../js/service/checkUserLogin.js"></script> -->
 <script src="../../js/report_preview/preview_report_control.js"></script>
 
 </html>

@@ -2506,12 +2506,12 @@ class service {
         })
     }
 
-    getReportByDateAndRtID(id, date_start, date_end) {
+    getReportByDateAndRtID(id, date_start, date_end,menu) {
         console.log(id)
         console.log(date_start)
         console.log(date_end)
         return new Promise((resolve, reject) => {
-            PrintDAOObj.getViewReport(id, date_start, date_end).then((viewData_data) => {
+            PrintDAOObj.getViewReport(id, date_start, date_end,menu).then((viewData_data) => {
                 if (viewData_data.length != 0) {
                     for (let i = 0; i < viewData_data.length; i++) {
                         viewData_data[i].R_ISSUED = viewData_data[i].R_ISSUED != null ? this.formatDate("TO-DISPLAY", viewData_data[i].R_ISSUED + '') : viewData_data[i].R_ISSUED
