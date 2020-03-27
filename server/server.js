@@ -551,6 +551,11 @@ app.get('/get/user/id/:userId', (req, res) => {
     res.json(data)
   })
 })
+app.get('/get/user/username/:username', (req, res) => {
+  webService.getUserByUsername(req.params.username).then((data) => {
+    res.json(data)
+  })
+})
 app.get('/get/request/profile/:pid/:eid', (req, res) => {
   webService.getRequestProfileByPIDAndEID(req.params.pid, req.params.eid).then((data) => {
     res.json(data)

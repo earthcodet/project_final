@@ -17,7 +17,7 @@ function createTabl(data) {
     for (var i = 0; i < data.length; i++) {
         // creates a table row
         var row = document.createElement("tr");
-        for (var j = 0; j < 3; j++) {
+        for (var j = 0; j < 4; j++) {
             console.log(j)
             var cell = document.createElement("td");
             if (j === 0) {
@@ -29,7 +29,12 @@ function createTabl(data) {
                 if (data[i].USER_STATUS === 'Y') {
                     cell.style.textDecoration = 'line-through'
                 }
-            } else if (j === 1) {
+            } else if( j === 1){
+                let text = data[i].USER_POSITION_TYPE === 'นายก' ? 'นายกเทศมนตรี' : data[i].USER_POSITION_TYPE
+                text = text ===  null ? 'แอดมิน' : text
+                var cellText = document.createTextNode(text);
+                cell.appendChild(cellText);
+            }else if (j === 2) {
                 //menu
                 let user_type = data[i].USER_TYPE_USER
                 let text = user_type === 'A' ? 'Admin' : 'User'

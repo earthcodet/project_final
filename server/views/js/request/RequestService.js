@@ -1656,8 +1656,12 @@ function setLisetUserAlderManToUi(list_user) {
     if (list_user.length != 0) {
         userAlderman = list_user[0].USER_ID
         requestData.staff_id_alderman = list_user[0].USER_ID
-        document.getElementById('position').value = list_user[0].USER_POSITION
-
+        if(list_user[0].USER_POSITION === null){
+            document.getElementById('position').value = 'นายกเทศมนตรี'
+        }else{
+            document.getElementById('position').value = list_user[0].USER_POSITION
+        }
+        
         for (let i = 0; i < list_user.length; i++) {
             temp_alderman_list.push(list_user[i])
             var select = document.getElementById("documentName3");
@@ -1680,7 +1684,13 @@ function getPositionAlderman(userId) {
 }
 function changePositionAlderman(userId) {
     userAlderman = userId
-    document.getElementById('position').value = getPositionAlderman(userId)
+    let item = getPositionAlderman(userId)
+    //doing
+    if(item === null){
+        document.getElementById('position').value = 'นายกเทศมนตรี'
+    }else{
+        document.getElementById('position').value = item
+    }
 }
 function displayUserAlderman() {
     getPresident().then((list_user) => {

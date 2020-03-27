@@ -106,6 +106,9 @@ function setUI() {
     document.getElementById('position_detail').value = user.position
     document.getElementById('defalut').value = user.is_default
 
+    //update ปิด สองช่องนี้ไม่ให้แก้
+    document.getElementById('username').disabled = true
+    document.getElementById('position').disabled = true
 }
 function getImage(id) {
     return new Promise((resolve, reject) => {
@@ -124,8 +127,15 @@ function getComData(id) {
         })
     })
 }
+function checkDuplicationUsername(username) {
+    return new Promise((resolve, reject) => {
+        axios.get(`http://localhost:5000/get/user/username/${username}`).then((result) => {
+            list_data = result.data
+            return resolve(result.data);
+        })
+    })
+}
 function uploadImage(event) {
-    delete_image = false
     var cancelButton = document.getElementById("cancelImage");
     var target = event.target || event.srcElement;
     var imagefile = document.querySelector("#uploadFile");
@@ -135,6 +145,7 @@ function uploadImage(event) {
         .pop()
         .split(".");
     fileImage = imagefile.files[0];
+
     typeFile = file[1];
     // inImage.type = typeImg;
     var selectedFile = event.target.files[0];
@@ -142,6 +153,7 @@ function uploadImage(event) {
     var img = document.getElementById("operatorImage");
 
     reader.onload = function (event) {
+        delete_image = false
         // inImage.data = event.target.result
         img.src = event.target.result;
         img.alt = "operator";
@@ -151,6 +163,10 @@ function uploadImage(event) {
         base64ImageSelect = base64
         console.log(base64ImageSelect)
     };
+    console.log('file image ')
+    console.log(fileImage)
+    console.log('delete_image ')
+    console.log(delete_image)
     reader.readAsDataURL(selectedFile);
 
 }
@@ -242,15 +258,69 @@ function insertData() {
 
     });
 }
+function checkUserName() {
+    let username = setNull(document.getElementById('username').value.trim())
+    let password = setNull(document.getElementById('password').value.trim())
+    return new Promise((resolve, reject) => {
+        if (username === null && password === null) {
+            return resolve(true)
+        } else {
+            if (username === null) {
+                Swal.fire({
+                    html: 'ไม่สามารถปล่อยว่างช่องผู้ใช้งานได้ หากช่องช่องรหัสผ่านผู้ใช้งานไม่ใช่ช่องว่าง',
+                    icon: "error",
+                    confirmButtonColor: "#009688"
+                })
+            }
+            if (password === null) {
+                Swal.fire({
+                    html: 'ไม่สามารถปล่อยว่างช่องรหัสผ่านได้ หากช่องผู้ใช้งานไม่ใช่ช่องว่าง',
+                    icon: "error",
+                    confirmButtonColor: "#009688"
+                })
+            }
+            if (username != null && password != null) {
+                checkDuplicationUsername(username).then((check) => {
+                    if (check) {
+                        Swal.fire({
+                            html: 'มีชือผู้ใช้งานในระบบแล้ว',
+                            icon: "error",
+                            confirmButtonColor: "#009688"
+                        })
+                    } else {
+
+                        return resolve(true)
+                    }
+                })
+            }
+        }
+    })
+}
 function checkImagenayo() {
-    if (user.position_type != 'นายก') {
+    if (document.getElementById('position').value != 'นายก') {
         return true
     } else {
-        //file Image คือ check ว่า มีการเลือกไฟล์
-        //data_nayo_image (ค่อยบอกว่าข้อมูลที่ผ่านการ get มามีรูปไหม)
-        if (fileImage != null || data_nayo_image) {
+        if (data_nayo_image) {
+            console.log(`data_nayo_image ${data_nayo_image}`)
+            console.log('condition 1')
+            //data_nayo_image (ค่อยบอกว่าข้อมูลที่ผ่านการ get มามีรูปไหม) 
+            if (delete_image && fileImage === null) {
+                console.log(`delete_image = ${delete_image === true}`)
+                console.log(`fileImage === null = ${fileImage === null}`)
+                console.log(`delete_image = ${delete_image} , fileImage = ${fileImage}`)
+                console.log('check image condition 1')
+                return false
+            } else {
+
+                return true
+            }
+        } else if (fileImage != null) {
+            console.log(fileImage)
+            //file Image คือ check ว่า มีการเลือกไฟล์
             return true
         } else {
+            console.log(`user.position_type ${user.position_type} , data_nayo_image = ${data_nayo_image}`)
+            console.log('check image condition 2    ')
             return false
         }
     }
@@ -258,42 +328,47 @@ function checkImagenayo() {
 }
 function insertPage() {
     if (checkInputInsert()) {
-        //check ว่าเลือกภาพหรือยัง
-        if (checkImagenayo()) {
-            insertData().then((data) => {
-                if (data.status) {
-                    console.log(data)
-                    Swal.fire({
-                        html: "บันทึกสำเร็จ",
-                        icon: "success",
-                        confirmButtonColor: "#009688"
-                    }).then((values) => {
-                        if (data.id != 'update') {
-                            let temp_html = window.location.href.split('?')
-                            location.replace(temp_html[0] + '?id=' + data.id)
-                        } else {
-                            let temp_html = window.location.href.split('?')
-                            location.replace(temp_html[0] + '?id=' + user.id)
-                        }
+        let check_username = checkUserName()
+        console.log(check_username)
+        if (check_username) {
+            //check ว่าเลือกภาพหรือยัง
+            if (checkImagenayo()) {
+                insertData().then((data) => {
+                    if (data.status) {
+                        console.log(data)
+                        Swal.fire({
+                            html: "บันทึกสำเร็จ",
+                            icon: "success",
+                            confirmButtonColor: "#009688"
+                        }).then((values) => {
+                            if (data.id != 'update') {
+                                let temp_html = window.location.href.split('?')
+                                location.replace(temp_html[0] + '?id=' + data.id)
+                            } else {
+                                let temp_html = window.location.href.split('?')
+                                location.replace(temp_html[0] + '?id=' + user.id)
+                            }
 
-                    })
-                } else {
-                    Swal.fire({
-                        html: `<a>เกิดข้อผิดพลาด</a> 
+                        })
+                    } else {
+                        Swal.fire({
+                            html: `<a>เกิดข้อผิดพลาด</a> 
                                 <br> <a>${data.id}</a>`,
-                        icon: "error",
-                        confirmButtonColor: "#009688"
-                    })
-                }
-            })
+                            icon: "error",
+                            confirmButtonColor: "#009688"
+                        })
+                    }
+                })
+            } else {
+                Swal.fire({
+                    html: `<a>กรุณาเลือกภาพก่อน</a>`,
+                    icon: "error",
+                    confirmButtonColor: "#009688"
+                })
+            }
         } else {
-            Swal.fire({
-                html: `<a>กรุณาเลือกภาพก่อน</a>`,
-                icon: "error",
-                confirmButtonColor: "#009688"
-            })
+            console.log('error')
         }
-
     } else {
         Swal.fire({
             html: `ไม่สามารถเว้นช่องว่างได้`,

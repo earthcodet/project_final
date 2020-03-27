@@ -18,6 +18,21 @@ class LoginDAO {
             })
         })
     }
+    getUserByUsername(username) {
+        return new Promise((resolve, reject) => {
+            con.query(`SELECT * FROM user WHERE USER_USERNAME="${username}"`, function (err, result) {
+                if (err) {
+                    throw err
+                }
+                if(result.length != 0){
+                    return resolve(true)
+                }else{
+                    return resolve(false)
+                }
+                
+            })
+        })
+    }
     getUserAll() {
         return new Promise((resolve, reject) => {
             con.query(`SELECT * FROM user `, function (err, result) {

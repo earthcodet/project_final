@@ -62,6 +62,13 @@ class service {
             })
         })
     }
+    getUserByUsername(username) {
+        return new Promise((resolve, reject) => {
+            UserDAOObj.getUserByUsername(username).then((data) => {
+                return resolve(data)
+            })
+        })
+    }
     getProvince() {
         return new Promise((resolve, reject) => {
             AddressDAOObj.getProvince().then((data) => {
