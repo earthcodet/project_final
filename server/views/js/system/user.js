@@ -259,6 +259,9 @@ function insertData() {
     });
 }
 function checkUserName() {
+    document.getElementById('username').classList.remove("alertInput");
+    document.getElementById('password').classList.remove("alertInput");
+
     let username = setNull(document.getElementById('username').value.trim())
     let password = setNull(document.getElementById('password').value.trim())
     return new Promise((resolve, reject) => {
@@ -266,6 +269,7 @@ function checkUserName() {
             return resolve(true)
         } else {
             if (username === null) {
+                document.getElementById('username').classList.add("alertInput");
                 Swal.fire({
                     html: 'ไม่สามารถปล่อยว่างช่องผู้ใช้งานได้ หากช่องช่องรหัสผ่านผู้ใช้งานไม่ใช่ช่องว่าง',
                     icon: "error",
@@ -273,6 +277,7 @@ function checkUserName() {
                 })
             }
             if (password === null) {
+                document.getElementById('password').classList.add("alertInput");
                 Swal.fire({
                     html: 'ไม่สามารถปล่อยว่างช่องรหัสผ่านได้ หากช่องผู้ใช้งานไม่ใช่ช่องว่าง',
                     icon: "error",
@@ -328,47 +333,48 @@ function checkImagenayo() {
 }
 function insertPage() {
     if (checkInputInsert()) {
-        let check_username = checkUserName()
-        console.log(check_username)
-        if (check_username) {
-            //check ว่าเลือกภาพหรือยัง
-            if (checkImagenayo()) {
-                insertData().then((data) => {
-                    if (data.status) {
-                        console.log(data)
-                        Swal.fire({
-                            html: "บันทึกสำเร็จ",
-                            icon: "success",
-                            confirmButtonColor: "#009688"
-                        }).then((values) => {
-                            if (data.id != 'update') {
-                                let temp_html = window.location.href.split('?')
-                                location.replace(temp_html[0] + '?id=' + data.id)
-                            } else {
-                                let temp_html = window.location.href.split('?')
-                                location.replace(temp_html[0] + '?id=' + user.id)
-                            }
+        checkUserName().then((data_chek) => {
+            if (data_chek) {
+                //check ว่าเลือกภาพหรือยัง
+                if (checkImagenayo()) {
+                    insertData().then((data) => {
+                        if (data.status) {
+                            console.log(data)
+                            Swal.fire({
+                                html: "บันทึกสำเร็จ",
+                                icon: "success",
+                                confirmButtonColor: "#009688"
+                            }).then((values) => {
+                                if (data.id != 'update') {
+                                    let temp_html = window.location.href.split('?')
+                                    location.replace(temp_html[0] + '?id=' + data.id)
+                                } else {
+                                    let temp_html = window.location.href.split('?')
+                                    location.replace(temp_html[0] + '?id=' + user.id)
+                                }
 
-                        })
-                    } else {
-                        Swal.fire({
-                            html: `<a>เกิดข้อผิดพลาด</a> 
+                            })
+                        } else {
+                            Swal.fire({
+                                html: `<a>เกิดข้อผิดพลาด</a> 
                                 <br> <a>${data.id}</a>`,
-                            icon: "error",
-                            confirmButtonColor: "#009688"
-                        })
-                    }
-                })
+                                icon: "error",
+                                confirmButtonColor: "#009688"
+                            })
+                        }
+                    })
+                } else {
+                    Swal.fire({
+                        html: `<a>กรุณาเลือกภาพก่อน</a>`,
+                        icon: "error",
+                        confirmButtonColor: "#009688"
+                    })
+                }
             } else {
-                Swal.fire({
-                    html: `<a>กรุณาเลือกภาพก่อน</a>`,
-                    icon: "error",
-                    confirmButtonColor: "#009688"
-                })
+                console.log('error')
             }
-        } else {
-            console.log('error')
-        }
+        })
+
     } else {
         Swal.fire({
             html: `ไม่สามารถเว้นช่องว่างได้`,
