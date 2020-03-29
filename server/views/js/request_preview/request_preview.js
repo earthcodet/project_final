@@ -469,9 +469,17 @@ function displayFax(fax) {
     if (fax === null) {
         return '-'
     } else {
-        return fax.slice(0, 3) + '-' + fax.slice(3, fax.length)
+        let item = fax.split('/')
+        if(item.length != 1){
+            if(item[1] != ''){
+                return item[0].slice(0, 3) + '-' + item[0].slice(3, item[0].length) + ' ต่อ ' + item[1]
+            }else{
+                return fax.slice(0, 3) + '-' + fax.slice(3, fax.length - 1)
+            }
+        }else{
+            return fax.slice(0, 3) + '-' + fax.slice(3, fax.length)
+        }
     }
-
 }
 function cutNoRequestType(type) {
     let no1 = type.slice(0, 1)

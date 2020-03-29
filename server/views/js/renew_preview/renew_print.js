@@ -78,7 +78,6 @@ function setData(rd, op, sc , date_temp) {
     } else {
         document.getElementById('user_type_2').checked = true
     }
-    document.getElementById('fax')
     document.getElementById('user_fullname').innerText = getFullName(rd)
     document.getElementById('user_age').innerText = checkNull(rd.PERSONAL_AGE)
     document.getElementById('nationality').innerText = checkNull(rd.PERSONAL_NATIONALITY)
@@ -137,9 +136,17 @@ function displayFax(fax) {
     if (fax === null) {
         return '-'
     } else {
-        return fax.slice(0, 3) + '-' + fax.slice(3, fax.length)
+        let item = fax.split('/')
+        if(item.length != 1){
+            if(item[1] != ''){
+                return item[0].slice(0, 3) + '-' + item[0].slice(3, item[0].length) + ' ต่อ ' + item[1]
+            }else{
+                return fax.slice(0, 3) + '-' + fax.slice(3, fax.length - 1)
+            }
+        }else{
+            return fax.slice(0, 3) + '-' + fax.slice(3, fax.length)
+        }
     }
-
 }
 function searchPersonalById(id) {
     return new Promise((resolve, reject) => {
@@ -166,7 +173,12 @@ function displayPhone(p) {
     if (p[0] === '-') {
         return '-'
     } else {
-        return p[0].slice(0, 3) + '-' + p[0].slice(3, p[0].length) + ' ต่อ ' + p[1]
+        if(p[1] != ''){
+            return p[0].slice(0, 3) + '-' + p[0].slice(3, p[0].length) + ' ต่อ ' + p[1]
+        }else{
+            return p[0].slice(0, 3) + '-' + p[0].slice(3, p[0].length) 
+        }
+       
     }
 }
 getDataView()
