@@ -3,15 +3,7 @@ let filesPdf = null
 let selectImageFile = 0
 let maxImageFile = 8
 let image_changed = false
-
-//  check ว่ามีการอัพโหลดไฟล์หรือเปล่า
 let file_is_uploaded = false
-
-// function checkPhoneInput(tagId) {
-//     var text = document.getElementById(tagId).value
-//     text = text.replace(/(\d{3})(\d{7})/, "$1-$2");
-//     document.getElementById(tagId).value = text
-// }
 var totalFiles = [];
 function handleFileSelect(evt) {
     var files = evt.target.files;
@@ -203,7 +195,6 @@ function sortTable(n, id, type) {
         }
     }
 }
-
 // check phone //
 function checkPhone(value, id, new_id) {
 
@@ -545,11 +536,11 @@ function getDateExp(type, date) {
     if (type === 'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร' || type === 'หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร') {
         // 3 year - 1 day
         // date_return.date_exp = `${day - 1}-${month}-${year + 3}`
-        if (((year + 1)-543) % 4 === 0) {
+        if (((year + 1) - 543) % 4 === 0) {
             if (parseInt(month) === 3 && day === 1) {
                 date_return.date_exp = '29-02-' + (year + 1)
             } else {
-                
+
                 if (day === 1) {
                     if (parseInt(month) - 1 === 0) {
                         date_return.date_exp = `${mn[11]}-12-${year + 3}`
@@ -587,13 +578,13 @@ function getDateExp(type, date) {
         return date_return
     } else {
         // 1 Year - 1 day
-        if (((year + 1)-543) % 4 === 0) {
-            console.log('1 date => '+day)
-            console.log('1 month => '+month)
-            console.log('1 year+1 => '+(year+1))
+        if (((year + 1) - 543) % 4 === 0) {
+            console.log('1 date => ' + day)
+            console.log('1 month => ' + month)
+            console.log('1 year+1 => ' + (year + 1))
             if (month === 3 && day === 1) {
                 date_return.date_exp = '29-02-' + (year + 1)
-                console.log('date '+date_return.date_exp)
+                console.log('date ' + date_return.date_exp)
             } else {
                 if (day === 1) {
                     if (parseInt(month) - 1 === 0) {
@@ -607,9 +598,9 @@ function getDateExp(type, date) {
                 }
             }
         } else {
-            console.log('2 date => '+day)
-            console.log('2 month => '+month)
-            console.log('2 year+1 => '+(year+1))
+            console.log('2 date => ' + day)
+            console.log('2 month => ' + month)
+            console.log('2 year+1 => ' + (year + 1))
             if (day === 1) {
                 if (parseInt(month) - 1 === 0) {
                     date_return.date_exp = `${mn[11]}-12-${year + 1}`
@@ -648,16 +639,53 @@ function setDateExpss() {
         })
     })
 }
-function checkDateFormat(value){
-    value = value+''
-    if(value.split('-').length != 3 ){
+function checkDateFormat(value) {
+    value = value + ''
+    if (value.split('-').length != 3) {
         return false
-    }else{
-        if(value.split('-')[0].length === 2 && value.split('-')[1].length === 2 && value.split('-')[2].length === 4){
+    } else {
+        if (value.split('-')[0].length === 2 && value.split('-')[1].length === 2 && value.split('-')[2].length === 4) {
             return true
-        }else{
+        } else {
             return false
         }
     }
 }
 setReDateExp()
+
+function checkFaxInput(id) {
+    let doc = document.getElementById(id)
+    let value = doc.value
+    value = value.split("")
+    let temp = ''
+    for (let i = 0; i < value.length; i++) {
+        if (i != 15) {
+            if(i === 9 ){
+                if (value[9] != '/') {
+                } else {
+                    temp = temp + value[9]
+                }
+            }else{
+                if (!isNaN(value[i])) {
+                    temp = temp + value[i]
+                } else {
+                    temp = temp
+                }  
+            }
+        } else {
+            break
+        }
+    }
+    console.log(temp)
+    doc.value = temp
+}
+
+$('#company-fax').keyup(function () {
+    checkFaxInput('company-fax')
+});
+$('#fax').keyup(function () {
+    checkFaxInput('fax')
+});
+$('#wFax').keyup(function () {
+    checkFaxInput('wFax')
+});
