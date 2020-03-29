@@ -104,6 +104,31 @@ class TransferDAO {
             })
         })
     }
+    checkOldId(no, year) {
+        return new Promise((resolve, reject) => {
+            let query = `SELECT REQUEST_NO_OLD,REQUEST_YEAR_OLD,REQUEST_OWNER FROM transfer WHERE REQUEST_NO_OLD = '${no}' AND  REQUEST_YEAR_OLD = '${year}' `
+            con.query(query, function (err, result) {
+                if (err) {
+                    console.log(err)
+                    return resolve(err.code)
+                }
+                return resolve(result)
+            })
+        })
+    }
+    getTransferByOldId(id, year){
+        return new Promise((resolve, reject) => {
+            let query = `SELECT *,DATEDIFF(TRANSFER_DATE_EXP, NOW()) As DATE_COUNT FROM transfer WHERE REQUEST_NO_OLD LIKE '%${id}%' AND  REQUEST_YEAR_OLD = '${year}'`
+            console.log(query)
+            con.query(query, function (err, result) {
+                if (err) {
+                    console.log(err)
+                    return resolve(err.code)
+                }
+                return resolve(result)
+            })
+        }) 
+    }
     getOwnerDuplication(no, year, p_id) {
         return new Promise((resolve, reject) => {
             let query = `SELECT * FROM transfer WHERE REQUEST_NO = '${no}' AND  REQUEST_YEAR = '${year}' AND TRANSFER_AVAILABLE = 'Y' AND (PERSONAL_ID='${p_id}' OR REQUEST_OWNER='${p_id}')`

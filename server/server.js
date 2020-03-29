@@ -556,6 +556,12 @@ app.get('/get/user/username/:username', (req, res) => {
     res.json(data)
   })
 })
+
+app.get('/get/request/history/transfer/:id/:year', (req, res) => {
+  webService.getRequestTransferHistory(req.params.id, req.params.year).then((data) => {
+    res.json(data)
+  })
+})
 app.get('/get/request/profile/:pid/:eid', (req, res) => {
   webService.getRequestProfileByPIDAndEID(req.params.pid, req.params.eid).then((data) => {
     res.json(data)

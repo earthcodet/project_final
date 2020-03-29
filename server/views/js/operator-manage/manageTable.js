@@ -1,5 +1,6 @@
 //แก้ไขจำนวนเงิน
 let sc_y = 2
+let list_history = []
 function editPayPopup() {
     let html_display = `
     <br>
@@ -208,33 +209,18 @@ function checkPay() {
 //ดูประวัติการโอนใบ
 function historyRequest() {
     var swal_html = `<div >
-        <div class="display-center" onkeypress="return runScript(event)">
-                    <h5 style="font-size: 100%;">
-                        ชื่อ :
-                        <input type="text" id="popSearchName" style="width: 18%;">
-                        นามสกุล :
-                        <input type="text" id="popSearchSurname" style="width: 18%;" >
-                        เลขบัตรประจำตัว :
-                        <input type="text" id="popSearchId" style="width: 18%;" >
-                        <button type="button" style="width: auto;height: auto;"
-                        class="btn btn-secondary is-color" onClick='searchPersonal()'>
-                                <i class="fa fa-search"></i> 
-                                ค้นหา
-                           
-                        </button>
-                        <br>
-                        <font id='error_search' style='display:none'class='alert'> ค้นหาไม่พบ </font>
-                    </h5>   
-                    
+        <div class="display-center">
                 </div>
         <div class="search-popup-height">
-            <table id='resultItems' class="table tablesearch table-hover cursor-pointer">
+            <table id='table_transfer_history' class="table tablesearch table-hover cursor-pointer">
                 <thead>
                   <tr class="is-color ">
-                    <th>ชื่อ</th>
-                    <th>นามสกุล</th>
-                    <th>ที่อยู่</th>
-                    <th>เลขบัตรประจำตัว</th>
+                    <th>ประเภทใบอนุญาต</th>
+                    <th>เลขที่คำขอใหม่</th>
+                    <th>เลขที่ใบอนุญาตเดิม</th>
+                    <th>วันที่เริ่ม</th>
+                    <th>วันที่หมดอายุ</th>
+                    <th>สถานนะ</th>
                   </tr>
                 </thead>
               </table>
@@ -250,10 +236,107 @@ function historyRequest() {
         closeOnConfirm: false,
         closeOnCancel: false
     });
-
+    displayTableHistory()
 
 }
-historyRequest()
+function getHistoryRequest() {
+    return new Promise((resolve, reject) => {
+        axios.get(`http://localhost:5000/get/request/history/transfer/${inRequest.no}/${inRequest.year}`).then((result) => {
+            list_history = result.data
+            resolve(result.data);
+        })
+    })
+}
+function displayTableHistory() {
+    getHistoryRequest().then((data) => {
+        createHistoryRequest(data)
+    })
+}
+function createHistoryRequest(data) {
+    var tbl = document.getElementById('table_transfer_history');
+    if (tbl.getElementsByTagName("tbody")[0] != null || tbl.getElementsByTagName("tbody")[0] != undefined) {
+        tbl.removeChild(tbl.getElementsByTagName("tbody")[0])
+    }
+    var tblBody = document.createElement('tbody')
+    for (var i = 0; i < data.length; i++) {
+        var row = document.createElement("tr");
+        row.style.fontSize = '0.95vw'
+        // row.onclick = function () { showItem(data[this.rowIndex - 1]) }
+        for (var j = 0; j < 6; j++) {
+            console.log(j)
+            var cell = document.createElement("td");
+            if (j === 0) {
+                let text = ''
+                let array = ['หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร', 'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร']
+                // index 0 = E
+                if (data[i].REQUEST_NO.slice(0, 1) === 'E') {
+                    text = array[0]
+                } else {
+                    text = array[1]
+                }
+                var cellText = document.createTextNode(text);
+            } else if (j === 1) {
+                //เลขที่คำขอใหม่
+                var cellText = document.createTextNode(`${data[i].REQUEST_NO}/${data[i].REQUEST_YEAR}`);
+            } else if (j === 2) {
+                //เลขที่ใบอนุญาตเดิม
+                if (i === 0) {
+                    var cellText = document.createTextNode(`${data[i].REQUEST_NO_OLD}/${data[i].REQUEST_YEAR_OLD}`);
+                } else {
+                    var cellText = document.createTextNode(`${data[i-1].REQUEST_NO}/${data[i-1].REQUEST_YEAR}`);
+                }
+
+            } else if (j === 3) {
+                //วันที่เริ่ม
+                if (data[i].TRANSFER_DATE != null) {
+                    let temp_date = data[i].TRANSFER_DATE + ''
+                    //02-01-2563
+                    let temp_array = temp_date.split('-')
+                    let temp_montn = parseInt(temp_array[1])
+
+                    let text = `${parseInt(temp_array[0])} ${numToMonth[temp_montn]} ${temp_array[2]}`
+                    var cellText = document.createTextNode(text);
+                } else {
+                    var cellText = document.createTextNode('-');
+                }
+
+            } else if (j === 4) {
+                //วันที่หมดอายุ
+                if (data[i].TRANSFER_DATE_EXP != null) {
+                    let temp_date = data[i].TRANSFER_DATE_EXP + ''
+                    //02-01-2563
+                    let temp_array = temp_date.split('-')
+                    let temp_montn = parseInt(temp_array[1])
+
+                    let text = `${parseInt(temp_array[0])} ${numToMonth[temp_montn]} ${temp_array[2]}`
+                    var cellText = document.createTextNode(text);
+                } else {
+                    var cellText = document.createTextNode('-');
+                }
+            } else {
+                //สถานนะ
+                if (data[i].DATE_COUNT != null) {
+                    let daysBetween = data[i].DATE_COUNT
+                    if (daysBetween < 0) {
+                        text = 'หมดอายุ'
+                    } else {
+                        text = 'เหลืออีก ' + daysBetween + ' วัน'
+                    }
+
+                    var cellText = document.createTextNode(text);
+                } else {
+                    var cellText = document.createTextNode('-');
+                }
+
+            }
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+        }
+        tblBody.appendChild(row);
+    }
+    tbl.appendChild(tblBody);
+
+}
 //ไม่สามารถชำระเงินล่วงหน้าได้
 function noPay() {
     Swal.fire({
@@ -1178,18 +1261,26 @@ $(function () {
         callback: function (key, options) {
             let type = this[0].cells[1].innerText.trim()
             let id = this[0].cells[2].innerText.trim()
+            let indexData = this[0].rowIndex - 1
+            setDataItem(requestDataList[indexData])
             if (inRequest.is_deleted === 'Y' && key != 'detail') {
                 statusRequestDelete()
             } else {
                 if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
                     statusDelete()
                 } else {
-                    toRequest(type, id)
+                    if(key === 'detail'){
+                        toRequest(type, id)
+                    }else{
+                        historyRequest()
+                    }
+                    
                 }
             }
 
         },
         items: {
+            "history":{ name: 'ดูประวัติการโอนใบอนุญาต'},
             "detail": { name: "ดูรายละเอียด" }
 
         },

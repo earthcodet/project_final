@@ -2002,14 +2002,14 @@ class service {
             })
         })
     }
-    getEstablishment(id, l_id,profile) {
+    getEstablishment(id, l_id, profile) {
         console.log(`get Establishment ${id} ${l_id}`)
         return new Promise((resolve, reject) => {
             EstablishmentDAOObj.get(id).then((e_data) => {
                 if (e_data != undefined) {
                     this.getAddressByAddressId(e_data.ADDRESS_ID).then((e_address_data) => {
                         e_data.ADDRESS = e_address_data[0]
-                        if(profile === 'profile' && e_data.ESTABLISHMENT_IS_LAND_OWNED != null){
+                        if (profile === 'profile' && e_data.ESTABLISHMENT_IS_LAND_OWNED != null) {
                             LandDAOObj.get(e_data.ESTABLISHMENT_IS_LAND_OWNED).then((land_data) => {
                                 if (land_data.LAND_BIRTHDAY != null) {
                                     if (land_data.LAND_BIRTHDAY != '0000-00-00') {
@@ -2530,12 +2530,12 @@ class service {
         })
     }
 
-    getReportByDateAndRtID(id, date_start, date_end,menu) {
+    getReportByDateAndRtID(id, date_start, date_end, menu) {
         console.log(id)
         console.log(date_start)
         console.log(date_end)
         return new Promise((resolve, reject) => {
-            PrintDAOObj.getViewReport(id, date_start, date_end,menu).then((viewData_data) => {
+            PrintDAOObj.getViewReport(id, date_start, date_end, menu).then((viewData_data) => {
                 if (viewData_data.length != 0) {
                     for (let i = 0; i < viewData_data.length; i++) {
                         viewData_data[i].R_ISSUED = viewData_data[i].R_ISSUED != null ? this.formatDate("TO-DISPLAY", viewData_data[i].R_ISSUED + '') : viewData_data[i].R_ISSUED
@@ -2583,11 +2583,11 @@ class service {
                         if (viewData_data.length != 0) {
                             for (let j = 0; j < list_money.length; j++) {
                                 let e_ot = viewData_data[i].REPORT_E_OT === null ? 0 : viewData_data[i].REPORT_E_OT
-                                let e_m = viewData_data[i].REPORT_E_M === null ? 0 : viewData_data[i].REPORT_E_M 
+                                let e_m = viewData_data[i].REPORT_E_M === null ? 0 : viewData_data[i].REPORT_E_M
                                 list_money[j] = parseFloat(list_money[j]) + e_m
                                 list_op[j] = parseInt(list_op[j]) + e_ot
                             }
-                        } 
+                        }
                         if (i === list_year.length - 1) {
                             let temp_array_return = [list_money, list_op]
                             return resolve(temp_array_return)
@@ -2623,13 +2623,48 @@ class service {
             })
         })
     }
+    getRequestTransferHistory(id, no) {
+        console.log('id = ' + id)
+        console.log('no = ' + no)
+        return new Promise((resolve, reject) => {
+            this.getOldIdTransferRequest(id, no).then((item_tranfer) => {
+                if (item_tranfer.length != 0) {
+                    console.log('item no 1')
+                    TransferDAOObj.getTransferByOldId(item_tranfer[0].REQUEST_NO_OLD, item_tranfer[0].REQUEST_YEAR_OLD).then((data) => {
+                        for (let i = 0; i < data.length; i++) {
+                            data[i].TRANSFER_DATE = data[i].TRANSFER_DATE != null ? this.formatDate("TO-DISPLAY", data[i].TRANSFER_DATE + '') : data[i].TRANSFER_DATE
+                            data[i].TRANSFER_DATE_EXP = data[i].TRANSFER_DATE_EXP != null ? this.formatDate("TO-DISPLAY", data[i].TRANSFER_DATE_EXP + '') : data[i].TRANSFER_DATE_EXP
+                        }
+                        return resolve(data)
+                    })
+                } else {
+                    console.log('item no 2')
+                    TransferDAOObj.checkOldId(id, no).then((check_data) => {
+                        console.log(check_data)
+                        if (check_data.length != 0) {
+                            TransferDAOObj.getTransferByOldId(id, no).then((data) => {
+                                for (let i = 0; i < data.length; i++) {
+                                    data[i].TRANSFER_DATE = data[i].TRANSFER_DATE != null ? this.formatDate("TO-DISPLAY", data[i].TRANSFER_DATE + '') : data[i].TRANSFER_DATE
+                                    data[i].TRANSFER_DATE_EXP = data[i].TRANSFER_DATE_EXP != null ? this.formatDate("TO-DISPLAY", data[i].TRANSFER_DATE_EXP + '') : data[i].TRANSFER_DATE_EXP
+                                }
+                                return resolve(data)
+                            })
+                        } else {
+                            return resolve([])
+                        }
+                    })
+
+                }
+            })
+        })
+    }
     getRequestProfileByPIDAndEID(p_id, e_id) {
         let temp_array_return = []
         return new Promise((resolve, reject) => {
             this.getPersonalAndAddressById(p_id).then((personal_operator_data) => {
                 temp_array_return.push(personal_operator_data[0])
-                this.getEstablishment(e_id,undefined, 'profile').then((dataEstablishment) => {
-                // this.getEstablishment(e_id).then((dataEstablishment) => {
+                this.getEstablishment(e_id, undefined, 'profile').then((dataEstablishment) => {
+                    // this.getEstablishment(e_id).then((dataEstablishment) => {
                     temp_array_return.push(dataEstablishment)
                     return resolve(temp_array_return)
                 })
