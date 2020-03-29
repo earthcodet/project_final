@@ -179,13 +179,13 @@ function setPayY(Y) {
         document.getElementById('pay_fee').value = inRequest.receipt_fee_year_2
         document.getElementById('pay_fine').value = inRequest.receipt_fine_year_2
         document.getElementById('datepicker7').value = inRequest.receipt_date_year_2
-        document.getElementById('app_name_money').value =  inRequest.staff_id_money
+        document.getElementById('app_name_money').value = inRequest.staff_id_money
     } else {
         sc_y = 3
         document.getElementById('pay_fee').value = inRequest.receipt_fee_year_3
         document.getElementById('pay_fine').value = inRequest.receipt_fine_year_3
         document.getElementById('datepicker7').value = inRequest.receipt_date_year_3
-        document.getElementById('app_name_money').value =  inRequest.staff_id_money
+        document.getElementById('app_name_money').value = inRequest.staff_id_money
     }
 }
 function checkEditYear() {
@@ -205,6 +205,55 @@ function checkPay() {
         payPopup()
     }
 }
+//ดูประวัติการโอนใบ
+function historyRequest() {
+    var swal_html = `<div >
+        <div class="display-center" onkeypress="return runScript(event)">
+                    <h5 style="font-size: 100%;">
+                        ชื่อ :
+                        <input type="text" id="popSearchName" style="width: 18%;">
+                        นามสกุล :
+                        <input type="text" id="popSearchSurname" style="width: 18%;" >
+                        เลขบัตรประจำตัว :
+                        <input type="text" id="popSearchId" style="width: 18%;" >
+                        <button type="button" style="width: auto;height: auto;"
+                        class="btn btn-secondary is-color" onClick='searchPersonal()'>
+                                <i class="fa fa-search"></i> 
+                                ค้นหา
+                           
+                        </button>
+                        <br>
+                        <font id='error_search' style='display:none'class='alert'> ค้นหาไม่พบ </font>
+                    </h5>   
+                    
+                </div>
+        <div class="search-popup-height">
+            <table id='resultItems' class="table tablesearch table-hover cursor-pointer">
+                <thead>
+                  <tr class="is-color ">
+                    <th>ชื่อ</th>
+                    <th>นามสกุล</th>
+                    <th>ที่อยู่</th>
+                    <th>เลขบัตรประจำตัว</th>
+                  </tr>
+                </thead>
+              </table>
+        </div>
+    </div>`
+
+    Swal.fire({
+        title: `ประวัติโอนใบอนุญาต ของเลขที่ใบอนุญาต ${inRequest.no}/${inRequest.year}`,
+        html: swal_html,
+        width: '80%',
+        customClass: 'swal-height',
+        showConfirmButton: false,
+        closeOnConfirm: false,
+        closeOnCancel: false
+    });
+
+
+}
+historyRequest()
 //ไม่สามารถชำระเงินล่วงหน้าได้
 function noPay() {
     Swal.fire({
@@ -968,7 +1017,7 @@ $(function () {
             let indexData = this[0].rowIndex - 1
             console.log(`this`)
             console.log(this)
-                setDataItem(requestDataList[indexData])
+            setDataItem(requestDataList[indexData])
             if (inRequest.is_deleted === 'Y' && key != 'detail') {
                 statusRequestDelete()
             } else {
@@ -1069,7 +1118,7 @@ $(function () {
         },
         items: {
             "pay": { name: "ชำระเงิน" },
-            "editPay" :{name: "แก้ไขชำระเงิน"},
+            "editPay": { name: "แก้ไขชำระเงิน" },
             "per": { name: "ต่อใบอนุญาต" },
             "transfer": { name: "โอนใบอนุญาต" },
             "add": { name: "เพิ่มใบอนุญาต" },
@@ -1267,7 +1316,7 @@ function getUserInformation(type) {
         })
     })
 }
-function setLisetUserInformationToUi(list_user, id,owner_id) {
+function setLisetUserInformationToUi(list_user, id, owner_id) {
     if (list_user.length != 0) {
         document.getElementById(id).innerHTML = ''
         for (let i = 0; i < list_user.length; i++) {
@@ -1280,14 +1329,14 @@ function setLisetUserInformationToUi(list_user, id,owner_id) {
             select.onchange = function () { userMoney = this.value };
             select.add(option);
         }
-        if(owner_id != undefined){
+        if (owner_id != undefined) {
             document.getElementById(id).value = owner_id
         }
     }
 }
-function displayUserInformation(id, type , ownerId) {
+function displayUserInformation(id, type, ownerId) {
     getUserInformation(type).then((list_user) => {
         console.log(`'get'`)
-        setLisetUserInformationToUi(list_user, id , ownerId)
+        setLisetUserInformationToUi(list_user, id, ownerId)
     })
 }

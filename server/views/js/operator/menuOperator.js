@@ -57,9 +57,10 @@ function addPage() {
 }
 
 function insertPage() {
-    addNew = false
+   
     let _redyToInsert = preInsert()
-    if (_redyToInsert) {
+    if (_redyToInsert) { 
+        addNew = false
         Swal.fire({
             title: "สำนักงานเทศบาล",
             html: "ต้องการบันทึกหรือไม่",

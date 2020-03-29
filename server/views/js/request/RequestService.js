@@ -59,7 +59,7 @@ function checkView(typeForm) {
                         console.log(assistantOperatorData)
                         setDataView()
                         if (requestData.no != '') {
-                            if(requestData.status === 'active' ){
+                            if (requestData.status === 'active') {
                                 document.getElementById('print_document_allow').style.display = ''
                             }
                             document.getElementById('print_document_image').style.display = ''
@@ -69,13 +69,13 @@ function checkView(typeForm) {
                         }
 
                         if (raw_data.REQUEST_IMAGE_NAME != null && raw_data.REQUEST_IMAGE_NAME != undefined) {
-                            console.log('get image '+raw_data.REQUEST_IMAGE_NAME)
-                            getImageRequestByImageName(raw_data.REQUEST_IMAGE_NAME).then((image_get) =>{
+                            console.log('get image ' + raw_data.REQUEST_IMAGE_NAME)
+                            getImageRequestByImageName(raw_data.REQUEST_IMAGE_NAME).then((image_get) => {
                                 imageDisplayFormDatabase = image_get
-                               createImage(imageDisplayFormDatabase) 
+                                createImage(imageDisplayFormDatabase)
                             })
                         }
-                    }   
+                    }
                 })
             }
         }
@@ -84,6 +84,7 @@ function checkView(typeForm) {
         if (requestId.p_id.length === 7 && requestId.e_id.length === 7) {
             getPersonalDataAndEstablishment(requestId.p_id, requestId.e_id).then((raw_data) => {
                 // displayUserAlderman()
+                console.log(raw_data)
                 if (raw_data[0] != false && raw_data[1] != false) {
                     document.getElementById('btn_sc_op').disabled = true
                     setOperatorData(raw_data[0])
@@ -96,6 +97,8 @@ function checkView(typeForm) {
                         ESTABLISHMENT_DATA: raw_data[1]
 
                     }
+                    setAddressOwnerLandData(temp_address)
+                    setLandData(temp_address)
                     setAddressEstablishmentData(temp_address)
                     setDataProfile()
                 }
@@ -209,7 +212,57 @@ function setDataProfile() {
     if (document.getElementById('numPeople') != undefined) {
         document.getElementById('numPeople').value = establishmentData.worker
     }
+    //ใช้อาคารสถานที่ประกอบการของผู้อื่น
+    if (document.getElementById('useOtherPlace') != undefined) {
+        if (establishmentData.is_land_owned === 'NO' && requestData.establishment_is_land_owned === '') {
+            document.getElementById('boxOwner').style.display = 'none'
+            document.getElementById('notuseOtherPlace').checked = true
+            document.getElementById('useOtherPlace').checked = false
+        } else {
+            // get New Data Address
+            document.getElementById('boxOwner').style.display = ''
+            document.getElementById('ownPrefix').value = landData.title
+            document.getElementById('ownName').value = landData.name
+            document.getElementById('ownSurname').value = landData.surname
+            //วันเกิด
+            document.getElementById('datepicker9').value = landData.birthday
+            let cut_phone_no4 = landData.phone.split('/')
+            if (cut_phone_no4[1] === '') {
+                document.getElementById("ownPhone").value = cut_phone_no4[0]
+                document.getElementById('ownPhone_more').value = ''
+                document.getElementById('ownPhone_more').disabled = false
+            } else {
+                document.getElementById("ownPhone").value = cut_phone_no4[0]
+                document.getElementById('ownPhone_more').disabled = false
+                document.getElementById('ownPhone_more').value = cut_phone_no4[1]
+            }
+            document.getElementById('ownHomeId').value = addressOwnerLandData.home_number
+            document.getElementById('ownMoo').value = addressOwnerLandData.moo
+            document.getElementById('ownTrxk').value = addressOwnerLandData.trxk
+            document.getElementById('ownSxy').value = addressOwnerLandData.sxy
+            document.getElementById('ownRoad').value = addressOwnerLandData.road
 
+            let provinceIdEL = parseInt(getProviceIdByName(addressOwnerLandData.province_name))
+            let amphurIdEL = parseInt(getAmphureIdByName(addressOwnerLandData.amphur_name, provinceIdEL))
+            let districtIdEL = parseInt(getDistrictIdByName(addressOwnerLandData.district_name, amphurIdEL))
+            document.getElementById(`ownerProvince`).value = provinceIdEL
+            onwerAmphurSelect(parseInt(provinceIdEL))
+            onwerDistrictSelect(parseInt(amphurIdEL))
+            document.getElementById(`ownerDistrict`).value = amphurIdEL
+            if (districtIdEL === '' || districtIdEL === undefined) {
+                document.getElementById(`ownerSubdistrict`).innerHTML = ''
+            } else {
+                document.getElementById(`ownerSubdistrict`).value = districtIdEL
+            }
+            if (landData.status_upload_file) {
+                document.getElementById('status_upload_file').style.display = ''
+            } else {
+                document.getElementById('status_upload_file').style.display = 'none'
+            }
+            document.getElementById('notuseOtherPlace').checked = false
+            document.getElementById('useOtherPlace').checked = true
+        }
+    }
     changeStatusMenuData(requestData.status, requestData.is_deleted) // RequestControl.js < switch menu to data === true
 }
 // setDataView
@@ -1157,12 +1210,12 @@ function dataChange(type) {
                     status_data_change = true
                 }
             }
-            if(document.getElementById('typeWorkplace') != undefined){
+            if (document.getElementById('typeWorkplace') != undefined) {
                 establishmentData.type = document.getElementById('typeWorkplace').value.trim()
-            }else{
+            } else {
                 establishmentData.type = ''
             }
-            
+
             if (document.getElementById('typeReForm') != undefined) {
                 if (requestData.subcategory != document.getElementById('typeReForm').value ||
                     requestData.product_type != document.getElementById('typeProduct').value.trim() ||
@@ -1656,12 +1709,12 @@ function setLisetUserAlderManToUi(list_user) {
     if (list_user.length != 0) {
         userAlderman = list_user[0].USER_ID
         requestData.staff_id_alderman = list_user[0].USER_ID
-        if(list_user[0].USER_POSITION === null){
+        if (list_user[0].USER_POSITION === null) {
             document.getElementById('position').value = 'นายกเทศมนตรี'
-        }else{
+        } else {
             document.getElementById('position').value = list_user[0].USER_POSITION
         }
-        
+
         for (let i = 0; i < list_user.length; i++) {
             temp_alderman_list.push(list_user[i])
             var select = document.getElementById("documentName3");
@@ -1685,10 +1738,9 @@ function getPositionAlderman(userId) {
 function changePositionAlderman(userId) {
     userAlderman = userId
     let item = getPositionAlderman(userId)
-    //doing
-    if(item === null){
+    if (item === null) {
         document.getElementById('position').value = 'นายกเทศมนตรี'
-    }else{
+    } else {
         document.getElementById('position').value = item
     }
 }

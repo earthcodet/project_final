@@ -2002,13 +2002,30 @@ class service {
             })
         })
     }
-    getEstablishment(id, l_id) {
+    getEstablishment(id, l_id,profile) {
         console.log(`get Establishment ${id} ${l_id}`)
         return new Promise((resolve, reject) => {
             EstablishmentDAOObj.get(id).then((e_data) => {
                 if (e_data != undefined) {
                     this.getAddressByAddressId(e_data.ADDRESS_ID).then((e_address_data) => {
                         e_data.ADDRESS = e_address_data[0]
+                        if(profile === 'profile' && e_data.ESTABLISHMENT_IS_LAND_OWNED != null){
+                            LandDAOObj.get(e_data.ESTABLISHMENT_IS_LAND_OWNED).then((land_data) => {
+                                if (land_data.LAND_BIRTHDAY != null) {
+                                    if (land_data.LAND_BIRTHDAY != '0000-00-00') {
+                                        land_data.LAND_BIRTHDAY = this.formatDate('TO-DISPLAY', land_data.LAND_BIRTHDAY + '')
+                                    }
+                                }
+                                this.getAddressByAddressId(land_data.ADDRESS_ID).then((land_address_data) => {
+                                    FileDAOObj.getfile(land_data.LAND_ID).then((data) => {
+                                        land_data.UPLOADFILE = data
+                                        land_data.ADDRESS = land_address_data[0]
+                                        e_data.LAND = land_data
+                                        return resolve(e_data)
+                                    })
+                                })
+                            })
+                        }
                         if (l_id != undefined && l_id != e_data.ESTABLISHMENT_IS_LAND_OWNED && l_id != null) {
                             console.log('get Request land owner')
                             LandDAOObj.get(l_id).then((land_data) => {
@@ -2611,7 +2628,8 @@ class service {
         return new Promise((resolve, reject) => {
             this.getPersonalAndAddressById(p_id).then((personal_operator_data) => {
                 temp_array_return.push(personal_operator_data[0])
-                this.getEstablishment(e_id).then((dataEstablishment) => {
+                this.getEstablishment(e_id,undefined, 'profile').then((dataEstablishment) => {
+                // this.getEstablishment(e_id).then((dataEstablishment) => {
                     temp_array_return.push(dataEstablishment)
                     return resolve(temp_array_return)
                 })
