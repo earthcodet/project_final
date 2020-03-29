@@ -1745,8 +1745,11 @@ function changePositionAlderman(userId) {
     }
 }
 function displayUserAlderman() {
-    getPresident().then((list_user) => {
-        setLisetUserAlderManToUi(list_user)
+    return new Promise((resolve, reject) => {
+        getPresident().then((list_user) => {
+            setLisetUserAlderManToUi(list_user)
+            return resolve(true)
+        })
     })
 }
 //get staff money 
@@ -1798,13 +1801,15 @@ function getImageRequestByImageName(image_name) {
     })
 }
 function setRequsetType(type) {
+    //doing
     runForm().then((data) => {
         document.getElementById('documentName3').disabled = false
         getRequestType(type).then((data_test) => {
             addRequestTypeToDatalist()
+            displayUserAlderman().then((data_test_2) =>{
+              checkView(type)  
+            })
         })
-        checkView(type)
-        displayUserAlderman()
     })
 }
 function addRequestTypeToDatalist() {
