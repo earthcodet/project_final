@@ -660,17 +660,17 @@ function checkFaxInput(id) {
     let temp = ''
     for (let i = 0; i < value.length; i++) {
         if (i != 15) {
-            if(i === 9 ){
+            if (i === 9) {
                 if (value[9] != '/') {
                 } else {
                     temp = temp + value[9]
                 }
-            }else{
+            } else {
                 if (!isNaN(value[i])) {
                     temp = temp + value[i]
                 } else {
                     temp = temp
-                }  
+                }
             }
         } else {
             break
@@ -679,13 +679,18 @@ function checkFaxInput(id) {
     console.log(temp)
     doc.value = temp
 }
-
-$('#company-fax').keyup(function () {
-    checkFaxInput('company-fax')
-});
-$('#fax').keyup(function () {
-    checkFaxInput('fax')
-});
-$('#wFax').keyup(function () {
-    checkFaxInput('wFax')
-});
+if (document.getElementById('company-fax') != undefined) {
+    $('#company-fax').keyup(function () {
+        checkFaxInput('company-fax')
+    });
+}
+if (document.getElementById('fax') != undefined) {
+    $('#fax').keyup(function () {
+        checkFaxInput('fax')
+    });
+}
+if (document.getElementById('wFax') != undefined) {
+    $('#wFax').keyup(function () {
+        checkFaxInput('wFax')
+    });
+}

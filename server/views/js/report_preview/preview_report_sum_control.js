@@ -6,19 +6,19 @@ function openReport() {
 
     let s_mon = parseInt(document.getElementById('mon').value)
     let s_year = parseInt(document.getElementById('year').value)
-
+    console.log(`year old  = ${year} and year new  = ${s_year}`)
     if (s_year > year) {
         Swal.fire({
             html: "ไม่สามารถเลือกวันที่เกินวันที่ปัจจุบันได้",
             icon: "error",
             confirmButtonColor: "#009688"
         })
-    } else if (s_mon > mon) {
+    } else if(s_year === year && s_mon > mon){  
         Swal.fire({
             html: "ไม่สามารถเลือกวันที่เกินวันที่ปัจจุบันได้",
             icon: "error",
             confirmButtonColor: "#009688"
-        })
+        })  
     } else {
         if (s_mon === mon && s_year === year) {
             Swal.fire({
