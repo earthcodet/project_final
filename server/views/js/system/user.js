@@ -1,5 +1,6 @@
 var fileImage = null;
 let delete_image = false
+let status_page = 'new'
 let user = {
     id: '',
     username: '',
@@ -45,6 +46,7 @@ function getView(value_t) {
     if (value_t.id != undefined) {
         getComData(value_t.id).then((raw_data) => {
             if (raw_data.length != 0) {
+                status_page = 'update'
                 document.getElementById('topic').innerText = 'อัพเดทข้อมูล'
                 document.getElementById('head_topic').innerText = 'อัพเดทข้อมูล'
                 setData(raw_data[0])
@@ -258,46 +260,53 @@ function insertData() {
 
     });
 }
-function checkUserName() {
+function checkUserName(type) {
     document.getElementById('username').classList.remove("alertInput");
     document.getElementById('password').classList.remove("alertInput");
 
     let username = setNull(document.getElementById('username').value.trim())
     let password = setNull(document.getElementById('password').value.trim())
     return new Promise((resolve, reject) => {
-        if (username === null && password === null) {
+        if (username === null) {
+            document.getElementById('username').classList.add("alertInput");
+            Swal.fire({
+                html: 'ไม่สามารถปล่อยว่างช่องผู้ใช้งานได้ หากช่องช่องรหัสผ่านผู้ใช้งานไม่ใช่ช่องว่าง',
+                icon: "error",
+                confirmButtonColor: "#009688"
+            })
             return resolve(true)
-        } else {
-            if (username === null) {
-                document.getElementById('username').classList.add("alertInput");
-                Swal.fire({
-                    html: 'ไม่สามารถปล่อยว่างช่องผู้ใช้งานได้ หากช่องช่องรหัสผ่านผู้ใช้งานไม่ใช่ช่องว่าง',
-                    icon: "error",
-                    confirmButtonColor: "#009688"
-                })
-            }
-            if (password === null) {
-                document.getElementById('password').classList.add("alertInput");
-                Swal.fire({
-                    html: 'ไม่สามารถปล่อยว่างช่องรหัสผ่านได้ หากช่องผู้ใช้งานไม่ใช่ช่องว่าง',
-                    icon: "error",
-                    confirmButtonColor: "#009688"
-                })
-            }
-            if (username != null && password != null) {
-                checkDuplicationUsername(username).then((check) => {
-                    if (check) {
-                        Swal.fire({
-                            html: 'มีชือผู้ใช้งานในระบบแล้ว',
-                            icon: "error",
-                            confirmButtonColor: "#009688"
-                        })
-                    } else {
+        }
+        if (password === null) {
+            document.getElementById('password').classList.add("alertInput");
+            Swal.fire({
+                html: 'ไม่สามารถปล่อยว่างช่องรหัสผ่านได้ หากช่องผู้ใช้งานไม่ใช่ช่องว่าง',
+                icon: "error",
+                confirmButtonColor: "#009688"
+            })
+            return resolve(true)
+        }
 
-                        return resolve(true)
-                    }
-                })
+        if (type === 'new') {
+            if (username === null && password === null) {
+                return resolve(true)
+            } else {
+                if (username != null && password != null) {
+                    checkDuplicationUsername(username).then((check) => {
+                        if (check) {
+                            Swal.fire({
+                                html: 'มีชือผู้ใช้งานในระบบแล้ว',
+                                icon: "error",
+                                confirmButtonColor: "#009688"
+                            })
+                            return resolve(true)
+                        } else {
+                            return resolve(false)
+                        }
+                    })
+                }
             }
+        } else {
+            return resolve(false)
         }
     })
 }
@@ -333,8 +342,9 @@ function checkImagenayo() {
 }
 function insertPage() {
     if (checkInputInsert()) {
-        checkUserName().then((data_chek) => {
-            if (data_chek) {
+        checkUserName(status_page).then((data_chek) => {
+            console.log(`data_check = ${data_chek}`)
+            if (!data_chek) {
                 //check ว่าเลือกภาพหรือยัง
                 if (checkImagenayo()) {
                     insertData().then((data) => {
