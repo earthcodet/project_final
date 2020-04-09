@@ -80,10 +80,10 @@ function searchFilter(value) {
     select = document.getElementById('brow');
     lengths = select.options.length;
     console.log(lengths)
+    document.getElementById('type_search').value = ''
     for (i = 0; i < lengths; i++) {
         let t_option = select.options[i]
         if (checkRequestType(value, i) != undefined) {
-            console.log('found')
             t_option.disabled = false;
         } else {
             t_option.disabled = true
