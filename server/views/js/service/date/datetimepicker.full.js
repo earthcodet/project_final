@@ -1624,7 +1624,7 @@ var DateFormatter;
           monthselect.hide();
           return false;
         });
-console.log(new Date().getFullYear()+543 +543)
+// console.log(new Date().getFullYear()+543 +543)
       //scroll_element = timepicker.find('.xdsoft_time_box');
       timeboxparent.append(timebox);
       timeboxparent.xdsoftScroller();
@@ -1709,7 +1709,8 @@ console.log(new Date().getFullYear()+543 +543)
           var month = _this.currentTime.getMonth() + 1,
             year;
           if (month === 12) {
-            _this.currentTime.setFullYear(_this.currentTime.getFullYear()+543 + 1);
+            // _this.currentTime.setFullYear(_this.currentTime.getFullYear()+543 + 1);
+            _this.currentTime.setFullYear(_this.currentTime.getFullYear() + 1);
             month = 0;
           }
 
@@ -1755,7 +1756,8 @@ console.log(new Date().getFullYear()+543 +543)
 
           var month = _this.currentTime.getMonth() - 1;
           if (month === -1) {
-            _this.currentTime.setFullYear(_this.currentTime.getFullYear()+543 - 1);
+            // _this.currentTime.setFullYear(_this.currentTime.getFullYear()+543 - 1);
+            _this.currentTime.setFullYear(_this.currentTime.getFullYear() - 1);
             month = 11;
           }
           _this.currentTime.setDate(
