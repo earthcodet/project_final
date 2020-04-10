@@ -424,4 +424,17 @@ function setAlertInput(c_1, c_2, c_3) {
         document.getElementById("surname").classList.add("alertInput");
     }
 }
+function displayPassword(){
+    let btn_show_password = document.getElementById('show_password')
+    let input_password = document.getElementById('password')
+    if (input_password.type === "password") {
+        btn_show_password.classList.add('fa-eye')
+        btn_show_password.classList.remove('fa-eye-slash')
+        input_password.type = "text";
+      } else {
+        btn_show_password.classList.remove('fa-eye')
+        btn_show_password.classList.add('fa-eye-slash')
+        input_password.type = "password";
+      }
+}
 startForm()
