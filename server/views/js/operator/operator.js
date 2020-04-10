@@ -327,6 +327,7 @@ function preInsert() {
     let check_input = inputRequired()
     if (check_input) {
          if (check_id_user.trim().length === 13 && type_user === 'บุคคลธรรมดา' || check_id_company.trim().length === 13 && type_user === 'นิติบุคคล') {
+            console.log(`_isUsed  = ${_isUsed}`)
             if (!_isUsed) {
                 if(edit_document===true){
                     if (formatPhone(document.getElementById('phone').value.trim()) || formatPhone(document.getElementById('company-phone').value.trim())) {
@@ -425,6 +426,7 @@ function preInsert() {
                         document.getElementById('phone').classList.add('alertInput')
                     }
                 }else{
+                    console.log(check_id_new)
                     if(check_id_new){
                         if (formatPhone(document.getElementById('phone').value.trim()) || formatPhone(document.getElementById('company-phone').value.trim())) {
                             if (document.getElementById("typeUser").value === 'บุคคลธรรมดา') {
@@ -531,6 +533,7 @@ function preInsert() {
                             confirmButtonColor: "#009688",
                             icon: iconAlert
                         })
+                        console.log(`error id`)
                         document.getElementById('id').classList.add('alertInput')
                     document.getElementById('company-id').classList.add('alertInput')
                     }
@@ -587,7 +590,8 @@ function duplicateId(personalId) {
 }
 function checkId(value, type) {
     if (value.length != 13) {
-        _isCheckPersonalId = false;
+        // _isCheckPersonalId = false;
+        _isIdCheckPersonal = false;
     }
     if (value.length === 13) {
         if (type === 'PERSONAL') {
@@ -618,12 +622,15 @@ function checkId(value, type) {
                                 confirmButtonColor: "#009688",
                                 icon: "success"
                             });
-                            _isCheckPersonalId = value
+                            // _isCheckPersonalId = value
+                            _isIdCheckPersonal = value
                             _isUsed = false;
                             textChange = 'เลขประจำตัวผู้ประกอบการนี้สามารถใช้ได้'
                             iconAlert = 'success'
                             check_id_new = true
+                            console.log('check id true _isUsed  = false')
                         } else {
+                            console.log('check id false')
                             Swal.fire({
                                 title: "เลขประจำตัวผู้ประกอบการนี้มีในระบบแล้ว",
                                 width: "30%",
@@ -666,7 +673,11 @@ function checkId(value, type) {
                     confirmButtonColor: "#009688",
                     icon: iconAlert
                 });
-                check_id_new = false
+                if(iconAlert === 'success'){
+                    check_id_new = true
+                }else{
+                    check_id_new = false
+                }
                 console.log(`personal id not change`)
             }
         } else {
@@ -682,11 +693,13 @@ function checkId(value, type) {
                             confirmButtonColor: "#009688",
                             icon: "success"
                         });
-                        _isCheckPersonalId = value
+                        // _isCheckPersonalId = value
+                        _isIdCheckPersonal = value
                         _isUsed = false;
                         iconAlert = 'success'
                         textChange = 'เลขประจำตัวผู้ประกอบการนี้สามารถใช้ได้'
                         check_id_new = true
+                        console.log('id don`t chnage pass')
                     } else {
                         Swal.fire({
                             title: "เลขประจำตัวผู้ประกอบการนี้มีในระบบแล้ว",
@@ -703,6 +716,7 @@ function checkId(value, type) {
                         document.getElementById('id').classList.add('alertInput')
                         document.getElementById('company-id').classList.add('alertInput')
                         check_id_new = false
+                        console.log('id don`t chnage false')
                     }
                     console.log(_isUsed);
                 });
@@ -717,7 +731,12 @@ function checkId(value, type) {
                     icon: iconAlert
                 });
                 console.log(`personal id not change`)
-                check_id_new = false
+                if(iconAlert === 'success'){
+                    check_id_new = true
+                }else{
+                    check_id_new = false
+                }
+                // 
             }
         }
     } else {

@@ -265,7 +265,7 @@ function changeStatusDelete(status) {
 
 function deletePage() {
     
-    if (addNew === false) {
+    if (document.getElementById('saveMenu').classList.contains('disableds')) {
         Swal.fire({
             title: "สำนักงานเทศบาล",
             html: "ต้องการลบหรือไม่",

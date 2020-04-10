@@ -256,7 +256,7 @@
                     <a style="margin-left: 1.8vw;">เลขทะเบียน <font color="red">*</font> :</a>
                     <input type="text" id="company-id" name="" placeholder="" style="width: 11vw"
                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                        maxlength="13" onkeyup="checkId(this.value, '')"
+                        maxlength="13" onkeyup="checkId(this.value, 'CORPORATION')"
                         onchange="document.getElementById('company-id').classList.remove('alertInput')">
                     <a style="margin-left:0.3vw;">ออกเมื่อ <font color="red">*</font> :</a>
                     <input type="text" id="datepicker4" placeholder="" style="width: 11vw" maxlength="10"
