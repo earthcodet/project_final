@@ -267,25 +267,28 @@ function checkUserName(type) {
     let username = setNull(document.getElementById('username').value.trim())
     let password = setNull(document.getElementById('password').value.trim())
     return new Promise((resolve, reject) => {
-        if (username === null) {
-            document.getElementById('username').classList.add("alertInput");
-            Swal.fire({
-                html: 'ไม่สามารถปล่อยว่างช่องผู้ใช้งานได้ หากช่องช่องรหัสผ่านผู้ใช้งานไม่ใช่ช่องว่าง',
-                icon: "error",
-                confirmButtonColor: "#009688"
-            })
-            return resolve(true)
+        if (username === null && password === null) {
+            return resolve(false)
+        } else {
+            if (username === null) {
+                document.getElementById('username').classList.add("alertInput");
+                Swal.fire({
+                    html: 'ไม่สามารถปล่อยว่างช่องผู้ใช้งานได้ หากช่องช่องรหัสผ่านผู้ใช้งานไม่ใช่ช่องว่าง',
+                    icon: "error",
+                    confirmButtonColor: "#009688"
+                })
+                return resolve(true)
+            }
+            if (password === null) {
+                document.getElementById('password').classList.add("alertInput");
+                Swal.fire({
+                    html: 'ไม่สามารถปล่อยว่างช่องรหัสผ่านได้ หากช่องผู้ใช้งานไม่ใช่ช่องว่าง',
+                    icon: "error",
+                    confirmButtonColor: "#009688"
+                })
+                return resolve(true)
+            }
         }
-        if (password === null) {
-            document.getElementById('password').classList.add("alertInput");
-            Swal.fire({
-                html: 'ไม่สามารถปล่อยว่างช่องรหัสผ่านได้ หากช่องผู้ใช้งานไม่ใช่ช่องว่าง',
-                icon: "error",
-                confirmButtonColor: "#009688"
-            })
-            return resolve(true)
-        }
-
         if (type === 'new') {
             if (username === null && password === null) {
                 return resolve(true)
@@ -424,17 +427,17 @@ function setAlertInput(c_1, c_2, c_3) {
         document.getElementById("surname").classList.add("alertInput");
     }
 }
-function displayPassword(){
+function displayPassword() {
     let btn_show_password = document.getElementById('show_password')
     let input_password = document.getElementById('password')
     if (input_password.type === "password") {
         btn_show_password.classList.add('fa-eye')
         btn_show_password.classList.remove('fa-eye-slash')
         input_password.type = "text";
-      } else {
+    } else {
         btn_show_password.classList.remove('fa-eye')
         btn_show_password.classList.add('fa-eye-slash')
         input_password.type = "password";
-      }
+    }
 }
 startForm()
