@@ -57,7 +57,7 @@ function getDataView() {
                 setSN(requestId.id_no.slice(0, 1))
                 if (data[0].STAFF_ID_ALDERMAN != null) {
                     getImageNayo(data[0].STAFF_ID_ALDERMAN).then((data_image) => {
-                        console.log(data_image)
+                        // console.log(data_image)
                         createImagetoUI(data_image)
                         if (requestId.id_no.slice(0, 1) === 'A' || requestId.id_no.slice(0, 1) === 'B') {
                             getImagePersonal(data[0].P_ID).then((data_imge_owner) => {
@@ -99,13 +99,23 @@ function createImageABToUI(image, type) {
         if (image.length === 0) {
             document.getElementById('image_owner').src = `../../img/userProfile.png`
         } else {
-            document.getElementById('image_owner').src = `data:image/${image[0].IMAGE_TYPE};base64,${image[0].IMAGE_DATA}`
+            if (image[0].IMAGE_DATA === null) {
+                document.getElementById('image_owner').src = `../../img/userProfile.png`
+            } else {
+                document.getElementById('image_owner').src = `data:image/${image[0].IMAGE_TYPE};base64,${image[0].IMAGE_DATA}`
+            }
+
         }
     } else {
         if (image.length === 0) {
             document.getElementById('image_a').src = `../../img/userProfile.png`
         } else {
-            document.getElementById('image_a').src = `data:image/${image[0].IMAGE_TYPE};base64,${image[0].IMAGE_DATA}`
+            if (image[0].IMAGE_DATA === null) {
+                document.getElementById('image_a').src = `../../img/userProfile.png`
+            } else {
+                document.getElementById('image_a').src = `data:image/${image[0].IMAGE_TYPE};base64,${image[0].IMAGE_DATA}`
+            }
+
         }
     }
 }
@@ -470,13 +480,13 @@ function displayFax(fax) {
         return '-'
     } else {
         let item = fax.split('/')
-        if(item.length != 1){
-            if(item[1] != ''){
+        if (item.length != 1) {
+            if (item[1] != '') {
                 return item[0].slice(0, 3) + '-' + item[0].slice(3, item[0].length) + ' ต่อ ' + item[1]
-            }else{
+            } else {
                 return fax.slice(0, 3) + '-' + fax.slice(3, fax.length - 1)
             }
-        }else{
+        } else {
             return fax.slice(0, 3) + '-' + fax.slice(3, fax.length)
         }
     }
