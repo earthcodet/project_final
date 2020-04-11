@@ -4220,7 +4220,7 @@ class service {
                                             })
                                         }
                                     } else {
-                                        request.establishment_is_land_owned = this.setNullValue(equest.establishment_is_land_owned)
+                                        request.establishment_is_land_owned = this.setNullValue(request.establishment_is_land_owned)
                                         request.establishment_address_id = this.setNullValue(request.establishment_address_id)
 
                                         console.log('#15')
@@ -4407,7 +4407,7 @@ class service {
                                     } else {
                                         Edata.is_land_owned = land.id
                                         let new_edata = this.formatInsert('ESTABLISHMENT', Edata)
-                                        request.establishment_is_land_owned = this.setNullValue(equest.establishment_is_land_owned)
+                                        request.establishment_is_land_owned = this.setNullValue(request.establishment_is_land_owned)
                                         request.establishment_address_id = this.setNullValue(request.establishment_address_id)
                                         console.log('#28')
                                         this.updateEstablishmentAndCheckDuplication(new_edata, address).then((est_id) => {

@@ -1953,3 +1953,11 @@ function getPositionById(id) {
         }
     }
 }
+function blockInput(){
+    let input = document.getElementById('other')
+    if(input.disabled === true){
+        input.disabled = false
+    }else{
+        input.disabled = true
+    }
+}
