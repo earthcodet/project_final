@@ -62,10 +62,17 @@ function checkView(typeForm) {
                             if (requestData.status === 'active') {
                                 document.getElementById('print_document_allow').style.display = ''
                             }
-                            document.getElementById('print_document_image').style.display = ''
+                            if(document.getElementById('print_document_image') != undefined){
+                              document.getElementById('print_document_image').style.display = ''  
+                            }
+                            
                         } else {
-                            document.getElementById('print_document_image').style.display = 'none'
-                            document.getElementById('print_document_allow').style.display = 'none'
+                            if(document.getElementById('print_document_image') != undefined){
+                                 document.getElementById('print_document_image').style.display = 'none'
+                            }
+                            if(document.getElementById('print_document_allow') != undefined){
+                                document.getElementById('print_document_allow').style.display = 'none'
+                            }
                         }
 
                         if (raw_data.REQUEST_IMAGE_NAME != null && raw_data.REQUEST_IMAGE_NAME != undefined) {

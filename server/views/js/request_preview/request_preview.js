@@ -369,6 +369,7 @@ function setData(type, raw_data, ex) {
     if (type === 5) {
         if (document.getElementById('t_topic') != undefined) {
             let text = ''
+            console.log(raw_data)
             if (raw_data.RT_ID === 13) {
                 text = 'ใบอนุญาตจัดตั้งสุสาน และฌาปณกิจสถาน'
             } else {
