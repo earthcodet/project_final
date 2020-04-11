@@ -231,9 +231,9 @@ function createResultSearch(data) {
         let te_name = data[i].E_NAME === null ? '-' : data[i].E_NAME
         var cellText = document.createTextNode(te_name);
       } else if (j === 4) {
-        let t_title = data[i].P_TITLE
+        let t_title = data[i].P_TITLE === null ? '' : data[i].P_TITLE
         let t_name = data[i].P_NAME
-        let t_surname = data[i].P_SURNAME
+        let t_surname = data[i].P_SURNAME === null ? '' : data[i].P_SURNAME
         let t_full = t_title + ' ' + t_name + ' ' + t_surname
         var cellText = document.createTextNode(t_full);
       } else if (j === 5) {
