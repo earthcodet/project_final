@@ -5,25 +5,25 @@ let userAlderman = ''
 let temp_alderman_list = []
 function checkView(typeForm) {
     let requestId = getUrlVars()
-    console.log(requestId)
+    // console.log(requestId)
     if (requestId.id != undefined) {
         let requsetNo = requestId.id.slice(0, 6)
         let requestYear = requestId.id.slice(6, 10)
-        console.log(`typeForm ${typeForm}`)
+        // console.log(`typeForm ${typeForm}`)
         if (typeForm != undefined) {
             let sight = getSightFormType(typeForm)
             let checkSight = requsetNo.slice(0, 1) === sight ? true : false
-            console.log(`sight ${sight}`)
-            console.log(`checkSight = ${checkSight} > ${requsetNo.slice(0, 1)} === ${sight} > ${requsetNo.slice(0, 1) === sight}`)
-            console.log(checkSight)
+            // console.log(`sight ${sight}`)
+            // console.log(`checkSight = ${checkSight} > ${requsetNo.slice(0, 1)} === ${sight} > ${requsetNo.slice(0, 1) === sight}`)
+            // console.log(checkSight)
             if (checkSight) {
                 getRequestData(requsetNo, requestYear).then((raw_data) => {
                     //displayUserAlderman()
-                    console.log(raw_data)
+                    // console.log(raw_data)
                     if (raw_data != '') {
                         document.getElementById('btn_sc_op').disabled = true
-                        console.log(`raw_data`)
-                        console.log(raw_data)
+                        // // console.log(`raw_data`)
+                        // // console.log(raw_data)
                         setRequestData(raw_data)
                         setEstablishmentData(raw_data)
                         setAddressEstablishmentData(raw_data)
@@ -37,26 +37,26 @@ function checkView(typeForm) {
                         if (raw_data.gropDataAssistant != undefined) {
                             setassistantOperatorData(raw_data.gropDataAssistant)
                         }
-                        console.log(`requestData`)
-                        console.log(requestData)
-                        console.log(`establishmentData`)
-                        console.log(establishmentData)
-                        console.log(`addressEstablishmentData`)
-                        console.log(addressEstablishmentData)
-                        console.log(`addressOwnerLandData`)
-                        console.log(addressOwnerLandData)
-                        console.log(`landData`)
-                        console.log(landData)
-                        console.log(`referecneData`)
-                        console.log(referenceData)
-                        console.log(`trianData`)
-                        console.log(trianData)
-                        console.log(`operatorAddressData`)
-                        console.log(operatorAddressData)
-                        console.log(`operatorData`)
-                        console.log(operatorData)
-                        console.log(`assistantOperatorData`)
-                        console.log(assistantOperatorData)
+                        // // console.log(`requestData`)
+                        // // console.log(requestData)
+                        // // console.log(`establishmentData`)
+                        // // console.log(establishmentData)
+                        // // console.log(`addressEstablishmentData`)
+                        // // console.log(addressEstablishmentData)
+                        // // console.log(`addressOwnerLandData`)
+                        // // console.log(addressOwnerLandData)
+                        // // console.log(`landData`)
+                        // // console.log(landData)
+                        // // console.log(`referecneData`)
+                        // // console.log(referenceData)
+                        // // console.log(`trianData`)
+                        // // console.log(trianData)
+                        // // console.log(`operatorAddressData`)
+                        // // console.log(operatorAddressData)
+                        // // console.log(`operatorData`)
+                        // // console.log(operatorData)
+                        // // console.log(`assistantOperatorData`)
+                        // // console.log(assistantOperatorData)
                         setDataView()
                         if (requestData.no != '') {
                             if (requestData.status === 'active') {
@@ -69,7 +69,7 @@ function checkView(typeForm) {
                         }
 
                         if (raw_data.REQUEST_IMAGE_NAME != null && raw_data.REQUEST_IMAGE_NAME != undefined) {
-                            console.log('get image ' + raw_data.REQUEST_IMAGE_NAME)
+                            // console.log('get image ' + raw_data.REQUEST_IMAGE_NAME)
                             getImageRequestByImageName(raw_data.REQUEST_IMAGE_NAME).then((image_get) => {
                                 imageDisplayFormDatabase = image_get
                                 createImage(imageDisplayFormDatabase)
@@ -84,7 +84,7 @@ function checkView(typeForm) {
         if (requestId.p_id.length === 7 && requestId.e_id.length === 7) {
             getPersonalDataAndEstablishment(requestId.p_id, requestId.e_id).then((raw_data) => {
                 // displayUserAlderman()
-                console.log(raw_data)
+                // console.log(raw_data)
                 if (raw_data[0] != false && raw_data[1] != false) {
                     document.getElementById('btn_sc_op').disabled = true
                     setOperatorData(raw_data[0])
@@ -174,7 +174,7 @@ function setDataProfile() {
     wamphurSelect(parseInt(provinceIdE))
     wdistrictSelect(parseInt(amphurIdE))
     document.getElementById(`wDistrict`).value = amphurIdE
-    console.log(`districtIdE ${districtIdE === undefined || districtIdE === ''}   ${districtIdE}`)
+    // console.log(`districtIdE ${districtIdE === undefined || districtIdE === ''}   ${districtIdE}`)
     if (districtIdE === undefined || districtIdE === '') {
         document.getElementById(`wSubdistrict`).innerHTML = ''
     } else {
@@ -273,7 +273,7 @@ function setDataView() {
     if (imageDisplayFormDatabase.length != 0) {
         createImage(imageDisplayFormDatabase)
     }
-    console.log('requestData.status ' + requestData.status)
+    // console.log('requestData.status ' + requestData.status)
     // if (requestData.status === 'approval' || requestData.status === 'active') {
     if (document.getElementById('bFeeY2') != undefined) {
         if (requestData.receipt_date_year_2 === '') {
@@ -305,19 +305,21 @@ function setDataView() {
         document.getElementById('bFee').value = requestData.receipt_fee
         document.getElementById('bFine').value = requestData.receipt_fine
     }
-    console.log('requestData.staff_id_money')
-    console.log(requestData.staff_id_money)
-    console.log(requestData.staff_id_money === '')
+    // console.log('requestData.staff_id_money')
+    // console.log(requestData.staff_id_money)
+    // console.log(requestData.staff_id_money === '')
     if (requestData.staff_id_money === '') {
         resetOptionitem('documentName2', size_money_list)
-        console.log(document.getElementById('documentName2'))
+        // console.log(document.getElementById('documentName2'))
     } else {
         displayUserMoney(requestData.staff_id_money)
     }
-    console.log(requestData.staff_id_alderman)
-    console.log(documentName3)
+    // console.log(requestData.staff_id_alderman)
+    // console.log(documentName3)
     document.getElementById('documentName3').value = requestData.staff_id_alderman
-    document.getElementById('position').value = getPositionById(requestData.staff_id_alderman)
+    let getPosition_temp = getPositionById(requestData.staff_id_alderman)
+    let position_temp = getPosition_temp === null || getPosition_temp === '' ? 'นายกเทศมนตรี' : getPosition_temp
+    document.getElementById('position').value = position_temp
     // }
 
     if (requestData.status === 'cancel') {
@@ -415,7 +417,7 @@ function setDataView() {
     wamphurSelect(parseInt(provinceIdE))
     wdistrictSelect(parseInt(amphurIdE))
     document.getElementById(`wDistrict`).value = amphurIdE
-    console.log(`districtIdE ${districtIdE === undefined || districtIdE === ''}   ${districtIdE}`)
+    // console.log(`districtIdE ${districtIdE === undefined || districtIdE === ''}   ${districtIdE}`)
     if (districtIdE === undefined || districtIdE === '') {
         document.getElementById(`wSubdistrict`).innerHTML = ''
     } else {
@@ -630,15 +632,15 @@ function checkformatReturn(value) {
 }
 //set data return form update
 function setRequestDataUpdateReturn(raw_data) {
-    console.log(raw_data)
+    // console.log(raw_data)
     trianData.id = raw_data.train_id === '' ? trianData.id : raw_data.train_id
     referenceData.id = raw_data.reference_id === '' ? referenceData.id : raw_data.reference_id
     landData.id = raw_data.land_id === '' ? landData.id : raw_data.land_id
     requestData.establishment_is_land_owned = checkformatReturn(raw_data.address_land_id)
     establishmentData.id = checkformatReturn(raw_data.establishment_id)
     requestData.establishment_id = checkformatReturn(raw_data.establishment_id)
-    console.log('-o-<>-o-')
-    console.log(establishmentData)
+    // console.log('-o-<>-o-')
+    // console.log(establishmentData)
 }
 //set data return form insert
 function setRequestDataReturn(raw_data) {
@@ -660,22 +662,22 @@ function setRequestDataReturn(raw_data) {
     addressEstablishmentData.id = establishmentData.address_id
     // establishmentData.id = requestData.establishment_id
     requestData.status = raw_data.status
-    console.log(`landData`)
-    console.log(landData)
-    console.log(`referecneData`)
-    console.log(referenceData)
-    console.log(`trianData`)
-    console.log(trianData)
-    console.log(`establishmentData`)
-    console.log(establishmentData)
-    console.log(`addressEstablishmentData`)
-    console.log(addressEstablishmentData)
-    console.log(`addressOwnerLandData`)
-    console.log(addressOwnerLandData)
-    console.log(`requestData`)
-    console.log(requestData)
-    console.log(`raw_data`)
-    console.log(raw_data)
+    // console.log(`landData`)
+    // console.log(landData)
+    // console.log(`referecneData`)
+    // console.log(referenceData)
+    // console.log(`trianData`)
+    // console.log(trianData)
+    // console.log(`establishmentData`)
+    // console.log(establishmentData)
+    // console.log(`addressEstablishmentData`)
+    // console.log(addressEstablishmentData)
+    // console.log(`addressOwnerLandData`)
+    // console.log(addressOwnerLandData)
+    // console.log(`requestData`)
+    // console.log(requestData)
+    // console.log(`raw_data`)
+    // console.log(raw_data)
 }
 //set data full raw data
 function setRequestData(raw_data) {
@@ -910,7 +912,7 @@ function createGroupData() {
         let districtValue = parseInt(document.getElementById(`subdistrict`).value);
 
         operatorAddressData.district_name = district[districtValue - 1] === undefined ? '' : district[districtValue - 1].DISTRICT_NAME;
-        console.log(operatorAddressData.district_name)
+        // console.log(operatorAddressData.district_name)
         operatorAddressData.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
         operatorAddressData.province_name = province[provinceValue - 1].PROVINCE_NAME;
     }
@@ -947,7 +949,7 @@ function createGroupData() {
 
         let menu = window.location.href.toString().slice(35, window.location.href.toString().length)
         menu = menu.replace(/[?&]+([^=&]+)=([^&]*)/gi, "");
-        console.log(`request.menu => ${menu}`)
+        // console.log(`request.menu => ${menu}`)
         switch (menu) {
             case 'request_public_sell.html':
                 requestData.menu = `ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ`
@@ -1123,7 +1125,7 @@ function createGroupData() {
 
         }
         if (establishmentData_change) {
-            console.log(establishmentData_change)
+            // console.log(establishmentData_change)
             setDataUpdate('establishmentData')
             establishmentData.is_establishment_changed = true
         }
@@ -1185,8 +1187,8 @@ function dataChange(type) {
             sell_allow_t = document.getElementById('useSpirits').checked === true ? 'Y' : 'N'
         }
 
-        console.log(`1check image = ${requestData.image_is_changed}`)
-        console.log(`2check image = ${image_changed}`)
+        // console.log(`1check image = ${requestData.image_is_changed}`)
+        // console.log(`2check image = ${image_changed}`)
         if (requestData.image_is_changed != image_changed ||
             requestData.request_type_id != getRequestTypeId(document.getElementById('typeReq').value.trim()) ||
             requestData.reference_id != referecne_id_t ||
@@ -1227,7 +1229,7 @@ function dataChange(type) {
             if (document.getElementById('typeWorkplace') != undefined) {
                 if (requestData.product_type != document.getElementById('typeWorkplace').value.trim()) {
                     status_data_change = true
-                    console.log(`sdsda2`)
+                    // console.log(`sdsda2`)
                 }
             }
             if (document.getElementById('useSpirits') != undefined) {
@@ -1289,49 +1291,49 @@ function dataChange(type) {
             establishmentData.name != document.getElementById('workplaceName').value.trim() ||
             establishmentData.phone != `${document.getElementById('wPhone').value.trim()}/${document.getElementById('wPhone_more').value.trim()}` ||
             establishmentData.fax != document.getElementById('wFax').value.trim()) {
-            console.log(`1`)
+            // console.log(`1`)
             status_data_change = true
         } else {
             // if (document.getElementById('typeWorkplace') != undefined) {
             //     if (establishmentData.type != document.getElementById('typeWorkplace').value.trim()) {
             //         status_data_change = true
-            //         console.log(`2`)
+            //         // console.log(`2`)
             //     }
             // }
             if (document.getElementById('machinery') != undefined) {
                 if (establishmentData.machine_size != document.getElementById('machinery').value.trim()) {
                     status_data_change = true
-                    console.log(`3`)
+                    // console.log(`3`)
                 }
             }
             if (document.getElementById('area') != undefined) {
                 if (establishmentData.area_size != document.getElementById('area').value) {
                     status_data_change = true
-                    console.log(`4 establishmentData.area_size ${establishmentData.area_size} != document.getElementById('area').value ${document.getElementById('area').value}`)
+                    // console.log(`4 establishmentData.area_size ${establishmentData.area_size} != document.getElementById('area').value ${document.getElementById('area').value}`)
                 }
             }
             if (document.getElementById('numPeople') != undefined) {
                 if (establishmentData.worker != document.getElementById('numPeople').value) {
                     status_data_change = true
-                    console.log(`5 establishmentData.worker ${establishmentData.worker} and document.getElementById('numPeople').value ${document.getElementById('numPeople').value}`)
+                    // console.log(`5 establishmentData.worker ${establishmentData.worker} and document.getElementById('numPeople').value ${document.getElementById('numPeople').value}`)
                 }
             }
             if (document.getElementById('wLocation') != undefined) {
                 if (establishmentData.grond != document.getElementById('wLocation').value) {
                     status_data_change = true
-                    console.log(`6 establishmentData.grond ${establishmentData.grond} and document.getElementById('wLocation').value ${document.getElementById('wLocation').value}`)
+                    // console.log(`6 establishmentData.grond ${establishmentData.grond} and document.getElementById('wLocation').value ${document.getElementById('wLocation').value}`)
                 }
             }
             if (document.getElementById('useOtherPlace') != undefined) {
-                console.log(establishmentData)
-                console.log(establishmentData.is_land_owned)
+                // console.log(establishmentData)
+                // console.log(establishmentData.is_land_owned)
                 let establishment_is_land_owned_t = document.getElementById('useOtherPlace').checked === true ? true : false
-                console.log(establishmentData.is_land_owned)
-                console.log(establishment_is_land_owned_t)
-                console.log(establishmentData.is_land_owned != establishment_is_land_owned_t)
+                // console.log(establishmentData.is_land_owned)
+                // console.log(establishment_is_land_owned_t)
+                // console.log(establishmentData.is_land_owned != establishment_is_land_owned_t)
                 if (establishmentData.is_land_owned != establishment_is_land_owned_t) {
                     status_data_change = true
-                    console.log(`7 establishmentData.is_land_owned ${establishmentData.is_land_owned} === establishment_is_land_owned_t ${establishment_is_land_owned_t}`)
+                    // console.log(`7 establishmentData.is_land_owned ${establishmentData.is_land_owned} === establishment_is_land_owned_t ${establishment_is_land_owned_t}`)
                 }
             }
         }
@@ -1507,7 +1509,7 @@ function setDataUpdate(type) {
         let provinceValue = parseInt(document.getElementById(`wProvince`).value);
         let amphurValue = parseInt(document.getElementById(`wDistrict`).value);
         let districtValue = parseInt(document.getElementById(`wSubdistrict`).value);
-        console.log(`dis no = ` + districtValue)
+        // console.log(`dis no = ` + districtValue)
         addressEstablishmentData.district_name = district[districtValue - 1] === undefined ? '' : district[districtValue - 1].DISTRICT_NAME;
         addressEstablishmentData.amphur_name = amphur[amphurValue - 1].AMPHUR_NAME;
         addressEstablishmentData.province_name = province[provinceValue - 1].PROVINCE_NAME;
@@ -1565,7 +1567,7 @@ function getAge(date) {
     let month_now = parseInt(now.slice(5, 7))
     let day_now = parseInt(now.slice(8, 10))
     // date "08-02-2563" OR 1998-04-22T17:00:00.000Z
-    console.log(`date ${date}`)
+    // console.log(`date ${date}`)
     let day_b = parseInt(date.slice(8, 9))
     let month_b = parseInt(date.slice(5, 7))
     let year_b = parseInt(date.slice(0, 4)) > 1800 && parseInt(date.slice(0, 4)) < 2200 ? parseInt(date.slice(0, 4)) + 543 : parseInt(date.slice(0, 4))
@@ -1575,8 +1577,8 @@ function getAge(date) {
         month_b = parseInt(date.slice(3, 5))
         year_b = parseInt(date.slice(6, 10)) > 1800 && parseInt(date.slice(6, 10)) < 2200 ? parseInt(date.slice(6, 10)) + 543 : parseInt(date.slice(6, 10))
     }
-    console.log(`year_b ${year_b}`)
-    console.log(`year_now ${year_now}`)
+    // console.log(`year_b ${year_b}`)
+    // console.log(`year_now ${year_now}`)
     if (month_b === month_now && day_b === day_now) {
         return age = year_now - year_b
     } else if (month_now === month_b) {
@@ -1616,11 +1618,11 @@ function createArrayInsert() {
         data: ''
     }
     let imageData = []
-    console.log(totalFiles)
+    // console.log(totalFiles)
     if (requestData.image_is_changed) {
-        console.log(`imageData`)
+        // console.log(`imageData`)
         for (let i = 0; i < totalFiles.length; i++) {
-            console.log(i)
+            // console.log(i)
             if (totalFiles[i].E_IMAGE_TYPE != undefined) {
                 object.type = totalFiles[i].E_IMAGE_TYPE
             }
@@ -1633,15 +1635,15 @@ function createArrayInsert() {
         }
     }
     arrayItem.push(imageData) // image 9
-    console.log(imageData)
+    // console.log(imageData)
     return arrayItem
 }
 function insertRequest() {
     createGroupData()
     let item = createArrayInsert()
-    console.log(item)
+    // console.log(item)
     return new Promise((resolve, reject) => {
-        console.log("insertToDatabase");
+        // console.log("insertToDatabase");
         var formData = new FormData();
         if (landData.file_upload_changed) {
             formData.append('files', filesPdf);
@@ -1670,7 +1672,7 @@ function insertRequest() {
             }
         })
             .then(data => {
-                console.log(data.data)
+                // console.log(data.data)
                 return resolve(data.data);
             });
         // return resolve(true);
@@ -1705,10 +1707,14 @@ function getPresident() {
 }
 
 function setLisetUserAlderManToUi(list_user) {
-    console.log(list_user)
+    // console.log(list_user)
     if (list_user.length != 0) {
         userAlderman = list_user[0].USER_ID
         requestData.staff_id_alderman = list_user[0].USER_ID
+        console.log(list_user[0])
+        console.log(`item display = list_user[0].USER_POSITION 
+        ${list_user[0].USER_POSITION} === null`)
+        //fix bug
         if (list_user[0].USER_POSITION === null) {
             document.getElementById('position').value = 'นายกเทศมนตรี'
         } else {
@@ -1762,7 +1768,7 @@ function getUserMoney(id) {
     })
 }
 function setLisetUserMoneyToUi(list_user) {
-    console.log(list_user)
+    // console.log(list_user)
     if (list_user.length != 0) {
         for (let i = 0; i < list_user.length; i++) {
             var select = document.getElementById("documentName2");
@@ -1806,8 +1812,8 @@ function setRequsetType(type) {
         document.getElementById('documentName3').disabled = false
         getRequestType(type).then((data_test) => {
             addRequestTypeToDatalist()
-            displayUserAlderman().then((data_test_2) =>{
-              checkView(type)  
+            displayUserAlderman().then((data_test_2) => {
+                checkView(type)
             })
         })
     })
@@ -1847,13 +1853,13 @@ function getUrlVars() {
 }
 function createImage(image) {
     deleteImageAllRequest()
-    console.log(image)
+    // // console.log(image)
     totalFiles = []
     for (let i = 0; i < image.length; i++) {
-        console.log(`image i = ${i}`)
+        // // console.log(`image i = ${i}`)
         totalFiles.push(image[i])
         selectImageFile = selectImageFile + 1
-        console.log(image[i])
+        // // console.log(image[i])
         var span = document.createElement('span');
         span.innerHTML =
             [
@@ -1870,7 +1876,7 @@ function createImage(image) {
 
         document.getElementById('outputImage').insertBefore(span, null);
     }
-    console.log(totalFiles)
+    // // console.log(totalFiles)
 }
 
 //create print 
@@ -1881,7 +1887,7 @@ function printRequest() {
 //get sight
 function getSightFormType(type) {
     let sightT = ''
-    console.log(`getSightFormType => ` + type)
+    // console.log(`getSightFormType => ` + type)
     switch (type) {
         case 'ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ':
             sightT = 'A'
@@ -1938,12 +1944,12 @@ function base64toBlob(base64Data, contentType) {
 }
 
 function resetOptionitem(id, length) {
-    console.log(`resetOptionitem ${id}`)
+    // console.log(`resetOptionitem ${id}`)
     var select = document.getElementById(id);
-    console.log(`length ${length}`)
+    // console.log(`length ${length}`)
     for (i = 0, c = 0; i < length; i++) {
         select.options[c] = null;
-        console.log(`select.options[${c}] ${select.options[c]}`)
+        // console.log(`select.options[${c}] ${select.options[c]}`)
     }
 }
 function getPositionById(id) {
@@ -1953,11 +1959,11 @@ function getPositionById(id) {
         }
     }
 }
-function blockInput(){
+function blockInput() {
     let input = document.getElementById('other')
-    if(input.disabled === true){
+    if (input.disabled === true) {
         input.disabled = false
-    }else{
+    } else {
         input.disabled = true
     }
 }
