@@ -127,7 +127,11 @@ function displayForm() {
 function checkViewSight(id, raw_data) {
     if (id === 'C' || id === 'D' || id === 'E' || id === 'F') {
         //set no 1
-        setData(1, raw_data, 'ex')
+        if(id === 'E' || id === 'F'){
+         setData(1, raw_data, 'ex')   
+        }else{
+            setData(1, raw_data)   
+        }
     } else if (id === 'H') {
         //set no 2
         setData(2, raw_data)
@@ -225,7 +229,12 @@ function setData(type, raw_data, ex) {
         if (ex != undefined) {
             document.getElementById('day3').innerText = minusDateplusOne(raw_data.DATE_ISSUED)[0]
             document.getElementById('month3').innerText = minusDateplusOne(raw_data.DATE_EXP)[1]
-            document.getElementById('year3').innerText = minusDateplusOne(raw_data.DATE_ISSUED)[2]
+            console.log(raw_data.R_YEAR_2_M)
+            if(raw_data.R_YEAR_2_M != null){
+                document.getElementById('year3').innerText =parseInt(minusDateplusOne(raw_data.DATE_ISSUED)[2]) +1
+            }else{
+                document.getElementById('year3').innerText = minusDateplusOne(raw_data.DATE_ISSUED)[2]
+            }
         } else {
             document.getElementById('day3').innerText = dateFormat(raw_data.DATE_EXP)[0]
             document.getElementById('month3').innerText = dateFormat(raw_data.DATE_EXP)[1]

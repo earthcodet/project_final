@@ -112,6 +112,7 @@ class PrintDAO {
             query = query + `request.REQUEST_RECEIPT_FEE As R_FEE, `
             query = query + `request.REQUEST_DATE_ISSUED As DATE_ISSUED, `
             query = query + `request.REQUEST_DATE_EXPIRED As DATE_EXP, `
+            query = query + `request.REQUEST_RECEIPT_DATE_YEAR_2 As R_YEAR_2_M, `
             query = query + `request.REQUEST_CONDITION_NO_1 As R_C_1, `
             query = query + `request.REQUEST_CONDITION_NO_2 As R_C_2, `
             query = query + `request.REQUEST_CONDITION_NO_3 As R_C_3, `
