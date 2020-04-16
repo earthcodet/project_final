@@ -152,6 +152,12 @@ function insertPage() {
                             check_id_new = false
                             if (insert.length != 0) {
                                 resolve();
+                            }else{
+                                Swal.fire({
+                                    html: `<a>เกิดข้อผิดพลาดทางเซิพเวอร์กรุณาลองใหม่อีกครั้ง</a>`,
+                                    icon: "error",
+                                    confirmButtonColor: "#009688"
+                                })
                             }
                         })
                     }, 100);
