@@ -652,6 +652,74 @@ function checkDateFormat(value) {
     }
 }
 setReDateExp()
+function checkDateFormatCorrect(value) {
+    value = value.trim()
+    let monthDay = [31,28,31,30,31,30,31,31,30,31,30,31]
+    if (value.length != 0) {
+        // console.log(value)
+        if (value.length === 1 && value === '-') {
+            console.log('-1')
+            return true
+        } else {
+            if(value.length != 10){
+                console.log('0')
+                return false
+            }else{
+                let temp_check = value.split('')
+                let mask = '-'
+                let date_check = parseInt(temp_check[0] +''+ temp_check[1])
+                let month_check = parseInt(temp_check[3] + '' + temp_check[4])
+                let year_check = parseInt(''+temp_check[6] + temp_check[7] + temp_check[8] + temp_check[9])
+                // console.log(` date = ${date_check} , month = ${month_check} , year = ${year_check}`)
+                if(temp_check[2] != mask || temp_check[5] != mask){
+                    console.log('1')
+                    return false 
+                }
+                let new_year = year_check - 543
+                if(new_year % 4 === 0){
+                    if(month_check === 2){
+                        if(date_check > 29){
+                            console.log('2')
+                            return false
+                        }else{
+                            console.log('3')
+                            return true
+                        }
+                    }else{
+                        if(month_check > 12){
+                            console.log('4')
+                            return false
+                        }else{
+                            if(date_check > monthDay[month_check - 1]){
+                                console.log('5')
+                                return false
+                            }else{
+                                console.log('6')
+                               return true
+                            }
+                        }
+                    }
+                }else{
+                    if(month_check > 12){
+                        console.log('7')
+                        return false
+                    }else{
+                        if(date_check > monthDay[month_check - 1]){
+                            console.log('8')
+                            return false
+                        }else{
+                            console.log('9')
+                           return true
+                        }
+                    }
+                }
+            }
+        }
+    }else{
+        console.log('10')
+        return false
+    }
+}
 
 function checkFaxInput(id) {
     let doc = document.getElementById(id)
