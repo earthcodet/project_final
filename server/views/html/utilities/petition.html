@@ -124,7 +124,7 @@
                     <input type="text" id='c_id' style="margin-left: 1vw;" maxlength="3"
                     oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                     <a style="margin-left: 1vw;">วันที่ยืนคำร้อง<a style="color: red;">*</a> : </a>
-                    <input type="text" id="datepicker2" style="margin-left: 1vw;">
+                    <input type="text" id="datepicker2" style="margin-left: 1vw;" maxlength="10">
                     <br>
                     <a style="margin-left: 5vw;">บุคคลที่ต้องการร้องเรียน<a style="color: red;">*</a> : </a>
                     <input type="text" id="full_name_op" style="margin-left: 1vw;width: 20vw;" disabled>
@@ -184,8 +184,8 @@
                         <input type="text" id="request_id_report" style="width: 20vw;" disabled value="">
                         <br>
                         <a style="margin-left: 1vw;">โดยขอหยุดประกอบกิจการชั่วคราวระหว่างวันที่ <a style="color: red;">*</a> : </a><input type="text"
-                            id="datepicker4">
-                        <a style="margin-left: 1vw;">ถึงวันที่ <a style="color: red;">*</a>: </a><input type="text" id="datepicker3">
+                            id="datepicker4" maxlength="10">
+                        <a style="margin-left: 1vw;">ถึงวันที่ <a style="color: red;">*</a>: </a><input type="text" id="datepicker3" maxlength="10">
                         <br>
                     </div>
                     <br><br>
