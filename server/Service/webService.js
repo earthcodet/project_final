@@ -703,7 +703,7 @@ class service {
                         if (p_id.request_id != null) {
                             RequestDAOObj.updateStatusOnly(p_id.request_id, p_id.request_year, user_update, dateForUpdate, 'ban').then((t_data) => {
                                 if (image.length != 0) {
-                                    this.insertImageComplainth(image, p_id.id).then((data) => {
+                                    this.insertImageComplainth(image, p_id.id+''+p_id.year).then((data) => {
                                         if (data) {
                                             return resolve(true)
                                         } else {
@@ -717,7 +717,7 @@ class service {
                         } else {
                             console.log('insert image end')
                             if (image.length != 0) {
-                                this.insertImageComplainth(image, p_id.id).then((data) => {
+                                this.insertImageComplainth(image, p_id.id+''+p_id.year).then((data) => {
                                     if (data) {
                                         return resolve(true)
                                     } else {
@@ -737,7 +737,7 @@ class service {
                         return resolve(false)
                     } else {
                         if (image.length != 0) {
-                            this.insertImageComplainth(image, p_id.id).then((data) => {
+                            this.insertImageComplainth(image, p_id.id+''+p_id.year).then((data) => {
                                 console.log('0 true')
                                 if (data) {
                                     if (p_id.is_deleted === 'Y' && p_id.request_id != null) {

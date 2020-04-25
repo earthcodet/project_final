@@ -32,7 +32,7 @@ function getView(value_t) {
                 displayBlock(type_start, 1)
                 setUIDataCom(type_start, 1)
                 if (p_data.total_image != 0) {
-                    getImage(p_data.id).then((data_image) => {
+                    getImage(p_data.id+''+p_data.year).then((data_image) => {
                         list_image = data_image
                         console.log('set 1')
                         setUIDataCom(type_start, 2)
