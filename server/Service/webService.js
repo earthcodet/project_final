@@ -1436,11 +1436,11 @@ class service {
             new_data.phone = this.setNullValue(new_data.phone, 'phone')
             new_data.nationality = this.setNullValue(new_data.nationality)
             new_data.race = this.setNullValue(new_data.race)
-            new_data.birthday = this.setNullValue(new_data.birthday, 'date')
+            new_data.birthday = this.setNullValue(new_data.birthday, 'date') 
             new_data.card_expipe = this.setNullValue(new_data.card_expipe, 'date')
             new_data.fax = this.setNullValue(new_data.fax)
             new_data.surname = this.setNullValue(new_data.surname)
-            new_data.card_issued = this.setNullValue(new_data.card_issued, 'date')
+            new_data.card_issued = this.setNullValue(new_data.card_issued, 'date') === null ? '-' : this.setNullValue(new_data.card_issued, 'date')  
             return new_data
         }
         if (type === 'ADDRESS') {
