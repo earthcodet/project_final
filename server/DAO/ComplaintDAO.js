@@ -9,9 +9,10 @@ var con = mysql.createConnection({
 class ComplaintDAO {
     insert(p_data) {
         let date_year = parseInt(new Date().toISOString().slice(0, 4)) + 543 + ""
-        let year_insert = date_year.slice(2, 4)
+        // let year_insert = date_year.slice(2, 4)
         p_data.id
-        p_data.year = year_insert
+        // p_data.year = year_insert
+        p_data.year
         p_data.personal_id
         p_data.request_id
         p_data.request_year

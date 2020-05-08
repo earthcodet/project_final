@@ -341,6 +341,9 @@ function createGroupData() {
     }else{
         p_data.status = 'M'
     }
+    let temp_year_input = document.getElementById('datepicker2').value.trim()
+    p_data.year = temp_year_input.slice(temp_year_input.length - 2 , temp_year_input.length)
+    console.log(p_data.year)
     p_data.date_start = document.getElementById('datepicker4').value.trim()
     p_data.date_end = document.getElementById('datepicker3').value.trim()
     p_data.total_image = totalFiles_report.length
@@ -421,6 +424,9 @@ function checkInputInsert(type) {
     //zone 1
     let c_1 = document.getElementById('c_id').value.trim().length === 0
     let c_2 = document.getElementById('datepicker2').value.trim().length === 0
+    if(document.getElementById('datepicker2').value.trim().length != 10){
+        c_2 = true
+    }
     let c_3 = document.getElementById('full_name_op').value.trim().length === 0
 
     if (type === 1) {
