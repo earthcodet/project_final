@@ -337,10 +337,11 @@ function createGroupData() {
     if(w_c_1){
         p_data.status = 'N'
     }else if(w_c_2){
-        p_data.status = 'N'
-    }else{
-        p_data.status = 'M'
-    }
+        p_data.status = 'Y'
+    
+    }    // }else{
+    //     p_data.status = 'M'
+    // }
     let temp_year_input = document.getElementById('datepicker2').value.trim()
     p_data.year = temp_year_input.slice(temp_year_input.length - 2 , temp_year_input.length)
     console.log(p_data.year)
