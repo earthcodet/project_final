@@ -39,9 +39,9 @@ function setData(data) {
 function setUI() {
     document.getElementById('menu_type').value = menu.type
     document.getElementById('menu_name').value = menu.name
-    document.getElementById('topic').innerText = 'อัพเดทข้อมูล'
-    document.getElementById('head_topic').innerText = 'อัพเดทข้อมูล'
-    
+    document.getElementById('topic').innerText = 'แก้ไขข้อมูล'
+    document.getElementById('head_topic').innerText = 'แก้ไขข้อมูลประเภทคำขอ'
+    document.getElementById('title_type').innerText='แก้ไขประเภทคำขอ'
 }
 function getComData(id) {
     return new Promise((resolve, reject) => {

@@ -425,7 +425,7 @@ function setData(type, raw_data, ex) {
     //นายก
     if (document.getElementById('name_nayo') != undefined) {
         document.getElementById('name_nayo').innerText = `${raw_data.A_TITLE} ${raw_data.A_NAME} ${raw_data.A_SURNAME}`
-        document.getElementById('position_nayo').innerText = checkNullCondition(raw_data.A_POSITION)
+        // document.getElementById('position_nayo').innerText = checkNullCondition(raw_data.A_POSITION)
     }
 }
 function dateFormat(raw_data) {

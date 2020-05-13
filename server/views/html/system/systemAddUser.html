@@ -5,28 +5,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- <!-- <script src="../js/js22.js"></script> --> -->
+    <!-- <script src="../js/js22.js"></script> -->
     <script src="../../js/service/jquery/jquery-3.4.1.min.js"></script>
     <link rel="stylesheet" href="../../css/css2.css">
     <link href="../../css/fonts.css" rel="stylesheet">
-    <title> เพิ่มผู้ใช้งาน</title>
+    <title id="title_user"> เพิ่มผู้ใช้งาน</title>
 
     <!-- icon -->
     <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.css">
 </head>
-
+<style>
+    button{
+        font-family: 'Sarabun';
+    }
+</style>
 <body>
     <!-- เมนูด้านบน -->
     <div class="w3-top icon-bar">
-        <a id="addMenu" class="exit disableds" onclick="addTEST()"><i class="fa fa-plus-square"> เพิ่ม</i></a>
-        <a id="editMenu" onclick="editTEST()" class="exit disableds"><i class="fa fa-pencil-alt"> แก้ไข</i></a>
-        <a id="saveMenu" onclick="insertTEST()" class="exit disableds"><i class="fa fa-save"> บันทึก</i></a>
-        <a id="restoreMenu" onclick="restoreTEST()" class="exit disableds"><i class="fa fa-reply"> เรียกคืน</i></a>
-        <a id="deleteMenu" onclick="deleteTEST()" class="exit disableds"><i class="fa fa-times"> ยกเลิก</i></a>
+        <a id="addMenu" class="exit disableds" onclick="addTEST()"><i class="fa fa-plus-square"><span> เพิ่ม</span></i></a>
+        <a id="editMenu" onclick="editTEST()" class="exit disableds"><i class="fa fa-pencil-alt"><span> แก้ไข</span></i></a>
+        <a id="saveMenu" onclick="insertTEST()" class="exit disableds"><i class="fa fa-save"><span> บันทึก</span></i></a>
+        <a id="restoreMenu" onclick="restoreTEST()" class="exit disableds"><i class="fa fa-reply"><span> เรียกคืน</span></i></a>
+        <a id="deleteMenu" onclick="deleteTEST()" class="exit disableds"><i class="fa fa-times"><span> ยกเลิก</span></i></a>
         <!-- <a><i class="fa fa-search"> ค้นหา</i></a> -->
         <a id="exitMenu" onclick="exitPage()" class="exit" style="float: right;width: 17%;"><i
-                class="fa fa-sign-out-alt">
-                ออกจากระบบ</i></a>
+                class="fa fa-sign-out-alt"><span>
+                ออกจากระบบ</span></i></a>
     </div>
     <!-- เมนูด้านข้าง -->
     <div class="sidenav">
@@ -97,7 +101,7 @@
     <!-- เนื้อหา -->
     <form id="form">
         <fieldset style="border: 0;padding: 0;margin: 0;">
-            <div class="main" style="margin-top:7vw;">
+            <div class="main">
                 <header class="w3-top2">
                     <h1 id='head_topic' style="font-size:2.8vh;margin-left: 25px;padding: 2px;">เพิ่มผู้ใช้งาน</h1>
                 </header>
@@ -124,7 +128,7 @@
                             <br>
                             <label style="margin-left: 1.8vw;">ตำแหน่ง : </label>
                             <select type="text" id='position' style="width: 30%;" onchange="displayImageBox()">
-                                <option value="การเงิน">กองคลัง</option>
+                                <option value="การเงิน">การเงิน</option>
                                 <option value="ทะเบียน">งานทะเบียน</option>
                                 <option value="นายก">นายกเทศมนตรี</option>
                             </select>
@@ -175,6 +179,7 @@
             </div>
             </div>
         </fieldset>
+        <br><br>
     </form>
 
 

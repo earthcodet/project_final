@@ -47,8 +47,8 @@ function getView(value_t) {
         getComData(value_t.id).then((raw_data) => {
             if (raw_data.length != 0) {
                 status_page = 'update'
-                document.getElementById('topic').innerText = 'อัพเดทข้อมูล'
-                document.getElementById('head_topic').innerText = 'อัพเดทข้อมูล'
+                document.getElementById('topic').innerText = 'แก้ไขข้อมูล'
+                document.getElementById('head_topic').innerText = 'แก้ไขข้อมูลผู้ใช้งาน'
                 setData(raw_data[0])
                 setUI()
                 if (user.position_type === 'นายก') {
@@ -107,7 +107,7 @@ function setUI() {
     document.getElementById('type_user').value = user.type_user
     document.getElementById('position_detail').value = user.position
     document.getElementById('defalut').value = user.is_default
-
+    document.getElementById('title_user').innerText='แก้ไขผู้ใช้งาน'
     //update ปิด สองช่องนี้ไม่ให้แก้
     document.getElementById('username').disabled = true
     document.getElementById('position').disabled = true

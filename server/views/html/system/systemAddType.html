@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- <!-- <script src="../js/js22.js"></script> --> -->
+    <!-- <script src="../js/js22.js"></script> -->
 
     <link rel="stylesheet" href="../../css/css2.css">
     <link href="../../css/fonts.css" rel="stylesheet">
 
-<title>เพิ่มประเภทคำขอ</title>
+<title id="title_type">เพิ่มประเภทคำขอ</title>
     <!-- icon -->
     <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.css">
 </head>
@@ -18,15 +18,15 @@
 <body>
     <!-- เมนูด้านบน -->
     <div class="w3-top icon-bar">
-        <a id="addMenu" class="exit disableds" onclick="addTEST()"><i class="fa fa-plus-square"> เพิ่ม</i></a>
-        <a id="editMenu" onclick="editTEST()" class="exit disableds"><i class="fa fa-pencil-alt"> แก้ไข</i></a>
-        <a id="saveMenu" onclick="insertTEST()" class="exit disableds"><i class="fa fa-save"> บันทึก</i></a>
-        <a id="restoreMenu" onclick="restoreTEST()" class="exit disableds"><i class="fa fa-reply"> เรียกคืน</i></a>
-        <a id="deleteMenu" onclick="deleteTEST()" class="exit disableds"><i class="fa fa-times"> ยกเลิก</i></a>
+        <a id="addMenu" class="exit disableds" onclick="addTEST()"><i class="fa fa-plus-square"><span> เพิ่ม</span></i></a>
+        <a id="editMenu" onclick="editTEST()" class="exit disableds"><i class="fa fa-pencil-alt"><span> แก้ไข</span></i></a>
+        <a id="saveMenu" onclick="insertTEST()" class="exit disableds"><i class="fa fa-save"><span> บันทึก</span></i></a>
+        <a id="restoreMenu" onclick="restoreTEST()" class="exit disableds"><i class="fa fa-reply"><span> เรียกคืน</span></i></a>
+        <a id="deleteMenu" onclick="deleteTEST()" class="exit disableds"><i class="fa fa-times"><span> ยกเลิก</span></i></a>
         <!-- <a><i class="fa fa-search"> ค้นหา</i></a> -->
         <a id="exitMenu" onclick="exitPage()" class="exit" style="float: right;width: 17%;"><i
-                class="fa fa-sign-out-alt">
-                ออกจากระบบ</i></a>
+                class="fa fa-sign-out-alt"><span>
+                ออกจากระบบ</span></i></a>
     </div>
     <!-- เมนูด้านข้าง -->
     <div class="sidenav">
@@ -97,15 +97,16 @@
     <!-- เนื้อหา -->
     <form id="form">
         <fieldset style="border: 0;padding: 0;margin: 0;">
-            <div class="main"style='margin-top:7.5vw;'>
+            <div class="main">
+                <!-- style='margin-top:7.5vw;' -->
                 <header class="w3-top2">
-                    <h1 id='head_topic' style="font-size:2.8vh;margin-left: 25px;padding: 2px;"> เพิ่มประเภทคำขอ</h1>
+                    <h1 id='head_topic' style="font-size:2.8vh;margin-left: 25px;padding: 2px;"> เพิ่มข้อมูลประเภทคำขอ</h1>
                 </header>
                 <div class="box">
                     <center>
                         <br><a>
                             <h1 id='topic'>เพิ่มข้อมูล</h1>
-                            <label style="margin-left: 2vw;">ชื่อประเภท : </label>
+                            <label style="margin-left: 2vw;">ชื่อเมนู : </label>
                             <select style="width: 40%;" id='menu_type'>
                                 <option value="ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ">
                                     ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</option>
@@ -125,11 +126,11 @@
                                 <option value="กิจการฌาปณสถาน">กิจการฌาปณสถาน</option>
                             </select>
                             <br>
-                            <label style="margin-left: 3.6vw;">ชื่อเมนู :
+                            <label style="margin-left: 3.6vw;">ชื่อประเภท :
                             </label>
                             <input type="text" id='menu_name' style="width: 40%;">
                             <br><br>
-                            <button type='button' onclick="insertPage()" style="width: 20%;border-radius: 2px;">ยืนยัน</button>
+                            <button type='button' onclick="insertPage()" style="width: 20%;border-radius: 2px; font-family: 'Sarabun';">ยืนยัน</button>
                             <br><br>
                         </a>
                     </center>

@@ -16,15 +16,15 @@
 <body>
     <!-- เมนูด้านบน -->
     <div class="w3-top icon-bar">
-        <a id="addMenu" class="exit disableds" onclick="addTEST()"><i class="fa fa-plus-square"> เพิ่ม</i></a>
-        <a id="editMenu" onclick="editTEST()" class="exit disableds"><i class="fa fa-pencil-alt"> แก้ไข</i></a>
-        <a id="saveMenu" onclick="insertTEST()" class="exit disableds"><i class="fa fa-save"> บันทึก</i></a>
-        <a id="restoreMenu" onclick="restoreTEST()" class="exit disableds"><i class="fa fa-reply"> เรียกคืน</i></a>
-        <a id="deleteMenu" onclick="deleteTEST()" class="exit disableds"><i class="fa fa-times"> ยกเลิก</i></a>
+        <a id="addMenu" class="exit disableds" onclick="addTEST()"><i class="fa fa-plus-square"><span> เพิ่ม</span></i></a>
+        <a id="editMenu" onclick="editTEST()" class="exit disableds"><i class="fa fa-pencil-alt"><span> แก้ไข</span></i></a>
+        <a id="saveMenu" onclick="insertTEST()" class="exit disableds"><i class="fa fa-save"><span> บันทึก</span></i></a>
+        <a id="restoreMenu" onclick="restoreTEST()" class="exit disableds"><i class="fa fa-reply"><span> เรียกคืน</span></i></a>
+        <a id="deleteMenu" onclick="deleteTEST()" class="exit disableds"><i class="fa fa-times"><span> ยกเลิก</span></i></a>
         <!-- <a><i class="fa fa-search"> ค้นหา</i></a> -->
         <a id="exitMenu" onclick="exitPage()" class="exit" style="float: right;width: 17%;"><i
-                class="fa fa-sign-out-alt">
-                ออกจากระบบ</i></a>
+                class="fa fa-sign-out-alt"><span>
+                ออกจากระบบ</span></i></a>
     </div>
     <!-- เมนูด้านข้าง -->
     <div class="sidenav">
@@ -113,7 +113,7 @@
                         <option value=10>ตุลาคม</option>
                         <option value=11>พฤศจิกายน</option>
                         <option value=12>ธันวาคม</option>
-                    </select>
+                    </select>&emsp;
                     <a>ปี พ.ศ. : </a>
                     <select id="year" style="width: 10%;">
                         <option value=2550>2550</option>
@@ -138,8 +138,9 @@
                         <option value=2569>2569</option>
                         <option value=2570>2570</option>
                     </select>
-                    <br> <button type="button" class="" onclick="openReport()"
-                        style="background-color: #009688;color: white ;width: 10%;border-radius: 2px;">ตกลง</button>
+                    <br><br><br>
+                    <button type="button" class="" onclick="openReport()"
+                        style="background-color: #009688;color: white ;width: 10%;border-radius: 2px; font-family: 'Sarabun';">ตกลง</button>
                 </div>
             </div>
         </fieldset>
