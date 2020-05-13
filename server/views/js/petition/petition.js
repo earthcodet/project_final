@@ -20,6 +20,7 @@ function getView(value_t) {
     let type_start = 1
     if (value_t.com_id != undefined && value_t.com_year != undefined) {
         getComData(value_t.com_id, value_t.com_year).then((raw_data) => {
+            console.log(raw_data)
             if (raw_data.length != 0) {
                 setPDATA(raw_data[0], 1)
                 if (p_data.request_id != '') {
@@ -82,7 +83,8 @@ function setPDATA(data, type) {
             request_id: data.REQUEST_NO === null ? '' : data.REQUEST_NO,
             request_year: data.REQUEST_YEAR === null ? '' : data.REQUEST_YEAR,
             date_submission: data.COMPLAINT_DATE_SUBMISSION,
-            type: data.COMPLAINT_TYPE === null ? '' : data.COMPLAINT_TYPE,
+            // type: data.COMPLAINT_TYPE === null ? '' : data.COMPLAINT_TYPE,
+            type: data.COMPLAINT_TYPE ,
             status: data.COMPLAINT_STATUS === null ? '' : data.COMPLAINT_STATUS,
             date_start: data.COMPLAINT_DATE_START === null ? '' : data.COMPLAINT_DATE_START,
             date_end: data.COMPLAINT_DATE_END === null ? '' : data.COMPLAINT_DATE_END,
@@ -136,7 +138,8 @@ function setUIDataCom(type, type_step) {
                     break;
                 } else {
                     if (i === name.length - 1) {
-                        if (p_data.type != 'ไม่มีประเภท') {
+                        // console.log(`p_data.type ` + p_data.type)
+                        if (p_data.type != 'ไม่มีประเภท' && p_data.type != null) {
                             document.getElementById('t_8').checked = true
                             document.getElementById('t_e').value = p_data.type
                         }
@@ -198,7 +201,7 @@ function setUIDataCom(type, type_step) {
                     break;
                 } else {
                     if (i === name.length - 1) {
-                        if (p_data.type != 'ไม่มีประเภท') {
+                        if (p_data.type != 'ไม่มีประเภท' && p_data.type != null) {
                             document.getElementById('t_8').checked = true
                             document.getElementById('t_e').value = p_data.type
                         }
@@ -362,7 +365,7 @@ function getValueType() {
             if (check) {
                 return document.getElementById('t_e').value.trim()
             } else {
-                return 'ไม่มีประเภท'
+                return ''
             }
         }
     }
