@@ -825,13 +825,10 @@ function createTableRequest(data) {
         } else {
             row.classList.add(now_status + '-menu')
         }
-
-
         //row index = this.rowIndex
         // row.onclick = function () { showItem(data[this.rowIndex - 1]) }
 
         for (var j = 0; j < 6; j++) {
-            console.log(j)
             var cell = document.createElement("td");
             if (j === 0) {
                 //year
@@ -890,8 +887,15 @@ function createTableRequest(data) {
                     }
                 }
             }
+            
             cell.appendChild(cellText);
             row.appendChild(cell);
+        }
+        console.log(row)
+        if (data[i].REQUEST_IS_DELETED === 'Y') {
+            row.style.textDecoration = 'line-through'
+        } else {
+            row.style.textDecoration = ''
         }
         tblBody.appendChild(row);
     }
@@ -979,8 +983,8 @@ function searchFilter() {
     filter = input.value.trim()
     input2 = document.getElementById("search_list_type");
     filter2 = input2.value.trim()
-    console.log('filter =' +filter )
-    console.log('filter2 =' +filter2 )
+    console.log('filter =' + filter)
+    console.log('filter2 =' + filter2)
     table = document.getElementById(getTableIdTableByStatus(now_status));
     tr = table.getElementsByTagName("tr");
 
@@ -1021,17 +1025,17 @@ function searchFilter() {
             textValue2 = td2.textContent || td2.innerText;
             textValue2 = textValue2 + ''
             textValue2 = textValue2.trim()
-            textValue  = textValue .trim()
+            textValue = textValue.trim()
             if (textValue.indexOf(filter) > -1 && textValue2.indexOf(filter2) > -1) {
                 tr[i].style.display = "";
             } else {
                 tr[i].style.display = "none";
             }
         }
-    }else{
+    } else {
         console.log('con 4')
         for (i = 0; i < tr.length; i++) {
-                tr[i].style.display = "";
+            tr[i].style.display = "";
         }
     }
 }
