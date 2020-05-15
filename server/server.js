@@ -72,6 +72,8 @@ app.get('/get/user/all', (req, res) => {
 app.post('/user/update/status/delete/', (req, res) => {
   //userItem
   webService.updateStatusDeleteUser(req.body.userItem.id,req.body.userItem.status,req.session.username).then((data) => {
+   //personal
+  //  webService.updateStatusDeleteUser(req.body.personal.id,req.body.personal.is_deleted,req.session.username).then((data) => {
     res.json(data)
   })
 })

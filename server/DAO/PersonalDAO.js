@@ -183,8 +183,8 @@ class PersonalDAO {
             let query = text
             ,
             values = {
-                PERSONAL_UPDATE:personal.fax,
-                PERSONAL_IS_DELETED:personal.update,
+                PERSONAL_UPDATE:personal.update,
+                PERSONAL_IS_DELETED:personal.is_deleted,
                 USER_UPDATE:personal.username +``
             }
             con.query(query,values, function (err, result) {
