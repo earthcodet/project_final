@@ -312,8 +312,8 @@ function changeStatusMenuData(status, status_delete) {
             addNew = false
             disableMenuAll()
             enableMenu('addMenu')
-            enableMenu('editMenu')
-            enableMenu('deleteMenu')
+            // enableMenu('editMenu')
+            // enableMenu('deleteMenu')
             enableFunction()
         } else {
             if (status === '') {
