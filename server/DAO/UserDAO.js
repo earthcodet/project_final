@@ -55,7 +55,7 @@ class LoginDAO {
     }
     getStaffฺByType(value) {
         return new Promise((resolve, reject) => {
-            con.query(`SELECT * FROM user WHERE USER_POSITION_TYPE ='${value}' ORDER By USER_IS_DEFAULT DESC`, function (err, result) {
+            con.query(`SELECT * FROM user WHERE USER_POSITION_TYPE ='${value}' AND USER_STATUS = 'N' ORDER By USER_IS_DEFAULT DESC`, function (err, result) {
                 if (err) {
                     throw err
                 }
