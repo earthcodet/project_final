@@ -283,7 +283,7 @@ function createHistoryRequest(data) {
                 if (i === 0) {
                     var cellText = document.createTextNode(`${data[i].REQUEST_NO_OLD}/${data[i].REQUEST_YEAR_OLD}`);
                 } else {
-                    var cellText = document.createTextNode(`${data[i-1].REQUEST_NO}/${data[i-1].REQUEST_YEAR}`);
+                    var cellText = document.createTextNode(`${data[i - 1].REQUEST_NO}/${data[i - 1].REQUEST_YEAR}`);
                 }
 
             } else if (j === 3) {
@@ -519,6 +519,7 @@ function canclePopup(type) {
                             inRequest.delete_logic = document.getElementById('cancleTextPopup').value
                             inRequest.status_before = inRequest.status
                             inRequest.status = 'cancel'
+                            inRequest.is_deleted = 'Y'
                             updateRequest().then((data) => {
                                 if (data) {
                                     resolve();
@@ -928,6 +929,9 @@ function cancelStatus() {
                             break;
 
                     }
+                    //add Status is_delete
+                    inRequest.delete_logic = ''
+                    inRequest.is_deleted = 'N'
                     // inRequest.status = inRequest.status_before
                     updateRequest().then((data) => {
                         if (data) {
@@ -1101,38 +1105,38 @@ $(function () {
             console.log(`this`)
             console.log(this)
             setDataItem(requestDataList[indexData])
-            if (inRequest.is_deleted === 'Y' && key != 'detail') {
-                statusRequestDelete()
+            // if (inRequest.is_deleted === 'Y' && key != 'detail') {
+            //     statusRequestDelete()
+            // } else {
+            if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
+                statusDelete()
             } else {
-                if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
-                    statusDelete()
-                } else {
-                    switch (key) {
-                        case 'per':
-                            if (inRequest.date_exp_count > 90) {
-                                toPerRequestError()
-                            } else {
-                                toPerRequest(type, id)
-                            }
-                            break;
-                        case 'add':
-                            addPopup()
-                            break;
-                        case 'detail':
-                            toRequest(type, id)
-                            break;
-                        case 'cancle_status':
-                            cancelStatus()
-                            break;
-                        case 'stop':
-                            viewPageReport(undefined, inPersonal.id, `${inRequest.no}${inRequest.year}`)
-                            break;
-                        default:
-                            canclePopup()
-                            break;
-                    }
+                switch (key) {
+                    case 'per':
+                        if (inRequest.date_exp_count > 90) {
+                            toPerRequestError()
+                        } else {
+                            toPerRequest(type, id)
+                        }
+                        break;
+                    case 'add':
+                        addPopup()
+                        break;
+                    case 'detail':
+                        toRequest(type, id)
+                        break;
+                    case 'cancle_status':
+                        cancelStatus()
+                        break;
+                    case 'stop':
+                        viewPageReport(undefined, inPersonal.id, `${inRequest.no}${inRequest.year}`)
+                        break;
+                    default:
+                        canclePopup()
+                        break;
                 }
             }
+            // }
 
         },
         items: {
@@ -1156,47 +1160,47 @@ $(function () {
             console.log(`this`)
             console.log(this)
             setDataItem(requestDataList[indexData])
-            if (inRequest.is_deleted === 'Y' && key != 'detail') {
-                statusRequestDelete()
+            // if (inRequest.is_deleted === 'Y' && key != 'detail') {
+            //     statusRequestDelete()
+            // } else {
+            if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
+                statusDelete()
             } else {
-                if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
-                    statusDelete()
-                } else {
-                    switch (key) {
-                        case 'per':
-                            if (inRequest.date_exp_count > 90) {
-                                toPerRequestError()
-                            } else {
-                                toPerRequest(type, id)
-                            }
-                            break;
-                        case 'transfer':
-                            transferPopup(id)
-                            break;
-                        case 'add':
-                            addPopup()
-                            break;
-                        case 'detail':
-                            toRequest(type, id)
-                            break;
-                        case 'cancle_status':
-                            checkBackStatus()
-                            break;
-                        case 'pay':
-                            checkPay()
-                            break;
-                        case 'stop':
-                            viewPageReport(undefined, inPersonal.id, `${inRequest.no}${inRequest.year}`)
-                            break;
-                        case 'editPay':
-                            checkEditYear()
-                            break;
-                        default:
-                            canclePopup('Extra')
-                            break;
-                    }
+                switch (key) {
+                    case 'per':
+                        if (inRequest.date_exp_count > 90) {
+                            toPerRequestError()
+                        } else {
+                            toPerRequest(type, id)
+                        }
+                        break;
+                    case 'transfer':
+                        transferPopup(id)
+                        break;
+                    case 'add':
+                        addPopup()
+                        break;
+                    case 'detail':
+                        toRequest(type, id)
+                        break;
+                    case 'cancle_status':
+                        checkBackStatus()
+                        break;
+                    case 'pay':
+                        checkPay()
+                        break;
+                    case 'stop':
+                        viewPageReport(undefined, inPersonal.id, `${inRequest.no}${inRequest.year}`)
+                        break;
+                    case 'editPay':
+                        checkEditYear()
+                        break;
+                    default:
+                        canclePopup('Extra')
+                        break;
                 }
             }
+            // }
 
         },
         items: {
@@ -1221,28 +1225,28 @@ $(function () {
             let id = this[0].cells[2].innerText.trim()
             let indexData = this[0].rowIndex - 1
             setDataItem(requestDataList[indexData])
-            if (inRequest.is_deleted === 'Y' && key != 'detail') {
-                statusRequestDelete()
+            // if (inRequest.is_deleted === 'Y' && key != 'detail') {
+            //     statusRequestDelete()
+            // } else {
+            if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
+                statusDelete()
             } else {
-                if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
-                    statusDelete()
-                } else {
-                    switch (key) {
-                        case 'pay':
-                            payPopup()
-                            break;
-                        case 'delete':
-                            canclePopup()
-                            break;
-                        case 'cancel-status':
-                            cancelStatus()
-                            break;
-                        default:
-                            toRequest(type, id)
-                            break;
-                    }
+                switch (key) {
+                    case 'pay':
+                        payPopup()
+                        break;
+                    case 'delete':
+                        canclePopup()
+                        break;
+                    case 'cancel-status':
+                        cancelStatus()
+                        break;
+                    default:
+                        toRequest(type, id)
+                        break;
                 }
             }
+            // }
 
         },
         items: {
@@ -1263,24 +1267,24 @@ $(function () {
             let id = this[0].cells[2].innerText.trim()
             let indexData = this[0].rowIndex - 1
             setDataItem(requestDataList[indexData])
-            if (inRequest.is_deleted === 'Y' && key != 'detail') {
-                statusRequestDelete()
+            // if (inRequest.is_deleted === 'Y' && key != 'detail') {
+            //     statusRequestDelete()
+            // } else {
+            if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
+                statusDelete()
             } else {
-                if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
-                    statusDelete()
+                if (key === 'detail') {
+                    toRequest(type, id)
                 } else {
-                    if(key === 'detail'){
-                        toRequest(type, id)
-                    }else{
-                        historyRequest()
-                    }
-                    
+                    historyRequest()
                 }
+
             }
+            // }
 
         },
         items: {
-            "history":{ name: 'ดูประวัติการโอนใบอนุญาต'},
+            "history": { name: 'ดูประวัติการโอนใบอนุญาต' },
             "detail": { name: "ดูรายละเอียด" }
 
         },
@@ -1295,20 +1299,20 @@ $(function () {
             let id = this[0].cells[2].innerText.trim()
             let indexData = this[0].rowIndex - 1
             setDataItem(requestDataList[indexData])
-            if (inRequest.is_deleted === 'Y' && key != 'detail') {
-                statusRequestDelete()
+            // if (inRequest.is_deleted === 'Y' && key != 'detail') {
+            //     statusRequestDelete()
+            // } else {
+            if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
+                statusDelete()
             } else {
-                if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
-                    statusDelete()
-                } else {
-                    if (key === 'detail') {
-                        toRequest(type, id)
-                    }
-                    if (key === 'cancel-status') {
-                        cancelStatus()
-                    }
+                if (key === 'detail') {
+                    toRequest(type, id)
+                }
+                if (key === 'cancel-status') {
+                    cancelStatus()
                 }
             }
+            // }
 
 
         },
@@ -1328,28 +1332,28 @@ $(function () {
             let indexData = this[0].rowIndex - 1
             console.log(indexData)
             setDataItem(requestDataList[indexData])
-            if (inRequest.is_deleted === 'Y' && key != 'detail') {
-                statusRequestDelete()
+            // if (inRequest.is_deleted === 'Y' && key != 'detail') {
+            //     statusRequestDelete()
+            // } else {
+            if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
+                statusDelete()
             } else {
-                if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
-                    statusDelete()
-                } else {
-                    switch (key) {
-                        case 'approval':
-                            approvalPopup()
-                            break;
-                        case 'not-approval':
-                            notApprovalPopup(type)
-                            break;
-                        case 'delete':
-                            canclePopup()
-                            break;
-                        default:
-                            toRequest(type, id)
-                            break;
-                    }
+                switch (key) {
+                    case 'approval':
+                        approvalPopup()
+                        break;
+                    case 'not-approval':
+                        notApprovalPopup(type)
+                        break;
+                    case 'delete':
+                        canclePopup()
+                        break;
+                    default:
+                        toRequest(type, id)
+                        break;
                 }
             }
+            // }
 
         },
         items: {
@@ -1368,15 +1372,15 @@ $(function () {
         callback: function (key, options) {
             let id = this[0].cells[2].innerText.trim()
             let type = this[0].cells[1].innerText.trim()
-            if (inRequest.is_deleted === 'Y' && key != 'detail') {
-                statusRequestDelete()
+            // if (inRequest.is_deleted === 'Y' && key != 'detail') {
+            //     statusRequestDelete()
+            // } else {
+            if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
+                statusDelete()
             } else {
-                if (tempPersonal.PERSONAL_IS_DELETED === 'Y' && key != 'detail') {
-                    statusDelete()
-                } else {
-                    toRequest(type, id)
-                }
+                toRequest(type, id)
             }
+            // }
 
         },
         items: {

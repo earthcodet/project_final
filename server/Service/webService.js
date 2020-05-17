@@ -2846,7 +2846,10 @@ class service {
             status: request.status,
             id: request.id,
             year: request.year,
-            last_update: ''
+            last_update: '',
+            status_before: request.b_status,
+            logic_delete: request.text_delete,
+            type_function: request.func_status
         }
         var datetime = new Date();
         let dateForUpdate = datetime.toISOString().slice(0, 10)

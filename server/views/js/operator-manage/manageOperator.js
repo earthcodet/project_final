@@ -892,11 +892,11 @@ function createTableRequest(data) {
             row.appendChild(cell);
         }
         console.log(row)
-        if (data[i].REQUEST_IS_DELETED === 'Y') {
-            row.style.textDecoration = 'line-through'
-        } else {
-            row.style.textDecoration = ''
-        }
+        // if (data[i].REQUEST_IS_DELETED === 'Y') {
+        //     row.style.textDecoration = 'line-through'
+        // } else {
+        //     row.style.textDecoration = ''
+        // }
         tblBody.appendChild(row);
     }
     console.log(tblBody)

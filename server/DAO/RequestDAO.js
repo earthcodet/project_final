@@ -462,9 +462,9 @@ class RequestDAO {
                 //ชื่อสถานประกอบการ
                 if (item.e_name != '') {
                     value = value + `establishment.ESTABLISHMENT_NAME LIKE "%${item.e_name}%" `
-                }else{
+                } else {
                     value = value + `1`
-                } 
+                }
 
             }
 
@@ -615,7 +615,7 @@ class RequestDAO {
                     REQUEST_DATE_ISSUED: request.date_issued,
                     REQUEST_DATE_EXPIRED: request.date_expired,
                     REQUEST_DELETE_LOGIC: request.delete_logic,
-                    REQUEST_IS_DELETED: request.is_delete
+                    REQUEST_IS_DELETED: request.is_deleted
                 }
             con.query(query, values, function (err, result) {
                 if (err) {
@@ -627,7 +627,7 @@ class RequestDAO {
             })
         })
     }
-        updateStatusOnly(no, year, user, last_update, status, status_before) {
+    updateStatusOnly(no, year, user, last_update, status, status_before) {
         return new Promise((resolve, reject) => {
             let query = `UPDATE request SET ? WHERE REQUEST_NO='${no}' AND REQUEST_YEAR='${year}'`
             let values = {}
@@ -658,11 +658,26 @@ class RequestDAO {
     updateStatusDelete(object) {
         return new Promise((resolve, reject) => {
             let query = `UPDATE request SET ? WHERE REQUEST_NO='${object.id}' AND REQUEST_YEAR='${object.year}'`
-            let values = {
-                REQUEST_IS_DELETED: object.status,
-                REQUEST_USER_UPDATE: object.username + ``,
-                REQUEST_LAST_UPDATE: object.last_update
+            let values = {}
+            if (object.type_function === 'cancel') {
+                values = {
+                    REQUEST_IS_DELETED: object.status,
+                    REQUEST_USER_UPDATE: object.username + ``,
+                    REQUEST_LAST_UPDATE: object.last_update,
+                    REQUEST_DELETE_LOGIC: object.logic_delete,
+                    REQUEST_STATUS_BEFORE: object.status_before,
+                    REQUEST_STATUS: 'cancel'
+                }
+            }else{
+                values = {
+                    REQUEST_IS_DELETED: object.status,
+                    REQUEST_USER_UPDATE: object.username + ``,
+                    REQUEST_LAST_UPDATE: object.last_update,
+                    REQUEST_DELETE_LOGIC: null,
+                    REQUEST_STATUS: object.status_before
+                }
             }
+
             con.query(query, values, function (err, result) {
                 if (err) {
                     console.log(err.code)

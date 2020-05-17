@@ -148,21 +148,22 @@ function deletePage() {
             preConfirm: function () {
                 return new Promise(function (resolve, reject) {
                     setTimeout(function () {
+                        canclePopup('Y', 'cancel')
                         //function ใน operator 
-                        changeStatusDeleteRequest('Y').then((statusDelete) => {
-                            let temp_status = requestData.is_deleted
-                            requestData.is_deleted = 'Y'
-                            if (statusDelete) {
-                                resolve();
-                            } else {
-                                requestData.is_deleted = temp_status
-                                Swal.fire({
-                                    html: "เกิดข้อผิดพลาดกับระบบ",
-                                    icon: "error",
-                                    confirmButtonColor: "#009688"
-                                });
-                            }
-                        })
+                        // changeStatusDeleteRequest('Y').then((statusDelete) => {
+                        //     let temp_status = requestData.is_deleted
+                        //     requestData.is_deleted = 'Y'
+                        //     if (statusDelete) {
+                        //         resolve();
+                        //     } else {
+                        //         requestData.is_deleted = temp_status
+                        //         Swal.fire({
+                        //             html: "เกิดข้อผิดพลาดกับระบบ",
+                        //             icon: "error",
+                        //             confirmButtonColor: "#009688"
+                        //         });
+                        //     }
+                        // })
                     }, 100);
                 })
             }
@@ -246,6 +247,91 @@ function deletePage() {
             });
     }
 }
+function canclePopup(status, type_status) {
+
+    let html_display = `
+<div style = 'text-align:left; display:block' >
+<br>
+    <label class = 'topic' > เหตุผลที่ยกเลิก </label> 
+    <br>
+    <br>
+    <textarea id='cancleTextPopup' class='tabOne' row='10' style='width:95%;' ></textarea>
+    <br> 
+    <div class='center'>
+        <label id='cancleTextPopup_alert' class='alert tabOne' style='display:none' >ช่องนี้เว้นว่างไม่ได้</label>
+    </div>
+    <br>
+</div>
+`
+    Swal.fire({
+        html: html_display,
+        width: '35%',
+        customClass: 'swal-height',
+        showCancelButton: true,
+        showConfirmButton: true,
+        confirmButtonText: "ใช่",
+        cancelButtonText: "ไม่ใช่",
+        confirmButtonColor: "#009688",
+        cancelButtonColor: '#dc3545',
+        closeOnConfirm: false,
+        closeOnCancel: false,
+        showLoaderOnConfirm: true,
+        preConfirm: function () {
+            let cancleTextPopup_text = document.getElementById('cancleTextPopup')
+            let cancleTextPopup_alert_text = document.getElementById('cancleTextPopup_alert')
+
+            cancleTextPopup_text.classList.remove('alertInput')
+            cancleTextPopup_alert_text.style.display = 'none'
+            if (cancleTextPopup_text.value.trim().length == 0) {
+                cancleTextPopup_text.classList.add('alertInput')
+                cancleTextPopup_alert_text.style.display = ''
+                Swal.showValidationMessage(
+                    `ข้อมูลไม่ครบ`
+                )
+            } else {
+                return new Promise(function (resolve, reject) {
+                    setTimeout(function () {
+                        let text_delete_temp = document.getElementById('cancleTextPopup').value.trim()
+                        changeStatusDeleteRequest(status, text_delete_temp, type_status).then((statusDelete) => {
+                            let temp_status = requestData.is_deleted
+                            requestData.is_deleted = 'Y'
+                            if (statusDelete) {
+                                resolve();
+                            } else {
+                                requestData.is_deleted = temp_status
+                                Swal.fire({
+                                    html: "เกิดข้อผิดพลาดกับระบบ",
+                                    icon: "error",
+                                    confirmButtonColor: "#009688"
+                                });
+                            }
+                        })
+                    }, 100);
+                });
+            }
+        }
+    }).then((result) => {
+        if (result.value) {
+            Swal.fire({
+                html: "<h2>บันทึกสำเร็จ</h2>",
+                icon: "success",
+                confirmButtonColor: "#009688"
+            })
+                .then((result) => {
+                    disableMenuAll()
+                    if (window.location.href.split('?').length === 1) {
+                        disableMenuAll()
+                        location.replace(window.location.href + '?id=' + requestData.no + '' + requestData.year)
+                    } else {
+                        let temp_html = window.location.href.split('?')
+                        location.replace(temp_html[0] + '?id=' + requestData.no + '' + requestData.year)
+
+                    }
+                })
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+        }
+    });
+}
 function restorePage() {
     //function Update delete 
     Swal.fire({
@@ -265,9 +351,10 @@ function restorePage() {
             return new Promise(function (resolve, reject) {
                 setTimeout(function () {
                     //function ใน operator 
-                    changeStatusDeleteRequest('N').then((statusDelete) => {
+                    // canclePopup('N', 're_status')
+                    changeStatusDeleteRequest('N', '', 're_status').then((statusDelete) => {
                         let temp_status = requestData.is_deleted
-                        requestData.is_deleted = 'N'
+                        requestData.is_deleted = 'Y'
                         if (statusDelete) {
                             resolve();
                         } else {
@@ -279,6 +366,20 @@ function restorePage() {
                             });
                         }
                     })
+                    // changeStatusDeleteRequest('N').then((statusDelete) => {
+                    //     let temp_status = requestData.is_deleted
+                    //     requestData.is_deleted = 'N'
+                    //     if (statusDelete) {
+                    //         resolve();
+                    //     } else {
+                    //         requestData.is_deleted = temp_status
+                    //         Swal.fire({
+                    //             html: "เกิดข้อผิดพลาดกับระบบ",
+                    //             icon: "error",
+                    //             confirmButtonColor: "#009688"
+                    //         });
+                    //     }
+                    // })
                 }, 100);
             })
         }
@@ -288,14 +389,24 @@ function restorePage() {
                 html: "ผู้ประกอบการนี้กลับอยู่ในสถานะปกติแล้ว",
                 icon: "success",
                 confirmButtonColor: "#009688"
-            });
-            resetStyleIdDeleteRequest()
-            deleteData = false
-            data = true
-            disableMenuAll()
-            enableMenu('addMenu')
-            enableMenu('editMenu')
-            enableMenu('deleteMenu')
+            }).then((result) => {
+                disableMenuAll()
+                if (window.location.href.split('?').length === 1) {
+                    disableMenuAll()
+                    location.replace(window.location.href + '?id=' + requestData.no + '' + requestData.year)
+                } else {
+                    let temp_html = window.location.href.split('?')
+                    location.replace(temp_html[0] + '?id=' + requestData.no + '' + requestData.year)
+
+                }
+            })
+            // resetStyleIdDeleteRequest()
+            // deleteData = false
+            // data = true
+            // disableMenuAll()
+            // enableMenu('addMenu')
+            // enableMenu('editMenu')
+            // enableMenu('deleteMenu')
         } else if (result.dismiss === Swal.DismissReason.cancel) {
             // Swal.fire("บันทึกล้มเหลว");
         }
@@ -360,11 +471,20 @@ function changeStatusMenuData(status, status_delete) {
     }
 
 }
-function changeStatusDeleteRequest(status) {
+function changeStatusDeleteRequest(status, text, type_status) {
     let requestDataDelete = {}
     requestDataDelete.id = requestData.no
     requestDataDelete.year = requestData.year
-    requestDataDelete.status = status
+    requestDataDelete.status = status // status_delete
+    
+    requestDataDelete.func_status = type_status // type function 
+    if (type_status === 'cancel') {
+        requestDataDelete.b_status = requestData.status // status now
+        requestDataDelete.text_delete = text // logic delete
+    } else {
+        requestDataDelete.b_status = requestData.status_before // status now
+        requestDataDelete.text_delete = '' // logic delete
+    }
     console.log(`changeStatusDeleteRequest => `)
     console.log(requestDataDelete)
     return new Promise(function (resolve, reject) {
