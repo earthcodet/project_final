@@ -33,6 +33,7 @@ function start() {
 function setUI(data, m, y) {
     document.getElementById('ta_m').innerText = m_t[m - 1] + ' ' + (y + 543)
     document.getElementById('mon_report').innerText = m_full_name[m]
+    document.getElementById('year_report_title').innerText = y + 543
     let topic = [
         'ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร  (สอ.4)',
         'ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร  (สอ.5)',

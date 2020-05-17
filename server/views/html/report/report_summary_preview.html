@@ -33,7 +33,8 @@
     body {
         padding: 20px;
     }
-    button{
+
+    button {
         font-family: 'Sarabun';
     }
 </style>
@@ -53,12 +54,12 @@
         <br><br>
     </div>
     <p class="text-center">รายงานการชำระค่าธรรมเนียมใบอนุญาตประกอบการค้าประเภทต่างๆ</p>
-    <p class="text-center">ประจำเดือน <z id='mon_report'></z>
+    <p class="text-center">ประจำเดือน <z id='mon_report'></z> ปี <z id='year_report_title'></z>
     </p>
     <div class="sarabun-font">
         <table id="table" class="table table-bordered ">
             <thead class="text-center">
-                <tr >
+                <tr>
                     <th class="align-middle" rowspan="2">ที่</th>
                     <th class="align-middle" rowspan="2" width="29%"> รายการ </th>
                     <th class="align-middle" rowspan="2">ยอดประมาณการ(ราย)</th>
@@ -215,16 +216,16 @@
 
         <table class="table" id='table_sum'>
             <thead>
-            <tr>
-                <td>ยอดรวมที่จัดเก็บได้ในปีงบประมาณ</td>
-                <td class="text-left" id='year_report'> </td>
-                <td>รวมจำนวนทั้งหมด</td>
-                <td id='total_op'> </td>
-                <td class="text-left">ราย</td>
-                <td>เป็นเงิน</td>
-                <td id='total_money'></td>
-                <td class="text-left">บาท</td>
-            </tr>
+                <tr>
+                    <td>ยอดรวมที่จัดเก็บได้ในปีงบประมาณ</td>
+                    <td class="text-left" > <z id='year_report'></z></td>
+                    <td>รวมจำนวนทั้งหมด</td>
+                    <td id='total_op'> </td>
+                    <td class="text-left">ราย</td>
+                    <td>เป็นเงิน</td>
+                    <td id='total_money'></td>
+                    <td class="text-left">บาท</td>
+                </tr>
             </thead>
         </table>
     </div>
