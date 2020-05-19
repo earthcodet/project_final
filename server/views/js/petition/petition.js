@@ -33,7 +33,7 @@ function getView(value_t) {
                 displayBlock(type_start, 1)
                 setUIDataCom(type_start, 1)
                 if (p_data.total_image != 0) {
-                    getImage(p_data.id+''+p_data.year).then((data_image) => {
+                    getImage(p_data.id + '' + p_data.year).then((data_image) => {
                         list_image = data_image
                         console.log('set 1')
                         setUIDataCom(type_start, 2)
@@ -84,7 +84,7 @@ function setPDATA(data, type) {
             request_year: data.REQUEST_YEAR === null ? '' : data.REQUEST_YEAR,
             date_submission: data.COMPLAINT_DATE_SUBMISSION,
             // type: data.COMPLAINT_TYPE === null ? '' : data.COMPLAINT_TYPE,
-            type: data.COMPLAINT_TYPE ,
+            type: data.COMPLAINT_TYPE,
             status: data.COMPLAINT_STATUS === null ? '' : data.COMPLAINT_STATUS,
             date_start: data.COMPLAINT_DATE_START === null ? '' : data.COMPLAINT_DATE_START,
             date_end: data.COMPLAINT_DATE_END === null ? '' : data.COMPLAINT_DATE_END,
@@ -116,7 +116,6 @@ function displayBlock(type) {
     }
 }
 function setUIDataCom(type, type_step) {
-
     if (type_step === 1) {
         disableMenuAll()
         document.getElementById('c_id').value = p_data.id
@@ -158,7 +157,7 @@ function setUIDataCom(type, type_step) {
             document.getElementById('datepicker4').value = p_data.date_start
             document.getElementById('datepicker3').value = p_data.date_end
             document.getElementById('c_id').disabled = false
-           
+
         }
         if (p_data.total_image === 0) {
             if (p_data.is_deleted === 'Y') {
@@ -167,6 +166,9 @@ function setUIDataCom(type, type_step) {
             if (p_data.is_deleted === 'N') {
                 changeStatusMenuData()
             }
+        }
+        if(p_data.is_deleted === 'Y'){
+            document.getElementById('c_id').style.textDecoration = 'line-through'
         }
 
     } else if (type_step === 2) {
@@ -235,6 +237,12 @@ function setUIDataCom(type, type_step) {
         if (p_data.is_deleted === 'N') {
             changeStatusMenuData()
         }
+    }
+    if (document.getElementById('c_id').value.trim().length != 0) {
+        document.getElementById('c_id').disabled = true
+    }
+    if (document.getElementById('datepicker2').value.trim().length != 0) {
+        document.getElementById('datepicker2').disabled = true
     }
 }
 function getPersonal(id) {
@@ -335,18 +343,18 @@ function createGroupData() {
     }
     p_data.date_submission = document.getElementById('datepicker2').value.trim()
     p_data.type = getValueType()
-    let w_c_1 = document.getElementById('w_1').checked 
-    let w_c_2 = document.getElementById('w_2').checked 
-    if(w_c_1){
+    let w_c_1 = document.getElementById('w_1').checked
+    let w_c_2 = document.getElementById('w_2').checked
+    if (w_c_1) {
         p_data.status = 'N'
-    }else if(w_c_2){
+    } else if (w_c_2) {
         p_data.status = 'Y'
-    
+
     }    // }else{
     //     p_data.status = 'M'
     // }
     let temp_year_input = document.getElementById('datepicker2').value.trim()
-    p_data.year = temp_year_input.slice(temp_year_input.length - 2 , temp_year_input.length)
+    p_data.year = temp_year_input.slice(temp_year_input.length - 2, temp_year_input.length)
     console.log(p_data.year)
     p_data.date_start = document.getElementById('datepicker4').value.trim()
     p_data.date_end = document.getElementById('datepicker3').value.trim()
@@ -428,7 +436,7 @@ function checkInputInsert(type) {
     //zone 1
     let c_1 = document.getElementById('c_id').value.trim().length === 0
     let c_2 = document.getElementById('datepicker2').value.trim().length === 0
-    if(document.getElementById('datepicker2').value.trim().length != 10){
+    if (document.getElementById('datepicker2').value.trim().length != 10) {
         c_2 = true
     }
     let c_3 = document.getElementById('full_name_op').value.trim().length === 0

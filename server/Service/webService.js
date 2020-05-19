@@ -693,17 +693,28 @@ class service {
         console.log(p_id)
         return new Promise((resolve, reject) => {
             if (p_id.status_insert === 'NEW') {
-                console.log('insert com start')
-                ComplaintDAOObj.insert(p_id).then((result) => {
-                    console.log('insert com end')
-                    console.log(`result = ${result}`)
-                    if (result != 'true') {
-                        return resolve(false)
-                    } else {
-                        if (p_id.request_id != null) {
-                            RequestDAOObj.updateStatusOnly(p_id.request_id, p_id.request_year, user_update, dateForUpdate, 'ban').then((t_data) => {
+                ComplaintDAOObj.getDuplicationId(p_id.id, p_id.year).then((re_result) => {
+                    if (re_result === true) {
+                        p_id.is_deleted = 'N'
+                        ComplaintDAOObj.update(p_id).then((result_update) => {
+                            if (p_id.request_id != null) {
+                                RequestDAOObj.updateStatusOnly(p_id.request_id, p_id.request_year, user_update, dateForUpdate, 'ban').then((t_data) => {
+                                    if (image.length != 0) {
+                                        this.insertImageComplainth(image, p_id.id + '' + p_id.year).then((data) => {
+                                            if (data) {
+                                                return resolve(true)
+                                            } else {
+                                                return resolve('Image Error')
+                                            }
+                                        })
+                                    } else {
+                                        return resolve(true)
+                                    }
+                                })
+                            } else {
+                                console.log('insert image end')
                                 if (image.length != 0) {
-                                    this.insertImageComplainth(image, p_id.id+''+p_id.year).then((data) => {
+                                    this.insertImageComplainth(image, p_id.id + '' + p_id.year).then((data) => {
                                         if (data) {
                                             return resolve(true)
                                         } else {
@@ -713,31 +724,61 @@ class service {
                                 } else {
                                     return resolve(true)
                                 }
-                            })
-                        } else {
-                            console.log('insert image end')
-                            if (image.length != 0) {
-                                this.insertImageComplainth(image, p_id.id+''+p_id.year).then((data) => {
-                                    if (data) {
-                                        return resolve(true)
-                                    } else {
-                                        return resolve('Image Error')
-                                    }
-                                })
-                            } else {
-                                return resolve(true)
                             }
-                        }
+                        })
+                    } else {
+                        console.log('insert com start')
+                        ComplaintDAOObj.insert(p_id).then((result) => {
+                            console.log('insert com end')
+                            console.log(`result = ${result}`)
+                            if (result != 'true') {
+                                return resolve(false)
+                            } else {
+                                if (p_id.request_id != null) {
+                                    RequestDAOObj.updateStatusOnly(p_id.request_id, p_id.request_year, user_update, dateForUpdate, 'ban').then((t_data) => {
+                                        if (image.length != 0) {
+                                            this.insertImageComplainth(image, p_id.id + '' + p_id.year).then((data) => {
+                                                if (data) {
+                                                    return resolve(true)
+                                                } else {
+                                                    return resolve('Image Error')
+                                                }
+                                            })
+                                        } else {
+                                            return resolve(true)
+                                        }
+                                    })
+                                } else {
+                                    console.log('insert image end')
+                                    if (image.length != 0) {
+                                        this.insertImageComplainth(image, p_id.id + '' + p_id.year).then((data) => {
+                                            if (data) {
+                                                return resolve(true)
+                                            } else {
+                                                return resolve('Image Error')
+                                            }
+                                        })
+                                    } else {
+                                        return resolve(true)
+                                    }
+                                }
+                            }
+                        })
                     }
                 })
+
             } else {
+                //bug done
                 console.log('UPDATE COM')
+                if (p_id.is_deleted === 'Y') {
+                    ImageDAOObj.deleteImageComplaint(p_id.id+''+p_id.year)
+                }
                 ComplaintDAOObj.update(p_id).then((result) => {
                     if (!result) {
                         return resolve(false)
                     } else {
                         if (image.length != 0) {
-                            this.insertImageComplainth(image, p_id.id+''+p_id.year).then((data) => {
+                            this.insertImageComplainth(image, p_id.id + '' + p_id.year).then((data) => {
                                 console.log('0 true')
                                 if (data) {
                                     if (p_id.is_deleted === 'Y' && p_id.request_id != null) {
@@ -770,7 +811,6 @@ class service {
                     }
                 })
             }
-
         })
     }
     insertImageComplainth(image, id) {
@@ -1436,11 +1476,11 @@ class service {
             new_data.phone = this.setNullValue(new_data.phone, 'phone')
             new_data.nationality = this.setNullValue(new_data.nationality)
             new_data.race = this.setNullValue(new_data.race)
-            new_data.birthday = this.setNullValue(new_data.birthday, 'date') 
+            new_data.birthday = this.setNullValue(new_data.birthday, 'date')
             new_data.card_expipe = this.setNullValue(new_data.card_expipe, 'date')
             new_data.fax = this.setNullValue(new_data.fax)
             new_data.surname = this.setNullValue(new_data.surname)
-            new_data.card_issued = this.setNullValue(new_data.card_issued, 'date') === null ? '-' : this.setNullValue(new_data.card_issued, 'date')  
+            new_data.card_issued = this.setNullValue(new_data.card_issued, 'date') === null ? '-' : this.setNullValue(new_data.card_issued, 'date')
             return new_data
         }
         if (type === 'ADDRESS') {

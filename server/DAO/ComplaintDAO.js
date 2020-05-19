@@ -66,11 +66,13 @@ class ComplaintDAO {
                     COMPLAINT_TOTAL_IMAGE : p_data.total_image,
                     COMPLAINT_IS_DELETED : p_data.is_deleted
                 }
+                console.log(query)
             con.query(query, values, function (err, result) {
                 if (err) {
                     console.log(err)
                     return resolve(err.code)
                 }
+                console.log(result)
                 if (result.affectedRows === 1) {
                     return resolve(true)
                 } else {
@@ -87,6 +89,22 @@ class ComplaintDAO {
                     throw err;
                 }
                 return resolve(rows);
+            });
+        });
+    }
+    getDuplicationId(id, year){
+        return new Promise((resolve, reject) => { 
+            con.query('SELECT * FROM complaint WHERE COMPLAINT_ID ="'+id+'"'+" AND COMPLAINT_YEAR = '"+`${year}`+"' AND COMPLAINT_IS_DELETED = 'Y'", function (err, rows) {
+                if (err) {
+                    console.log(err)
+                    throw err;
+                }
+                if(rows.length != 0){
+                    return resolve(true);
+                }else{
+                    return resolve(false);
+                }
+                
             });
         });
     }
