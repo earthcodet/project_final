@@ -16,6 +16,7 @@ function addPage() {
     disableFunction()
     disableMenuAll()
     enableMenu('saveMenu')
+    enableMenu('deleteMenu')
     var id = document.getElementById('id')
     if (id != null) {
         id.style.textDecoration = ''
