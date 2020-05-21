@@ -262,7 +262,7 @@ function changeStatusDelete(status) {
     console.log(`changeStatusDelete => `)
     console.log(personalDelete)
     return new Promise(function (resolve, reject) {
-        axios.post(`http://localhost:5000/update/status/delete/`, { 'personal': personalDelete }).then((result) => {
+        axios.post(`http://localhost:5000/update/status/delete`, { 'personal': personalDelete }).then((result) => {
             console.log(`changeStatusDelete = ${result.data}`)
             return resolve(result.data);
         })
@@ -584,7 +584,7 @@ function searchOparator() {
                         นามสกุล :
                         <input type="text" id="popSearchSurname" style="width: 18%;" >
                         เลขบัตรประจำตัว :
-                        <input type="text" id="popSearchId" style="width: 18%;" >
+                        <input type="text" id="popSearchId" style="width: 18%;" maxlength=13 >
                         <button type="button" style="width: auto;height: auto;"
                         class="btn btn-secondary is-color" onClick='searchPersonal()'>
                                 <i class="fa fa-search"></i> 

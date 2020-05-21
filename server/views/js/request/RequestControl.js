@@ -618,7 +618,7 @@ function searchOparator(typeSearch) {
                         นามสกุล :
                         <input type="text" id="popSearchSurname" style="width: 18%;" >
                         เลขบัตรประจำตัว :
-                        <input type="text" id="popSearchId" style="width: 18%;" >
+                        <input type="text" id="popSearchId" style="width: 18%;" maxlength=13>
                         <button type="button" style="width: auto;height: auto;"
                         class="btn btn-secondary is-color" onClick="searchPersonal('${typeSearch}')">
                                 <i class="fa fa-search"></i> 
