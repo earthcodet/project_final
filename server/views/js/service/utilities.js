@@ -536,30 +536,30 @@ function getDateExp(type, date) {
     if (type === 'หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร' || type === 'หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร') {
         // 3 year - 1 day
         // date_return.date_exp = `${day - 1}-${month}-${year + 3}`
-        if (((year + 1) - 543) % 4 === 0) {
+        if (((year + 2) - 543) % 4 === 0) {
             if (parseInt(month) === 3 && day === 1) {
-                date_return.date_exp = '29-02-' + (year + 1)
+                date_return.date_exp = '29-02-' + (year + 2)
             } else {
 
                 if (day === 1) {
                     if (parseInt(month) - 1 === 0) {
-                        date_return.date_exp = `${mn[11]}-12-${year + 3}`
+                        date_return.date_exp = `${mn[11]}-12-${year + 2}`
                     } else {
-                        date_return.date_exp = `${mn[parseInt(month) - 2]}-${parseInt(month) - 1}-${year + 3}`
+                        date_return.date_exp = `${mn[parseInt(month) - 2]}-${parseInt(month) - 1}-${year + 2}`
                     }
                 } else {
-                    date_return.date_exp = `${day - 1}-${month}-${year + 3}`
+                    date_return.date_exp = `${day - 1}-${month}-${year + 2}`
                 }
             }
         } else {
             if (day === 1) {
                 if (parseInt(month) - 1 === 0) {
-                    date_return.date_exp = `${mn[11]}-12-${year + 3}`
+                    date_return.date_exp = `${mn[11]}-12-${year + 2}`
                 } else {
-                    date_return.date_exp = `${mn[parseInt(month) - 2]}-${parseInt(month) - 1}-${year + 3}`
+                    date_return.date_exp = `${mn[parseInt(month) - 2]}-${parseInt(month) - 1}-${year + 2}`
                 }
             } else {
-                date_return.date_exp = `${day - 1}-${month}-${year + 3}`
+                date_return.date_exp = `${day - 1}-${month}-${year + 2}`
             }
         }
         console.log(date_return.date_exp)

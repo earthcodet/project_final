@@ -203,7 +203,7 @@ function checkPay() {
     if (sum_year === 0) {
         noPay()
     } else {
-        payPopup()
+        payPopup('ex')
     }
 }
 //ดูประวัติการโอนใบ
@@ -659,8 +659,9 @@ function notApprovalPopup() {
     });
 }
 //ชำระเงิน
-function payPopup() {
-    let html_display = `
+function payPopup(status_pay) {
+    let html_display = ''
+    html_display = `
     <br>
     <label class = 'topic' style='font-size:1.5vw'> ชำระเงิน </label> 
     <div style ='display:block; text-align:left;margin-left:4.5vw'>
@@ -739,36 +740,49 @@ function payPopup() {
                     setTimeout(function () {
                         inRequest.staff_id_money = document.getElementById('app_name_money').value
                         if (inRequest.date_expired != '') {
-                            let object = getDateExp(inRequest.menu, document.getElementById('datepicker7').value)
-                            inRequest.date_expired = object.date_exp
-                            inRequest.date_issued = object.date_issuse
+                            if (status_pay != 'ex') {
+                                let object = getDateExp(inRequest.menu, document.getElementById('datepicker7').value)
+                                inRequest.date_expired = object.date_exp
+                                inRequest.date_issued = object.date_issuse
+                            }
                             //จะเช็คต่อว่า ปัจุจบัน ต้องเพิ่มเงินไปที่ช่องไหน
                             let temp = inRequest.date_expired.split('-')
                             let year = parseInt(temp[2])
                             let year_now = parseInt(new Date().toISOString().slice(0, 10).split('-')[0]) + 543
+                            // year_now = 2564
+                            console.log(`year_now - year = ${year - year_now}`)
                             // let year_now = parseInt('2564')
                             //ใบอนุญาต เหลืออีก 3 ปี บันทึกลงช่องที่ 1
-                            if (year - year_now === 3) {
-                                inRequest.receipt_date = document.getElementById('datepicker7').value
-                                inRequest.receipt_fine = document.getElementById('pay_fine').value
-                                inRequest.receipt_fee = document.getElementById('pay_fee').value
-                                inRequest.status_before = inRequest.status
-                                inRequest.status = 'active'
-                            } else if (year - year_now === 2) {
-                                //ใบอนุญาต เหลืออีก 2 ปี บันทึกลงช่องที่ 2
-                                inRequest.receipt_date_year_2 = document.getElementById('datepicker7').value
-                                inRequest.receipt_fine_year_2 = document.getElementById('pay_fine').value
-                                inRequest.receipt_fee_year_2 = document.getElementById('pay_fee').value
-                                inRequest.status_before = inRequest.status
-                                inRequest.status = 'active'
-                            } else {
-                                //ใบอนุญาต เหลืออีก 1 ปี หรือ 0 ปี บันทึกลงช่องที่ 3
+                            if(status_pay === 'ex'){
+                                if (year - year_now === 2) {
+                                    inRequest.receipt_date = document.getElementById('datepicker7').value
+                                    inRequest.receipt_fine = document.getElementById('pay_fine').value
+                                    inRequest.receipt_fee = document.getElementById('pay_fee').value
+                                    inRequest.status_before = inRequest.status
+                                    inRequest.status = 'active'
+                                } else if (year - year_now === 1) {
+                                    //ใบอนุญาต เหลืออีก 2 ปี บันทึกลงช่องที่ 2
+                                    inRequest.receipt_date_year_2 = document.getElementById('datepicker7').value
+                                    inRequest.receipt_fine_year_2 = document.getElementById('pay_fine').value
+                                    inRequest.receipt_fee_year_2 = document.getElementById('pay_fee').value
+                                    inRequest.status_before = inRequest.status
+                                    inRequest.status = 'active'
+                                } else {
+                                    //ใบอนุญาต เหลืออีก 1 ปี หรือ 0 ปี บันทึกลงช่องที่ 3
+                                    inRequest.receipt_date_year_3 = document.getElementById('datepicker7').value
+                                    inRequest.receipt_fine_year_3 = document.getElementById('pay_fine').value
+                                    inRequest.receipt_fee_year_3 = document.getElementById('pay_fee').value
+                                    inRequest.status_before = inRequest.status
+                                    inRequest.status = 'active'
+                                }
+                            }else{
                                 inRequest.receipt_date_year_3 = document.getElementById('datepicker7').value
-                                inRequest.receipt_fine_year_3 = document.getElementById('pay_fine').value
-                                inRequest.receipt_fee_year_3 = document.getElementById('pay_fee').value
-                                inRequest.status_before = inRequest.status
-                                inRequest.status = 'active'
+                                    inRequest.receipt_fine_year_3 = document.getElementById('pay_fine').value
+                                    inRequest.receipt_fee_year_3 = document.getElementById('pay_fee').value
+                                    inRequest.status_before = inRequest.status
+                                    inRequest.status = 'active'
                             }
+                            
                             updateRequest().then((data) => {
                                 if (data) {
                                     resolve();
@@ -1038,6 +1052,15 @@ function statusRequestDelete() {
         confirmButtonColor: "#009688"
     })
 }
+function statusDontPay() {
+    Swal.fire({
+        html: 'ไม่สามารถชำระเงินได้เนื่องจากใบอนุญาตมีอายุเหลือปีสุดท้าย',
+        width: '30%',
+        customClass: 'swal-height',
+        icon: 'warning',
+        confirmButtonColor: "#009688"
+    })
+}
 function notChangeStatus() {
     Swal.fire({
         html: 'ไม่สามารถยกเลิกสถานะใบนี้ได้ เนื่องจากใบนี้ผ่านการโอนมา',
@@ -1187,7 +1210,14 @@ $(function () {
                         checkBackStatus()
                         break;
                     case 'pay':
-                        checkPay()
+                        let temp = inRequest.date_expired.split('-')
+                        let year = parseInt(temp[2])
+                        let year_now = parseInt(new Date().toISOString().slice(0, 10).split('-')[0]) + 543
+                        if (year_now === year) {
+                            statusDontPay()
+                        } else {
+                            checkPay()
+                        }
                         break;
                     case 'stop':
                         viewPageReport(undefined, inPersonal.id, `${inRequest.no}${inRequest.year}`)
