@@ -31,15 +31,15 @@
 <body>
     <!-- เมนูด้านบน -->
     <div class="w3-top icon-bar">
-        <a id="addMenu" onclick="addPage()" class="exit  "><i class="fa fa-plus-square" >
+        <a id="addMenu" onclick="addPage()" class="exit  "><i class="fa fa-plus-square">
                 <span>เพิ่ม</span></i></a>
-        <a id="editMenu" onclick="editPage()" class="exit disableds"><i class="fa fa-pencil-alt" >
+        <a id="editMenu" onclick="editPage()" class="exit disableds"><i class="fa fa-pencil-alt">
                 <span>แก้ไข</span></i></a>
-        <a id="saveMenu" onclick="insertPage()" class="exit disableds"><i class="fa fa-save" >
+        <a id="saveMenu" onclick="insertPage()" class="exit disableds"><i class="fa fa-save">
                 <span>บันทึก</span></i></a>
-        <a id="restoreMenu"  class="exit disableds"><i class="fa fa-reply" >
+        <a id="restoreMenu" class="exit disableds"><i class="fa fa-reply">
                 <span>เรียกคืน</span></i></a>
-        <a id="deleteMenu" onclick="deletePage()" class="exit disableds"><i class="fa fa-times" >
+        <a id="deleteMenu" onclick="deletePage()" class="exit disableds"><i class="fa fa-times">
                 <span>ยกเลิก</span></i></a>
         <!-- <a><i class="fa fa-search"> ค้นหา</i></a> -->
         <a id="exitMenu" onclick="exitPage()" class="exit" style="float: right;width: 17%;"><i
@@ -93,7 +93,8 @@
         <button class="dropdown-btn" id="adminna" style="display: none;"><b>ข้อมูลระบบ </b><i
                 class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
-            <a href="#"></a>
+            <a href="../system/systemUser.html">จัดการผู้ใช้งาน</a>
+            <a href="../system/systemType.html">จัดการประเภท</a>
         </div>
         <button class="dropdown-btn"><b>รายงาน </b><i class="fa fa-caret-down"></i></button>
         <div class="dropdown-container">
@@ -122,13 +123,14 @@
                 <div class="box">
                     <a style="margin-left: 5vw;">เลขที่ใบคำร้อง<a style="color: red;">*</a> : </a>
                     <input type="text" id='c_id' style="margin-left: 1vw;" maxlength="3"
-                    oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                     <a style="margin-left: 1vw;">วันที่ยืนคำร้อง<a style="color: red;">*</a> : </a>
                     <input type="text" id="datepicker2" style="margin-left: 1vw;" maxlength="10">
                     <br>
                     <a style="margin-left: 5vw;">บุคคลที่ต้องการร้องเรียน<a style="color: red;">*</a> : </a>
                     <input type="text" id="full_name_op" style="margin-left: 1vw;width: 20vw;" disabled>
-                    <button type="button" class="fa fa-search" id='btn_name' onclick="searchOparator()" style="margin-left: 1vw;">
+                    <button type="button" class="fa fa-search" id='btn_name' onclick="searchOparator()"
+                        style="margin-left: 1vw;">
                     </button>
                     <br>
                     <br>
@@ -174,18 +176,19 @@
                         <input type="text" id='t_e' style="margin-left: 3vw; width: 35%;" disabled>
                         <br>
                         <a style="margin-left: 5vw;">การดำเนินการ : </a>
-                        <input type="radio" id='w_1'name="petition2" style="margin-left: 1vw;">
+                        <input type="radio" id='w_1' name="petition2" style="margin-left: 1vw;">
                         <a> อยู่ระหว่างดำเนินการ </a><br>
-                        <input type="radio" id='w_2'name="petition2" style="margin-left: 12.3vw;">
+                        <input type="radio" id='w_2' name="petition2" style="margin-left: 12.3vw;">
                         <a> ดำเนินการเรียบร้อย </a>
                     </div>
                     <div id='block_no2' style='width: 85%; margin-left: 5vw;display: none'>
                         <a style="margin-left: 6.8vw;">เลขที่ใบอนุญาตที่ต้องการยกเลิก : </a>
                         <input type="text" id="request_id_report" style="width: 20vw;" disabled value="">
                         <br>
-                        <a style="margin-left: 1vw;">โดยขอหยุดประกอบกิจการชั่วคราวระหว่างวันที่ <a style="color: red;">*</a> : </a><input type="text"
-                            id="datepicker4" maxlength="10">
-                        <a style="margin-left: 1vw;">ถึงวันที่ <a style="color: red;">*</a>: </a><input type="text" id="datepicker3" maxlength="10">
+                        <a style="margin-left: 1vw;">โดยขอหยุดประกอบกิจการชั่วคราวระหว่างวันที่ <a
+                                style="color: red;">*</a> : </a><input type="text" id="datepicker4" maxlength="10">
+                        <a style="margin-left: 1vw;">ถึงวันที่ <a style="color: red;">*</a>: </a><input type="text"
+                            id="datepicker3" maxlength="10">
                         <br>
                     </div>
                     <br><br>
