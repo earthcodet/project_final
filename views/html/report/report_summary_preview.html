@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="../../css/fonts.css" rel="stylesheet">
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+    <!-- css ส่วนกลาง -->
+    <link href="../../css/utilities.css" rel="stylesheet">
+</head>
+<style type="text/css">
+    @media print {
+        @page {
+            size: A4 landscape;
+        }
+
+        BODY {
+            font-size: x-small;
+            line-height: 1em;
+        }
+
+        .hideWhenPrint {
+            display: none;
+        }
+    }
+
+    body {
+        padding: 20px;
+    }
+
+    button {
+        font-family: 'Sarabun';
+    }
+</style>
+<script type="text/javascript">
+    function ExportToExcel(table) {
+        var htmltable = document.getElementById('table');
+        var html = htmltable.outerHTML;
+        window.open('data:application/vnd.ms-excel,' + encodeURIComponent(html));
+    }
+</script>
+
+<body>
+    <div class="hideWhenPrint">
+        <button type="button" class="btn btn-outline-success btn-lg is-color" onclick="window.print()">พิมพ์</button>
+        <button type="button" class="btn btn-outline-success btn-lg is-color"
+            onclick="ExportToExcel(table)">Excel</button>
+        <br><br>
+    </div>
+    <p class="text-center">รายงานการชำระค่าธรรมเนียมใบอนุญาตประกอบการค้าประเภทต่างๆ</p>
+    <p class="text-center">ประจำเดือน <z id='mon_report'></z> ปี <z id='year_report_title'></z>
+    </p>
+    <div class="sarabun-font">
+        <table id="table" class="table table-bordered ">
+            <thead class="text-center">
+                <tr>
+                    <th class="align-middle" rowspan="2">ที่</th>
+                    <th class="align-middle" rowspan="2" width="29%"> รายการ </th>
+                    <th class="align-middle" rowspan="2">ยอดประมาณการ(ราย)</th>
+                    <th class="align-middle" rowspan="2">ยอดประมาณการ(บาท)</th>
+                    <th class="align-middle" colspan="2">ยอดยกมา</th>
+                    <th class="align-middle" colspan="2">ยอดเดือน <a id='ta_m'></a></th>
+                    <th class="align-middle" colspan="2">ยอดรวม</th>
+                    <th class="align-middle" colspan="2" width="10%">งบประมาณ</th>
+                </tr>
+                <tr>
+                    <th class="align-middle">จำนวน(ราย)</th>
+                    <th class="align-middle">จำนวนเงิน(บาท)</th>
+                    <th class="align-middle">จำนวน(ราย)</th>
+                    <th class="align-middle">จำนวนเงิน(บาท)</th>
+                    <th class="align-middle">จำนวน(ราย)</th>
+                    <th class="align-middle">จำนวนเงิน(บาท)</th>
+                    <th class="align-middle" colspan="2">+เกิน -ขาด</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร&nbsp;(สอ.4)</td>
+                    <td></td>
+                    <td rowspan="2"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td rowspan="2" class="align-middle">+</td>
+                    <td rowspan="2" class="align-middle">75,000</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร&nbsp;(สอ.5)</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร&nbsp;(สอ.6)</td>
+                    <td></td>
+                    <td rowspan="2"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td rowspan="2" class="align-middle"></td>
+                    <td rowspan="2" class="align-middle"></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร&nbsp;(สอ.7)</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ&nbsp;(สณ.2)</td>
+                    <td></td>
+                    <td rowspan="2"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td rowspan="2" class="align-middle"></td>
+                    <td rowspan="2" class="align-middle"></td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ&nbsp;(สณ.5)</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>ใบอนุญาตประกอบกิจการค้าที่เป็นอันตรายต่อสุขภาพ&nbsp;(อภ.2)</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>ใบอนุญาติจัดตั้งตลาดเอกชน&nbsp;(ตล.3)</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>ใบอนุญาติจัดตั้งสุสานและฌาปณสถาน</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="text-center">รวมทั้งสิ้น</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+
+        <table class="table" id='table_sum'>
+            <thead>
+                <tr>
+                    <td>ยอดรวมที่จัดเก็บได้ในปีงบประมาณ</td>
+                    <td class="text-left" > <z id='year_report'></z></td>
+                    <td>รวมจำนวนทั้งหมด</td>
+                    <td id='total_op'> </td>
+                    <td class="text-left">ราย</td>
+                    <td>เป็นเงิน</td>
+                    <td id='total_money'></td>
+                    <td class="text-left">บาท</td>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</body>
+<script src="../../node_modules/axios/dist/axios.min.js"></script>
+<script src="../../js/report_preview/preview_report_sum.js"></script>
+
+</html>

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+<title>กิจการที่จัดตั้งสถานที่จำหน่ายหรือสะสมอาหาร พื้นที่น้อยกว่า
+    200 ตารางเมตร</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../css/w.3.css">
+<link rel="stylesheet" href="../css/w3-theme-teal.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- bootstrap -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+
+<link href="../css/css-003.css" rel="stylesheet">
+<link href="../css/css-index.css" rel="stylesheet">
+<link href="../css/fonts.css" rel="stylesheet">
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="../js/js-index.js"></script>
+<script src="../js/test.js"></script>
+
+<!-- search -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- disable input -->
+<script src="../js/disable.js"></script>
+
+<!-- css ส่วนกลาง -->
+<link href="../css/utilities.css" rel="stylesheet">
+
+<!-- function ส่วนกลาง -->
+<script src="../js/utilities.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<!-- ทดสอบควบคุมหน้า -->
+<script src="../js/controlTest.js"></script>
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<body>
+    
+
+    <!-- เมนูด้านบน -->
+    <div class="w3-top" style="overflow:auto;">
+        <ul>
+            <li class="fa fa-bars w3-button w3-my-color w3-hide-large w3-xxlarge" onclick="w3_open()"></li>
+            <li>
+                <a id="addMenu" href="#news" onclick="addTEST()">
+                    <i class="fa fa-plus-square fa-lg w3-margin-right w3-text-theme "> </i>
+                    เพิ่ม
+                </a>
+            </li>
+            <li>
+                <a id="editMenu" href="#contact" onclick="editTEST()" class="disableds">
+                    <i class="fa fa-pencil fa-lg w3-margin-right w3-text-theme"></i>
+                    แก้ไข
+                </a>
+            </li>
+            <li>
+                <a id="saveMenu" onclick="insertTEST()" class="disableds" href="#contact">
+                    <i class="fa fa-floppy-o fa-lg w3-margin-right w3-text-theme"></i>
+                    บันทึก
+                </a>
+            </li>
+            <li>
+                <a id="restoreMenu" onclick="restoreTEST()" href="#contact" class="disableds">
+                    <i class="fa fa-reply fa-lg w3-margin-right w3-text-theme"></i>
+                    เรียกคืน
+                </a>
+            </li>
+            <li>
+                <a id="deleteMenu" onclick="deleteTEST()" href="#about" class="disableds">
+                    <i class="fa fa-close fa-lg w3-margin-right w3-text-theme"></i>
+                    ยกเลิก
+                </a>
+            </li>
+            <li class="w3-display-topright">
+                <a id="exitMenu" onclick="exitTEST()" class="exit"  >
+                    <i class="fa fa-sign-out fa-lg w3-margin-right w3-text-theme"></i>
+                    ออกจากระบบ
+                </a>
+            </li>
+        </ul>
+        <nav class="w3-sidebar w3-bar-block w3-collapse w3-animate-left w3-card" style="z-index:3;width:250px;"
+        id="mySidebar">
+        <a class="w3-bar-item w3-button w3-border-bottom w3-large" href="index.html">
+            <img src="../img/img1.jpg" style="width:100%;">
+        </a>
+        <div>
+            <a class="w3-bar-item w3-button w3-theme" onclick="myAccordion('demo')"
+                href="javascript:void(0)">ระบบงานคำขอ<i class="fa fa-caret-down"></i></a>
+            <div id="demo" class="w3-show">
+                <a class="w3-button" href="request_health_danger.html">- กิจการที่เป็นอันตรายต่อสุขภาพ</a>
+                <a class="w3-button w3-my-color" href="request_area_less.html">-
+                    กิจการที่จัดตั้งสถานที่จำหน่ายหรือสะสมอาหาร
+                    พื้นที่น้อยกว่า
+                    200 ตารางเมตร</a>
+                <a class="w3-button" href="request_area_more.html">- กิจการที่จัดตั้งสถานที่จำหน่ายหรือสะสมอาหาร
+                    พื้นที่เกินกว่า
+                    200 ตารางเมตร</a>
+                <a class="w3-button" href="request_market.html">- กิจการตลาด</a>
+                <a class="w3-button" href="request_public.html">- กิจการจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
+                <a class="w3-button" href="request_crematory.html">- กิจการฌาปณสถาน</a>
+            </div>
+        </div>
+
+        <div>
+            <a class="w3-bar-item w3-button" onclick="myAccordion2('demo2')"
+                href="javascript:void(0)">งานตรวจสอบ/อนุมัติ<i class="fa fa-caret-down"></i></a>
+            <div id="demo2" class="w3-hide">
+                <a class="w3-bar-item w3-button" href="#"></a>
+            </div>
+        </div>
+
+        <div>
+            <a class="w3-bar-item w3-button" onclick="myAccordion3('demo3')" href="javascript:void(0)">งานใบอนุญาต<i
+                    class="fa fa-caret-down"></i></a>
+            <div id="demo3" class="w3-hide">
+                <a class="w3-bar-item w3-button" href="#"></a>
+            </div>
+        </div>
+
+        <div>
+            <a class="w3-bar-item w3-button" onclick="myAccordion4('demo4')" href="javascript:void(0)">ข้อมูลส่วนกลาง<i
+                    class="fa fa-caret-down"></i></a>
+            <div id="demo4" class="w3-hide">
+                <a class="w3-button" href="./central/operator.html">- ข้อมูลผู้ประกอบการ</a>
+                <a class="w3-button" href="./central/02.html">- ข้อมูลการจดใบอนุญาต</a>
+                <a class="w3-button" href="./central/03.html">- โอนใบอนุญาต</a>
+            </div>
+        </div>
+
+        <div>
+            <a class="w3-bar-item w3-button" onclick="myAccordion5('demo5')" href="javascript:void(0)">งานร้องเรียน<i
+                    class="fa fa-caret-down"></i></a>
+            <div id="demo5" class="w3-hide">
+                <a class="w3-button" href="#">- บันทึกเรื่องร้องเรียน</a>
+                <a class="w3-button" href="#">- บันทึกคำร้อง</a>
+            </div>
+        </div>
+
+        <div>
+            <a class="w3-bar-item w3-button" onclick="myAccordion5('demo6')" href="javascript:void(0)">ข้อมูลระบบ<i
+                    class="fa fa-caret-down"></i></a>
+            <div id="demo6" class="w3-hide">
+                <a class="w3-bar-item w3-button" href="#"></a>
+            </div>
+        </div>
+
+        <div>
+            <a class="w3-bar-item w3-button" onclick="myAccordion5('demo7')" href="javascript:void(0)">รายงาน<i
+                    class="fa fa-caret-down"></i></a>
+            <div id="demo7" class="w3-hide">
+                <a class="w3-bar-item w3-button" href="#"></a>
+            </div>
+        </div>
+
+
+    </nav>
+
+    <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay">
+    </div>
+    </div>
+
+    <div class="w3-main" style="margin-left:250px; margin-top: 47px;">
+        <header class="w3-container w3-theme">
+            <h1 style="font-size:20px">กิจการที่จัดตั้งสถานที่จำหน่ายหรือสะสมอาหาร พื้นที่น้อยกว่า
+                200 ตารางเมตร</h1>
+        </header>
+
+        <div class="container-xl" style="padding:32px">
+            <div class="box">
+                <form id="form">
+                <fieldset disabled id="disable">
+                    <!-- <form action="/action_page.php"> -->
+                    <table class="table">
+                        <tr>
+                            <td><a>เลขที่คำขอ :</a></td>
+                            <td><input type="text" id="" name="" placeholder=""></td>
+                            <td><a>วันที่ยืนขอ :</a></td>
+                            <td><input type="date" id="" name="" placeholder=""></td>
+                            <td><a>ประเภทคำขอ :</a></td>
+                            <td><input list="brow" id="" name="">
+                                <datalist id="brow">
+                                    <option value="" hidden>เลือก...</option>
+                                    <option value="1.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่ไม่เกิน 10 ตรม.">
+                                        1.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่ไม่เกิน 10 ตรม.
+                                    </option>
+                                    <option
+                                        value="2.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่เกิน 10 ตรม. แต่ไม่เกิน 25 ตรม.">
+                                        2.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่เกิน 10 ตรม. แต่ไม่เกิน 25 ตรม.
+                                    </option>
+                                    <option
+                                        value="3.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่เกิน 25 ตรม. แต่ไม่เกิน 50 ตรม.">
+                                        3.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่เกิน 25 ตรม. แต่ไม่เกิน 50 ตรม.
+                                    </option>
+                                    <option
+                                        value="4.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่เกิน 50 ตรม. แต่ไม่เกิน 100ตรม.">
+                                        4.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่เกิน 50 ตรม. แต่ไม่เกิน 100ตรม.
+                                    </option>
+                                    <option
+                                        value="5.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่เกิน 100 ตรม. แต่ไม่เกิน 200ตรม.">
+                                        5.สถานจำหน่ายอาหาร หรือ สถานที่สะสมอาหาร พื้นที่เกิน 100 ตรม. แต่ไม่เกิน 200ตรม.
+                                    </option>
+                                </datalist>
+                                </input></td>
+                            <td><a>เขียนที่ :</a></td>
+                            <td><input type="text" id="place" value="เทศบาลเมืองแสนสุข" readonly></td>
+                        </tr>
+                    </table>
+
+                    <table class="table">
+                        <tr>
+                            <td><a>ข้าพเจ้า :</a>
+                                <input type="radio" name="typee" id="typeUser1" value="บุคคลธรรมดา">
+                                <a>บุคคลธรรมดา</a>
+                                <input type="radio" name="typee" id="typeUser2" value="นิติบุคคล">
+                                <a>นิติบุคคล</a> &nbsp;</td>
+                            <td><input type="text" id="name"></td>
+                            <td><a>เลขประจำตัว :</a></td>
+                            <td><input type="int" id="id"> &nbsp;</td>
+                            <td><a>อายุ :</a></td>
+                            <td><input type="int" id="age" size="3"> &nbsp;</td>
+                            <td><a>สัญชาติ :</a></td>
+                            <td><input list="nationality" id="" name="" size="7.5">
+                                <datalist id="nationality">
+                                    <select id="nationality">
+                                        <option value="" hidden>เลือก...</option>
+                                        <option value="ไทย">ไทย</option>
+                                        <option value="จีน"></option>
+                                        <option value="อเมริกัน"></option>
+                                        <!-- </select> -->
+                                </datalist>
+                                </input> &nbsp;</td>
+                            <td><a>เชื้อชาติ :</a></td>
+                            <td>
+                                <input list="nationality" id="" name="" size="7.5">
+                                <datalist id="nationality">
+                                    <!-- <select id="race" style="width: 8%;"> -->
+                                    <option value="" hidden>เลือก...</option>
+                                    <option value="ไทย">ไทย</option>
+                                    <option value="จีน"></option>
+                                    <option value="อเมริกัน"></option>
+                                    <!-- </select> -->
+                                </datalist>
+                                </input></td>
+                        </tr>
+                    </table>
+
+                    <table class="table">
+                        <tr>
+                            <td><a>ตั้งอยู่เลขที่ :</a></td>
+                            <td><input type="text" id="homeId" size="5"></td>
+                            <td><a>หมู่ที่ :</a></td>
+                            <td><input type="int" id="moo" size="5"></td>
+                            <td><a>ตรอก:</a></td>
+                            <td><input type="text" id="trxk"></td>
+                            <td><a>ซอย :</a></td>
+                            <td><input type="text" id="sxy"></td>
+                            <td><a>อาคาร :</a></td>
+                            <td><input type="text" id="building"></td>
+                            <td><a>ถนน :</a></td>
+                            <td><input type="text" id="road" size="15"></td>
+                        </tr>
+                    </table>
+
+                    <table class="table">
+                        <tr>
+                            <td><a>จังหวัด :</a></td>
+                            <td><select id="province">
+                                </select></td>
+                            <td><a>อำเภอ :</a></td>
+                            <td> <select id="district">
+                                </select></td>
+                            <td><a>ตำบล :</a></td>
+                            <td><select id="subdistrict">
+                                </select></td>
+                            <td><a>โทรศัพท์ :</a></td>
+                            <td><input type="text" id="phone"></td>
+                            <td><a>โทรสาร :</a></td>
+                            <td> <input type="text" id="fax"></td>
+                        </tr>
+                    </table>
+
+                    <table class="table">
+                        <tr>
+                            <td><a>ใช้ชื่ออาคารที่ประกอบการว่า :</a></td>
+                            <td><input type="text" id="workplaceName" size="50"></td>
+                            <td> (ถ้ามี)</td>
+                            <td><a>พื้นที่ :</a></td>
+                            <td><input type="int" id="area" size="10"></td>
+                            <td>ตารางเมตร</td>
+                            <td><a>จำนวนคนงาน :</a></td>
+                            <td><input type="int" id="numPeople" size="10"></td>
+                            <td>คน</td>
+                        </tr>
+                    </table>
+
+                    <table class="table">
+                        <tr>
+                            <td><a>ตั้งอยู่เลขที่ :</a></td>
+                            <td><input type="text" id="wHomeId" size="5"></td>
+                            <td><a>หมู่ที่ :</a></td>
+                            <td><input type="int" id="wMoo" size="5"></td>
+                            <td><a>ตรอก:</a></td>
+                            <td><input type="text" id="wTrxk"></td>
+                            <td><a>ซอย :</a></td>
+                            <td><input type="text" id="wSxy"></td>
+                            <td><a>อาคาร :</a></td>
+                            <td><input type="text" id="wBuilding"></td>
+                            <td><a>ถนน :</a></td>
+                            <td><input type="text" id="wRoad" size="15"></td>
+                        </tr>
+                    </table>
+
+                    <table class="table">
+                        <tr>
+                            <td><a>จังหวัด :</a></td>
+                            <td><select id="wProvince">
+                                </select></td>
+                            <td><a>อำเภอ :</a></td>
+                            <td> <select id="wDistrict">
+                                </select></td>
+                            <td><a>ตำบล :</a></td>
+                            <td><select id="wSubdistrict">
+                                </select></td>
+                            <td><a>โทรศัพท์ :</a></td>
+                            <td><input type="text" id="wPhone"></td>
+                            <td><a>โทรสาร :</a></td>
+                            <td> <input type="text" id="wFax"></td>
+                        </tr>
+                    </table>
+
+                    <br>
+                    บุลคลอ้างอิง
+                    <br>
+
+                    <table class="table">
+                        <td><a>คำนำหน้าชื่อ :</a></td>
+                        <td><select id="" name="">
+                                <option value="" hidden>เลือก...</option>
+                                <option value="">นาย</option>
+                                <option value="">นาง</option>
+                                <option value="">นางสาว</option>
+                            </select></td>
+                        <td><a>ชื่อ :</a></td>
+                        <td><input type="text" id="" name="" placeholder=""></td>
+                        <td><a>นามสกุล :</a></td>
+                        <td><input type="text" id="" name="" placeholder=""></td>
+                        <td><a>สถานะ :</a></td>
+                        <td><input type="text" id=""></td>
+                        <td><a>โทรศัพท์ :</a></td>
+                        <td><input type="text" id=""></td>
+                    </table>
+
+                    <br>
+
+                    <div class="row">
+                        <div class="col"><input type="radio" name="sub" id="purposeType1"> ยืนยันคำขอรับ &nbsp;
+                            <input type="radio" name="sub" id="purposeType2"> ยืนยันคำขอต่ออายุ &nbsp;
+                            <br>
+                            <br>
+
+                            <input type="checkbox" id="documentId" value="cb1" />
+                            หนังสือยินยอมให้ใช้อาคารสถานที่เป็นที่ประกอบการ<br>
+                            <input type="checkbox" id="documenthHome" value="cb2" />
+                            สำเนาทะเบียนบ้าน/โฉนดที่ดิน(ที่ให้ใช้เป็นสถานที่ประกอบกิจการ)<br>
+                            <input type="checkbox" id="documentLegalEntity" value="cb3" />
+                            ใบรับรองแพทย์ผู้ขอรับใบอนุญาตและผู้ช่วยจำหน่ายสินค้า (ตามแบบ สณ.๑๑)<br>
+                            <input type="checkbox" id="documentSignature" value="cb4" /> หนังสือสัญญาเช่า<br>
+                            <input type="checkbox" id="documentSJ4" value="cb5" /> หนังสือมอบอำนาจ
+                            พร้อมติดอากรแสตมป์<br>
+                            <input type="checkbox" id="documentOther" value="cb6" /> เอกสารอื่นๆที่เกี่ยวข้อง
+                            <input type="text" id="other" size="40" /><br>
+                            <br><br>
+                        </div>
+                        <div class="col">
+                            <button class="button" id="">รูปภาพ</button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 offset-md-3 text-center">
+                            ข้าพเจ้าขอรับรองว่า
+                            ข้อความในแบบคำร้องขอต่อใบอนุญาตนี้เป็นจริงทุกประการ<br>
+                            (ลงชื่อ)&nbsp;
+                            <input type="text" id="documentName" />&nbsp;
+                            ผู้ขอรับใบอนุญาต
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
