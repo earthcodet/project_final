@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>รายงานประจำเดือน/ปี</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <script src="../js/js22.js"></script> -->
+
+    <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.css">
+    <link rel="stylesheet" href="../../css/css2.css">
+    <link href="../../css/fonts.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- เมนูด้านบน -->
+    <div class="w3-top icon-bar">
+        <a id="addMenu" class="exit disableds" onclick="addTEST()"><i class="fa fa-plus-square"><span> เพิ่ม</span></i></a>
+        <a id="editMenu" onclick="editTEST()" class="exit disableds"><i class="fa fa-pencil-alt"><span> แก้ไข</span></i></a>
+        <a id="saveMenu" onclick="insertTEST()" class="exit disableds"><i class="fa fa-save"><span> บันทึก</span></i></a>
+        <a id="restoreMenu" onclick="restoreTEST()" class="exit disableds"><i class="fa fa-reply"><span> เรียกคืน</span></i></a>
+        <a id="deleteMenu" onclick="deleteTEST()" class="exit disableds"><i class="fa fa-times"><span> ยกเลิก</span></i></a>
+        <!-- <a><i class="fa fa-search"> ค้นหา</i></a> -->
+        <a id="exitMenu" onclick="exitPage()" class="exit" style="float: right;width: 17%;"><i
+                class="fa fa-sign-out-alt"><span>
+                ออกจากระบบ</span></i></a>
+    </div>
+    <!-- เมนูด้านข้าง -->
+    <div class="sidenav">
+        <a href="/" style="margin-top: 15%;">
+            <img src="../../img/img1.jpg" style="width:92%;">
+        </a>
+        <br>
+        <button class="dropdown-btn"><b>ระบบงานคำขอ </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="../request/searchRequest.html">- ค้นหา/แก้ไข</a>
+            <a href="../request/request_public_sell.html">- ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
+            <a href="../request/request_public_hawk.html">- ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
+            <a href="../request/request_area_more_sell.html">- ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
+            <a href="../request/request_area_more_correct.html">- ใบอนุญาตจัดตั้งสถานที่สะสมอาหาร</a>
+            <a href="../request/request_area_less_sell.html">- หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
+            <a href="../request/request_area_less_correct.html">- หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
+            <a href="../request/request_market.html">- ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
+            <a href="../request/request_health_danger.html">- กิจการที่เป็นอันตรายต่อสุขภาพ</a>
+            <a href="../request/request_crematory.html">- กิจการฌาปณสถาน</a>
+        </div>
+        <button class="dropdown-btn"><b>ระบบต่ออายุงานคำขอ </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="../renew/renew_public_sell.html">- คำขอต่อใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
+            <a href="../renew/renew_public_hawk.html">- คำขอต่อใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
+            <a href="../renew/renew_area_more_sell.html">- คำขอต่อใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
+            <a href="../renew/renew_area_more_correct.html">- คำขอต่อใบอนุญาตจัดตั้งสถานที่สะสมอาหาร</a>
+            <a href="../renew/renew_area_less_sell.html">- คำขอต่อหนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
+            <a href="../renew/renew_area_less_correct.html">- คำขอต่อหนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
+            <a href="../renew/renew_market.html">- คำขอต่อใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
+            <a href="../renew/renew_health_danger.html">- คำขอต่อกิจการที่เป็นอันตรายต่อสุขภาพ</a>
+            <a href="../renew/renew_crematory.html">- คำขอต่อกิจการฌาปณสถาน</a>
+        </div>
+        <button class="dropdown-btn"><b>ข้อมูลส่วนกลาง </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="../central/operator.html">- ข้อมูลผู้ประกอบการ</a>
+            <a href="../central/02.html">- ข้อมูลการจดใบอนุญาต</a>
+            <a href="../central/03.html">- โอนใบอนุญาต</a>
+        </div>
+        <button class="dropdown-btn"><b>งานร้องเรียน </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="../utilities/petition.html">- บันทึกเรื่องร้องเรียน</a>
+            <!-- <a href="#">- บันทึกคำร้อง</a> -->
+        </div>
+        <button class="dropdown-btn" id="adminna" style="display: none;"><b>ข้อมูลระบบ </b><i
+                class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="../system/systemUser.html">จัดการผู้ใช้งาน</a>
+            <a href="../system/systemType.html">จัดการประเภท</a>
+        </div>
+        <button class="dropdown-btn select-active"><b>รายงาน </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="../report/report_crematory.html">- ตามคำขอ</a>
+            <a class="dropdown-active" href="../report/report_summary.html">- สรุป</a>
+        </div>
+        <button class="dropdown-btn notification"><b>แจ้งเตือน </b><span id="notficationRequest" class="badge"
+                style="margin-left:0.5vw;">100000</span><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a class="notification" href="../notfication/request.html">- งานคำขอ<span id="notficationRequest2"
+                    class="badge" style="margin-left:0.5vw;">100000</span></a>
+        </div>
+        <br><br>
+        <button class="dropdown-btn"><a href="../notfication/request copy.html" style="color: red;"><b>คำขอหมดอายุเกิน 3
+                    ปี </b></a>
+            <!-- <i class="fa fa-caret-down"></i> -->
+        </button>
+    </div>
+    <!-- เนื้อหา -->
+    <form id="form">
+        <fieldset id="disable" style="border: 0;padding: 0;margin: 0;">
+            <div class="main">
+                <header class="w3-top2">
+                    <h1 style="font-size:2.8vh;margin-left: 25px;padding: 2px;"> สรุปรายงานประจำเดือน / ปี</h1>
+                </header>
+                <div style="text-align: center; ">
+                    <a>รายเดือน : </a>
+                    <select id='mon' style="width: 17%;">
+                        <option value=1>มกราคม</option>
+                        <option value=2>กุมภาพันธ์</option>
+                        <option value=3>มีนาคม</option>
+                        <option value=4>เมษายน</option>
+                        <option value=5>พฤษภาคม</option>
+                        <option value=6>มิถุนายน</option>
+                        <option value=7>กรกฎาคม</option>
+                        <option value=8>สิงหาคม</option>
+                        <option value=9>กันยายน</option>
+                        <option value=10>ตุลาคม</option>
+                        <option value=11>พฤศจิกายน</option>
+                        <option value=12>ธันวาคม</option>
+                    </select>&emsp;
+                    <a>ปี พ.ศ. : </a>
+                    <select id="year" style="width: 10%;">
+                        <option value=2550>2550</option>
+                        <option value=2551>2551</option>
+                        <option value=2552>2552</option>
+                        <option value=2553>2553</option>
+                        <option value=2554>2554</option>
+                        <option value=2555>2555</option>
+                        <option value=2556>2556</option>
+                        <option value=2557>2557</option>
+                        <option value=2558>2558</option>
+                        <option value=2559>2559</option>
+                        <option value=2560>2560</option>
+                        <option value=2561>2561</option>
+                        <option value=2562>2562</option>
+                        <option value=2563>2563</option>
+                        <option value=2564>2564</option>
+                        <option value=2565>2565</option>
+                        <option value=2566>2566</option>
+                        <option value=2567>2567</option>
+                        <option value=2568>2568</option>
+                        <option value=2569>2569</option>
+                        <option value=2570>2570</option>
+                    </select>
+                    <br><br><br>
+                    <button type="button" class="" onclick="openReport()"
+                        style="background-color: #009688;color: white ;width: 10%;border-radius: 2px; font-family: 'Sarabun';">ตกลง</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+
+
+</body>
+<script src="../../node_modules/axios/dist/axios.min.js"></script>
+<script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+<script src="../../js/service/utilities.js"></script>
+
+<script src="../../js/service/sideMenu.js"></script>
+
+<script src="../../js/service/checkUserLogin.js"></script>
+<script src="../../js/report_preview/preview_report_sum_control.js"></script>
+
+</html>
