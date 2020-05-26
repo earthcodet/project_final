@@ -56,7 +56,7 @@ function getDataView() {
             if (data.length != 0) {
                 setSN(requestId.id_no.slice(0, 1))
                 if (data[0].STAFF_ID_ALDERMAN != null) {
-                    getImageNayo(data[0].STAFF_ID_ALDERMAN).then((data_image) => {
+                    getImageNayo(data[0].STAFF_ID_ALDERMAN, requestId.id_no.slice(0, 1)).then((data_image) => {
                         // console.log(data_image)
                         createImagetoUI(data_image)
                         if (requestId.id_no.slice(0, 1) === 'A' || requestId.id_no.slice(0, 1) === 'B') {
@@ -84,8 +84,10 @@ function getDataView() {
     }
 }
 function createImagetoUI(image) {
-    if (image.length != 0 && image[0].S_IMAGE_DATA != undefined) {
-        document.getElementById('s_nayo').src = `data:image/${image[0].S_IMAGE_TYPE};base64,${image[0].S_IMAGE_DATA}`
+    if (image != null) {
+        if (image.length != 0 && image[0].S_IMAGE_DATA != undefined) {
+            document.getElementById('s_nayo').src = `data:image/${image[0].S_IMAGE_TYPE};base64,${image[0].S_IMAGE_DATA}`
+        }
     }
 }
 function setNameAA(item) {
@@ -127,10 +129,10 @@ function displayForm() {
 function checkViewSight(id, raw_data) {
     if (id === 'C' || id === 'D' || id === 'E' || id === 'F') {
         //set no 1
-        if(id === 'E' || id === 'F'){
-         setData(1, raw_data, 'ex')   
-        }else{
-            setData(1, raw_data)   
+        if (id === 'E' || id === 'F') {
+            setData(1, raw_data, 'ex')
+        } else {
+            setData(1, raw_data)
         }
     } else if (id === 'H') {
         //set no 2
@@ -230,9 +232,9 @@ function setData(type, raw_data, ex) {
             document.getElementById('day3').innerText = minusDateplusOne(raw_data.DATE_ISSUED)[0]
             document.getElementById('month3').innerText = minusDateplusOne(raw_data.DATE_EXP)[1]
             console.log(raw_data.R_YEAR_2_M)
-            if(raw_data.R_YEAR_2_M != null){
-                document.getElementById('year3').innerText =parseInt(minusDateplusOne(raw_data.DATE_ISSUED)[2]) +1
-            }else{
+            if (raw_data.R_YEAR_2_M != null) {
+                document.getElementById('year3').innerText = parseInt(minusDateplusOne(raw_data.DATE_ISSUED)[2]) + 1
+            } else {
                 document.getElementById('year3').innerText = minusDateplusOne(raw_data.DATE_ISSUED)[2]
             }
         } else {
@@ -521,11 +523,16 @@ function searchPersonalById(id) {
         })
     })
 }
-function getImageNayo(id) {
+function getImageNayo(id, type) {
     return new Promise((resolve, reject) => {
-        axios.get(`http://localhost:5000/get/image/nayo/view/${id}`).then((result) => {
-            return resolve(result.data);
-        })
+        if (type === 'A' || type === 'B') {
+            axios.get(`http://localhost:5000/get/image/nayo/view/${id}`).then((result) => {
+                return resolve(result.data);
+            })
+        } else {
+            return resolve(null);
+        }
+
     })
 }
 function checkNull(a) {

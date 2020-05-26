@@ -137,7 +137,7 @@ function setDataProfile() {
     document.getElementById("race").readOnly = operatorData.type === 'บุคคลธรรมดา' ? false : true
     document.getElementById("race").disabled = operatorData.type != 'บุคคลธรรมดา' ? true : false
     document.getElementById("age").disabled = operatorData.type != 'บุคคลธรรมดา' ? true : false
-    document.getElementById("home_id").value = operatorAddressData.home_number
+    document.getElementById("home_id").value = operatorAddressData.home_number === '' ? '-' : operatorAddressData.home_number
     document.getElementById("moo").value = operatorAddressData.moo
     document.getElementById("trxk").value = operatorAddressData.trxk
     document.getElementById("sxy").value = operatorAddressData.sxy
@@ -352,7 +352,8 @@ function setDataView() {
     document.getElementById("race").readOnly = operatorData.type === 'บุคคลธรรมดา' ? false : true
     document.getElementById("race").disabled = operatorData.type != 'บุคคลธรรมดา' ? true : false
     document.getElementById("age").disabled = operatorData.type != 'บุคคลธรรมดา' ? true : false
-    document.getElementById("home_id").value = operatorAddressData.home_number
+    // document.getElementById("home_id").value = operatorAddressData.home_number
+    document.getElementById("home_id").value = operatorAddressData.home_number === '' ? '-' : operatorAddressData.home_number
     document.getElementById("moo").value = operatorAddressData.moo
     document.getElementById("trxk").value = operatorAddressData.trxk
     document.getElementById("sxy").value = operatorAddressData.sxy
@@ -583,7 +584,8 @@ function setDataOperator(raw_data, type) {
         document.getElementById("race").disabled = operatorData.type != 'บุคคลธรรมดา' ? true : false
         document.getElementById("age").disabled = operatorData.type != 'บุคคลธรรมดา' ? true : false
         //address
-        document.getElementById("home_id").value = operatorAddressData.home_number
+        // document.getElementById("home_id").value = operatorAddressData.home_number
+        document.getElementById("home_id").value = operatorAddressData.home_number === '' ? '-' : operatorAddressData.home_number
         document.getElementById("moo").value = operatorAddressData.moo
         document.getElementById("trxk").value = operatorAddressData.trxk
         document.getElementById("sxy").value = operatorAddressData.sxy
