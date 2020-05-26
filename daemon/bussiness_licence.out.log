@@ -9,3 +9,25 @@ server user = admin
 username update = admin
 Username and Password correct
 username => admin
+
+App listening on 5000
+Error: connect ECONNREFUSED 127.0.0.1:3306
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1141:16)
+    --------------------
+    at Protocol._enqueue (D:\business_licence_db\project\server\node_modules\mysql\lib\protocol\Protocol.js:144:48)
+    at Protocol.handshake (D:\business_licence_db\project\server\node_modules\mysql\lib\protocol\Protocol.js:51:23)
+    at Connection.connect (D:\business_licence_db\project\server\node_modules\mysql\lib\Connection.js:119:18)
+    at Connection._implyConnect (D:\business_licence_db\project\server\node_modules\mysql\lib\Connection.js:457:10)
+    at Connection.query (D:\business_licence_db\project\server\node_modules\mysql\lib\Connection.js:199:8)
+    at D:\business_licence_db\project\server\DAO\AddressDAO.js:114:17
+    at new Promise (<anonymous>)
+    at AddressDAO.getMaxIdAddress (D:\business_licence_db\project\server\DAO\AddressDAO.js:112:16)
+    at D:\business_licence_db\project\server\Service\webService.js:522:31
+    at new Promise (<anonymous>) {
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 3306,
+  fatal: true
+}
