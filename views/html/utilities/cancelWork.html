@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <!-- <script src="../js/js22.js"></script> --> -->
+
+    <link rel="stylesheet" href="../../css/css2.css">
+    <link href="../../css/fonts.css" rel="stylesheet">
+
+    <!-- icon -->
+    <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.css">
+
+</head>
+
+<body>
+    <!-- เมนูด้านบน -->
+    <div class="w3-top icon-bar">
+        <a id="addMenu" class="exit disableds" onclick="addTEST()"><i class="fa fa-plus-square"> เพิ่ม</i></a>
+        <a id="editMenu" onclick="editTEST()" class="exit disableds"><i class="fa fa-pencil-alt"> แก้ไข</i></a>
+        <a id="saveMenu" onclick="insertTEST()" class="exit disableds"><i class="fa fa-save"> บันทึก</i></a>
+        <a id="restoreMenu" onclick="restoreTEST()" class="exit disableds"><i class="fa fa-reply"> เรียกคืน</i></a>
+        <a id="deleteMenu" onclick="deleteTEST()" class="exit disableds"><i class="fa fa-times"> ยกเลิก</i></a>
+        <!-- <a><i class="fa fa-search"> ค้นหา</i></a> -->
+        <a id="exitMenu" onclick="exitPage()" class="exit" style="float: right;width: 17%;"><i
+                class="fa fa-sign-out-alt">
+                ออกจากระบบ</i></a>
+    </div>
+    <!-- เมนูด้านข้าง -->
+    <div class="sidenav">
+        <a href="/" style="margin-top: 15%;">
+            <img src="../../img/img1.jpg" style="width:92%;">
+        </a>
+        <br>
+        <button class="dropdown-btn"><b>ระบบงานคำขอ </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="../request/searchRequest.html">- ค้นหา/แก้ไข</a>
+            <a href="../request/request_public_sell.html">- ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
+            <a href="../request/request_public_hawk.html">- ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
+            <a href="../request/request_area_more_sell.html">- ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
+            <a href="../request/request_area_more_correct.html">- ใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</a>
+            <a href="../request/request_area_less_sell.html">- หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
+            <a href="../request/request_area_less_correct.html">- หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
+            <a href="../request/request_market.html">- ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
+            <a href="../request/request_health_danger.html">-
+                กิจการที่เป็นอันตรายต่อสุขภาพ</a>
+            <a href="../request/request_crematory.html">- กิจการฌาปณสถาน</a>
+
+        </div>
+        <button class="dropdown-btn"><b>ระบบต่ออายุงานคำขอ </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="../renew/renew_public_sell.html">- คำขอต่อใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
+            <a href="../renew/renew_public_hawk.html">- คำขอต่อใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
+            <a href="../renew/renew_area_more_sell.html">- คำขอต่อใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
+            <a href="../renew/renew_area_more_correct.html">- คำขอต่อใบอนุญาตจัดจัดตั้งสถานที่สะสมอาหาร</a>
+            <a href="../renew/renew_area_less_sell.html">- คำขอต่อหนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
+            <a href="../renew/renew_area_less_correct.html">- คำขอต่อหนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
+            <a href="../renew/renew_market.html">- คำขอต่อใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
+            <a href="../renew/renew_health_danger.html">- คำขอต่อกิจการที่เป็นอันตรายต่อสุขภาพ</a>
+        </div>
+        <button class="dropdown-btn"><b>ข้อมูลส่วนกลาง </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container ">
+            <a href="../central/operator.html">- ข้อมูลผู้ประกอบการ</a>
+            <a href="../central/02.html">- ข้อมูลการจดใบอนุญาต</a>
+            <a href="../central/03.html">- โอนใบอนุญาต</a>
+        </div>
+        <button class="dropdown-btn select-active"><b>งานร้องเรียน </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="petition.html" class="dropdown-active">- เรื่องร้องเรียน</a>
+            <a href="#">- บันทึกคำร้อง</a>
+        </div>
+        <button class="dropdown-btn" id="adminna" style="display: block;"><b>ข้อมูลระบบ </b><i
+                class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="../system/systemUser.html.html">จัดการผู้ใช้งาน</a>
+            <a href="../system/systemUser.html.html">จัดการประเภท</a>
+        </div>
+        <button class="dropdown-btn"><b>รายงาน </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="../report/report_crematory.html">- ตามคำขอ</a>
+            <a href="../report/report_summary.html">- สรุป</a>
+        </div>
+        <button class="dropdown-btn "><b>แจ้งเตือน </b><span id="notficationRequest" class="badge"
+                style="margin-left:0.5vw;">100000</span><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a class="dropdown-active" href="../notfication/request.html">- งานคำขอ<span id="notficationRequest2"
+                    class="badge" style="margin-left:0.5vw;">100000</span></a>
+        </div>
+        <br><br>
+        <button class="dropdown-btn "><a href="request copy.html" style="color: red;"><b>คำขอหมดอายุเกิน 3 ปี </b></a>
+            <!-- <i class="fa fa-caret-down"></i> -->
+        </button>
+    </div>
+    <!-- เนื้อหา -->
+    <form id="form">
+        <fieldset style="border: 0;padding: 0;margin: 0;">
+            <div class="main">
+                <header class="w3-top2">
+                    <h1 style="font-size:2.8vh;margin-left: 25px;padding: 2px;"> ยกเลิกใบอนุญาต</h1>
+                </header>
+                <div class="box">
+                    <a>เลขที่ใบคำร้อง : </a><input type="text">
+                    <a>วันที่ยืนคำร้อง : </a><input type="text" >
+                    <br>
+                    <a>เหตุผลที่ขอยกเลิกใบอนุญาต  : </a><input type="text" style="width: 50%;">
+                    <br><br>
+                    </div>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+
+
+</body>
+<script src="../../node_modules/axios/dist/axios.min.js"></script>
+<script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+<script src="../../js/service/utilities.js"></script>
+
+<script src="../../js/service/jquery/jquery.js"></script>
+<script src="../../js/service/sideMenu.js"></script>
+
+
+
+</html>

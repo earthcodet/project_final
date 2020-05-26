@@ -1,0 +1,74 @@
+
+.swal-height {
+    height: auto;
+  }
+  
+  .search-popup-height {
+    height: 300px;
+    border-style: solid;
+    border-color: #d8d7d7;
+    border-width: 0px 1px 1px 1px
+  }
+  
+  /* table ค้นหาผู้ประกอบการ */
+  
+  .tablesearch {
+    height: 100%;
+  }
+  
+  .tablesearch tbody {
+    display: block;
+    height: 100%;
+    overflow: auto;
+  }
+  
+  .tablesearch th {
+    padding: 0.5rem;
+    margin-bottom: 0rem;
+    text-align: center;
+  }
+  
+  .tablesearch tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+  
+  .tablesearch thead {
+    width: calc( 100% - 1em)
+  }
+  
+  /* table result */
+  
+  .setheight400px {
+    height: 400px;
+  }
+  
+  .tableresult tbody {
+    display: block;
+    height: 370px;
+    overflow: auto;
+  }
+  
+  .tableresult th {
+    font-size: 16px;
+    padding: 0.5rem;
+    margin-bottom: 0rem;
+    text-align: center;
+  }
+  
+  .tableresult thead, .tableresult tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+  
+  .tableresult thead {
+    width: calc( 100% - 1.1em)
+  }
+  
+  .menu-click {
+    color: white;
+    text-decoration: underline;
+    cursor: auto;
+  }

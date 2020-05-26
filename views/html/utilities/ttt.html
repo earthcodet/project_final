@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>บันทึกคำร้อง</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="../../css/css2.css">
+    <link href="../../css/fonts.css" rel="stylesheet">
+
+    <!-- topmenu สำหรับหน้านี้เท่านั้น -->
+    <link rel="stylesheet" href="../../css/topmenu.css">
+
+    <!-- icon -->
+    <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.css">
+
+
+
+    <!-- เรียกไลบารี่สร้างปฎิทิน  -->
+    <script src="../../js/service/jquery/jquery-3.4.1.min.js"></script>
+    <script src="../../js/service/date/datetimepicker.full.js"></script> -->
+    <script src="../../js/service/date/dateth.js"></script>
+    <link rel="stylesheet" href="../../css/date.css">
+
+    <link rel="stylesheet" href="../../js/service/jquery/jquery.js">
+    <link href="../../css/jquery.contextMenu.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- เมนูด้านบน -->
+    <div class="w3-top icon-bar">
+        <a id="addMenu" class="exit  disableds"><i class="fa fa-plus-square">
+                <span>เพิ่ม</span></i></a>
+        <a id="editMenu" class="exit disableds"><i class="fa fa-pencil-alt">
+                <span>แก้ไข</span></i></a>
+        <a id="saveMenu" class="exit disableds"><i class="fa fa-save">
+                <span>บันทึก</span></i></a>
+        <a id="restoreMenu" class="exit disableds"><i class="fa fa-reply">
+                <span>เรียกคืน</span></i></a>
+        <a id="deleteMenu" class="exit disableds"><i class="fa fa-times">
+                <span>ยกเลิก</span></i></a>
+        <!-- <a><i class="fa fa-search"> ค้นหา</i></a> -->
+        <a id='searchMenu' class="exit" onclick="searchOparator()"><i class="fa fa-search"> <span>ค้นหา</span></i></a>
+        <a id="exitMenu" onclick="exitPage()" class="exit" style="float: right;width: 17%;"><i
+                class="fa fa-sign-out-alt">
+                <span>ออกจากระบบ</span></i></a>
+    </div>
+    <!-- เมนูด้านข้าง -->
+    <div class="sidenav">
+        <a href="/" style="margin-top: 15%;">
+            <img src="../../img/img1.jpg" style="width:92%;">
+        </a>
+        <br>
+        <button class="dropdown-btn"><b>ระบบงานคำขอ </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="../request/searchRequest.html">- ค้นหา/แก้ไข</a>
+            <a href="../request/request_public_sell.html">- ใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
+            <a href="../request/request_public_hawk.html">- ใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
+            <a href="../request/request_area_more_sell.html">- ใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
+            <a href="../request/request_area_more_correct.html">- ใบอนุญาตจัดตั้งสถานที่สะสมอาหาร</a>
+            <a href="../request/request_area_less_sell.html">- หนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
+            <a href="../request/request_area_less_correct.html">- หนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
+            <a href="../request/request_market.html">- ใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
+            <a href="../request/request_health_danger.html">-
+                กิจการที่เป็นอันตรายต่อสุขภาพ</a>
+            <a href="../request/request_crematory.html">- กิจการฌาปณสถาน</a>
+
+        </div>
+        <button class="dropdown-btn"><b>ระบบต่ออายุงานคำขอ </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="../renew/renew_public_sell.html">- คำขอต่อใบอนุญาตจำหน่ายสินค้าในที่หรือทางสาธารณะ</a>
+            <a href="../renew/renew_public_hawk.html">- คำขอต่อใบอนุญาตเร่ขายสินค้าในที่หรือทางสาธารณะ</a>
+            <a href="../renew/renew_area_more_sell.html">- คำขอต่อใบอนุญาตจัดตั้งสถานที่จำหน่ายอาหาร</a>
+            <a href="../renew/renew_area_more_correct.html">- คำขอต่อใบอนุญาตจัดตั้งสถานที่สะสมอาหาร</a>
+            <a href="../renew/renew_area_less_sell.html">- คำขอต่อหนังสือรับรองการแจ้งจัดตั้งสถานที่จำหน่ายอาหาร</a>
+            <a href="../renew/renew_area_less_correct.html">- คำขอต่อหนังสือรับรองการแจ้งจัดตั้งสถานที่สะสมอาหาร</a>
+            <a href="../renew/renew_market.html">- คำขอต่อใบอนุญาตให้ใช้สถานที่เป็นตลาดเอกชน</a>
+            <a href="../renew/renew_health_danger.html">- คำขอต่อกิจการที่เป็นอันตรายต่อสุขภาพ</a>
+            <a href="../renew/renew_crematory.html" >- คำขอต่อกิจการฌาปณสถาน</a>
+        </div>
+        <button class="dropdown-btn  "><b>ข้อมูลส่วนกลาง </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container ">
+            <a href="../central/operator.html">- ข้อมูลผู้ประกอบการ</a>
+            <a href="../central/02.html" >- ข้อมูลการจดใบอนุญาต</a>
+            <a href="../central/03.html">- โอนใบอนุญาต</a>
+        </div>
+        <button class="dropdown-btn select-active"><b>งานร้องเรียน </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="petition.html" class='dropdown-active '>- บันทึกเรื่องร้องเรียน</a>
+            <a href="#">- บันทึกคำร้อง</a>
+        </div>
+        <button class="dropdown-btn" id="adminna" style="display: none;"><b>ข้อมูลระบบ </b><i
+                class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="#"></a>
+        </div>
+        <button class="dropdown-btn"><b>รายงาน </b><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a href="../report/report_crematory.html">- ตามคำขอ</a>
+            <a href="../report/report_summary.html">- สรุป</a>
+        </div>
+        <button class="dropdown-btn notification"><b>แจ้งเตือน </b><span id="notficationRequest" class="badge"
+                style="margin-left:0.5vw;">100000</span><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <a class="notification" href="../notfication/request.html">- งานคำขอ<span id="notficationRequest"
+                    class="badge" style="margin-left:0.5vw;">100000</span></a>
+        </div>
+        <br><br>
+        <button class="dropdown-btn"><a href="../notfication/request copy.html" style="color: red;"><b>คำขอหมดอายุเกิน 3
+                    ปี </b></a>
+            <!-- <i class="fa fa-caret-down"></i> -->
+        </button>
+    </div>
+    <!-- เนื้อหา -->
+    <form id="form">
+        <fieldset style="border: 0;padding: 0;margin: 0;">
+            <div class="main">
+                <header class="w3-top2">
+                    <h1 style="font-size:2.8vh;margin-left: 25px;padding: 2px;"> บันทึกเรื่องร้องเรียน</h1>
+                </header>
+                <div class="box">
+                    <a style="margin-left: 5vw;">เลขที่ใบคำร้อง : </a>
+                    <input type="text" style="margin-left: 1vw;">
+                    <a style="margin-left: 1vw;">วันที่ยืนคำร้อง : </a>
+                    <input type="text" id="datepicker2" style="margin-left: 1vw;">
+                    
+                    <br>
+                    <a style="margin-left: 5vw;">ประเภทเรื่องร้องเรียน : </a>
+                    <input type="radio" name="petition" style="margin-left: 3vw;">
+                    <a> สุขลักษณะด้านอาหาร </a>
+                    <input type="radio" name="petition" style="margin-left: 3vw;">
+                    <a> กลิ่น </a>
+                    <input type="radio" name="petition" style="margin-left: 3vw;">
+                    <a> สารเคมี </a>
+                    <br>
+                    <input type="radio" name="petition" style="margin-left: 17.2vw;">
+                    <a> ขยะมูลฝอย/สิ่งปฏิกูล </a>
+                    <input type="radio" name="petition" style="margin-left: 3.15vw;">
+                    <a> เสียงดัง </a>
+                    <input type="radio" name="petition" style="margin-left: 1.88vw;">
+                    <a> แสง รังสี </a>
+                    <br>
+                    <input type="radio" name="petition" style="margin-left: 17.2vw;">
+                    <a> ควัน เถ้า เขม่า ฝุ่นละออง</a>
+                    <input type="radio" name="petition" style="margin-left: 1.9vw;">
+                    <a> อื่นๆ </a>
+                    <input type="text" style="margin-left: 3vw; width: 35%;">
+                    <br>
+                    <a style="margin-left: 5vw;">เรื่องที่ต้องการร้องเรียน</a> <input type="text" style="margin-left: 1vw;width: 35vw;">
+                    <br>
+                    <a style="margin-left: 5vw;">การดำเนินการ : </a>
+                    <input type="radio" name="petition" style="margin-left: 1vw;">
+                    <a> อยู่ระหว่างดำเนินการ </a><br>
+                    <input type="radio" name="petition" style="margin-left: 12.3vw;">
+                    <a> ดำเนินการเรียบร้อย </a>
+                    <br><br>
+                    <a style="margin-left: 5vw;"> ภาพถ่ายเหตุการร้องเรียน </a>
+                    <button type="button" class="button" style="height: 2.7vw;">
+                        <a><i class="fa fa-upload"></i>
+                            อัพโหลดภาพ</a>
+                    </button>
+                    <br>
+                    <br>
+                    <div id='outputImage' style="height: 40vh; overflow-y:auto; border: 0.3vh solid black;">
+                    </div>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+
+
+</body>
+<script src="../../node_modules/axios/dist/axios.min.js"></script>
+<script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+<script src="../../js/service/utilities.js"></script>
+
+<!-- เอาไว้เช็คว่า user login หรือเปล่า --> -->
+<!-- <script src="../../js/service/checkUserLogin.js"></script> -->
+
+<script src="../../js/service/sideMenu.js"></script>
+
+<!-- right click  -->
+<script src="../../js/service/clickRight/jquery.contextMenu.js"></script>
+<script src="../../js/service/clickRight/jquery.ui.position.min.js"></script>
+
+</html>

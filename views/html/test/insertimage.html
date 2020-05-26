@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="../../node_modules/axios/dist/axios.min.js"></script>
+<script src="../../js/service/imageupload.js"></script>
+<link rel="stylesheet" href="../../css/css2.css">
+
+<body>
+    <!-- เพิ่มรูป -->
+    <div style="width: 100%;">
+        <br>
+        <div>
+            <div>
+                <br><br>
+                <input style="margin-left:9vw;" type="file" id="uploadFilePdf" onchange="pdfFile(event)"
+                    accept="application/pdf">
+            </div>
+            <a>รูปภาพผลการตรวจสอบ</a>
+            <input type="file" id="uploadFile" style="display: none;" onchange="handleFileSelect(event)"
+                accept="image/*" multiple>
+            <button type="button" class="button" onclick="document.getElementById('uploadFile').click()">
+                <h5><i class="fa fa-upload"></i>
+                    อัพโหลดภาพ</h5>
+            </button>
+            <button type="button" class="button" onclick="insertE()">
+                <h5><i class="fa fa-upload"></i>
+                    INSERT</h5>
+            </button>
+            <input id='is'>
+            </button>
+            <br>
+            <br>
+            <div id='outputImage' style="height: 80vh; overflow-y:auto; border: 0.3vh solid black;">
+            </div>
+        </div>
+    </div>
+    <br>
+</body>
+
+</html>

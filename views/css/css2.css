@@ -1,0 +1,659 @@
+.content {
+    float: right;
+    width: 85%;
+    margin-top: 25px;
+}
+
+.icon-bar {
+    width: 100%;
+    background-color: #333333;
+    overflow: auto;
+}
+
+.icon-bar a {
+    float: left;
+    width: 8%;
+    text-align: center;
+    padding: 2vh 1vh;
+    transition: all 0.3s ease;
+    color: white;
+    font-size: 2.5vh;
+}
+
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 1vw;
+    /* font-size: 1vw; */
+    border: none;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 15vw;
+    box-shadow: 0vw 1vw 2vw 0vw rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding:1vw 2vw;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-content a:hover {background-color: #ddd;}
+  
+  .dropdown:hover .dropdown-content {display: block;}
+  
+  .dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+.icon-bar a:hover {
+    background-color: #000;
+}
+
+.active {
+    background-color: green;
+    color: white;
+}
+
+.select-active {
+    background-color: green!important;
+    color: white!important;
+}
+
+.dropdown-active {
+    background-color: rgb(143, 141, 141)!important;
+}
+
+.w3-top {
+    width: 100%;
+    position: fixed;
+    z-index: 5;
+    top: 0;
+    right: 0;
+}
+
+.w3-top2 {
+    width: 85%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+}
+
+body {
+    font-family: 'Sarabun', sans-serif;
+    /* font-size: 13px; */
+}
+
+/* Fixed sidenav, full height */
+
+.sidenav {
+    height: 100%;
+    float: left;
+    width: 15%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(255, 255, 255);
+    overflow-x: hidden;
+    padding-top: 1%;
+    font-family: 'Sarabun', sans-serif;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+/* Style the sidenav links and the dropdown button */
+
+.sidenav a, .dropdown-btn {
+    padding: 1vh 1vh 2vh 2vh;
+    text-decoration: none;
+    font-size: 2.1vh;
+    color: #070606;
+    display: block;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+    border-radius: 0%;
+    font-family: 'Sarabun', sans-serif;
+}
+
+.sidenav a {
+    width: 100%;
+}
+
+/* On mouse-over */
+
+.sidenav a:hover, .dropdown-btn:hover {
+    color: #000000;
+    background-color: #BFC9CA;
+}
+
+.active {
+    background-color: green;
+    color: white;
+}
+
+/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+
+.dropdown-container {
+    display: none;
+    background-color: #E5E7E9;
+    padding-left: 3px;
+    padding-right: 2;
+}
+
+/* Optional: Style the caret down icon */
+
+.fa-caret-down {
+    float: right;
+    padding-right: 8px;
+}
+
+/* Some media queries for responsiveness */
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+    .sidenav a {
+        font-size: 2vh;
+    }
+}
+
+.main {
+    /* float: right; */
+    width: 84%;
+    margin-top: 10%;
+    margin-left: 15%;
+}
+
+.main2 {
+    /* float: right; */
+    width: 85%;
+    margin-top: 2%;
+    margin-left: 15%;
+}
+
+div.box {
+    width: 99%;
+    height: 100%;
+    border: 0.2vh solid black;
+    padding: 1vh;
+    margin-left: 1%;
+    /* margin-right: 5%; */
+    /* margin:5px; */
+    /* font-size: 100%; */
+}
+
+input, select {
+    padding: 1.2vh 1vh;
+    margin: 1vh 0vh;
+    /* display: inline-block; */
+    border: 0.1vh solid #ccc;
+    border-radius: 1.5vh;
+    box-sizing: border-box;
+    font-size: 2.1vh;
+    font-family: 'Sarabun';
+}
+
+/* disable icon*/
+
+select {
+    /* for Firefox */
+    -moz-appearance: none;
+    /* for Chrome */
+    -webkit-appearance: none;
+    background-repeat: no-repeat;
+    background-position: 98% center;
+    background-image: url(../img/dropdown.png);
+    background-size: 10%;
+    font-family: 'Sarabun', sans-serif;
+}
+
+/* For IE10 */
+
+select::-ms-expand {
+    display: none;
+}
+
+a {
+    font-size: 2.1vh;
+    font-family: 'Sarabun';
+}
+
+button {
+    background-color: #555555;
+    border: none;
+    color: white;
+    padding: 1vh 1vh;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 2.45vh;
+    border-radius: 10%;
+}
+
+button.addimage {
+    background-color: #009688;
+    color: #FFFF;
+}
+
+button.delete {
+    background-color: red;
+    color: #FFFF;
+}
+
+button.image {
+    width: 100%;
+    border-radius: .5vw;
+    height: auto;
+}
+
+button:disabled {
+    background-color: gray;
+    pointer-events: none;
+    cursor: default;
+}
+
+button.button {
+    background-color: #555555;
+    border: none;
+    color: white;
+    padding: 0.1vh 2vh;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 2.45vh;
+    border-radius: 1.5vh;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: #3e8e41;
+}
+
+input[type=radio] {
+    /* height: 100%; */
+    /* padding: 1.2vh 1vh; */
+    /* position: absolute; */
+    opacity: 1;
+    cursor: pointer;
+}
+
+textarea {
+    width: 95%;
+    height: 100px;
+    /* padding: 12px 20px; */
+    box-sizing: border-box;
+    border: 0.5vh solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 2.5vh;
+    resize: none;
+}
+
+/* ด้านบน 3 อัน */
+
+a.disableds {
+    pointer-events: none;
+    cursor: default;
+    color: gray!important
+}
+
+a.exit {
+    color: white;
+    cursor: pointer;
+}
+a.exit:hover {
+    /* color: #034b9a; */
+    text-decoration: underline;
+}
+
+.alertInput{
+    border-color: red;
+}
+* {
+    box-sizing: border-box;
+}
+
+.col {
+    float: left;
+    width: 50%;
+    padding: 10px;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+header {
+    background-color: #add8e6;
+    margin-top: 3.4%
+}
+
+.notification {
+    position: relative;
+}
+
+.notification .badgeTopic {
+    position: absolute;
+    top: 16px;
+    right: 19px;
+    color: white;
+    background-color: red;
+    padding: 2px 8px;
+    border-radius: 3px;
+}
+
+.notification .badge {
+    position: absolute;
+    top: 0.3vw;
+    /* right: 3vw; */
+    color: white;
+    background-color: red;
+    padding: 0.3vw 0.3vw;
+    border-radius: 0.5vw;
+}
+
+.is-color {
+    background-color: #009688!important;
+    color: #FFFF!important;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    /* ปิดไว้เวลาเปิด popup มันจะไม่ขยับ */
+    /* overflow-x: auto; */
+}
+
+/* popup */
+
+.search-popup-height {
+    height: 300px;
+    border-style: solid;
+    border-color: #d8d7d7;
+    border-width: 0px 1px 1px 1px
+}
+
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    color: #212529;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out
+}
+
+@media (prefers-reduced-motion:reduce) {
+    .btn {
+        transition: none
+    }
+}
+
+.btn:hover {
+    color: #212529;
+    text-decoration: none
+}
+
+.btn-secondary {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d
+}
+
+.btn-secondary:hover {
+    color: #fff;
+    background-color: #5a6268;
+    border-color: #545b62
+}
+
+/* table ค้นหาผู้ประกอบการ */
+
+.tablesearch {
+    height: 100%;
+}
+
+.tablesearch tbody {
+    display: block;
+    height: 100%;
+    overflow: auto;
+}
+
+.tablesearch th {
+    padding: 0.5rem;
+    margin-bottom: 0rem;
+    text-align: center;
+}
+
+.tablesearch tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.tablesearch thead {
+    width: calc( 100% - 1em)
+}
+
+/* table result */
+
+.setheight400px {
+    height: 400px;
+}
+
+.tableresult tbody {
+    display: block;
+    height: 25vw;
+    overflow: auto;
+}
+
+.tableresult th {
+    /* font-size: 2vh; */
+    padding: 0.5rem;
+    margin-bottom: 0rem;
+    text-align: center;
+}
+
+.tableresult thead, .tableresult tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.tableresult thead {
+    width: calc( 100% - 1.1em)
+}
+
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529
+}
+
+.table td, .table th {
+    padding: .75rem;
+    vertical-align: top;
+}
+
+/* .table thead th {
+    vertical-align: bottom;
+} */
+
+.table tbody+tbody {
+    border-top: 2px solid #dee2e6
+}
+
+.table-hover tbody tr:hover {
+    color: #212529;
+    background-color: rgba(0, 0, 0, .075)
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+div.displaynone {
+    display: none;
+}
+
+p.font {
+    font-size: 1.1vw;
+}
+
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #414642;
+}
+
+/* Style the buttons inside the tab */
+
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+    font-family: 'Sarabun', sans-serif;
+}
+
+/* Change background color of buttons on hover */
+
+.tab button:hover {
+    background-color: rgb(80, 80, 80);
+}
+
+/* Create an active/current tablink class */
+
+.tab button.active {
+    background-color: rgb(0, 0, 0);
+}
+
+/* Style the tab content */
+
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+/* html.swal2-shown,body.swal2-shown { overflow-y: hidden !important; } */
+
+span {
+    font-family: 'Sarabun', sans-serif;
+}
+
+/* animation text */
+font.alert{
+    color:red;
+    font-size: 16xw;
+}
+font.animation {
+    position: relative;
+    /* contro */
+    display: inline-block;
+    animation-name: animation;
+    animation-duration: 0.5s;
+    /* animation-timing-function: linear; */
+    /* ทำให้ animation ติด loop */
+    /* animation-iteration-count: infinite; */
+}
+@keyframes animation{
+    10%, 90% {
+        transform: translate3d(-1px, 0, 0);
+      }
+      
+      20%, 80% {
+        transform: translate3d(2px, 0, 0);
+      }
+    
+      30%, 50%, 70% {
+        transform: translate3d(-4px, 0, 0);
+      }
+    
+      40%, 60% {
+        transform: translate3d(4px, 0, 0);
+      }
+}
+
+.tabOne{
+    margin-left: 1vw;
+}
+.tabTwo{
+    margin-left: 6vw;
+}
+.alert{
+    color : red;
+    font-style:italic;
+    font-size: 0.9vw;
+    /* display: none; */
+}
+div.center{
+    text-align: center;
+    display: block;
+}
+topics{
+    font-size: 10vw
+}
+
+.menu{
+    width: 12rem;
+    height: 4.5rem;
+    background-color: #f4f4f4;
+    color: #333;
+    border: 1px solid #aaa;
+    box-shadow: 2px 2px 2px #999;
+    border-radius: 0.2rem;
+    list-style: none;
+    position: fixed;
+}
+.menu.off{
+    top: -200%;
+    left: -200%;
+}
+.menu-item{
+    height: 1.5rem;
+    line-height: 1.5rem;
+    font-size: 1rem;
+    font-weight: 100;
+    padding: 0 1rem;
+    cursor: pointer;
+}
+.menu-item:hover,
+.menu-item:active{
+    color: #000;
+    font-weight: 500;
+}

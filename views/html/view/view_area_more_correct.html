@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+
+    <link rel="stylesheet" href="../../css/fonts.css">
+
+    <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.css">
+    <script src="../../js/service/jquery/jquery-3.4.1.min.js"></script>
+    <script src="../../js/service/bootstrap-4.4.1/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../../css/bootstrap-4.4.1/bootstrap.min.css">
+
+</head>
+<style>
+    a {
+        text-decoration: none !important;
+        font-weight: bold;
+    }
+
+    body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: #FAFAFA;
+        font-size: 12pt;
+    }
+
+    * {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+    }
+
+    .page {
+        width: 310mm;
+        min-height: 297mm;
+        /* padding: 15mm; */
+        padding-left: 15mm;
+        padding-right: 15mm;
+        padding-top: 3mm;
+        margin: 10mm auto;
+        border: 1px #D3D3D3 solid;
+        border-radius: 1px;
+        background: white;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .subpage {
+        padding: 1cm;
+        border: 2px red solid;
+        height: 257mm;
+        outline: 2cm #FFEAEA solid;
+    }
+
+    @page {
+        size: A4;
+        margin: 0;
+    }
+
+    @media print {
+
+        html,
+        body {
+            width: 210mm;
+            height: 297mm;
+        }
+
+        .page {
+            margin: 0;
+            border: initial;
+            border-radius: initial;
+            width: initial;
+            min-height: initial;
+            box-shadow: initial;
+            background: initial;
+            page-break-after: always;
+        }
+
+        .align {
+            position: absolute;
+            bottom: 10mm;
+        }
+
+        .hideWhenPrint {
+            display: none;
+            text-align: center;
+        }
+    }
+</style>
+
+<body>
+    <div class="hideWhenPrint" style="text-align: center;">
+        <br>
+        <button type="button" class="btn btn-outline-success btn-lg is-color"
+            style="background-color: gray;color: white;cursor: pointer;" onclick="window.print()">พิมพ์</button>
+        <br>
+    </div>
+    <div class="page">
+        <div class="container" style="font-family: 'Sarabun';">
+            <div style="text-align: center;">
+                <br>
+                <p id='sn_no' style="float: right;">แบบ สอ.5</p>
+                <br>
+                <br>
+                <p><img src="../../img/ตราครุฑ.png" style="width: 130px;"></p>
+                <b>
+                    <h4 style="font-size: 7mm;" id='t_topic'>ใบอนุญาตจัดตั้งสถานที่สะสมอาหาร</h4>
+                </b>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col">
+                    เลขที่&emsp; <a id="number"></a>
+                    <a style="float: right;padding-right: 2cm;">สำนักงาน เทศบาลเมืองแสนสุข</a>
+                </div>
+            </div>
+            <br>
+            <!-- 1. -->
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col">
+                    <p>อนุญาตให้&emsp;
+                        <input type="checkbox" name="nametype" id="typeName1"> บุคคลธรรมดา <input type="checkbox"
+                            name="nametype" id="typeName2"> นิติบุคคล</p>
+                </div>
+                <div class="col-3">
+                    <p>ชื่อ &emsp;<a id="name"></a></p>
+                </div>
+                <div class="col-2">อายุ &emsp;<a id="age"></a>&emsp;ปี</div>
+                <div class="col-2">สัญชาติ &emsp;<a id="nationality"></a></div>           
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p>เลขบัตรประชาชนเลขที่ &emsp;<a id="nameId"></a></p>
+                </div>
+                <div class="col">อยู่บ้าน/สำนักงานเลขที่ &emsp;<a id="homeId"></a></div>
+                <div class="col">ตรอก &emsp;<a id="trxk"></a></div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p>ซอย &emsp;<a id="sxy"></a></p>
+                </div>
+                <div class="col">ถนน &emsp;<a id="road"></a></div>
+                <div class="col-2">หมู่ที่ &emsp;<a id="moo"></a></div>
+                <div class="col">แขวง/ตำบล &emsp;<a id="subdistrict"></a></div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p>เขต/อำเภอ &emsp;<a id="district"></a></p>
+                </div>
+                <div class="col">จังหวัด &emsp;<a id="province"></a></div>
+                <div class="col">โทรศัพท์ &emsp;<a id="phone"></a></div>
+            </div>
+            <!-- 2. -->
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col">
+                    <p>1. จัดตั้งสถานที่จำหน่ายอาหารประเภท &emsp;<a id="category"></a></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-5">
+                    <p>สถานที่ชื่อ &emsp;<a id="nameShop"></a></p>
+                </div>
+                <div class="col">พื้นที่ประกอบการ &emsp;<a id="area"></a>&emsp; ตารางเมตร</div>
+            </div>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col">
+                    <p>2. ตั้งอยู่ที่ &emsp;<a id="homeIdS"></a></p>
+                </div>
+                <div class="col">ตรอก &emsp;<a id="trxkS"></a></div>
+                <div class="col">ถนน &emsp;<a id="roadS"></a></div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <p>หมู่ที่ &emsp;<a id="mooS"></a></p>
+                </div>
+                <div class="col-3">โทรศัพท์ &emsp;<a id="phoneS"></a></div>
+            </div>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-5">
+                    <p>3. ค่าธรรมเนียมฉบับละ &emsp;<a id="fee"></a>&emsp; บาทต่อปี</p>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col">
+                    <p>4. ผู้รับใบญาตรับรองการแจ้งเตือนต้องปฏิบัติตามเงี่อนไขดังต่อไปนี้</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col">
+                    <p>&emsp;4.1) ผู้รับใบอนุญาตต้องปฏิบัติให้ถูกต้อง ครบถ้วน ตามหลักเกณฑ์วิธีการ และ
+                        เงื่อนไขที่กำหนดในข้อกำหนดของท้องถิ่น</a></p>
+                    <p>&emsp;4.2)
+                        หากปรากฎในภายหลังว่าการประกอบการที่ได้รับอนุญาตนี้เป็นการขัดต่อข้อกฏหมายอื่นที่่เกี่ยวข้องโดยมิอาจแก้ไขได้
+                        </a></p>
+                    <p>&emsp;&emsp;&emsp;เจ้าพนักงานท้องถิ่นอาจพิจารณาให้เพิกถอนการอนุญาตนี้ได้</p>
+                    <p>&emsp;4.3) ผู้รับบใอนุญาตต้องปฏิบัติตามเงื่อนไขเฉพาะดังต่อไปนี้ คือ</p>
+                    <p>&emsp;&ensp;&emsp; 4.3.1 )&emsp; <a id="note42"></a></p>
+                    <p>&emsp;&ensp;&emsp; 4.3.2 )&emsp; <a id="note43"></a></p>
+                    <p>&emsp;&ensp;&emsp; 4.3.3 )&emsp; <a id="note44"></a></p>
+                    <p>&emsp;&ensp;&emsp; 4.3.4 )&emsp; <a id="note45"></a></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2">
+                    <p>ออกให้ ณ วันที่ &emsp;<a id="day2"></a></p>
+                </div>
+                <div class="col-2">เดือน &emsp;<a id="month2"></a></div>
+                <div class="col-2">พ.ศ. &emsp;<a id="year2"></a></div>
+                <div class="col-2">สิ้นสุดอายุวันที่ &emsp;<a id="day3"></a></div>
+                <div class="col-2">เดือน &emsp;<a id="month3"></a></div>
+                <div class="col-2">พ.ศ. &emsp;<a id="year3"></a></div>
+            </div>
+
+            <br>
+            <!-- ลงชื่อ -->
+            <div class="row">
+                <div class="col-6 text-center">
+                    <br><br>
+                    (ลงชื่อ)................................................................ผู้รับเงิน
+                    <br>
+                    ( <c id='name_money'>นายวรชาติ ศักดิ์วราสวัสดิ์</c> )
+                    <br>
+
+                </div>
+                <div class="col text-center">
+                    <br>
+                    (ลงชื่อ) &emsp;<img id='s_nayo'
+                        style="width: 200px;">&emsp;&emsp;&emsp;
+                    <br>
+                    ( <c id='name_nayo'>นายวรชาติ ศักดิ์วราสวัสดิ์</c> )
+                    <br>
+                    <c id='position_nayo'>รองนายกเทศมนตรี ปฏิบัติราชการแทน</c>
+                    <br>
+                    <c>นายกเทศมนตรีเมืองแสนสุข</c>
+                    <br>
+                    เจ้าพนักงานท้องถิ่น
+                </div>
+            </div>
+
+            <div class="align">
+                <u><b>คำเตือน</b></u>&ensp;1. ต้องแสดงใบอนุญาตนี้ไว้ในที่เปิดเผย เห็นได้ง่าย ณ
+                สถานที่ที่ได้รับอนุญาต<br>
+                &emsp;&emsp;&emsp;&ensp; 2. สามารถต่ออายุหนังสือรับรองล้วงหน้า 90 วันก่อนวันหมดอายุ
+            </div>
+        </div>
+        <br>
+
+    </div>
+
+</body>
+<script src="../../node_modules/axios/dist/axios.min.js"></script>
+<script src="../../js/request_preview/request_preview.js"></script>
+
+</html>

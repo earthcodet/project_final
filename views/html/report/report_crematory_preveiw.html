@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>รายงาน</title>
+
+    <link href="../../css/fonts.css" rel="stylesheet">
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+    <!-- css ส่วนกลาง -->
+    <!-- <link href="../../css/utilities.css" rel="stylesheet"> -->
+    <script src="../../node_modules/axios/dist/axios.min.js"></script>
+    <script src="../../js/report_preview/preview_report.js"></script>
+
+</head>
+
+<style type="text/css">
+    @media print {
+        @page {
+            size: A4 landscape;
+        }
+
+        BODY {
+            font-size: x-small;
+            line-height: 1em;
+        }
+
+        .hideWhenPrint {
+            display: none;
+        }
+
+        div.header {
+            display: block;
+        }
+    }
+
+
+    table {
+        font-family: arial, sans-serif;
+        width: 100%;
+        /* border-collapse: collapse; */
+        /* border: 1px solid black; */
+    }
+
+
+    td,
+    th {
+        border: 0.2px solid black;
+        text-align: left;
+        padding: 8px;
+    }
+
+    body {
+        padding: 20px;
+    }
+    button{
+        font-family: 'Sarabun';
+    }
+</style>
+<script type="text/javascript">
+    function ExportToExcel(table) {
+        var htmltable = document.getElementById('table');
+        var html = htmltable.outerHTML;
+        window.open('data:application/vnd.ms-excel,' + encodeURIComponent(html));
+    }
+</script>
+
+<body>
+    <div class="hideWhenPrint" >
+        <button type="button" class="btn btn-outline-success btn-lg is-color" style="background-color: #009688;
+        color: #FFFF;" onclick="window.print()">พิมพ์</button>
+        <button type="button" class="btn btn-outline-success btn-lg is-color" style="background-color: #009688;
+        color: #FFFF;" onclick="ExportToExcel(table)">Excel</button>
+        <br><br>
+    </div>
+    <div style="font-family: sarabun;" >
+        <!-- table table-bordered table-hover -->
+        <table id="table" class="">
+            <thead class="text-center" style="border-style: none;">
+                <th colspan="9" style=" border: 0px solid black;">
+                    <p class="text-center"><b>สำนักงานเทศบาลเมืองแสนสุข</b></p>
+                    <p class="text-center">รายงานประจำวัน/เดือน/ปี
+                        <br>
+                        รายงานตั้งแต่วันที่ <g id='date_start'></g> ถึงวันที่ <g id='date_end'></g> ประเภท<g
+                            id='type_menu'>
+                        </g>
+                    </p>
+                </th>
+                <tr>
+                    <td class="align-middle">ลำดับ</td>
+                    <td class="align-middle" width="16%">ชื่อ-นามสกุล</td>
+                    <td class="align-middle">วันออกใบอนุญาต</td>
+                    <td class="align-middle">วันหมดอายุ</td>
+                    <td class="align-middle" width="22%">ประเภทกิจการ</td>
+                    <td class="align-middle">ค่าธรรมเนียม</td>
+                    <td class="align-middle">ชื่อสถานประกอบการ</td>
+                    <td class="align-middle" width="20%">ที่อยู่</td>
+                    <td class="align-middle" width="10%">โทรศัพท์</td>
+                </tr>
+            </thead>
+
+            <tbody style="page-break-after:always;">
+                <tr>
+                    <td>1</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <div style="display: block; text-align: right;margin-right:38vw;">
+            รวมค่าธรรมเนียม <a id='sum_report' style="text-decoration: underline;margin-left: 0.5vw;"></a> บาท
+
+        </div>
+    </div>
+</body>
+
+</html>
