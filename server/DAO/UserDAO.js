@@ -10,7 +10,7 @@ var con = mysql.createConnection({
 class LoginDAO {
     getUser(username, password) {
         return new Promise((resolve, reject) => {
-            con.query(`SELECT * FROM user WHERE USER_USERNAME='${username}' AND USER_PASSWORD = '${password}'`, function (err, result) {
+            con.query(`SELECT * FROM user WHERE USER_USERNAME='${username}' AND USER_PASSWORD = '${password}' AND USER_STATUS = 'N'`, function (err, result) {
                 if (err) {
                     throw err
                 }
